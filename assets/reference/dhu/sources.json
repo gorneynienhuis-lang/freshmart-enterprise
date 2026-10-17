@@ -1,0 +1,55 @@
+{
+  "retrievedOn": "2026-10-18",
+  "sourcePage": "https://www.dhu.edu.cn/_s3/xxbs/list.psp",
+  "files": [
+    {
+      "file": "original/dhu-visual-identity-guidelines.pdf",
+      "url": "https://www.dhu.edu.cn/_upload/article/files/d2/8c/2137ec0c44238fd6fbd3ee28ff07/5b021eb4-4f50-4e51-871c-7a17d191a581.pdf",
+      "bytes": 7415723,
+      "sha256": "e7d0290bf3a52f5492fcfbfc77a246414eb14d44ba7b0d23f32dd4fb738bbce8",
+      "status": "downloaded"
+    },
+    {
+      "file": "original/dhu-emblem-ai.rar",
+      "url": "https://www.dhu.edu.cn/_upload/article/files/d2/8c/2137ec0c44238fd6fbd3ee28ff07/fee04c5a-3004-4ec4-94f4-c52f2b28ce87.rar",
+      "bytes": 1146720,
+      "sha256": "f929bc87a8245616675bfc3f3819f0be99f9aac2819f99adc9aea4d0232f8219",
+      "status": "downloaded"
+    },
+    {
+      "file": "original/dhu-logo-lockups-ai.rar",
+      "url": "https://www.dhu.edu.cn/_upload/article/files/d2/8c/2137ec0c44238fd6fbd3ee28ff07/b0c1c2a5-1987-4098-90db-df8d9c6f1723.rar",
+      "bytes": 1620464,
+      "sha256": "2de8a5e7ec8c0abf3e2f6b8063dd0312a5ccb62c51b38f3d6be9b19c87af8f33",
+      "status": "downloaded"
+    },
+    {
+      "file": "original/dhu-patterns-ai.rar",
+      "url": "https://www.dhu.edu.cn/_upload/article/files/d2/8c/2137ec0c44238fd6fbd3ee28ff07/dcfd65a6-95fe-4add-bdb1-b4f51a43af7c.rar",
+      "bytes": 1195791,
+      "sha256": "63819b3baa26e0fc387567402b43dd5b3caf5d504d8736c26c2a866d7cb1a1b3",
+      "status": "downloaded"
+    },
+    {
+      "file": "previews/official-standard-colour.png",
+      "url": "https://www.dhu.edu.cn/_upload/article/images/d2/8c/2137ec0c44238fd6fbd3ee28ff07/05012139-2805-45aa-860b-6fd04610a81e.png",
+      "bytes": 23540,
+      "sha256": "c981dc7b1962d5c3c9bf68b342900afff59068d118200860e1ed372332048ea7",
+      "status": "downloaded"
+    },
+    {
+      "file": "previews/official-emblem-reference.png",
+      "url": "https://www.dhu.edu.cn/_upload/article/images/d2/8c/2137ec0c44238fd6fbd3ee28ff07/f0954537-44ad-44dc-9aae-4799b6b96411.png",
+      "bytes": 86727,
+      "sha256": "5fb753b8c991f0f50af9a0aa77dfac09627f32fe1a563e94694b3d7015e20dd8",
+      "status": "downloaded"
+    },
+    {
+      "file": "previews/official-lockups-reference.png",
+      "url": "https://www.dhu.edu.cn/_upload/article/images/d2/8c/2137ec0c44238fd6fbd3ee28ff07/4af1006f-bd01-4d67-a78a-9a0a6c9202e0.png",
+      "bytes": 128155,
+      "sha256": "02b860ae8d52f10e0e2f4c1420a68792a3bb41bcbfa09b7ea304bdd9964a3290",
+      "status": "downloaded"
+    }
+  ]
+}
