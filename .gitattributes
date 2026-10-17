@@ -1,0 +1,10 @@
+# Preserve original design/reference files byte-for-byte.
+*.ai binary
+*.pdf binary
+*.rar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+
+# Official Windows Maven launcher uses CRLF.
+backend/mvnw.cmd text eol=crlf whitespace=cr-at-eol
