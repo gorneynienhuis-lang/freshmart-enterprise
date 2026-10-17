@@ -1,0 +1,1137 @@
+{
+  "version": "0.1.0",
+  "implementationStatus": "CONTRACT_ONLY",
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "operationId": "getCsrfToken",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "auth.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "operationId": "registerMember",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "auth.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "operationId": "login",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "auth.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "operationId": "refreshSession",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ],
+      "permissions": [
+        "auth.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "operationId": "logout",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ],
+      "permissions": [
+        "auth.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "operationId": "getCurrentUser",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ],
+      "permissions": [
+        "auth.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/home",
+      "operationId": "getHome",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "catalog.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "operationId": "listCategories",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "catalog.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "operationId": "listProducts",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "catalog.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products/{productId}",
+      "operationId": "getProduct",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "catalog.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products/{productId}/reviews",
+      "operationId": "listProductReviews",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "catalog.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "operationId": "getCart",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "cart.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/cart/items",
+      "operationId": "addCartItem",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "cart.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/cart/items/{cartItemId}",
+      "operationId": "updateCartItem",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "cart.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/cart/items/{cartItemId}",
+      "operationId": "removeCartItem",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "cart.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/addresses",
+      "operationId": "listAddresses",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "member.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/addresses",
+      "operationId": "createAddress",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "member.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/addresses/{addressId}",
+      "operationId": "updateAddress",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "member.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/addresses/{addressId}",
+      "operationId": "deleteAddress",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "member.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/delivery-slots",
+      "operationId": "listDeliverySlots",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "slot.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/coupons",
+      "operationId": "listMyCoupons",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "member.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "operationId": "quoteOrder",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "cart.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "operationId": "createOrder",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "order.create"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "operationId": "listMyOrders",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "order.self.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/{orderId}",
+      "operationId": "getMyOrder",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "order.self.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/{orderId}/status",
+      "operationId": "getOrderStatus",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "order.self.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders/{orderId}/cancel",
+      "operationId": "cancelMyOrder",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "order.self.cancel"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "operationId": "createPayment",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "payment.self.create"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/payments/{paymentId}",
+      "operationId": "getPayment",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "payment.self.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/{paymentId}/sandbox-simulate",
+      "operationId": "simulateSandboxPayment",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "payment.self.simulate"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/sandbox/callback",
+      "operationId": "receiveSandboxPaymentCallback",
+      "roles": [
+        "SANDBOX_CHANNEL"
+      ],
+      "permissions": [
+        "payment.callback"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/refunds/{refundId}",
+      "operationId": "getMyRefund",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "payment.self.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/aftersales",
+      "operationId": "applyAftersale",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "aftersale.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/aftersales",
+      "operationId": "listMyAftersales",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "aftersale.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/aftersales/{aftersaleId}",
+      "operationId": "getMyAftersale",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "aftersale.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/aftersales/{aftersaleId}/cancel",
+      "operationId": "cancelMyAftersale",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "aftersale.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/reviews",
+      "operationId": "createReview",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "review.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "operationId": "getAdminDashboard",
+      "roles": [
+        "OPERATOR",
+        "FINANCE"
+      ],
+      "permissions": [
+        "dashboard.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/products",
+      "operationId": "listAdminProducts",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "product.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/products",
+      "operationId": "createProduct",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "product.write"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/products/{productId}",
+      "operationId": "getAdminProduct",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "product.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/products/{productId}",
+      "operationId": "patchProduct",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "product.write"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/products/{productId}/status",
+      "operationId": "setProductStatus",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "product.status"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/products/{productId}/skus",
+      "operationId": "createSku",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "sku.write"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/skus/{skuId}",
+      "operationId": "patchSku",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "sku.write"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/batches",
+      "operationId": "listBatches",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "batch.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/batches",
+      "operationId": "receiveBatch",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "batch.create"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/batches/{batchId}",
+      "operationId": "getBatch",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "batch.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/batches/{batchId}/adjustments",
+      "operationId": "adjustInventory",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "inventory.adjust"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/batches/{batchId}/lifecycle",
+      "operationId": "setBatchLifecycle",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "batch.lifecycle"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "operationId": "listInventoryMovements",
+      "roles": [
+        "PICKER",
+        "FINANCE"
+      ],
+      "permissions": [
+        "inventory.movement.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "operationId": "listAdminOrders",
+      "roles": [
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE"
+      ],
+      "permissions": [
+        "order.work.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/{orderId}",
+      "operationId": "getAdminOrder",
+      "roles": [
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE"
+      ],
+      "permissions": [
+        "order.work.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/orders/{orderId}/cancel",
+      "operationId": "cancelOrderAsService",
+      "roles": [
+        "SERVICE"
+      ],
+      "permissions": [
+        "order.service.cancel"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/orders/{orderId}/returns/receive",
+      "operationId": "receiveCanceledOrderReturn",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "return.receive"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "operationId": "listPickTasks",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "pick.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks/{taskId}",
+      "operationId": "getPickTask",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "pick.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/claim",
+      "operationId": "claimPickTask",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "pick.claim"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/reallocate",
+      "operationId": "reallocatePickTask",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "pick.reallocate"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/confirm",
+      "operationId": "confirmPickTask",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "pick.confirm"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks",
+      "operationId": "listDeliveryTasks",
+      "roles": [
+        "PICKER",
+        "COURIER",
+        "SERVICE"
+      ],
+      "permissions": [
+        "delivery.handover.read",
+        "delivery.self.read",
+        "delivery.exception.resolve"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}",
+      "operationId": "getDeliveryTask",
+      "roles": [
+        "PICKER",
+        "COURIER",
+        "SERVICE"
+      ],
+      "permissions": [
+        "delivery.handover.read",
+        "delivery.self.read",
+        "delivery.exception.resolve"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/dispatch",
+      "operationId": "dispatchDelivery",
+      "roles": [
+        "PICKER"
+      ],
+      "permissions": [
+        "delivery.dispatch"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/complete",
+      "operationId": "completeDelivery",
+      "roles": [
+        "COURIER"
+      ],
+      "permissions": [
+        "delivery.complete"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/exceptions",
+      "operationId": "reportDeliveryException",
+      "roles": [
+        "COURIER"
+      ],
+      "permissions": [
+        "delivery.exception"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales",
+      "operationId": "listAdminAftersales",
+      "roles": [
+        "SERVICE"
+      ],
+      "permissions": [
+        "aftersale.work.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}",
+      "operationId": "getAdminAftersale",
+      "roles": [
+        "SERVICE"
+      ],
+      "permissions": [
+        "aftersale.work.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/approve",
+      "operationId": "approveAftersale",
+      "roles": [
+        "SERVICE"
+      ],
+      "permissions": [
+        "aftersale.review"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/reject",
+      "operationId": "rejectAftersale",
+      "roles": [
+        "SERVICE"
+      ],
+      "permissions": [
+        "aftersale.review"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "operationId": "listAdminRefunds",
+      "roles": [
+        "FINANCE"
+      ],
+      "permissions": [
+        "refund.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/{refundId}/execute",
+      "operationId": "executeRefund",
+      "roles": [
+        "FINANCE"
+      ],
+      "permissions": [
+        "refund.execute"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/{refundId}/retry",
+      "operationId": "retryRefund",
+      "roles": [
+        "FINANCE"
+      ],
+      "permissions": [
+        "refund.retry"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "operationId": "listReconciliations",
+      "roles": [
+        "FINANCE"
+      ],
+      "permissions": [
+        "reconciliation.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/reconciliations",
+      "operationId": "createReconciliation",
+      "roles": [
+        "FINANCE"
+      ],
+      "permissions": [
+        "reconciliation.run"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs",
+      "operationId": "listAuditLogs",
+      "roles": [
+        "ADMIN"
+      ],
+      "permissions": [
+        "audit.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "operationId": "listEmployees",
+      "roles": [
+        "ADMIN"
+      ],
+      "permissions": [
+        "employee.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/employees",
+      "operationId": "createEmployee",
+      "roles": [
+        "ADMIN"
+      ],
+      "permissions": [
+        "employee.create"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/employees/{employeeId}/roles",
+      "operationId": "setEmployeeRoles",
+      "roles": [
+        "ADMIN"
+      ],
+      "permissions": [
+        "employee.roles"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/employees/{employeeId}/status",
+      "operationId": "setEmployeeStatus",
+      "roles": [
+        "ADMIN"
+      ],
+      "permissions": [
+        "employee.status"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/roles",
+      "operationId": "listRoles",
+      "roles": [
+        "ADMIN"
+      ],
+      "permissions": [
+        "role.read"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-slots",
+      "operationId": "listAdminDeliverySlots",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "slot.manage"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/delivery-slots/{slotId}",
+      "operationId": "updateDeliverySlot",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "slot.manage"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/policies",
+      "operationId": "getBusinessPolicies",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "policy.manage"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/policies",
+      "operationId": "updateBusinessPolicies",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "policy.manage"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/password",
+      "operationId": "changePassword",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ],
+      "permissions": [
+        "auth.self"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/media/images",
+      "operationId": "uploadEvidenceImage",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "media.member.upload"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/{mediaId}/access",
+      "operationId": "getPrivateMediaAccess",
+      "roles": [
+        "MEMBER",
+        "SERVICE"
+      ],
+      "permissions": [
+        "media.access"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/contact-access",
+      "operationId": "accessDeliveryContact",
+      "roles": [
+        "COURIER"
+      ],
+      "permissions": [
+        "delivery.contact.access"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/media/images",
+      "operationId": "uploadProductImage",
+      "roles": [
+        "OPERATOR"
+      ],
+      "permissions": [
+        "media.product.upload"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/claim",
+      "operationId": "claimAftersale",
+      "roles": [
+        "SERVICE"
+      ],
+      "permissions": [
+        "aftersale.work.claim"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/resolve-exception",
+      "operationId": "resolveDeliveryException",
+      "roles": [
+        "SERVICE"
+      ],
+      "permissions": [
+        "delivery.exception.resolve"
+      ],
+      "implementationStatus": "CONTRACT_ONLY"
+    }
+  ]
+}

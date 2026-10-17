@@ -1,0 +1,18 @@
+{
+  "contractVersion": "0.1.0",
+  "files": [
+    {
+      "path": "contracts/openapi.yaml",
+      "sha256": "f1f636f25007b2669c08223c28efefa8ab5dc8680c050f5136ede13420929e69"
+    },
+    {
+      "path": "docs/evidence/contract-v0.1/static-validator.txt",
+      "sha256": "bf9d1aab7d5182bf60e2ab9648448474ced94099aae072c3905a314ed4ba0fce"
+    },
+    {
+      "path": "docs/evidence/contract-v0.1/standard-validator.json",
+      "sha256": "9fd7cd27148e3eb13811a699f332a051ef07515341b7df6f59ed1c3a660f2a26"
+    }
+  ],
+  "scope": "static contract and example validation only"
+}

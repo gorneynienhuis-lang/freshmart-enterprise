@@ -1,0 +1,35 @@
+# deps
+node_modules/
+.pnpm-store/
+# build
+dist/
+build/
+target/
+*.class
+# env
+.env
+.env.local
+*.log
+# IDE / OS
+.idea/
+.vscode/
+.DS_Store
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+credentials*.json
+secrets/
+coverage/
+playwright-report/
+test-results/
+*.mp4
+*.mov
+*.zip
+*.tar.gz
+*.hprof
+*.dump
+*.sql.gz
+~$*

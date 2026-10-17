@@ -1,0 +1,1 @@
+PASS: 91 operations; 172 schemas; 946 local refs; 1971 schema/example checks; manifest + fixtures + roles + permission keys + state/security invariants. Static contract only; backend runtime/business tests NOT EXECUTED.

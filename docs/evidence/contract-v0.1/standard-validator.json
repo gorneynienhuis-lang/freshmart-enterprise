@@ -1,0 +1,16 @@
+{
+  "result": "PASS",
+  "version": "0.1.0",
+  "operations": 91,
+  "validatedExamples": 731,
+  "checks": [
+    "OpenAPI 3.1 specification",
+    "JSON Schema 2020-12 request and response examples with format checks"
+  ],
+  "notVerified": [
+    "backend implementation",
+    "runtime authorization",
+    "money and inventory concurrency",
+    "performance"
+  ]
+}

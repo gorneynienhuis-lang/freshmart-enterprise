@@ -1,0 +1,3706 @@
+{
+  "version": "0.1.0",
+  "notice": "固定契约样例，非真实业务记录，非测试通过声明",
+  "operations": {
+    "getCsrfToken": {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "csrfToken": "csrf-demo-token-001",
+          "expiresAt": "2026-10-18T14:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "registerMember": {
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "request": {
+        "phone": "13800138000",
+        "password": "DemoPassword123!",
+        "displayName": "演示会员"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "accessToken": "demo.access.token",
+          "tokenType": "Bearer",
+          "expiresIn": 900,
+          "user": {
+            "mustChangePassword": false,
+            "userId": "u1001",
+            "displayName": "演示会员",
+            "phoneMasked": "138****8000",
+            "roles": [
+              "MEMBER"
+            ],
+            "status": "ACTIVE",
+            "version": 1,
+            "permissions": [
+              "catalog.read",
+              "auth.self",
+              "order.create",
+              "order.self.read"
+            ]
+          },
+          "csrfToken": "csrf-demo-token-001",
+          "csrfExpiresAt": "2026-10-18T13:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "login": {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "request": {
+        "phone": "13800138000",
+        "password": "DemoPassword123!"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "accessToken": "demo.access.token",
+          "tokenType": "Bearer",
+          "expiresIn": 900,
+          "user": {
+            "mustChangePassword": false,
+            "userId": "u1001",
+            "displayName": "演示会员",
+            "phoneMasked": "138****8000",
+            "roles": [
+              "MEMBER"
+            ],
+            "status": "ACTIVE",
+            "version": 1,
+            "permissions": [
+              "catalog.read",
+              "auth.self",
+              "order.create",
+              "order.self.read"
+            ]
+          },
+          "csrfToken": "csrf-demo-token-001",
+          "csrfExpiresAt": "2026-10-18T13:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "refreshSession": {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "accessToken": "demo.access.token",
+          "tokenType": "Bearer",
+          "expiresIn": 900,
+          "user": {
+            "mustChangePassword": false,
+            "userId": "u1001",
+            "displayName": "演示会员",
+            "phoneMasked": "138****8000",
+            "roles": [
+              "MEMBER"
+            ],
+            "status": "ACTIVE",
+            "version": 1,
+            "permissions": [
+              "catalog.read",
+              "auth.self",
+              "order.create",
+              "order.self.read"
+            ]
+          },
+          "csrfToken": "csrf-demo-token-001",
+          "csrfExpiresAt": "2026-10-18T13:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "logout": {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "accepted": true,
+          "resourceId": "1001",
+          "version": 1,
+          "message": "命令已受理；异步任务完成前不表示资金已到账"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getCurrentUser": {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "mustChangePassword": false,
+          "userId": "u1001",
+          "displayName": "演示会员",
+          "phoneMasked": "138****8000",
+          "roles": [
+            "MEMBER"
+          ],
+          "status": "ACTIVE",
+          "version": 1,
+          "permissions": [
+            "catalog.read",
+            "auth.self",
+            "order.create",
+            "order.self.read"
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getHome": {
+      "method": "GET",
+      "path": "/api/v1/home",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "banners": [
+            {
+              "bannerId": "banner-1",
+              "title": "预约鲜送",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "targetType": "CATEGORY",
+              "targetId": null
+            }
+          ],
+          "categories": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "sortOrder": 1
+            }
+          ],
+          "nearExpiryProducts": [],
+          "recommendedProducts": [
+            {
+              "productId": "S001",
+              "spuCode": "S001",
+              "categoryId": "C01",
+              "name": "沙瓤番茄",
+              "description": "新鲜番茄；以实际商品为准",
+              "origin": "山东寿光",
+              "storage": "COLD",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "priceMode": "BY_PIECE",
+              "unitLabel": "500g/份",
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "skus": [
+                {
+                  "skuId": "SKU-001",
+                  "skuCode": "SKU-001",
+                  "name": "沙瓤番茄500g/份",
+                  "unitLabel": "500g/份",
+                  "baseUnit": "PIECE",
+                  "priceMode": "BY_PIECE",
+                  "priceUnitGram": null,
+                  "price": 690,
+                  "memberPrice": 590,
+                  "salePrice": 590,
+                  "stockStatus": "IN_STOCK",
+                  "nearExpiry": false,
+                  "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+                  "version": 1,
+                  "arrivedAt": null,
+                  "freshness": null,
+                  "shelfLifeRemainingDays": null
+                }
+              ],
+              "version": 1,
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ],
+          "generatedAt": "2026-10-18T14:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listCategories": {
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "sortOrder": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listProducts": {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "productId": "S001",
+              "spuCode": "S001",
+              "categoryId": "C01",
+              "name": "沙瓤番茄",
+              "description": "新鲜番茄；以实际商品为准",
+              "origin": "山东寿光",
+              "storage": "COLD",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "priceMode": "BY_PIECE",
+              "unitLabel": "500g/份",
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "skus": [
+                {
+                  "skuId": "SKU-001",
+                  "skuCode": "SKU-001",
+                  "name": "沙瓤番茄500g/份",
+                  "unitLabel": "500g/份",
+                  "baseUnit": "PIECE",
+                  "priceMode": "BY_PIECE",
+                  "priceUnitGram": null,
+                  "price": 690,
+                  "memberPrice": 590,
+                  "salePrice": 590,
+                  "stockStatus": "IN_STOCK",
+                  "nearExpiry": false,
+                  "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+                  "version": 1,
+                  "arrivedAt": null,
+                  "freshness": null,
+                  "shelfLifeRemainingDays": null
+                }
+              ],
+              "version": 1,
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getProduct": {
+      "method": "GET",
+      "path": "/api/v1/products/{productId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "productId": "S001",
+          "spuCode": "S001",
+          "categoryId": "C01",
+          "name": "沙瓤番茄",
+          "description": "新鲜番茄；以实际商品为准",
+          "origin": "山东寿光",
+          "storage": "COLD",
+          "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+          "price": 690,
+          "memberPrice": 590,
+          "salePrice": 590,
+          "priceMode": "BY_PIECE",
+          "unitLabel": "500g/份",
+          "stockStatus": "IN_STOCK",
+          "nearExpiry": false,
+          "skus": [
+            {
+              "skuId": "SKU-001",
+              "skuCode": "SKU-001",
+              "name": "沙瓤番茄500g/份",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "priceUnitGram": null,
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1,
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ],
+          "version": 1,
+          "arrivedAt": null,
+          "freshness": null,
+          "shelfLifeRemainingDays": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listProductReviews": {
+      "method": "GET",
+      "path": "/api/v1/products/{productId}/reviews",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "reviewId": "review-1",
+              "productId": "S001",
+              "displayName": "演示会员",
+              "rating": 5,
+              "content": "商品新鲜，配送及时",
+              "imageUrls": [],
+              "createdAt": "2026-10-18T14:00:00+08:00"
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getCart": {
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "cartItemId": "cart-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "quantity": 1,
+              "unitPrice": 590,
+              "lineAmount": 590,
+              "selected": true,
+              "stockStatus": "IN_STOCK",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1
+            }
+          ],
+          "selectedItemCount": 1,
+          "estimatedGoodsAmount": 590,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "addCartItem": {
+      "method": "POST",
+      "path": "/api/v1/cart/items",
+      "request": {
+        "skuId": "SKU-001",
+        "quantity": 1,
+        "selected": true
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "cartItemId": "cart-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "quantity": 1,
+              "unitPrice": 590,
+              "lineAmount": 590,
+              "selected": true,
+              "stockStatus": "IN_STOCK",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1
+            }
+          ],
+          "selectedItemCount": 1,
+          "estimatedGoodsAmount": 590,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "updateCartItem": {
+      "method": "PATCH",
+      "path": "/api/v1/cart/items/{cartItemId}",
+      "request": {
+        "quantity": 1,
+        "selected": true,
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "cartItemId": "cart-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "quantity": 1,
+              "unitPrice": 590,
+              "lineAmount": 590,
+              "selected": true,
+              "stockStatus": "IN_STOCK",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1
+            }
+          ],
+          "selectedItemCount": 1,
+          "estimatedGoodsAmount": 590,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "removeCartItem": {
+      "method": "DELETE",
+      "path": "/api/v1/cart/items/{cartItemId}",
+      "request": {
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "cartItemId": "cart-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "quantity": 1,
+              "unitPrice": 590,
+              "lineAmount": 590,
+              "selected": true,
+              "stockStatus": "IN_STOCK",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1
+            }
+          ],
+          "selectedItemCount": 1,
+          "estimatedGoodsAmount": 590,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listAddresses": {
+      "method": "GET",
+      "path": "/api/v1/addresses",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "addressId": "addr-1",
+              "recipientName": "测试用户",
+              "phone": "13800138000",
+              "province": "上海市",
+              "city": "上海市",
+              "district": "松江区",
+              "detail": "演示路1号",
+              "isDefault": true,
+              "serviceable": true,
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createAddress": {
+      "method": "POST",
+      "path": "/api/v1/addresses",
+      "request": {
+        "recipientName": "测试用户",
+        "phone": "13800138000",
+        "province": "上海市",
+        "city": "上海市",
+        "district": "松江区",
+        "detail": "演示路1号",
+        "isDefault": true
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "addressId": "addr-1",
+          "recipientName": "测试用户",
+          "phone": "13800138000",
+          "province": "上海市",
+          "city": "上海市",
+          "district": "松江区",
+          "detail": "演示路1号",
+          "isDefault": true,
+          "serviceable": true,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "updateAddress": {
+      "method": "PUT",
+      "path": "/api/v1/addresses/{addressId}",
+      "request": {
+        "recipientName": "测试用户",
+        "phone": "13800138000",
+        "province": "上海市",
+        "city": "上海市",
+        "district": "松江区",
+        "detail": "演示路1号",
+        "isDefault": true,
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "addressId": "addr-1",
+          "recipientName": "测试用户",
+          "phone": "13800138000",
+          "province": "上海市",
+          "city": "上海市",
+          "district": "松江区",
+          "detail": "演示路1号",
+          "isDefault": true,
+          "serviceable": true,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "deleteAddress": {
+      "method": "DELETE",
+      "path": "/api/v1/addresses/{addressId}",
+      "request": {
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "accepted": true,
+          "resourceId": "1001",
+          "version": 1,
+          "message": "命令已受理；异步任务完成前不表示资金已到账"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listDeliverySlots": {
+      "method": "GET",
+      "path": "/api/v1/delivery-slots",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "slotId": "slot-20261018-2",
+              "date": "2026-10-18",
+              "label": "14:00–17:00",
+              "startAt": "2026-10-18T14:00:00+08:00",
+              "endAt": "2026-10-18T17:00:00+08:00",
+              "cutoffAt": "2026-10-18T13:30:00+08:00",
+              "remaining": 20,
+              "available": true,
+              "unavailableReason": null,
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listMyCoupons": {
+      "method": "GET",
+      "path": "/api/v1/coupons",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "couponId": "coupon-1",
+              "name": "新人券",
+              "discountAmount": 500,
+              "minGoodsAmount": 3000,
+              "status": "AVAILABLE",
+              "expiresAt": "2026-10-18T14:00:00+08:00",
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "quoteOrder": {
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "request": {
+        "items": [
+          {
+            "skuId": "SKU-001",
+            "quantity": 1
+          }
+        ],
+        "addressId": "addr-1",
+        "slotId": "slot-20261018-2",
+        "couponId": null
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "quoteId": "quote-1",
+          "quoteToken": "quote-demo-token",
+          "expiresAt": "2026-10-18T13:05:00+08:00",
+          "lines": [
+            {
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "linePayableAmount": 590,
+              "referenceUnitPrice": 690,
+              "memberUnitPrice": 590,
+              "nearExpiryUnitPrice": null
+            }
+          ],
+          "price": {
+            "referenceGoodsAmount": 690,
+            "memberGoodsAmount": 590,
+            "nearExpiryDiscountAmount": 0,
+            "couponDiscountAmount": 0,
+            "goodsPayableAmount": 590,
+            "freightAmount": 600,
+            "payableAmount": 1190,
+            "freeShippingThresholdAmount": 9900,
+            "freeShippingGapAmount": 9310
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "address": {
+            "addressId": "addr-1",
+            "recipientName": "测试用户",
+            "phone": "13800138000",
+            "province": "上海市",
+            "city": "上海市",
+            "district": "松江区",
+            "detail": "演示路1号",
+            "isDefault": true,
+            "serviceable": true,
+            "version": 1
+          },
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createOrder": {
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "request": {
+        "quoteId": "quote-1",
+        "quoteToken": "quote-demo-token"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "orderId": "order-1",
+          "orderNo": "FM20261018000123",
+          "status": "PENDING_PAY",
+          "currency": "CNY",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "price": {
+            "referenceGoodsAmount": 690,
+            "memberGoodsAmount": 590,
+            "nearExpiryDiscountAmount": 0,
+            "couponDiscountAmount": 0,
+            "goodsPayableAmount": 590,
+            "freightAmount": 600,
+            "payableAmount": 1190,
+            "freeShippingThresholdAmount": 9900,
+            "freeShippingGapAmount": 9310
+          },
+          "paidAmount": 0,
+          "refundedAmount": 0,
+          "address": {
+            "addressId": "addr-1",
+            "recipientName": "测试用户",
+            "phone": "13800138000",
+            "province": "上海市",
+            "city": "上海市",
+            "district": "松江区",
+            "detail": "演示路1号",
+            "isDefault": true,
+            "serviceable": true,
+            "version": 1
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "weightAdjustment": null,
+          "refunds": [],
+          "buyerNote": null,
+          "createdAt": "2026-10-18T13:00:00+08:00",
+          "paymentExpiresAt": "2026-10-18T13:15:00+08:00",
+          "paidAt": null,
+          "finishedAt": null,
+          "version": 1,
+          "allowedActions": [
+            "PAY",
+            "CANCEL"
+          ],
+          "deliveryReceiptCode": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listMyOrders": {
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "orderId": "order-1",
+              "orderNo": "FM20261018000123",
+              "status": "PENDING_PAY",
+              "currency": "CNY",
+              "items": [
+                {
+                  "orderItemId": "oi-1",
+                  "skuId": "SKU-001",
+                  "productId": "S001",
+                  "productName": "沙瓤番茄",
+                  "unitLabel": "500g/份",
+                  "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+                  "baseUnit": "PIECE",
+                  "priceMode": "BY_PIECE",
+                  "quantity": 1,
+                  "estimatedGram": null,
+                  "actualGram": null,
+                  "priceUnitGram": null,
+                  "unitPrice": 590,
+                  "couponAllocationAmount": 0,
+                  "originalPayableAmount": 590,
+                  "finalPayableAmount": null,
+                  "refundedAmount": 0
+                }
+              ],
+              "price": {
+                "referenceGoodsAmount": 690,
+                "memberGoodsAmount": 590,
+                "nearExpiryDiscountAmount": 0,
+                "couponDiscountAmount": 0,
+                "goodsPayableAmount": 590,
+                "freightAmount": 600,
+                "payableAmount": 1190,
+                "freeShippingThresholdAmount": 9900,
+                "freeShippingGapAmount": 9310
+              },
+              "paidAmount": 0,
+              "refundedAmount": 0,
+              "address": {
+                "addressId": "addr-1",
+                "recipientName": "测试用户",
+                "phone": "13800138000",
+                "province": "上海市",
+                "city": "上海市",
+                "district": "松江区",
+                "detail": "演示路1号",
+                "isDefault": true,
+                "serviceable": true,
+                "version": 1
+              },
+              "slot": {
+                "slotId": "slot-20261018-2",
+                "date": "2026-10-18",
+                "label": "14:00–17:00",
+                "startAt": "2026-10-18T14:00:00+08:00",
+                "endAt": "2026-10-18T17:00:00+08:00",
+                "cutoffAt": "2026-10-18T13:30:00+08:00",
+                "remaining": 20,
+                "available": true,
+                "unavailableReason": null,
+                "version": 1
+              },
+              "weightAdjustment": null,
+              "refunds": [],
+              "buyerNote": null,
+              "createdAt": "2026-10-18T13:00:00+08:00",
+              "paymentExpiresAt": "2026-10-18T13:15:00+08:00",
+              "paidAt": null,
+              "finishedAt": null,
+              "version": 1,
+              "allowedActions": [
+                "PAY",
+                "CANCEL"
+              ],
+              "deliveryReceiptCode": null
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getMyOrder": {
+      "method": "GET",
+      "path": "/api/v1/orders/{orderId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "orderId": "order-1",
+          "orderNo": "FM20261018000123",
+          "status": "PENDING_PAY",
+          "currency": "CNY",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "price": {
+            "referenceGoodsAmount": 690,
+            "memberGoodsAmount": 590,
+            "nearExpiryDiscountAmount": 0,
+            "couponDiscountAmount": 0,
+            "goodsPayableAmount": 590,
+            "freightAmount": 600,
+            "payableAmount": 1190,
+            "freeShippingThresholdAmount": 9900,
+            "freeShippingGapAmount": 9310
+          },
+          "paidAmount": 0,
+          "refundedAmount": 0,
+          "address": {
+            "addressId": "addr-1",
+            "recipientName": "测试用户",
+            "phone": "13800138000",
+            "province": "上海市",
+            "city": "上海市",
+            "district": "松江区",
+            "detail": "演示路1号",
+            "isDefault": true,
+            "serviceable": true,
+            "version": 1
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "weightAdjustment": null,
+          "refunds": [],
+          "buyerNote": null,
+          "createdAt": "2026-10-18T13:00:00+08:00",
+          "paymentExpiresAt": "2026-10-18T13:15:00+08:00",
+          "paidAt": null,
+          "finishedAt": null,
+          "version": 1,
+          "allowedActions": [
+            "PAY",
+            "CANCEL"
+          ],
+          "deliveryReceiptCode": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getOrderStatus": {
+      "method": "GET",
+      "path": "/api/v1/orders/{orderId}/status",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "orderId": "order-1",
+          "status": "PENDING_PAY",
+          "paidAmount": 0,
+          "refundedAmount": 0,
+          "weightAdjustmentStatus": "NONE",
+          "version": 1,
+          "updatedAt": "2026-10-18T14:00:00+08:00",
+          "allowedActions": [
+            "PAY",
+            "CANCEL"
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "cancelMyOrder": {
+      "method": "POST",
+      "path": "/api/v1/orders/{orderId}/cancel",
+      "request": {
+        "version": 1,
+        "reason": "用户请求取消"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "orderId": "order-1",
+          "orderNo": "FM20261018000123",
+          "status": "PENDING_PAY",
+          "currency": "CNY",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "price": {
+            "referenceGoodsAmount": 690,
+            "memberGoodsAmount": 590,
+            "nearExpiryDiscountAmount": 0,
+            "couponDiscountAmount": 0,
+            "goodsPayableAmount": 590,
+            "freightAmount": 600,
+            "payableAmount": 1190,
+            "freeShippingThresholdAmount": 9900,
+            "freeShippingGapAmount": 9310
+          },
+          "paidAmount": 0,
+          "refundedAmount": 0,
+          "address": {
+            "addressId": "addr-1",
+            "recipientName": "测试用户",
+            "phone": "13800138000",
+            "province": "上海市",
+            "city": "上海市",
+            "district": "松江区",
+            "detail": "演示路1号",
+            "isDefault": true,
+            "serviceable": true,
+            "version": 1
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "weightAdjustment": null,
+          "refunds": [],
+          "buyerNote": null,
+          "createdAt": "2026-10-18T13:00:00+08:00",
+          "paymentExpiresAt": "2026-10-18T13:15:00+08:00",
+          "paidAt": null,
+          "finishedAt": null,
+          "version": 1,
+          "allowedActions": [
+            "PAY",
+            "CANCEL"
+          ],
+          "deliveryReceiptCode": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createPayment": {
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "request": {
+        "orderId": "order-1",
+        "purpose": "ORDER"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "paymentId": "pay-1",
+          "orderId": "order-1",
+          "adjustmentId": null,
+          "purpose": "ORDER",
+          "channel": "SANDBOX",
+          "status": "PENDING",
+          "amount": 1190,
+          "currency": "CNY",
+          "expiresAt": "2026-10-18T13:15:00+08:00",
+          "version": 1,
+          "allowedActions": [
+            "SIMULATE_PAYMENT"
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getPayment": {
+      "method": "GET",
+      "path": "/api/v1/payments/{paymentId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "paymentId": "pay-1",
+          "orderId": "order-1",
+          "adjustmentId": null,
+          "purpose": "ORDER",
+          "channel": "SANDBOX",
+          "status": "PENDING",
+          "amount": 1190,
+          "currency": "CNY",
+          "expiresAt": "2026-10-18T13:15:00+08:00",
+          "version": 1,
+          "allowedActions": [
+            "SIMULATE_PAYMENT"
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "simulateSandboxPayment": {
+      "method": "POST",
+      "path": "/api/v1/payments/{paymentId}/sandbox-simulate",
+      "request": {
+        "outcome": "SUCCESS",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "paymentId": "pay-1",
+          "orderId": "order-1",
+          "adjustmentId": null,
+          "purpose": "ORDER",
+          "channel": "SANDBOX",
+          "status": "PENDING",
+          "amount": 1190,
+          "currency": "CNY",
+          "expiresAt": "2026-10-18T13:15:00+08:00",
+          "version": 1,
+          "allowedActions": [
+            "SIMULATE_PAYMENT"
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "receiveSandboxPaymentCallback": {
+      "method": "POST",
+      "path": "/api/v1/payments/sandbox/callback",
+      "request": {
+        "eventId": "evt-1",
+        "paymentId": "pay-1",
+        "channelTradeNo": "sandbox-trade-1",
+        "status": "SUCCESS",
+        "amount": 1190,
+        "currency": "CNY",
+        "occurredAt": "2026-10-18T14:00:00+08:00"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "eventId": "evt-1",
+          "accepted": true,
+          "duplicate": false
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getMyRefund": {
+      "method": "GET",
+      "path": "/api/v1/refunds/{refundId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "refundId": "refund-1",
+          "orderId": "order-1",
+          "paymentId": "pay-1",
+          "aftersaleId": null,
+          "adjustmentId": null,
+          "type": "AFTERSALE",
+          "amount": 24,
+          "currency": "CNY",
+          "status": "PENDING",
+          "reason": "称重退差",
+          "createdAt": "2026-10-18T14:00:00+08:00",
+          "completedAt": null,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "applyAftersale": {
+      "method": "POST",
+      "path": "/api/v1/aftersales",
+      "request": {
+        "orderId": "order-1",
+        "type": "QUALITY",
+        "reason": "商品质量问题",
+        "items": [
+          {
+            "orderItemId": "oi-1",
+            "quantity": 1,
+            "requestedAmount": 590
+          }
+        ],
+        "evidenceMediaIds": []
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "aftersaleId": "after-1",
+          "orderId": "order-1",
+          "type": "QUALITY",
+          "reason": "商品质量问题",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "quantity": 1,
+              "requestedAmount": 590
+            }
+          ],
+          "evidenceMediaIds": [],
+          "status": "APPLIED",
+          "requestedAmount": 590,
+          "approvedAmount": 0,
+          "reviewComment": null,
+          "refunds": [],
+          "appliedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listMyAftersales": {
+      "method": "GET",
+      "path": "/api/v1/aftersales",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "aftersaleId": "after-1",
+              "orderId": "order-1",
+              "type": "QUALITY",
+              "reason": "商品质量问题",
+              "items": [
+                {
+                  "orderItemId": "oi-1",
+                  "quantity": 1,
+                  "requestedAmount": 590
+                }
+              ],
+              "evidenceMediaIds": [],
+              "status": "APPLIED",
+              "requestedAmount": 590,
+              "approvedAmount": 0,
+              "reviewComment": null,
+              "refunds": [],
+              "appliedAt": "2026-10-18T14:00:00+08:00",
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getMyAftersale": {
+      "method": "GET",
+      "path": "/api/v1/aftersales/{aftersaleId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "aftersaleId": "after-1",
+          "orderId": "order-1",
+          "type": "QUALITY",
+          "reason": "商品质量问题",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "quantity": 1,
+              "requestedAmount": 590
+            }
+          ],
+          "evidenceMediaIds": [],
+          "status": "APPLIED",
+          "requestedAmount": 590,
+          "approvedAmount": 0,
+          "reviewComment": null,
+          "refunds": [],
+          "appliedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "cancelMyAftersale": {
+      "method": "POST",
+      "path": "/api/v1/aftersales/{aftersaleId}/cancel",
+      "request": {
+        "version": 1,
+        "reason": "用户请求取消"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "aftersaleId": "after-1",
+          "orderId": "order-1",
+          "type": "QUALITY",
+          "reason": "商品质量问题",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "quantity": 1,
+              "requestedAmount": 590
+            }
+          ],
+          "evidenceMediaIds": [],
+          "status": "APPLIED",
+          "requestedAmount": 590,
+          "approvedAmount": 0,
+          "reviewComment": null,
+          "refunds": [],
+          "appliedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createReview": {
+      "method": "POST",
+      "path": "/api/v1/reviews",
+      "request": {
+        "orderItemId": "oi-1",
+        "rating": 5,
+        "content": "商品新鲜，配送及时",
+        "imageMediaIds": [],
+        "anonymous": false
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "reviewId": "review-1",
+          "productId": "S001",
+          "displayName": "演示会员",
+          "rating": 5,
+          "content": "商品新鲜，配送及时",
+          "imageUrls": [],
+          "createdAt": "2026-10-18T14:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getAdminDashboard": {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "businessDate": "2026-10-18",
+          "paidOrderCount": 1,
+          "capturedPaymentAmount": 1190,
+          "successfulRefundAmount": 0,
+          "netCollectedAmount": 1190,
+          "pendingPickCount": 1,
+          "nearExpiryBatchCount": 0,
+          "lowStockSkuCount": 0,
+          "generatedAt": "2026-10-18T14:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listAdminProducts": {
+      "method": "GET",
+      "path": "/api/v1/admin/products",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "productId": "S001",
+              "spuCode": "S001",
+              "categoryId": "C01",
+              "name": "沙瓤番茄",
+              "description": "新鲜番茄；以实际商品为准",
+              "origin": "山东寿光",
+              "storage": "COLD",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "priceMode": "BY_PIECE",
+              "unitLabel": "500g/份",
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "skus": [
+                {
+                  "skuId": "SKU-001",
+                  "skuCode": "SKU-001",
+                  "name": "沙瓤番茄500g/份",
+                  "unitLabel": "500g/份",
+                  "baseUnit": "PIECE",
+                  "priceMode": "BY_PIECE",
+                  "priceUnitGram": null,
+                  "price": 690,
+                  "memberPrice": 590,
+                  "salePrice": 590,
+                  "stockStatus": "IN_STOCK",
+                  "nearExpiry": false,
+                  "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+                  "version": 1,
+                  "arrivedAt": null,
+                  "freshness": null,
+                  "shelfLifeRemainingDays": null
+                }
+              ],
+              "version": 1,
+              "status": "DRAFT",
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createProduct": {
+      "method": "POST",
+      "path": "/api/v1/admin/products",
+      "request": {
+        "categoryId": "C01",
+        "name": "沙瓤番茄",
+        "description": "新鲜番茄",
+        "origin": "山东寿光",
+        "storage": "COLD",
+        "imageUrl": "http://localhost:8080/static/products/S001.jpg"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "productId": "S001",
+          "spuCode": "S001",
+          "categoryId": "C01",
+          "name": "沙瓤番茄",
+          "description": "新鲜番茄；以实际商品为准",
+          "origin": "山东寿光",
+          "storage": "COLD",
+          "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+          "price": 690,
+          "memberPrice": 590,
+          "salePrice": 590,
+          "priceMode": "BY_PIECE",
+          "unitLabel": "500g/份",
+          "stockStatus": "IN_STOCK",
+          "nearExpiry": false,
+          "skus": [
+            {
+              "skuId": "SKU-001",
+              "skuCode": "SKU-001",
+              "name": "沙瓤番茄500g/份",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "priceUnitGram": null,
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1,
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ],
+          "version": 1,
+          "status": "DRAFT",
+          "arrivedAt": null,
+          "freshness": null,
+          "shelfLifeRemainingDays": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getAdminProduct": {
+      "method": "GET",
+      "path": "/api/v1/admin/products/{productId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "productId": "S001",
+          "spuCode": "S001",
+          "categoryId": "C01",
+          "name": "沙瓤番茄",
+          "description": "新鲜番茄；以实际商品为准",
+          "origin": "山东寿光",
+          "storage": "COLD",
+          "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+          "price": 690,
+          "memberPrice": 590,
+          "salePrice": 590,
+          "priceMode": "BY_PIECE",
+          "unitLabel": "500g/份",
+          "stockStatus": "IN_STOCK",
+          "nearExpiry": false,
+          "skus": [
+            {
+              "skuId": "SKU-001",
+              "skuCode": "SKU-001",
+              "name": "沙瓤番茄500g/份",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "priceUnitGram": null,
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1,
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ],
+          "version": 1,
+          "status": "DRAFT",
+          "arrivedAt": null,
+          "freshness": null,
+          "shelfLifeRemainingDays": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "patchProduct": {
+      "method": "PATCH",
+      "path": "/api/v1/admin/products/{productId}",
+      "request": {
+        "version": 1,
+        "name": "沙瓤番茄精选"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "productId": "S001",
+          "spuCode": "S001",
+          "categoryId": "C01",
+          "name": "沙瓤番茄",
+          "description": "新鲜番茄；以实际商品为准",
+          "origin": "山东寿光",
+          "storage": "COLD",
+          "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+          "price": 690,
+          "memberPrice": 590,
+          "salePrice": 590,
+          "priceMode": "BY_PIECE",
+          "unitLabel": "500g/份",
+          "stockStatus": "IN_STOCK",
+          "nearExpiry": false,
+          "skus": [
+            {
+              "skuId": "SKU-001",
+              "skuCode": "SKU-001",
+              "name": "沙瓤番茄500g/份",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "priceUnitGram": null,
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1,
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ],
+          "version": 1,
+          "status": "DRAFT",
+          "arrivedAt": null,
+          "freshness": null,
+          "shelfLifeRemainingDays": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "setProductStatus": {
+      "method": "PUT",
+      "path": "/api/v1/admin/products/{productId}/status",
+      "request": {
+        "status": "ON_SALE",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "productId": "S001",
+          "spuCode": "S001",
+          "categoryId": "C01",
+          "name": "沙瓤番茄",
+          "description": "新鲜番茄；以实际商品为准",
+          "origin": "山东寿光",
+          "storage": "COLD",
+          "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+          "price": 690,
+          "memberPrice": 590,
+          "salePrice": 590,
+          "priceMode": "BY_PIECE",
+          "unitLabel": "500g/份",
+          "stockStatus": "IN_STOCK",
+          "nearExpiry": false,
+          "skus": [
+            {
+              "skuId": "SKU-001",
+              "skuCode": "SKU-001",
+              "name": "沙瓤番茄500g/份",
+              "unitLabel": "500g/份",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "priceUnitGram": null,
+              "price": 690,
+              "memberPrice": 590,
+              "salePrice": 590,
+              "stockStatus": "IN_STOCK",
+              "nearExpiry": false,
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "version": 1,
+              "arrivedAt": null,
+              "freshness": null,
+              "shelfLifeRemainingDays": null
+            }
+          ],
+          "version": 1,
+          "status": "DRAFT",
+          "arrivedAt": null,
+          "freshness": null,
+          "shelfLifeRemainingDays": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createSku": {
+      "method": "POST",
+      "path": "/api/v1/admin/products/{productId}/skus",
+      "request": {
+        "skuCode": "SKU-001",
+        "name": "沙瓤番茄500g/份",
+        "unitLabel": "500g/份",
+        "baseUnit": "PIECE",
+        "priceMode": "BY_PIECE",
+        "priceUnitGram": null,
+        "price": 690,
+        "memberPrice": 590,
+        "imageUrl": "http://localhost:8080/static/products/S001.jpg"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "skuId": "SKU-001",
+          "skuCode": "SKU-001",
+          "name": "沙瓤番茄500g/份",
+          "unitLabel": "500g/份",
+          "baseUnit": "PIECE",
+          "priceMode": "BY_PIECE",
+          "priceUnitGram": null,
+          "price": 690,
+          "memberPrice": 590,
+          "salePrice": 590,
+          "stockStatus": "IN_STOCK",
+          "nearExpiry": false,
+          "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+          "version": 1,
+          "arrivedAt": null,
+          "freshness": null,
+          "shelfLifeRemainingDays": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "patchSku": {
+      "method": "PATCH",
+      "path": "/api/v1/admin/skus/{skuId}",
+      "request": {
+        "version": 1,
+        "memberPrice": 590
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "skuId": "SKU-001",
+          "skuCode": "SKU-001",
+          "name": "沙瓤番茄500g/份",
+          "unitLabel": "500g/份",
+          "baseUnit": "PIECE",
+          "priceMode": "BY_PIECE",
+          "priceUnitGram": null,
+          "price": 690,
+          "memberPrice": 590,
+          "salePrice": 590,
+          "stockStatus": "IN_STOCK",
+          "nearExpiry": false,
+          "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+          "version": 1,
+          "arrivedAt": null,
+          "freshness": null,
+          "shelfLifeRemainingDays": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listBatches": {
+      "method": "GET",
+      "path": "/api/v1/admin/batches",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "batchId": "batch-1",
+              "batchNo": "B20261018-001",
+              "skuId": "SKU-001",
+              "baseUnit": "PIECE",
+              "onHand": 100,
+              "reserved": 5,
+              "quarantined": 0,
+              "available": 95,
+              "lifecycle": "NORMAL",
+              "freshness": "NORMAL",
+              "producedAt": "2026-10-18T00:00:00+08:00",
+              "expiresAt": "2026-10-21T23:59:59+08:00",
+              "receivedAt": "2026-10-18T14:00:00+08:00",
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "receiveBatch": {
+      "method": "POST",
+      "path": "/api/v1/admin/batches",
+      "request": {
+        "batchNo": "B20261018-001",
+        "skuId": "SKU-001",
+        "receivedQuantity": 100,
+        "producedAt": "2026-10-18T00:00:00+08:00",
+        "expiresAt": "2026-10-21T23:59:59+08:00",
+        "reason": "采购验收入库"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "batchId": "batch-1",
+          "batchNo": "B20261018-001",
+          "skuId": "SKU-001",
+          "baseUnit": "PIECE",
+          "onHand": 100,
+          "reserved": 5,
+          "quarantined": 0,
+          "available": 95,
+          "lifecycle": "NORMAL",
+          "freshness": "NORMAL",
+          "producedAt": "2026-10-18T00:00:00+08:00",
+          "expiresAt": "2026-10-21T23:59:59+08:00",
+          "receivedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getBatch": {
+      "method": "GET",
+      "path": "/api/v1/admin/batches/{batchId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "batchId": "batch-1",
+          "batchNo": "B20261018-001",
+          "skuId": "SKU-001",
+          "baseUnit": "PIECE",
+          "onHand": 100,
+          "reserved": 5,
+          "quarantined": 0,
+          "available": 95,
+          "lifecycle": "NORMAL",
+          "freshness": "NORMAL",
+          "producedAt": "2026-10-18T00:00:00+08:00",
+          "expiresAt": "2026-10-21T23:59:59+08:00",
+          "receivedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "adjustInventory": {
+      "method": "POST",
+      "path": "/api/v1/admin/batches/{batchId}/adjustments",
+      "request": {
+        "quantityDelta": -1,
+        "reasonCode": "COUNT_CORRECTION",
+        "reason": "盘点破损一份",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "batchId": "batch-1",
+          "batchNo": "B20261018-001",
+          "skuId": "SKU-001",
+          "baseUnit": "PIECE",
+          "onHand": 100,
+          "reserved": 5,
+          "quarantined": 0,
+          "available": 95,
+          "lifecycle": "NORMAL",
+          "freshness": "NORMAL",
+          "producedAt": "2026-10-18T00:00:00+08:00",
+          "expiresAt": "2026-10-21T23:59:59+08:00",
+          "receivedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "setBatchLifecycle": {
+      "method": "PUT",
+      "path": "/api/v1/admin/batches/{batchId}/lifecycle",
+      "request": {
+        "lifecycle": "NORMAL",
+        "reason": "质检隔离",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "batchId": "batch-1",
+          "batchNo": "B20261018-001",
+          "skuId": "SKU-001",
+          "baseUnit": "PIECE",
+          "onHand": 100,
+          "reserved": 5,
+          "quarantined": 0,
+          "available": 95,
+          "lifecycle": "NORMAL",
+          "freshness": "NORMAL",
+          "producedAt": "2026-10-18T00:00:00+08:00",
+          "expiresAt": "2026-10-21T23:59:59+08:00",
+          "receivedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listInventoryMovements": {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "movementId": "move-1",
+              "batchId": "batch-1",
+              "skuId": "SKU-001",
+              "orderId": null,
+              "type": "RECEIVE",
+              "onHandDelta": 0,
+              "reservedDelta": 1,
+              "quarantinedDelta": 0,
+              "reason": "下单预占",
+              "actorId": "u-picker-1",
+              "createdAt": "2026-10-18T14:00:00+08:00"
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listAdminOrders": {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "orderId": "order-1",
+              "orderNo": "FM20261018000123",
+              "memberId": "u1001",
+              "status": "PENDING_PAY",
+              "items": [
+                {
+                  "orderItemId": "oi-1",
+                  "skuId": "SKU-001",
+                  "productId": "S001",
+                  "productName": "沙瓤番茄",
+                  "unitLabel": "500g/份",
+                  "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+                  "baseUnit": "PIECE",
+                  "priceMode": "BY_PIECE",
+                  "quantity": 1,
+                  "estimatedGram": null,
+                  "actualGram": null,
+                  "priceUnitGram": null,
+                  "unitPrice": 590,
+                  "couponAllocationAmount": 0,
+                  "originalPayableAmount": 590,
+                  "finalPayableAmount": null,
+                  "refundedAmount": 0
+                }
+              ],
+              "price": {
+                "referenceGoodsAmount": 690,
+                "memberGoodsAmount": 590,
+                "nearExpiryDiscountAmount": 0,
+                "couponDiscountAmount": 0,
+                "goodsPayableAmount": 590,
+                "freightAmount": 600,
+                "payableAmount": 1190,
+                "freeShippingThresholdAmount": 9900,
+                "freeShippingGapAmount": 9310
+              },
+              "paidAmount": 0,
+              "refundedAmount": 0,
+              "contact": {
+                "recipientName": "测**",
+                "phoneMasked": "138****8000",
+                "region": "上海市松江区"
+              },
+              "slot": {
+                "slotId": "slot-20261018-2",
+                "date": "2026-10-18",
+                "label": "14:00–17:00",
+                "startAt": "2026-10-18T14:00:00+08:00",
+                "endAt": "2026-10-18T17:00:00+08:00",
+                "cutoffAt": "2026-10-18T13:30:00+08:00",
+                "remaining": 20,
+                "available": true,
+                "unavailableReason": null,
+                "version": 1
+              },
+              "weightAdjustment": null,
+              "refunds": [],
+              "createdAt": "2026-10-18T14:00:00+08:00",
+              "version": 1,
+              "allowedActions": []
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getAdminOrder": {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/{orderId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "orderId": "order-1",
+          "orderNo": "FM20261018000123",
+          "memberId": "u1001",
+          "status": "PENDING_PAY",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "price": {
+            "referenceGoodsAmount": 690,
+            "memberGoodsAmount": 590,
+            "nearExpiryDiscountAmount": 0,
+            "couponDiscountAmount": 0,
+            "goodsPayableAmount": 590,
+            "freightAmount": 600,
+            "payableAmount": 1190,
+            "freeShippingThresholdAmount": 9900,
+            "freeShippingGapAmount": 9310
+          },
+          "paidAmount": 0,
+          "refundedAmount": 0,
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "weightAdjustment": null,
+          "refunds": [],
+          "createdAt": "2026-10-18T14:00:00+08:00",
+          "version": 1,
+          "allowedActions": []
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "cancelOrderAsService": {
+      "method": "POST",
+      "path": "/api/v1/admin/orders/{orderId}/cancel",
+      "request": {
+        "version": 1,
+        "reason": "用户请求取消"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "orderId": "order-1",
+          "orderNo": "FM20261018000123",
+          "memberId": "u1001",
+          "status": "PENDING_PAY",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "price": {
+            "referenceGoodsAmount": 690,
+            "memberGoodsAmount": 590,
+            "nearExpiryDiscountAmount": 0,
+            "couponDiscountAmount": 0,
+            "goodsPayableAmount": 590,
+            "freightAmount": 600,
+            "payableAmount": 1190,
+            "freeShippingThresholdAmount": 9900,
+            "freeShippingGapAmount": 9310
+          },
+          "paidAmount": 0,
+          "refundedAmount": 0,
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "weightAdjustment": null,
+          "refunds": [],
+          "createdAt": "2026-10-18T14:00:00+08:00",
+          "version": 1,
+          "allowedActions": []
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "receiveCanceledOrderReturn": {
+      "method": "POST",
+      "path": "/api/v1/admin/orders/{orderId}/returns/receive",
+      "request": {
+        "allocations": [
+          {
+            "allocationId": "alloc-1",
+            "passedQuantity": 1,
+            "quarantinedQuantity": 0
+          }
+        ],
+        "inspectionNote": "取消订单实物已收回并完成质检",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "accepted": true,
+          "resourceId": "1001",
+          "version": 1,
+          "message": "命令已受理；异步任务完成前不表示资金已到账"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listPickTasks": {
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "taskId": "pick-1",
+              "orderId": "order-1",
+              "status": "UNASSIGNED",
+              "pickerId": null,
+              "items": [
+                {
+                  "orderItemId": "oi-1",
+                  "skuId": "SKU-001",
+                  "productId": "S001",
+                  "productName": "沙瓤番茄",
+                  "unitLabel": "500g/份",
+                  "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+                  "baseUnit": "PIECE",
+                  "priceMode": "BY_PIECE",
+                  "quantity": 1,
+                  "estimatedGram": null,
+                  "actualGram": null,
+                  "priceUnitGram": null,
+                  "unitPrice": 590,
+                  "couponAllocationAmount": 0,
+                  "originalPayableAmount": 590,
+                  "finalPayableAmount": null,
+                  "refundedAmount": 0
+                }
+              ],
+              "allocations": [
+                {
+                  "allocationId": "alloc-1",
+                  "orderItemId": "oi-1",
+                  "batchId": "batch-1",
+                  "batchNo": "B20261018-001",
+                  "baseUnit": "PIECE",
+                  "reservedQuantity": 1,
+                  "pickedQuantity": 0,
+                  "returnedQuantity": 0,
+                  "version": 1
+                }
+              ],
+              "slot": {
+                "slotId": "slot-20261018-2",
+                "date": "2026-10-18",
+                "label": "14:00–17:00",
+                "startAt": "2026-10-18T14:00:00+08:00",
+                "endAt": "2026-10-18T17:00:00+08:00",
+                "cutoffAt": "2026-10-18T13:30:00+08:00",
+                "remaining": 20,
+                "available": true,
+                "unavailableReason": null,
+                "version": 1
+              },
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getPickTask": {
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks/{taskId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "pick-1",
+          "orderId": "order-1",
+          "status": "UNASSIGNED",
+          "pickerId": null,
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "allocations": [
+            {
+              "allocationId": "alloc-1",
+              "orderItemId": "oi-1",
+              "batchId": "batch-1",
+              "batchNo": "B20261018-001",
+              "baseUnit": "PIECE",
+              "reservedQuantity": 1,
+              "pickedQuantity": 0,
+              "returnedQuantity": 0,
+              "version": 1
+            }
+          ],
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "claimPickTask": {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/claim",
+      "request": {
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "pick-1",
+          "orderId": "order-1",
+          "status": "UNASSIGNED",
+          "pickerId": null,
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "allocations": [
+            {
+              "allocationId": "alloc-1",
+              "orderItemId": "oi-1",
+              "batchId": "batch-1",
+              "batchNo": "B20261018-001",
+              "baseUnit": "PIECE",
+              "reservedQuantity": 1,
+              "pickedQuantity": 0,
+              "returnedQuantity": 0,
+              "version": 1
+            }
+          ],
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "reallocatePickTask": {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/reallocate",
+      "request": {
+        "allocations": [
+          {
+            "orderItemId": "oi-1",
+            "batchId": "batch-2",
+            "quantity": 1
+          }
+        ],
+        "reason": "原批次拣货时发现质量问题",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "pick-1",
+          "orderId": "order-1",
+          "status": "UNASSIGNED",
+          "pickerId": null,
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "skuId": "SKU-001",
+              "productId": "S001",
+              "productName": "沙瓤番茄",
+              "unitLabel": "500g/份",
+              "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+              "baseUnit": "PIECE",
+              "priceMode": "BY_PIECE",
+              "quantity": 1,
+              "estimatedGram": null,
+              "actualGram": null,
+              "priceUnitGram": null,
+              "unitPrice": 590,
+              "couponAllocationAmount": 0,
+              "originalPayableAmount": 590,
+              "finalPayableAmount": null,
+              "refundedAmount": 0
+            }
+          ],
+          "allocations": [
+            {
+              "allocationId": "alloc-1",
+              "orderItemId": "oi-1",
+              "batchId": "batch-1",
+              "batchNo": "B20261018-001",
+              "baseUnit": "PIECE",
+              "reservedQuantity": 1,
+              "pickedQuantity": 0,
+              "returnedQuantity": 0,
+              "version": 1
+            }
+          ],
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "confirmPickTask": {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/confirm",
+      "request": {
+        "allocations": [
+          {
+            "allocationId": "alloc-1",
+            "actualQuantity": 1,
+            "reasonCode": "NORMAL",
+            "reason": "正常拣货"
+          }
+        ],
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "task": {
+            "taskId": "pick-1",
+            "orderId": "order-1",
+            "status": "UNASSIGNED",
+            "pickerId": null,
+            "items": [
+              {
+                "orderItemId": "oi-1",
+                "skuId": "SKU-001",
+                "productId": "S001",
+                "productName": "沙瓤番茄",
+                "unitLabel": "500g/份",
+                "imageUrl": "http://localhost:8080/static/products/S001.jpg",
+                "baseUnit": "PIECE",
+                "priceMode": "BY_PIECE",
+                "quantity": 1,
+                "estimatedGram": null,
+                "actualGram": null,
+                "priceUnitGram": null,
+                "unitPrice": 590,
+                "couponAllocationAmount": 0,
+                "originalPayableAmount": 590,
+                "finalPayableAmount": null,
+                "refundedAmount": 0
+              }
+            ],
+            "allocations": [
+              {
+                "allocationId": "alloc-1",
+                "orderItemId": "oi-1",
+                "batchId": "batch-1",
+                "batchNo": "B20261018-001",
+                "baseUnit": "PIECE",
+                "reservedQuantity": 1,
+                "pickedQuantity": 0,
+                "returnedQuantity": 0,
+                "version": 1
+              }
+            ],
+            "slot": {
+              "slotId": "slot-20261018-2",
+              "date": "2026-10-18",
+              "label": "14:00–17:00",
+              "startAt": "2026-10-18T14:00:00+08:00",
+              "endAt": "2026-10-18T17:00:00+08:00",
+              "cutoffAt": "2026-10-18T13:30:00+08:00",
+              "remaining": 20,
+              "available": true,
+              "unavailableReason": null,
+              "version": 1
+            },
+            "version": 1
+          },
+          "orderStatus": "READY_TO_SHIP",
+          "weightAdjustment": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listDeliveryTasks": {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "taskId": "delivery-1",
+              "orderId": "order-1",
+              "status": "PENDING_DISPATCH",
+              "courierId": null,
+              "contact": {
+                "recipientName": "测**",
+                "phoneMasked": "138****8000",
+                "region": "上海市松江区"
+              },
+              "slot": {
+                "slotId": "slot-20261018-2",
+                "date": "2026-10-18",
+                "label": "14:00–17:00",
+                "startAt": "2026-10-18T14:00:00+08:00",
+                "endAt": "2026-10-18T17:00:00+08:00",
+                "cutoffAt": "2026-10-18T13:30:00+08:00",
+                "remaining": 20,
+                "available": true,
+                "unavailableReason": null,
+                "version": 1
+              },
+              "dispatchedAt": null,
+              "completedAt": null,
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getDeliveryTask": {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "delivery-1",
+          "orderId": "order-1",
+          "status": "PENDING_DISPATCH",
+          "courierId": null,
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "dispatchedAt": null,
+          "completedAt": null,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "dispatchDelivery": {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/dispatch",
+      "request": {
+        "courierId": "u-courier-1",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "delivery-1",
+          "orderId": "order-1",
+          "status": "PENDING_DISPATCH",
+          "courierId": null,
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "dispatchedAt": null,
+          "completedAt": null,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "completeDelivery": {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/complete",
+      "request": {
+        "proofCode": "123456",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "delivery-1",
+          "orderId": "order-1",
+          "status": "PENDING_DISPATCH",
+          "courierId": null,
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "dispatchedAt": null,
+          "completedAt": null,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "reportDeliveryException": {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/exceptions",
+      "request": {
+        "type": "RECIPIENT_UNREACHABLE",
+        "reason": "预约时段联系不上收货人",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "delivery-1",
+          "orderId": "order-1",
+          "status": "EXCEPTION",
+          "courierId": "u-courier-1",
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "dispatchedAt": "2026-10-18T14:00:00+08:00",
+          "completedAt": null,
+          "version": 2
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listAdminAftersales": {
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "aftersaleId": "after-1",
+              "orderId": "order-1",
+              "type": "QUALITY",
+              "reason": "商品质量问题",
+              "items": [
+                {
+                  "orderItemId": "oi-1",
+                  "quantity": 1,
+                  "requestedAmount": 590
+                }
+              ],
+              "evidenceMediaIds": [],
+              "status": "APPLIED",
+              "requestedAmount": 590,
+              "approvedAmount": 0,
+              "reviewComment": null,
+              "refunds": [],
+              "appliedAt": "2026-10-18T14:00:00+08:00",
+              "version": 1,
+              "memberId": "u1001",
+              "reviewerId": null,
+              "contact": {
+                "recipientName": "测**",
+                "phoneMasked": "138****8000",
+                "region": "上海市松江区"
+              },
+              "assigneeId": null
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getAdminAftersale": {
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "aftersaleId": "after-1",
+          "orderId": "order-1",
+          "type": "QUALITY",
+          "reason": "商品质量问题",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "quantity": 1,
+              "requestedAmount": 590
+            }
+          ],
+          "evidenceMediaIds": [],
+          "status": "APPLIED",
+          "requestedAmount": 590,
+          "approvedAmount": 0,
+          "reviewComment": null,
+          "refunds": [],
+          "appliedAt": "2026-10-18T14:00:00+08:00",
+          "version": 1,
+          "memberId": "u1001",
+          "reviewerId": null,
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "assigneeId": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "approveAftersale": {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/approve",
+      "request": {
+        "approvedItems": [
+          {
+            "orderItemId": "oi-1",
+            "quantity": 1,
+            "requestedAmount": 590
+          }
+        ],
+        "comment": "照片证据清晰，批准实付范围退款",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "aftersaleId": "after-1",
+          "orderId": "order-1",
+          "type": "QUALITY",
+          "reason": "商品质量问题",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "quantity": 1,
+              "requestedAmount": 590
+            }
+          ],
+          "evidenceMediaIds": [
+            "media-1"
+          ],
+          "status": "APPROVED",
+          "requestedAmount": 590,
+          "approvedAmount": 590,
+          "reviewComment": "照片证据核验通过",
+          "refunds": [
+            {
+              "refundId": "refund-1",
+              "orderId": "order-1",
+              "paymentId": "pay-1",
+              "aftersaleId": "after-1",
+              "adjustmentId": null,
+              "type": "AFTERSALE",
+              "amount": 590,
+              "currency": "CNY",
+              "status": "PENDING",
+              "reason": "客服核验证据批准品质售后",
+              "createdAt": "2026-10-18T14:20:00+08:00",
+              "completedAt": null,
+              "version": 1
+            }
+          ],
+          "appliedAt": "2026-10-18T14:00:00+08:00",
+          "version": 3,
+          "memberId": "u1001",
+          "reviewerId": "u-service-1",
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "assigneeId": "u-service-1"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T14:20:00+08:00"
+      }
+    },
+    "rejectAftersale": {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/reject",
+      "request": {
+        "comment": "申请超过已完成7天期限",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "aftersaleId": "after-1",
+          "orderId": "order-1",
+          "type": "QUALITY",
+          "reason": "商品质量问题",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "quantity": 1,
+              "requestedAmount": 590
+            }
+          ],
+          "evidenceMediaIds": [],
+          "status": "REJECTED",
+          "requestedAmount": 590,
+          "approvedAmount": 0,
+          "reviewComment": "证据不满足赔付条件",
+          "refunds": [],
+          "appliedAt": "2026-10-18T14:00:00+08:00",
+          "version": 3,
+          "memberId": "u1001",
+          "reviewerId": "u-service-1",
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "assigneeId": "u-service-1"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listAdminRefunds": {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "refundId": "refund-1",
+              "orderId": "order-1",
+              "paymentId": "pay-1",
+              "aftersaleId": null,
+              "adjustmentId": null,
+              "type": "AFTERSALE",
+              "amount": 24,
+              "currency": "CNY",
+              "status": "PENDING",
+              "reason": "称重退差",
+              "createdAt": "2026-10-18T14:00:00+08:00",
+              "completedAt": null,
+              "version": 1,
+              "reviewerId": null,
+              "executorId": null,
+              "lastError": null
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "executeRefund": {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/{refundId}/execute",
+      "request": {
+        "version": 1,
+        "reason": "复核通过，执行原路沙箱退款"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "refundId": "refund-1",
+          "orderId": "order-1",
+          "paymentId": "pay-1",
+          "aftersaleId": "after-1",
+          "adjustmentId": null,
+          "type": "AFTERSALE",
+          "amount": 590,
+          "currency": "CNY",
+          "status": "PROCESSING",
+          "reason": "客服核验证据批准品质售后",
+          "createdAt": "2026-10-18T14:20:00+08:00",
+          "completedAt": null,
+          "version": 2,
+          "reviewerId": "u-service-1",
+          "executorId": "u-finance-1",
+          "lastError": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T14:30:00+08:00"
+      }
+    },
+    "retryRefund": {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/{refundId}/retry",
+      "request": {
+        "version": 1,
+        "reason": "复核通过，执行原路沙箱退款"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "refundId": "refund-1",
+          "orderId": "order-1",
+          "paymentId": "pay-1",
+          "aftersaleId": "after-1",
+          "adjustmentId": null,
+          "type": "AFTERSALE",
+          "amount": 590,
+          "currency": "CNY",
+          "status": "PROCESSING",
+          "reason": "客服核验证据批准品质售后",
+          "createdAt": "2026-10-18T14:20:00+08:00",
+          "completedAt": null,
+          "version": 3,
+          "reviewerId": "u-service-1",
+          "executorId": "u-finance-1",
+          "lastError": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T14:30:00+08:00"
+      }
+    },
+    "listReconciliations": {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "reconciliationId": "recon-1",
+              "businessDate": "2026-10-18",
+              "status": "PENDING",
+              "paymentCount": 1,
+              "paymentAmount": 1190,
+              "refundCount": 0,
+              "refundAmount": 0,
+              "differenceAmount": 0,
+              "differenceCount": 0,
+              "createdAt": "2026-10-18T14:00:00+08:00",
+              "completedAt": null
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createReconciliation": {
+      "method": "POST",
+      "path": "/api/v1/admin/reconciliations",
+      "request": {
+        "businessDate": "2026-10-18"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "reconciliationId": "recon-1",
+          "businessDate": "2026-10-18",
+          "status": "PENDING",
+          "paymentCount": 1,
+          "paymentAmount": 1190,
+          "refundCount": 0,
+          "refundAmount": 0,
+          "differenceAmount": 0,
+          "differenceCount": 0,
+          "createdAt": "2026-10-18T14:00:00+08:00",
+          "completedAt": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listAuditLogs": {
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "auditId": "audit-1",
+              "actorId": "u1001",
+              "actorRoles": [
+                "MEMBER"
+              ],
+              "action": "ORDER_CANCEL",
+              "resourceType": "ORDER",
+              "resourceId": "order-1",
+              "result": "SUCCESS",
+              "reason": null,
+              "traceId": "trace-demo-001",
+              "occurredAt": "2026-10-18T14:00:00+08:00"
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listEmployees": {
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "page": 1,
+          "size": 20,
+          "total": 1,
+          "items": [
+            {
+              "mustChangePassword": true,
+              "employeeId": "emp-1",
+              "userId": "u-picker-1",
+              "displayName": "演示仓储",
+              "phoneMasked": "139****0001",
+              "roles": [
+                "MEMBER"
+              ],
+              "status": "ACTIVE",
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "createEmployee": {
+      "method": "POST",
+      "path": "/api/v1/admin/employees",
+      "request": {
+        "phone": "13800138000",
+        "displayName": "演示仓储",
+        "temporaryPassword": "DemoPassword123!",
+        "roles": [
+          "MEMBER"
+        ]
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "mustChangePassword": true,
+          "employeeId": "emp-1",
+          "userId": "u-picker-1",
+          "displayName": "演示仓储",
+          "phoneMasked": "139****0001",
+          "roles": [
+            "MEMBER"
+          ],
+          "status": "ACTIVE",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "setEmployeeRoles": {
+      "method": "PUT",
+      "path": "/api/v1/admin/employees/{employeeId}/roles",
+      "request": {
+        "roles": [
+          "MEMBER"
+        ],
+        "reason": "调整岗位职责；MEMBER须显式授予",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "mustChangePassword": true,
+          "employeeId": "emp-1",
+          "userId": "u-picker-1",
+          "displayName": "演示仓储",
+          "phoneMasked": "139****0001",
+          "roles": [
+            "MEMBER"
+          ],
+          "status": "ACTIVE",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "setEmployeeStatus": {
+      "method": "PUT",
+      "path": "/api/v1/admin/employees/{employeeId}/status",
+      "request": {
+        "status": "ACTIVE",
+        "reason": "账号停用",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "mustChangePassword": true,
+          "employeeId": "emp-1",
+          "userId": "u-picker-1",
+          "displayName": "演示仓储",
+          "phoneMasked": "139****0001",
+          "roles": [
+            "MEMBER"
+          ],
+          "status": "ACTIVE",
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listRoles": {
+      "method": "GET",
+      "path": "/api/v1/admin/roles",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "code": "MEMBER",
+              "name": "会员",
+              "description": "注册账号基础购物权限；员工身份与购物权限独立",
+              "permissionKeys": []
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "listAdminDeliverySlots": {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-slots",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "items": [
+            {
+              "slotId": "slot-20261018-2",
+              "date": "2026-10-18",
+              "label": "14:00–17:00",
+              "startAt": "2026-10-18T14:00:00+08:00",
+              "endAt": "2026-10-18T17:00:00+08:00",
+              "cutoffAt": "2026-10-18T13:30:00+08:00",
+              "remaining": 20,
+              "available": true,
+              "unavailableReason": null,
+              "version": 1
+            }
+          ]
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "updateDeliverySlot": {
+      "method": "PUT",
+      "path": "/api/v1/admin/delivery-slots/{slotId}",
+      "request": {
+        "capacity": 30,
+        "cutoffAt": "2026-10-18T14:00:00+08:00",
+        "enabled": true,
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "slotId": "slot-20261018-2",
+          "date": "2026-10-18",
+          "label": "14:00–17:00",
+          "startAt": "2026-10-18T14:00:00+08:00",
+          "endAt": "2026-10-18T17:00:00+08:00",
+          "cutoffAt": "2026-10-18T13:30:00+08:00",
+          "remaining": 20,
+          "available": true,
+          "unavailableReason": null,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getBusinessPolicies": {
+      "method": "GET",
+      "path": "/api/v1/admin/policies",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "freightAmount": 600,
+          "freeShippingThresholdAmount": 9900,
+          "nearExpiryDays": 3,
+          "nearExpiryDiscountBasisPoints": 9000,
+          "newcomerCouponAmount": 500,
+          "newcomerCouponMinGoodsAmount": 3000,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "updateBusinessPolicies": {
+      "method": "PUT",
+      "path": "/api/v1/admin/policies",
+      "request": {
+        "freightAmount": 600,
+        "freeShippingThresholdAmount": 9900,
+        "nearExpiryDays": 3,
+        "nearExpiryDiscountBasisPoints": 9000,
+        "newcomerCouponAmount": 500,
+        "newcomerCouponMinGoodsAmount": 3000,
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "freightAmount": 600,
+          "freeShippingThresholdAmount": 9900,
+          "nearExpiryDays": 3,
+          "nearExpiryDiscountBasisPoints": 9000,
+          "newcomerCouponAmount": 500,
+          "newcomerCouponMinGoodsAmount": 3000,
+          "version": 1
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "changePassword": {
+      "method": "POST",
+      "path": "/api/v1/auth/password",
+      "request": {
+        "currentPassword": "DemoPassword123!",
+        "newPassword": "DemoPassword123!"
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "accepted": true,
+          "resourceId": "1001",
+          "version": 1,
+          "message": "命令已受理；异步任务完成前不表示资金已到账"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "uploadEvidenceImage": {
+      "method": "POST",
+      "path": "/api/v1/media/images",
+      "request": {
+        "purpose": "AFTERSALE",
+        "orderId": "order-1",
+        "file": "<binary image bytes>"
+      },
+      "requestContentType": "multipart/form-data",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "mediaId": "media-1",
+          "purpose": "AFTERSALE",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 102400,
+          "status": "READY",
+          "createdAt": "2026-10-18T14:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "getPrivateMediaAccess": {
+      "method": "GET",
+      "path": "/api/v1/media/{mediaId}/access",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "mediaId": "media-1",
+          "url": "http://localhost:8080/media-content/media-1?token=demo",
+          "expiresAt": "2026-10-18T14:00:00+08:00"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "accessDeliveryContact": {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/contact-access",
+      "request": {
+        "purpose": "DELIVERY_CONTACT",
+        "reason": "预约配送联系用户",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "delivery-1",
+          "recipientName": "测试用户",
+          "phone": "13800138000",
+          "addressDetail": "上海市松江区演示路1号"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "uploadProductImage": {
+      "method": "POST",
+      "path": "/api/v1/admin/media/images",
+      "request": {
+        "productId": null,
+        "file": "<binary image bytes>"
+      },
+      "requestContentType": "multipart/form-data",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "mediaId": "media-1",
+          "purpose": "PRODUCT",
+          "mimeType": "image/jpeg",
+          "sizeBytes": 102400,
+          "status": "READY",
+          "createdAt": "2026-10-18T14:00:00+08:00",
+          "publicUrl": "http://localhost:8080/static/products/S001.jpg"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "claimAftersale": {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/claim",
+      "request": {
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "aftersaleId": "after-1",
+          "orderId": "order-1",
+          "type": "QUALITY",
+          "reason": "商品质量问题",
+          "items": [
+            {
+              "orderItemId": "oi-1",
+              "quantity": 1,
+              "requestedAmount": 590
+            }
+          ],
+          "evidenceMediaIds": [
+            "media-1"
+          ],
+          "status": "APPLIED",
+          "requestedAmount": 590,
+          "approvedAmount": 0,
+          "reviewComment": null,
+          "refunds": [],
+          "appliedAt": "2026-10-18T14:00:00+08:00",
+          "version": 2,
+          "memberId": "u1001",
+          "reviewerId": null,
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "assigneeId": "u-service-1"
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
+    },
+    "resolveDeliveryException": {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/resolve-exception",
+      "request": {
+        "reason": "已联系收货人确认继续配送",
+        "expectedVersion": 2
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "taskId": "delivery-1",
+          "orderId": "order-1",
+          "status": "DELIVERING",
+          "courierId": "u-courier-1",
+          "contact": {
+            "recipientName": "测**",
+            "phoneMasked": "138****8000",
+            "region": "上海市松江区"
+          },
+          "slot": {
+            "slotId": "slot-20261018-2",
+            "date": "2026-10-18",
+            "label": "14:00–17:00",
+            "startAt": "2026-10-18T14:00:00+08:00",
+            "endAt": "2026-10-18T17:00:00+08:00",
+            "cutoffAt": "2026-10-18T13:30:00+08:00",
+            "remaining": 20,
+            "available": true,
+            "unavailableReason": null,
+            "version": 1
+          },
+          "dispatchedAt": "2026-10-18T14:00:00+08:00",
+          "completedAt": null,
+          "version": 3
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T14:15:00+08:00"
+      }
+    }
+  }
+}
