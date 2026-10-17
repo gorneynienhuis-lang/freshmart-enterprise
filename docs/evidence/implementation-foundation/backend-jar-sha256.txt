@@ -1,0 +1,1 @@
+e869cdf403539d1a01b157f3c7f3e4a7931508f2be6b50b92e05038730f1b084  backend/target/fresh-mall-backend-0.1.0-SNAPSHOT.jar

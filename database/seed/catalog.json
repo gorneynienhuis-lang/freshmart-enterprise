@@ -1,0 +1,930 @@
+{
+  "source": "成员C商品CSV，仅采用商品描述及价格，不采用其库存与过期日期",
+  "adjustments": [
+    "SKU-021原为按重但计价单位条，按约600g/条明确priceUnitGram=600；其他按重SKU priceUnitGram=500。",
+    "演示数量和批次由seed脚本按基础单位重建，不从矛盾CSV库存导入。",
+    "图片沿用原交付素材，仅作课程演示资产池，最终页面选图仍由Claude及用户确认。"
+  ],
+  "categories": [
+    {
+      "categoryId": "C01",
+      "name": "时令蔬菜",
+      "shortName": "蔬菜",
+      "sortOrder": 1,
+      "imagePath": "/catalog/S001.jpg"
+    },
+    {
+      "categoryId": "C02",
+      "name": "新鲜水果",
+      "shortName": "水果",
+      "sortOrder": 2,
+      "imagePath": "/catalog/S006.jpg"
+    },
+    {
+      "categoryId": "C03",
+      "name": "肉禽蛋品",
+      "shortName": "肉禽蛋",
+      "sortOrder": 3,
+      "imagePath": "/catalog/S011.jpg"
+    },
+    {
+      "categoryId": "C04",
+      "name": "水产海鲜",
+      "shortName": "海鲜",
+      "sortOrder": 4,
+      "imagePath": "/catalog/S016.jpg"
+    },
+    {
+      "categoryId": "C05",
+      "name": "乳品烘焙",
+      "shortName": "乳品烘焙",
+      "sortOrder": 5,
+      "imagePath": "/catalog/S021.jpg"
+    },
+    {
+      "categoryId": "C06",
+      "name": "粮油调味",
+      "shortName": "粮油",
+      "sortOrder": 6,
+      "imagePath": "/catalog/S026.jpg"
+    },
+    {
+      "categoryId": "C07",
+      "name": "冷冻食品",
+      "shortName": "冷冻",
+      "sortOrder": 7,
+      "imagePath": "/catalog/S031.jpg"
+    },
+    {
+      "categoryId": "C08",
+      "name": "饮料酒水",
+      "shortName": "饮品",
+      "sortOrder": 8,
+      "imagePath": "/catalog/S036.jpg"
+    }
+  ],
+  "products": [
+    {
+      "productId": "S001",
+      "categoryId": "C01",
+      "name": "沙瓤番茄",
+      "origin": "山东寿光",
+      "storage": "COLD",
+      "imagePath": "/catalog/S001.jpg"
+    },
+    {
+      "productId": "S002",
+      "categoryId": "C01",
+      "name": "水果黄瓜",
+      "origin": "山东",
+      "storage": "COLD",
+      "imagePath": "/catalog/S002.jpg"
+    },
+    {
+      "productId": "S003",
+      "categoryId": "C01",
+      "name": "黄心土豆",
+      "origin": "内蒙古",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S003.jpg"
+    },
+    {
+      "productId": "S004",
+      "categoryId": "C01",
+      "name": "有机菠菜",
+      "origin": "云南",
+      "storage": "COLD",
+      "imagePath": "/catalog/S004.jpg"
+    },
+    {
+      "productId": "S005",
+      "categoryId": "C01",
+      "name": "西兰花",
+      "origin": "浙江",
+      "storage": "COLD",
+      "imagePath": "/catalog/S005.jpg"
+    },
+    {
+      "productId": "S006",
+      "categoryId": "C02",
+      "name": "红富士苹果",
+      "origin": "陕西洛川",
+      "storage": "COLD",
+      "imagePath": "/catalog/S006.jpg"
+    },
+    {
+      "productId": "S007",
+      "categoryId": "C02",
+      "name": "高山香蕉",
+      "origin": "广西",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S007.jpg"
+    },
+    {
+      "productId": "S008",
+      "categoryId": "C02",
+      "name": "赣南脐橙",
+      "origin": "江西赣州",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S008.jpg"
+    },
+    {
+      "productId": "S009",
+      "categoryId": "C02",
+      "name": "云南蓝莓",
+      "origin": "云南",
+      "storage": "COLD",
+      "imagePath": "/catalog/S009.jpg"
+    },
+    {
+      "productId": "S010",
+      "categoryId": "C02",
+      "name": "阳光玫瑰葡萄",
+      "origin": "云南",
+      "storage": "COLD",
+      "imagePath": "/catalog/S010.jpg"
+    },
+    {
+      "productId": "S011",
+      "categoryId": "C03",
+      "name": "谷物鲜鸡蛋",
+      "origin": "河北",
+      "storage": "COLD",
+      "imagePath": "/catalog/S011.jpg"
+    },
+    {
+      "productId": "S012",
+      "categoryId": "C03",
+      "name": "冷鲜鸡胸肉",
+      "origin": "山东",
+      "storage": "COLD",
+      "imagePath": "/catalog/S012.jpg"
+    },
+    {
+      "productId": "S013",
+      "categoryId": "C03",
+      "name": "猪里脊肉",
+      "origin": "河南",
+      "storage": "COLD",
+      "imagePath": "/catalog/S013.jpg"
+    },
+    {
+      "productId": "S014",
+      "categoryId": "C03",
+      "name": "谷饲牛腩",
+      "origin": "内蒙古",
+      "storage": "COLD",
+      "imagePath": "/catalog/S014.jpg"
+    },
+    {
+      "productId": "S015",
+      "categoryId": "C03",
+      "name": "羔羊肉卷",
+      "origin": "宁夏",
+      "storage": "FROZEN",
+      "imagePath": "/catalog/S015.jpg"
+    },
+    {
+      "productId": "S016",
+      "categoryId": "C04",
+      "name": "鲜活基围虾",
+      "origin": "广东",
+      "storage": "COLD",
+      "imagePath": "/catalog/S016.jpg"
+    },
+    {
+      "productId": "S017",
+      "categoryId": "C04",
+      "name": "冰鲜三文鱼",
+      "origin": "挪威",
+      "storage": "COLD",
+      "imagePath": "/catalog/S017.jpg"
+    },
+    {
+      "productId": "S018",
+      "categoryId": "C04",
+      "name": "鲜活鲈鱼",
+      "origin": "福建",
+      "storage": "COLD",
+      "imagePath": "/catalog/S018.jpg"
+    },
+    {
+      "productId": "S019",
+      "categoryId": "C04",
+      "name": "冷冻带鱼段",
+      "origin": "浙江",
+      "storage": "FROZEN",
+      "imagePath": "/catalog/S019.jpg"
+    },
+    {
+      "productId": "S020",
+      "categoryId": "C04",
+      "name": "净化花蛤",
+      "origin": "山东",
+      "storage": "COLD",
+      "imagePath": "/catalog/S020.jpg"
+    },
+    {
+      "productId": "S021",
+      "categoryId": "C05",
+      "name": "低温纯牛奶",
+      "origin": "内蒙古",
+      "storage": "COLD",
+      "imagePath": "/catalog/S021.jpg"
+    },
+    {
+      "productId": "S022",
+      "categoryId": "C05",
+      "name": "原味酸奶",
+      "origin": "河北",
+      "storage": "COLD",
+      "imagePath": "/catalog/S022.jpg"
+    },
+    {
+      "productId": "S023",
+      "categoryId": "C05",
+      "name": "动物黄油",
+      "origin": "新西兰",
+      "storage": "COLD",
+      "imagePath": "/catalog/S023.jpg"
+    },
+    {
+      "productId": "S024",
+      "categoryId": "C05",
+      "name": "全麦吐司",
+      "origin": "上海",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S024.jpg"
+    },
+    {
+      "productId": "S025",
+      "categoryId": "C05",
+      "name": "早餐餐包",
+      "origin": "江苏",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S025.jpg"
+    },
+    {
+      "productId": "S026",
+      "categoryId": "C06",
+      "name": "东北长粒香米",
+      "origin": "黑龙江",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S026.jpg"
+    },
+    {
+      "productId": "S027",
+      "categoryId": "C06",
+      "name": "高筋小麦粉",
+      "origin": "河南",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S027.jpg"
+    },
+    {
+      "productId": "S028",
+      "categoryId": "C06",
+      "name": "压榨花生油",
+      "origin": "山东",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S028.jpg"
+    },
+    {
+      "productId": "S029",
+      "categoryId": "C06",
+      "name": "特级生抽",
+      "origin": "广东",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S029.jpg"
+    },
+    {
+      "productId": "S030",
+      "categoryId": "C06",
+      "name": "天然海盐",
+      "origin": "福建",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S030.jpg"
+    },
+    {
+      "productId": "S031",
+      "categoryId": "C07",
+      "name": "手工速冻水饺",
+      "origin": "上海",
+      "storage": "FROZEN",
+      "imagePath": "/catalog/S031.jpg"
+    },
+    {
+      "productId": "S032",
+      "categoryId": "C07",
+      "name": "黑芝麻汤圆",
+      "origin": "浙江",
+      "storage": "FROZEN",
+      "imagePath": "/catalog/S032.jpg"
+    },
+    {
+      "productId": "S033",
+      "categoryId": "C07",
+      "name": "香酥鸡块",
+      "origin": "山东",
+      "storage": "FROZEN",
+      "imagePath": "/catalog/S033.jpg"
+    },
+    {
+      "productId": "S034",
+      "categoryId": "C07",
+      "name": "原切西冷牛排",
+      "origin": "澳大利亚",
+      "storage": "FROZEN",
+      "imagePath": "/catalog/S034.jpg"
+    },
+    {
+      "productId": "S035",
+      "categoryId": "C07",
+      "name": "冷冻甜玉米粒",
+      "origin": "河北",
+      "storage": "FROZEN",
+      "imagePath": "/catalog/S035.jpg"
+    },
+    {
+      "productId": "S036",
+      "categoryId": "C08",
+      "name": "天然矿泉水",
+      "origin": "吉林",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S036.jpg"
+    },
+    {
+      "productId": "S037",
+      "categoryId": "C08",
+      "name": "无糖气泡水",
+      "origin": "安徽",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S037.jpg"
+    },
+    {
+      "productId": "S038",
+      "categoryId": "C08",
+      "name": "100%橙汁",
+      "origin": "江西",
+      "storage": "COLD",
+      "imagePath": "/catalog/S038.jpg"
+    },
+    {
+      "productId": "S039",
+      "categoryId": "C08",
+      "name": "挂耳咖啡",
+      "origin": "云南",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S039.jpg"
+    },
+    {
+      "productId": "S040",
+      "categoryId": "C08",
+      "name": "精酿啤酒",
+      "origin": "山东",
+      "storage": "AMBIENT",
+      "imagePath": "/catalog/S040.jpg"
+    }
+  ],
+  "skus": [
+    {
+      "skuId": "SKU-001",
+      "productId": "S001",
+      "name": "沙瓤番茄-500g/份",
+      "unitLabel": "500g/份",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 690,
+      "memberPrice": 590,
+      "imagePath": "/catalog/S001.jpg"
+    },
+    {
+      "skuId": "SKU-002",
+      "productId": "S001",
+      "name": "沙瓤番茄-1kg/袋",
+      "unitLabel": "1kg/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1290,
+      "memberPrice": 1190,
+      "imagePath": "/catalog/S001.jpg"
+    },
+    {
+      "skuId": "SKU-003",
+      "productId": "S002",
+      "name": "水果黄瓜-500g/盒",
+      "unitLabel": "500g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 890,
+      "memberPrice": 790,
+      "imagePath": "/catalog/S002.jpg"
+    },
+    {
+      "skuId": "SKU-004",
+      "productId": "S003",
+      "name": "黄心土豆-1kg/袋",
+      "unitLabel": "1kg/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 590,
+      "memberPrice": 490,
+      "imagePath": "/catalog/S003.jpg"
+    },
+    {
+      "skuId": "SKU-005",
+      "productId": "S004",
+      "name": "有机菠菜-散装称重",
+      "unitLabel": "散装称重 · 每500g计价",
+      "baseUnit": "GRAM",
+      "priceMode": "BY_WEIGHT",
+      "priceUnitGram": 500,
+      "price": 990,
+      "memberPrice": 890,
+      "imagePath": "/catalog/S004.jpg"
+    },
+    {
+      "skuId": "SKU-006",
+      "productId": "S005",
+      "name": "西兰花-约400g/颗",
+      "unitLabel": "约400g/颗",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 790,
+      "memberPrice": 690,
+      "imagePath": "/catalog/S005.jpg"
+    },
+    {
+      "skuId": "SKU-007",
+      "productId": "S006",
+      "name": "红富士苹果-4个装",
+      "unitLabel": "4个装",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1990,
+      "memberPrice": 1690,
+      "imagePath": "/catalog/S006.jpg"
+    },
+    {
+      "skuId": "SKU-008",
+      "productId": "S006",
+      "name": "红富士苹果-8个装",
+      "unitLabel": "8个装",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 3590,
+      "memberPrice": 3190,
+      "imagePath": "/catalog/S006.jpg"
+    },
+    {
+      "skuId": "SKU-009",
+      "productId": "S007",
+      "name": "高山香蕉-1kg/份",
+      "unitLabel": "1kg/份",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 990,
+      "memberPrice": 890,
+      "imagePath": "/catalog/S007.jpg"
+    },
+    {
+      "skuId": "SKU-010",
+      "productId": "S008",
+      "name": "赣南脐橙-2kg/箱",
+      "unitLabel": "2kg/箱",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 2990,
+      "memberPrice": 2590,
+      "imagePath": "/catalog/S008.jpg"
+    },
+    {
+      "skuId": "SKU-011",
+      "productId": "S009",
+      "name": "云南蓝莓-125g/盒",
+      "unitLabel": "125g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1990,
+      "memberPrice": 1690,
+      "imagePath": "/catalog/S009.jpg"
+    },
+    {
+      "skuId": "SKU-012",
+      "productId": "S009",
+      "name": "云南蓝莓-250g/盒",
+      "unitLabel": "250g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 3590,
+      "memberPrice": 3190,
+      "imagePath": "/catalog/S009.jpg"
+    },
+    {
+      "skuId": "SKU-013",
+      "productId": "S010",
+      "name": "阳光玫瑰葡萄-500g/盒",
+      "unitLabel": "500g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 2990,
+      "memberPrice": 2590,
+      "imagePath": "/catalog/S010.jpg"
+    },
+    {
+      "skuId": "SKU-014",
+      "productId": "S011",
+      "name": "谷物鲜鸡蛋-10枚装",
+      "unitLabel": "10枚装",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1590,
+      "memberPrice": 1390,
+      "imagePath": "/catalog/S011.jpg"
+    },
+    {
+      "skuId": "SKU-015",
+      "productId": "S012",
+      "name": "冷鲜鸡胸肉-500g/盒",
+      "unitLabel": "500g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1990,
+      "memberPrice": 1790,
+      "imagePath": "/catalog/S012.jpg"
+    },
+    {
+      "skuId": "SKU-016",
+      "productId": "S013",
+      "name": "猪里脊肉-散装称重",
+      "unitLabel": "散装称重 · 每500g计价",
+      "baseUnit": "GRAM",
+      "priceMode": "BY_WEIGHT",
+      "priceUnitGram": 500,
+      "price": 2490,
+      "memberPrice": 2290,
+      "imagePath": "/catalog/S013.jpg"
+    },
+    {
+      "skuId": "SKU-017",
+      "productId": "S014",
+      "name": "谷饲牛腩-500g/盒",
+      "unitLabel": "500g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 4590,
+      "memberPrice": 4190,
+      "imagePath": "/catalog/S014.jpg"
+    },
+    {
+      "skuId": "SKU-018",
+      "productId": "S015",
+      "name": "羔羊肉卷-300g/盒",
+      "unitLabel": "300g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 3990,
+      "memberPrice": 3590,
+      "imagePath": "/catalog/S015.jpg"
+    },
+    {
+      "skuId": "SKU-019",
+      "productId": "S016",
+      "name": "鲜活基围虾-散装称重",
+      "unitLabel": "散装称重 · 每500g计价",
+      "baseUnit": "GRAM",
+      "priceMode": "BY_WEIGHT",
+      "priceUnitGram": 500,
+      "price": 5990,
+      "memberPrice": 5490,
+      "imagePath": "/catalog/S016.jpg"
+    },
+    {
+      "skuId": "SKU-020",
+      "productId": "S017",
+      "name": "冰鲜三文鱼-200g/盒",
+      "unitLabel": "200g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 4990,
+      "memberPrice": 4590,
+      "imagePath": "/catalog/S017.jpg"
+    },
+    {
+      "skuId": "SKU-021",
+      "productId": "S018",
+      "name": "鲜活鲈鱼-约600g/条",
+      "unitLabel": "约600g/条 · 每600g计价",
+      "baseUnit": "GRAM",
+      "priceMode": "BY_WEIGHT",
+      "priceUnitGram": 600,
+      "price": 3590,
+      "memberPrice": 3290,
+      "imagePath": "/catalog/S018.jpg"
+    },
+    {
+      "skuId": "SKU-022",
+      "productId": "S019",
+      "name": "冷冻带鱼段-500g/袋",
+      "unitLabel": "500g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 2990,
+      "memberPrice": 2590,
+      "imagePath": "/catalog/S019.jpg"
+    },
+    {
+      "skuId": "SKU-023",
+      "productId": "S020",
+      "name": "净化花蛤-500g/袋",
+      "unitLabel": "500g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1290,
+      "memberPrice": 1090,
+      "imagePath": "/catalog/S020.jpg"
+    },
+    {
+      "skuId": "SKU-024",
+      "productId": "S021",
+      "name": "低温纯牛奶-250ml×12盒",
+      "unitLabel": "250ml×12盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 5990,
+      "memberPrice": 5290,
+      "imagePath": "/catalog/S021.jpg"
+    },
+    {
+      "skuId": "SKU-025",
+      "productId": "S021",
+      "name": "低温纯牛奶-1L×6盒",
+      "unitLabel": "1L×6盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 7990,
+      "memberPrice": 7290,
+      "imagePath": "/catalog/S021.jpg"
+    },
+    {
+      "skuId": "SKU-026",
+      "productId": "S022",
+      "name": "原味酸奶-100g×8杯",
+      "unitLabel": "100g×8杯",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 2990,
+      "memberPrice": 2590,
+      "imagePath": "/catalog/S022.jpg"
+    },
+    {
+      "skuId": "SKU-027",
+      "productId": "S023",
+      "name": "动物黄油-200g/盒",
+      "unitLabel": "200g/盒",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 3290,
+      "memberPrice": 2990,
+      "imagePath": "/catalog/S023.jpg"
+    },
+    {
+      "skuId": "SKU-028",
+      "productId": "S024",
+      "name": "全麦吐司-400g/袋",
+      "unitLabel": "400g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1590,
+      "memberPrice": 1390,
+      "imagePath": "/catalog/S024.jpg"
+    },
+    {
+      "skuId": "SKU-029",
+      "productId": "S025",
+      "name": "早餐餐包-6只/袋",
+      "unitLabel": "6只/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1290,
+      "memberPrice": 1090,
+      "imagePath": "/catalog/S025.jpg"
+    },
+    {
+      "skuId": "SKU-030",
+      "productId": "S026",
+      "name": "东北长粒香米-5kg/袋",
+      "unitLabel": "5kg/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 4990,
+      "memberPrice": 4490,
+      "imagePath": "/catalog/S026.jpg"
+    },
+    {
+      "skuId": "SKU-031",
+      "productId": "S026",
+      "name": "东北长粒香米-10kg/袋",
+      "unitLabel": "10kg/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 8990,
+      "memberPrice": 8290,
+      "imagePath": "/catalog/S026.jpg"
+    },
+    {
+      "skuId": "SKU-032",
+      "productId": "S027",
+      "name": "高筋小麦粉-2.5kg/袋",
+      "unitLabel": "2.5kg/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1990,
+      "memberPrice": 1790,
+      "imagePath": "/catalog/S027.jpg"
+    },
+    {
+      "skuId": "SKU-033",
+      "productId": "S028",
+      "name": "压榨花生油-5L/桶",
+      "unitLabel": "5L/桶",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 8990,
+      "memberPrice": 8290,
+      "imagePath": "/catalog/S028.jpg"
+    },
+    {
+      "skuId": "SKU-034",
+      "productId": "S029",
+      "name": "特级生抽-500ml/瓶",
+      "unitLabel": "500ml/瓶",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1290,
+      "memberPrice": 1090,
+      "imagePath": "/catalog/S029.jpg"
+    },
+    {
+      "skuId": "SKU-035",
+      "productId": "S030",
+      "name": "天然海盐-400g/袋",
+      "unitLabel": "400g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 590,
+      "memberPrice": 490,
+      "imagePath": "/catalog/S030.jpg"
+    },
+    {
+      "skuId": "SKU-036",
+      "productId": "S031",
+      "name": "手工速冻水饺-500g/袋",
+      "unitLabel": "500g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1990,
+      "memberPrice": 1690,
+      "imagePath": "/catalog/S031.jpg"
+    },
+    {
+      "skuId": "SKU-037",
+      "productId": "S032",
+      "name": "黑芝麻汤圆-360g/袋",
+      "unitLabel": "360g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1590,
+      "memberPrice": 1390,
+      "imagePath": "/catalog/S032.jpg"
+    },
+    {
+      "skuId": "SKU-038",
+      "productId": "S033",
+      "name": "香酥鸡块-500g/袋",
+      "unitLabel": "500g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 2290,
+      "memberPrice": 1990,
+      "imagePath": "/catalog/S033.jpg"
+    },
+    {
+      "skuId": "SKU-039",
+      "productId": "S034",
+      "name": "原切西冷牛排-200g×2片",
+      "unitLabel": "200g×2片",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 6990,
+      "memberPrice": 6290,
+      "imagePath": "/catalog/S034.jpg"
+    },
+    {
+      "skuId": "SKU-040",
+      "productId": "S035",
+      "name": "冷冻甜玉米粒-400g/袋",
+      "unitLabel": "400g/袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 990,
+      "memberPrice": 890,
+      "imagePath": "/catalog/S035.jpg"
+    },
+    {
+      "skuId": "SKU-041",
+      "productId": "S036",
+      "name": "天然矿泉水-550ml×24瓶",
+      "unitLabel": "550ml×24瓶",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 3990,
+      "memberPrice": 3590,
+      "imagePath": "/catalog/S036.jpg"
+    },
+    {
+      "skuId": "SKU-042",
+      "productId": "S037",
+      "name": "无糖气泡水-480ml×12瓶",
+      "unitLabel": "480ml×12瓶",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 4590,
+      "memberPrice": 4190,
+      "imagePath": "/catalog/S037.jpg"
+    },
+    {
+      "skuId": "SKU-043",
+      "productId": "S038",
+      "name": "100%橙汁-900ml/瓶",
+      "unitLabel": "900ml/瓶",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 1990,
+      "memberPrice": 1690,
+      "imagePath": "/catalog/S038.jpg"
+    },
+    {
+      "skuId": "SKU-044",
+      "productId": "S039",
+      "name": "挂耳咖啡-10g×10袋",
+      "unitLabel": "10g×10袋",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 4990,
+      "memberPrice": 4490,
+      "imagePath": "/catalog/S039.jpg"
+    },
+    {
+      "skuId": "SKU-045",
+      "productId": "S040",
+      "name": "精酿啤酒-330ml×6瓶",
+      "unitLabel": "330ml×6瓶",
+      "baseUnit": "PIECE",
+      "priceMode": "BY_PIECE",
+      "priceUnitGram": null,
+      "price": 5990,
+      "memberPrice": 5490,
+      "imagePath": "/catalog/S040.jpg"
+    }
+  ]
+}

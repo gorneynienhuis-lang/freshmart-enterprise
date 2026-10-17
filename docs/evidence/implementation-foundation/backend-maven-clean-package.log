@@ -1,0 +1,587 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.freshmart:fresh-mall-backend >------------------
+[INFO] Building fresh-mall backend 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.5.0:clean (default-clean) @ fresh-mall-backend ---
+[INFO] Deleting /Users/djy/Desktop/实验四/fresh-mall/backend/target
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ fresh-mall-backend ---
+[INFO] Copying 43 resources from src/main/resources to target/classes
+[INFO] Copying 2 resources from ../database/migrations to target/classes/db/migration
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ fresh-mall-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 45 source files with javac [debug parameters release 21] to target/classes
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ fresh-mall-backend ---
+[INFO] Copying 0 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ fresh-mall-backend ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 6 source files with javac [debug parameters release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ fresh-mall-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.freshmart.identity.IdentityIntegrationTest
+03:04:16.805 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.freshmart.identity.IdentityIntegrationTest]: IdentityIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+03:04:16.864 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.IdentityIntegrationTest
+03:04:16.897 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.freshmart.identity.IdentityIntegrationTest]: IdentityIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+03:04:16.899 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.IdentityIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-18T03:04:17.039+08:00  INFO 8523 --- [fresh-mall] [           main] c.f.identity.IdentityIntegrationTest     : Starting IdentityIntegrationTest using Java 21.0.12.1 with PID 8523 (started by djy in /Users/djy/Desktop/实验四/fresh-mall/backend)
+2026-10-18T03:04:17.039+08:00  INFO 8523 --- [fresh-mall] [           main] c.f.identity.IdentityIntegrationTest     : No active profile set, falling back to 1 default profile: "default"
+2026-10-18T03:04:17.513+08:00  INFO 8523 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-18T03:04:17.592+08:00  INFO 8523 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:identity user=SA
+2026-10-18T03:04:17.593+08:00  INFO 8523 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-18T03:04:17.598+08:00  INFO 8523 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:identity (H2 2.4)
+2026-10-18T03:04:17.619+08:00  WARN 8523 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-18T03:04:17.630+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-18T03:04:17.631+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.007s)
+2026-10-18T03:04:17.633+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-18T03:04:17.647+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-18T03:04:17.653+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-18T03:04:17.670+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-18T03:04:17.675+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "PUBLIC", now at version v002 (execution time 00:00.015s)
+2026-10-18T03:04:18.127+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-18T03:04:18.127+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-18T03:04:18.129+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-18T03:04:18.132+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2026-10-18T03:04:18.153+08:00  INFO 8523 --- [fresh-mall] [           main] c.f.identity.IdentityIntegrationTest     : Started IdentityIntegrationTest in 1.229 seconds (process running for 1.687)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (/Users/djy/.m2/repository/net/bytebuddy/byte-buddy-agent/1.18.11/byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.454 s -- in com.freshmart.identity.IdentityIntegrationTest
+[INFO] Running com.freshmart.catalog.CatalogIntegrationTest
+2026-10-18T03:04:20.189+08:00  INFO 8523 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.catalog.CatalogIntegrationTest]: CatalogIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-18T03:04:20.193+08:00  INFO 8523 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.catalog.CatalogIntegrationTest
+2026-10-18T03:04:20.193+08:00  INFO 8523 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.catalog.CatalogIntegrationTest]: CatalogIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-18T03:04:20.194+08:00  INFO 8523 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.catalog.CatalogIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-18T03:04:20.204+08:00  INFO 8523 --- [fresh-mall] [           main] c.f.catalog.CatalogIntegrationTest       : Starting CatalogIntegrationTest using Java 21.0.12.1 with PID 8523 (started by djy in /Users/djy/Desktop/实验四/fresh-mall/backend)
+2026-10-18T03:04:20.204+08:00  INFO 8523 --- [fresh-mall] [           main] c.f.catalog.CatalogIntegrationTest       : No active profile set, falling back to 1 default profile: "default"
+2026-10-18T03:04:20.281+08:00  INFO 8523 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-18T03:04:20.282+08:00  INFO 8523 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn2: url=jdbc:h2:mem:catalog user=SA
+2026-10-18T03:04:20.282+08:00  INFO 8523 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-18T03:04:20.282+08:00  INFO 8523 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:catalog (H2 2.4)
+2026-10-18T03:04:20.284+08:00  WARN 8523 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-18T03:04:20.285+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-18T03:04:20.285+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 2 migrations (execution time 00:00.000s)
+2026-10-18T03:04:20.285+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-18T03:04:20.287+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-18T03:04:20.288+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-18T03:04:20.296+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-18T03:04:20.298+08:00  INFO 8523 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 2 migrations to schema "PUBLIC", now at version v002 (execution time 00:00.006s)
+2026-10-18T03:04:20.403+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-18T03:04:20.403+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-18T03:04:20.403+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-18T03:04:20.405+08:00  INFO 8523 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-10-18T03:04:20.409+08:00  INFO 8523 --- [fresh-mall] [           main] c.f.catalog.CatalogIntegrationTest       : Started CatalogIntegrationTest in 0.214 seconds (process running for 3.944)
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.308 s -- in com.freshmart.catalog.CatalogIntegrationTest
+[INFO] Running com.freshmart.command.IdempotencyServiceTest
+[ERROR] Tests run: 5, Failures: 1, Errors: 3, Skipped: 0, Time elapsed: 0.069 s <<< FAILURE! -- in com.freshmart.command.IdempotencyServiceTest
+[ERROR] com.freshmart.command.IdempotencyServiceTest.failureRollsBackBothResultAndBusinessWriteAndCanRetry -- Time elapsed: 0.043 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <java.lang.IllegalStateException> but was: <org.springframework.dao.DataIntegrityViolationException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:158)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:68)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3223)
+	at com.freshmart.command.IdempotencyServiceTest.failureRollsBackBothResultAndBusinessWriteAndCanRetry(IdempotencyServiceTest.java:68)
+Caused by: org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:106)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:102)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:111)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:95)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:362)
+	at jdk.proxy2/jdk.proxy2.$Proxy118.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:239)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy2/jdk.proxy2.$Proxy123.ensure(Unknown Source)
+	at com.freshmart.command.IdempotencyService.execute(IdempotencyService.java:38)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.freshmart.command.IdempotencyService$$SpringCGLIB$$0.execute(<generated>)
+	at com.freshmart.command.IdempotencyServiceTest.lambda$failureRollsBackBothResultAndBusinessWriteAndCanRetry$7(IdempotencyServiceTest.java:68)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:54)
+	... 3 more
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:104)
+	at org.h2.table.Table.fireConstraints(Table.java:1208)
+	at org.h2.table.Table.fireBeforeRow(Table.java:1199)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:171)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
+	at org.h2.command.Command.executeUpdate(Command.java:306)
+	at org.h2.command.Command.executeUpdate(Command.java:250)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:262)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:348)
+	... 23 more
+Caused by: org.h2.message.DbException: The database has been closed [90098-240]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.getDatabase(SessionLocal.java:674)
+	at org.h2.engine.SessionLocal.getCompareMode(SessionLocal.java:2137)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:2001)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:77)
+	at java.base/java.util.TreeMap.getEntryUsingComparator(TreeMap.java:409)
+	at java.base/java.util.TreeMap.getEntry(TreeMap.java:379)
+	at java.base/java.util.TreeMap.containsKey(TreeMap.java:244)
+	at java.base/java.util.TreeSet.contains(TreeSet.java:238)
+	at org.h2.expression.condition.ConditionInConstantSet.getValue(ConditionInConstantSet.java:80)
+	at org.h2.expression.condition.ConditionIn.getValue(ConditionIn.java:53)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:99)
+	... 42 more
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database has been closed [90098-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 56 more
+
+[ERROR] com.freshmart.command.IdempotencyServiceTest.changedBodySameKeyIsConflictWhileDifferentActorIsIndependent -- Time elapsed: 0.001 s <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: 
+
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:106)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:102)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:111)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:95)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:362)
+	at jdk.proxy2/jdk.proxy2.$Proxy118.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:239)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy2/jdk.proxy2.$Proxy123.ensure(Unknown Source)
+	at com.freshmart.command.IdempotencyService.execute(IdempotencyService.java:38)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.freshmart.command.IdempotencyService$$SpringCGLIB$$0.execute(<generated>)
+	at com.freshmart.command.IdempotencyServiceTest.changedBodySameKeyIsConflictWhileDifferentActorIsIndependent(IdempotencyServiceTest.java:61)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:104)
+	at org.h2.table.Table.fireConstraints(Table.java:1208)
+	at org.h2.table.Table.fireBeforeRow(Table.java:1199)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:171)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
+	at org.h2.command.Command.executeUpdate(Command.java:306)
+	at org.h2.command.Command.executeUpdate(Command.java:250)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:262)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:348)
+	... 19 more
+Caused by: org.h2.message.DbException: The database has been closed [90098-240]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.getDatabase(SessionLocal.java:674)
+	at org.h2.engine.SessionLocal.getCompareMode(SessionLocal.java:2137)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:2001)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:77)
+	at java.base/java.util.TreeMap.getEntryUsingComparator(TreeMap.java:409)
+	at java.base/java.util.TreeMap.getEntry(TreeMap.java:379)
+	at java.base/java.util.TreeMap.containsKey(TreeMap.java:244)
+	at java.base/java.util.TreeSet.contains(TreeSet.java:238)
+	at org.h2.expression.condition.ConditionInConstantSet.getValue(ConditionInConstantSet.java:80)
+	at org.h2.expression.condition.ConditionIn.getValue(ConditionIn.java:53)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:99)
+	... 38 more
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database has been closed [90098-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 52 more
+
+[ERROR] com.freshmart.command.IdempotencyServiceTest.concurrentSameKeyIsSerializedByPersistentLock -- Time elapsed: 0.001 s <<< ERROR!
+java.util.concurrent.ExecutionException: 
+org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at java.base/java.util.concurrent.FutureTask.report(FutureTask.java:122)
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:205)
+	at com.freshmart.command.IdempotencyServiceTest.concurrentSameKeyIsSerializedByPersistentLock(IdempotencyServiceTest.java:82)
+Caused by: org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:106)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:102)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:111)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:95)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:362)
+	at jdk.proxy2/jdk.proxy2.$Proxy118.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:239)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy2/jdk.proxy2.$Proxy123.ensure(Unknown Source)
+	at com.freshmart.command.IdempotencyService.execute(IdempotencyService.java:38)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.freshmart.command.IdempotencyService$$SpringCGLIB$$0.execute(<generated>)
+	at com.freshmart.command.IdempotencyServiceTest.lambda$concurrentSameKeyIsSerializedByPersistentLock$10(IdempotencyServiceTest.java:80)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:104)
+	at org.h2.table.Table.fireConstraints(Table.java:1208)
+	at org.h2.table.Table.fireBeforeRow(Table.java:1199)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:171)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
+	at org.h2.command.Command.executeUpdate(Command.java:306)
+	at org.h2.command.Command.executeUpdate(Command.java:250)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:262)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:348)
+	... 19 more
+Caused by: org.h2.message.DbException: The database has been closed [90098-240]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.getDatabase(SessionLocal.java:674)
+	at org.h2.engine.SessionLocal.getCompareMode(SessionLocal.java:2137)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:2001)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:77)
+	at java.base/java.util.TreeMap.getEntryUsingComparator(TreeMap.java:409)
+	at java.base/java.util.TreeMap.getEntry(TreeMap.java:379)
+	at java.base/java.util.TreeMap.containsKey(TreeMap.java:244)
+	at java.base/java.util.TreeSet.contains(TreeSet.java:238)
+	at org.h2.expression.condition.ConditionInConstantSet.getValue(ConditionInConstantSet.java:80)
+	at org.h2.expression.condition.ConditionIn.getValue(ConditionIn.java:53)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:99)
+	... 38 more
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database has been closed [90098-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 52 more
+
+[ERROR] com.freshmart.command.IdempotencyServiceTest.replaysCommittedResultWithoutRunningSideEffectAgain -- Time elapsed: 0.001 s <<< ERROR!
+org.springframework.dao.DataIntegrityViolationException: 
+
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:106)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:102)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:111)
+	at org.mybatis.spring.MyBatisExceptionTranslator.translateExceptionIfPossible(MyBatisExceptionTranslator.java:95)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:362)
+	at jdk.proxy2/jdk.proxy2.$Proxy118.insert(Unknown Source)
+	at org.mybatis.spring.SqlSessionTemplate.insert(SqlSessionTemplate.java:239)
+	at org.apache.ibatis.binding.MapperMethod.execute(MapperMethod.java:62)
+	at org.apache.ibatis.binding.MapperProxy$PlainMethodInvoker.invoke(MapperProxy.java:141)
+	at org.apache.ibatis.binding.MapperProxy.invoke(MapperProxy.java:86)
+	at jdk.proxy2/jdk.proxy2.$Proxy123.ensure(Unknown Source)
+	at com.freshmart.command.IdempotencyService.execute(IdempotencyService.java:38)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:190)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:158)
+	at org.springframework.transaction.interceptor.TransactionInterceptor$1.proceedWithInvocation(TransactionInterceptor.java:133)
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:371)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:130)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:179)
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:719)
+	at com.freshmart.command.IdempotencyService$$SpringCGLIB$$0.execute(<generated>)
+	at com.freshmart.command.IdempotencyServiceTest.replaysCommittedResultWithoutRunningSideEffectAgain(IdempotencyServiceTest.java:56)
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:104)
+	at org.h2.table.Table.fireConstraints(Table.java:1208)
+	at org.h2.table.Table.fireBeforeRow(Table.java:1199)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:171)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:77)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
+	at org.h2.command.Command.executeUpdate(Command.java:306)
+	at org.h2.command.Command.executeUpdate(Command.java:250)
+	at org.h2.jdbc.JdbcPreparedStatement.execute(JdbcPreparedStatement.java:262)
+	at org.apache.ibatis.executor.statement.PreparedStatementHandler.update(PreparedStatementHandler.java:48)
+	at org.apache.ibatis.executor.statement.RoutingStatementHandler.update(RoutingStatementHandler.java:75)
+	at org.apache.ibatis.executor.SimpleExecutor.doUpdate(SimpleExecutor.java:50)
+	at org.apache.ibatis.executor.BaseExecutor.update(BaseExecutor.java:117)
+	at org.apache.ibatis.executor.CachingExecutor.update(CachingExecutor.java:76)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.update(DefaultSqlSession.java:197)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.insert(DefaultSqlSession.java:184)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.mybatis.spring.SqlSessionTemplate$SqlSessionInterceptor.invoke(SqlSessionTemplate.java:348)
+	... 19 more
+Caused by: org.h2.message.DbException: The database has been closed [90098-240]
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.message.DbException.get(DbException.java:188)
+	at org.h2.engine.SessionLocal.getDatabase(SessionLocal.java:674)
+	at org.h2.engine.SessionLocal.getCompareMode(SessionLocal.java:2137)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:2001)
+	at org.h2.engine.SessionLocal.compare(SessionLocal.java:77)
+	at java.base/java.util.TreeMap.getEntryUsingComparator(TreeMap.java:409)
+	at java.base/java.util.TreeMap.getEntry(TreeMap.java:379)
+	at java.base/java.util.TreeMap.containsKey(TreeMap.java:244)
+	at java.base/java.util.TreeSet.contains(TreeSet.java:238)
+	at org.h2.expression.condition.ConditionInConstantSet.getValue(ConditionInConstantSet.java:80)
+	at org.h2.expression.condition.ConditionIn.getValue(ConditionIn.java:53)
+	at org.h2.constraint.ConstraintCheck.checkRow(ConstraintCheck.java:99)
+	... 38 more
+Caused by: org.h2.jdbc.JdbcSQLNonTransientConnectionException: The database has been closed [90098-240]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:690)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	... 52 more
+
+[INFO] Running com.freshmart.domain.InventoryDomainTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.freshmart.domain.InventoryDomainTest
+[INFO] Running com.freshmart.domain.PricingCalculatorTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.freshmart.domain.PricingCalculatorTest
+[INFO] Running com.freshmart.domain.OrderLifecycleTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.freshmart.domain.OrderLifecycleTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   IdempotencyServiceTest.failureRollsBackBothResultAndBusinessWriteAndCanRetry:68 Unexpected exception type thrown, expected: <java.lang.IllegalStateException> but was: <org.springframework.dao.DataIntegrityViolationException>
+[ERROR] Errors: 
+[ERROR]   IdempotencyServiceTest.changedBodySameKeyIsConflictWhileDifferentActorIsIndependent:61 » DataIntegrityViolation 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+[ERROR]   IdempotencyServiceTest.concurrentSameKeyIsSerializedByPersistentLock:82 » Execution org.springframework.dao.DataIntegrityViolationException: 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+[ERROR]   IdempotencyServiceTest.replaysCommittedResultWithoutRunningSideEffectAgain:56 » DataIntegrityViolation 
+### Error updating database.  Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+### The error may exist in com/freshmart/command/CommandMapper.java (best guess)
+### The error may involve com.freshmart.command.CommandMapper.ensure-Inline
+### The error occurred while setting parameters
+### SQL: INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at) VALUES(?,?,?,?,'PENDING',?,?) ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key
+### Cause: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+; Check constraint invalid: "CK_IDEMPOTENCY_STATUS: "; SQL statement:
+INSERT INTO fm_idempotency(actor_id,route,idempotency_key,request_hash,status,created_at,expires_at)
+VALUES(?,?,?,?,'PENDING',?,?)
+ON DUPLICATE KEY UPDATE idempotency_key=idempotency_key [23514-240]
+[INFO] 
+[ERROR] Tests run: 60, Failures: 1, Errors: 3, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  5.743 s
+[INFO] Finished at: 2026-10-18T03:04:20+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-test) on project fresh-mall-backend: There are test failures.
+[ERROR] 
+[ERROR] See /Users/djy/Desktop/实验四/fresh-mall/backend/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

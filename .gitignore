@@ -33,3 +33,9 @@ test-results/
 *.dump
 *.sql.gz
 ~$*
+# Local runtime and generated demo secrets/data
+.tools/
+.runtime/
+database/generated/
+__pycache__/
+*.pyc

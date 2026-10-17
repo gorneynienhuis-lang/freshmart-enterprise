@@ -1,0 +1,6 @@
+REJECTED weight denominator NULL SQLState=23513
+REJECTED weight denominator beyond safe integer SQLState=23513
+REJECTED quarantined batch retaining reservation SQLState=23513
+REJECTED disposed batch retaining physical stock SQLState=23513
+PASS: 4 invalid writes rejected; valid weight, NORMAL, whole QUARANTINED, and zero DISPOSED states accepted.
+Engine: H2 2.4.240 (2025-09-22)

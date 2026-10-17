@@ -1,0 +1,677 @@
+{
+  "source": "contracts/examples/operation-manifest.json v0.1.0",
+  "rules": [
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/home",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products/{productId}",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/products/{productId}/reviews",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/cart/items",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/cart/items/{cartItemId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/cart/items/{cartItemId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/addresses",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/addresses",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/addresses/{addressId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/addresses/{addressId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/delivery-slots",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/coupons",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/{orderId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/orders/{orderId}/status",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders/{orderId}/cancel",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/payments/{paymentId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/{paymentId}/sandbox-simulate",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/payments/sandbox/callback",
+      "roles": [
+        "SANDBOX_CHANNEL"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/refunds/{refundId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/aftersales",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/aftersales",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/aftersales/{aftersaleId}",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/aftersales/{aftersaleId}/cancel",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/reviews",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "roles": [
+        "OPERATOR",
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/products",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/products",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/products/{productId}",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/products/{productId}",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/products/{productId}/status",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/products/{productId}/skus",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "PATCH",
+      "path": "/api/v1/admin/skus/{skuId}",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/batches",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/batches",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/batches/{batchId}",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/batches/{batchId}/adjustments",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/batches/{batchId}/lifecycle",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "roles": [
+        "PICKER",
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "roles": [
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/{orderId}",
+      "roles": [
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/orders/{orderId}/cancel",
+      "roles": [
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/orders/{orderId}/returns/receive",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks/{taskId}",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/claim",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/reallocate",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/{taskId}/confirm",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks",
+      "roles": [
+        "PICKER",
+        "COURIER",
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}",
+      "roles": [
+        "PICKER",
+        "COURIER",
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/dispatch",
+      "roles": [
+        "PICKER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/complete",
+      "roles": [
+        "COURIER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/exceptions",
+      "roles": [
+        "COURIER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales",
+      "roles": [
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}",
+      "roles": [
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/approve",
+      "roles": [
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/reject",
+      "roles": [
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "roles": [
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/{refundId}/execute",
+      "roles": [
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/{refundId}/retry",
+      "roles": [
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "roles": [
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/reconciliations",
+      "roles": [
+        "FINANCE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/employees",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/employees/{employeeId}/roles",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/employees/{employeeId}/status",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/roles",
+      "roles": [
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-slots",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/delivery-slots/{slotId}",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/policies",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/admin/policies",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/password",
+      "roles": [
+        "MEMBER",
+        "PICKER",
+        "COURIER",
+        "OPERATOR",
+        "SERVICE",
+        "FINANCE",
+        "ADMIN"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/media/images",
+      "roles": [
+        "MEMBER"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/{mediaId}/access",
+      "roles": [
+        "MEMBER",
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/contact-access",
+      "roles": [
+        "COURIER"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/media/images",
+      "roles": [
+        "OPERATOR"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/aftersales/{aftersaleId}/claim",
+      "roles": [
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/delivery-tasks/{taskId}/resolve-exception",
+      "roles": [
+        "SERVICE"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "source": "contracts/permissions.md",
+  "roles": {
+    "MEMBER": [
+      "aftersale.self",
+      "auth.self",
+      "cart.self",
+      "catalog.read",
+      "media.access",
+      "media.member.upload",
+      "member.self",
+      "order.create",
+      "order.self.cancel",
+      "order.self.read",
+      "payment.self.create",
+      "payment.self.read",
+      "payment.self.simulate",
+      "review.self",
+      "slot.read"
+    ],
+    "PICKER": [
+      "auth.self",
+      "batch.create",
+      "batch.lifecycle",
+      "batch.read",
+      "catalog.read",
+      "delivery.dispatch",
+      "delivery.handover.read",
+      "inventory.adjust",
+      "inventory.movement.read",
+      "pick.claim",
+      "pick.confirm",
+      "pick.read",
+      "pick.reallocate",
+      "return.receive"
+    ],
+    "COURIER": [
+      "auth.self",
+      "catalog.read",
+      "delivery.complete",
+      "delivery.contact.access",
+      "delivery.exception",
+      "delivery.self.read"
+    ],
+    "OPERATOR": [
+      "auth.self",
+      "catalog.read",
+      "dashboard.read",
+      "media.product.upload",
+      "order.work.read",
+      "policy.manage",
+      "product.read",
+      "product.status",
+      "product.write",
+      "sku.write",
+      "slot.manage"
+    ],
+    "SERVICE": [
+      "aftersale.review",
+      "aftersale.work.claim",
+      "aftersale.work.read",
+      "auth.self",
+      "catalog.read",
+      "delivery.exception.resolve",
+      "media.access",
+      "order.service.cancel",
+      "order.work.read"
+    ],
+    "FINANCE": [
+      "auth.self",
+      "catalog.read",
+      "dashboard.read",
+      "inventory.movement.read",
+      "order.work.read",
+      "reconciliation.read",
+      "reconciliation.run",
+      "refund.execute",
+      "refund.read",
+      "refund.retry"
+    ],
+    "ADMIN": [
+      "audit.read",
+      "auth.self",
+      "catalog.read",
+      "employee.create",
+      "employee.read",
+      "employee.roles",
+      "employee.status",
+      "role.read"
+    ]
+  }
+}
