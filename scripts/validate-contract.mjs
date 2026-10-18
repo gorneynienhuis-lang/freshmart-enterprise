@@ -76,7 +76,7 @@ function validate(schema,value,where='$',depth=0){
 }
 function testExample(schema,value,where){examples++;try{failures.push(...validate(schema,value,where));}catch(e){failures.push(where+': '+e.message);}}
 check(doc.openapi==='3.1.0','OpenAPI version must be 3.1.0');
-check(doc.info?.version==='0.2.1','Expected contract version 0.2.1');
+check(doc.info?.version==='0.2.2','Expected contract version 0.2.2');
 check(doc['x-contract-status']==='IMPLEMENTATION_IN_PROGRESS','Implementation boundary missing');
 walk(doc,(value,where)=>{if(value.$ref){refs++;try{resolve(value.$ref)}catch(e){failures.push(where+': '+e.message)}}});
 walk(doc.components.schemas,(s,where)=>{
@@ -149,6 +149,13 @@ check(recovery?.url==='/api/v1/admin/delivery-tasks/{taskId}/resolve-exception'&
 check(same(doc.components.schemas.ResolveDeliveryExceptionRequest.required,['reason','expectedVersion']),'recovery must require reason and expectedVersion');
 check(recovery?.op['x-transition']?.from==='EXCEPTION'&&recovery.op['x-transition'].to==='DELIVERING'&&recovery.op['x-transition'].preserveCourier===true,'recovery must preserve courier and restore DELIVERING');
 for(const id of ['listDeliveryTasks','getDeliveryTask'])check(operationMap.get(id)?.op['x-roles'].includes('SERVICE')&&operationMap.get(id).op['x-permissions'].includes('delivery.exception.resolve'),id+': SERVICE recovery prerequisite read missing');
+// Member review state is private and derived; operational item projections stay unchanged.
+check(doc.components.schemas.Order.properties.items.items.$ref==='#/components/schemas/MemberOrderItem','Member order must use private review-state item projection');
+for(const key of ['reviewed','reviewable']) {
+ check(doc.components.schemas.MemberOrderItem.required.includes(key)&&doc.components.schemas.MemberOrderItem.properties[key].type==='boolean','Member review state must be explicit boolean: '+key);
+ check(!Object.hasOwn(doc.components.schemas.OrderItem.properties,key),'Private member review state leaked into operational OrderItem: '+key);
+}
+for(const name of ['AdminOrder','PickTask'])check(doc.components.schemas[name].properties.items.items.$ref==='#/components/schemas/OrderItem',name+': private review-state projection must not leak');
 // Small validator self-checks guard the essential rejection behavior, not business code.
 check(validate(doc.components.schemas.User,{userId:42},'negative').length>0,'self-check failed to reject numeric/missing user fields');
 check(validate(doc.components.schemas.VersionRequest,{version:1,amount:100},'negative').length>0,'self-check failed to reject undeclared amount');

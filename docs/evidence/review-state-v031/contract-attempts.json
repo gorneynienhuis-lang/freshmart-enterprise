@@ -1,0 +1,29 @@
+{
+  "attempts": [
+    {
+      "status": "FAILED",
+      "command": "node scripts/validate-contract.mjs",
+      "errors": [
+        "Nested OrderPage.items schema example missing reviewed",
+        "Nested OrderPage.items schema example missing reviewable"
+      ],
+      "businessRuntimeExecuted": false,
+      "fix": "Updated the historical nested member-order page example to match two required derived fields."
+    },
+    {
+      "status": "NOT_EXECUTED_ENVIRONMENT_DEPENDENCY_MISSING",
+      "command": "python3 tests/contract/verify_openapi.py",
+      "error": "openapi_spec_validator not installed in system environment",
+      "fix": "Created private .runtime/contract-validation-venv and installed repository-pinned requirements; independent standard validator then passed 95 operations/771 examples."
+    },
+    {
+      "status": "PASSED",
+      "command": "node scripts/validate-contract.mjs",
+      "operations": 95,
+      "schemas": 176,
+      "schemaExampleChecks": 2070,
+      "businessRuntimeExecuted": false
+    }
+  ],
+  "recordedAt": "2026-10-18T07:53:50.453557+00:00"
+}

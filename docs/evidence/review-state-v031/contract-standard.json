@@ -1,0 +1,19 @@
+{
+  "result": "PASS",
+  "version": "0.2.2",
+  "operations": 95,
+  "validatedExamples": 771,
+  "checks": [
+    "OpenAPI3.1 specification",
+    "JSON Schema2020-12 request and response examples with format checks"
+  ],
+  "command": ".runtime/contract-validation-venv/bin/python tests/contract/verify_openapi.py",
+  "contractSha256": "cb8f05c88ec7881f72368ca5ecaa6bed77084fa4b6c0f4aa0c3941e81f0e6506",
+  "recordedAt": "2026-10-18T07:58:18.131883+00:00",
+  "notVerified": [
+    "backend implementation",
+    "runtime authorization",
+    "money and inventory concurrency",
+    "performance"
+  ]
+}

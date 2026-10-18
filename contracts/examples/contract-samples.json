@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "notice": "固定契约样例，非真实业务记录，非测试通过声明",
   "operations": {
     "getCsrfToken": {
@@ -827,7 +827,9 @@
               "couponAllocationAmount": 0,
               "originalPayableAmount": 590,
               "finalPayableAmount": null,
-              "refundedAmount": 0
+              "refundedAmount": 0,
+              "reviewed": false,
+              "reviewable": false
             }
           ],
           "price": {
@@ -919,7 +921,9 @@
                   "couponAllocationAmount": 0,
                   "originalPayableAmount": 590,
                   "finalPayableAmount": null,
-                  "refundedAmount": 0
+                  "refundedAmount": 0,
+                  "reviewed": false,
+                  "reviewable": false
                 }
               ],
               "price": {
@@ -1008,7 +1012,9 @@
               "couponAllocationAmount": 0,
               "originalPayableAmount": 590,
               "finalPayableAmount": null,
-              "refundedAmount": 0
+              "refundedAmount": 0,
+              "reviewed": false,
+              "reviewable": false
             }
           ],
           "price": {
@@ -1123,7 +1129,9 @@
               "couponAllocationAmount": 0,
               "originalPayableAmount": 590,
               "finalPayableAmount": null,
-              "refundedAmount": 0
+              "refundedAmount": 0,
+              "reviewed": false,
+              "reviewable": false
             }
           ],
           "price": {

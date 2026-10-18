@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "fresh-mall 企业级生鲜商城接口契约",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "description": "2026-10-18课程生鲜商城接口契约；以各operation的x-implementation-status区分已实现与尚未实现，示例不代表验收结果。BASELINE.md规定业务基线，CNY整数分、整数克、字符串ID，业务时区Asia/Shanghai。JSON语法为YAML1.2子集。v0.1.2新增员工治理五操作实装标记与独立showcase部署环境，业务状态和已有请求/响应结构不变。IMPLEMENTED_DEMO表示存在真实数据库实现，运行与部署验收以docs/evidence为准；showcase始终为合成数据和沙箱支付。"
   },
   "servers": [
@@ -3210,7 +3210,9 @@
                         "couponAllocationAmount": 0,
                         "originalPayableAmount": 590,
                         "finalPayableAmount": null,
-                        "refundedAmount": 0
+                        "refundedAmount": 0,
+                        "reviewed": false,
+                        "reviewable": false
                       }
                     ],
                     "price": {
@@ -3429,7 +3431,9 @@
                             "couponAllocationAmount": 0,
                             "originalPayableAmount": 590,
                             "finalPayableAmount": null,
-                            "refundedAmount": 0
+                            "refundedAmount": 0,
+                            "reviewed": false,
+                            "reviewable": false
                           }
                         ],
                         "price": {
@@ -3626,7 +3630,9 @@
                         "couponAllocationAmount": 0,
                         "originalPayableAmount": 590,
                         "finalPayableAmount": null,
-                        "refundedAmount": 0
+                        "refundedAmount": 0,
+                        "reviewed": false,
+                        "reviewable": false
                       }
                     ],
                     "price": {
@@ -3971,7 +3977,9 @@
                         "couponAllocationAmount": 0,
                         "originalPayableAmount": 590,
                         "finalPayableAmount": null,
-                        "refundedAmount": 0
+                        "refundedAmount": 0,
+                        "reviewed": false,
+                        "reviewable": false
                       }
                     ],
                     "price": {
@@ -17304,7 +17312,7 @@
           "items": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/OrderItem"
+              "$ref": "#/components/schemas/MemberOrderItem"
             },
             "minItems": 1,
             "maxItems": 100
@@ -17432,7 +17440,7 @@
               "PAY",
               "CANCEL"
             ],
-            "description": "服务端按当前主体、状态、资金额度和时限计算；执行操作时仍重新授权校验"
+            "description": "服务端按当前主体、状态、资金额度和时限计算；执行操作时仍重新授权校验 REVIEW仅当至少一个本人订单行reviewable为true；已评价或实际缺货未交付的行不能再次评价。"
           },
           "deliveryReceiptCode": {
             "anyOf": [
@@ -22251,7 +22259,9 @@
                     "couponAllocationAmount": 0,
                     "originalPayableAmount": 590,
                     "finalPayableAmount": null,
-                    "refundedAmount": 0
+                    "refundedAmount": 0,
+                    "reviewed": false,
+                    "reviewable": false
                   }
                 ],
                 "price": {
@@ -25033,6 +25043,196 @@
           "traceId",
           "timestamp"
         ]
+      },
+      "MemberOrderItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "orderItemId": {
+            "type": "string",
+            "description": "对外字符串ID；不将bigint作为JSON数字传输",
+            "example": "oi-1",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "skuId": {
+            "type": "string",
+            "description": "对外字符串ID；不将bigint作为JSON数字传输",
+            "example": "SKU-001",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "productId": {
+            "type": "string",
+            "description": "对外字符串ID；不将bigint作为JSON数字传输",
+            "example": "S001",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "productName": {
+            "type": "string",
+            "description": "文本；服务端校验长度并以纯文本处理",
+            "example": "沙瓤番茄",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "unitLabel": {
+            "type": "string",
+            "description": "文本；服务端校验长度并以纯文本处理",
+            "example": "500g/份",
+            "minLength": 1,
+            "maxLength": 60
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "图片地址；开发静态目录以实际部署base URL拼接",
+            "example": "http://localhost:8080/static/products/S001.jpg",
+            "format": "uri",
+            "maxLength": 2048
+          },
+          "baseUnit": {
+            "type": "string",
+            "enum": [
+              "PIECE",
+              "GRAM"
+            ],
+            "example": "PIECE"
+          },
+          "priceMode": {
+            "type": "string",
+            "enum": [
+              "BY_PIECE",
+              "BY_WEIGHT"
+            ],
+            "example": "BY_PIECE"
+          },
+          "quantity": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991,
+            "example": 1
+          },
+          "estimatedGram": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991,
+                "example": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": null
+          },
+          "actualGram": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991,
+                "example": 480
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": null
+          },
+          "priceUnitGram": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991,
+                "example": 500
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": null
+          },
+          "unitPrice": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "example": 590,
+            "description": "CNY整数分，服务端计算；不得使用浮点金额"
+          },
+          "couponAllocationAmount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "example": 0,
+            "description": "CNY整数分，服务端计算；不得使用浮点金额"
+          },
+          "originalPayableAmount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "example": 590,
+            "description": "CNY整数分，服务端计算；不得使用浮点金额"
+          },
+          "finalPayableAmount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991,
+                "example": 590,
+                "description": "CNY整数分，服务端计算；不得使用浮点金额"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": null
+          },
+          "refundedAmount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991,
+            "example": 0,
+            "description": "CNY整数分，服务端计算；不得使用浮点金额"
+          },
+          "reviewed": {
+            "type": "boolean",
+            "description": "当前本人订单行是否已有持久评价；每行只允许一评。不得通过匿名公开评价推断。",
+            "example": false
+          },
+          "reviewable": {
+            "type": "boolean",
+            "description": "当前行允许评价：本人订单已完成、实际交付量大于0且尚未评价。执行时服务端重新授权与校验；同一行并发只写一评。",
+            "example": false
+          }
+        },
+        "required": [
+          "orderItemId",
+          "skuId",
+          "productId",
+          "productName",
+          "unitLabel",
+          "imageUrl",
+          "baseUnit",
+          "priceMode",
+          "quantity",
+          "estimatedGram",
+          "actualGram",
+          "priceUnitGram",
+          "unitPrice",
+          "couponAllocationAmount",
+          "originalPayableAmount",
+          "finalPayableAmount",
+          "refundedAmount",
+          "reviewed",
+          "reviewable"
+        ],
+        "description": "仅本人会员订单返回的订单行读模型。评价状态由持久关联与实际交付量派生，不写回成交快照；后台OrderItem不含这两个字段。"
       }
     },
     "parameters": {

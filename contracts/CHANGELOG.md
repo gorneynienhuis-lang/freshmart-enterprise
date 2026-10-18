@@ -1,5 +1,11 @@
 # 契约变更
 
+## 0.2.2 · 2026-10-18
+
+- 95操作保持不变，新增MemberOrderItem，合计176 schema。只有本人会员Order.items返回必填reviewed/reviewable布尔值，真实评价关联与实际交付量派生，不改变成交快照。后台AdminOrder/PickTask仍用原OrderItem，不返回本人评价归属状态。
+- reviewable仅FINISHED且实际收到数量大于0、尚未评价时为true；Order及OrderStatus的REVIEW动作与此一致。刷新或重登录应直接显示已评价，实际全缺货的订单行不得引导提交；后端唯一约束、owner与并发校验仍独立执行。
+- 本增量只描述响应结构及规则，不把静态样例或未执行的测试冒称验收结果。
+
 ## 0.2.1 · 2026-10-18
 
 - 新增POST `/orders/{orderId}/cancellation-requests`，共95操作、175 schema。本人发货前订单校验version和幂等键后，分派非买家本人的ACTIVE SERVICE；同单只允许一个OPEN，无可用客服时事务回滚，不改变履约、金额或库存。
