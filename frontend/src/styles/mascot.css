@@ -1,0 +1,356 @@
+/* 东小锦 · 右下角吉祥物与“问东小锦”面板。只含视觉与动效，无业务逻辑。 */
+.dxj {
+  --dxj-red: #A0021F;
+  --dxj-red-dark: #7E0118;
+  --dxj-green: #2F7A4B;
+  --dxj-green-tint: #EAF4EE;
+  --dxj-ink: #1B1F24;
+  --dxj-muted: #5B6470;
+  --dxj-line: #E3E6EA;
+  --dxj-stage-w: 156px;
+  --dxj-stage-h: 184px;
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: max(16px, env(safe-area-inset-bottom));
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  font-family: 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif;
+  pointer-events: none;
+}
+.dxj > * { pointer-events: auto; }
+
+/* ---------- 吉祥物舞台 ---------- */
+.dxj-stage {
+  --dxj-rx: 0deg;
+  --dxj-ry: 0deg;
+  position: relative;
+  width: var(--dxj-stage-w);
+  height: var(--dxj-stage-h);
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  perspective: 520px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 角色 + 气泡一起移动的容器：散步用 transform，探头用 translate，两者互不干扰 */
+.dxj-actor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  transform: translateX(var(--dxj-x, 0px));
+  transition: transform var(--dxj-walk-ms, 0ms) cubic-bezier(0.42, 0, 0.58, 1), translate 0.35s ease, opacity 0.35s ease;
+}
+/* 滚动后退到边缘，只露出半个身子 */
+.dxj[data-peek='true'] .dxj-actor { translate: 52% 0; opacity: 0.92; }
+.dxj-stage:focus-visible { outline: 3px solid var(--dxj-red); outline-offset: 4px; border-radius: 16px; }
+
+/* 地面阴影 + 一枚小小的白色底座，让角色“站”在页面上 */
+.dxj-shadow {
+  position: absolute;
+  left: 50%;
+  bottom: 2px;
+  width: 78%;
+  height: 16px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(60, 30, 20, 0.28), rgba(60, 30, 20, 0));
+  animation: dxj-shadow 7s ease-in-out infinite;
+}
+
+.dxj-body {
+  position: absolute;
+  inset: 0 0 8px;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--dxj-rx)) rotateY(var(--dxj-ry));
+  transition: transform 0.25s ease-out;
+}
+.dxj-hop {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 100%;
+  animation: dxj-breathe 3.6s ease-in-out infinite, dxj-hop 7s ease-in-out infinite;
+}
+.dxj-stage:hover .dxj-hop { animation-play-state: paused; translate: 0 -4px; transition: translate 0.2s ease; }
+
+/* 散步：左右摇摆着一颠一颠地走 */
+.dxj[data-walking='true'] .dxj-hop { animation: dxj-waddle 0.46s ease-in-out infinite; }
+.dxj[data-walking='true'] .dxj-shadow { animation: dxj-step-shadow 0.46s ease-in-out infinite; }
+/* 原地蹦两下 */
+.dxj[data-act='hop'] .dxj-hop { animation: dxj-jump 1.1s ease-out; }
+.dxj[data-act='hop'] .dxj-shadow { animation: dxj-jump-shadow 1.1s ease-out; }
+/* 翻记录板时歪头看一看 */
+.dxj[data-act='look'] .dxj-hop { animation: dxj-look 2.6s ease-in-out; }
+
+@keyframes dxj-waddle {
+  0%, 100% { rotate: -5deg; translate: 0 0; }
+  25% { rotate: 0deg; translate: 0 -6px; }
+  50% { rotate: 5deg; translate: 0 0; }
+  75% { rotate: 0deg; translate: 0 -6px; }
+}
+@keyframes dxj-step-shadow {
+  0%, 50%, 100% { transform: translateX(-50%) scale(1); }
+  25%, 75% { transform: translateX(-50%) scale(0.88); }
+}
+@keyframes dxj-jump {
+  0% { translate: 0 0; scale: 1 1; }
+  12% { translate: 0 0; scale: 1.06 0.92; }
+  30% { translate: 0 -22px; scale: 0.96 1.05; }
+  46% { translate: 0 0; scale: 1.05 0.94; }
+  58% { translate: 0 -10px; scale: 1 1; }
+  72% { translate: 0 0; scale: 1.03 0.97; }
+  100% { translate: 0 0; scale: 1 1; }
+}
+@keyframes dxj-jump-shadow {
+  0%, 12%, 46%, 72%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  30% { transform: translateX(-50%) scale(0.7); opacity: 0.55; }
+  58% { transform: translateX(-50%) scale(0.85); opacity: 0.75; }
+}
+@keyframes dxj-look {
+  0%, 100% { rotate: 0deg; }
+  20%, 45% { rotate: -6deg; }
+  60%, 85% { rotate: 4deg; }
+}
+
+.dxj-pose {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  translate: -50% 0;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.22s ease;
+  filter: drop-shadow(0 6px 6px rgba(70, 35, 20, 0.18));
+}
+.dxj-pose[data-active='true'] { opacity: 1; }
+.dxj-pose img { display: block; height: 100%; width: auto; user-select: none; }
+
+/* 眨眼：与毛色相近的眼睑从上往下合上 */
+.dxj-lid {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #C9A68D 0%, #9C7A64 82%, #6E5140 100%);
+  transform: scaleY(0);
+  transform-origin: 50% 0;
+  animation: dxj-blink 5.2s infinite;
+}
+.dxj-pose[data-active='true'] .dxj-lid:nth-of-type(2) { animation-delay: 0.02s; }
+
+@keyframes dxj-breathe {
+  0%, 100% { scale: 1 1; }
+  50% { scale: 1.012 1.028; }
+}
+@keyframes dxj-hop {
+  0%, 84%, 100% { translate: 0 0; }
+  88% { translate: 0 -10px; }
+  92% { translate: 0 0; }
+  95% { translate: 0 -4px; }
+  97% { translate: 0 0; }
+}
+@keyframes dxj-shadow {
+  0%, 84%, 92%, 97%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  88% { transform: translateX(-50%) scale(0.82); opacity: 0.7; }
+}
+@keyframes dxj-blink {
+  0%, 93%, 100% { transform: scaleY(0); }
+  95.5% { transform: scaleY(1); }
+}
+
+/* ---------- 气泡提示 ---------- */
+.dxj-hint {
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 10px 10px 2px 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--dxj-line);
+  box-shadow: 0 6px 18px rgba(27, 31, 36, 0.1);
+  color: var(--dxj-ink);
+  font-size: 13px;
+  white-space: nowrap;
+  animation: dxj-pop 0.25s ease-out;
+}
+.dxj-hint-hover { font-weight: 600; color: var(--dxj-red); }
+
+/* 主动冒出来的话：白底气泡，尾巴指向东小锦的脑袋，点一下就打开面板 */
+.dxj-bubble {
+  position: relative;
+  max-width: 236px;
+  margin: 0 calc(var(--dxj-stage-w) * 0.22) 0 0;
+  padding: 10px 14px;
+  border: 1px solid var(--dxj-line);
+  border-radius: 14px;
+  background: #FFFFFF;
+  box-shadow: 0 8px 22px rgba(27, 31, 36, 0.12);
+  color: var(--dxj-ink);
+  font: inherit;
+  font-size: 13.5px;
+  line-height: 1.55;
+  text-align: left;
+  cursor: pointer;
+  transform-origin: 80% 100%;
+  animation: dxj-bubble 6s ease both;
+}
+.dxj-bubble::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--dxj-green);
+}
+.dxj-bubble::after {
+  content: '';
+  position: absolute;
+  right: 26px;
+  bottom: -7px;
+  width: 12px;
+  height: 12px;
+  background: #FFFFFF;
+  border-right: 1px solid var(--dxj-line);
+  border-bottom: 1px solid var(--dxj-line);
+  transform: rotate(45deg);
+}
+.dxj-bubble:hover { border-color: #CFD5DB; }
+.dxj-bubble:focus-visible { outline: 2px solid var(--dxj-red); outline-offset: 2px; }
+@keyframes dxj-bubble {
+  0% { opacity: 0; scale: 0.7; translate: 0 6px; }
+  6% { opacity: 1; scale: 1.04; translate: 0 0; }
+  10% { scale: 1; }
+  90% { opacity: 1; scale: 1; }
+  100% { opacity: 0; scale: 0.96; translate: 0 -4px; }
+}
+@keyframes dxj-pop { from { opacity: 0; translate: 0 4px; } to { opacity: 1; translate: 0 0; } }
+
+/* ---------- 问东小锦 面板 ---------- */
+.dxj-panel {
+  width: 360px;
+  max-height: min(560px, calc(100vh - var(--dxj-stage-h) - 48px));
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid var(--dxj-line);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(27, 31, 36, 0.18);
+  overflow: hidden;
+  animation: dxj-pop 0.2s ease-out;
+}
+.dxj-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 12px 12px 14px;
+  border-top: 4px solid var(--dxj-red);
+  border-bottom: 1px solid var(--dxj-line);
+}
+.dxj-head-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--dxj-green-tint);
+  overflow: hidden;
+  flex: none;
+}
+.dxj-head-avatar img { width: 100%; height: auto; margin-top: 2px; }
+.dxj-head-text { flex: 1; min-width: 0; }
+.dxj-head-text h2 { margin: 0; font-size: 16px; font-weight: 700; color: var(--dxj-ink); }
+.dxj-head-text p { margin: 2px 0 0; display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--dxj-muted); }
+.dxj-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--dxj-green); }
+.dxj-close {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 8px; background: transparent; color: var(--dxj-muted); cursor: pointer;
+}
+.dxj-close:hover { background: #F4F5F7; color: var(--dxj-ink); }
+.dxj-close:focus-visible, .dxj-quick button:focus-visible, .dxj-compose button:focus-visible { outline: 2px solid var(--dxj-red); outline-offset: 2px; }
+
+.dxj-log {
+  list-style: none;
+  margin: 0;
+  padding: 14px;
+  flex: 1;
+  min-height: 120px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #FAFAF9;
+}
+.dxj-msg { max-width: 86%; padding: 9px 12px; border-radius: 12px; font-size: 14px; line-height: 1.6; }
+.dxj-msg p { margin: 0; }
+.dxj-msg p + p { margin-top: 6px; }
+.dxj-msg-assistant { align-self: flex-start; background: #FFFFFF; border: 1px solid var(--dxj-line); border-top-left-radius: 4px; color: var(--dxj-ink); }
+.dxj-msg-user { align-self: flex-end; background: var(--dxj-red); color: #FFFFFF; border-top-right-radius: 4px; }
+.dxj-typing { display: flex; gap: 5px; padding: 12px 14px; }
+.dxj-typing span { width: 6px; height: 6px; border-radius: 50%; background: #B4BAC1; animation: dxj-dots 1s infinite ease-in-out; }
+.dxj-typing span:nth-child(2) { animation-delay: 0.15s; }
+.dxj-typing span:nth-child(3) { animation-delay: 0.3s; }
+@keyframes dxj-dots { 0%, 80%, 100% { opacity: 0.35; translate: 0 0; } 40% { opacity: 1; translate: 0 -3px; } }
+
+.dxj-quick { display: flex; flex-wrap: wrap; gap: 6px; padding: 10px 14px 4px; border-top: 1px solid var(--dxj-line); }
+.dxj-quick button {
+  padding: 6px 10px;
+  border: 1px solid #D5DADF;
+  border-radius: 999px;
+  background: #FFFFFF;
+  color: var(--dxj-ink);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.dxj-quick button:hover:not(:disabled) { border-color: var(--dxj-green); color: var(--dxj-green); background: var(--dxj-green-tint); }
+.dxj-quick button:disabled { opacity: 0.5; cursor: default; }
+
+.dxj-compose { display: flex; align-items: flex-end; gap: 8px; padding: 8px 14px 6px; }
+.dxj-compose textarea {
+  flex: 1;
+  min-height: 40px;
+  max-height: 96px;
+  padding: 9px 12px;
+  box-sizing: border-box;
+  border: 1px solid #D5DADF;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 14px;
+  resize: none;
+  color: var(--dxj-ink);
+}
+.dxj-compose textarea:focus { outline: none; border-color: var(--dxj-red); box-shadow: 0 0 0 3px rgba(160, 2, 31, 0.12); }
+.dxj-compose button {
+  width: 40px; height: 40px; flex: none;
+  display: flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 10px; background: var(--dxj-red); color: #FFFFFF; cursor: pointer;
+}
+.dxj-compose button:disabled { background: #D5DADF; cursor: default; }
+.dxj-foot { margin: 0; padding: 0 14px 10px; font-size: 11px; color: #8A929C; }
+.dxj-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- 平板 ---------- */
+@media (max-width: 1024px) {
+  .dxj { --dxj-stage-w: 124px; --dxj-stage-h: 146px; }
+}
+
+/* ---------- 手机：更小的角色；打开面板时变为底部抽屉并暂时隐藏角色 ---------- */
+@media (max-width: 640px) {
+  .dxj { --dxj-stage-w: 92px; --dxj-stage-h: 108px; right: max(8px, env(safe-area-inset-right)); bottom: max(8px, env(safe-area-inset-bottom)); }
+  .dxj-hint { display: none; }
+  .dxj-bubble { max-width: min(220px, 62vw); font-size: 13px; padding: 8px 12px; }
+  .dxj[data-open='true'] { left: 0; right: 0; bottom: 0; }
+  .dxj[data-open='true'] .dxj-stage { display: none; }
+  .dxj-panel { width: 100%; max-height: 78vh; border-radius: 16px 16px 0 0; border-bottom: 0; }
+}
+
+/* ---------- 无动画降级 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .dxj-hop, .dxj-shadow, .dxj-lid, .dxj-typing span, .dxj-hint, .dxj-panel,
+  .dxj[data-walking='true'] .dxj-hop, .dxj[data-walking='true'] .dxj-shadow,
+  .dxj[data-act] .dxj-hop, .dxj[data-act] .dxj-shadow, .dxj-bubble { animation: none; }
+  .dxj-body, .dxj-pose, .dxj-stage, .dxj-actor { transition: none; }
+  .dxj-stage:hover .dxj-hop { translate: none; }
+}

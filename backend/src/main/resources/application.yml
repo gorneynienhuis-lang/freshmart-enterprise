@@ -76,6 +76,12 @@ app:
   login-ip-max-failures: ${APP_LOGIN_IP_MAX_FAILURES:50}
   login-ip-window-seconds: ${APP_LOGIN_IP_WINDOW_SECONDS:60}
   login-ip-block-seconds: ${APP_LOGIN_IP_BLOCK_SECONDS:60}
+  mascot:
+    enabled: ${APP_MASCOT_ENABLED:false}
+    api-key: ${DASHSCOPE_API_KEY:}
+    endpoint: ${MASCOT_API_ENDPOINT:https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions}
+    model: ${MASCOT_API_MODEL:qwen-flash}
+    timeout-ms: ${MASCOT_API_TIMEOUT_MS:8000}
   near-expiry-days: 3
   near-expiry-discount-basis-points: 9000
 management:

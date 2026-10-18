@@ -1,6 +1,7 @@
 import legacyDesigns from '../generated/design.json';
 import r04Designs from '../generated/design-r04.json';
 import { isR04Design } from './design-version';
+import { setProductImage } from './product-image';
 const selectedDesigns = () => isR04Design() ? r04Designs : legacyDesigns;
 export type PageName = keyof typeof legacyDesigns;
 export type Values = Record<string, unknown>;
@@ -82,5 +83,6 @@ export function mountTemplate(root: HTMLElement, name: PageName, values: Values)
     // Inert template contents cannot fetch unresolved {{image}} URLs. Resolve every
     // attribute and repeated item before connecting the resulting DOM to the page.
     root.replaceChildren(prepared.content);
+    for (const image of root.querySelectorAll<HTMLImageElement>('img[src^="/generated/S"]')) setProductImage(image, image.getAttribute('src'));
     // Build-time template is trusted; runtime values are assigned as DOM text/attributes, never HTML.
 }

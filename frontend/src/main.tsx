@@ -5,6 +5,7 @@ import { designVersion, designVersionHref } from './app/design-version';
 import './styles/r04-foundation.css';
 import './styles/runtime-r04.css';
 import './styles/r03-polish.css';
+import { MascotAssistant } from './ui/mascot/MascotAssistant';
 
 function Demo() {
     const view = useRef<HTMLDivElement>(null);
@@ -25,6 +26,7 @@ function Demo() {
             </nav>
         </div>
         <div ref={view}/>
+        <MascotAssistant />
     </>;
 }
 createRoot(document.getElementById('root')!).render(<Demo />);

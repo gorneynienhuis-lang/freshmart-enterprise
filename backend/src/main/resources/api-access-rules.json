@@ -2,6 +2,13 @@
   "source": "contracts/examples/operation-manifest.json v0.2.1",
   "rules": [
     {
+      "method": "POST",
+      "path": "/api/v1/mascot/chat",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
       "method": "GET",
       "path": "/api/v1/auth/csrf",
       "roles": [
