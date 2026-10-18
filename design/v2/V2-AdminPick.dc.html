@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>运营后台 · 拣货称重</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#A0021F}a:hover{color:#7E0118}
+.dhu-band{background-color:#A0021F;background-image:url(/_blob/fda7af62195fbe9bd07b39f07f802586);background-repeat:repeat-x;background-size:480px auto;background-position:left -40px center}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F5F7; color: #1B1F24; font-family: 'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',sans-serif; font-size: 14px; display: flex; flex-direction: column">
+  <div class="dhu-band" style="height: 4px"></div>
+  <header style="height: 60px; background: #FFFFFF; border-bottom: 1px solid #E3E6EA; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 14px">
+      <img src="/_blob/bc803c12398b168e69df338a2a0adb79" alt="东华大学 DONGHUA UNIVERSITY" style="height: 40px; width: auto">
+      <span aria-hidden="true" style="width: 1px; height: 26px; background: #D5DADF"></span>
+      <span style="font-size: 16px; font-weight: 700; color: #A0021F; letter-spacing: 0.04em">社区生鲜超市</span>
+      <span style="font-size: 13px; padding: 2px 8px; border-radius: 4px; background: #1B1F24; color: #FFFFFF">运营后台</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 18px; font-size: 13px; color: #3E4650">
+      <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #1E8A55"></span>系统正常</span>
+      <span style="padding: 5px 10px; border: 1px solid #D5DADF; border-radius: 6px">仓储 · 王师傅（示意）</span>
+      <a href="#" style="color: #3E4650; text-decoration: none">退出</a>
+    </div>
+  </header>
+  <div style="flex: 1; display: flex; flex-wrap: wrap">
+    <nav aria-label="后台导航" style="flex: 0 0 216px; background: #FFFFFF; border-right: 1px solid #E3E6EA; padding: 16px 12px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">工作台</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">商品与库存</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">商品与 SKU</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">批次与临期<span style="margin-left: auto; min-width: 20px; height: 18px; padding: 0 6px; box-sizing: border-box; border-radius: 9px; background: #F7EBED; color: #A0021F; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center">5</span></a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">库存调整</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">履约</span>
+      <a href="#" aria-current="page" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; background: #F7EBED; color: #A0021F; font-weight: 700; text-decoration: none">拣货称重<span style="margin-left: auto; min-width: 20px; height: 18px; padding: 0 6px; box-sizing: border-box; border-radius: 9px; background: #F7EBED; color: #A0021F; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center">12</span></a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">配送任务</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">售后与资金</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">售后审核<span style="margin-left: auto; min-width: 20px; height: 18px; padding: 0 6px; box-sizing: border-box; border-radius: 9px; background: #F7EBED; color: #A0021F; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center">3</span></a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">退款执行</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">营销与配置</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">优惠券</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">配送时段</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">系统</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">员工与角色</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">审计日志</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">系统监控</a>
+      </div>
+    </nav>
+    <main style="flex: 999 1 720px; min-width: 0; padding: 24px 28px 40px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+        <div style="display: flex; align-items: baseline; gap: 12px"><h1 style="margin: 0; font-size: 22px; font-weight: 700">拣货称重</h1><span style="color: #5B6470">按先到期先出（FEFO）分配批次 · 数据为示意</span></div>
+      </div>
+
+      <div style="background: #FFFFFF; border-radius: 8px; padding: 14px 18px; display: flex; align-items: center; gap: 12px; flex-wrap: wrap">
+        <label style="display: flex; align-items: center; gap: 8px"><span style="color: #5B6470">配送时段</span>
+          <select style="height: 34px; padding: 0 10px; border: 1px solid #D5DADF; border-radius: 6px; font-family: inherit; background: #FFFFFF"><option>今天 14:00–17:00</option><option>今天 18:00–21:00</option></select></label>
+        <div role="tablist" aria-label="拣货状态" style="display: flex; border: 1px solid #D5DADF; border-radius: 6px; overflow: hidden">
+          <sc-for list="{{tabs}}" as="t" hint-placeholder-count="5">
+            <button role="tab" aria-selected="{{t.on}}" style="{{t.style}}">{{t.label}}<span style="margin-left: 6px; font-family: 'Barlow',sans-serif; opacity: 0.8">{{t.n}}</span></button>
+          </sc-for>
+        </div>
+        <label style="margin-left: auto; display: flex; align-items: center; gap: 8px; height: 34px; padding: 0 10px; border: 1px solid #D5DADF; border-radius: 6px">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6470" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+          <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">搜索订单号</span>
+          <input type="search" placeholder="订单号 / 拣货单号" style="border: 0; outline: none; font-family: inherit; font-size: 13px; width: 160px">
+        </label>
+      </div>
+
+      <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap">
+        <section style="flex: 999 1 520px; min-width: 0; background: #FFFFFF; border-radius: 8px; padding: 6px 18px 12px">
+          <div role="table" aria-label="拣货单" style="display: flex; flex-direction: column; font-size: 13px">
+            <div role="row" style="display: grid; grid-template-columns: 128px minmax(0, 1fr) 54px 60px 82px 70px; gap: 10px; padding: 12px 8px; color: #5B6470; border-bottom: 1px solid #E3E6EA"><span role="columnheader">拣货单</span><span role="columnheader">订单</span><span role="columnheader">行数</span><span role="columnheader">称重</span><span role="columnheader">状态</span><span role="columnheader">拣货员</span></div>
+            <sc-for list="{{rows}}" as="r" hint-placeholder-count="7">
+              <div role="row" style="{{r.rowStyle}}">
+                <span role="cell" style="font-family: 'Barlow',sans-serif; font-weight: 600">{{r.pk}}</span>
+                <span role="cell" style="font-family: 'Barlow',sans-serif; color: #3E4650; overflow: hidden; text-overflow: ellipsis">{{r.order}}</span>
+                <span role="cell" style="font-family: 'Barlow',sans-serif">{{r.lines}}</span>
+                <span role="cell">{{r.weigh}}</span>
+                <span role="cell"><span style="{{r.chip}}">{{r.state}}</span></span>
+                <span role="cell" style="color: #3E4650">{{r.picker}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section aria-label="拣货单详情" style="flex: 1 1 440px; max-width: 500px; background: #FFFFFF; border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+            <div style="display: flex; flex-direction: column; gap: 4px">
+              <h2 style="margin: 0; font-size: 17px; font-weight: 700; font-family: 'Barlow',sans-serif">PK20261018-0007</h2>
+              <span style="font-size: 12px; color: #5B6470">订单 FM20261018000123 · 今天 14:00–17:00 · 学生公寓 3 号楼</span>
+            </div>
+            <span style="font-size: 12px; line-height: 22px; padding: 0 8px; border-radius: 4px; background: #F7EBED; color: #A0021F; font-weight: 600">拣货中</span>
+          </div>
+
+          <sc-for list="{{items}}" as="i" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 22px 52px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 10px 0; border-top: 1px solid #F1F2F4">
+              <input type="checkbox" checked="{{i.done}}" aria-label="{{i.aria}}" style="width: 18px; height: 18px; margin: 0; accent-color: #A0021F">
+              <img src="{{i.img}}" alt="" style="width: 52px; height: 52px; object-fit: cover; border-radius: 6px; border: 1px solid #EEF0F2">
+              <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+                <span style="font-weight: 600">{{i.name}}</span>
+                <span style="font-size: 12px; color: #5B6470">批次 <span style="font-family: 'Barlow',sans-serif; color: #1B1F24">{{i.batch}}</span> · {{i.exp}}</span>
+              </span>
+              <span style="font-family: 'Barlow',sans-serif; font-weight: 600">× {{i.qty}}</span>
+            </div>
+          </sc-for>
+
+          <div style="border: 1px solid #E3E6EA; border-radius: 8px; padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+            <div style="display: flex; gap: 10px; align-items: center">
+              <img src="/_blob/aa99e67147dbf29c3b182aa13bd007f8" alt="" style="width: 52px; height: 52px; object-fit: cover; border-radius: 6px; border: 1px solid #EEF0F2">
+              <span style="display: flex; flex-direction: column; gap: 2px">
+                <span style="font-weight: 700">鲜活基围虾 · 称重</span>
+                <span style="font-size: 12px; color: #5B6470">预估 500g · 已预付 ¥54.90 · 单价 ¥54.90/500g · 批次 <span style="font-family: 'Barlow',sans-serif; white-space: nowrap">B1018-01</span></span>
+              </span>
+            </div>
+            <div style="display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap">
+              <label style="display: flex; flex-direction: column; gap: 6px">
+                <span style="font-size: 13px; font-weight: 600">实称重量（克）</span>
+                <span style="display: flex; align-items: center; gap: 6px">
+                  <button aria-label="减 10 克" onClick="{{minus}}" style="width: 36px; height: 40px; border: 1px solid #D5DADF; border-radius: 6px; background: #F7F8F9; font-size: 18px; cursor: pointer">−</button>
+                  <input type="number" value="{{gram}}" onChange="{{onGram}}" style="width: 96px; height: 40px; box-sizing: border-box; padding: 0 10px; border: 1px solid #D5DADF; border-radius: 6px; font-family: 'Barlow',sans-serif; font-size: 18px; font-weight: 600">
+                  <button aria-label="加 10 克" onClick="{{plus}}" style="width: 36px; height: 40px; border: 1px solid #D5DADF; border-radius: 6px; background: #F7F8F9; font-size: 18px; cursor: pointer">+</button>
+                </span>
+              </label>
+              <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 2px">
+                <span style="font-size: 12px; color: #5B6470">按实重应付</span>
+                <span style="font-family: 'Barlow',sans-serif; font-size: 20px; font-weight: 700">¥{{actual}}</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 2px">
+                <span style="font-size: 12px; color: #5B6470">差额</span>
+                <span style="{{diffStyle}}">{{diff}}</span>
+              </div>
+            </div>
+            <div style="{{noteStyle}}">{{note}}</div>
+          </div>
+
+          <div style="display: flex; gap: 10px">
+            <button disabled="{{blocked}}" style="{{submitStyle}}">{{submitLabel}}</button>
+            <button style="height: 44px; padding: 0 16px; border: 1px solid #D5DADF; border-radius: 8px; background: #FFFFFF; font-family: inherit; cursor: pointer">标记缺货</button>
+          </div>
+          <p style="margin: 0; font-size: 12px; color: #5B6470">实重上限为预估的 110%。补款单生成后，顾客在 10 分钟内补款才可出库；逾期整单取消并原路退款。</p>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { gram: 536 };
+  }
+  renderVals() {
+    const g = Math.max(0, Number(this.state.gram) || 0);
+    const est = 500, unit = 5490;
+    const paid = unit;
+    const actualC = Math.round(unit * g / 500);
+    const diffC = actualC - paid;
+    const over = g > est * 1.1;
+    const fmt = (c) => (Math.abs(c) / 100).toFixed(2);
+    const chip = (bg, fg) => 'font-size: 12px; line-height: 22px; padding: 0 8px; border-radius: 4px; background: ' + bg + '; color: ' + fg + '; font-weight: 600; white-space: nowrap';
+    const S = {
+      wait: chip('#F1F2F4', '#4A525C'), pick: chip('#F7EBED', '#A0021F'), top: chip('#FFF1DB', '#8A4B00'), done: chip('#EAF4EE', '#1E6B45')
+    };
+    const rowBase = 'display: grid; grid-template-columns: 128px minmax(0, 1fr) 54px 60px 82px 70px; gap: 10px; padding: 12px 8px; align-items: center; border-bottom: 1px solid #F1F2F4; ';
+    const row = (pk, order, lines, weigh, state, k, picker, sel) => ({ pk, order, lines, weigh, state, chip: S[k], picker, rowStyle: rowBase + (sel ? 'background: #FBF4F5; box-shadow: inset 3px 0 0 #A0021F' : '') });
+    const tabBase = 'height: 34px; padding: 0 14px; border: 0; font-family: inherit; font-size: 13px; cursor: pointer; ';
+    const tab = (label, n, on) => ({ label, n, on, style: tabBase + (on ? 'background: #A0021F; color: #FFFFFF; font-weight: 600' : 'background: #FFFFFF; color: #1B1F24; border-left: 1px solid #D5DADF') });
+    let note, noteStyle, diff, diffStyle, submitLabel;
+    const box = 'font-size: 13px; line-height: 1.6; padding: 10px 12px; border-radius: 6px; ';
+    if (over) {
+      diff = '+¥' + fmt(diffC); diffStyle = "font-family: 'Barlow',sans-serif; font-size: 20px; font-weight: 700; color: #A0021F";
+      note = '实重超过预估 10%（上限 550g），不能提交。请调整份量后重新称重。'; noteStyle = box + 'background: #FBE9E9; color: #A0021F';
+      submitLabel = '超出上限，无法提交';
+    } else if (diffC > 0) {
+      diff = '+¥' + fmt(diffC); diffStyle = "font-family: 'Barlow',sans-serif; font-size: 20px; font-weight: 700; color: #8A4B00";
+      note = '确认后生成补款单 ¥' + fmt(diffC) + '，并通知顾客在 10 分钟内补款。'; noteStyle = box + 'background: #FFF9EE; color: #4A3A1A';
+      submitLabel = '确认称重，生成补款单';
+    } else if (diffC < 0) {
+      diff = '−¥' + fmt(diffC); diffStyle = "font-family: 'Barlow',sans-serif; font-size: 20px; font-weight: 700; color: #1E6B45";
+      note = '实重偏少，确认后系统自动原路退差 ¥' + fmt(diffC) + '。'; noteStyle = box + 'background: #F2F7F4; color: #1E6B45';
+      submitLabel = '确认称重，自动退差';
+    } else {
+      diff = '¥0.00'; diffStyle = "font-family: 'Barlow',sans-serif; font-size: 20px; font-weight: 700; color: #1B1F24";
+      note = '实重与预估一致，无需补退。'; noteStyle = box + 'background: #F4F5F7; color: #3E4650';
+      submitLabel = '确认拣货完成';
+    }
+    const submitStyle = 'flex: 1; height: 44px; border: 0; border-radius: 8px; font-family: inherit; font-size: 15px; font-weight: 700; ' + (over ? 'background: #E3E6EA; color: #8A929C; cursor: not-allowed' : 'background: #A0021F; color: #FFFFFF; cursor: pointer');
+    return {
+      gram: g, actual: fmt(actualC), diff, diffStyle, note, noteStyle, submitLabel, submitStyle, blocked: over,
+      onGram: (e) => this.setState({ gram: e.target.value }),
+      minus: () => this.setState({ gram: Math.max(0, g - 10) }),
+      plus: () => this.setState({ gram: g + 10 }),
+      tabs: [ tab('全部', 34, false), tab('待拣货', 8, false), tab('拣货中', 3, true), tab('待补款', 2, false), tab('已完成', 21, false) ],
+      rows: [
+        row('PK20261018-0007', 'FM20261018000123', 4, '1 行', '拣货中', 'pick', '王师傅', true),
+        row('PK20261018-0006', 'FM20261018000119', 6, '—', '拣货中', 'pick', '王师傅', false),
+        row('PK20261018-0005', 'FM20261018000117', 3, '2 行', '待补款', 'top', '刘师傅', false),
+        row('PK20261018-0008', 'FM20261018000126', 5, '—', '待拣货', 'wait', '—', false),
+        row('PK20261018-0009', 'FM20261018000130', 2, '1 行', '待拣货', 'wait', '—', false),
+        row('PK20261018-0004', 'FM20261018000111', 7, '—', '已完成', 'done', '刘师傅', false),
+        row('PK20261018-0003', 'FM20261018000108', 4, '1 行', '已完成', 'done', '王师傅', false)
+      ],
+      items: [
+        { img: '/_blob/0af9a6eedf3a7bbae9c970a3e5a63881', name: '沙瓤番茄 500g/份', batch: 'B1016-02', exp: '10-20 到期', qty: 2, done: true, aria: '沙瓤番茄已拣' },
+        { img: '/_blob/5047c1f4ec7dfd1630aca54d0bc6b0fb', name: '谷物鲜鸡蛋 10枚装', batch: 'B1015-01', exp: '明天到期 · 临期', qty: 1, done: true, aria: '谷物鲜鸡蛋已拣' },
+        { img: '/_blob/7df4f21ccc5aa96aea33b56af103bb83', name: '冰鲜三文鱼 200g/盒', batch: 'B1017-03', exp: '10-21 到期', qty: 1, done: false, aria: '冰鲜三文鱼未拣' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

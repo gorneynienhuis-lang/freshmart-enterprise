@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>运营后台 · 工作台</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#A0021F}a:hover{color:#7E0118}
+.dhu-band{background-color:#A0021F;background-image:url(/_blob/fda7af62195fbe9bd07b39f07f802586);background-repeat:repeat-x;background-size:480px auto;background-position:left -40px center}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F5F7; color: #1B1F24; font-family: 'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',sans-serif; font-size: 14px; display: flex; flex-direction: column">
+  <div class="dhu-band" style="height: 4px"></div>
+  <header style="height: 60px; background: #FFFFFF; border-bottom: 1px solid #E3E6EA; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; gap: 16px">
+    <div style="display: flex; align-items: center; gap: 14px">
+      <img src="/_blob/bc803c12398b168e69df338a2a0adb79" alt="东华大学 DONGHUA UNIVERSITY" style="height: 40px; width: auto">
+      <span aria-hidden="true" style="width: 1px; height: 26px; background: #D5DADF"></span>
+      <span style="font-size: 16px; font-weight: 700; color: #A0021F; letter-spacing: 0.04em">社区生鲜超市</span>
+      <span style="font-size: 13px; padding: 2px 8px; border-radius: 4px; background: #1B1F24; color: #FFFFFF">运营后台</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 18px; font-size: 13px; color: #3E4650">
+      <span style="display: flex; align-items: center; gap: 6px"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 50%; background: #1E8A55"></span>系统正常</span>
+      <span style="padding: 5px 10px; border: 1px solid #D5DADF; border-radius: 6px">运营 · 张老师（示意）</span>
+      <a href="#" style="color: #3E4650; text-decoration: none">退出</a>
+    </div>
+  </header>
+  <div style="flex: 1; display: flex; flex-wrap: wrap">
+    <nav aria-label="后台导航" style="flex: 0 0 216px; background: #FFFFFF; border-right: 1px solid #E3E6EA; padding: 16px 12px; display: flex; flex-direction: column; gap: 18px">
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <a href="#" aria-current="page" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; background: #F7EBED; color: #A0021F; font-weight: 700; text-decoration: none">工作台</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">商品与库存</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">商品与 SKU</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">批次与临期<span style="margin-left: auto; min-width: 20px; height: 18px; padding: 0 6px; box-sizing: border-box; border-radius: 9px; background: #F7EBED; color: #A0021F; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center">5</span></a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">库存调整</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">履约</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">拣货称重<span style="margin-left: auto; min-width: 20px; height: 18px; padding: 0 6px; box-sizing: border-box; border-radius: 9px; background: #F7EBED; color: #A0021F; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center">12</span></a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">配送任务</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">售后与资金</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">售后审核<span style="margin-left: auto; min-width: 20px; height: 18px; padding: 0 6px; box-sizing: border-box; border-radius: 9px; background: #F7EBED; color: #A0021F; font-size: 11px; font-weight: 700; line-height: 18px; text-align: center">3</span></a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">退款执行</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">营销与配置</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">优惠券</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">配送时段</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 2px">
+      <span style="padding: 0 10px; font-size: 12px; color: #8A929C; letter-spacing: 0.08em">系统</span>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">员工与角色</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">审计日志</a>
+      <a href="#" style="display: flex; align-items: center; height: 38px; padding: 0 10px; border-radius: 6px; color: #1B1F24; text-decoration: none">系统监控</a>
+      </div>
+    </nav>
+    <main style="flex: 999 1 720px; min-width: 0; padding: 24px 28px 40px; display: flex; flex-direction: column; gap: 16px">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+        <div style="display: flex; align-items: baseline; gap: 12px"><h1 style="margin: 0; font-size: 22px; font-weight: 700">工作台</h1><span style="color: #5B6470">2026-10-18 周日 · 本页数据为示意</span></div>
+        <div style="display: flex; gap: 8px">
+          <button style="height: 34px; padding: 0 14px; border: 1px solid #D5DADF; border-radius: 6px; background: #FFFFFF; font-family: inherit; cursor: pointer">刷新</button>
+          <button style="height: 34px; padding: 0 14px; border: 0; border-radius: 6px; background: #A0021F; color: #FFFFFF; font-family: inherit; font-weight: 600; cursor: pointer">导出日报</button>
+        </div>
+      </div>
+
+      <section aria-label="今日指标" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px">
+        <sc-for list="{{kpis}}" as="k" hint-placeholder-count="6">
+          <a href="#" style="background: #FFFFFF; border-radius: 8px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: #1B1F24">
+            <span style="font-size: 13px; color: #5B6470">{{k.label}}</span>
+            <span style="{{k.numStyle}}">{{k.value}}</span>
+            <span style="font-size: 12px; color: #5B6470">{{k.note}}</span>
+          </a>
+        </sc-for>
+      </section>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 16px">
+        <section style="background: #FFFFFF; border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-size: 16px; font-weight: 700">今日配送时段</h2><a href="#" style="font-size: 13px; text-decoration: none">时段配置 ›</a></div>
+          <sc-for list="{{slots}}" as="s" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: 110px minmax(0, 1fr) 70px 86px; gap: 14px; align-items: center">
+              <span style="font-family: 'Barlow',sans-serif; font-size: 16px; font-weight: 600">{{s.time}}</span>
+              <span role="meter" aria-label="{{s.aria}}" style="height: 8px; border-radius: 4px; background: #EEF0F2; overflow: hidden; display: block"><span style="{{s.bar}}"></span></span>
+              <span style="font-family: 'Barlow',sans-serif; color: #3E4650; text-align: right">{{s.used}}/{{s.cap}}</span>
+              <span style="{{s.chip}}">{{s.state}}</span>
+            </div>
+          </sc-for>
+        </section>
+
+        <section style="background: #FFFFFF; border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 12px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-size: 16px; font-weight: 700">系统状态</h2><a href="#" style="font-size: 13px; text-decoration: none">系统监控 ›</a></div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px">
+            <sc-for list="{{health}}" as="h" hint-placeholder-count="4">
+              <div style="border: 1px solid #EEF0F2; border-radius: 6px; padding: 10px 12px; display: flex; flex-direction: column; gap: 2px">
+                <span style="font-size: 12px; color: #5B6470">{{h.k}}</span>
+                <span style="font-family: 'Barlow',sans-serif; font-size: 20px; font-weight: 700">{{h.v}}</span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 16px">
+        <section style="background: #FFFFFF; border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-size: 16px; font-weight: 700">临期预警 <span style="font-size: 13px; font-weight: 400; color: #5B6470">保质期 ≤ 3 天</span></h2><a href="#" style="font-size: 13px; text-decoration: none">批次与临期 ›</a></div>
+          <div role="table" aria-label="临期批次" style="display: flex; flex-direction: column; font-size: 13px">
+            <div role="row" style="display: grid; grid-template-columns: minmax(0, 1.3fr) 90px 90px 50px 100px; gap: 8px; padding: 8px 4px; color: #5B6470; border-bottom: 1px solid #E3E6EA"><span role="columnheader">商品</span><span role="columnheader">批次</span><span role="columnheader">到期</span><span role="columnheader" style="text-align: right">可售</span><span role="columnheader" style="text-align: right">操作</span></div>
+            <sc-for list="{{expiry}}" as="e" hint-placeholder-count="5">
+              <div role="row" style="display: grid; grid-template-columns: minmax(0, 1.3fr) 90px 90px 50px 100px; gap: 8px; padding: 10px 4px; align-items: center; border-bottom: 1px solid #F1F2F4">
+                <span role="cell" style="font-weight: 600">{{e.name}}</span>
+                <span role="cell" style="font-family: 'Barlow',sans-serif; color: #3E4650">{{e.batch}}</span>
+                <span role="cell"><span style="{{e.chip}}">{{e.left}}</span></span>
+                <span role="cell" style="text-align: right; font-family: 'Barlow',sans-serif">{{e.qty}}</span>
+                <span role="cell" style="text-align: right; white-space: nowrap"><a href="#" style="text-decoration: none">{{e.action}}</a></span>
+              </div>
+            </sc-for>
+          </div>
+        </section>
+
+        <section style="background: #FFFFFF; border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; justify-content: space-between; align-items: baseline"><h2 style="margin: 0; font-size: 16px; font-weight: 700">待处理售后</h2><a href="#" style="font-size: 13px; text-decoration: none">售后审核 ›</a></div>
+          <sc-for list="{{afters}}" as="a" hint-placeholder-count="3">
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) 90px 92px; gap: 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid #F1F2F4">
+              <span style="display: flex; flex-direction: column; gap: 2px; min-width: 0">
+                <span style="font-weight: 600">{{a.title}}</span>
+                <span style="font-size: 12px; color: #5B6470; font-family: 'Barlow',sans-serif">{{a.no}} · {{a.time}}</span>
+              </span>
+              <span style="text-align: right; font-family: 'Barlow',sans-serif; font-weight: 700">¥{{a.amount}}</span>
+              <span style="{{a.chip}}">{{a.state}}</span>
+            </div>
+          </sc-for>
+          <p style="margin: 4px 0 0; font-size: 12px; color: #5B6470">客服审核通过后由财务执行退款，同一笔人工退款不能由同一人审核并执行。</p>
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const chip = (bg, fg) => 'justify-self: end; font-size: 12px; line-height: 22px; padding: 0 8px; border-radius: 4px; background: ' + bg + '; color: ' + fg + '; font-weight: 600; white-space: nowrap; text-align: center';
+    const num = (c) => "font-family: 'Barlow',sans-serif; font-size: 30px; font-weight: 700; line-height: 1.1; color: " + c;
+    const bar = (pct, c) => 'display: block; height: 8px; width: ' + pct + '%; background: ' + c + '; border-radius: 4px';
+    return {
+      kpis: [
+        { label: '今日订单', value: '86', note: '已支付 79 · 待支付 7', numStyle: num('#1B1F24') },
+        { label: '待拣货', value: '12', note: '14:00 时段 9 单', numStyle: num('#1B1F24') },
+        { label: '待补款', value: '2', note: '称重差额，10 分钟内', numStyle: num('#8A4B00') },
+        { label: '临期批次', value: '5', note: '其中 2 个明天到期', numStyle: num('#8A4B00') },
+        { label: '售后待审', value: '3', note: '品质问题 2 · 少发 1', numStyle: num('#1B1F24') },
+        { label: '支付回调异常', value: '0', note: '近 24 小时', numStyle: num('#1E6B45') }
+      ],
+      slots: [
+        { time: '09:00–12:00', used: 30, cap: 30, aria: '09:00 至 12:00 已用 30，共 30', bar: bar(100, '#8A929C'), state: '已出库', chip: chip('#F1F2F4', '#4A525C') },
+        { time: '14:00–17:00', used: 22, cap: 30, aria: '14:00 至 17:00 已用 22，共 30', bar: bar(73, '#A0021F'), state: '拣货中', chip: chip('#F7EBED', '#A0021F') },
+        { time: '18:00–21:00', used: 9, cap: 30, aria: '18:00 至 21:00 已用 9，共 30', bar: bar(30, '#A0021F'), state: '接单中', chip: chip('#EAF4EE', '#1E6B45') }
+      ],
+      health: [
+        { k: '接口 P95 延迟', v: '182 ms' },
+        { k: '5xx 错误率', v: '0.2%' },
+        { k: '超时关单任务积压', v: '0' },
+        { k: '库存并发冲突（今日）', v: '3' }
+      ],
+      expiry: [
+        { name: '谷物鲜鸡蛋', batch: 'B1015-01', left: '明天到期', chip: chip('#FBE9E9', '#A0021F'), qty: 14, action: '设为临期特惠' },
+        { name: '全麦吐司', batch: 'B1016-03', left: '明天到期', chip: chip('#FBE9E9', '#A0021F'), qty: 6, action: '设为临期特惠' },
+        { name: '云南蓝莓', batch: 'B1016-02', left: '剩 2 天', chip: chip('#FFF1DB', '#8A4B00'), qty: 9, action: '设为临期特惠' },
+        { name: '动物黄油', batch: 'B1009-01', left: '剩 3 天', chip: chip('#FFF1DB', '#8A4B00'), qty: 4, action: '查看批次' },
+        { name: '100%橙汁', batch: 'B1012-02', left: '剩 3 天', chip: chip('#FFF1DB', '#8A4B00'), qty: 11, action: '查看批次' }
+      ],
+      afters: [
+        { title: '品质问题 · 阳光玫瑰葡萄 1 盒', no: 'AS20261018003', time: '10:42', amount: '25.90', state: '待审核', chip: chip('#FFF1DB', '#8A4B00') },
+        { title: '缺货少发 · 冷鲜鸡胸肉 1 盒', no: 'AS20261018002', time: '09:15', amount: '17.90', state: '待审核', chip: chip('#FFF1DB', '#8A4B00') },
+        { title: '品质问题 · 净化花蛤 1 袋', no: 'AS20261017011', time: '昨天', amount: '10.90', state: '待财务退款', chip: chip('#E8F1F8', '#1D5A85') }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

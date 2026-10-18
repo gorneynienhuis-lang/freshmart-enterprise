@@ -1,0 +1,31 @@
+{
+  "correctedAt": "2026-10-18T12:03:53.976360+08:00",
+  "runId": "probe-73df193503bc",
+  "reason": "Historical synthetic fixtures used relative imageUrl, incompatible with OpenAPI uri format. Corrected only fixture image metadata.",
+  "previousImageUrl": "/catalog/S001.jpg",
+  "imageUrl": "http://127.0.0.1:8080/catalog/S001.jpg",
+  "asset": {
+    "status": 200,
+    "contentType": "image/jpeg",
+    "bytes": 991209
+  },
+  "matchedRows": {
+    "fm_category": 3,
+    "fm_product": 3,
+    "fm_sku": 3,
+    "fm_order": 3,
+    "fm_checkout_quote": 13,
+    "fm_idempotency": 19
+  },
+  "allOtherRowFieldsUnchanged": {
+    "fm_category": true,
+    "fm_product": true,
+    "fm_sku": true,
+    "fm_order": true,
+    "fm_checkout_quote": true,
+    "fm_idempotency": true
+  },
+  "serviceRestarted": false,
+  "probeResultFileUnmodified": true,
+  "futureFixtureGeneratorCorrected": true
+}

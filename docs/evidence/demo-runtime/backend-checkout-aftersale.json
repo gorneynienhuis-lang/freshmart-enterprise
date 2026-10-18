@@ -1,0 +1,188 @@
+{
+  "generatedAt": "2026-10-18T03:59:16.311730+00:00",
+  "scope": "Checkout and aftersale integration-test evidence; no credentials, tokens, raw request bodies or Surefire system properties copied.",
+  "environment": {
+    "jdk": "Temurin 21",
+    "framework": "Spring Boot integration tests + MockMvc",
+    "database": "H2 in MySQL compatibility mode",
+    "paymentChannel": "Persistent local sandbox receipt table; no real payment provider",
+    "realMySqlRuntimeVerifiedByThisFile": false
+  },
+  "runs": [
+    {
+      "name": "Full clean package",
+      "completedAt": "2026-10-18T11:54:00+08:00",
+      "command": "mvn -B -ntp -f backend/pom.xml clean package",
+      "tests": 93,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "result": "BUILD SUCCESS",
+      "sourceLog": "/private/tmp/fresh-full-package.log",
+      "note": "This run includes the 12 checkout and 11 aftersale cases listed below. It predates the new full-shortage Commerce test and final Commerce lock-order/error-code changes."
+    },
+    {
+      "name": "Incremental Commerce package",
+      "completedAt": "2026-10-18T11:57:07+08:00",
+      "command": "mvn -B -ntp -f backend/pom.xml -Dtest=CommerceIntegrationTest package",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "result": "BUILD SUCCESS",
+      "sourceLog": "/private/tmp/fresh-commerce-final-package.log",
+      "newCase": "fullShortageCancelsAndRefundsGoodsAndFreightWithoutPhysicalStockMovement",
+      "note": "Recompiled the final Commerce changes and ran its 11 cases. The other suites were not rerun in this invocation."
+    }
+  ],
+  "countingNote": "The source test inventory is now 94 (93 previous + 1 new). There is no claim that all 94 ran together in one invocation. These H2 results do not establish MySQL deployment success; later V001 timestamp-default fixes and runtime checks are separate evidence.",
+  "suites": [
+    {
+      "suite": "com.freshmart.checkout.CheckoutIntegrationTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "durationSeconds": 1.393,
+      "result": "PASSED",
+      "sourceReport": "backend/target/surefire-reports/TEST-com.freshmart.checkout.CheckoutIntegrationTest.xml",
+      "reportSha256": "f91a265abe49319cb9543999286dfb2b811bd2211929bba374705f94b23dbfbd",
+      "cases": [
+        {
+          "name": "duplicateQuoteSkusMergeBeforePricingAndOverflowIsRejected",
+          "result": "PASSED",
+          "durationSeconds": 0.098
+        },
+        {
+          "name": "gramQuantityIsAlreadyGramsAndAmountsAreServerCalculated",
+          "result": "PASSED",
+          "durationSeconds": 0.097
+        },
+        {
+          "name": "addressDefaultsStayUniqueUnderConcurrentCreates",
+          "result": "PASSED",
+          "durationSeconds": 0.097
+        },
+        {
+          "name": "addressDefaultOwnerVersionAndIdempotencyAreEnforced",
+          "result": "PASSED",
+          "durationSeconds": 0.106
+        },
+        {
+          "name": "nearExpiryDiscountNeedsEntireLinePoolAndDeliveryWindowCoverage",
+          "result": "PASSED",
+          "durationSeconds": 0.095
+        },
+        {
+          "name": "slotQueriesAreReadOnlyDateBoundAndPreserveCapacityConfiguration",
+          "result": "PASSED",
+          "durationSeconds": 0.101
+        },
+        {
+          "name": "expiredAtWindowEndQuarantinedAndFutureReceivedBatchesCannotSupportQuote",
+          "result": "PASSED",
+          "durationSeconds": 0.103
+        },
+        {
+          "name": "unauthorizedWrongRoleMissingKeyAndMissingRequiredFieldsFailClosed",
+          "result": "PASSED",
+          "durationSeconds": 0.1
+        },
+        {
+          "name": "cartMergesSkuAndRetryDoesNotDuplicateOrReserveStock",
+          "result": "PASSED",
+          "durationSeconds": 0.104
+        },
+        {
+          "name": "cartUpdateAndDeleteHideOtherOwnersAndRejectStaleVersions",
+          "result": "PASSED",
+          "durationSeconds": 0.099
+        },
+        {
+          "name": "campaignIsExplicitGrantsExactlyOnceAndCouponThresholdAndAllocationAreReal",
+          "result": "PASSED",
+          "durationSeconds": 0.097
+        },
+        {
+          "name": "quoteRetryReturnsPersistedSnapshotAndTamperingReuseExpiryOrPriceChangesFail",
+          "result": "PASSED",
+          "durationSeconds": 0.106
+        }
+      ]
+    },
+    {
+      "suite": "com.freshmart.aftersale.AfterSaleIntegrationTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "durationSeconds": 2.986,
+      "result": "PASSED",
+      "sourceReport": "backend/target/surefire-reports/TEST-com.freshmart.aftersale.AfterSaleIntegrationTest.xml",
+      "reportSha256": "9de5182932a0f469b8ac50980506fe01864b189baa6f0a3b4c52061568ac47d4",
+      "cases": [
+        {
+          "name": "multiPaymentApprovalCompletesOnlyAfterAllOriginalRoutesAndAllocatesLineRefundOnce",
+          "result": "PASSED",
+          "durationSeconds": 0.262
+        },
+        {
+          "name": "completedOrderAftersaleRequiresIndependentFinancialAuthorizationAndDoesNotRestoreStock",
+          "result": "PASSED",
+          "durationSeconds": 0.245
+        },
+        {
+          "name": "httpIdempotencyRetriesDoNotRepeatApplicationAndUnknownMoneyFieldsAreRejected",
+          "result": "PASSED",
+          "durationSeconds": 0.259
+        },
+        {
+          "name": "serviceOrderQueriesAreAssignmentScopedAndFinanceNeverReceivesAddressRegion",
+          "result": "PASSED",
+          "durationSeconds": 0.334
+        },
+        {
+          "name": "wrongOwnerAndStaffScopeAreHiddenAndReviewerCannotExecuteEvenWithFinanceRole",
+          "result": "PASSED",
+          "durationSeconds": 0.241
+        },
+        {
+          "name": "revokedFinanceAuthorizationPreventsWorkerSendingPendingRefund",
+          "result": "PASSED",
+          "durationSeconds": 0.24
+        },
+        {
+          "name": "concurrentApplicationsHaveExactlyOneActiveLine",
+          "result": "PASSED",
+          "durationSeconds": 0.234
+        },
+        {
+          "name": "cashCapsUseFinalLineAmountExcludeFreightAndOnlyOneActiveCasePerLine",
+          "result": "PASSED",
+          "durationSeconds": 0.243
+        },
+        {
+          "name": "applicationRejectsUnfinishedExpiredOrdersAndUnverifiedEvidence",
+          "result": "PASSED",
+          "durationSeconds": 0.251
+        },
+        {
+          "name": "cancelAndRejectReleaseOnlyActiveCaseGuardAndDoNotCreateRefund",
+          "result": "PASSED",
+          "durationSeconds": 0.243
+        },
+        {
+          "name": "failedRefundRetryQueriesPersistentChannelReceiptBeforeSendingAgain",
+          "result": "PASSED",
+          "durationSeconds": 0.238
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "QUALITY aftersale and private evidence-media upload are not implemented; unsupported requests are rejected.",
+    "The local refund gateway models durable success receipts. A production channel with explicit failures, bounded automatic retries and manual escalation is not implemented.",
+    "The failed-refund retry test exercises a prepared failed record with a persistent channel receipt; it is not evidence of an end-to-end external-channel failure/retry implementation.",
+    "No frontend visual approval, load-test result or production deployment claim is included."
+  ]
+}

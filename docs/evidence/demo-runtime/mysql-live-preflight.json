@@ -1,0 +1,17 @@
+{
+  "verifiedAt": "2026-10-18T11:38:54.534795+08:00",
+  "mysqlVersion": "8.4.11",
+  "bindAddress": "127.0.0.1",
+  "port": 3306,
+  "datadir": "/Users/djy/Desktop/实验四/fresh-mall/.runtime/mysql-data/",
+  "serverTimezone": "+00:00",
+  "applicationAccount": "fresh_mall_demo@localhost",
+  "database": "fresh_mall_demo",
+  "applicationGrants": [
+    "GRANT USAGE ON *.* TO `fresh_mall_demo`@`localhost`",
+    "GRANT ALL PRIVILEGES ON `fresh_mall_demo`.* TO `fresh_mall_demo`@`localhost`"
+  ],
+  "businessTables": 0,
+  "source": "live MySQL query, isolated .runtime instance",
+  "businessSeedImported": false
+}

@@ -1,0 +1,20 @@
+{
+  "recordedDate": "2026-10-18",
+  "platform": "macOS arm64",
+  "jdk": "Eclipse Temurin 21.0.12.1",
+  "jdkHome": "/Library/Java/JavaVirtualMachines/temurin-21.jdk/Contents/Home",
+  "maven": "3.9.16",
+  "node": "26.8.1",
+  "python": "3.14.7",
+  "mysql": {
+    "version": "8.4.11",
+    "officialListing": "https://dev.mysql.com/downloads/mysql/?version=8.4.11",
+    "download": "https://cdn.mysql.com/Downloads/MySQL-8.4/mysql-8.4.11-macos15-arm64.tar.gz",
+    "officialMd5": "6e89113f04f2af85d0a164573493db3a",
+    "downloadedMd5Matches": true,
+    "downloadedSha256": "b96e00493bc3499b9ffd7f08d65c5d64933af0383a8287d9873b64f94c2d6009",
+    "binaryVersionVerified": true,
+    "serverStarted": false,
+    "note": "This records distribution verification only. See subsequent runtime evidence for actual service and SQL validation."
+  }
+}

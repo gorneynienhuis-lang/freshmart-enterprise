@@ -1,0 +1,8 @@
+# Explicit local-only profile. Payment actions remain sandbox actions.
+server:
+  address: 127.0.0.1
+app:
+  secure-cookies: false
+  allowed-origins: http://localhost:5173,http://127.0.0.1:5173
+  sandbox-enabled: true
+  sandbox-secret: ${SANDBOX_SECRET:}

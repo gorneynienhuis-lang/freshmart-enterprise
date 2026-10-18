@@ -1,0 +1,11 @@
+{
+  "executedDate": "2026-10-18",
+  "pythonCompile": "passed",
+  "posixShellSyntax": "passed",
+  "preparePreservesExistingCredentialBytes": true,
+  "envAccountAndMysqlClientFileModes": "0600",
+  "backendExcludesRootAndDemoPasswords": true,
+  "socketUtf8PathWithinMacLimit": true,
+  "serverStarted": false,
+  "note": "Preflight checks only. Actual MySQL and application startup evidence is recorded separately."
+}

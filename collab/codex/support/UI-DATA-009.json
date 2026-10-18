@@ -1,0 +1,78 @@
+{
+  "meta": {"kind": "SAMPLE_ONLY_NOT_REAL_BUSINESS", "sampleClock": "2026-10-18T13:00:00+08:00", "contract": "contracts/openapi.yaml · 0.1.0", "shape": "API字段投影+display视图props，非完整响应；金额分、重量克。", "ownership": "Claude只呈现props/事件。计算、网络、权限、状态、校验、接线均由Codex负责。"},
+  "checkout": {
+    "title": "确认订单",
+    "sources": ["POST /api/v1/orders/quote · Quote/QuoteLine/PriceSummary", "GET /api/v1/delivery-slots · DeliverySlot", "GET /api/v1/coupons · Coupon", "POST /api/v1/orders · createOrder"],
+    "visualStates": ["加载中", "可提交", "报价过期/时段不可用", "提交中/失败+traceId"],
+    "sample": {
+      "quoteId": "sample-quote-009",
+      "expiresAt": "2026-10-18T13:05:00+08:00",
+      "address": {"recipientName": "示例同学", "detail": "松江校区 · 示例收货点（非已确认配送范围）", "serviceable": true},
+      "slot": {"slotId": "sample-slot-20261018-2", "label": "14:00–17:00", "startAt": "2026-10-18T14:00:00+08:00", "cutoffAt": "2026-10-18T13:30:00+08:00", "remaining": 8, "available": true, "unavailableReason": null},
+      "lines": [
+        {"skuId": "sample-sku-tomato", "productName": "沙瓤番茄", "priceMode": "BY_PIECE", "quantity": 2, "estimatedGram": null, "couponAllocationAmount": 88, "linePayableAmount": 1092, "display": {"spec": "500g/份 × 2", "unitPrice": "¥5.90/份", "subtotalBeforeCoupon": "¥11.80"}},
+        {"skuId": "sample-sku-shrimp", "productName": "鲜活基围虾", "priceMode": "BY_WEIGHT", "quantity": 1, "estimatedGram": 500, "couponAllocationAmount": 412, "linePayableAmount": 5078, "display": {"spec": "预估500g × 1份", "unitPrice": "¥54.90/500g", "subtotalBeforeCoupon": "¥54.90", "tag": "称重，多退少补"}}
+      ],
+      "selectedCoupon": {"name": "示例新人券", "discountAmount": 500, "minGoodsAmount": 3000, "status": "AVAILABLE"},
+      "price": {"referenceGoodsAmount": 7370, "memberGoodsAmount": 6670, "nearExpiryDiscountAmount": 0, "couponDiscountAmount": 500, "goodsPayableAmount": 6170, "freightAmount": 600, "payableAmount": 6770, "freeShippingThresholdAmount": 9900, "freeShippingGapAmount": 3730},
+      "display": {
+        "coupon": "满¥30减¥5 · 已选择",
+        "amountRows": [
+          {"label": "会员商品金额", "text": "¥66.70"},
+          {"label": "优惠券", "text": "−¥5.00"},
+          {"label": "优惠后商品金额", "text": "¥61.70"},
+          {"label": "运费", "text": "¥6.00"}
+        ],
+        "payable": "¥67.70",
+        "freeShippingHint": "优惠后商品金额还差¥37.30免运费",
+        "weightHint": "称重多退少补，实重最多超预估10%；补款以系统截止时间为准，最长10分钟且不晚于时段开始。",
+        "paymentHint": "提交后进入沙箱支付，不产生真实扣费。"
+      },
+      "buttons": [
+        {"event": "changeAddress", "label": "更换地址", "enabled": true},
+        {"event": "changeSlot", "label": "更换时段", "enabled": true},
+        {"event": "changeCoupon", "label": "选择优惠券", "enabled": true},
+        {"event": "submitOrder", "label": "提交订单", "operationId": "createOrder", "enabled": true}
+      ]
+    }
+  },
+  "opsOverview": {
+    "title": "运营概览",
+    "sources": ["GET /api/v1/admin/dashboard · Dashboard", "GET /api/v1/admin/orders · AdminOrderPage", "GET /api/v1/admin/orders/{orderId} · AdminOrder", "POST /api/v1/admin/products · createProduct"],
+    "visualStates": ["加载中", "有数据", "暂无订单", "失败+traceId"],
+    "orderStatusLabels": {"PENDING_PAY": "待支付", "PAID": "已支付，待拣货", "PICKING": "拣货中", "READY_TO_SHIP": "待发货", "DELIVERING": "配送中", "FINISHED": "已完成", "CANCELED": "已取消", "CLOSED": "已关闭"},
+    "sample": {
+      "viewer": {
+        "displayName": "示例运营员",
+        "roles": ["OPERATOR"]
+      },
+      "navigation": ["运营概览", "商品管理", "订单查询", "配送时段", "业务规则"],
+      "dashboard": {"businessDate": "2026-10-18", "paidOrderCount": 1, "capturedPaymentAmount": 6770, "successfulRefundAmount": 0, "netCollectedAmount": 6770, "pendingPickCount": 1, "nearExpiryBatchCount": 3, "lowStockSkuCount": 2, "generatedAt": "2026-10-18T13:00:00+08:00"},
+      "display": {
+        "metrics": [
+          {"label": "已支付订单", "text": "1单"},
+          {"label": "成功收款", "text": "¥67.70"},
+          {"label": "成功退款", "text": "¥0.00"},
+          {"label": "净收款", "text": "¥67.70"}
+        ],
+        "attention": [
+          {"label": "待拣货订单", "text": "1单"},
+          {"label": "临期批次", "text": "3批"},
+          {"label": "低库存SKU", "text": "2个"}
+        ]
+      },
+      "orderFilters": {"orderNo": "", "status": null},
+      "orders": [
+        {"orderId": "sample-order-paid", "orderNo": "FM20261018000001", "status": "PAID", "paidAmount": 6770, "contact": {"recipientName": "示**", "phoneMasked": "138****8000"}, "allowedActions": [], "display": {"payable": "¥67.70", "paid": "¥67.70", "time": "12:30"}},
+        {"orderId": "sample-order-unpaid", "orderNo": "FM20261018000002", "status": "PENDING_PAY", "paidAmount": 0, "contact": {"recipientName": "测**", "phoneMasked": "139****9000"}, "allowedActions": [], "display": {"payable": "¥67.70", "paid": "¥0.00", "time": "12:58"}}
+      ],
+      "buttons": [
+        {"event": "refreshOverview", "label": "刷新", "operationId": "getAdminDashboard", "enabled": true},
+        {"event": "searchOrders", "label": "查询", "operationId": "listAdminOrders", "enabled": true},
+        {"event": "viewOrder", "label": "查看详情", "operationId": "getAdminOrder", "enabled": true},
+        {"event": "openCreateProduct", "label": "新增商品", "operationId": "createProduct", "enabled": true}
+      ],
+      "permissionNote": "OPERATOR订单只读；不显示取消/拣货/发货/执行退款。按钮显隐由Codex给props，指标不代表操作授权。"
+    }
+  }
+}

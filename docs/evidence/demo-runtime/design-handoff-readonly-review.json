@@ -1,0 +1,24 @@
+{
+  "reviewedAt": "2026-10-18T11:39:51.608294+08:00",
+  "generatedPages": [
+    "Home",
+    "List",
+    "Detail",
+    "Checkout",
+    "Admin",
+    "AdminPick"
+  ],
+  "assetReferenceCount": 31,
+  "missingAssets": [],
+  "rawBlobReferencesRemaining": 0,
+  "sourceHashes": {
+    "V2-AdminPick.dc.html": "8e42b8cf392320bbc4ff2eda86b50de95f27021fee547203d2eae7eac2259541",
+    "V2-HomeB.dc.html": "6c2e51503bfff85a338f3b92cc1ddcc18ee2794dcf981c3c061f4931aed16d10",
+    "V2-Checkout.dc.html": "1124f28783784b24358604595840d78a1efbaca49b7853e67d4c1d9afc774902",
+    "V2-Admin.dc.html": "36a6bac382d579c29424cb6e9a71e967912ad4a741cf609e0c814f10c95e6a79",
+    "V2-Detail.dc.html": "2a2d1f793ce726d7f3933ef1b2be26ed1f7279bbf2e3d964ba4d39688986dec4",
+    "V2-Home.dc.html": "13eb135c3e2613fa3dbf612cf57703801df5ac20bad8682b2d53cecd449a4e9d",
+    "V2-List.dc.html": "abc49d2e9fe0205459630c630c0fe101bc8673ca24ea69454616ee4811747f6e"
+  },
+  "verifiedBy": "read-only files + existing 1440/1024 PNG inspection; not a new browser run"
+}

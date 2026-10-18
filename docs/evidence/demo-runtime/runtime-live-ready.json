@@ -1,0 +1,30 @@
+{
+  "verifiedAt": "2026-10-18T11:59:26.203922+08:00",
+  "mysql": "8.4.11",
+  "flyway": [
+    "001\tidentity catalog\t1",
+    "002\tcommand audit\t1",
+    "003\tcheckout\t1",
+    "004\tcommerce\t1",
+    "005\taftersale\t1"
+  ],
+  "seedCountsBeforeProbe": {
+    "fm_user": 7,
+    "fm_category": 8,
+    "fm_product": 40,
+    "fm_sku": 45,
+    "fm_inventory_batch": 136,
+    "fm_delivery_slot": 6,
+    "fm_coupon": 1
+  },
+  "hikariConnections": [
+    "36\tREAD-COMMITTED",
+    "37\tREAD-COMMITTED",
+    "38\tREAD-COMMITTED"
+  ],
+  "hikariIsolation": "READ-COMMITTED",
+  "backendHealthUp": true,
+  "backendJarSha256": "6cb863ab76f9b9d9767a6c3a5842c9dbb65f4a3184b8c0ee8c0c3c31781df5c6",
+  "foreignKeyCount": 31,
+  "nonInnoDBTables": 0
+}

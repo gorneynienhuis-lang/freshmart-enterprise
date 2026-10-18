@@ -1,0 +1,321 @@
+{
+  "runId": "probe-73df193503bc",
+  "startedAt": "2026-10-18T11:59:26.392508+08:00",
+  "database": "MySQL 8.4.11",
+  "api": "http://127.0.0.1:8080/api/v1",
+  "simultaneousClients": 6,
+  "fixturePolicy": "new namespaced synthetic fixtures only; orders canceled, products retired, audit preserved",
+  "tests": [
+    {
+      "scenario": "last inventory unit, six distinct users",
+      "simultaneousRequests": 6,
+      "distinctDeliverySlots": 6,
+      "responses": [
+        {
+          "http": 422,
+          "code": 1201,
+          "errorKey": "INSUFFICIENT_STOCK",
+          "traceId": "02a55290-3b45-4d99-8508-658e7afa2071",
+          "elapsedMs": 33.7
+        },
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "d98e4b46-4531-4e69-bc64-95ea13ebc6a7",
+          "elapsedMs": 28.8
+        },
+        {
+          "http": 422,
+          "code": 1201,
+          "errorKey": "INSUFFICIENT_STOCK",
+          "traceId": "af4364cd-1fc5-4f2b-b72e-cdfb1f849018",
+          "elapsedMs": 36.2
+        },
+        {
+          "http": 422,
+          "code": 1201,
+          "errorKey": "INSUFFICIENT_STOCK",
+          "traceId": "c7d60ff7-2d7f-440b-9920-dd044384d333",
+          "elapsedMs": 36.6
+        },
+        {
+          "http": 422,
+          "code": 1201,
+          "errorKey": "INSUFFICIENT_STOCK",
+          "traceId": "e534d941-7f67-4ac9-bab0-bbf4bd8303ff",
+          "elapsedMs": 31.2
+        },
+        {
+          "http": 422,
+          "code": 1201,
+          "errorKey": "INSUFFICIENT_STOCK",
+          "traceId": "06f43e3b-192e-47f7-a849-aed8c2e03cc8",
+          "elapsedMs": 39.6
+        }
+      ],
+      "beforeCancel": {
+        "onHand": 1,
+        "reserved": 1,
+        "quarantined": 0,
+        "capacity": 180,
+        "used": 1,
+        "orders": 1
+      },
+      "afterCancel": {
+        "onHand": 1,
+        "reserved": 0,
+        "quarantined": 0,
+        "capacity": 180,
+        "used": 0,
+        "orders": 1
+      },
+      "passed": true
+    },
+    {
+      "scenario": "last delivery slot, six distinct users",
+      "simultaneousRequests": 6,
+      "distinctDeliverySlots": 1,
+      "responses": [
+        {
+          "http": 422,
+          "code": 1202,
+          "errorKey": "SLOT_UNAVAILABLE",
+          "traceId": "8635b574-42a5-4a69-ad5c-483524068654",
+          "elapsedMs": 7.6
+        },
+        {
+          "http": 422,
+          "code": 1202,
+          "errorKey": "SLOT_UNAVAILABLE",
+          "traceId": "735272f5-2ed3-4e66-b792-cd46e6543c4b",
+          "elapsedMs": 8.0
+        },
+        {
+          "http": 422,
+          "code": 1202,
+          "errorKey": "SLOT_UNAVAILABLE",
+          "traceId": "bfc283b5-27ed-4cda-8f9a-9b4275c545a1",
+          "elapsedMs": 7.8
+        },
+        {
+          "http": 422,
+          "code": 1202,
+          "errorKey": "SLOT_UNAVAILABLE",
+          "traceId": "145fa00e-02ed-48fc-b5fb-6768caab8f81",
+          "elapsedMs": 8.1
+        },
+        {
+          "http": 422,
+          "code": 1202,
+          "errorKey": "SLOT_UNAVAILABLE",
+          "traceId": "655c6702-aa5f-4bc0-8e38-9375da442258",
+          "elapsedMs": 8.4
+        },
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "92404110-6f34-4867-aeea-abf68720190e",
+          "elapsedMs": 13.2
+        }
+      ],
+      "beforeCancel": {
+        "onHand": 50,
+        "reserved": 1,
+        "quarantined": 0,
+        "capacity": 1,
+        "used": 1,
+        "orders": 1
+      },
+      "afterCancel": {
+        "onHand": 50,
+        "reserved": 0,
+        "quarantined": 0,
+        "capacity": 1,
+        "used": 0,
+        "orders": 1
+      },
+      "passed": true
+    },
+    {
+      "scenario": "same-key order + authorization + signed payment replay",
+      "responses": [
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "953641bc-f73f-4438-9eec-092487f4e745",
+          "elapsedMs": 8.4
+        },
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "783446ed-2502-4dc6-ae76-4a0843831db5",
+          "elapsedMs": 8.8
+        },
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "9cca8c47-11d1-48f4-b3ef-ae93b93bb32c",
+          "elapsedMs": 8.5
+        },
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "5a736c96-aefe-41a6-8203-5b88d634aca0",
+          "elapsedMs": 8.4
+        },
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "11fea1c3-d5e4-492d-9ca1-1e19bf6a6945",
+          "elapsedMs": 9.0
+        },
+        {
+          "http": 201,
+          "code": 0,
+          "errorKey": null,
+          "traceId": "96861b78-c37d-4c00-8f76-85c38fdd110b",
+          "elapsedMs": 7.7
+        }
+      ],
+      "singleReservation": {
+        "onHand": 50,
+        "reserved": 1,
+        "quarantined": 0,
+        "capacity": 30,
+        "used": 1,
+        "orders": 1
+      },
+      "boundaries": {
+        "sameKeyDifferentBody": {
+          "http": 409,
+          "code": 1008,
+          "errorKey": "IDEMPOTENCY_CONFLICT",
+          "traceId": "38386f4a-483a-4487-b8d9-97bcd22eecb4",
+          "elapsedMs": 3.6
+        },
+        "otherMemberResource": {
+          "http": 404,
+          "code": 1004,
+          "errorKey": "NOT_FOUND",
+          "traceId": "1b660ca1-bf8e-4f62-abff-f7aa97846470",
+          "elapsedMs": 2.8
+        },
+        "unauthenticatedResource": {
+          "http": 401,
+          "code": 1002,
+          "errorKey": "UNAUTHENTICATED",
+          "traceId": "ee6d0509-0cc5-4788-885d-1132a4ce39bc",
+          "elapsedMs": 0.7
+        },
+        "memberPickingRoute": {
+          "http": 403,
+          "code": 1003,
+          "errorKey": "FORBIDDEN",
+          "traceId": "db7fa3f8-5bf7-4f5d-8a70-c48c2f00819d",
+          "elapsedMs": 1.5
+        },
+        "clientSubmittedPrice": {
+          "http": 400,
+          "code": 1001,
+          "errorKey": "VALIDATION_ERROR",
+          "traceId": "f2f8961f-345f-4f22-9031-a182210a450a",
+          "elapsedMs": 2.6
+        },
+        "unsignedCallback": {
+          "http": 401,
+          "code": 1301,
+          "errorKey": "SIGNATURE_INVALID",
+          "traceId": "1bdc09c9-22bb-4150-8693-ceaef9cea4ae",
+          "elapsedMs": 1.3
+        },
+        "signedWrongAmount": {
+          "http": 422,
+          "code": 1302,
+          "errorKey": "PAYMENT_MISMATCH",
+          "traceId": "a3e01907-0d28-4c48-8ba1-2c1172d2d107",
+          "elapsedMs": 6.0
+        },
+        "sameEventDifferentBody": {
+          "http": 422,
+          "code": 1302,
+          "errorKey": "PAYMENT_MISMATCH",
+          "traceId": "6204ad35-53ab-431e-a7c7-cc59fd7cf94f",
+          "elapsedMs": 2.9
+        }
+      },
+      "signedCallbackReplay": {
+        "responses": [
+          {
+            "http": 200,
+            "code": 0,
+            "errorKey": null,
+            "traceId": "b37abcb0-16d6-4118-b086-b6822769402b",
+            "elapsedMs": 8.1
+          },
+          {
+            "http": 200,
+            "code": 0,
+            "errorKey": null,
+            "traceId": "2ffa0325-dd79-47e2-92a1-d34549c4f44a",
+            "elapsedMs": 2.4
+          },
+          {
+            "http": 200,
+            "code": 0,
+            "errorKey": null,
+            "traceId": "2020e4f1-66c9-4bfd-9428-57e1b3949cbb",
+            "elapsedMs": 8.3
+          },
+          {
+            "http": 200,
+            "code": 0,
+            "errorKey": null,
+            "traceId": "f4cec64a-83ab-4e33-98a5-410de2409869",
+            "elapsedMs": 9.5
+          },
+          {
+            "http": 200,
+            "code": 0,
+            "errorKey": null,
+            "traceId": "9c9b652e-77de-48a9-a1be-c73e4676dfd7",
+            "elapsedMs": 7.3
+          },
+          {
+            "http": 200,
+            "code": 0,
+            "errorKey": null,
+            "traceId": "499fd092-cedf-423a-a10a-d23d8e1e1988",
+            "elapsedMs": 7.2
+          }
+        ],
+        "paidAmount": 700,
+        "paymentEventRows": 1,
+        "expectedAmount": 700
+      },
+      "afterCancel": {
+        "onHand": 50,
+        "reserved": 0,
+        "quarantined": 0,
+        "capacity": 30,
+        "used": 0,
+        "orders": 1
+      },
+      "refundAfterCancel": {
+        "refundedAmount": 700,
+        "paidAmount": 700,
+        "successfulRefundRows": 1
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "fixturesRetired": true,
+  "finishedAt": "2026-10-18T11:59:28.803279+08:00"
+}

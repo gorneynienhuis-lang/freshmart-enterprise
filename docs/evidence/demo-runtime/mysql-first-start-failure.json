@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-10-18T11:58:27.116332+08:00",
+  "startup": "failed",
+  "migration": "V001",
+  "mysqlError": 1067,
+  "reason": "Invalid default value for created_at: TIMESTAMP(6) default precision mismatch",
+  "tablesAndRows": {
+    "flyway_schema_history": 1,
+    "fm_auth_session": 0,
+    "fm_category": 0,
+    "fm_csrf_context": 0,
+    "fm_user": 0,
+    "fm_user_role": 0
+  },
+  "seedImported": false,
+  "allBusinessTablesEmpty": true
+}

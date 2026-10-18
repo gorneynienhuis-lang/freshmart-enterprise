@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>商品详情</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#A0021F}a:hover{color:#7E0118}
+.dhu-weave{background-color:#A0021F;background-image:url(/_blob/fda7af62195fbe9bd07b39f07f802586);background-repeat:no-repeat;background-size:640px auto;background-position:right -120px center}
+.dhu-band{background-color:#A0021F;background-image:url(/_blob/fda7af62195fbe9bd07b39f07f802586);background-repeat:repeat-x;background-size:480px auto;background-position:left -40px center}
+.fm-navlinks{scrollbar-width:none}.fm-navlinks::-webkit-scrollbar{display:none}
+@media (max-width:1279px){.fm-header-row{gap:24px!important}.fm-slot{display:none!important}.fm-hero-grid{grid-template-columns:232px minmax(0,1fr)!important}.fm-hero-aside{grid-column:1 / -1;flex-direction:row!important;align-items:flex-start;margin-top:0!important}.fm-hero-aside>*{flex:1 1 0}.fm-hero-fruit{transform:scale(.84);transform-origin:right bottom}}
+@media (max-width:1279px){.fm-slots{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:1100px){.fm-freeship{display:none!important}.fm-navgap{gap:20px!important}.fm-hot{display:none!important}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F5F7; color: #1B1F24; font-family: 'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',sans-serif; font-size: 14px">
+
+  <div class="dhu-band">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 12px; color: #FFFFFF; flex-wrap: wrap">
+      <span style="display: flex; align-items: center; gap: 16px">
+        <span style="font-weight: 600; letter-spacing: 0.06em">东华大学社区 · 校内实验超市</span>
+        <span aria-hidden="true" style="width: 1px; height: 12px; background: rgba(255, 255, 255, 0.4)"></span>
+        <span style="display: flex; align-items: center; gap: 6px; color: rgba(255, 255, 255, 0.9)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+          送至：松江校区 · 人民北路 2999 号（示意）<a href="#" style="color: #FFFFFF; text-decoration: underline">更换</a>
+        </span>
+      </span>
+      <nav aria-label="账户" style="display: flex; gap: 18px">
+        <a href="#" style="color: #FFFFFF; text-decoration: none">你好，请登录</a>
+        <a href="#" style="color: #FFFFFF; text-decoration: none; font-weight: 600">免费注册</a>
+        <a href="#" style="color: #FFFFFF; text-decoration: none">我的订单</a>
+        <a href="#" style="color: #FFFFFF; text-decoration: none">帮助与售后</a>
+      </nav>
+    </div>
+  </div>
+
+  <header style="background: #FFFFFF">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 20px 24px 14px; display: flex; align-items: center; gap: 32px; flex-wrap: nowrap" class="fm-header-row">
+      <a href="#" aria-label="东华大学社区生鲜超市 首页" style="display: flex; align-items: center; gap: 16px; text-decoration: none; color: #1B1F24; flex: none">
+        <img src="/_blob/bc803c12398b168e69df338a2a0adb79" alt="东华大学 DONGHUA UNIVERSITY" style="height: 54px; width: auto">
+        <span aria-hidden="true" style="width: 1px; height: 38px; background: #D5DADF"></span>
+        <span style="display: flex; flex-direction: column; gap: 4px; line-height: 1.1">
+          <span style="font-size: 22px; font-weight: 700; letter-spacing: 0.06em; color: #A0021F">社区生鲜超市</span>
+          <span style="font-size: 12px; color: #5B6470; letter-spacing: 0.04em">Community Fresh Market</span>
+        </span>
+      </a>
+      <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 6px; min-width: 0">
+        <form style="display: flex; height: 44px; border: 2px solid {{t.brand}}; border-radius: 8px; overflow: hidden">
+          <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 0 12px; min-width: 0">
+            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">搜索商品</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B6470" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <input type="search" placeholder="搜索商品、分类或产地，例如：三文鱼" style="flex: 1; min-width: 0; border: 0; outline: none; font-size: 14px; font-family: inherit; color: #1B1F24; background: transparent">
+          </label>
+          <button type="submit" style="width: 96px; border: 0; background: {{t.brand}}; color: #FFFFFF; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer">搜索</button>
+        </form>
+        <div class="fm-hot" style="display: flex; gap: 14px; font-size: 12px; color: #5B6470; flex-wrap: wrap">
+          <span>常搜：</span>
+          <a href="#" style="color: #5B6470; text-decoration: none">番茄</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">鸡蛋</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">三文鱼</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">蓝莓</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">牛排</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">水饺</a>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; flex: none">
+        <a href="#" class="fm-slot" style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid #E3E6EA; border-radius: 8px; color: #1B1F24; text-decoration: none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{t.brand}}" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          <span style="display: flex; flex-direction: column; line-height: 1.3"><span style="font-size: 12px; color: #5B6470">最早可约</span><span style="font-size: 14px; font-weight: 600">今天 14:00–17:00</span></span>
+        </a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 16px; background: {{t.brand}}; color: #FFFFFF; border-radius: 8px; text-decoration: none">
+          <span style="position: relative; display: flex; margin-right: 8px">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.5 12h11.5l2-8H6.2"></path></svg>
+            <span style="position: absolute; top: -9px; right: -12px; min-width: 18px; height: 18px; padding: 0 5px; box-sizing: border-box; border-radius: 9px; background: #FFFFFF; color: #A0021F; font-size: 11px; line-height: 18px; text-align: center; font-weight: 600">3</span>
+          </span>
+          <span style="display: flex; flex-direction: column; line-height: 1.25"><span style="font-size: 12px; opacity: 0.85">购物车</span><span style="font-family: 'Barlow',sans-serif; font-size: 17px; font-weight: 600">¥45.60</span></span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="主导航" style="background: #FFFFFF; border-bottom: 1px solid #E3E6EA">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 46px; display: flex; align-items: stretch; gap: 28px">
+      <a href="#" style="width: 232px; box-sizing: border-box; flex: none; display: flex; align-items: center; gap: 10px; padding: 0 16px; background: {{t.brand}}; color: #FFFFFF; text-decoration: none; font-weight: 600; border-radius: 6px; margin: 6px 0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>全部商品分类</a>
+      <div style="display: flex; align-items: center; gap: 28px; flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap" class="fm-navlinks fm-navgap">
+        <a href="#" style="color: #1B1F24; text-decoration: none">首页</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">临期特惠</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">当季蔬果</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">肉禽蛋品</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">海鲜水产</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">乳品烘焙</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">新人专享券</a>
+      </div>
+      <span class="fm-freeship" style="display: flex; align-items: center; font-size: 13px; color: #5B6470; flex: none">满 ¥99 免运费，未满收 ¥6</span>
+    </div>
+  </nav>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 16px 24px 48px; display: flex; flex-direction: column; gap: 16px">
+    <nav aria-label="面包屑" style="display: flex; gap: 8px; font-size: 13px; color: #5B6470">
+      <a href="#" style="color: #5B6470; text-decoration: none">首页</a><span aria-hidden="true">›</span><a href="#" style="color: #5B6470; text-decoration: none">海鲜水产</a><span aria-hidden="true">›</span><span style="color: #1B1F24">鲜活基围虾</span>
+    </nav>
+
+    <div style="background: #FFFFFF; border-radius: 8px; padding: 28px; display: flex; gap: 40px; flex-wrap: wrap">
+      <div style="flex: 1 1 340px; max-width: 540px; display: flex; flex-direction: column; gap: 12px">
+        <div style="aspect-ratio: 1 / 1; border: 1px solid #EEF0F2; border-radius: 8px; overflow: hidden"><img src="/_blob/aa99e67147dbf29c3b182aa13bd007f8" alt="鲜活基围虾" style="width: 100%; height: 100%; object-fit: cover"></div>
+        <div style="display: flex; gap: 10px">
+          <button aria-label="查看图片 1" style="width: 72px; height: 72px; padding: 0; border: 2px solid {{t.brand}}; border-radius: 6px; overflow: hidden; background: #FFFFFF; cursor: pointer"><img src="/_blob/aa99e67147dbf29c3b182aa13bd007f8" alt="" style="width: 100%; height: 100%; object-fit: cover"></button>
+        </div>
+      </div>
+
+      <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="display: flex; gap: 6px">
+            <span style="font-size: 12px; line-height: 20px; padding: 0 8px; border-radius: 3px; background: #E6F4EE; color: {{t.brand}}; font-weight: 600">鲜活</span>
+            <span style="font-size: 12px; line-height: 20px; padding: 0 8px; border-radius: 3px; background: #F1F2F4; color: #4A525C; font-weight: 600">称重</span>
+          </div>
+          <h1 style="margin: 0; font-size: 26px; font-weight: 700; line-height: 1.3">鲜活基围虾</h1>
+          <p style="margin: 0; color: #5B6470">产地广东 · 按 500g 计价 · 按份下单，拣货称重后多退少补</p>
+        </div>
+
+        <div style="background: #F7F8F9; border-radius: 8px; padding: 16px 18px; display: flex; flex-direction: column; gap: 6px">
+          <div style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap">
+            <span style="font-size: 13px; color: {{t.price}}; font-weight: 600">会员价</span>
+            <span style="font-family: 'Barlow',sans-serif; font-size: 36px; font-weight: 700; color: {{t.price}}; line-height: 1"><span style="font-size: 20px">¥</span>54.90</span>
+            <span style="color: #5B6470">/ 500g</span>
+            <span style="font-size: 13px; color: #8A929C; text-decoration: line-through">参考价 ¥59.90 / 500g</span>
+          </div>
+          <span style="font-size: 13px; color: #5B6470">¥10.98 / 100g · 注册即享会员价 · 最终价格以结算页报价为准</span>
+        </div>
+
+        <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px">
+          <legend style="padding: 0 0 10px; font-weight: 700">每份预估重量</legend>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap">
+            <sc-for list="{{weights}}" as="w" hint-placeholder-count="3">
+              <button onClick="{{w.pick}}" aria-pressed="{{w.on}}" style="{{w.style}}">{{w.label}}<span style="display: block; font-family: 'Barlow',sans-serif; font-size: 13px; font-weight: 500; opacity: 0.8">预付 ¥{{w.amount}}</span></button>
+            </sc-for>
+          </div>
+        </fieldset>
+
+        <div style="display: flex; gap: 12px; padding: 12px 14px; border: 1px solid #F1D9A8; background: #FFF9EE; border-radius: 8px; font-size: 13px; line-height: 1.7; color: #4A3A1A">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8A4B00" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; margin-top: 3px"><circle cx="12" cy="12" r="9"></circle><path d="M12 8v5M12 16.5v.5"></path></svg>
+          <span>按预估重量先付 <strong>¥{{amount}}</strong>。拣货称重后：实重偏少，差额原路退回；实重偏多，需补款，最多不超过预估的 10%（本份最多补 <strong>¥{{maxTopUp}}</strong>），请在 10 分钟内完成补款，否则订单取消并全额退款。</span>
+        </div>
+
+        <fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 10px">
+          <legend style="padding: 0 0 10px; font-weight: 700">预约配送时段</legend>
+          <div class="fm-slots" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px">
+            <sc-for list="{{slots}}" as="s" hint-placeholder-count="4">
+              <button onClick="{{s.pick}}" disabled="{{s.disabled}}" aria-pressed="{{s.on}}" style="{{s.style}}">
+                <span style="font-size: 12px; opacity: 0.85">{{s.day}}</span>
+                <span style="font-family: 'Barlow',sans-serif; font-size: 17px; font-weight: 600">{{s.time}}</span>
+                <span style="font-size: 12px">{{s.state}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </fieldset>
+
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding-top: 4px">
+          <div style="height: 48px; display: grid; grid-template-columns: 44px 52px 44px; border: 1px solid #D5DADF; border-radius: 8px; overflow: hidden">
+            <button aria-label="减少一份" onClick="{{dec}}" style="border: 0; background: #F7F8F9; font-size: 20px; color: #1B1F24; cursor: pointer">−</button>
+            <span style="display: flex; align-items: center; justify-content: center; font-family: 'Barlow',sans-serif; font-size: 17px; font-weight: 600" aria-live="polite">{{qty}}</span>
+            <button aria-label="增加一份" onClick="{{inc}}" style="border: 0; background: #F7F8F9; font-size: 20px; color: #1B1F24; cursor: pointer">+</button>
+          </div>
+          <button style="height: 48px; padding: 0 32px; border: 0; background: {{t.brand}}; color: #FFFFFF; border-radius: 8px; font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer">加入购物车</button>
+          <button style="height: 48px; padding: 0 28px; border: 1px solid {{t.brand}}; background: #FFFFFF; color: {{t.brand}}; border-radius: 8px; font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer">立即购买</button>
+        </div>
+        <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 13px; color: #5B6470; border-top: 1px solid #EEF0F2; padding-top: 14px">
+          <span>收货后 7 天品质售后</span><span>满 ¥99 免运费，未满收 ¥6</span><span>沙箱支付，不产生真实扣费</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap">
+      <section style="flex: 999 1 640px; min-width: 0; background: #FFFFFF; border-radius: 8px">
+        <div role="tablist" aria-label="商品信息" style="display: flex; gap: 28px; padding: 0 24px; border-bottom: 1px solid #E3E6EA">
+          <button role="tab" aria-selected="true" style="height: 50px; padding: 0; border: 0; border-bottom: 2px solid {{t.brand}}; background: transparent; color: {{t.brand}}; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer">规格参数</button>
+          <button role="tab" aria-selected="false" style="height: 50px; padding: 0; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #1B1F24; font-size: 15px; font-family: inherit; cursor: pointer">商品介绍</button>
+          <button role="tab" aria-selected="false" style="height: 50px; padding: 0; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #1B1F24; font-size: 15px; font-family: inherit; cursor: pointer">售后说明</button>
+        </div>
+        <dl style="margin: 0; padding: 20px 24px 24px; display: grid; grid-template-columns: 120px minmax(0, 1fr); row-gap: 0">
+          <sc-for list="{{specs}}" as="r" hint-placeholder-count="6">
+            <dt style="padding: 11px 0; border-bottom: 1px solid #F1F2F4; color: #5B6470">{{r.k}}</dt>
+            <dd style="margin: 0; padding: 11px 0; border-bottom: 1px solid #F1F2F4">{{r.v}}</dd>
+          </sc-for>
+        </dl>
+      </section>
+
+      <aside style="flex: 1 1 300px; background: #FFFFFF; border-radius: 8px; padding: 18px 20px; display: flex; flex-direction: column; gap: 14px">
+        <h2 style="margin: 0; font-size: 16px; font-weight: 700">同类商品</h2>
+        <sc-for list="{{related}}" as="r" hint-placeholder-count="4">
+          <a href="#" style="display: flex; gap: 12px; align-items: center; color: #1B1F24; text-decoration: none">
+            <img src="{{r.img}}" alt="" style="width: 64px; height: 64px; object-fit: cover; border-radius: 6px; border: 1px solid #EEF0F2">
+            <span style="display: flex; flex-direction: column; gap: 3px; min-width: 0">
+              <span style="font-weight: 600">{{r.name}}</span>
+              <span style="font-size: 12px; color: #5B6470">{{r.spec}}</span>
+              <span style="font-family: 'Barlow',sans-serif; font-size: 17px; font-weight: 700; color: {{t.price}}">¥{{r.price}}</span>
+            </span>
+          </a>
+        </sc-for>
+      </aside>
+    </div>
+  </main>
+  <footer style="border-top: 1px solid #E3E6EA; background: #FFFFFF">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: #5B6470">
+      <span>东华大学社区生鲜超市 · 课程项目（校内实验超市设定，非学校官方运营）· 沙箱支付，不产生真实扣费 · 数据为示意</span>
+      <span style="display: flex; gap: 18px"><a href="#" style="color: #5B6470; text-decoration: none">配送与运费</a><a href="#" style="color: #5B6470; text-decoration: none">售后与退款</a><a href="#" style="color: #5B6470; text-decoration: none">称重差额说明</a></span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  themeOf() {
+    const themes = {
+      '锦缎红': { brand: '#A0021F', tint: '#F7EBED', price: '#A0021F', dot: '#D9B8BE' },
+      '松绿': { brand: '#0F6E56', tint: '#EAF2EE', price: '#A0021F', dot: '#B9C7C0' }
+    };
+    return themes[this.props.theme ?? '锦缎红'] || themes['锦缎红'];
+  }
+  renderVals() {
+    const T = this.themeOf();
+    const paint = (v) => {
+      if (typeof v === 'string') return v.split('#0F6E56').join(T.brand).split('#EAF2EE').join(T.tint).split('#D7261E').join(T.price);
+      if (Array.isArray(v)) return v.map(paint);
+      if (v && typeof v === 'object') { const o = {}; Object.keys(v).forEach((k) => { o[k] = paint(v[k]); }); return o; }
+      return v;
+    };
+    const out = paint(this.baseVals());
+    out.t = T;
+    return out;
+  }
+  constructor(props) {
+    super(props);
+    this.state = { w: 500, slot: 1, qty: 1 };
+  }
+  baseVals() {
+    const st = this.state;
+    const unitCents = 5490;
+    const fmt = (c) => (c / 100).toFixed(2);
+    const est = (g) => Math.round(unitCents * g / 500);
+    const chip = (on) => 'min-width: 112px; padding: 10px 16px; border-radius: 8px; text-align: left; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' +
+      (on ? 'border: 2px solid #0F6E56; background: #EAF2EE; color: #0F6E56' : 'border: 1px solid #D5DADF; background: #FFFFFF; color: #1B1F24');
+    const weights = [250, 500, 1000].map((g) => ({
+      label: '约 ' + g + 'g', amount: fmt(est(g)), on: st.w === g, style: chip(st.w === g),
+      pick: () => this.setState({ w: g })
+    }));
+    const slotDefs = [
+      { day: '今天', time: '09:00–12:00', state: '已截止', disabled: true },
+      { day: '今天', time: '14:00–17:00', state: '剩 8 个名额' },
+      { day: '今天', time: '18:00–21:00', state: '剩 21 个名额' },
+      { day: '明天', time: '09:00–12:00', state: '可预约' }
+    ];
+    const slots = slotDefs.map((s, i) => {
+      const on = st.slot === i;
+      let style = 'display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 14px; border-radius: 8px; font-family: inherit; text-align: left; ';
+      if (s.disabled) style += 'border: 1px dashed #D5DADF; background: #F7F8F9; color: #8A929C; cursor: not-allowed';
+      else if (on) style += 'border: 2px solid #0F6E56; background: #EAF2EE; color: #0F6E56; cursor: pointer';
+      else style += 'border: 1px solid #D5DADF; background: #FFFFFF; color: #1B1F24; cursor: pointer';
+      return { ...s, disabled: !!s.disabled, on, style, pick: () => { if (!s.disabled) this.setState({ slot: i }); } };
+    });
+    const amountC = est(st.w) * st.qty;
+    return {
+      weights, slots,
+      qty: st.qty,
+      amount: fmt(amountC),
+      maxTopUp: fmt(Math.round(amountC * 0.1)),
+      inc: () => this.setState({ qty: Math.min(st.qty + 1, 9) }),
+      dec: () => this.setState({ qty: Math.max(st.qty - 1, 1) }),
+      specs: [
+        { k: '商品编码', v: 'S016' },
+        { k: '产地', v: '广东' },
+        { k: '储存方式', v: '鲜活，冷藏运输' },
+        { k: '计价方式', v: '按重计价，每 500g 单价；按份下单，拣货称重' },
+        { k: '称重规则', v: '实重偏少退差；偏多补款，上限为预估的 10%' },
+        { k: '到货与新鲜度', v: '以系统实际入库信息为准，无数据时不显示' },
+        { k: '售后', v: '收货后 7 天内可申请品质售后' }
+      ],
+      related: [
+        { img: '/_blob/7df4f21ccc5aa96aea33b56af103bb83', name: '冰鲜三文鱼', spec: '200g/盒 · 挪威', price: '45.9' },
+        { img: '/_blob/d095abe6052961a74ac3dbba9adb0a20', name: '鲜活鲈鱼', spec: '按 500g 计价 · 福建', price: '32.9' },
+        { img: '/_blob/39533df27c4af5c4d923fce77a1c7751', name: '净化花蛤', spec: '500g/袋 · 山东', price: '10.9' },
+        { img: '/_blob/6e380256f753e29487c75a5e74c577a9', name: '冷冻带鱼段', spec: '500g/袋 · 浙江', price: '25.9' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

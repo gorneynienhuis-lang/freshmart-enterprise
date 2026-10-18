@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>列表页</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#A0021F}a:hover{color:#7E0118}
+.dhu-weave{background-color:#A0021F;background-image:url(/_blob/fda7af62195fbe9bd07b39f07f802586);background-repeat:no-repeat;background-size:640px auto;background-position:right -120px center}
+.dhu-band{background-color:#A0021F;background-image:url(/_blob/fda7af62195fbe9bd07b39f07f802586);background-repeat:repeat-x;background-size:480px auto;background-position:left -40px center}
+.fm-navlinks{scrollbar-width:none}.fm-navlinks::-webkit-scrollbar{display:none}
+@media (max-width:1279px){.fm-header-row{gap:24px!important}.fm-slot{display:none!important}.fm-hero-grid{grid-template-columns:232px minmax(0,1fr)!important}.fm-hero-aside{grid-column:1 / -1;flex-direction:row!important;align-items:flex-start;margin-top:0!important}.fm-hero-aside>*{flex:1 1 0}.fm-hero-fruit{transform:scale(.84);transform-origin:right bottom}}
+@media (max-width:1100px){.fm-freeship{display:none!important}.fm-navgap{gap:20px!important}.fm-hot{display:none!important}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F4F5F7; color: #1B1F24; font-family: 'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',sans-serif; font-size: 14px">
+
+  <div class="dhu-band">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 12px; color: #FFFFFF; flex-wrap: wrap">
+      <span style="display: flex; align-items: center; gap: 16px">
+        <span style="font-weight: 600; letter-spacing: 0.06em">东华大学社区 · 校内实验超市</span>
+        <span aria-hidden="true" style="width: 1px; height: 12px; background: rgba(255, 255, 255, 0.4)"></span>
+        <span style="display: flex; align-items: center; gap: 6px; color: rgba(255, 255, 255, 0.9)">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+          送至：松江校区 · 人民北路 2999 号（示意）<a href="#" style="color: #FFFFFF; text-decoration: underline">更换</a>
+        </span>
+      </span>
+      <nav aria-label="账户" style="display: flex; gap: 18px">
+        <a href="#" style="color: #FFFFFF; text-decoration: none">你好，请登录</a>
+        <a href="#" style="color: #FFFFFF; text-decoration: none; font-weight: 600">免费注册</a>
+        <a href="#" style="color: #FFFFFF; text-decoration: none">我的订单</a>
+        <a href="#" style="color: #FFFFFF; text-decoration: none">帮助与售后</a>
+      </nav>
+    </div>
+  </div>
+
+  <header style="background: #FFFFFF">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 20px 24px 14px; display: flex; align-items: center; gap: 32px; flex-wrap: nowrap" class="fm-header-row">
+      <a href="#" aria-label="东华大学社区生鲜超市 首页" style="display: flex; align-items: center; gap: 16px; text-decoration: none; color: #1B1F24; flex: none">
+        <img src="/_blob/bc803c12398b168e69df338a2a0adb79" alt="东华大学 DONGHUA UNIVERSITY" style="height: 54px; width: auto">
+        <span aria-hidden="true" style="width: 1px; height: 38px; background: #D5DADF"></span>
+        <span style="display: flex; flex-direction: column; gap: 4px; line-height: 1.1">
+          <span style="font-size: 22px; font-weight: 700; letter-spacing: 0.06em; color: #A0021F">社区生鲜超市</span>
+          <span style="font-size: 12px; color: #5B6470; letter-spacing: 0.04em">Community Fresh Market</span>
+        </span>
+      </a>
+      <div style="flex: 1 1 320px; display: flex; flex-direction: column; gap: 6px; min-width: 0">
+        <form style="display: flex; height: 44px; border: 2px solid {{t.brand}}; border-radius: 8px; overflow: hidden">
+          <label style="flex: 1; display: flex; align-items: center; gap: 8px; padding: 0 12px; min-width: 0">
+            <span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">搜索商品</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5B6470" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            <input type="search" placeholder="搜索商品、分类或产地，例如：三文鱼" style="flex: 1; min-width: 0; border: 0; outline: none; font-size: 14px; font-family: inherit; color: #1B1F24; background: transparent">
+          </label>
+          <button type="submit" style="width: 96px; border: 0; background: {{t.brand}}; color: #FFFFFF; font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer">搜索</button>
+        </form>
+        <div class="fm-hot" style="display: flex; gap: 14px; font-size: 12px; color: #5B6470; flex-wrap: wrap">
+          <span>常搜：</span>
+          <a href="#" style="color: #5B6470; text-decoration: none">番茄</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">鸡蛋</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">三文鱼</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">蓝莓</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">牛排</a>
+          <a href="#" style="color: #5B6470; text-decoration: none">水饺</a>
+        </div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px; flex: none">
+        <a href="#" class="fm-slot" style="display: flex; align-items: center; gap: 10px; padding: 8px 12px; border: 1px solid #E3E6EA; border-radius: 8px; color: #1B1F24; text-decoration: none">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{t.brand}}" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>
+          <span style="display: flex; flex-direction: column; line-height: 1.3"><span style="font-size: 12px; color: #5B6470">最早可约</span><span style="font-size: 14px; font-weight: 600">今天 14:00–17:00</span></span>
+        </a>
+        <a href="#" style="display: flex; align-items: center; gap: 10px; height: 52px; padding: 0 16px; background: {{t.brand}}; color: #FFFFFF; border-radius: 8px; text-decoration: none">
+          <span style="position: relative; display: flex; margin-right: 8px">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="20" r="1.5"></circle><circle cx="18" cy="20" r="1.5"></circle><path d="M2 3h3l2.5 12h11.5l2-8H6.2"></path></svg>
+            <span style="position: absolute; top: -9px; right: -12px; min-width: 18px; height: 18px; padding: 0 5px; box-sizing: border-box; border-radius: 9px; background: #FFFFFF; color: #A0021F; font-size: 11px; line-height: 18px; text-align: center; font-weight: 600">3</span>
+          </span>
+          <span style="display: flex; flex-direction: column; line-height: 1.25"><span style="font-size: 12px; opacity: 0.85">购物车</span><span style="font-family: 'Barlow',sans-serif; font-size: 17px; font-weight: 600">¥45.60</span></span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <nav aria-label="主导航" style="background: #FFFFFF; border-bottom: 1px solid #E3E6EA">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 46px; display: flex; align-items: stretch; gap: 28px">
+      <a href="#" style="width: 232px; box-sizing: border-box; flex: none; display: flex; align-items: center; gap: 10px; padding: 0 16px; background: {{t.brand}}; color: #FFFFFF; text-decoration: none; font-weight: 600; border-radius: 6px; margin: 6px 0">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>全部商品分类</a>
+      <div style="display: flex; align-items: center; gap: 28px; flex: 1; min-width: 0; overflow-x: auto; white-space: nowrap" class="fm-navlinks fm-navgap">
+        <a href="#" style="color: #1B1F24; text-decoration: none">首页</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">临期特惠</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">当季蔬果</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">肉禽蛋品</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">海鲜水产</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">乳品烘焙</a>
+        <a href="#" style="color: #1B1F24; text-decoration: none">新人专享券</a>
+      </div>
+      <span class="fm-freeship" style="display: flex; align-items: center; font-size: 13px; color: #5B6470; flex: none">满 ¥99 免运费，未满收 ¥6</span>
+    </div>
+  </nav>
+
+  <main style="max-width: 1280px; margin: 0 auto; padding: 16px 24px 48px; display: flex; flex-direction: column; gap: 16px">
+    <nav aria-label="面包屑" style="display: flex; gap: 8px; font-size: 13px; color: #5B6470">
+      <a href="#" style="color: #5B6470; text-decoration: none">首页</a><span aria-hidden="true">›</span><span style="color: #1B1F24">蔬菜水果</span>
+    </nav>
+
+    <div style="display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap">
+      <aside aria-label="筛选" style="flex: 0 0 232px; background: #FFFFFF; border-radius: 8px; padding: 6px 18px 18px; display: flex; flex-direction: column">
+        <section style="padding: 14px 0; border-bottom: 1px solid #EEF0F2; display: flex; flex-direction: column; gap: 10px">
+          <h2 style="margin: 0; font-size: 14px; font-weight: 700">分类</h2>
+          <a href="#" style="display: flex; justify-content: space-between; color: {{t.brand}}; text-decoration: none; font-weight: 600">蔬菜水果<span style="color: #5B6470; font-weight: 400">9</span></a>
+          <a href="#" style="display: flex; justify-content: space-between; padding-left: 14px; color: #1B1F24; text-decoration: none">时令蔬菜<span style="color: #5B6470">5</span></a>
+          <a href="#" style="display: flex; justify-content: space-between; padding-left: 14px; color: #1B1F24; text-decoration: none">新鲜水果<span style="color: #5B6470">4</span></a>
+        </section>
+        <sc-for list="{{facets}}" as="f" hint-placeholder-count="3">
+          <fieldset style="margin: 0; padding: 14px 0; border: 0; border-bottom: 1px solid #EEF0F2; display: flex; flex-direction: column; gap: 10px">
+            <legend style="padding: 0 0 10px; font-size: 14px; font-weight: 700">{{f.title}}</legend>
+            <sc-for list="{{f.opts}}" as="o" hint-placeholder-count="3">
+              <label style="display: flex; align-items: center; gap: 8px; cursor: pointer">
+                <input type="checkbox" checked="{{o.on}}" style="width: 16px; height: 16px; margin: 0; accent-color: {{t.brand}}">
+                <span style="flex: 1">{{o.label}}</span><span style="color: #5B6470; font-size: 12px">{{o.n}}</span>
+              </label>
+            </sc-for>
+          </fieldset>
+        </sc-for>
+        <fieldset style="margin: 0; padding: 14px 0; border: 0; border-bottom: 1px solid #EEF0F2; display: flex; flex-direction: column; gap: 10px">
+          <legend style="padding: 0 0 10px; font-size: 14px; font-weight: 700">价格（元）</legend>
+          <div style="display: flex; align-items: center; gap: 8px">
+            <label style="flex: 1"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">最低价</span><input type="number" placeholder="最低" style="width: 100%; box-sizing: border-box; height: 34px; padding: 0 8px; border: 1px solid #D5DADF; border-radius: 6px; font-family: inherit"></label>
+            <span aria-hidden="true" style="color: #9AA1AA">–</span>
+            <label style="flex: 1"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">最高价</span><input type="number" placeholder="最高" style="width: 100%; box-sizing: border-box; height: 34px; padding: 0 8px; border: 1px solid #D5DADF; border-radius: 6px; font-family: inherit"></label>
+          </div>
+        </fieldset>
+        <div style="padding-top: 14px; display: flex; flex-direction: column; gap: 12px">
+          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer"><span>仅看有货</span><input type="checkbox" style="width: 16px; height: 16px; margin: 0; accent-color: {{t.brand}}"></label>
+          <label style="display: flex; align-items: center; justify-content: space-between; cursor: pointer"><span>只看临期特惠</span><input type="checkbox" style="width: 16px; height: 16px; margin: 0; accent-color: {{t.brand}}"></label>
+        </div>
+      </aside>
+
+      <section style="flex: 999 1 640px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+        <div style="background: #FFFFFF; border-radius: 8px; padding: 16px 20px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap">
+            <h1 style="margin: 0; font-size: 22px; font-weight: 700">蔬菜水果</h1>
+            <span style="color: #5B6470">共 9 件商品</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap">
+            <div role="group" aria-label="排序" style="display: flex; border: 1px solid #D5DADF; border-radius: 6px; overflow: hidden">
+              <button style="height: 34px; padding: 0 16px; border: 0; background: {{t.brand}}; color: #FFFFFF; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer">综合</button>
+              <button style="height: 34px; padding: 0 16px; border: 0; border-left: 1px solid #D5DADF; background: #FFFFFF; color: #1B1F24; font-family: inherit; font-size: 13px; cursor: pointer">价格 ↑</button>
+              <button style="height: 34px; padding: 0 16px; border: 0; border-left: 1px solid #D5DADF; background: #FFFFFF; color: #1B1F24; font-family: inherit; font-size: 13px; cursor: pointer">价格 ↓</button>
+              <button style="height: 34px; padding: 0 16px; border: 0; border-left: 1px solid #D5DADF; background: #FFFFFF; color: #1B1F24; font-family: inherit; font-size: 13px; cursor: pointer">上新</button>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px">
+              <span style="color: #5B6470">已选：</span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 6px 4px 10px; border-radius: 999px; background: {{t.tint}}; color: {{t.brand}}; font-weight: 600">冷藏<button aria-label="移除筛选：冷藏" style="width: 20px; height: 20px; border: 0; border-radius: 50%; background: transparent; color: {{t.brand}}; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></span>
+              <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 6px 4px 10px; border-radius: 999px; background: {{t.tint}}; color: {{t.brand}}; font-weight: 600">常温<button aria-label="移除筛选：常温" style="width: 20px; height: 20px; border: 0; border-radius: 50%; background: transparent; color: {{t.brand}}; cursor: pointer; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"></path></svg></button></span>
+              <a href="#" style="text-decoration: none">清除全部</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(184px, 1fr)); gap: 12px">
+          <sc-for list="{{items}}" as="p" hint-placeholder-count="9">
+            <article style="{{p.cardStyle}}">
+              <a href="#" style="display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 6px; background: #FFFFFF; position: relative"><img src="{{p.img}}" alt="{{p.name}}" style="{{p.imgStyle}}">
+                <sc-if value="{{p.soldOut}}" hint-placeholder-val="{{ false }}"><span style="position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 6px 14px; border-radius: 999px; background: rgba(27, 31, 36, 0.78); color: #FFFFFF; font-size: 13px; font-weight: 600; white-space: nowrap">今日已售罄</span></sc-if>
+              </a>
+              <div style="display: flex; gap: 4px; flex-wrap: wrap; min-height: 20px">
+                <span style="{{p.storeStyle}}">{{p.store}}</span>
+                <sc-if value="{{p.weighed}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; line-height: 18px; padding: 0 6px; border-radius: 3px; background: #F1F2F4; color: #4A525C; font-weight: 600">称重</span></sc-if>
+                <sc-if value="{{p.near}}" hint-placeholder-val="{{ false }}"><span style="font-size: 11px; line-height: 18px; padding: 0 6px; border-radius: 3px; background: #FFF1DB; color: #8A4B00; font-weight: 600">{{p.near}}</span></sc-if>
+              </div>
+              <a href="#" style="font-size: 14px; line-height: 1.4; color: #1B1F24; text-decoration: none; font-weight: 600">{{p.name}}</a>
+              <span style="font-size: 12px; color: #5B6470">{{p.spec}}</span>
+              <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 2px">
+                <span style="font-family: 'Barlow',sans-serif; font-size: 22px; font-weight: 700; color: {{t.price}}; line-height: 1"><span style="font-size: 14px">¥</span>{{p.price}}</span>
+                <span style="font-size: 12px; color: #8A929C; text-decoration: line-through">¥{{p.ref}}</span>
+              </div>
+              <span style="font-size: 12px; color: #5B6470">{{p.unit}}</span>
+              <sc-if value="{{p.inCart}}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top: 4px; height: 36px; display: grid; grid-template-columns: 36px 1fr 36px; border: 1px solid {{t.brand}}; border-radius: 6px; overflow: hidden">
+                  <button aria-label="减少一件" style="border: 0; background: {{t.brand}}; color: #FFFFFF; font-size: 18px; cursor: pointer">−</button>
+                  <span style="display: flex; align-items: center; justify-content: center; font-family: 'Barlow',sans-serif; font-weight: 600; font-size: 15px">{{p.qty}}</span>
+                  <button aria-label="增加一件" style="border: 0; background: {{t.brand}}; color: #FFFFFF; font-size: 18px; cursor: pointer">+</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{p.canAdd}}" hint-placeholder-val="{{ true }}">
+                <button style="margin-top: 4px; height: 36px; border: 1px solid {{t.brand}}; background: #FFFFFF; color: {{t.brand}}; border-radius: 6px; font-size: 14px; font-weight: 600; font-family: inherit; cursor: pointer">加入购物车</button>
+              </sc-if>
+              <sc-if value="{{p.soldOut}}" hint-placeholder-val="{{ false }}">
+                <button disabled style="margin-top: 4px; height: 36px; border: 1px solid #E3E6EA; background: #F4F5F7; color: #8A929C; border-radius: 6px; font-size: 14px; font-family: inherit">已售罄</button>
+              </sc-if>
+            </article>
+          </sc-for>
+        </div>
+        <p style="margin: 6px 0 0; text-align: center; font-size: 13px; color: #5B6470">已显示全部 9 件商品</p>
+      </section>
+    </div>
+  </main>
+  <footer style="border-top: 1px solid #E3E6EA; background: #FFFFFF">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: #5B6470">
+      <span>东华大学社区生鲜超市 · 课程项目（校内实验超市设定，非学校官方运营）· 沙箱支付，不产生真实扣费 · 数据为示意</span>
+      <span style="display: flex; gap: 18px"><a href="#" style="color: #5B6470; text-decoration: none">配送与运费</a><a href="#" style="color: #5B6470; text-decoration: none">售后与退款</a><a href="#" style="color: #5B6470; text-decoration: none">称重差额说明</a></span>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1260}}'>
+class Component extends DCLogic {
+  themeOf() {
+    const themes = {
+      '锦缎红': { brand: '#A0021F', tint: '#F7EBED', price: '#A0021F', dot: '#D9B8BE' },
+      '松绿': { brand: '#0F6E56', tint: '#EAF2EE', price: '#A0021F', dot: '#B9C7C0' }
+    };
+    return themes[this.props.theme ?? '锦缎红'] || themes['锦缎红'];
+  }
+  renderVals() {
+    const T = this.themeOf();
+    const paint = (v) => {
+      if (typeof v === 'string') return v.split('#0F6E56').join(T.brand).split('#EAF2EE').join(T.tint).split('#D7261E').join(T.price);
+      if (Array.isArray(v)) return v.map(paint);
+      if (v && typeof v === 'object') { const o = {}; Object.keys(v).forEach((k) => { o[k] = paint(v[k]); }); return o; }
+      return v;
+    };
+    const out = paint(this.baseVals());
+    out.t = T;
+    return out;
+  }
+  baseVals() {
+    const tag = (bg, fg) => 'font-size: 11px; line-height: 18px; padding: 0 6px; border-radius: 3px; background: ' + bg + '; color: ' + fg + '; font-weight: 600';
+    const S = { '冷藏': tag('#E8F1F8', '#1D5A85'), '冷冻': tag('#E6EAF5', '#2D3F7A'), '常温': tag('#F1F2F4', '#4A525C'), '鲜活': tag('#E6F4EE', '#0F6E56') };
+    const card = 'background: #FFFFFF; border: 1px solid #E3E6EA; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 6px';
+    const p = (img, name, spec, price, ref, unit, store, o) => {
+      o = o || {};
+      return { img: '/_blob/' + img, name, spec, price, ref, unit, store, storeStyle: S[store],
+        near: o.near || '', weighed: !!o.weighed, soldOut: !!o.soldOut, inCart: !!o.qty, qty: o.qty || 0,
+        canAdd: !o.soldOut && !o.qty, cardStyle: card,
+        imgStyle: 'width: 100%; height: 100%; object-fit: cover' + (o.soldOut ? '; opacity: 0.45; filter: grayscale(0.6)' : '') };
+    };
+    return {
+      facets: [
+        { title: '储存方式', opts: [ { label: '冷藏', n: 6, on: true }, { label: '常温', n: 3, on: true } ] },
+        { title: '计价方式', opts: [ { label: '按件', n: 8, on: false }, { label: '称重（多退少补）', n: 1, on: false } ] },
+        { title: '产地', opts: [ { label: '山东', n: 2, on: false }, { label: '云南', n: 3, on: false }, { label: '浙江', n: 1, on: false }, { label: '江西', n: 1, on: false }, { label: '广西', n: 1, on: false }, { label: '内蒙古', n: 1, on: false } ] }
+      ],
+      items: [
+        p('0af9a6eedf3a7bbae9c970a3e5a63881', '沙瓤番茄', '500g/份 · 山东寿光', '5.9', '6.9', '¥1.18/100g', '冷藏', { qty: 2 }),
+        p('c60af7dbc2fbc81d617746f61c4bb1b1', '西兰花', '约400g/颗 · 浙江', '6.9', '7.9', '约 ¥1.73/100g', '冷藏'),
+        p('5c4d3f1c92b4a6453887c92a79d66abb', '有机菠菜', '按 500g 计价 · 云南', '8.9', '9.9', '¥1.78/100g', '冷藏', { weighed: true }),
+        p('36398377435efce9ea77ce7ed7bddd90', '水果黄瓜', '500g/盒 · 山东', '7.9', '8.9', '¥1.58/100g', '冷藏'),
+        p('080b748959b55537e6117d004c91e20a', '黄心土豆', '1kg/袋 · 内蒙古', '4.9', '5.9', '¥0.49/100g', '常温'),
+        p('320e609ed9f9721d8954a18d1e51e8d0', '云南蓝莓', '125g/盒 · 云南', '12.9', '19.9', '¥10.32/100g', '冷藏', { near: '临期 · 剩 1 天' }),
+        p('ec01c16c179608173f05fb45a038c8c3', '阳光玫瑰葡萄', '500g/盒 · 云南', '25.9', '29.9', '¥5.18/100g', '冷藏', { soldOut: true }),
+        p('9e71af1d198ce7530b2447b62f202d26', '赣南脐橙', '2kg/箱 · 江西赣州', '25.9', '29.9', '¥1.30/100g', '常温'),
+        p('b99c8c0b64826f990b16c4298521c828', '高山香蕉', '1kg/份 · 广西', '8.9', '9.9', '¥0.89/100g', '常温')
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

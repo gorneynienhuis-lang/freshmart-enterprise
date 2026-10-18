@@ -39,3 +39,6 @@ test-results/
 database/generated/
 __pycache__/
 *.pyc
+
+# Copied from tracked design/catalog source by import-design.mjs
+frontend/public/generated/

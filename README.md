@@ -2,6 +2,8 @@
 
 当前优先级：**集中完成程序、业务闭环、联调与实际测试**。PPT 制作与扩写全部暂停；文档只维护实现所需契约、交接和真实验证证据。接口、测试计划与目标不代表功能已实现或测试已通过，进展以实际构建、启动和测试结果为准。
 
+本机 Demo 入口：运行 `./scripts/demo-start.sh` 后打开 [http://localhost:5173](http://localhost:5173)。账号用 `./scripts/demo-credentials.sh` 查看；数据保存在 Git 忽略的 `.runtime/`。本轮功能与限制见 [Demo说明](docs/demo-v0.1.md)，部署见 [运行说明](deploy/README.md)，实际测试证据见 [CODEX-010](collab/codex/CODEX-010.md)。
+
 私有仓库：https://github.com/gorneynienhuis-lang/freshmart-enterprise
 
 ## 从这里开始
