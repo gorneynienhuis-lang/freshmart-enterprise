@@ -30,7 +30,7 @@
           "auth"
         ],
         "summary": "获取Cookie变更保护令牌",
-        "description": "获取Cookie变更保护令牌\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "获取Cookie变更保护令牌\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"
@@ -49,6 +49,14 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
           }
         },
         "parameters": [],
@@ -101,6 +109,12 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "x-permissions": [
@@ -834,7 +848,7 @@
           "home"
         ],
         "summary": "首页聚合",
-        "description": "首页聚合\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "首页聚合\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"
@@ -853,6 +867,14 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
           }
         },
         "parameters": [],
@@ -960,6 +982,12 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "x-permissions": [
@@ -975,7 +1003,7 @@
           "categories"
         ],
         "summary": "商品分类",
-        "description": "商品分类\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "商品分类\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"
@@ -994,6 +1022,14 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
           }
         },
         "parameters": [],
@@ -1046,6 +1082,12 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "x-permissions": [
@@ -1061,7 +1103,7 @@
           "products"
         ],
         "summary": "分页搜索商品",
-        "description": "分页搜索商品\n\n仅上架商品；所有单价为每件或priceUnitGram克单价；不暴露批次与供应商信息。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "分页搜索商品\n\n仅上架商品；所有单价为每件或priceUnitGram克单价；不暴露批次与供应商信息。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"
@@ -1080,6 +1122,14 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
           }
         },
         "parameters": [
@@ -1228,6 +1278,12 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "x-permissions": [
@@ -1243,7 +1299,7 @@
           "products"
         ],
         "summary": "商品详情与可选SKU",
-        "description": "商品详情与可选SKU\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "商品详情与可选SKU\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"
@@ -1266,6 +1322,14 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
           }
         },
         "parameters": [
@@ -1366,6 +1430,12 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "x-permissions": [
@@ -1381,7 +1451,7 @@
           "products"
         ],
         "summary": "商品公开评价",
-        "description": "商品公开评价\n\n匿名/昵称脱敏，不包含订单ID与手机号；只展示可公开评价。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "商品公开评价\n\n匿名/昵称脱敏，不包含订单ID与手机号；只展示可公开评价。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"
@@ -1404,6 +1474,14 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
           }
         },
         "parameters": [
@@ -1484,6 +1562,12 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "x-permissions": [
@@ -14319,7 +14403,7 @@
           "media"
         ],
         "summary": "读取净化后的商品图片",
-        "description": "仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。",
+        "description": "仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"
@@ -14453,7 +14537,7 @@
           "media"
         ],
         "summary": "读取净化后的已授权公开评价图片",
-        "description": "仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。",
+        "description": "仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。",
         "security": [],
         "x-roles": [
           "GUEST"

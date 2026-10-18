@@ -1,0 +1,22 @@
+{
+  "result": "PASS",
+  "version": "0.2.2",
+  "operations": 95,
+  "validatedExamples": 783,
+  "checks": [
+    "OpenAPI3.1 specification",
+    "JSON Schema2020-12 request and response examples with format checks"
+  ],
+  "command": ".runtime/contract-validation-venv/bin/python tests/contract/verify_openapi.py",
+  "contractSha256": "177b10e942d9df46dd9ea167348a52a5a9d320594f7b04f634f74a8c809fed3a",
+  "recordedAt": "2026-10-18T08:10:34.131339+00:00",
+  "staticChecks": {
+    "operations": 95,
+    "schemas": 176,
+    "localRefs": 998,
+    "schemaExampleChecks": 2082
+  },
+  "previousStandardReport": "contract-standard.json (771 examples before explicit public-read401/403 declarations)",
+  "actualBoundaryReport": "public-read-errors.json (16 actual responses)",
+  "scope": "Static contract/examples and separate actual readonly credential/origin rejection cases; not whole business/performance acceptance."
+}

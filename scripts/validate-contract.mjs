@@ -107,6 +107,7 @@ for(const [url,item] of Object.entries(doc.paths))for(const [method,op]of Object
  check(!!op.operationId&&!operationMap.has(op.operationId),label+': missing/duplicate operationId');operationMap.set(op.operationId,{op,url,method});
  check(['CONTRACT_ONLY','IMPLEMENTED_DEMO'].includes(op['x-implementation-status']),label+': missing implementation boundary');
  check(Array.isArray(op['x-roles'])&&op['x-roles'].length>0&&op['x-roles'].every(r=>roleSet.has(r)),label+': roles missing/unknown');
+ if(method==='get'&&op['x-roles'].includes('GUEST'))check(op.responses['401']&&op.responses['403'],label+': public reads must declare rejection of explicit invalid credentials/origins');
  check(Array.isArray(op['x-permissions'])&&op['x-permissions'].length>0&&op['x-permissions'].every(k=>permissionKeys.has(k)),label+': permission not defined in permissions.md');
  check(Object.hasOwn(op,'security'),label+': explicit security missing');
  check(['NONE','JSON_SCHEMA'].includes(op['x-request-body']),label+': explicit request-body policy missing');

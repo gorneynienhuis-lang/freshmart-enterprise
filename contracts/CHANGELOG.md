@@ -5,6 +5,7 @@
 - 95操作保持不变，新增MemberOrderItem，合计176 schema。只有本人会员Order.items返回必填reviewed/reviewable布尔值，真实评价关联与实际交付量派生，不改变成交快照。后台AdminOrder/PickTask仍用原OrderItem，不返回本人评价归属状态。
 - reviewable仅FINISHED且实际收到数量大于0、尚未评价时为true；Order及OrderStatus的REVIEW动作与此一致。刷新或重登录应直接显示已评价，实际全缺货的订单行不得引导提交；后端唯一约束、owner与并发校验仍独立执行。
 - 本增量只描述响应结构及规则，不把静态样例或未执行的测试冒称验收结果。
+- 本轮真实续验发现旧脚本在注销后仍向公开CSRF接口带旧Bearer；同时修正公开GET遗漏的401/403响应声明。公开浏览允许不带凭据，但显式无效Bearer和非法Origin仍分别拒绝为401/403；本次不更改过滤器或扩大权限。原失败记录保留，不把补充后的合同倒填成旧运行已经通过。
 
 ## 0.2.1 · 2026-10-18
 

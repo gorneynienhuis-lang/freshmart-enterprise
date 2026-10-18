@@ -1,0 +1,155 @@
+{
+  "status": "PASSED",
+  "recordedAt": "2026-10-18T08:07:26.102Z",
+  "contractVersion": "0.2.2",
+  "contractSha256": "177b10e942d9df46dd9ea167348a52a5a9d320594f7b04f634f74a8c809fed3a",
+  "baseUrl": "http://127.0.0.1:18081",
+  "scope": "Actual readonly public GET rejection paths; no valid credentials supplied, business handlers not reached; authorization denial audits only.",
+  "checkedResponses": 16,
+  "responses": [
+    {
+      "path": "/api/v1/auth/csrf",
+      "actualPath": "/api/v1/auth/csrf",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "779a18bc-b093-4c9f-b857-7467cd7008a9",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/auth/csrf",
+      "actualPath": "/api/v1/auth/csrf",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "6cbfe0c8-da78-4ed8-8d99-178a7251d2bf",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/home",
+      "actualPath": "/api/v1/home",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "f28f2c17-c24c-49df-aae8-4362d7da2ac7",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/home",
+      "actualPath": "/api/v1/home",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "cd8f6796-0e5e-43be-a2f5-022e4fbbfe0e",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/categories",
+      "actualPath": "/api/v1/categories",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "ae7010a6-f516-459f-9f6a-c067406be29a",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/categories",
+      "actualPath": "/api/v1/categories",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "ad7552d6-7eb8-47a0-b834-1d958d0b57ad",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/products",
+      "actualPath": "/api/v1/products",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "9e1f8f33-45ab-45a8-b89e-6f994ec967ad",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/products",
+      "actualPath": "/api/v1/products",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "a0c5733d-8bec-4502-94ac-e9baeff00c27",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/products/{productId}",
+      "actualPath": "/api/v1/products/S001",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "1487abcf-36ae-459c-88be-3f3c74dbffd1",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/products/{productId}",
+      "actualPath": "/api/v1/products/S001",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "dfabab82-2833-463a-a791-999e4c45011f",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/products/{productId}/reviews",
+      "actualPath": "/api/v1/products/S001/reviews",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "49e3e3f2-3507-4885-a3ad-06f9a6690df2",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/products/{productId}/reviews",
+      "actualPath": "/api/v1/products/S001/reviews",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "80a443fd-3e6b-4c08-b30a-5e103371607f",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/media/products/{mediaId}/content",
+      "actualPath": "/api/v1/media/products/never-issued/content",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "6f14f4ae-a18a-49fd-aa73-d11c2cd0dadb",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/media/products/{mediaId}/content",
+      "actualPath": "/api/v1/media/products/never-issued/content",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "315e37b1-128b-4e78-8d64-c80fe402ca92",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/media/reviews/{mediaId}/content",
+      "actualPath": "/api/v1/media/reviews/never-issued/content",
+      "case": "invalid-bearer",
+      "status": 401,
+      "expected": 401,
+      "traceId": "9da791c2-7518-4b0d-924b-d9ecc68cf376",
+      "schemaErrors": []
+    },
+    {
+      "path": "/api/v1/media/reviews/{mediaId}/content",
+      "actualPath": "/api/v1/media/reviews/never-issued/content",
+      "case": "invalid-origin",
+      "status": 403,
+      "expected": 403,
+      "traceId": "7dbcb314-142a-425e-8a19-979ed501c67e",
+      "schemaErrors": []
+    }
+  ]
+}
