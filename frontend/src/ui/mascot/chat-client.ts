@@ -34,7 +34,9 @@ export interface MascotChatReply {
 
 interface Envelope<T> { code: number; message: string; data: T; traceId?: string }
 
-const endpoint: string = (import.meta.env.VITE_MASCOT_CHAT_URL ?? '').trim();
+// Same-origin by default: local Vite proxies `/api` to the backend, while the
+// deployed storefront reaches the Railway backend without exposing a secret.
+const endpoint: string = (import.meta.env.VITE_MASCOT_CHAT_URL ?? '/api/v1/mascot/chat').trim();
 
 export const mascotChatMode: 'api' | 'mock' = endpoint ? 'api' : 'mock';
 
