@@ -76,8 +76,8 @@ function validate(schema,value,where='$',depth=0){
 }
 function testExample(schema,value,where){examples++;try{failures.push(...validate(schema,value,where));}catch(e){failures.push(where+': '+e.message);}}
 check(doc.openapi==='3.1.0','OpenAPI version must be 3.1.0');
-check(doc.info?.version==='0.1.0','Expected reviewed contract version 0.1.0');
-check(doc['x-contract-status']==='REVIEWABLE_NOT_IMPLEMENTED','Contract-only status missing');
+check(doc.info?.version==='0.1.1','Expected contract version 0.1.1');
+check(doc['x-contract-status']==='IMPLEMENTATION_IN_PROGRESS','Implementation boundary missing');
 walk(doc,(value,where)=>{if(value.$ref){refs++;try{resolve(value.$ref)}catch(e){failures.push(where+': '+e.message)}}});
 walk(doc.components.schemas,(s,where)=>{
  if(s.type==='object'){
@@ -105,7 +105,7 @@ for(const [url,item] of Object.entries(doc.paths))for(const [method,op]of Object
  operations++;const label=method.toUpperCase()+' '+url;
  check(url.startsWith('/api/v1/'),label+': wrong prefix');
  check(!!op.operationId&&!operationMap.has(op.operationId),label+': missing/duplicate operationId');operationMap.set(op.operationId,{op,url,method});
- check(op['x-implementation-status']==='CONTRACT_ONLY',label+': missing implementation boundary');
+ check(['CONTRACT_ONLY','IMPLEMENTED_DEMO'].includes(op['x-implementation-status']),label+': missing implementation boundary');
  check(Array.isArray(op['x-roles'])&&op['x-roles'].length>0&&op['x-roles'].every(r=>roleSet.has(r)),label+': roles missing/unknown');
  check(Array.isArray(op['x-permissions'])&&op['x-permissions'].length>0&&op['x-permissions'].every(k=>permissionKeys.has(k)),label+': permission not defined in permissions.md');
  check(Object.hasOwn(op,'security'),label+': explicit security missing');
@@ -125,7 +125,7 @@ for(const [url,item] of Object.entries(doc.paths))for(const [method,op]of Object
  check(Object.keys(op['x-error-codes']||{}).length>0,label+': no error mapping');
  for(const error of Object.values(op['x-error-codes']||{}))check(Number.isInteger(error.code)&&error.code>0&&error.httpStatus>=400&&error.httpStatus<600&&op.responses[error.httpStatus],label+': invalid error code/status mapping');
 }
-const sim=operationMap.get('simulateSandboxPayment')?.op;check(same(sim?.['x-environments'],['dev','test'])&&same(sim?.['x-roles'],['MEMBER']),'sandbox simulation must be dev/test MEMBER only');
+const sim=operationMap.get('simulateSandboxPayment')?.op;check(same(sim?.['x-environments'],['dev','test','demo'])&&same(sim?.['x-roles'],['MEMBER']),'sandbox simulation must be dev/test/demo MEMBER only');
 const callback=operationMap.get('receiveSandboxPaymentCallback')?.op;check(same(callback?.security,[])&&callback?.['x-channel-auth']==='HMAC-SHA256','callback must use HMAC and no Bearer');
 for(const key of ['registerMember','login','refreshSession','logout']){const op=operationMap.get(key)?.op;check((op?.parameters||[]).map(deref).some(p=>p.name==='X-CSRF-Token'&&p.required),key+': missing CSRF header');check((op?.parameters||[]).map(deref).some(p=>p.name==='Origin'&&p.required),key+': missing Origin check');}
 const states={Order:['PENDING_PAY','PAID','PICKING','READY_TO_SHIP','DELIVERING','FINISHED','CANCELED','CLOSED'],Payment:['INIT','PENDING','SUCCESS','FAILED','CLOSED'],Refund:['PENDING','PROCESSING','SUCCESS','FAILED'],Aftersale:['APPLIED','APPROVED','REJECTED','REFUNDING','COMPLETED','CANCELED'],WeightAdjustment:['NONE','REFUND_PENDING','REFUNDED','TOP_UP_PENDING','SETTLED','CANCELED']};
@@ -155,3 +155,15 @@ check(validate(doc.components.schemas.VersionRequest,{version:1,amount:100},'neg
 check(validate(doc.components.schemas.CsrfToken.properties.csrfToken,'short','negative').length>0,'self-check failed to reject short CSRF');
 if(failures.length){console.error(`FAIL: ${failures.length} contract issue(s)`);for(const f of failures)console.error('- '+f);process.exitCode=1;}
 else console.log(`PASS: ${operations} operations; ${Object.keys(doc.components.schemas).length} schemas; ${refs} local refs; ${examples} schema/example checks; manifest + fixtures + roles + permission keys + state/security invariants. Static contract only; backend runtime/business tests NOT EXECUTED.`);
+
+// Runtime harnesses may reuse the same schema checks against actual HTTP responses.
+// This checks serialized shape only; callers still assert business behavior separately.
+export function validateRuntimeResponse(method, url, status, body) {
+ const pathname=new URL(url,'http://localhost').pathname;
+ const entry=[...operationMap.values()].find(({url:path,method:m})=>m===method.toLowerCase()&&new RegExp('^'+path.replace(/\{[^}]+\}/g,'[^/]+')+'$').test(pathname));
+ if(!entry)return {covered:false,errors:[]};
+ const response=entry.op.responses[String(status)];
+ if(!response)return {covered:true,errors:[`${method} ${pathname}: undeclared status ${status}`]};
+ const schema=Object.values(deref(response).content||{})[0]?.schema;
+ return {covered:true,errors:schema?validate(schema,body,`${entry.op.operationId}.${status}`):[]};
+}

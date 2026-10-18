@@ -11,6 +11,8 @@ export interface paths {
          * @description 获取Cookie变更保护令牌
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getCsrfToken"];
         put?: never;
@@ -37,6 +39,8 @@ export interface paths {
          *     先调用GET /auth/csrf。注册成功即基础会员。不得客户端传role。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["registerMember"];
         delete?: never;
@@ -61,6 +65,8 @@ export interface paths {
          *     先调用GET /auth/csrf；凭证失败返回真实HTTP401。员工与会员使用同一登录口。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["login"];
         delete?: never;
@@ -85,6 +91,8 @@ export interface paths {
          *     不需要Bearer。校验refresh cookie、Origin、X-CSRF-Token；并行刷新由客户端串行化。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["refreshSession"];
         delete?: never;
@@ -109,6 +117,8 @@ export interface paths {
          *     不需要Bearer；有效refresh cookie+CSRF，已吊销可幂等返回成功。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["logout"];
         delete?: never;
@@ -131,6 +141,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     permissions与contracts/permissions.md一致，按当前显式角色合并；不含数据范围例外/状态机，前端仅用于菜单提示。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getCurrentUser"];
         put?: never;
@@ -155,6 +167,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     origin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getHome"];
         put?: never;
@@ -177,6 +191,8 @@ export interface paths {
          * @description 商品分类
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listCategories"];
         put?: never;
@@ -203,6 +219,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     origin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listProducts"];
         put?: never;
@@ -227,6 +245,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     origin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getProduct"];
         put?: never;
@@ -251,6 +271,8 @@ export interface paths {
          *     匿名/昵称脱敏，不包含订单ID与手机号；只展示可公开评价。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listProductReviews"];
         put?: never;
@@ -275,6 +297,8 @@ export interface paths {
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。价格仅供参考，最终以下单报价为准。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getCart"];
         put?: never;
@@ -303,6 +327,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["addCartItem"];
         delete?: never;
@@ -330,6 +356,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         delete: operations["removeCartItem"];
         options?: never;
@@ -343,6 +371,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         patch: operations["updateCartItem"];
         trace?: never;
@@ -361,6 +391,8 @@ export interface paths {
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listAddresses"];
         put?: never;
@@ -373,6 +405,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["createAddress"];
         delete?: never;
@@ -398,6 +432,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         put: operations["updateAddress"];
         post?: never;
@@ -410,6 +446,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         delete: operations["deleteAddress"];
         options?: never;
@@ -431,6 +469,8 @@ export interface paths {
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。每日09–12/14–17/18–21，默认容量30；remaining为快照，只有下单事务成功才保证占位。截止或满额available=false。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listDeliverySlots"];
         put?: never;
@@ -455,6 +495,8 @@ export interface paths {
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。券资格、门槛及是否可叠加由后端判定；v0.1不含付费会员。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listMyCoupons"];
         put?: never;
@@ -483,6 +525,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["quoteOrder"];
         delete?: never;
@@ -507,6 +551,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     allowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listMyOrders"];
         put?: never;
@@ -519,6 +565,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["createOrder"];
         delete?: never;
@@ -543,6 +591,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     allowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getMyOrder"];
         put?: never;
@@ -571,6 +621,8 @@ export interface paths {
          *     allowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。
          *
          *     前端可每2秒轮询，最多60秒后改手动刷新；429服从Retry-After。v0.1无SSE，轮询超时不把PENDING自动判为失败。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getOrderStatus"];
         put?: never;
@@ -599,6 +651,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["cancelMyOrder"];
         delete?: never;
@@ -627,6 +681,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     响应allowedActions仅dev/test本人有效支付单给SIMULATE_PAYMENT，production为空。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["createPayment"];
         delete?: never;
@@ -651,6 +707,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     前端可每2秒轮询，最多60秒后改手动刷新；429服从Retry-After。v0.1无SSE，轮询超时不把PENDING自动判为失败。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getPayment"];
         put?: never;
@@ -679,6 +737,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["simulateSandboxPayment"];
         delete?: never;
@@ -705,6 +765,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     同订单其他支付尝试在已成功收款后又成功：保留该笔收款账，生成唯一DUPLICATE_PAYMENT原路退款，不将订单重复入账或重新履约。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["receiveSandboxPaymentCallback"];
         delete?: never;
@@ -727,6 +789,8 @@ export interface paths {
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。PROCESSING不等于到账，SUCCESS才表示渠道退款成功。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getMyRefund"];
         put?: never;
@@ -751,6 +815,8 @@ export interface paths {
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listMyAftersales"];
         put?: never;
@@ -765,6 +831,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     提交媒体ID必须经/media/images上传，属于本人、状态READY且purpose匹配；拒绝任意外部URL和他人媒体。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["applyAftersale"];
         delete?: never;
@@ -787,6 +855,8 @@ export interface paths {
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getMyAftersale"];
         put?: never;
@@ -815,6 +885,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["cancelMyAftersale"];
         delete?: never;
@@ -865,6 +937,8 @@ export interface paths {
          *     Asia/Shanghai自然日：capturedPaymentAmount按支付SUCCESS入账日汇总（含补款），successfulRefundAmount按退款SUCCESS日汇总，净额=两者之差；paidOrderCount按订单首次成功付款日去重，不将补款计新订单。库存指标按查询时点。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getAdminDashboard"];
         put?: never;
@@ -1167,6 +1241,8 @@ export interface paths {
          *     返回脱敏联系信息；OPERATOR运营只读、FINANCE资金核对只读、SERVICE处理客服流程。PICKER/COURIER仅通过各自任务接口取最小数据。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listAdminOrders"];
         put?: never;
@@ -1189,6 +1265,8 @@ export interface paths {
          * @description 后台脱敏订单详情
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getAdminOrder"];
         put?: never;
@@ -1219,6 +1297,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     SERVICE不得处理本人购买的订单；职责分离按账号主体而非当前选择角色判断。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["cancelOrderAsService"];
         delete?: never;
@@ -1245,6 +1325,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["receiveCanceledOrderReturn"];
         delete?: never;
@@ -1265,6 +1347,8 @@ export interface paths {
          * @description 待领或本人拣货任务
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listPickTasks"];
         put?: never;
@@ -1289,6 +1373,8 @@ export interface paths {
          *     仅未领取任务或本人任务；无客户姓名、电话、详细地址。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getPickTask"];
         put?: never;
@@ -1317,6 +1403,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["claimPickTask"];
         delete?: never;
@@ -1368,7 +1456,9 @@ export interface paths {
          *
          *     原子释放未实拣预占，只对实际出库量扣onHand并写PICK_OUT；实际0行不写出库流水。实际短缺的物理差异另走隔离/盘点/损耗调整，不能借少发任意改总账。整单净差只建一张补款或退差单；各差额行显式PIECE/GRAM与估/实数量。
          *
-         *     补款期限10分钟且不得晚于时段开始。差额NONE/REFUNDED/SETTLED才允许发货；未付补款过期取消整单、退已收款并按实物阶段回库。Idempotency-Key、版本/角色/本人归属均服务端校验。本契约待实现。
+         *     补款期限10分钟且不得晚于时段开始。差额NONE/REFUNDED/SETTLED才允许发货；未付补款过期取消整单、退已收款并按实物阶段回库。Idempotency-Key、版本/角色/本人归属均服务端校验。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["confirmPickTask"];
         delete?: never;
@@ -1393,6 +1483,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     SERVICE仅可读取本店本人负责或明确分派的相关客服EXCEPTION工单，用于获取taskId、version和恢复所需脱敏信息；不能读取其他任务、完整联系方式或签收码。此读取不授予dispatch/complete/contact-access权限。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listDeliveryTasks"];
         put?: never;
@@ -1419,6 +1511,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     SERVICE仅可读取本店本人负责或明确分派的相关客服EXCEPTION工单，用于获取taskId、version和恢复所需脱敏信息；不能读取其他任务、完整联系方式或签收码。此读取不授予dispatch/complete/contact-access权限。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getDeliveryTask"];
         put?: never;
@@ -1449,6 +1543,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     REFUND_PENDING也等待退差成功后发货；渠道失败保留原退款业务号重试及人工处理队列。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["dispatchDelivery"];
         delete?: never;
@@ -1475,6 +1571,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["completeDelivery"];
         delete?: never;
@@ -1523,6 +1621,8 @@ export interface paths {
          * @description 客服待领取及本人售后单
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listAdminAftersales"];
         put?: never;
@@ -1549,6 +1649,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     未领取队列仅可读脱敏概要，证据需先claim；assigneeId表示领取人，reviewerId表示已完成正式审核的账号。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["getAdminAftersale"];
         put?: never;
@@ -1570,7 +1672,9 @@ export interface paths {
         put?: never;
         /**
          * 客服审核批准售后
-         * @description 仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；必须先claim再审阅证据，不再在审核事务中隐式领取。禁止处理本人购买订单。校验version，批准金额逐行不超申请及剩余实付，保存reviewerId并将售后置APPROVED，创建PENDING人工退款单。审核不得授权资金执行；后台worker不可自动捡取人工PENDING退款。只有FINANCE execute通过职责分离校验后才将退款置PROCESSING、售后置REFUNDING并写执行授权outbox。Idempotency-Key必需，同键不同体409。此文件为契约，尚待实现。
+         * @description 仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；必须先claim再审阅证据，不再在审核事务中隐式领取。禁止处理本人购买订单。校验version，批准金额逐行不超申请及剩余实付，保存reviewerId并将售后置APPROVED，创建PENDING人工退款单。审核不得授权资金执行；后台worker不可自动捡取人工PENDING退款。只有FINANCE execute通过职责分离校验后才将退款置PROCESSING、售后置REFUNDING并写执行授权outbox。Idempotency-Key必需，同键不同体409。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["approveAftersale"];
         delete?: never;
@@ -1590,7 +1694,9 @@ export interface paths {
         put?: never;
         /**
          * 客服驳回售后
-         * @description 仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；先claim后审阅，不再隐式领取。校验version，理由必填，保存reviewerId并转REJECTED。禁止处理本人购买订单；他人工单404；状态或版本冲突409。Idempotency-Key必需。此文件为契约，尚待实现。
+         * @description 仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；先claim后审阅，不再隐式领取。校验version，理由必填，保存reviewerId并转REJECTED。禁止处理本人购买订单；他人工单404；状态或版本冲突409。Idempotency-Key必需。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["rejectAftersale"];
         delete?: never;
@@ -1611,6 +1717,8 @@ export interface paths {
          * @description 财务退款列表
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         get: operations["listAdminRefunds"];
         put?: never;
@@ -1643,6 +1751,8 @@ export interface paths {
          *     执行人还必须不同于原购买人，不能通过切换角色绕过职责分离。
          *
          *     人工AFTERSALE退款从PENDING转PROCESSING、售后从APPROVED转REFUNDING，并原子写入已授权执行outbox；worker仅消费这类授权事件，禁止直接扫描人工PENDING就发起渠道退款。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["executeRefund"];
         delete?: never;
@@ -1673,6 +1783,8 @@ export interface paths {
          *     执行人还必须不同于原购买人，不能通过切换角色绕过职责分离。
          *
          *     人工退款重试仍需FINANCE授权并写outbox，worker不能凭FAILED/PENDING状态自行绕过财务职责分离。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["retryRefund"];
         delete?: never;
@@ -1945,6 +2057,8 @@ export interface paths {
          *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["changePassword"];
         delete?: never;
@@ -2062,7 +2176,9 @@ export interface paths {
         put?: never;
         /**
          * 客服原子领取售后工单
-         * @description 仅SERVICE本店未分派且APPLIED的售后工单，禁止领取本人购买订单的售后。先CAS校验version并写assigneeId=当前账号，递增version；此时status仍为APPLIED，reviewerId仍为空。随后才能通过/media/{mediaId}/access读取本人工单证据，并执行approve/reject。其他客服已领取则409；超范围资源404。Idempotency-Key必需，同键不同体409；同键同体重试返回原结果。本契约待实现。
+         * @description 仅SERVICE本店未分派且APPLIED的售后工单，禁止领取本人购买订单的售后。先CAS校验version并写assigneeId=当前账号，递增version；此时status仍为APPLIED，reviewerId仍为空。随后才能通过/media/{mediaId}/access读取本人工单证据，并执行approve/reject。其他客服已领取则409；超范围资源404。Idempotency-Key必需，同键不同体409；同键同体重试返回原结果。
+         *
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
         post: operations["claimAftersale"];
         delete?: never;
@@ -4269,10 +4385,10 @@ export interface components {
              */
             phoneMasked: string;
             /**
-             * @description 文本；服务端校验长度并以纯文本处理
+             * @description 仅履约/运营/客服工作范围提供地区；FINANCE投影省略此字段，不返回地址。
              * @example 上海市松江区
              */
-            region: string;
+            region?: string;
         };
         AdminOrder: {
             /**
@@ -4953,12 +5069,12 @@ export interface components {
             successfulRefundAmount: number;
             /** @example 1190 */
             netCollectedAmount: number;
-            /** @example 1 */
-            pendingPickCount: number;
-            /** @example 0 */
-            nearExpiryBatchCount: number;
-            /** @example 0 */
-            lowStockSkuCount: number;
+            /** @description FINANCE投影为null（未授权），不能显示成0；OPERATOR返回真实聚合。 */
+            pendingPickCount: number | null;
+            /** @description FINANCE投影为null（未授权），不能显示成0；OPERATOR返回真实聚合。 */
+            nearExpiryBatchCount: number | null;
+            /** @description FINANCE投影为null（未授权），不能显示成0；OPERATOR返回真实聚合。 */
+            lowStockSkuCount: number | null;
             /**
              * Format: date-time
              * @description RFC3339带时区；业务日界以Asia/Shanghai解释
@@ -7321,7 +7437,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7375,7 +7491,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7451,7 +7567,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7518,7 +7634,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7585,7 +7701,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7629,7 +7745,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7681,7 +7797,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7780,7 +7896,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7835,7 +7951,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -7919,7 +8035,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8000,7 +8116,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8049,7 +8165,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8119,7 +8235,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8192,7 +8308,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8268,7 +8384,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8327,7 +8443,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8396,7 +8512,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8466,7 +8582,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8530,7 +8646,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8578,7 +8694,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8628,7 +8744,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8695,7 +8811,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8795,7 +8911,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -8926,7 +9042,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9042,7 +9158,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9158,7 +9274,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9222,7 +9338,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9349,7 +9465,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9404,7 +9520,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9471,7 +9587,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9546,7 +9662,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9589,7 +9705,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9644,7 +9760,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9728,7 +9844,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9788,7 +9904,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9860,7 +9976,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -9982,7 +10098,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11034,7 +11150,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11140,7 +11256,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11253,7 +11369,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11375,7 +11491,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11421,7 +11537,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11518,7 +11634,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11621,7 +11737,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11847,7 +11963,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11944,7 +12060,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12014,7 +12130,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12091,7 +12207,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12170,7 +12286,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12318,7 +12434,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12391,7 +12507,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12478,7 +12594,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12578,7 +12694,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12651,7 +12767,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12726,7 +12842,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12798,7 +12914,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13578,7 +13694,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13856,7 +13972,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功（Demo路由已提供；验证范围见运行报告） */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;

@@ -27,7 +27,7 @@ describe('canonical contract', () => {
   it('covers all 91 unique operations without claiming implementation', () => {
     expect(operations).toHaveLength(91);
     expect(new Set(operations.map(operation => operation.operationId)).size).toBe(91);
-    expect(operations.every(operation => operation.implementationStatus === 'CONTRACT_ONLY')).toBe(true);
+    expect(operations.every(operation => ['CONTRACT_ONLY', 'IMPLEMENTED_DEMO'].includes(operation.implementationStatus))).toBe(true);
   });
   it('uses typed paths including dynamic path parameters and real envelope data', async () => {
     const fetcher = mock(request => {

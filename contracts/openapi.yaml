@@ -3,8 +3,8 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "fresh-mall 企业级生鲜商城接口契约",
-    "version": "0.1.0",
-    "description": "2026-10-18契约评审版本，所有operation均CONTRACT_ONLY，尚未实现，例子不代表已运行/通过测试。以BASELINE.md为工程基线。前端React，后端模块化单体；CNY整数分/整数克/字符串ID；业务时区Asia/Shanghai。JSON语法是YAML1.2子集，本文件无需YAML解析依赖。 品牌展示名通过app.brand-name配置，本契约使用工程代号。"
+    "version": "0.1.1",
+    "description": "2026-10-18契约评审版本，所有operation均CONTRACT_ONLY，尚未实现，例子不代表已运行/通过测试。以BASELINE.md为工程基线。前端React，后端模块化单体；CNY整数分/整数克/字符串ID；业务时区Asia/Shanghai。JSON语法是YAML1.2子集，本文件无需YAML解析依赖。 品牌展示名通过app.brand-name配置，本契约使用工程代号。\n\nv0.1.1：数量统一为基础单位（PIECE件/GRAM克）；财务看板无权的经营数量返回null；demo为仅本机沙箱环境。x-implementation-status只标示代码覆盖，不等同运行验收。"
   },
   "servers": [
     {
@@ -30,12 +30,12 @@
           "auth"
         ],
         "summary": "获取Cookie变更保护令牌",
-        "description": "获取Cookie变更保护令牌\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "获取Cookie变更保护令牌\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [],
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -54,7 +54,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -116,7 +116,7 @@
           "auth"
         ],
         "summary": "注册基础会员",
-        "description": "注册基础会员\n\n先调用GET /auth/csrf。注册成功即基础会员。不得客户端传role。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "注册基础会员\n\n先调用GET /auth/csrf。注册成功即基础会员。不得客户端传role。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "csrfContext": []
@@ -125,7 +125,7 @@
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -163,7 +163,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -269,7 +269,7 @@
           "auth"
         ],
         "summary": "登录会员或员工",
-        "description": "登录会员或员工\n\n先调用GET /auth/csrf；凭证失败返回真实HTTP401。员工与会员使用同一登录口。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "登录会员或员工\n\n先调用GET /auth/csrf；凭证失败返回真实HTTP401。员工与会员使用同一登录口。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "csrfContext": []
@@ -278,7 +278,7 @@
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -320,7 +320,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -428,7 +428,7 @@
           "auth"
         ],
         "summary": "轮换刷新会话",
-        "description": "轮换刷新会话\n\n不需要Bearer。校验refresh cookie、Origin、X-CSRF-Token；并行刷新由客户端串行化。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "轮换刷新会话\n\n不需要Bearer。校验refresh cookie、Origin、X-CSRF-Token；并行刷新由客户端串行化。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "refreshCookie": []
@@ -443,7 +443,7 @@
           "FINANCE",
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -485,7 +485,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -579,7 +579,7 @@
           "auth"
         ],
         "summary": "退出并吊销会话",
-        "description": "退出并吊销会话\n\n不需要Bearer；有效refresh cookie+CSRF，已吊销可幂等返回成功。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "退出并吊销会话\n\n不需要Bearer；有效refresh cookie+CSRF，已吊销可幂等返回成功。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "refreshCookie": []
@@ -594,7 +594,7 @@
           "FINANCE",
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -636,7 +636,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -712,7 +712,7 @@
           "auth"
         ],
         "summary": "查询当前账号",
-        "description": "查询当前账号\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\npermissions与contracts/permissions.md一致，按当前显式角色合并；不含数据范围例外/状态机，前端仅用于菜单提示。",
+        "description": "查询当前账号\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\npermissions与contracts/permissions.md一致，按当前显式角色合并；不含数据范围例外/状态机，前端仅用于菜单提示。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -727,7 +727,7 @@
           "FINANCE",
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -754,7 +754,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -834,12 +834,12 @@
           "home"
         ],
         "summary": "首页聚合",
-        "description": "首页聚合\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。",
+        "description": "首页聚合\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [],
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -858,7 +858,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -975,12 +975,12 @@
           "categories"
         ],
         "summary": "商品分类",
-        "description": "商品分类\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "商品分类\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [],
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -999,7 +999,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -1061,12 +1061,12 @@
           "products"
         ],
         "summary": "分页搜索商品",
-        "description": "分页搜索商品\n\n仅上架商品；所有单价为每件或priceUnitGram克单价；不暴露批次与供应商信息。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。",
+        "description": "分页搜索商品\n\n仅上架商品；所有单价为每件或priceUnitGram克单价；不暴露批次与供应商信息。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [],
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -1144,7 +1144,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -1243,12 +1243,12 @@
           "products"
         ],
         "summary": "商品详情与可选SKU",
-        "description": "商品详情与可选SKU\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。",
+        "description": "商品详情与可选SKU\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\norigin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [],
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -1286,7 +1286,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -1381,12 +1381,12 @@
           "products"
         ],
         "summary": "商品公开评价",
-        "description": "商品公开评价\n\n匿名/昵称脱敏，不包含订单ID与手机号；只展示可公开评价。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "商品公开评价\n\n匿名/昵称脱敏，不包含订单ID与手机号；只展示可公开评价。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [],
         "x-roles": [
           "GUEST"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -1430,7 +1430,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -1489,7 +1489,8 @@
         "x-permissions": [
           "catalog.read"
         ],
-        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE"
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
+        "x-demo-limitations": "仅验证商品并返回无评价空分页；评价持久化及提交尚未实现，不生成虚假评价。"
       }
     },
     "/api/v1/cart": {
@@ -1499,7 +1500,7 @@
           "cart"
         ],
         "summary": "查询我的购物车",
-        "description": "查询我的购物车\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。价格仅供参考，最终以下单报价为准。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "查询我的购物车\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。价格仅供参考，最终以下单报价为准。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -1508,7 +1509,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -1535,7 +1536,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -1613,7 +1614,7 @@
           "cart"
         ],
         "summary": "加入购物车",
-        "description": "加入购物车\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。按SKU合并数量，不预占库存。GRAM数量表示估重克数。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "加入购物车\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。按SKU合并数量，不预占库存。GRAM数量表示估重克数。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -1622,7 +1623,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -1661,7 +1662,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -1760,7 +1761,7 @@
           "cart"
         ],
         "summary": "修改购物车数量或勾选",
-        "description": "修改购物车数量或勾选\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "修改购物车数量或勾选\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -1769,7 +1770,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -1826,7 +1827,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -1926,7 +1927,7 @@
           "cart"
         ],
         "summary": "删除购物车项目",
-        "description": "删除购物车项目\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "删除购物车项目\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -1935,7 +1936,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -1992,7 +1993,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -2092,7 +2093,7 @@
           "addresses"
         ],
         "summary": "我的收货地址",
-        "description": "我的收货地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "我的收货地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -2101,7 +2102,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -2128,7 +2129,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -2205,7 +2206,7 @@
           "addresses"
         ],
         "summary": "新增地址",
-        "description": "新增地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。服务范围由服务端判定，不能用isDefault改变服务范围。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "新增地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。服务范围由服务端判定，不能用isDefault改变服务范围。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -2214,7 +2215,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -2253,7 +2254,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -2346,7 +2347,7 @@
           "addresses"
         ],
         "summary": "修改地址",
-        "description": "修改地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "修改地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -2355,7 +2356,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -2412,7 +2413,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -2507,7 +2508,7 @@
           "addresses"
         ],
         "summary": "删除地址",
-        "description": "删除地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。不会改动历史订单的地址快照。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "删除地址\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。不会改动历史订单的地址快照。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -2516,7 +2517,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -2573,7 +2574,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -2657,7 +2658,7 @@
           "delivery-slots"
         ],
         "summary": "查询可预约配送时段",
-        "description": "查询可预约配送时段\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。每日09–12/14–17/18–21，默认容量30；remaining为快照，只有下单事务成功才保证占位。截止或满额available=false。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "查询可预约配送时段\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。每日09–12/14–17/18–21，默认容量30；remaining为快照，只有下单事务成功才保证占位。截止或满额available=false。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -2666,7 +2667,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -2719,7 +2720,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -2791,7 +2792,7 @@
           "coupons"
         ],
         "summary": "我的新人优惠券",
-        "description": "我的新人优惠券\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。券资格、门槛及是否可叠加由后端判定；v0.1不含付费会员。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "我的新人优惠券\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。券资格、门槛及是否可叠加由后端判定；v0.1不含付费会员。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -2800,7 +2801,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -2827,7 +2828,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -2896,7 +2897,7 @@
           "orders"
         ],
         "summary": "服务端订单报价",
-        "description": "服务端订单报价\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。报价默认5分钟有效且不得晚于配送时段预约截止，不预占库存、券或时段；会员价与临期价取低后扣新人券，优惠后满9900分免600分运费。下单重新原子校验，报价过期/价格变更需重报价，不能静默加价。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "服务端订单报价\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。报价默认5分钟有效且不得晚于配送时段预约截止，不预占库存、券或时段；会员价与临期价取低后扣新人券，优惠后满9900分免600分运费。下单重新原子校验，报价过期/价格变更需重报价，不能静默加价。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -2905,7 +2906,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -2960,7 +2961,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -3102,7 +3103,7 @@
           "orders"
         ],
         "summary": "创建订单与原子预占",
-        "description": "创建订单与原子预占\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。同事务锁定报价、券、FEFO多批次及配送名额，任一失败回滚。批次必须在预约时段结束前不过期。创建15分钟内支付。服务端从quote取金额，拒绝客户端金额字段。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "创建订单与原子预占\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。同事务锁定报价、券、FEFO多批次及配送名额，任一失败回滚。批次必须在预约时段结束前不过期。创建15分钟内支付。服务端从quote取金额，拒绝客户端金额字段。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -3111,7 +3112,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -3166,7 +3167,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -3317,7 +3318,7 @@
           "orders"
         ],
         "summary": "我的订单分页",
-        "description": "我的订单分页\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nallowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。",
+        "description": "我的订单分页\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nallowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -3326,7 +3327,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -3380,7 +3381,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -3520,7 +3521,7 @@
           "orders"
         ],
         "summary": "我的订单详情",
-        "description": "我的订单详情\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。支持每行估重/实重与整单差额；消费者不见allocation/batchNo。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nallowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。",
+        "description": "我的订单详情\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。支持每行估重/实重与整单差额；消费者不见allocation/batchNo。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nallowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -3529,7 +3530,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -3575,7 +3576,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -3718,7 +3719,7 @@
           "orders"
         ],
         "summary": "轮询订单状态与退款汇总",
-        "description": "轮询订单状态与退款汇总\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。退款状态独立于履约状态。支付成功不表示已出库。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nallowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。\n\n前端可每2秒轮询，最多60秒后改手动刷新；429服从Retry-After。v0.1无SSE，轮询超时不把PENDING自动判为失败。",
+        "description": "轮询订单状态与退款汇总\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。退款状态独立于履约状态。支付成功不表示已出库。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nallowedActions由服务端按当前角色/归属/状态/实付剩余额度/时限动态给出，执行时再校验；deliveryReceiptCode只向本人DELIVERING订单展示。\n\n前端可每2秒轮询，最多60秒后改手动刷新；429服从Retry-After。v0.1无SSE，轮询超时不把PENDING自动判为失败。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -3727,7 +3728,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -3773,7 +3774,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -3845,7 +3846,7 @@
           "orders"
         ],
         "summary": "发货前申请取消订单",
-        "description": "发货前申请取消订单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。允许PENDING_PAY/PAID/PICKING/READY_TO_SHIP；DELIVERING/FINISHED拒绝普通取消。状态进入CANCELED，未出库预占和时段释放；已收资金异步退款。已拣出库量须实物回库质检后恢复，不能凭取消直接增加可售量。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "发货前申请取消订单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。允许PENDING_PAY/PAID/PICKING/READY_TO_SHIP；DELIVERING/FINISHED拒绝普通取消。状态进入CANCELED，未出库预占和时段释放；已收资金异步退款。已拣出库量须实物回库质检后恢复，不能凭取消直接增加可售量。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -3854,7 +3855,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -3927,7 +3928,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -4083,7 +4084,7 @@
           "payments"
         ],
         "summary": "创建订单或补款沙箱支付单",
-        "description": "创建订单或补款沙箱支付单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。ORDER绑定PENDING_PAY订单；TOP_UP必须提供本人差额单adjustmentId且状态TOP_UP_PENDING。金额/币种/期限服务端决定。同订单可多次尝试但最多一次成功入账，补款独立支付单。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n响应allowedActions仅dev/test本人有效支付单给SIMULATE_PAYMENT，production为空。",
+        "description": "创建订单或补款沙箱支付单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。ORDER绑定PENDING_PAY订单；TOP_UP必须提供本人差额单adjustmentId且状态TOP_UP_PENDING。金额/币种/期限服务端决定。同订单可多次尝试但最多一次成功入账，补款独立支付单。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n响应allowedActions仅dev/test本人有效支付单给SIMULATE_PAYMENT，production为空。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -4092,7 +4093,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -4151,7 +4152,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -4245,7 +4246,7 @@
           "payments"
         ],
         "summary": "主动查询支付状态",
-        "description": "主动查询支付状态\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。必要时服务端主动查询沙箱渠道，并走与回调一致的幂等入账逻辑；不得客户端直接置SUCCESS。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n前端可每2秒轮询，最多60秒后改手动刷新；429服从Retry-After。v0.1无SSE，轮询超时不把PENDING自动判为失败。",
+        "description": "主动查询支付状态\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。必要时服务端主动查询沙箱渠道，并走与回调一致的幂等入账逻辑；不得客户端直接置SUCCESS。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n前端可每2秒轮询，最多60秒后改手动刷新；429服从Retry-After。v0.1无SSE，轮询超时不把PENDING自动判为失败。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -4254,7 +4255,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -4304,7 +4305,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -4381,7 +4382,7 @@
           "payments"
         ],
         "summary": "仅开发测试模拟本人支付结果",
-        "description": "仅开发测试模拟本人支付结果\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。production端点不注册并返回404；必须MEMBER身份且payment属于本人。服务端模拟器发送签名渠道事件，不允许用户伪造回调金额或签名密钥。该接口不是真实收费。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "仅开发测试模拟本人支付结果\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。production端点不注册并返回404；必须MEMBER身份且payment属于本人。服务端模拟器发送签名渠道事件，不允许用户伪造回调金额或签名密钥。该接口不是真实收费。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -4390,7 +4391,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -4451,7 +4452,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -4523,7 +4524,8 @@
         },
         "x-environments": [
           "dev",
-          "test"
+          "test",
+          "demo"
         ],
         "requestBody": {
           "required": true,
@@ -4552,12 +4554,12 @@
           "payments"
         ],
         "summary": "接收沙箱签名支付事件",
-        "description": "接收沙箱签名支付事件\n\n无Bearer认证。验证原始body HMAC、时间窗口和nonce，再校验金额/币种/支付绑定。以eventId及支付单资金账唯一键防重；同事件合法重试返回200 duplicate=true，不重复入账。晚付不复活CLOSED/CANCELED订单，创建唯一原路退款；资金与状态事务写入。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n同订单其他支付尝试在已成功收款后又成功：保留该笔收款账，生成唯一DUPLICATE_PAYMENT原路退款，不将订单重复入账或重新履约。",
+        "description": "接收沙箱签名支付事件\n\n无Bearer认证。验证原始body HMAC、时间窗口和nonce，再校验金额/币种/支付绑定。以eventId及支付单资金账唯一键防重；同事件合法重试返回200 duplicate=true，不重复入账。晚付不复活CLOSED/CANCELED订单，创建唯一原路退款；资金与状态事务写入。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n同订单其他支付尝试在已成功收款后又成功：保留该笔收款账，生成唯一DUPLICATE_PAYMENT原路退款，不将订单重复入账或重新履约。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [],
         "x-roles": [
           "SANDBOX_CHANNEL"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -4606,7 +4608,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -4690,7 +4692,7 @@
           "refunds"
         ],
         "summary": "查询本人退款单",
-        "description": "查询本人退款单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。PROCESSING不等于到账，SUCCESS才表示渠道退款成功。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "查询本人退款单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。PROCESSING不等于到账，SUCCESS才表示渠道退款成功。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -4699,7 +4701,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -4745,7 +4747,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -4819,7 +4821,7 @@
           "aftersales"
         ],
         "summary": "完成后7天内申请售后",
-        "description": "完成后7天内申请售后\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。必须FINISHED且完成后7天内；每行累计已退+在途申请不超行实付，订单不超实收。品质退赔不自动恢复库存，也不重复扣库存。履约缺货与称重差额不走售后。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n提交媒体ID必须经/media/images上传，属于本人、状态READY且purpose匹配；拒绝任意外部URL和他人媒体。",
+        "description": "完成后7天内申请售后\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。必须FINISHED且完成后7天内；每行累计已退+在途申请不超行实付，订单不超实收。品质退赔不自动恢复库存，也不重复扣库存。履约缺货与称重差额不走售后。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n提交媒体ID必须经/media/images上传，属于本人、状态READY且purpose匹配；拒绝任意外部URL和他人媒体。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -4828,7 +4830,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -4871,7 +4873,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -4967,7 +4969,8 @@
         "x-permissions": [
           "aftersale.self"
         ],
-        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE"
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
+        "x-demo-limitations": "仅SHORTAGE/LATE；QUALITY与非空evidenceMediaIds明确拒绝，私有证据媒体接口尚未实现。"
       },
       "get": {
         "operationId": "listMyAftersales",
@@ -4975,7 +4978,7 @@
           "aftersales"
         ],
         "summary": "我的售后单",
-        "description": "我的售后单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "我的售后单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -4984,7 +4987,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -5036,7 +5039,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -5120,7 +5123,7 @@
           "aftersales"
         ],
         "summary": "售后详情",
-        "description": "售后详情\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "售后详情\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -5129,7 +5132,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -5175,7 +5178,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -5255,7 +5258,7 @@
           "aftersales"
         ],
         "summary": "撤销售后申请",
-        "description": "撤销售后申请\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。仅APPLIED允许用户撤回；审核/执行中不允许撤回。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "撤销售后申请\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。仅APPLIED允许用户撤回；审核/执行中不允许撤回。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -5264,7 +5267,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -5321,7 +5324,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -5557,7 +5560,7 @@
           "admin"
         ],
         "summary": "运营与财务概览",
-        "description": "运营与财务概览\n\nAsia/Shanghai自然日：capturedPaymentAmount按支付SUCCESS入账日汇总（含补款），successfulRefundAmount按退款SUCCESS日汇总，净额=两者之差；paidOrderCount按订单首次成功付款日去重，不将补款计新订单。库存指标按查询时点。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "运营与财务概览\n\nAsia/Shanghai自然日：capturedPaymentAmount按支付SUCCESS入账日汇总（含补款），successfulRefundAmount按退款SUCCESS日汇总，净额=两者之差；paidOrderCount按订单首次成功付款日去重，不将补款计新订单。库存指标按查询时点。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -5567,7 +5570,7 @@
           "OPERATOR",
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -5606,7 +5609,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -7783,7 +7786,7 @@
           "admin"
         ],
         "summary": "按岗位查看订单",
-        "description": "按岗位查看订单\n\n返回脱敏联系信息；OPERATOR运营只读、FINANCE资金核对只读、SERVICE处理客服流程。PICKER/COURIER仅通过各自任务接口取最小数据。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "按岗位查看订单\n\n返回脱敏联系信息；OPERATOR运营只读、FINANCE资金核对只读、SERVICE处理客服流程。PICKER/COURIER仅通过各自任务接口取最小数据。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -7794,7 +7797,7 @@
           "SERVICE",
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -7862,7 +7865,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -7987,7 +7990,7 @@
           "admin"
         ],
         "summary": "后台脱敏订单详情",
-        "description": "后台脱敏订单详情\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "后台脱敏订单详情\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -7998,7 +8001,7 @@
           "SERVICE",
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -8044,7 +8047,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -8165,7 +8168,7 @@
           "admin"
         ],
         "summary": "客服执行发货前取消",
-        "description": "客服执行发货前取消\n\n仅PENDING_PAY/PAID/PICKING/READY_TO_SHIP，DELIVERING不允许普通取消。审计操作人和原因；出库后取消必须后续质检回库才恢复可售。异步退款不可由客服直接记成功。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE不得处理本人购买的订单；职责分离按账号主体而非当前选择角色判断。",
+        "description": "客服执行发货前取消\n\n仅PENDING_PAY/PAID/PICKING/READY_TO_SHIP，DELIVERING不允许普通取消。审计操作人和原因；出库后取消必须后续质检回库才恢复可售。异步退款不可由客服直接记成功。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE不得处理本人购买的订单；职责分离按账号主体而非当前选择角色判断。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -8174,7 +8177,7 @@
         "x-roles": [
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -8231,7 +8234,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -8372,7 +8375,7 @@
           "admin"
         ],
         "summary": "取消待发订单实物回库质检",
-        "description": "取消待发订单实物回库质检\n\n仅CANCELED且已有PICK_OUT的订单；原拣货人员或显式获派回库任务者。逐allocation累计回库不得超已出库未回库量，passed增加onHand和available，quarantined增加onHand和quarantined；生成唯一回库流水。品质售后不调用此接口。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "取消待发订单实物回库质检\n\n仅CANCELED且已有PICK_OUT的订单；原拣货人员或显式获派回库任务者。逐allocation累计回库不得超已出库未回库量，passed增加onHand和available，quarantined增加onHand和quarantined；生成唯一回库流水。品质售后不调用此接口。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -8381,7 +8384,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -8438,7 +8441,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -8530,7 +8533,7 @@
           "admin"
         ],
         "summary": "待领或本人拣货任务",
-        "description": "待领或本人拣货任务\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "待领或本人拣货任务\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -8539,7 +8542,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -8573,7 +8576,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -8689,7 +8692,7 @@
           "admin"
         ],
         "summary": "查询拣货任务及多批次分配",
-        "description": "查询拣货任务及多批次分配\n\n仅未领取任务或本人任务；无客户姓名、电话、详细地址。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "查询拣货任务及多批次分配\n\n仅未领取任务或本人任务；无客户姓名、电话、详细地址。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -8698,7 +8701,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -8744,7 +8747,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -8856,7 +8859,7 @@
           "admin"
         ],
         "summary": "原子领取拣货任务",
-        "description": "原子领取拣货任务\n\nCAS未分派任务至本人，订单PAID→PICKING；已被他人领取409。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "原子领取拣货任务\n\nCAS未分派任务至本人，订单PAID→PICKING；已被他人领取409。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -8865,7 +8868,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -8922,7 +8925,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -9258,7 +9261,7 @@
           "admin"
         ],
         "summary": "确认实拣数量及称重净差",
-        "description": "仅本人已领取拣货任务。请求必须逐allocation明确actualQuantity，包括0；按件不增加原数量，按重允许0至floor(估重×1.1)。实际0或按件少发须reasonCode=SHORTAGE并写说明；正常称重变化使用WEIGHT_VARIANCE。\n\n先显式重分配尝试补齐，仍缺货可部分履约：按件以实际件数×单价，按重以实克×单价/priceUnitGram逐订单行半入取整；实际券减免=min(原固定券分摊,实际行额)，运费保持原快照。全单实际0则CANCELED并退全部已收含运费。\n\n原子释放未实拣预占，只对实际出库量扣onHand并写PICK_OUT；实际0行不写出库流水。实际短缺的物理差异另走隔离/盘点/损耗调整，不能借少发任意改总账。整单净差只建一张补款或退差单；各差额行显式PIECE/GRAM与估/实数量。\n\n补款期限10分钟且不得晚于时段开始。差额NONE/REFUNDED/SETTLED才允许发货；未付补款过期取消整单、退已收款并按实物阶段回库。Idempotency-Key、版本/角色/本人归属均服务端校验。本契约待实现。",
+        "description": "仅本人已领取拣货任务。请求必须逐allocation明确actualQuantity，包括0；按件不增加原数量，按重允许0至floor(估重×1.1)。实际0或按件少发须reasonCode=SHORTAGE并写说明；正常称重变化使用WEIGHT_VARIANCE。\n\n先显式重分配尝试补齐，仍缺货可部分履约：按件以实际件数×单价，按重以实克×单价/priceUnitGram逐订单行半入取整；实际券减免=min(原固定券分摊,实际行额)，运费保持原快照。全单实际0则CANCELED并退全部已收含运费。\n\n原子释放未实拣预占，只对实际出库量扣onHand并写PICK_OUT；实际0行不写出库流水。实际短缺的物理差异另走隔离/盘点/损耗调整，不能借少发任意改总账。整单净差只建一张补款或退差单；各差额行显式PIECE/GRAM与估/实数量。\n\n补款期限10分钟且不得晚于时段开始。差额NONE/REFUNDED/SETTLED才允许发货；未付补款过期取消整单、退已收款并按实物阶段回库。Idempotency-Key、版本/角色/本人归属均服务端校验。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -9267,7 +9270,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -9328,7 +9331,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -9471,7 +9474,7 @@
           "admin"
         ],
         "summary": "配送任务列表",
-        "description": "配送任务列表\n\nPICKER仅本人已完成拣货对应待交接任务；COURIER仅已指派本人任务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE仅可读取本店本人负责或明确分派的相关客服EXCEPTION工单，用于获取taskId、version和恢复所需脱敏信息；不能读取其他任务、完整联系方式或签收码。此读取不授予dispatch/complete/contact-access权限。",
+        "description": "配送任务列表\n\nPICKER仅本人已完成拣货对应待交接任务；COURIER仅已指派本人任务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE仅可读取本店本人负责或明确分派的相关客服EXCEPTION工单，用于获取taskId、version和恢复所需脱敏信息；不能读取其他任务、完整联系方式或签收码。此读取不授予dispatch/complete/contact-access权限。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -9482,7 +9485,7 @@
           "COURIER",
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -9516,7 +9519,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -9607,7 +9610,7 @@
           "admin"
         ],
         "summary": "本人配送任务详情",
-        "description": "本人配送任务详情\n\n此列表/详情只返回脱敏联系信息，真实配送联系信息须仅本人派送中经专用端点按需访问并审计。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE仅可读取本店本人负责或明确分派的相关客服EXCEPTION工单，用于获取taskId、version和恢复所需脱敏信息；不能读取其他任务、完整联系方式或签收码。此读取不授予dispatch/complete/contact-access权限。",
+        "description": "本人配送任务详情\n\n此列表/详情只返回脱敏联系信息，真实配送联系信息须仅本人派送中经专用端点按需访问并审计。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE仅可读取本店本人负责或明确分派的相关客服EXCEPTION工单，用于获取taskId、version和恢复所需脱敏信息；不能读取其他任务、完整联系方式或签收码。此读取不授予dispatch/complete/contact-access权限。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -9618,7 +9621,7 @@
           "COURIER",
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -9664,7 +9667,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -9751,7 +9754,7 @@
           "admin"
         ],
         "summary": "拣货人员向配送员交接发货",
-        "description": "拣货人员向配送员交接发货\n\n仅本人已完成拣货任务，订单READY_TO_SHIP且称重差额为NONE/REFUNDED/SETTLED之一（无差额实体等同NONE）；courierId必须ACTIVE且有COURIER。原子置订单DELIVERING，记录交接；不能在补款未结时发货。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nREFUND_PENDING也等待退差成功后发货；渠道失败保留原退款业务号重试及人工处理队列。",
+        "description": "拣货人员向配送员交接发货\n\n仅本人已完成拣货任务，订单READY_TO_SHIP且称重差额为NONE/REFUNDED/SETTLED之一（无差额实体等同NONE）；courierId必须ACTIVE且有COURIER。原子置订单DELIVERING，记录交接；不能在补款未结时发货。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nREFUND_PENDING也等待退差成功后发货；渠道失败保留原退款业务号重试及人工处理队列。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -9760,7 +9763,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -9817,7 +9820,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -9922,7 +9925,7 @@
           "admin"
         ],
         "summary": "配送员凭签收凭证确认送达",
-        "description": "配送员凭签收凭证确认送达\n\n仅本人DELIVERING任务；校验一次性签收凭证，置订单FINISHED与finishedAt；不回填历史配送容量。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "配送员凭签收凭证确认送达\n\n仅本人DELIVERING任务；校验一次性签收凭证，置订单FINISHED与finishedAt；不回填历史配送容量。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -9931,7 +9934,7 @@
         "x-roles": [
           "COURIER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -9988,7 +9991,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -10265,7 +10268,7 @@
           "admin"
         ],
         "summary": "客服待领取及本人售后单",
-        "description": "客服待领取及本人售后单\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "客服待领取及本人售后单\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -10274,7 +10277,7 @@
         "x-roles": [
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -10326,7 +10329,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -10418,7 +10421,7 @@
           "admin"
         ],
         "summary": "客服售后详情",
-        "description": "客服售后详情\n\n仅未分派或本人审核任务，手机号脱敏；不存在通用PII reveal能力。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n未领取队列仅可读脱敏概要，证据需先claim；assigneeId表示领取人，reviewerId表示已完成正式审核的账号。",
+        "description": "客服售后详情\n\n仅未分派或本人审核任务，手机号脱敏；不存在通用PII reveal能力。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n未领取队列仅可读脱敏概要，证据需先claim；assigneeId表示领取人，reviewerId表示已完成正式审核的账号。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -10427,7 +10430,7 @@
         "x-roles": [
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -10473,7 +10476,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -10561,7 +10564,7 @@
           "admin"
         ],
         "summary": "客服审核批准售后",
-        "description": "仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；必须先claim再审阅证据，不再在审核事务中隐式领取。禁止处理本人购买订单。校验version，批准金额逐行不超申请及剩余实付，保存reviewerId并将售后置APPROVED，创建PENDING人工退款单。审核不得授权资金执行；后台worker不可自动捡取人工PENDING退款。只有FINANCE execute通过职责分离校验后才将退款置PROCESSING、售后置REFUNDING并写执行授权outbox。Idempotency-Key必需，同键不同体409。此文件为契约，尚待实现。",
+        "description": "仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；必须先claim再审阅证据，不再在审核事务中隐式领取。禁止处理本人购买订单。校验version，批准金额逐行不超申请及剩余实付，保存reviewerId并将售后置APPROVED，创建PENDING人工退款单。审核不得授权资金执行；后台worker不可自动捡取人工PENDING退款。只有FINANCE execute通过职责分离校验后才将退款置PROCESSING、售后置REFUNDING并写执行授权outbox。Idempotency-Key必需，同键不同体409。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -10570,7 +10573,7 @@
         "x-roles": [
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -10631,7 +10634,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -10764,7 +10767,7 @@
           "admin"
         ],
         "summary": "客服驳回售后",
-        "description": "仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；先claim后审阅，不再隐式领取。校验version，理由必填，保存reviewerId并转REJECTED。禁止处理本人购买订单；他人工单404；状态或版本冲突409。Idempotency-Key必需。此文件为契约，尚待实现。",
+        "description": "仅SERVICE本人已领取（assigneeId=当前账号）且APPLIED的售后工单；先claim后审阅，不再隐式领取。校验version，理由必填，保存reviewerId并转REJECTED。禁止处理本人购买订单；他人工单404；状态或版本冲突409。Idempotency-Key必需。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -10773,7 +10776,7 @@
         "x-roles": [
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -10830,7 +10833,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -10938,7 +10941,7 @@
           "admin"
         ],
         "summary": "财务退款列表",
-        "description": "财务退款列表\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "财务退款列表\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -10947,7 +10950,7 @@
         "x-roles": [
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -11011,7 +11014,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -11092,7 +11095,7 @@
           "admin"
         ],
         "summary": "财务执行原路沙箱退款",
-        "description": "财务执行原路沙箱退款\n\n仅PENDING人工售后退款；同一账号即使同时有SERVICE/FINANCE也不能执行本人审核单（reviewerId != actorId）。检查支付可退余额含在途退款占额；PROCESSING为异步执行，渠道确认后SUCCESS。自动称重/晚付/取消退款由受限系统任务处理。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n执行人还必须不同于原购买人，不能通过切换角色绕过职责分离。\n\n人工AFTERSALE退款从PENDING转PROCESSING、售后从APPROVED转REFUNDING，并原子写入已授权执行outbox；worker仅消费这类授权事件，禁止直接扫描人工PENDING就发起渠道退款。",
+        "description": "财务执行原路沙箱退款\n\n仅PENDING人工售后退款；同一账号即使同时有SERVICE/FINANCE也不能执行本人审核单（reviewerId != actorId）。检查支付可退余额含在途退款占额；PROCESSING为异步执行，渠道确认后SUCCESS。自动称重/晚付/取消退款由受限系统任务处理。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n执行人还必须不同于原购买人，不能通过切换角色绕过职责分离。\n\n人工AFTERSALE退款从PENDING转PROCESSING、售后从APPROVED转REFUNDING，并原子写入已授权执行outbox；worker仅消费这类授权事件，禁止直接扫描人工PENDING就发起渠道退款。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -11101,7 +11104,7 @@
         "x-roles": [
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -11170,7 +11173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -11270,7 +11273,7 @@
           "admin"
         ],
         "summary": "财务重试失败退款",
-        "description": "财务重试失败退款\n\n仅FAILED，先查询渠道去重再重试，同一退款业务键；仍校验reviewerId != actorId，不得另建退款绕过额度。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n执行人还必须不同于原购买人，不能通过切换角色绕过职责分离。\n\n人工退款重试仍需FINANCE授权并写outbox，worker不能凭FAILED/PENDING状态自行绕过财务职责分离。",
+        "description": "财务重试失败退款\n\n仅FAILED，先查询渠道去重再重试，同一退款业务键；仍校验reviewerId != actorId，不得另建退款绕过额度。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n执行人还必须不同于原购买人，不能通过切换角色绕过职责分离。\n\n人工退款重试仍需FINANCE授权并写outbox，worker不能凭FAILED/PENDING状态自行绕过财务职责分离。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -11279,7 +11282,7 @@
         "x-roles": [
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -11344,7 +11347,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -13072,7 +13075,7 @@
           "auth"
         ],
         "summary": "修改密码并吊销当前全部会话",
-        "description": "修改密码并吊销当前全部会话\n\n校验当前密码，更新强哈希并吊销该账号全部会话，客户端重新登录。mustChangePassword=true的员工临时会话仅允许/me、/password、/logout；不得先访问业务API。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "修改密码并吊销当前全部会话\n\n校验当前密码，更新强哈希并吊销该账号全部会话，客户端重新登录。mustChangePassword=true的员工临时会话仅允许/me、/password、/logout；不得先访问业务API。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -13087,7 +13090,7 @@
           "FINANCE",
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -13126,7 +13129,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -13760,7 +13763,7 @@
           "admin"
         ],
         "summary": "客服原子领取售后工单",
-        "description": "仅SERVICE本店未分派且APPLIED的售后工单，禁止领取本人购买订单的售后。先CAS校验version并写assigneeId=当前账号，递增version；此时status仍为APPLIED，reviewerId仍为空。随后才能通过/media/{mediaId}/access读取本人工单证据，并执行approve/reject。其他客服已领取则409；超范围资源404。Idempotency-Key必需，同键不同体409；同键同体重试返回原结果。本契约待实现。",
+        "description": "仅SERVICE本店未分派且APPLIED的售后工单，禁止领取本人购买订单的售后。先CAS校验version并写assigneeId=当前账号，递增version；此时status仍为APPLIED，reviewerId仍为空。随后才能通过/media/{mediaId}/access读取本人工单证据，并执行approve/reject。其他客服已领取则409；超范围资源404。Idempotency-Key必需，同键不同体409；同键同体重试返回原结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -13769,7 +13772,7 @@
         "x-roles": [
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -13826,7 +13829,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功（Demo路由已提供；验证范围见运行报告）",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -18792,7 +18795,7 @@
           },
           "region": {
             "type": "string",
-            "description": "文本；服务端校验长度并以纯文本处理",
+            "description": "仅履约/运营/客服工作范围提供地区；FINANCE投影省略此字段，不返回地址。",
             "example": "上海市松江区",
             "minLength": 1,
             "maxLength": 120
@@ -18800,8 +18803,7 @@
         },
         "required": [
           "recipientName",
-          "phoneMasked",
-          "region"
+          "phoneMasked"
         ]
       },
       "AdminOrder": {
@@ -20554,22 +20556,46 @@
             "example": 1190
           },
           "pendingPickCount": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 9007199254740991,
-            "example": 1
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991,
+                "example": 1
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "FINANCE投影为null（未授权），不能显示成0；OPERATOR返回真实聚合。"
           },
           "nearExpiryBatchCount": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 9007199254740991,
-            "example": 0
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991,
+                "example": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "FINANCE投影为null（未授权），不能显示成0；OPERATOR返回真实聚合。"
           },
           "lowStockSkuCount": {
-            "type": "integer",
-            "minimum": 0,
-            "maximum": 9007199254740991,
-            "example": 0
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991,
+                "example": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "FINANCE投影为null（未授权），不能显示成0；OPERATOR返回真实聚合。"
           },
           "generatedAt": {
             "type": "string",
@@ -24564,7 +24590,7 @@
       }
     }
   },
-  "x-contract-status": "REVIEWABLE_NOT_IMPLEMENTED",
+  "x-contract-status": "IMPLEMENTATION_IN_PROGRESS",
   "x-authoritative-baseline": "contracts/BASELINE.md",
   "x-state-enums": {
     "order": [

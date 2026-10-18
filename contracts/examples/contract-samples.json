@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "notice": "固定契约样例，非真实业务记录，非测试通过声明",
   "operations": {
     "getCsrfToken": {

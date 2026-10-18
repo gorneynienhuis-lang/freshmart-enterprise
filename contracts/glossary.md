@@ -30,7 +30,7 @@
 | 币种与金额 | CNY、整数分；金额后缀 Amount/Price；用整数或 Decimal，不用浮点累计 |
 | 重量 | 整数克，estimatedGram/actualGram/priceUnitGram；默认价格分母 priceUnitGram=500；estimatedGramPerUnit为内部估量配置，非当前响应字段 |
 | 库存基础单位 | PIECE 是整数销售单位，GRAM 是整数克；不能混合求“总件数” |
-| 购买份数 | quantity 为正整数；称重估量=quantity×estimatedGramPerUnit，实际库存仍按克 |
+| 购买数量 | quantity 为基础单位正整数：PIECE表示件，GRAM表示估重克数；称重estimatedGram=quantity，前端份重仅用于加购步长 |
 | 时间 | Asia/Shanghai；传输 RFC3339；now<deadline 才有效，到点即失效 |
 | 日期到期字段 | 导入成到期日下一天00:00的排他性 expiresAt；精确时间不截断 |
 | API 前缀 | `/api/v1`、`/api/v1/admin`；所有权和操作权限同时校验 |

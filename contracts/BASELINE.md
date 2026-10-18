@@ -1,9 +1,9 @@
-# v0.1 编写基线
+# v0.1.1 编写基线
 
 2026-10-18。Codex 根据用户“统一规则并直接推进”的授权制定的工程基线；不冒称所有产品取舍已由用户逐条确认。工程取舍与视觉确认边界见 `../collab/codex/DECISIONS-001.md`。本文件优先于 Claude 早期草案，随后由同版本业务规则、状态模型及 OpenAPI 展开。
 
 - 工程目录沿用 `fresh-mall/`。React + Vite + TypeScript（用户在 Claude 会话已选择）；后端模块化单体 Java 21 / Spring Boot 4.1 / MySQL 8.4 / Redis，依赖具体补丁版本在实施时核实并锁定。所有 UI、品牌、页面布局、PPT 属于 Claude；后端、数据库、部署、正式文档初稿属于 Codex。
-- 单自营门店、单仓配送；单币种 CNY。公开 API `/api/v1`，运营接口 `/api/v1/admin`。对外所有 ID 为字符串（内部可 bigint），业务码独立。金额整数分，重量整数克，数量基础单位 `PIECE` 或 `GRAM`。`priceMode` 为 `BY_PIECE` / `BY_WEIGHT`，称重单价明确 `priceUnitGram`（默认 500），禁止直接用克乘每斤价。
+- 单自营门店、单仓配送；单币种 CNY。公开 API `/api/v1`，运营接口 `/api/v1/admin`。对外所有 ID 为字符串（内部可 bigint），业务码独立。金额整数分，重量整数克，数量基础单位 `PIECE` 或 `GRAM`。`priceMode` 为 `BY_PIECE` / `BY_WEIGHT`，quantity按PIECE件或GRAM估重克数传输，称重estimatedGram=quantity，不再乘份重。称重单价明确 `priceUnitGram`（默认 500），禁止直接用克乘每斤价。
 - 响应 `{code:0,message:"ok",data:...,traceId:"...",timestamp:"2026-10-18T02:30:00+08:00"}`，错误使用真实 HTTP 4xx/5xx 和非零整数业务码；分页 `{page,size,total,items}`。业务时区 `Asia/Shanghai`；传输 RFC3339。订单支付期限创建后 15 分钟。时段 09–12 / 14–17 / 18–21，容量默认30，可配置。预约只接受尚未截止且有容量的时段。
 - `GUEST` 非持久角色；注册账户 `MEMBER`，员工 `PICKER/COURIER/OPERATOR/SERVICE/FINANCE/ADMIN`。员工身份与购物权限独立，ADMIN 不自动拥有一切业务权限，不能绕过金额、库存、审计约束；可以显式给同一账号 MEMBER 权限。客服审核，财务执行退款，禁止同一人审核并执行同笔人工售后退款。自动称重退差与晚付退款按系统规则执行并审计。
 - 支付使用沙箱，无真实收费；注册即基础会员，付费会员不在 v0.1，会员成交价与参考原价明确展示。新人券可以与会员价叠加；临期单价与会员单价取低，商品优惠后再计算券，再算运费。运费默认600分，优惠后商品实付满9900分免运费；门槛按下单快照，称重不回溯增收运费。最终价格由后端报价，客户端不提交可信金额。
