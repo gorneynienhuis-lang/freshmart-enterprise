@@ -137,6 +137,9 @@ def owned(name):
 def port_available(port):
     try:
         with socket.socket() as probe:
+            # A stopped listener may leave TIME_WAIT sockets. Like the actual
+            # servers, allow rebinding those while still refusing a live listener.
+            probe.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             probe.bind(('127.0.0.1', port))
         return True
     except OSError as error:

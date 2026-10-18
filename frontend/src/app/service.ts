@@ -48,4 +48,17 @@ export const service = {
     refunds:async()=>unwrap(await api.GET('/api/v1/admin/refunds',{params:{query:{size:100}}})),
     executeRefund:async(refundId:string,body:Models['RefundExecuteRequest'])=>cmd('POST',`/api/v1/admin/refunds/${refundId}/execute`,body,async key=>unwrap(await api.POST('/api/v1/admin/refunds/{refundId}/execute',{body,params:{path:{refundId},header:header(key)}}))),
     adminOrders: async () => unwrap(await api.GET('/api/v1/admin/orders', { params: { query: { size: 100 } } })),
+    dashboard: async (businessDate: string) => unwrap(await api.GET('/api/v1/admin/dashboard', { params: { query: { businessDate } } })),
+    employees: async (page = 1) => unwrap(await api.GET('/api/v1/admin/employees', { params: { query: { page, size: 20 } } })),
+    roles: async () => unwrap(await api.GET('/api/v1/admin/roles')),
+    createEmployee: async (body: Models['EmployeeCreateRequest']) => cmd('POST', '/api/v1/admin/employees', { ...body, temporaryPassword: await passwordFingerprint(body.temporaryPassword) }, async key => unwrap(await api.POST('/api/v1/admin/employees', { body, params: { header: header(key) } }))),
+    employeeRoles: async (id: string, body: Models['EmployeeRolesRequest']) => cmd('PUT', `/api/v1/admin/employees/${id}/roles`, body, async key => unwrap(await api.PUT('/api/v1/admin/employees/{employeeId}/roles', { body, params: { path: { employeeId: id }, header: header(key) } }))),
+    employeeStatus: async (id: string, body: Models['EmployeeStatusRequest']) => cmd('PUT', `/api/v1/admin/employees/${id}/status`, body, async key => unwrap(await api.PUT('/api/v1/admin/employees/{employeeId}/status', { body, params: { path: { employeeId: id }, header: header(key) } }))),
+    changePassword: async (body: Models['PasswordChangeRequest']) => cmd('POST', '/api/v1/auth/password', { currentPassword: await passwordFingerprint(body.currentPassword), newPassword: await passwordFingerprint(body.newPassword) }, async key => unwrap(await api.POST('/api/v1/auth/password', { body, params: { header: header(key) } }))),
 };
+
+// CommandLedger persists pending request identities in sessionStorage. Never put plaintext passwords there.
+async function passwordFingerprint(value: string): Promise<string> {
+    const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
+    return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('');
+}

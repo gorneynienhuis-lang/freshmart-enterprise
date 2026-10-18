@@ -1,0 +1,10 @@
+# Internet course showcase: synthetic data and sandbox payments; never real commerce.
+# Keep this profile separate from demo's loopback / insecure-cookie development settings.
+server:
+  address: 0.0.0.0
+  port: ${PORT:${SERVER_PORT:8080}}
+app:
+  secure-cookies: true
+  allowed-origins: ${APP_ALLOWED_ORIGINS}
+  sandbox-enabled: true
+  sandbox-secret: ${SANDBOX_SECRET}

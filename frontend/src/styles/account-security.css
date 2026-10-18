@@ -1,0 +1,12 @@
+.fm-security-dialog { width: min(480px, calc(100vw - 32px)); border: 1px solid #E5E7EB; border-radius: 12px; padding: 26px; color: #242932; box-shadow: 0 20px 70px #1f293728; }
+.fm-security-dialog::backdrop { background: #18202A70; }
+.fm-security-dialog > h2 { margin: 0 0 16px; font-size: 21px; }
+.fm-security-dialog > p { font-size: 13px; color: #68717C; line-height: 1.8; }
+.fm-security-dialog form { display: grid; gap: 16px; margin-top: 22px; }
+.fm-security-dialog form label { display: flex; flex-direction: column; gap: 7px; font-size: 13px; font-weight: 600; }
+.fm-security-dialog form input { width: 100%; box-sizing: border-box; font: inherit; padding: 11px 12px; border: 1px solid #D8DDE3; border-radius: 5px; }
+.fm-security-dialog input:focus-visible { outline: 2px solid #A0021F; outline-offset: 2px; }
+.fm-security-dialog button { font: inherit; padding: 9px 14px; border: 1px solid #E2E5E9; border-radius: 5px; background: #FFF; cursor: pointer; }
+.fm-security-dialog button[type="submit"] { color: #FFF; background: #A0021F; border-color: #A0021F; font-size: 14px; }
+.fm-security-dialog button:disabled { opacity: .55; cursor: wait; }
+.fm-security-dialog form [role="alert"] { color: #A0021F; font-size: 12px; line-height: 1.7; margin: 0; }

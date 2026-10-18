@@ -1,0 +1,73 @@
+{
+  "dataSource": "isolated real showcase JAR through local self-signed HTTPS loopback proxy; anonymous new context; no mocked response, forged Origin, login or reused session",
+  "base": "https://localhost:8182",
+  "tlsScope": "self-signed local probe with ignoreHTTPSErrors:true in this new test context only; not a public CA or cloud TLS verification",
+  "pages": [
+    {
+      "name": "home",
+      "route": "/",
+      "tls": {
+        "issuer": "localhost",
+        "protocol": "TLS 1.3",
+        "subjectName": "localhost",
+        "validFrom": 1792302071,
+        "validTo": 1792388471
+      },
+      "design": "r03",
+      "title": "把新鲜，带回校园。",
+      "productCards": 18,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "brokenImages": []
+    },
+    {
+      "name": "list",
+      "route": "/#/products",
+      "tls": null,
+      "design": "r03",
+      "title": "全部商品",
+      "productCards": 40,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "brokenImages": []
+    }
+  ],
+  "pageErrors": [],
+  "failedAssets": [],
+  "optionalAssets": [],
+  "apiResponses": [
+    {
+      "path": "/api/v1/auth/csrf",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/auth/refresh",
+      "status": 401
+    },
+    {
+      "path": "/api/v1/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/home",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/products",
+      "status": 200
+    }
+  ],
+  "originRequests": [
+    {
+      "path": "/assets/index-DCO5rwlT.js",
+      "method": "GET",
+      "origin": "https://localhost:8182"
+    },
+    {
+      "path": "/assets/index-MPKy8Joc.css",
+      "method": "GET",
+      "origin": "https://localhost:8182"
+    }
+  ],
+  "status": "PASSED"
+}

@@ -33,6 +33,8 @@ def generate(args):
         uid=f'demo-{role.lower()}'
         sql.append(insert('fm_user',['user_id','phone','password_hash','display_name','status','must_change_password','version','created_at','updated_at'],[uid,f'1990000000{i}',password_hash(password),f'演示-{role}','ACTIVE',False,0,stamp(base),stamp(base)]))
         sql.append(insert('fm_user_role',['user_id','role_code'],[uid,role]))
+        if role != 'MEMBER':
+            sql.append(insert('fm_employee',['employee_id','user_id','created_at'],[uid,uid,stamp(base)]))
     for c in catalog['categories']:
         sql.append(insert('fm_category',['category_id','code','name','short_name','image_url','sort_order','enabled'],[c['categoryId'],c['categoryId'],c['name'],c['shortName'],args.base_url.rstrip('/')+c['imagePath'],c['sortOrder'],True]))
     for p in catalog['products']:

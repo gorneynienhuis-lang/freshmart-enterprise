@@ -2,12 +2,15 @@
 
 用户2026-10-18明确要求每个已交付前端设计版本保存到GitHub，方便比较和回退。**保存候选稿不代表用户批准视觉或功能已验收。**
 
+最新选择：用户明确采用R03主要页面，要求修复分类文字后推进正式实现。默认R03；R04保留为备选。当前『当前版 / 备选设计』切换继续保留路由；旧标签和归档分支不覆盖。
+
 | 版本 | 标签 / GitHub入口 | 内容 | 用户状态 |
 |---|---|---|---|
 | R01 | [ui/home-r01-warm](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r01-warm) | 首次可运行Demo中的暖米首屏，基于170f8d2 | 用户不满意中间米白区域；保存用于对比 |
 | R02 | [ui/home-r02-shelf](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r02-shelf) | Claude ACK-011 白底货架版；三张价签、红色边条 | 用户明确仍不满意，未采纳；存在两项接线缺陷 |
 | R03 | [ui/home-r03-market](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r03-market) | 用户授权Codex制作自然摄影主视觉；三类真实精选商品及直达入口 | 用户认可该板块风格，要求保留并扩展整站；全Demo归档分支archive/demo-r03-2026-10-18=35182fe |
-| R04 | [ui/demo-r04-dhu-natural](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/demo-r04-dhu-natural) | 红白校园品牌、自然摄影的全Demo重构，支持新版/上一版即时切换 | 新候选稿待用户确认；34测试、三宽度页面及五角色业务流已验证 |
+| R04 | [ui/demo-r04-dhu-natural](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/demo-r04-dhu-natural) | 红白校园品牌、自然摄影的全Demo重构，源码与实测保留 | 用户选择继续使用R03，R04作为未采纳备选保留 |
+| R03 采用与修补 | [ui/r03-selected-polish](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/r03-selected-polish) | R03默认；分类完整点击/高亮/字体与手机布局修补；新增真实管理功能及账户安全 | 用户采用R03主要页面；新增后台基于同风格实现，功能与截图见CODEX-015 |
 
 ## 保存方式
 

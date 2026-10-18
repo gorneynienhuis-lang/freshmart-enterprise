@@ -1,0 +1,23 @@
+{
+  "startedAt": "2026-10-18T05:39:27.553Z",
+  "status": "FAILED",
+  "dataSource": "actual local API, existing staff login and read-only navigation; no mocks or business writes",
+  "sourceSha256": {
+    "frontend/src/app/application.ts": "107eb26eeaf4c2639d4f7a4c9e66f1c5c59f756095fd32e17315fc99564ddac1",
+    "frontend/src/app/admin-panel.ts": "52a4495fceb838d23a1476551670a787ba2a3e455936efe1b6f5398118f5d9ea",
+    "frontend/src/styles/runtime-r03.css": "715de7a8a653dce8cf76129ddeb0ffc0c591a41c6fbe05ce31f6d7ad7390387e",
+    "frontend/src/styles/r03-polish.css": "feec24e2800a068ed326cac323b146e1094c00131b4b39c4b20776b4937fe542",
+    "frontend/src/styles/admin-panel.css": "89407e5d4a6f00877fadd11829e76b20ef7c4be90225d4bc500981c686810732",
+    "frontend/src/generated/design.json": "4047a3a41995f034a0356aed5ba58d864cb70562fe5861e6b8acf7127a45a9c1",
+    "frontend/src/main.tsx": "955653aec9c0cb9427565c167d8375ebde297d0bc3988616a19238e2092f747a"
+  },
+  "pages": [],
+  "screens": [],
+  "checkedResponses": 8,
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "unexpectedWrites": [],
+  "error": "admin workbench header/logo missing",
+  "finishedAt": "2026-10-18T05:39:28.122Z"
+}

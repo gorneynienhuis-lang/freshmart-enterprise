@@ -1,0 +1,118 @@
+name: ${COMPOSE_PROJECT_NAME:-freshmall}
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  db:
+    image: ${MYSQL_IMAGE:?Run scripts/deploy-public.py lock-images first}
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: fresh_mall
+      MYSQL_USER: fresh_mall
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql-root-password
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql-app-password
+      TZ: UTC
+    command: ["--mysqlx=0", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_0900_ai_ci", "--default-time-zone=+00:00", "--transaction-isolation=READ-COMMITTED"]
+    secrets:
+      - mysql-root-password
+      - mysql-app-password
+      - source: mysql-root-client
+        target: mysql-root.cnf
+      - source: mysql-app-client
+        target: mysql-app.cnf
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks: [database]
+    healthcheck:
+      test: ["CMD-SHELL", "mysql --defaults-extra-file=/run/secrets/mysql-app.cnf --protocol=TCP -h127.0.0.1 -D fresh_mall -Nse 'SELECT 1' >/dev/null"]
+      interval: 10s
+      timeout: 5s
+      start_period: 60s
+      retries: 12
+    logging: *logging
+
+  backend:
+    image: freshmall-backend:${RELEASE_ID:?Set a reviewed release id}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.backend
+      args:
+        JAVA_BUILD_IMAGE: ${JAVA_BUILD_IMAGE:?Run lock-images first}
+        JAVA_RUNTIME_IMAGE: ${JAVA_RUNTIME_IMAGE:?Run lock-images first}
+    restart: unless-stopped
+    env_file: [./private/backend.env]
+    environment:
+      SPRING_PROFILES_ACTIVE: showcase
+      SERVER_ADDRESS: 0.0.0.0
+      SERVER_PORT: "8080"
+      DB_URL: jdbc:mysql://db:3306/fresh_mall?serverTimezone=UTC&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: fresh_mall
+      APP_ALLOWED_ORIGINS: ${PUBLIC_ORIGIN:?Set an exact public HTTPS origin}
+      APP_SECURE_COOKIES: "true"
+      APP_BRAND_NAME: 东华鲜集
+      TZ: UTC
+    depends_on:
+      db:
+        condition: service_healthy
+    networks: [application, database]
+    read_only: true
+    tmpfs: ["/tmp:size=128m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    mem_limit: 1024m
+    logging: *logging
+
+  web:
+    image: freshmall-web:${RELEASE_ID:?Set a reviewed release id}
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.web
+      args:
+        NODE_BUILD_IMAGE: ${NODE_BUILD_IMAGE:?Run lock-images first}
+        CADDY_IMAGE: ${CADDY_IMAGE:?Run lock-images first}
+    restart: unless-stopped
+    environment:
+      SITE_HOST: ${SITE_HOST:?Set the public hostname}
+      ACME_EMAIL: ${ACME_EMAIL:?Set the certificate email}
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - caddy-data:/data
+      - caddy-config:/config
+    networks: [application, public]
+    read_only: true
+    tmpfs: ["/tmp:size=32m,mode=1777"]
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    security_opt: ["no-new-privileges:true"]
+    logging: *logging
+
+secrets:
+  mysql-root-password:
+    file: ./private/mysql-root-password
+  mysql-app-password:
+    file: ./private/mysql-app-password
+  mysql-root-client:
+    file: ./private/mysql-root.cnf
+    name: ${COMPOSE_PROJECT_NAME:-freshmall}_mysql-root-client
+  mysql-app-client:
+    file: ./private/mysql-app.cnf
+    name: ${COMPOSE_PROJECT_NAME:-freshmall}_mysql-app-client
+
+networks:
+  public:
+  application:
+    internal: true
+  database:
+    internal: true
+
+volumes:
+  mysql-data:
+  caddy-data:
+  caddy-config:

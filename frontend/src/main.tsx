@@ -4,6 +4,7 @@ import { Application } from './app/application';
 import { designVersion, designVersionHref } from './app/design-version';
 import './styles/r04-foundation.css';
 import './styles/runtime-r04.css';
+import './styles/r03-polish.css';
 
 function Demo() {
     const view = useRef<HTMLDivElement>(null);
@@ -17,10 +18,10 @@ function Demo() {
     }, []);
     return <>
         <div className="demo-status-bar" style={{ fontFamily: 'sans-serif', fontSize: 12, padding: '7px 24px', borderBottom: '1px solid #E3E6EA', background: '#FFFFFF', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
-            <div ref={notice} role="status" aria-live="polite">课程 Demo · 数据来自本地后端 · 沙箱支付 · 界面仍为候选稿</div>
+            <div ref={notice} role="status" aria-live="polite">课程演示 · 数据来自后端服务 · 沙箱支付{current === 'r04' ? ' · 备选设计待确认' : ''}</div>
             <nav className="demo-design-switch" aria-label="界面版本" style={{ display: 'flex', gap: 14, whiteSpace: 'nowrap' }}>
-                <a href={designVersionHref('r04')} aria-current={current === 'r04' ? 'page' : undefined} onClick={event => { event.currentTarget.href = designVersionHref('r04'); }}>新版</a>
-                <a href={designVersionHref('r03')} aria-current={current === 'r03' ? 'page' : undefined} onClick={event => { event.currentTarget.href = designVersionHref('r03'); }}>上一版</a>
+                <a href={designVersionHref('r03')} aria-current={current === 'r03' ? 'page' : undefined} onClick={event => { event.currentTarget.href = designVersionHref('r03'); }}>当前版</a>
+                <a href={designVersionHref('r04')} aria-current={current === 'r04' ? 'page' : undefined} onClick={event => { event.currentTarget.href = designVersionHref('r04'); }}>备选设计</a>
             </nav>
         </div>
         <div ref={view}/>

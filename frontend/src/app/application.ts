@@ -3,6 +3,9 @@ import { mountTemplate, defaults, type Values, type PageName } from './template'
 import { ApiError } from '../api/errors';
 import { homeCategoryHref, selectHomeFeatured } from './home-featured';
 import { isR04Design } from './design-version';
+import { renderManagement } from './admin-panel';
+import '../styles/account-security.css';
+import '../styles/runtime-r03.css';
 import { formatMoney, formatWeight, type Models, type Product, type Cart, type Quote, type Address, type DeliverySlot, type Order } from '../domain';
 const money = (n: number) => formatMoney(n, { symbol: false, grouping: false });
 function yuan(value:string):number {if(!/^(0|[1-9]\d*)(\.\d{1,2})?$/.test(value))throw new Error('金额须为非负数，最多两位小数');const [whole,decimal='']=value.split('.');const cents=BigInt(whole!)*100n+BigInt(decimal.padEnd(2,'0'));if(cents>BigInt(Number.MAX_SAFE_INTEGER))throw new Error('金额超出范围');return Number(cents);}
@@ -16,7 +19,7 @@ const byText = (root: ParentNode, text: string) => qa(root, 'a,span,p,div').find
 const el = (tag: string, text?: string) => { const node = document.createElement(tag); if (text !== undefined)
     node.textContent = text; return node; };
 function businessDate(offset = 0) { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(Date.now() + offset * 86400000)); }
-function button(text: string, act: () => void) { const b = document.createElement('button'); b.type = 'button'; b.textContent = text; b.onclick = act; if (isR04Design()) { b.className = 'r04-button'; if (/关闭|稍后|继续选购|刷新|切换|删除|取消订单|驳回/.test(text)) b.dataset.tone = /删除|取消订单|驳回/.test(text) ? 'danger' : 'quiet'; } return b; }
+function button(text: string, act: () => void) { const b = document.createElement('button'); b.type = 'button'; b.textContent = text; b.onclick = act; b.className = isR04Design() ? 'r04-button' : 'fm-action-button'; if (/关闭|稍后|继续选购|刷新|切换|删除|取消订单|驳回/.test(text)) b.dataset.tone = /删除|取消订单|驳回/.test(text) ? 'danger' : 'quiet'; return b; }
 function input(label: string, name: string, value = '', type = 'text') { const l = document.createElement('label'); if (isR04Design()) { l.className = 'r04-field'; l.append(el('span', label)); } else l.textContent = label + ' '; const i = document.createElement('input'); i.name = name; i.value = value; i.type = type; i.required = true; l.append(i); return l; }
 const roleNames: Record<string, string> = { MEMBER: '社区会员', ADMIN: '系统管理员', PICKER: '拣货员', COURIER: '配送员', OPERATOR: '门店运营', SERVICE: '客服', FINANCE: '财务' };
 function r04Note(text: string, kind = 'neutral') { const p = el('p', text); p.className = 'r04-context'; p.dataset.tone = kind; return p; }
@@ -77,8 +80,17 @@ export class Application {
         this.cart = await service.cart();
     else
         this.cart = null; }
-    private mount(page: PageName, values: Values) { mountTemplate(this.root, page, { ...defaults(page), ...values }); this.common(); }
+    private mount(page: PageName, values: Values) { delete this.root.dataset.runtime; mountTemplate(this.root, page, { ...defaults(page), ...values }); this.common(); }
     private async render() { const epoch = ++this.epoch; const route = new URL(location.hash.slice(1) || '/', location.origin); try {
+        const user = service.auth.getSnapshot().user;
+        if (user?.mustChangePassword || route.pathname === '/account/password') {
+            if (!user) { await this.home(); this.login(false); return; }
+            this.cart = null;
+            const main = this.shell('账户安全');
+            main.append(el('p', user.mustChangePassword ? '首次登录请先更改临时密码，完成后才能访问商城与工作台。' : '修改密码后，所有已登录设备将退出，请用新密码重新登录。'), button('设置新密码', () => this.changePassword()), button('退出登录', () => void this.run(async () => { await service.auth.logout(); this.navigate('/'); await this.render(); })));
+            this.changePassword();
+            return;
+        }
         await this.loadCart();
         if (epoch !== this.epoch)
             return;
@@ -96,7 +108,7 @@ export class Application {
             }
             await this.orders();
         }
-        else if (route.pathname === '/operations') {
+        else if (route.pathname === '/operations' || route.pathname === '/admin') {
             await this.operations();
         }
         else if (route.pathname.startsWith('/product/')) {
@@ -143,6 +155,7 @@ export class Application {
                 if (user) {
                     a.textContent = '账户 / 切换';
                     a.onclick = e => { e.preventDefault(); this.login(false); };
+                    const security = document.createElement('a'); security.textContent = '修改密码'; security.href = '#/account/password'; a.after(security);
                 }
                 else
                     a.onclick = e => { e.preventDefault(); this.login(true); };
@@ -182,7 +195,7 @@ export class Application {
         }
         for (const n of qa(this.root, 'footer span'))
             if (n.childElementCount === 0)
-                n.textContent = n.textContent?.replace('数据为示意', '数据库演示数据 · 界面候选稿') ?? '';
+                n.textContent = n.textContent?.replace('数据为示意', isR04Design() ? '数据库演示数据 · 备选设计待确认' : '数据库演示数据 · 沙箱支付') ?? '';
     }
     private card(product: Product) { const sample = (defaults('List').items as Values[])[0]!; return { ...sample, _key: product.productId, img: product.imageUrl, name: product.name, spec: product.unitLabel + ' · ' + product.origin, price: money(product.salePrice), ref: money(product.price), unit: product.priceMode === 'BY_WEIGHT' ? '按实重结算，多退少补' : '按件计价', store: storage[product.storage], near: product.nearExpiry ? `临期 · 剩 ${product.shelfLifeRemainingDays ?? '—'} 天` : '', weighed: product.priceMode === 'BY_WEIGHT', soldOut: product.stockStatus === 'SOLD_OUT', inCart: false, canAdd: product.stockStatus !== 'SOLD_OUT' }; }
     private bindCards() { for (const article of qa(this.root, 'article[data-key]')) {
@@ -244,20 +257,29 @@ export class Application {
         }
     }
     private async list(params: URLSearchParams) { const epoch=this.epoch;const keyword = params.get('keyword') || undefined; const categoryId = params.get('categoryId') || undefined; const sort = (params.get('sort') || 'RECOMMENDED') as 'RECOMMENDED' | 'PRICE_ASC' | 'PRICE_DESC'; const result = await service.products({ ...keyword ? { keyword } : {}, ...categoryId ? { categoryId } : {}, ...params.get('nearExpiry') === 'true' ? { nearExpiry: true } : {}, sort }); if(epoch!==this.epoch)return;this.products = result.items; this.mount('List', { items: result.items.map(p => this.card(p)), facets: [] }); this.bindCards(); const h = q(this.root, 'h1'); if (h) {
-        h.textContent = keyword ? `搜索：${keyword}` : isR04Design() && categoryId ? this.categories.find(category => category.categoryId === categoryId)?.name ?? '全部商品' : '全部商品';
+        h.textContent = keyword ? `搜索：${keyword}` : categoryId ? this.categories.find(category => category.categoryId === categoryId)?.name ?? '全部商品' : '全部商品';
+        const breadcrumb = q(this.root, 'main nav[aria-label="面包屑"] > span:last-child');
+        if (breadcrumb) breadcrumb.textContent = h.textContent;
         if (h.nextElementSibling)
             h.nextElementSibling.textContent = `共 ${result.total} 件商品`;
     } const end = qa(this.root, 'main p').at(-1); if (end)
         end.textContent = result.items.length ? `已显示 ${result.items.length} 件商品` : '没有找到符合条件的商品'; const sidebar = q(this.root, 'main aside'); if (sidebar) {
         sidebar.replaceChildren(el('h2', '商品分类'));
+        sidebar.setAttribute('aria-label', '商品分类');
+        sidebar.setAttribute('data-catalog-categories', '');
+        const all = document.createElement('a');
+        all.textContent = '全部商品';
+        all.href = '#/products';
+        if (!categoryId) all.setAttribute('aria-current', 'page');
+        sidebar.append(all);
         if (!this.categories.length)
             this.categories = (await service.categories()).items;
         for (const c of this.categories) {
             const a = document.createElement('a');
             a.textContent = c.name;
             a.href = '#/products?categoryId=' + c.categoryId;
-            if (isR04Design() && c.categoryId === categoryId) a.setAttribute('aria-current', 'page');
-            sidebar.append(a, el('br'));
+            if (c.categoryId === categoryId) a.setAttribute('aria-current', 'page');
+            sidebar.append(a);
         }
     } const sorter = q(this.root, '[aria-label="排序"]'); if (sorter)
         for (const [i, b] of qa<HTMLButtonElement>(sorter, 'button').entries()) {
@@ -265,7 +287,7 @@ export class Application {
                 b.remove();
                 continue;
             }
-            if (isR04Design()) b.setAttribute('aria-pressed', String(sort === ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]));
+            b.setAttribute('aria-pressed', String(sort === ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]));
             b.onclick = () => { params.set('sort', ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]!); this.navigate('/products?' + params); };
         } const clear = qa<HTMLAnchorElement>(this.root, 'a').find(a => a.textContent === '清除全部'); if (clear)
         clear.parentElement?.replaceChildren(button('清除筛选', () => this.navigate('/products'))); }
@@ -349,7 +371,9 @@ export class Application {
         this.cart = null;
         d.close();
         this.tell('登录成功');
-        if (!service.auth.getSnapshot().user?.roles.includes('MEMBER'))
+        if (service.auth.getSnapshot().user?.mustChangePassword)
+            this.navigate('/account/password');
+        else if (!service.auth.getSnapshot().user?.roles.includes('MEMBER'))
             this.navigate('/operations');
         else
             await this.render();
@@ -359,7 +383,38 @@ export class Application {
     }
     finally {
         submit.disabled = false;
-    } })(); }; d.append(f, el('p', isR04Design() ? '东华大学社区生鲜 · 会员与员工使用各自账户登录。' : '演示账户见本地 demo-credentials.sh；员工与会员权限独立。')); }
+    } })(); }; d.append(f, el('p', '东华大学社区生鲜 · 会员与员工使用各自账户登录。密码至少 12 位。')); }
+    private changePassword() {
+        const d = this.dialog('修改登录密码');
+        d.classList.add('fm-security-dialog');
+        const f = document.createElement('form');
+        const current = input('当前密码', 'currentPassword', '', 'password');
+        const replacement = input('新密码', 'newPassword', '', 'password');
+        const confirmation = input('确认新密码', 'confirmPassword', '', 'password');
+        for (const field of [current, replacement, confirmation]) {
+            const control = q<HTMLInputElement>(field, 'input')!; control.minLength = 12; control.maxLength = 128;
+            control.autocomplete = field === current ? 'current-password' : 'new-password';
+        }
+        const submit = button('保存密码并重新登录', () => {}); submit.type = 'submit';
+        const output = el('p'); output.setAttribute('role', 'alert');
+        f.append(current, replacement, confirmation, submit, output);
+        f.onsubmit = event => { event.preventDefault(); submit.disabled = true; const values = new FormData(f);
+            void (async () => { try {
+                if (values.get('newPassword') !== values.get('confirmPassword')) throw new Error('两次输入的新密码不一致');
+                if (values.get('newPassword') === values.get('currentPassword')) throw new Error('新密码不能与当前密码相同');
+                await service.changePassword({ currentPassword: String(values.get('currentPassword')), newPassword: String(values.get('newPassword')) });
+                f.reset(); this.cart = null; this.quote = null; d.close(); this.navigate('/'); await this.home();
+                this.tell('密码已修改，所有旧会话已退出，请使用新密码登录。'); this.login(false);
+            } catch (error) {
+                output.textContent = error instanceof Error ? error.message : '密码修改失败';
+                if (error instanceof ApiError && (error.outcomeUnknown || error.status === 401)) {
+                    output.textContent += error.outcomeUnknown ? '；提交结果尚未确认，密码可能已生效。请尝试用新密码重新登录，若未成功再使用原密码。' : '；当前密码或会话未通过校验，可重新登录后再操作。';
+                    if (!q(d, '[data-password-relogin]')) { const relogin = button('去重新登录', () => { service.auth.clearSession(); this.cart = null; this.quote = null; d.close(); this.navigate('/'); void this.home().then(() => this.login(false)); }); relogin.dataset.passwordRelogin = 'true'; d.append(relogin); }
+                }
+            }
+            finally { submit.disabled = false; } })(); };
+        d.append(el('p', '密码至少 12 位。修改后立即退出全部设备；请妥善保存新密码。'), f);
+    }
     private async couponDialog() { if (!this.member())
         return; await this.run(async () => { const list = await service.coupons(); const d = this.dialog('我的优惠券'); for (const c of list.items) {
         const coupon = el('p', `${c.name}：${formatMoney(c.discountAmount)}，满 ${formatMoney(c.minGoodsAmount)} 可用 · ${c.status}`); if (isR04Design()) coupon.className = 'r04-coupon-card'; d.append(coupon); } if (!list.items.length)
@@ -498,7 +553,7 @@ export class Application {
             main.append(aside, section); this.root.append(top, header, main);
             this.common(); return section;
         }
-        this.mount('Checkout', { addrs: [], days: [], slots: [], lines: [], summary: [], payable: '—' }); const main = q(this.root, 'main')!; main.replaceChildren(); main.style.display = 'block'; const section = el('section'); section.style.cssText = 'background:#FFFFFF;border-radius:8px;padding:20px 24px;display:flex;flex-direction:column;gap:14px'; section.append(el('h1', title)); main.append(section); q(this.root, 'ol')?.replaceChildren(); const headerTitle = byText(this.root, '确认订单'); if (headerTitle)
+        this.mount('Checkout', { addrs: [], days: [], slots: [], lines: [], summary: [], payable: '—' }); this.root.dataset.runtime = 'true'; const main = q(this.root, 'main')!; main.replaceChildren(); main.style.display = 'block'; const section = el('section'); section.className = 'fm-runtime-panel'; section.style.cssText = 'background:#FFFFFF;border-radius:8px;padding:20px 24px;display:flex;flex-direction:column;gap:14px'; section.append(el('h1', title)); main.append(section); q(this.root, 'ol')?.replaceChildren(); const headerTitle = byText(this.root, '确认订单'); if (headerTitle)
             headerTitle.textContent = title; section.append(button('继续选购', () => this.navigate('/products')), button('刷新', () => void this.render())); return section;
     }
     private async orders() {const epoch=this.epoch; const result = await service.orders();if(epoch!==this.epoch)return; const main = this.shell('我的订单'); if (!result.items.length) {
@@ -538,8 +593,9 @@ export class Application {
             this.login(false);
             return;
         }
-        const main = this.shell('员工工作台 · 实际接口');
-        main.append(el('p', '当前身份：' + user.displayName + ' · ' + user.roles.join(' / ')), button('切换账户', () => this.login(false)));
+        const main = this.shell('员工工作台');
+        main.append(el('p', '当前身份：' + user.displayName + ' · ' + user.roles.map(role => roleNames[role] ?? role).join(' / ')), button('切换账户', () => this.login(false)));
+        await renderManagement(main, { dialog: title => this.dialog(title), run: action => this.run(action), reload: () => this.operations() });
         if (user.permissions.includes('order.work.read')) {
             const orders = await service.adminOrders();
             main.append(el('h2', '订单查询'));
@@ -580,7 +636,7 @@ export class Application {
         }
         if(user.permissions.includes('aftersale.work.read')){const cases=await service.adminAftersales();main.append(el('h2','售后工单'));for(const a of cases.items){const row=el('section');row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));if(a.status==='APPLIED'&&!a.assigneeId&&user.permissions.includes('aftersale.work.claim'))row.append(button('领取售后',()=>void this.run(async()=>{await service.claimAftersale(a.aftersaleId,a.version);await this.operations();})));if(a.status==='APPLIED'&&a.assigneeId===user.userId&&user.permissions.includes('aftersale.review'))row.append(button('审核售后',()=>this.reviewDialog(a)));main.append(row);}}
         if(user.permissions.includes('refund.read')){const refunds=await service.refunds();main.append(el('h2','退款执行'));for(const refund of refunds.items){const row=el('p');row.append(el('span',`${refund.refundId} · ${refund.status} · ${formatMoney(refund.amount)} · ${refund.type}`));if(refund.status==='PENDING'&&refund.type==='AFTERSALE'&&user.permissions.includes('refund.execute'))row.append(button('执行退款',()=>{const d=this.dialog('确认原路沙箱退款');const reason=input('复核说明','reason','复核通过，执行原路沙箱退款');d.append(el('p',formatMoney(refund.amount)),reason,button('确认退款',()=>void this.run(async()=>{await service.executeRefund(refund.refundId,{version:refund.version,reason:q<HTMLInputElement>(reason,'input')!.value});d.close();this.tell('退款指令已提交，请刷新查看结果');await this.operations();})));}));main.append(row);}}
-        if (!user.permissions.some(p => ['order.work.read', 'pick.read', 'delivery.handover.read', 'delivery.self.read', 'aftersale.work.read', 'refund.read'].includes(p)))
+        if (!user.permissions.some(p => ['order.work.read', 'pick.read', 'delivery.handover.read', 'delivery.self.read', 'aftersale.work.read', 'refund.read', 'dashboard.read', 'employee.read'].includes(p)))
             main.append(el('p', '此角色没有本工作台的业务操作权限。服务端独立校验角色与资源归属。'));
         if (isR04Design()) this.decorateWorkbench(main);
     }

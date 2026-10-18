@@ -3,13 +3,13 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "fresh-mall 企业级生鲜商城接口契约",
-    "version": "0.1.1",
-    "description": "2026-10-18契约评审版本，所有operation均CONTRACT_ONLY，尚未实现，例子不代表已运行/通过测试。以BASELINE.md为工程基线。前端React，后端模块化单体；CNY整数分/整数克/字符串ID；业务时区Asia/Shanghai。JSON语法是YAML1.2子集，本文件无需YAML解析依赖。 品牌展示名通过app.brand-name配置，本契约使用工程代号。\n\nv0.1.1：数量统一为基础单位（PIECE件/GRAM克）；财务看板无权的经营数量返回null；demo为仅本机沙箱环境。x-implementation-status只标示代码覆盖，不等同运行验收。"
+    "version": "0.1.2",
+    "description": "2026-10-18课程生鲜商城接口契约；以各operation的x-implementation-status区分已实现与尚未实现，示例不代表验收结果。BASELINE.md规定业务基线，CNY整数分、整数克、字符串ID，业务时区Asia/Shanghai。JSON语法为YAML1.2子集。v0.1.2新增员工治理五操作实装标记与独立showcase部署环境，业务状态和已有请求/响应结构不变。IMPLEMENTED_DEMO表示存在真实数据库实现，运行与部署验收以docs/evidence为准；showcase始终为合成数据和沙箱支付。"
   },
   "servers": [
     {
       "url": "http://localhost:8080",
-      "description": "本地dev；尚待实现和启动"
+      "description": "本机真实后端；公网showcase使用部署分配的同源HTTPS地址"
     }
   ],
   "tags": [
@@ -4084,7 +4084,7 @@
           "payments"
         ],
         "summary": "创建订单或补款沙箱支付单",
-        "description": "创建订单或补款沙箱支付单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。ORDER绑定PENDING_PAY订单；TOP_UP必须提供本人差额单adjustmentId且状态TOP_UP_PENDING。金额/币种/期限服务端决定。同订单可多次尝试但最多一次成功入账，补款独立支付单。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n响应allowedActions仅dev/test本人有效支付单给SIMULATE_PAYMENT，production为空。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "创建订单或补款沙箱支付单\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。ORDER绑定PENDING_PAY订单；TOP_UP必须提供本人差额单adjustmentId且状态TOP_UP_PENDING。金额/币种/期限服务端决定。同订单可多次尝试但最多一次成功入账，补款独立支付单。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\n响应allowedActions仅dev/test/demo/showcase本人有效支付单给SIMULATE_PAYMENT，production为空。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
         "security": [
           {
             "bearerAuth": []
@@ -4381,8 +4381,8 @@
         "tags": [
           "payments"
         ],
-        "summary": "仅开发测试模拟本人支付结果",
-        "description": "仅开发测试模拟本人支付结果\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。production端点不注册并返回404；必须MEMBER身份且payment属于本人。服务端模拟器发送签名渠道事件，不允许用户伪造回调金额或签名密钥。该接口不是真实收费。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "summary": "仅课程沙箱模拟本人支付结果",
+        "description": "仅课程沙箱模拟本人支付结果\n\n仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。production端点不注册并返回404；必须MEMBER身份且payment属于本人。服务端模拟器发送签名渠道事件，不允许用户伪造回调金额或签名密钥。该接口不是真实收费。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。\n\nshowcase为独立HTTPS课程展示环境，使用合成数据、首次改密与安全Cookie；prod/production仍禁止沙箱。",
         "security": [
           {
             "bearerAuth": []
@@ -4525,7 +4525,8 @@
         "x-environments": [
           "dev",
           "test",
-          "demo"
+          "demo",
+          "showcase"
         ],
         "requestBody": {
           "required": true,
@@ -11892,7 +11893,7 @@
         "x-roles": [
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12008,7 +12009,7 @@
         "x-roles": [
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12148,7 +12149,7 @@
         "x-roles": [
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12308,7 +12309,7 @@
         "x-roles": [
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12466,7 +12467,7 @@
         "x-roles": [
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {

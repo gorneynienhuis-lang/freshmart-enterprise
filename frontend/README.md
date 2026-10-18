@@ -14,7 +14,9 @@ React + Vite + TypeScript，调用真实 `/api/v1`；不启用 mock。在仓库�
 
 ## 设计复用与边界
 
-R04整站候选由用户明确授权Codex制作：`design/r04/`保存六页模板、公共header/footer/product-card片段和自然摄影素材；`src/styles/r04-foundation.css`与`runtime-r04.css`统一商城及原生业务视图。`npm run import:design`同时生成R03/R04两个设计包，默认R04；`?ui=r03`选R03，切换保留hash业务路由。`design/v2/`及旧设计包保留，与GitHub归档基线一致。
+用户现已采用R03主要页面，默认R03；分类和手机修补集中在`r03-polish.css`，业务工作台与密码弹窗由`runtime-r03.css`、`admin-panel.css`、`account-security.css`补齐。R04源和素材继续保留，显式`?ui=r04`回看；切换保留hash路由。`design/v2/`原始设计源和两个设计包保留，导入器不覆盖源稿。
+
+新增真实员工管理及经营概览。运行`node scripts/e2e-administration.mjs`可验证创建员工、首改门禁、会话撤销、岗位/状态、日期和财务投影；会创建并最终停用合成测试员工。入口、账号与密码私有文件见[登录与后台使用](../docs/登录与后台使用.md)。公网将编译前端放入Spring Boot同一个JAR，由平台提供HTTPS；无Vite开发服务器暴露，详见[部署](../deploy/公网部署.md)。
 
 `npm run test:ui`使用独立Chrome只读检查新旧页面、两种桌面宽度、分类排序和SKU，无mock或业务写入；为完整截图将懒加载图片临时改为eager。`E2E_OUTPUT_DIR=docs/evidence/ui-demo-r04/business npm run test:e2e`运行真实五角色链路，创建合成会员/订单并使用本地沙箱，输出路径相对于仓库根目录。最终R04结果为163个实际响应通过schema检查、0页面异常/缺图，详见CODEX-014。
 
@@ -25,6 +27,8 @@ R04整站候选由用户明确授权Codex制作：`design/r04/`保存六页模�
 `npm run import:design` 只读 `design/v2/V2-*.dc.html`，把 Claude 原布局、CSS、素材复制到 `src/generated/design.json` 与 `public/generated/`。旧 `/_blob` 图片通过已提交的 `scripts/design-assets.json` 映射到已有本地文件，不依赖临时审计输出。`design/`、`src/ui/`、`src/styles/`、`public/brand/` 未被改写。
 
 构建时读取原型默认视觉值；原型脚本不进入浏览器。运行时 `src/app/` 接管商品、库存、价格、地址、时段、券、订单和行为，不执行原型演示计价。模板运行器通过 DOM 文本/属性绑定服务端值，不将响应拼进 HTML。
+
+模板先在惰性`HTMLTemplateElement.content`内完成插值和重复项展开，再挂入活动DOM，防止浏览器预请求`{{p.img}}`。真实同JAR探针发现并修复该问题，回归脚本明确拒绝未解析占位资源请求。
 
 Home / List / Detail / Checkout 采用现有候选稿。登录、购物车编辑、订单、拣货和配送面板暂用原生表单及已有页面片段，是可验证业务的工程呈现，未代替用户视觉确认。后台假监控与原型统计数不用于真实 Demo。
 

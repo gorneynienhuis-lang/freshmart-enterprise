@@ -1,0 +1,59 @@
+{
+  "startedAt": "2026-10-18T05:33:46.040Z",
+  "dataSource": "real local MySQL HTTP APIs; actual browser clicks; no mocks or interception",
+  "status": "FAILED",
+  "checks": [
+    "ADMIN login, real paginated employee table, masked phone fields and disabled self-mutation controls",
+    "Created exactly one synthetic employee through UI with independent temporary password and explicit PICKER + MEMBER roles",
+    "First-login gate precedes all protected business APIs, inconsistent confirmation is blocked locally, successful password change revokes both actual sessions"
+  ],
+  "screens": [
+    "administrator-employees.png",
+    "first-password-gate.png",
+    "failure-administrator.png"
+  ],
+  "responsive": [],
+  "dashboard": [],
+  "sourceSha256": {
+    "frontend/src/app/application.ts": "50e666eb7ee3e20528b7f3edc5b45c71fb9bb606164bd25301d249c839df8332",
+    "frontend/src/app/admin-panel.ts": "52a4495fceb838d23a1476551670a787ba2a3e455936efe1b6f5398118f5d9ea",
+    "frontend/src/app/service.ts": "fb722e6b177a26b6e97ee8b0148100e966f5d192696060190859893ca671a313",
+    "frontend/src/app/commands.ts": "d0a4d018d0c5e82a9038f3b0e9a689e80b2a7eaf05d73b18ca6f8f4b980bcb2b",
+    "frontend/src/styles/admin-panel.css": "89407e5d4a6f00877fadd11829e76b20ef7c4be90225d4bc500981c686810732",
+    "backend/src/main/java/com/freshmart/identity/EmployeeService.java": "b261f939ae262eda3860ea0caccaa53588d40ad6dce38900db9caffb1a5400c4",
+    "backend/src/main/java/com/freshmart/identity/EmployeeController.java": "ee2462849d502a74d58c92bf714411bca28c22ad645f57c93b7abcf922e5a474",
+    "database/migrations/V006__employee_governance.sql": "915f1ec6f73d2b888664e0c1723d0a557935063e5e6a836b1f9055868a39d068",
+    "contracts/openapi.yaml": "2f8a630303c8fba87a925457e16745c604fda6b431b417c7216ff38be002fc66"
+  },
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "checkedResponses": 34,
+  "responseStatuses": {
+    "200": 28,
+    "201": 1,
+    "401": 5
+  },
+  "firstPasswordGate": {
+    "blockedBusinessRequests": [],
+    "mismatchBlockedBeforeRequest": true,
+    "revokedSessions": 2
+  },
+  "cleanup": {
+    "status": "DISABLED",
+    "historyRetained": true,
+    "seededAccountsChanged": false
+  },
+  "employee": {
+    "employeeId": "1ea27255-7d40-46db-bd70-872c73a3a8bc",
+    "userId": "1ea27255-7d40-46db-bd70-872c73a3a8bc",
+    "synthetic": true,
+    "initialRoles": [
+      "MEMBER",
+      "PICKER"
+    ],
+    "initialMustChangePassword": true
+  },
+  "error": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('heading', { name: '拣货任务', exact: true }) to be visible\u001b[22m\n",
+  "finishedAt": "2026-10-18T05:34:18.100Z"
+}

@@ -1,0 +1,24 @@
+/* Finish runtime controls within the selected R03 layout. */
+html[data-design="r03"] .fm-action-button { align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 8px 15px; border: 1px solid #A0021F; border-radius: 5px; background: #A0021F; color: #FFF; font-family: inherit; font-size: 13px; line-height: 1.4; cursor: pointer; }
+html[data-design="r03"] .fm-action-button[data-tone="quiet"] { background: #FFF; color: #5B6470; border-color: #D8DDE3; }
+html[data-design="r03"] .fm-action-button[data-tone="danger"] { background: #FFF5F6; color: #A0021F; border-color: #EDD1D7; }
+html[data-design="r03"] .fm-action-button:disabled { opacity: .5; cursor: not-allowed; }
+html[data-design="r03"] .fm-action-button:focus-visible { outline: 2px solid #A0021F; outline-offset: 3px; }
+html[data-design="r03"] [data-runtime] header a[aria-label*="首页"] > span:last-child { display: none; }
+html[data-design="r03"] [data-runtime] .fm-runtime-panel { min-width: 0; }
+html[data-design="r03"] [data-runtime] .fm-runtime-panel > h1 { margin: 6px 0 10px; font-size: 25px; line-height: 1.4; }
+html[data-design="r03"] [data-runtime] .fm-runtime-panel > h2 { font-size: 19px; margin: 22px 0 0; }
+html[data-design="r03"] [data-runtime] .fm-runtime-panel > p { line-height: 1.8; margin: 3px 0; }
+html[data-design="r03"] [data-runtime] .fm-runtime-panel > article,
+html[data-design="r03"] [data-runtime] .fm-runtime-panel > section:not(.fm-management-section) { border: 1px solid #E3E6EA; border-radius: 7px; padding: 18px; overflow-wrap: anywhere; }
+html[data-design="r03"] [data-runtime] .fm-runtime-panel > article button,
+html[data-design="r03"] [data-runtime] .fm-runtime-panel > section:not(.fm-management-section) button { margin: 5px 8px 5px 0; }
+@media (max-width: 760px) {
+  html[data-design="r03"] [data-runtime] header > div { padding: 16px !important; gap: 10px !important; }
+  html[data-design="r03"] [data-runtime] header a[aria-label*="首页"] { gap: 11px !important; min-width: 0; }
+  html[data-design="r03"] [data-runtime] header a[aria-label*="首页"] > img { height: 38px !important; max-width: 47%; object-fit: contain; }
+  html[data-design="r03"] [data-runtime] header a[aria-label*="首页"] > span:nth-last-child(2) { font-size: 16px !important; white-space: nowrap; letter-spacing: .02em !important; }
+  html[data-design="r03"] [data-runtime] main { padding: 18px 14px 32px !important; }
+  html[data-design="r03"] [data-runtime] .fm-runtime-panel { padding: 20px 16px !important; gap: 12px !important; }
+  html[data-design="r03"] [data-runtime] .fm-runtime-panel > h1 { font-size: 23px; }
+}

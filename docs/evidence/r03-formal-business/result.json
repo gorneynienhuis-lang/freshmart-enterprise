@@ -1,0 +1,42 @@
+{
+  "startedAt": "2026-10-18T05:41:09.899Z",
+  "checks": [
+    "register + csrf + session",
+    "member workbench restriction + real catalog search",
+    "product details + real cart + address + slot + coupon + server quote",
+    "create order + failed payment retry + sandbox payment + reload HttpOnly session restoration",
+    "picker role + claim + actual quantity + server weight settlement",
+    "picker handover to courier + member proof code + courier receipt completion",
+    "member SHORTAGE claim + service claim/review + separate finance refund + worker completion"
+  ],
+  "orders": [
+    {
+      "orderId": "ord_5c44b3d6-f75c-405f-89f2-4b67b06bd9ff",
+      "orderNo": "FM68ed09c0578d495d8c6e7ebdcc8980ed",
+      "amount": 6081
+    }
+  ],
+  "screens": [
+    "home-1440.png",
+    "home-1024.png",
+    "register-dialog.png",
+    "member-workbench-restricted.png",
+    "search-live.png",
+    "product-live.png",
+    "cart-live.png",
+    "checkout-live.png",
+    "payment-failed-retry.png",
+    "paid-order-restored.png",
+    "picker-confirmed.png",
+    "finished-order.png",
+    "courier-completed.png",
+    "aftersale-approved.png",
+    "aftersale-refunded.png"
+  ],
+  "status": "PASSED",
+  "finishedAt": "2026-10-18T05:41:20.026Z",
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "checkedResponses": 170
+}

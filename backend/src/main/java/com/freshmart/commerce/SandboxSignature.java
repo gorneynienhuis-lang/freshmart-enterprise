@@ -13,7 +13,7 @@ import java.time.Clock;
 import java.util.HexFormat;
 import java.util.UUID;
 
-/** Development sandbox only. No user-supplied amounts or browser success redirects are payment evidence. */
+/** Explicit course/demo sandbox only. Browser success redirects are never payment evidence. */
 @Component
 public class SandboxSignature {
     private final boolean enabled;
@@ -21,7 +21,7 @@ public class SandboxSignature {
     private final Clock clock;
     public SandboxSignature(@Value("${app.sandbox-enabled:false}")boolean enabled,@Value("${app.sandbox-secret:}")String secret,
                             Environment environment,Clock clock) {
-        this.enabled=enabled&&environment.acceptsProfiles(Profiles.of("demo","dev","test"))&&!environment.acceptsProfiles(Profiles.of("prod","production"));
+        this.enabled=enabled&&environment.acceptsProfiles(Profiles.of("demo","dev","test","showcase"))&&!environment.acceptsProfiles(Profiles.of("prod","production"));
         this.secret=secret.getBytes(StandardCharsets.UTF_8);this.clock=clock;
         if(this.enabled&&this.secret.length<32)throw new IllegalStateException("Sandbox secret must contain at least 32 bytes");
     }

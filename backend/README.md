@@ -1,69 +1,48 @@
 # fresh-mall 后端
 
-2026-10-18 第一批实现：Java 21、Spring Boot 4.1.1、MyBatis Starter 4.0.0；Maven Wrapper 固定 Maven 3.9.16。详见 [AGENTS.md](../AGENTS.md) 和 [鉴权与技术 ADR](../collab/decisions/ADR-001-后端技术栈.md)。PPT 工作继续暂停。
+2026-10-18。Java 21、Spring Boot 4.1.1、MyBatis 4.0.0、Maven Wrapper 3.9.16、MySQL 8.4.11。模块化单体，真实数据库持久化；支付、退款始终为课程沙箱。最新契约 0.1.2。
 
-## 当前范围
+## 实现边界
 
-已实现下列 **12 个合同 HTTP 操作**，路径统一以 `/api/v1` 开头。此前交接中的“13”是身份/商品测试数量，接口数量按本表为准。
+OpenAPI 共 91 个操作，目前 63 个标记 IMPLEMENTED_DEMO、28 个仍为 CONTRACT_ONLY。该标记说明存在代码，不等于每个分支均已验证，实际测试见 docs/evidence 与 CODEX 交接；不能以接口清单冒充完整企业生产能力。
 
-| 方法 | 路径 | 当前行为 |
+已接通：身份/CSRF/轮换/改密，商品浏览与搜索，购物车、地址、配送时段、优惠与服务器报价，库存和名额事务预占，订单/沙箱支付/幂等回调，称重差额、拣货、交接配送与签收、取消/关单/回库、SHORTAGE/LATE 售后与独立财务退款、真实运营/财务概览。
+
+本次补齐五个管理员操作（统一前缀 `/api/v1`）：
+
+| 方法 | 路径 | 行为 |
 |---|---|---|
-| GET | `/auth/csrf` | 创建持久化 CSRF 上下文，返回 token 并设置 Cookie |
-| POST | `/auth/register` | 基础会员注册，密码哈希持久化并签发会话 |
-| POST | `/auth/login` | 校验密码和账户，数据库限流，签发会话 |
-| POST | `/auth/refresh` | refresh Cookie 轮换；旧凭据重放吊销会话族 |
-| POST | `/auth/logout` | 吊销会话族并清除 Cookie |
-| GET | `/auth/me` | 当前用户脱敏资料与显式角色/权限 |
-| POST | `/auth/password` | 当前密码校验、幂等命令、改密并吊销全部会话 |
-| GET | `/categories` | 数据库启用分类，返回 `data.items` |
-| GET | `/home` | 数据库分类、推荐和临期商品；轮播暂为空 |
-| GET | `/products` | 数据库分页、分类/关键词/临期过滤与价格排序 |
-| GET | `/products/{productId}` | 上架商品与 SKU、当前可售提示及有效期信息 |
-| GET | `/products/{productId}/reviews` | 校验公开商品后返回空评价分页；评价存储和提交尚未实现 |
+| GET | /admin/employees | 仅独立员工标记账户、分页与脱敏 |
+| POST | /admin/employees | 201创建、临时密码强哈希、强制首次改密 |
+| GET | /admin/roles | 固定七角色与真实权限目录 |
+| PUT | /admin/employees/{employeeId}/roles | 版本检查、原因审计、撤销旧会话 |
+| PUT | /admin/employees/{employeeId}/status | 启停、原因审计、撤销旧会话 |
 
-商品价格和可售提示依据当前有效批次聚合，不能替代未来结算报价或预约时段库存保证。`/catalog/*.jpg` 是公开静态素材。购物车、地址、报价、订单、支付、售后、后台操作、员工管理及完整履约均尚未接通；合同权限注册包含这些路由，不代表 handler 已实现。
+V006 引入员工身份与持久治理互斥锁。普通购物会员不能被员工接口接管；管理员不能通过本接口修改自身角色/状态，并发操作仍须保留有效管理员。管理命令在事务锁内重查操作者权限与会话，避免先通过入口检查、随后被撤权仍执行变更。
 
-鉴权当前采用自写 `OncePerRequestFilter` 和显式角色注册，**未实装 Spring Security**。角色入口检查不替代资源所有者检查。运行时会话、限流、商品及批次来自数据库，没有内存 mock 作为运行数据源。
+商品编辑、仓储维护、QUALITY/私有证据上传、评价持久化、审计查询等未完成，见 [工程验收差距](../docs/工程验收差距-2026-10-18.md)。没有实现的 API 返回拒绝/404，不返回伪造成功数据。
 
-## 本机运行条件
+## 启动与配置
 
-准备 Java 21 和可访问的 MySQL 8.4 数据库；数据库与账户须先创建，并允许本项目 Flyway 迁移。当前没有可直接宣称已验证的完整 Compose 部署。配置见 [application.yml](src/main/resources/application.yml)。
+本机用仓库根目录 `./scripts/demo-start.sh`。数据、独立 MySQL、密码与日志在 Git 忽略的 `.runtime/`；不清空已有订单或重置账号。部署入口见 [本机运行](../deploy/README.md)、[公网方案](../deploy/公网部署.md)。
 
-| 环境变量 | 含义与默认值 |
+| 配置 | 要求 |
 |---|---|
-| `DB_URL` | 默认 `jdbc:mysql://localhost:3306/fresh_mall?serverTimezone=UTC&characterEncoding=UTF-8` |
-| `DB_USERNAME` | 默认 `fresh_mall`；需与已创建的数据库账户一致 |
-| `DB_PASSWORD` | 设置为该账户实际密码；仓库不提供通用登录凭据 |
-| `APP_TOKEN_SECRET` | 必填，至少 32 个 UTF-8 字节的随机密钥；不足时启动失败，不使用内置默认值 |
-| `APP_ALLOWED_ORIGINS` | 默认 `http://localhost:5173`；逗号分隔的精确 Origin，不允许 `*` |
-| `APP_SECURE_COOKIES` | 默认 `true`；本机 HTTP 联调使用 `false`，HTTPS 部署保持 `true` |
-| `SERVER_PORT` | 默认 `8080` |
-| `APP_BRAND_NAME` | 可配置品牌名；默认工程代号 `fresh-mall` |
+| DB_URL / DB_USERNAME / DB_PASSWORD | 实际 MySQL 与仅本库权限应用账号；不得把 root 注入应用 |
+| APP_TOKEN_SECRET | 随机至少32字节，重启保留，无可用默认密钥 |
+| APP_ALLOWED_ORIGINS | 逗号分隔精确Origin；showcase仅HTTPS且不可带路径 |
+| APP_SECURE_COOKIES | 默认true；仅本机demo为false；showcase强制true |
+| SANDBOX_SECRET | 独立随机至少32字节 |
+| SPRING_PROFILES_ACTIVE | 本机demo；公网课程showcase；prod/production禁止沙箱 |
 
-在 shell 中配置数据库变量后，从 `backend/` 执行：
+showcase 支持平台 PORT / SERVER_PORT，应用与前端编译资源同源，数据库不公开。仅根首页、编译静态目录、公开商品与健康状态匿名可读；其他监控需管理员身份。禁止把本机demo profile用作公网环境。
 
-```sh
-# 本机临时密钥示例；部署应从受控配置注入，并在重启间稳定保存。
-export APP_TOKEN_SECRET="$(openssl rand -hex 32)"
-APP_SECURE_COOKIES=false ./mvnw spring-boot:run
-```
+认证采用自写过滤器和显式权限注册，未使用 Spring Security。access只存前端内存、最长15分钟；refresh为HttpOnly Cookie且轮换、绝对最长7天，旧凭据重放吊销会话族。Cookie命令校验Origin和CSRF；改密成功撤销全部会话，临时员工在改密前仅能访问本人会话/改密/退出。
 
-不要把实际密钥、数据库密码或 `.env` 提交到仓库。更换签名密钥会使旧 access JWT 无法使用。Maven 首次运行需要访问官方依赖仓库。
+Flyway 从 `database/migrations` 打包 V001–V006；种子只向空演示库一次导入。不要手工重复执行迁移，不更改已运行迁移的历史校验和。
 
-构建时将 `../database/migrations/*.sql` 复制到 classpath `db/migration`，启动时由 Flyway 执行 V001/V002。建表迁移不自动导入商品种子；空数据库的商品列表应为空。演示种子生成入口为 [generate-demo-seed.py](../scripts/generate-demo-seed.py)，仅生成文件不等于已导入数据库。
+## 实际验证
 
-前端认证顺序为 `GET /auth/csrf` → 携带 Cookie、允许的 Origin 和 `X-CSRF-Token` 注册/登录；返回的新 CSRF token 对应新 Cookie。refresh/logout 同样校验这三项。其他已认证请求使用 `Authorization: Bearer <accessToken>`；改密额外要求 UUID 格式 `Idempotency-Key`。access 最长 15 分钟，refresh 会话族绝对期限最多 7 天，轮换不延期。
+`./mvnw -B -ntp package` 本轮104项测试、0失败/错误/跳过，并生成Spring Boot JAR。新增7项员工集成测试覆盖HTTP权限、幂等/陈旧version、脱敏/不接管会员、首次改密、会话吊销、并发管理员互撤与数据库锁。
 
-## 测试与证据边界
-
-```sh
-./mvnw -Dtest=IdentityIntegrationTest,CatalogIntegrationTest test
-./mvnw test
-./mvnw package
-```
-
-第一条命令对应当前已真实通过的 13 项集成测试：身份 8、商品 5。测试启动真实 Spring 上下文、MockMvc 过滤器、Flyway V001/V002 和隔离 H2 MySQL 模式数据库，没有模拟身份服务或商品 Mapper；测试密钥只存在测试配置。身份测试包含密码修改与 refresh/旧密码登录并发的用户行锁互斥。
-
-本轮随后执行全套 `clean package`，实际 60 项测试全部通过，Spring Boot JAR 打包成功，详见 [原始报告与构建证据](../docs/evidence/implementation-foundation/README.md)。这包含纯领域和幂等测试，不能换算成 60 个已实现接口。
-
-**H2 的结果不证明 MySQL 8.4 的锁、事务隔离、SQL 和性能已经验收。** 当前未完成真实 MySQL 启动与并发验证，未完成端到端订单资金闭环；完整测试和打包状态以当次命令输出及保存证据为准。`target/surefire-reports/` 为每次本地运行生成的报告，不提交构建产物。
+测试使用H2 MySQL模式的部分不能替代MySQL行为验证。本机真实MySQL已应用V006并进一步运行新增后台和既有购物流程；按各证据JSON区分成功结果、测试数据和限制。公网容器/HTTPS与云端备份恢复尚未验收，当前没有已上线URL。

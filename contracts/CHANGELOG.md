@@ -1,5 +1,11 @@
 # 契约变更
 
+## 0.1.2 · 2026-10-18
+
+- 员工分页/创建、固定角色目录、角色变更、账号启停五操作从CONTRACT_ONLY改为IMPLEMENTED_DEMO。请求/响应结构和业务角色不变；临时密码首次改密、撤销旧会话、持久管理互斥锁与version校验均由后端执行。
+- 新增独立showcase课程HTTPS沙箱环境；保持prod/production禁用沙箱、要求精确HTTPS Origin与Secure Cookie，不改为真实支付。
+- 修正dashboard读取businessDate参数与既定合同一致。合约示例、操作清单和生成类型同步版本；完整运行证据另见本轮交接。
+
 ## 0.1.1 · 2026-10-18
 
 - 修正文本文档与已发布API冲突：quantity始终以baseUnit计，PIECE=件，GRAM=估重克数。移除“份数×每份克数”的二次换算说明；不更改既有请求结构或服务器计价单位。

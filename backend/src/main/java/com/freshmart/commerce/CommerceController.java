@@ -50,7 +50,7 @@ public class CommerceController {
     @GetMapping("/admin/delivery-tasks/{id}") public ApiEnvelope<?> delivery(@PathVariable String id){return ApiEnvelope.ok(service.deliveryTask(actor(),id));}
     @PostMapping("/admin/delivery-tasks/{id}/dispatch") public ApiEnvelope<?> dispatch(@PathVariable String id,@Valid @RequestBody Dispatch body,HttpServletRequest request){return command(request,body,()->service.dispatch(actor(),id,body));}
     @PostMapping("/admin/delivery-tasks/{id}/complete") public ApiEnvelope<?> complete(@PathVariable String id,@Valid @RequestBody Complete body,HttpServletRequest request){return command(request,body,()->service.complete(actor(),id,body));}
-    @GetMapping("/admin/dashboard") public ApiEnvelope<?> dashboard(@RequestParam(required=false)LocalDate date){return ApiEnvelope.ok(service.dashboard(actor(),date));}
+    @GetMapping("/admin/dashboard") public ApiEnvelope<?> dashboard(@RequestParam(name="businessDate",required=false)LocalDate date){return ApiEnvelope.ok(service.dashboard(actor(),date));}
     private RequestActor actor(){return RequestActor.current();}
     @SuppressWarnings({"unchecked","rawtypes"})
     private ApiEnvelope<?> command(HttpServletRequest request,Object body,Supplier<Map<String,Object>> action){

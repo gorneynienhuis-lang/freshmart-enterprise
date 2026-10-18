@@ -20,7 +20,7 @@ function lookup(path: string, scopes: Values[]): unknown {
         }
 }
 function interpolate(value: string, scopes: Values[]): string { return value.replace(/\{\{([^}]+)\}\}/g, (_, path: string) => String(lookup(path, scopes) ?? '')); }
-function walk(parent: Element, scopes: Values[]): void {
+function walk(parent: Element | DocumentFragment, scopes: Values[]): void {
     for (const node of [...parent.childNodes]) {
         if (node.nodeType === Node.TEXT_NODE) {
             node.textContent = interpolate(node.textContent ?? '', scopes);
@@ -33,13 +33,13 @@ function walk(parent: Element, scopes: Values[]): void {
             const fragment = document.createDocumentFragment();
             if (Array.isArray(items))
                 for (const [index, item] of items.entries()) {
-                    const holder = document.createElement('div');
+                    const holder = document.createElement('template');
                     holder.innerHTML = node.innerHTML;
-                    walk(holder, [...scopes, { [node.getAttribute('as') ?? 'item']: item, $index: index }]);
+                    walk(holder.content, [...scopes, { [node.getAttribute('as') ?? 'item']: item, $index: index }]);
                     if (item && typeof item === 'object' && '_key' in item)
-                        for (const el of holder.children)
+                        for (const el of holder.content.children)
                             el.setAttribute('data-key', String(item._key));
-                    fragment.append(...holder.childNodes);
+                    fragment.append(holder.content);
                 }
             node.replaceWith(fragment);
             continue;
@@ -76,7 +76,11 @@ export function defaults(name: PageName): Values { return structuredClone(select
 export function mountTemplate(root: HTMLElement, name: PageName, values: Values): void {
     const designs = selectedDesigns();
     root.dataset.page = name;
-    root.innerHTML = `<style>${designs[name].css}</style>${designs[name].template}`;
-    walk(root, [values]);
+    const prepared = document.createElement('template');
+    prepared.innerHTML = `<style>${designs[name].css}</style>${designs[name].template}`;
+    walk(prepared.content, [values]);
+    // Inert template contents cannot fetch unresolved {{image}} URLs. Resolve every
+    // attribute and repeated item before connecting the resulting DOM to the page.
+    root.replaceChildren(prepared.content);
     // Build-time template is trusted; runtime values are assigned as DOM text/attributes, never HTML.
 }

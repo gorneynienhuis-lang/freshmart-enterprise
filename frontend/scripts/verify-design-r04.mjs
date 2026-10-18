@@ -59,7 +59,7 @@ async function snapshot(page, name, width, version='r04') {
 }
 async function home(page) {
  const waiting=page.waitForResponse(response => new URL(response.url()).pathname==='/api/v1/home' && response.ok());
- await page.goto(base + '/');
+ await page.goto(base + '/?ui=r04');
  const data=(await (await waiting).json()).data;
  await page.locator('[data-home-featured-slot]:not([hidden])').first().waitFor();
  await ready(page,'Home');
@@ -128,7 +128,7 @@ try {
   const candidate=[...catalog.items].sort((a,b)=>(b.skus?.length??0)-(a.skus?.length??0))[0];
   assert(candidate,'No real product');
   const product=await getData(context.request,'/api/v1/products/'+encodeURIComponent(candidate.productId));
-  await page.goto(base+'/#/product/'+encodeURIComponent(product.productId));
+  await page.goto(base+'/?ui=r04#/product/'+encodeURIComponent(product.productId));
   await ready(page,'Detail');
   assert((await page.locator('[data-page="Detail"] main h1').textContent()).trim()===product.name,'Product heading mismatch');
   assert(await page.locator('.r4-detail-skus button').count()===product.skus.length,'SKU button count differs from API');
@@ -149,12 +149,12 @@ try {
   await snapshot(page,'detail',width);
   if(width===1440){
    progress('version-switch-start',{width});
-   const oldSwitch=page.getByRole('navigation',{name:'界面版本'}).getByRole('link',{name:'上一版',exact:true});
+   const oldSwitch=page.getByRole('navigation',{name:'界面版本'}).getByRole('link',{name:'当前版',exact:true});
    const hash=new URL(page.url()).hash;await oldSwitch.click();await ready(page,'Detail');
    assert(new URL(page.url()).searchParams.get('ui')==='r03'&&new URL(page.url()).hash===hash,'R03 switch did not preserve hash');
    report.navigationChecks.push({kind:'switch-r03-preserve-detail',url:page.url()});
    await page.goto(base+'/?ui=r03#/');await ready(page,'Home');await snapshot(page,'home',1440,'r03');
-   const newest=page.getByRole('navigation',{name:'界面版本'}).getByRole('link',{name:'新版',exact:true});await newest.click();await ready(page,'Home');
+   const newest=page.getByRole('navigation',{name:'界面版本'}).getByRole('link',{name:'备选设计',exact:true});await newest.click();await ready(page,'Home');
    assert(new URL(page.url()).searchParams.get('ui')==='r04'&&new URL(page.url()).hash==='#/','R04 switch did not preserve hash');
    report.navigationChecks.push({kind:'switch-r04-preserve-home',url:page.url()});
   }

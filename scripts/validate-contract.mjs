@@ -76,7 +76,7 @@ function validate(schema,value,where='$',depth=0){
 }
 function testExample(schema,value,where){examples++;try{failures.push(...validate(schema,value,where));}catch(e){failures.push(where+': '+e.message);}}
 check(doc.openapi==='3.1.0','OpenAPI version must be 3.1.0');
-check(doc.info?.version==='0.1.1','Expected contract version 0.1.1');
+check(doc.info?.version==='0.1.2','Expected contract version 0.1.2');
 check(doc['x-contract-status']==='IMPLEMENTATION_IN_PROGRESS','Implementation boundary missing');
 walk(doc,(value,where)=>{if(value.$ref){refs++;try{resolve(value.$ref)}catch(e){failures.push(where+': '+e.message)}}});
 walk(doc.components.schemas,(s,where)=>{
@@ -125,7 +125,7 @@ for(const [url,item] of Object.entries(doc.paths))for(const [method,op]of Object
  check(Object.keys(op['x-error-codes']||{}).length>0,label+': no error mapping');
  for(const error of Object.values(op['x-error-codes']||{}))check(Number.isInteger(error.code)&&error.code>0&&error.httpStatus>=400&&error.httpStatus<600&&op.responses[error.httpStatus],label+': invalid error code/status mapping');
 }
-const sim=operationMap.get('simulateSandboxPayment')?.op;check(same(sim?.['x-environments'],['dev','test','demo'])&&same(sim?.['x-roles'],['MEMBER']),'sandbox simulation must be dev/test/demo MEMBER only');
+const sim=operationMap.get('simulateSandboxPayment')?.op;check(same(sim?.['x-environments'],['dev','test','demo','showcase'])&&same(sim?.['x-roles'],['MEMBER']),'sandbox simulation must be explicit dev/test/demo/showcase MEMBER only');
 const callback=operationMap.get('receiveSandboxPaymentCallback')?.op;check(same(callback?.security,[])&&callback?.['x-channel-auth']==='HMAC-SHA256','callback must use HMAC and no Bearer');
 for(const key of ['registerMember','login','refreshSession','logout']){const op=operationMap.get(key)?.op;check((op?.parameters||[]).map(deref).some(p=>p.name==='X-CSRF-Token'&&p.required),key+': missing CSRF header');check((op?.parameters||[]).map(deref).some(p=>p.name==='Origin'&&p.required),key+': missing Origin check');}
 const states={Order:['PENDING_PAY','PAID','PICKING','READY_TO_SHIP','DELIVERING','FINISHED','CANCELED','CLOSED'],Payment:['INIT','PENDING','SUCCESS','FAILED','CLOSED'],Refund:['PENDING','PROCESSING','SUCCESS','FAILED'],Aftersale:['APPLIED','APPROVED','REJECTED','REFUNDING','COMPLETED','CANCELED'],WeightAdjustment:['NONE','REFUND_PENDING','REFUNDED','TOP_UP_PENDING','SETTLED','CANCELED']};

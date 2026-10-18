@@ -1,0 +1,20 @@
+# syntax=docker/dockerfile:1
+ARG NODE_BUILD_IMAGE
+ARG CADDY_IMAGE
+FROM ${NODE_BUILD_IMAGE} AS build
+WORKDIR /src/frontend
+COPY frontend/package.json frontend/package-lock.json ./
+RUN npm ci --no-audit --no-fund
+COPY frontend/ /src/frontend/
+COPY design/v2/ /src/design/v2/
+COPY design/r04/ /src/design/r04/
+COPY backend/src/main/resources/static/catalog/ /src/backend/src/main/resources/static/catalog/
+COPY contracts/openapi.yaml /src/contracts/openapi.yaml
+# npm ci runs inside Linux; never copy the host's macOS node_modules.
+RUN npm run verify && npm run build
+
+FROM ${CADDY_IMAGE} AS runtime
+COPY --from=build /src/frontend/dist/ /srv/
+COPY deploy/Caddyfile /etc/caddy/Caddyfile
+EXPOSE 80 443
+HEALTHCHECK --interval=20s --timeout=5s --start-period=15s --retries=5 CMD wget -q -O /dev/null http://127.0.0.1:8081/healthz || exit 1

@@ -4,7 +4,9 @@
 
 本机 Demo 入口：运行 `./scripts/demo-start.sh` 后打开 [http://localhost:5173](http://localhost:5173)。账号用 `./scripts/demo-credentials.sh` 查看；数据保存在 Git 忽略的 `.runtime/`。本轮功能与限制见 [Demo说明](docs/demo-v0.1.md)，部署见 [运行说明](deploy/README.md)，实际测试证据见 [CODEX-010](collab/codex/CODEX-010.md)。
 
-当前视觉为用户授权Codex制作的R04红白自然候选版，商城、订单/弹窗及员工工作台已统一。旧版先在GitHub另建归档分支保留，页面顶部可切换『新版 / 上一版』（`?ui=r04` / `?ui=r03`），版本索引见[UI-VERSIONS](collab/codex/UI-VERSIONS.md)。全站设计与实际验证见[CODEX-014](collab/codex/CODEX-014.md)；本轮授权覆盖下述历史Claude视觉独占描述，PPT继续暂停。
+用户已选择R03主要页面，当前默认R03，分类侧栏与手机布局已修补；R04保留为显式备选（`?ui=r04`），历史版本和素材不覆盖。页面顶部为『当前版 / 备选设计』，版本索引见[UI-VERSIONS](collab/codex/UI-VERSIONS.md)。Codex继续负责实现、修正及验证，PPT仍暂停。
+
+新增系统管理员的真实员工治理与运营/财务经营概览，员工初次改密和会话吊销已接线。[登录与后台使用](docs/登录与后台使用.md)列出七岗位账号、密码私有文件、管理入口和操作步骤。[公网部署方案](deploy/公网部署.md)首选Railway平台域名及HTTPS，目前仅完成部署准备，**尚未创建云资源或生成公网网址**；费用和平台授权待用户确认。实际证据及剩余工程范围见[CODEX-015](collab/codex/CODEX-015.md)。
 
 私有仓库：https://github.com/gorneynienhuis-lang/freshmart-enterprise
 

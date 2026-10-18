@@ -680,7 +680,7 @@ export interface paths {
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
-         *     响应allowedActions仅dev/test本人有效支付单给SIMULATE_PAYMENT，production为空。
+         *     响应allowedActions仅dev/test/demo/showcase本人有效支付单给SIMULATE_PAYMENT，production为空。
          *
          *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
          */
@@ -729,8 +729,8 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * 仅开发测试模拟本人支付结果
-         * @description 仅开发测试模拟本人支付结果
+         * 仅课程沙箱模拟本人支付结果
+         * @description 仅课程沙箱模拟本人支付结果
          *
          *     仅当前MEMBER本人资源，其他人的ID返回404；客户端不得通过memberId指定他人。production端点不注册并返回404；必须MEMBER身份且payment属于本人。服务端模拟器发送签名渠道事件，不允许用户伪造回调金额或签名密钥。该接口不是真实收费。
          *
@@ -739,6 +739,8 @@ export interface paths {
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
          *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *
+         *     showcase为独立HTTPS课程展示环境，使用合成数据、首次改密与安全Cookie；prod/production仍禁止沙箱。
          */
         post: operations["simulateSandboxPayment"];
         delete?: never;

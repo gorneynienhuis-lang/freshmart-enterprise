@@ -1,0 +1,75 @@
+{
+  "verifiedAtBusinessDate": "2026-10-18",
+  "backendPackage": {
+    "command": "./mvnw -B -ntp package",
+    "tests": 104,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontendVerify": {
+    "tests": 34,
+    "testFiles": 5,
+    "typecheck": "PASSED",
+    "generatedApiOperations": 91,
+    "productionBuild": "PASSED",
+    "warning": "single JS chunk about 557kB minified; about 137kB gzip; not yet code-split"
+  },
+  "contract": {
+    "version": "0.1.2",
+    "operations": 91,
+    "implementationCodeMarkers": 63,
+    "contractOnlyMarkers": 28,
+    "schemaExampleChecks": 1971
+  },
+  "runtime": {
+    "mysql": "8.4.11",
+    "migration": "V006",
+    "existingDataReset": false,
+    "payment": "sandbox"
+  },
+  "evidence": {
+    "selectedUi": "../ui-r03-selected/ui-check.json",
+    "commerce": "../r03-formal-business/result.json",
+    "administration": "../administration-v0.1.2/result.json",
+    "runtimeLayout": "../administration-v0.1.2/layout-final/result.json",
+    "deployPreparation": "../../../deploy/验证记录.md",
+    "bundledShowcase": "../showcase-package/result.json"
+  },
+  "sourceSha256": {
+    "backend/src/main/java/com/freshmart/commerce/CommerceController.java": "4d919c98bfd85aa4b7a8e1a416bfa53be8becaab322179f24b76dc2eb7b4da4a",
+    "backend/src/main/java/com/freshmart/commerce/SandboxSignature.java": "2f8ad0ee077a8483073cc8e8734dd37c043c36dadfffb5c9723c1796e714d4c6",
+    "backend/src/main/java/com/freshmart/common/SecurityFilter.java": "9f83738db49c3d3f18ceba02263e59878e998d049d2f2b25ccb9fae5956ec650",
+    "backend/src/main/java/com/freshmart/common/ShowcaseConfiguration.java": "bdf440a88a5b4e24ffdf78e3b22cab7f8693d6cc440f855f9ef142385edebd55",
+    "backend/src/main/java/com/freshmart/identity/EmployeeController.java": "ee2462849d502a74d58c92bf714411bca28c22ad645f57c93b7abcf922e5a474",
+    "backend/src/main/java/com/freshmart/identity/EmployeeDenialAudit.java": "b4183b72dcdb56d603ce40752bedd332b1f3657909eb6af27f2d6e083f78821a",
+    "backend/src/main/java/com/freshmart/identity/EmployeeMapper.java": "41cca4c7daf39e5f153f8f7effc9b8f45bec3ee79973e605d63186a45737b08a",
+    "backend/src/main/java/com/freshmart/identity/EmployeeModels.java": "64dc3b33229a0ea53695af9f2ac66e7230c495fde91708eb73215dc4de6c9af1",
+    "backend/src/main/java/com/freshmart/identity/EmployeeService.java": "b261f939ae262eda3860ea0caccaa53588d40ad6dce38900db9caffb1a5400c4",
+    "backend/src/main/resources/application-showcase.yml": "2b5ea4f41d8621c0d1b553e2cf43713ccd424411a29f400a7cd2625a0320633f",
+    "contracts/openapi.yaml": "2f8a630303c8fba87a925457e16745c604fda6b431b417c7216ff38be002fc66",
+    "database/migrations/V006__employee_governance.sql": "915f1ec6f73d2b888664e0c1723d0a557935063e5e6a836b1f9055868a39d068",
+    "deploy/railway/Dockerfile": "7573352e0cb0c5a1ccfa9510e6ff5c8799a436c037e4b8add1eb34b731d4cea3",
+    "deploy/railway/railway.toml": "3cc1354aa4ff63740b9fa52c6e254a8c3cfaeae5e4da2d287664257934384c9e",
+    "frontend/src/app/admin-panel.ts": "52a4495fceb838d23a1476551670a787ba2a3e455936efe1b6f5398118f5d9ea",
+    "frontend/src/app/application.ts": "107eb26eeaf4c2639d4f7a4c9e66f1c5c59f756095fd32e17315fc99564ddac1",
+    "frontend/src/app/design-version.ts": "1f0d5975163cf846dce3e0ca9aea1d8c6ce020bea190a88f022bee0cbfdbc517",
+    "frontend/src/app/service.ts": "fb722e6b177a26b6e97ee8b0148100e966f5d192696060190859893ca671a313",
+    "frontend/src/app/template.ts": "b4584a3eca416ae1bf18875bd7d099a5305918fbf4c7293276d4aa7d5921feaf",
+    "frontend/src/main.tsx": "955653aec9c0cb9427565c167d8375ebde297d0bc3988616a19238e2092f747a",
+    "frontend/src/styles/account-security.css": "08090df19d7a0d545f9cce493218ce6e6ada197711abb6cc4f7865710bec6289",
+    "frontend/src/styles/admin-panel.css": "89407e5d4a6f00877fadd11829e76b20ef7c4be90225d4bc500981c686810732",
+    "frontend/src/styles/r03-polish.css": "feec24e2800a068ed326cac323b146e1094c00131b4b39c4b20776b4937fe542",
+    "frontend/src/styles/runtime-r03.css": "715de7a8a653dce8cf76129ddeb0ffc0c591a41c6fbe05ce31f6d7ad7390387e",
+    "scripts/demo-runtime.py": "0af66dd9a85dbf1f4f1e8cb712e4e0344318db704e64aa33e96e002116be959d",
+    "scripts/deploy-public.py": "52e3dd36d6f0136e06e0e63fa1616209d1924c7ff996c03163d0c1f4936b673d",
+    "scripts/generate-demo-seed.py": "bd71feab8abd279af552c1141a2fd6ecf7e412a863e8524853af512efe567712"
+  },
+  "notVerified": [
+    "Docker image build/runtime",
+    "Railway cloud deployment and public trusted TLS",
+    "public network acceptance",
+    "cloud backup restore"
+  ],
+  "localBundledHttps": "PASSED; isolated self-signed test certificate only; not public TLS"
+}

@@ -1,0 +1,51 @@
+/* Presentation repairs for the user-selected R03. Original V2 sources stay intact. */
+html[data-design="r03"] .demo-status-bar { color: #626873; background: #FAFAFA !important; }
+html[data-design="r03"] .demo-design-switch a { color: #626873; text-decoration: none; }
+html[data-design="r03"] .demo-design-switch a[aria-current="page"] { color: #A0021F; font-weight: 600; }
+html[data-design="r03"] a:focus-visible,
+html[data-design="r03"] button:focus-visible { outline: 2px solid #A0021F; outline-offset: 3px; }
+html[data-design="r03"] nav[aria-label="账户"] a { text-decoration: none; }
+
+html[data-design="r03"] [data-page="List"] [data-catalog-categories] { box-sizing: border-box; padding: 18px 12px; gap: 4px; }
+html[data-design="r03"] [data-page="List"] [data-catalog-categories] h2 { margin: 0 10px 12px; padding-bottom: 13px; border-bottom: 1px solid #EEF0F2; font-size: 14px; line-height: 22px; font-weight: 700; color: #1B1F24; }
+html[data-design="r03"] [data-page="List"] [data-catalog-categories] a { box-sizing: border-box; display: flex; align-items: center; min-height: 42px; padding: 10px 12px; border-radius: 5px; border-left: 2px solid transparent; color: #434B55; font-size: 14px; line-height: 22px; font-weight: 400; text-decoration: none; transition: background .15s ease, color .15s ease; }
+html[data-design="r03"] [data-page="List"] [data-catalog-categories] a:hover { background: #F7F7F8; color: #A0021F; }
+html[data-design="r03"] [data-page="List"] [data-catalog-categories] a[aria-current="page"] { color: #A0021F; background: #FCF0F2; border-left-color: #A0021F; font-weight: 600; }
+html[data-design="r03"] [data-page="List"] [data-catalog-categories] a:focus-visible { outline-offset: -2px; }
+html[data-design="r03"] [data-page="List"] [aria-label="排序"] button { background: #FFF !important; color: #434B55 !important; }
+html[data-design="r03"] [data-page="List"] [aria-label="排序"] button[aria-pressed="true"] { background: #A0021F !important; color: #FFF !important; }
+html[data-design="r03"] [data-page="List"] [data-catalog-categories] ~ section > div:first-child button:not([aria-pressed]) { font: inherit; padding: 5px 9px; border: 1px solid #E2E5E9; border-radius: 4px; background: #FFF; color: #656D77; cursor: pointer; }
+
+@media (max-width: 760px) {
+  html[data-design="r03"] .demo-status-bar { padding: 7px 14px !important; font-size: 10px !important; gap: 7px !important; }
+  html[data-design="r03"] [data-page] .dhu-band > div { height: auto !important; min-height: 36px; padding: 10px 16px !important; align-items: flex-start !important; gap: 10px !important; }
+  html[data-design="r03"] [data-page] .dhu-band > div > span { flex-wrap: wrap; gap: 8px !important; }
+  html[data-design="r03"] [data-page] .dhu-band > div > span > span[aria-hidden="true"] { display: none; }
+  html[data-design="r03"] [data-page] nav[aria-label="账户"] { flex-wrap: wrap; gap: 12px !important; font-size: 11px; }
+  html[data-design="r03"] [data-page] .fm-header-row { flex-wrap: wrap !important; gap: 14px !important; padding: 18px 16px 14px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row > a:first-child { flex: 1 1 100% !important; gap: 12px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row > a:first-child img { max-width: 43%; height: auto !important; max-height: 47px; }
+  html[data-design="r03"] [data-page] .fm-header-row > a:first-child > span:last-child > span:first-child { font-size: 19px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row > div:nth-child(2) { flex: 1 1 200px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row form { height: 40px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row form label { padding: 0 9px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row form button { width: 54px !important; font-size: 13px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row > div:last-child { margin-left: auto; }
+  html[data-design="r03"] [data-page] .fm-header-row > div:last-child > a:last-child { height: 40px !important; padding: 0 10px !important; gap: 5px !important; }
+  html[data-design="r03"] [data-page] .fm-header-row > div:last-child > a:last-child > span:first-child { margin-right: 5px !important; }
+  html[data-design="r03"] [data-page] nav[aria-label="主导航"] > div { padding: 0 16px !important; gap: 16px !important; }
+  html[data-design="r03"] [data-page] nav[aria-label="主导航"] > div > a:first-child { width: 130px !important; padding: 0 10px !important; font-size: 12px; }
+  html[data-design="r03"] [data-page="List"] main { padding: 16px 16px 36px !important; }
+  html[data-design="r03"] [data-page="List"] main > div { gap: 16px !important; }
+  html[data-design="r03"] [data-page="List"] [data-catalog-categories] { display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: 1 1 100% !important; gap: 4px; padding: 14px 9px; }
+  html[data-design="r03"] [data-page="List"] [data-catalog-categories] h2 { grid-column: 1 / -1; margin-bottom: 5px; padding-bottom: 10px; }
+  html[data-design="r03"] [data-page="List"] [data-catalog-categories] a { padding: 9px 8px; font-size: 12px; line-height: 20px; min-height: 40px; }
+  html[data-design="r03"] [data-page="List"] [data-catalog-categories] ~ section { flex-basis: 100% !important; }
+  html[data-design="r03"] [data-page="List"] [data-catalog-categories] ~ section > div:first-child { padding: 15px !important; }
+  html[data-design="r03"] [data-page="List"] [data-catalog-categories] ~ section > div:nth-child(2) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 9px !important; }
+  html[data-design="r03"] [data-page="List"] article { min-width: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="r03"] [data-catalog-categories] a { transition: none; }
+}

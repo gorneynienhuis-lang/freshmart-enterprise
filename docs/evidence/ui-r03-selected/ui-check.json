@@ -1,0 +1,329 @@
+{
+  "startedAt": "2026-10-18T05:41:09.445Z",
+  "dataSource": "real local backend, anonymous browser, no mocked responses",
+  "pages": [
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "design": "r03",
+      "title": "全部商品",
+      "categories": [
+        {
+          "text": "全部商品",
+          "href": "#/products",
+          "active": "page",
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "时令蔬菜",
+          "href": "#/products?categoryId=C01",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "新鲜水果",
+          "href": "#/products?categoryId=C02",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "肉禽蛋品",
+          "href": "#/products?categoryId=C03",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "水产海鲜",
+          "href": "#/products?categoryId=C04",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "乳品烘焙",
+          "href": "#/products?categoryId=C05",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "粮油调味",
+          "href": "#/products?categoryId=C06",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "冷冻食品",
+          "href": "#/products?categoryId=C07",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "饮料酒水",
+          "href": "#/products?categoryId=C08",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        }
+      ],
+      "overflow": [],
+      "brokenImages": []
+    },
+    {
+      "width": 1024,
+      "documentWidth": 1024,
+      "design": "r03",
+      "title": "全部商品",
+      "categories": [
+        {
+          "text": "全部商品",
+          "href": "#/products",
+          "active": "page",
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "时令蔬菜",
+          "href": "#/products?categoryId=C01",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "新鲜水果",
+          "href": "#/products?categoryId=C02",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "肉禽蛋品",
+          "href": "#/products?categoryId=C03",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "水产海鲜",
+          "href": "#/products?categoryId=C04",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "乳品烘焙",
+          "href": "#/products?categoryId=C05",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "粮油调味",
+          "href": "#/products?categoryId=C06",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "冷冻食品",
+          "href": "#/products?categoryId=C07",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        },
+        {
+          "text": "饮料酒水",
+          "href": "#/products?categoryId=C08",
+          "active": null,
+          "font": "14px",
+          "decoration": "none",
+          "height": 42
+        }
+      ],
+      "overflow": [],
+      "brokenImages": []
+    },
+    {
+      "width": 390,
+      "documentWidth": 390,
+      "design": "r03",
+      "title": "全部商品",
+      "categories": [
+        {
+          "text": "全部商品",
+          "href": "#/products",
+          "active": "page",
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "时令蔬菜",
+          "href": "#/products?categoryId=C01",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "新鲜水果",
+          "href": "#/products?categoryId=C02",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "肉禽蛋品",
+          "href": "#/products?categoryId=C03",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "水产海鲜",
+          "href": "#/products?categoryId=C04",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "乳品烘焙",
+          "href": "#/products?categoryId=C05",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "粮油调味",
+          "href": "#/products?categoryId=C06",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "冷冻食品",
+          "href": "#/products?categoryId=C07",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        },
+        {
+          "text": "饮料酒水",
+          "href": "#/products?categoryId=C08",
+          "active": null,
+          "font": "12px",
+          "decoration": "none",
+          "height": 40
+        }
+      ],
+      "overflow": [
+        {
+          "tag": "A",
+          "class": "",
+          "right": 422
+        },
+        {
+          "tag": "A",
+          "class": "",
+          "right": 499
+        },
+        {
+          "tag": "A",
+          "class": "",
+          "right": 576
+        },
+        {
+          "tag": "A",
+          "class": "",
+          "right": 668
+        }
+      ],
+      "brokenImages": []
+    }
+  ],
+  "categoryChecks": [
+    {
+      "width": 1440,
+      "selected": "时令蔬菜",
+      "selectedLink": "时令蔬菜"
+    },
+    {
+      "width": 1024,
+      "selected": "时令蔬菜",
+      "selectedLink": "时令蔬菜"
+    },
+    {
+      "width": 390,
+      "selected": "时令蔬菜",
+      "selectedLink": "时令蔬菜"
+    }
+  ],
+  "navigationChecks": [
+    {
+      "width": 1440,
+      "returnAll": true,
+      "sortPriceAscending": true,
+      "focus": {
+        "active": true,
+        "outline": "solid",
+        "outlineWidth": "2px"
+      }
+    },
+    {
+      "width": 1024,
+      "returnAll": true,
+      "sortPriceAscending": true,
+      "focus": {
+        "active": true,
+        "outline": "solid",
+        "outlineWidth": "2px"
+      }
+    },
+    {
+      "width": 390,
+      "returnAll": true,
+      "sortPriceAscending": true,
+      "focus": {
+        "active": true,
+        "outline": "solid",
+        "outlineWidth": "2px"
+      }
+    },
+    {
+      "explicitR04": true,
+      "switchToSelectedR03PreservesRoute": true
+    }
+  ],
+  "errors": [],
+  "failedAssets": [],
+  "status": "PASSED"
+}

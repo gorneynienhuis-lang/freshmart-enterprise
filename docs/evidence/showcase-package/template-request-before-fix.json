@@ -1,0 +1,62 @@
+{
+  "dataSource": "isolated real showcase JAR through local self-signed HTTPS loopback proxy; anonymous new context; no mocked response, forged Origin, login or reused session",
+  "base": "https://localhost:8182",
+  "tlsScope": "self-signed local probe with ignoreHTTPSErrors:true in this new test context only; not a public CA or cloud TLS verification",
+  "pages": [
+    {
+      "name": "home",
+      "route": "/",
+      "design": "r03",
+      "title": "把新鲜，带回校园。",
+      "productCards": 18,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "brokenImages": []
+    },
+    {
+      "name": "list",
+      "route": "/#/products",
+      "design": "r03",
+      "title": "全部商品",
+      "productCards": 40,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "brokenImages": []
+    }
+  ],
+  "pageErrors": [],
+  "failedAssets": [
+    {
+      "path": "/%7B%7Bp.img%7D%7D",
+      "status": 401
+    },
+    {
+      "path": "/%7B%7Bp.img%7D%7D",
+      "status": 401
+    }
+  ],
+  "optionalAssets": [],
+  "apiResponses": [
+    {
+      "path": "/api/v1/auth/csrf",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/auth/refresh",
+      "status": 401
+    },
+    {
+      "path": "/api/v1/categories",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/home",
+      "status": 200
+    },
+    {
+      "path": "/api/v1/products",
+      "status": 200
+    }
+  ],
+  "status": "FAILED"
+}
