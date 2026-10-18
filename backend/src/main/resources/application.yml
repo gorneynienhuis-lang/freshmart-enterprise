@@ -1,11 +1,24 @@
 server:
   port: ${SERVER_PORT:8080}
+  forward-headers-strategy: none
   error:
     include-message: never
     include-stacktrace: never
 spring:
   application:
     name: fresh-mall
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:16379}
+      username: ${REDIS_USERNAME:}
+      password: ${REDIS_PASSWORD:}
+      connect-timeout: 100ms
+      timeout: 150ms
+      lettuce:
+        shutdown-timeout: 100ms
+      repositories:
+        enabled: false
   datasource:
     url: ${DB_URL:jdbc:mysql://localhost:3306/fresh_mall?serverTimezone=UTC&characterEncoding=UTF-8}
     username: ${DB_USERNAME:fresh_mall}
@@ -43,9 +56,32 @@ app:
   allowed-origins: ${APP_ALLOWED_ORIGINS:http://localhost:5173}
   public-origin: ${APP_PUBLIC_ORIGIN:http://localhost:8080}
   media-dir: ${APP_MEDIA_DIR:./.runtime/media}
+  refund-max-attempts: ${APP_REFUND_MAX_ATTEMPTS:5}
+  refund-retry-base-seconds: ${APP_REFUND_RETRY_BASE_SECONDS:10}
+  refund-retry-max-seconds: ${APP_REFUND_RETRY_MAX_SECONDS:300}
+  refund-lease-seconds: ${APP_REFUND_LEASE_SECONDS:30}
+  sandbox-refund-faults-enabled: ${APP_SANDBOX_REFUND_FAULTS_ENABLED:false}
+  commerce-jobs-enabled: ${APP_COMMERCE_JOBS_ENABLED:true}
+  monitoring-enabled: ${APP_MONITORING_ENABLED:false}
+  metrics-token-file: ${APP_METRICS_TOKEN_FILE:}
+  metrics-snapshot-delay-ms: ${APP_METRICS_SNAPSHOT_DELAY_MS:10000}
+  catalog-cache:
+    enabled: ${APP_CATALOG_CACHE_ENABLED:false}
+    ttl: 60s
+    jitter: 5s
+    failure-cooldown: 3s
+  login-account-max-failures: ${APP_LOGIN_ACCOUNT_MAX_FAILURES:5}
+  login-account-window-seconds: ${APP_LOGIN_ACCOUNT_WINDOW_SECONDS:60}
+  login-account-block-seconds: ${APP_LOGIN_ACCOUNT_BLOCK_SECONDS:900}
+  login-ip-max-failures: ${APP_LOGIN_IP_MAX_FAILURES:50}
+  login-ip-window-seconds: ${APP_LOGIN_IP_WINDOW_SECONDS:60}
+  login-ip-block-seconds: ${APP_LOGIN_IP_BLOCK_SECONDS:60}
   near-expiry-days: 3
   near-expiry-discount-basis-points: 9000
 management:
+  health:
+    redis:
+      enabled: false
   endpoints:
     web:
       exposure:

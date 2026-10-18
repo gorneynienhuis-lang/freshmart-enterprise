@@ -1,0 +1,23 @@
+{
+  "runId": "2026-10-18T07-18-53-660Z-b6b66d3e",
+  "phase": "prepare",
+  "startedAt": "2026-10-18T07:18:53.660Z",
+  "status": "FAIL",
+  "target": {
+    "schema": "fresh_mall_restore_engineering_v030_20261018a",
+    "baseUrl": "http://127.0.0.1:18081",
+    "purpose": "engineering-refund-recovery"
+  },
+  "dataSource": "Real isolated MySQL and real HTTP business APIs. Only private per-refund fault plans are changed through SQL; no refund/order/payment/outbox state is forged.",
+  "responses": [],
+  "checkedResponses": 0,
+  "schemaErrors": [],
+  "checks": [],
+  "snapshots": [],
+  "notExercised": [
+    "Browser UI is a separate acceptance window; this script verifies actual HTTP/SQL facts only."
+  ],
+  "error": "Isolated mysql operation failed; credentials and SQL output suppressed.",
+  "pendingCleanup": [],
+  "finishedAt": "2026-10-18T07:18:53.668Z"
+}

@@ -50,7 +50,7 @@ class CommerceIntegrationTest {
     String orderId(Map<String,Object>o){return string(o,"orderId");}
     Map<String,Object> pay(String id){var p=service.prepay(member,new Prepay(id,"ORDER",null));return service.simulate(member,string(p,"paymentId"),new Simulate("SUCCESS",number(p,"version")));}
     Map<String,Object> pick(String id,long actual){var o=db.order(id);var task=service.claim(picker,o.pickTaskId,new Version(o.version));var allocation=db.allocations(id).getFirst();return service.confirmPick(picker,o.pickTaskId,new PickConfirm(List.of(new PickLine(allocation.allocationId,actual,actual==allocation.reservedQuantity?"NORMAL":"WEIGHT_VARIANCE","测试实拣")),number(task,"version")));}
-    void processRefunds(String order){for(var r:db.refunds(order)){var claimed=refunds.claim(r.refundId);if(claimed!=null){gateway.execute(claimed);refunds.complete(r.refundId);}}}
+    void processRefunds(String order){for(var r:db.refunds(order)){var claimed=refunds.claim(r.refundId);if(claimed!=null){gateway.execute(claimed);refunds.complete(claimed);}}}
     String key(){return UUID.randomUUID().toString();}
     long stock(String column){return jdbc.queryForObject("SELECT "+column+" FROM fm_inventory_batch WHERE batch_id=?",Long.class,batchId);}
 
@@ -79,7 +79,7 @@ class CommerceIntegrationTest {
     }
     @Test void lighterPickingRefundSurvivesChannelCompletionRetry(){String id=orderId(order(500));pay(id);pick(id,480);var row=db.order(id);assertEquals("REFUND_PENDING",row.adjustmentStatus);assertEquals(-40,row.adjustmentDelta);assertEquals(9520,stock("on_hand"));assertEquals(0,stock("reserved"));
         assertThrows(ApiException.class,()->service.dispatch(picker,row.deliveryTaskId,new Dispatch(courier.userId(),row.version)));
-        var r=db.refunds(id).getFirst();var claimed=refunds.claim(r.refundId);gateway.execute(claimed);gateway.execute(claimed);refunds.complete(r.refundId);refunds.complete(r.refundId);
+        var r=db.refunds(id).getFirst();var claimed=refunds.claim(r.refundId);gateway.execute(claimed);gateway.execute(claimed);refunds.complete(claimed);refunds.complete(claimed);
         assertEquals(40,db.order(id).refundedAmount);assertEquals("REFUNDED",db.order(id).adjustmentStatus);assertEquals(1,jdbc.queryForObject("SELECT COUNT(*) FROM fm_sandbox_refund_receipt WHERE refund_id=?",Integer.class,r.refundId));
     }
     @Test void fullShortageCancelsAndRefundsGoodsAndFreightWithoutPhysicalStockMovement(){String id=orderId(order(500));pay(id);var before=db.order(id);

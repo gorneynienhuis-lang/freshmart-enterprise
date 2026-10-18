@@ -1,0 +1,392 @@
+{
+  "runId": "2026-10-18T07-19-47-062Z-dd31fe8b",
+  "phase": "prepare",
+  "startedAt": "2026-10-18T07:19:47.063Z",
+  "status": "PASS",
+  "target": {
+    "schema": "fresh_mall_restore_engineering_v030_20261018a",
+    "baseUrl": "http://127.0.0.1:18081",
+    "purpose": "engineering-refund-recovery"
+  },
+  "dataSource": "Real isolated MySQL and real HTTP business APIs. Only private per-refund fault plans are changed through SQL; no refund/order/payment/outbox state is forged.",
+  "responses": [
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "0d87c191-4fae-4142-a8fc-340bb1d16138",
+      "at": "2026-10-18T07:19:47.105Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "status": 201,
+      "traceId": "c1f1af49-b05c-49a5-9647-c997ae74784e",
+      "at": "2026-10-18T07:19:47.239Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "d4396088-521f-410a-b06e-a2eeaea52e8b",
+      "at": "2026-10-18T07:19:47.251Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "d80c4694-0baf-4628-a398-9b126b1a4970",
+      "at": "2026-10-18T07:19:47.308Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/addresses",
+      "status": 201,
+      "traceId": "06e5abfc-57f5-4ab8-8bef-f5c6f6bf77dc",
+      "at": "2026-10-18T07:19:47.323Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/delivery-slots",
+      "status": 200,
+      "traceId": "1a6d70dd-a05c-41b7-9fc0-41d7d011bf14",
+      "at": "2026-10-18T07:19:47.342Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "status": 200,
+      "traceId": "db3afea5-832b-4e44-98c5-30433dbd4ad3",
+      "at": "2026-10-18T07:19:47.375Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "status": 200,
+      "traceId": "9b894bfd-a073-4789-8c7c-e6f944b7972d",
+      "at": "2026-10-18T07:19:47.396Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "status": 201,
+      "traceId": "b3c4bdff-da17-4e2d-be6f-0007a5326690",
+      "at": "2026-10-18T07:19:47.420Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "status": 201,
+      "traceId": "40092372-fba2-4a9d-8e20-3ec3e8c19605",
+      "at": "2026-10-18T07:19:47.430Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/pay_e54556ac-f190-4b13-af1b-6b181ee403bf/sandbox-simulate",
+      "status": 200,
+      "traceId": "a05fb36d-2a31-4ce7-aa46-e44b24a9ac06",
+      "at": "2026-10-18T07:19:47.442Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_d59217b6-96cd-44d2-ac6c-54224cb81d17",
+      "status": 200,
+      "traceId": "8e84b064-0bc4-4825-b43d-5aa742274158",
+      "at": "2026-10-18T07:19:47.447Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/ord_d59217b6-96cd-44d2-ac6c-54224cb81d17/cancel",
+      "status": 200,
+      "traceId": "da7290c8-3ff2-4458-88ce-6c633ff9ba98",
+      "at": "2026-10-18T07:19:47.462Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "status": 200,
+      "traceId": "e69c4430-19f6-4650-89e8-9e209f315162",
+      "at": "2026-10-18T07:19:47.489Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "status": 201,
+      "traceId": "9a76fcc6-693b-42d3-a32e-354ba75f62c4",
+      "at": "2026-10-18T07:19:47.500Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "status": 201,
+      "traceId": "d19f02f3-76a5-4f68-85c0-83629744fb46",
+      "at": "2026-10-18T07:19:47.506Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/pay_1655c623-f9d4-4d44-a7a0-3735d9ba427a/sandbox-simulate",
+      "status": 200,
+      "traceId": "5d3f8cee-8488-4bf4-8d14-826bc9232a4d",
+      "at": "2026-10-18T07:19:47.514Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_f54b744b-5921-44fb-8017-a63a69de60c8",
+      "status": 200,
+      "traceId": "2a8a4c46-7a1e-4a59-879c-74cba556bc7a",
+      "at": "2026-10-18T07:19:47.518Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/ord_f54b744b-5921-44fb-8017-a63a69de60c8/cancel",
+      "status": 200,
+      "traceId": "4c567429-c4d0-4f37-b4e7-d17fe84662db",
+      "at": "2026-10-18T07:19:47.528Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "status": 200,
+      "traceId": "ceb6f670-bea3-456e-876a-080e3424846d",
+      "at": "2026-10-18T07:19:47.554Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "status": 201,
+      "traceId": "d13a1a2c-1489-40d7-a24e-3548dd3314e5",
+      "at": "2026-10-18T07:19:47.564Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "status": 201,
+      "traceId": "e9e566b9-5d05-4e9d-affd-8c1da63778c0",
+      "at": "2026-10-18T07:19:47.570Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/pay_eef4110f-c2c7-439c-8ef3-dd2556273af2/sandbox-simulate",
+      "status": 200,
+      "traceId": "465cc50a-66eb-456a-9b17-26e11066afad",
+      "at": "2026-10-18T07:19:47.576Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_3f3d7cbc-6537-401c-9aca-d2e5ec1f1bcb",
+      "status": 200,
+      "traceId": "8359439f-dca6-4886-b31a-7c5d85304a27",
+      "at": "2026-10-18T07:19:47.580Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/ord_3f3d7cbc-6537-401c-9aca-d2e5ec1f1bcb/cancel",
+      "status": 200,
+      "traceId": "32184d48-65e8-4692-a43f-c2966f707350",
+      "at": "2026-10-18T07:19:47.590Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "status": 200,
+      "traceId": "88c78a88-5faf-4537-a338-0c2898d72f61",
+      "at": "2026-10-18T07:19:47.616Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "status": 201,
+      "traceId": "a396fda2-87f5-43ab-8ef7-09040f20bc80",
+      "at": "2026-10-18T07:19:47.628Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "status": 201,
+      "traceId": "d64f802c-2e39-48b9-a8ba-c4322d1c57e0",
+      "at": "2026-10-18T07:19:47.632Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/payments/pay_3106e5da-1cd2-488e-9b02-cb29bec04ef7/sandbox-simulate",
+      "status": 200,
+      "traceId": "1b4eaea5-9c65-4186-b15f-f87e38f21efa",
+      "at": "2026-10-18T07:19:47.639Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "status": 200,
+      "traceId": "c215b10e-f65a-4d85-b114-d82b14719b54",
+      "at": "2026-10-18T07:19:47.643Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5/cancel",
+      "status": 200,
+      "traceId": "6c955c21-6b29-4043-bdb3-f634c7ea2997",
+      "at": "2026-10-18T07:19:47.651Z"
+    }
+  ],
+  "checkedResponses": 31,
+  "schemaErrors": [],
+  "checks": [
+    "Four cancellations used real API; per-refund faults armed while isolated jobs disabled, no financial state forged."
+  ],
+  "snapshots": [
+    {
+      "label": "prepared-with-jobs-disabled",
+      "scenario": "transient",
+      "at": "2026-10-18T07:19:47.481Z",
+      "amount": 1190,
+      "orderId": "ord_d59217b6-96cd-44d2-ac6c-54224cb81d17",
+      "failedAt": null,
+      "refundId": "ref_9f04a09f-1799-4c78-ba83-26c1e6e072c4",
+      "paymentId": "pay_e54556ac-f190-4b13-af1b-6b181ee403bf",
+      "executorId": "SYSTEM",
+      "reviewerId": null,
+      "availableAt": "2026-10-18 07:19:47.457974",
+      "attemptCount": 0,
+      "outboxStatus": "PENDING",
+      "receiptCount": 0,
+      "refundStatus": "PENDING",
+      "lastErrorCode": null,
+      "receiptAmount": null,
+      "refundVersion": 0,
+      "faultRemaining": 3,
+      "faultTriggered": 0,
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "leaseGeneration": 0,
+      "cycleAttemptCount": 0,
+      "orderRefundedAmount": 0,
+      "receiptBindingValid": 0
+    },
+    {
+      "label": "prepared-with-jobs-disabled",
+      "scenario": "rejected",
+      "at": "2026-10-18T07:19:47.547Z",
+      "amount": 1190,
+      "orderId": "ord_f54b744b-5921-44fb-8017-a63a69de60c8",
+      "failedAt": null,
+      "refundId": "ref_b1124357-638f-47a1-9617-42dde1fb1174",
+      "paymentId": "pay_1655c623-f9d4-4d44-a7a0-3735d9ba427a",
+      "executorId": "SYSTEM",
+      "reviewerId": null,
+      "availableAt": "2026-10-18 07:19:47.525504",
+      "attemptCount": 0,
+      "outboxStatus": "PENDING",
+      "receiptCount": 0,
+      "refundStatus": "PENDING",
+      "lastErrorCode": null,
+      "receiptAmount": null,
+      "refundVersion": 0,
+      "faultRemaining": 1,
+      "faultTriggered": 0,
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "leaseGeneration": 0,
+      "cycleAttemptCount": 0,
+      "orderRefundedAmount": 0,
+      "receiptBindingValid": 0
+    },
+    {
+      "label": "prepared-with-jobs-disabled",
+      "scenario": "lost-ack",
+      "at": "2026-10-18T07:19:47.609Z",
+      "amount": 1190,
+      "orderId": "ord_3f3d7cbc-6537-401c-9aca-d2e5ec1f1bcb",
+      "failedAt": null,
+      "refundId": "ref_77ea6d6e-a810-4a46-8b05-a2c39a832d8f",
+      "paymentId": "pay_eef4110f-c2c7-439c-8ef3-dd2556273af2",
+      "executorId": "SYSTEM",
+      "reviewerId": null,
+      "availableAt": "2026-10-18 07:19:47.587284",
+      "attemptCount": 0,
+      "outboxStatus": "PENDING",
+      "receiptCount": 0,
+      "refundStatus": "PENDING",
+      "lastErrorCode": null,
+      "receiptAmount": null,
+      "refundVersion": 0,
+      "faultRemaining": 1,
+      "faultTriggered": 0,
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "leaseGeneration": 0,
+      "cycleAttemptCount": 0,
+      "orderRefundedAmount": 0,
+      "receiptBindingValid": 0
+    },
+    {
+      "label": "prepared-with-jobs-disabled",
+      "scenario": "ui-retry",
+      "at": "2026-10-18T07:19:47.670Z",
+      "amount": 1190,
+      "orderId": "ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "failedAt": null,
+      "refundId": "ref_5efac181-2fc1-48d6-9728-512eda6037c6",
+      "paymentId": "pay_3106e5da-1cd2-488e-9b02-cb29bec04ef7",
+      "executorId": "SYSTEM",
+      "reviewerId": null,
+      "availableAt": "2026-10-18 07:19:47.648340",
+      "attemptCount": 0,
+      "outboxStatus": "PENDING",
+      "receiptCount": 0,
+      "refundStatus": "PENDING",
+      "lastErrorCode": null,
+      "receiptAmount": null,
+      "refundVersion": 0,
+      "faultRemaining": 1,
+      "faultTriggered": 0,
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "leaseGeneration": 0,
+      "cycleAttemptCount": 0,
+      "orderRefundedAmount": 0,
+      "receiptBindingValid": 0
+    }
+  ],
+  "notExercised": [
+    "Browser UI is a separate acceptance window; this script verifies actual HTTP/SQL facts only."
+  ],
+  "databaseVersion": "8.4.11",
+  "sourceSha256": {
+    "backend/src/main/java/com/freshmart/commerce/RefundProcessor.java": "19d4cfa9e96a3752a9f7836f8830d84d50a7323478ea280db60539aeb776a13b",
+    "backend/src/main/java/com/freshmart/commerce/SandboxRefundReceiptStore.java": "bd31d0e74eac4253ee53c72c30b21746526c665d2a757a3641fe220727edeeba",
+    "database/migrations/V013__refund_recovery.sql": "bf3839281bfc95a8797ab868f4d4ebcdbe24746522cc66dbc267863c2b1c7c70"
+  },
+  "next": "Root may now restart ONLY the isolated instance with jobs enabled and faults explicitly enabled; then run verify.",
+  "finishedAt": "2026-10-18T07:19:47.671Z"
+}

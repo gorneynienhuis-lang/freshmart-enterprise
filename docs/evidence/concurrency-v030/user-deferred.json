@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-18T07:42:26.835895+00:00",
+  "status": "USER_DEFERRED",
+  "userDecision": "暂不执行，保留测试脚本",
+  "businessHttpSent": 0,
+  "databaseBusinessWrites": 0,
+  "exclusiveBusinessWindow": false,
+  "scriptRetained": true,
+  "futureExecutionRequiresFreshExplicitUserAuthorization": true
+}

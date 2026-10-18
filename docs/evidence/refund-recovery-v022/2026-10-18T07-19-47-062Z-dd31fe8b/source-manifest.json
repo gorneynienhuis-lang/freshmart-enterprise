@@ -1,0 +1,16 @@
+{
+  "recordedAt": "2026-10-18T07:30:54.750861+00:00",
+  "recordedAfterExecution": true,
+  "note": "Post-run source fingerprints; runtime/JAR ownership was verified separately by root. No runtime restart or business write performed.",
+  "sha256": {
+    "scripts/e2e-refund-recovery.mjs": "1e357fabbe3ba94014db2dd0b7cd06c2ef554b8c95bb9a1fd4da104dddacffa3",
+    "frontend/scripts/e2e-refund-retry.mjs": "b773de96809969a9c9b0bbb8b7d8e42cf0b99161dc9a74c88d3d2de6fd12f2a3",
+    "frontend/src/app/application.ts": "e0d9f2a52c512a3cf08aaa28e69608b53836505bf7891adef220c9086a4e9352",
+    "frontend/src/app/lifecycle-panel.ts": "00ccdaa660c05239744328a434f6a46696fa851860c85c93b123556dbf4abb08",
+    "frontend/src/app/lifecycle-service.ts": "71e54146f1ed1c434c26c2f5786856bab092552b73fbc0e259425a5d6ec59ed3",
+    "backend/src/main/java/com/freshmart/commerce/RefundProcessor.java": "19d4cfa9e96a3752a9f7836f8830d84d50a7323478ea280db60539aeb776a13b",
+    "backend/src/main/java/com/freshmart/commerce/SandboxRefundGateway.java": "4b3eaaac12394c7b0dfb8bacc991cb81972ad61d1dca1413f416aef78a7bd8af",
+    "backend/src/main/java/com/freshmart/commerce/SandboxRefundReceiptStore.java": "bd31d0e74eac4253ee53c72c30b21746526c665d2a757a3641fe220727edeeba",
+    "database/migrations/V013__refund_recovery.sql": "bf3839281bfc95a8797ab868f4d4ebcdbe24746522cc66dbc267863c2b1c7c70"
+  }
+}

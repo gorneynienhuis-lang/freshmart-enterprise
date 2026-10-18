@@ -1,0 +1,26 @@
+{
+  "scope": "No live application monitoring claim; SHA256 verified official artifacts, real promtool synthetic rule tests and local Python controller safety tests only.",
+  "python_safety_tests": {
+    "command": "python3 deploy/monitoring/test_runtime.py",
+    "tests": 4,
+    "failures": 0
+  },
+  "files_sha256": {
+    "scripts/monitoring-runtime.py": "25a0adc57fd97b942ac8fc18e5fb227a0af2f63b84511816718ccfa5e0243520",
+    "deploy/monitoring/prometheus.lock.json": "b1b95df0a8c441cb5194154fe1de4b4f205b17b237df21a86614ac52e18a5485",
+    "deploy/monitoring/prometheus.yml.template": "0ac7a2df1f133d817bcfa22ff618d055acaf74101b6d593d85c66ba121c5da99",
+    "deploy/monitoring/alerts.yml": "c6c15fe639a2bdc69fe1ee3bef36fc67f86f18efea554936bd1f296026725a9d",
+    "deploy/monitoring/alerts.test.yml": "ffda6d50c863f77e89148507b3af48907f7dfe48af04aaf2c4e5dbe5ab117686",
+    "deploy/monitoring/test_runtime.py": "815618c4256d14aa8be6206d6f885bfb70119b71e2cc6365a170e80aa290e907",
+    "deploy/monitoring/capture_ui.mjs": "bb231202d99d1e60bb15c4f494daa65204304c719acbe4e5c44b8a6dc802cbe0"
+  },
+  "native_capture_syntax_check": {
+    "command": "node --check deploy/monitoring/capture_ui.mjs",
+    "exit_code": 0
+  },
+  "first_runtime_start_attempt": {
+    "result": "OWNED_CHILD_SENT_SIGTERM",
+    "reason": "Darwin ps with LANG=C escaped the Chinese executable path, so exact executable verification rejected this attempt. The script sent SIGTERM to its own newly-created child; no unrelated PID was signaled.",
+    "fix": "Whitelist UTF-8 locale for process fingerprints; real retry verified executable and started owned Prometheus PID48890. No other process was stopped."
+  }
+}

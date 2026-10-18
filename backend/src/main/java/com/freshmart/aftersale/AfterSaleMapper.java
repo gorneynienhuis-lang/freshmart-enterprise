@@ -9,6 +9,7 @@ public interface AfterSaleMapper {
  @Select("SELECT * FROM fm_aftersale WHERE aftersale_id=#{id}") CaseRow find(String id);
  @Select("SELECT * FROM fm_aftersale WHERE aftersale_id=#{id} FOR UPDATE") @Options(useCache=false,flushCache=Options.FlushCachePolicy.TRUE) CaseRow lock(String id);
  @Select("SELECT * FROM fm_aftersale_line WHERE aftersale_id=#{id} ORDER BY order_item_id") List<LineRow> lines(String id);
+ @Select("SELECT * FROM fm_aftersale_line WHERE aftersale_id=#{id} ORDER BY order_item_id FOR UPDATE") @Options(useCache=false,flushCache=Options.FlushCachePolicy.TRUE) List<LineRow> lockRefundLines(String id);
  @Insert("INSERT INTO fm_aftersale_evidence(aftersale_id,media_id) VALUES(#{aftersale},#{media})") void addEvidence(@Param("aftersale")String aftersale,@Param("media")String media);
  @Select("SELECT media_id FROM fm_aftersale_evidence WHERE aftersale_id=#{id} ORDER BY media_id") List<String> evidence(String id);
  @Select("SELECT COUNT(*) FROM fm_aftersale_active_line WHERE order_item_id=#{id}") long activeCount(String id);
@@ -24,6 +25,7 @@ public interface AfterSaleMapper {
  @Insert("INSERT INTO fm_aftersale_active_line(order_item_id,aftersale_id) VALUES(#{item},#{id})") void activate(@Param("item") String item,@Param("id") String id);
  @Delete("DELETE FROM fm_aftersale_active_line WHERE aftersale_id=#{id}") void release(String id);
  @Select("SELECT * FROM fm_refund WHERE aftersale_id=#{id} ORDER BY refund_id") List<RefundRow> caseRefunds(String id);
+ @Select("SELECT * FROM fm_refund WHERE aftersale_id=#{id} ORDER BY refund_id FOR UPDATE") @Options(useCache=false,flushCache=Options.FlushCachePolicy.TRUE) List<RefundRow> lockCaseRefunds(String id);
  String REFUND_FILTER="1=1 <if test='status!=null'>AND status=#{status}</if><if test='order!=null'>AND order_id=#{order}</if>";
  @Select("<script>SELECT * FROM fm_refund WHERE "+REFUND_FILTER+" ORDER BY created_at DESC,refund_id LIMIT #{size} OFFSET #{offset}</script>") List<RefundRow> refunds(@Param("status") String status,@Param("order") String order,@Param("size") int size,@Param("offset") long offset);
  @Select("<script>SELECT COUNT(*) FROM fm_refund WHERE "+REFUND_FILTER+"</script>") long countRefunds(@Param("status") String status,@Param("order") String order);

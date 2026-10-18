@@ -1,0 +1,37 @@
+{
+  "snapshot": "20261018T071320Z-e9b367d1",
+  "snapshotSourceState": "working tree copied at invocation; not a clean-install or remote-CI claim",
+  "baseCommit": "d96169bdbf720ed3af54a1d296443a59fc5888c2",
+  "copiedAt": "2026-10-18T07:13:20.868177+00:00",
+  "sourceManifestSha256": "5c230fb00d326833fe4d5225919244487a77721aff0d30bcd12001a58ee7cd1f",
+  "verificationSha256": "6f2dee0129ae1cc3e5af3f2f23f25e7fb01dc4db5830924c0e634f1cfa14a4e5",
+  "builtJarSha256": "aa267f513059bad34a0538b2fb0570af6a81ef6dba11ec7451d72e728ef4b4c5",
+  "copiedJavaSources": {
+    "backend/src/main/java/com/freshmart/cache/CatalogCacheIdentity.java": "852fdf0b7307801fa71567cd42eab32a21cb450fa9a91eadcb8d8388eddb5ddd",
+    "backend/src/main/java/com/freshmart/cache/PublicCategoryCache.java": "4cdc36d771f66ce730315c9189198e6ad146f7696ac8ff5cfb010f25b75e7f4e",
+    "backend/src/main/java/com/freshmart/cache/CatalogRedisClientConfiguration.java": "b8fb1c0ac4dde8de533fa8b83bc3d646b2bab87c25b7f2106f6a6c9a320c0dc2",
+    "backend/src/main/java/com/freshmart/catalog/CatalogService.java": "12fe94db55ed0d80d79553c3c2c67b6da6f134f12ed760c334bf6fbd9ddec239",
+    "backend/src/test/java/com/freshmart/cache/PublicCategoryCacheTest.java": "603a40f17f54c1dc93c1e5883ecfbdd080feed6794e74f82a9f5f02556239048"
+  },
+  "runtimeScriptsHashesCapturedAfterExecutionAt": "2026-10-18T07:24:43.074272+00:00",
+  "runtimeScripts": {
+    "scripts/redis-runtime.py": "1c2f97871bda1a8e6b99d306aa939ff1045f1f4bd8457ceddc128f9b4f907559",
+    "scripts/engineering-runtime.py": "fff6a220925c9be414208d2dcaf1e6ee024ed01e19fb4edb72c7369214c3a9ba",
+    "scripts/verify-redis-live.py": "58929e2cefd9ee0586d1004c580a6933c12c917caa6cca2f1ee5ef30a864e95d",
+    "scripts/tests/test_engineering_runtime.py": "ac6c88e45a31a17bfdab9e0f13efdc24893d12a3860536b691b2891292eb8db3",
+    "scripts/tests/test_redis_runtime.py": "a7bf52a5ee0a62c3bbeef49668c750785046a68e7ffa403f730535e12c858650"
+  },
+  "fullBackendTests": {
+    "tests": 192,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverageLine": {
+    "missed": 122,
+    "covered": 2029
+  },
+  "redisArchiveSha256": "d33935732f7fc15476295fe05f5ce740927bc14847798e47b3f67b4f27b8b478",
+  "redisBinarySha256": "03bcb53683d831c79c298fc81da3ed368c3763e2f5c639c1372a8cfd23495973",
+  "linuxDockerCloudValidated": false
+}

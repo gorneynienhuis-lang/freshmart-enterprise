@@ -1,0 +1,623 @@
+{
+  "capturedAt": "2026-10-18T07:26:51.897Z",
+  "label": "business-dead",
+  "dataSource": "Actual Prometheus 3.15.0 HTTP APIs and native browser UI. No mocked responses, interception, fixture scrape, or main application/database access.",
+  "queries": [
+    {
+      "expression": "up{job=\"freshmall\"}",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "__name__": "up",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.911,
+              "1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "expression": "{__name__=~\"freshmall_outbox_.*|freshmall_refund_failed|freshmall_inventory_.*|freshmall_business_.*\"}",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "__name__": "freshmall_business_snapshot_collection_success",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.913,
+              "1"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_business_snapshot_collections_total",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "result": "failure"
+            },
+            "value": [
+              1792308411.913,
+              "0"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_business_snapshot_collections_total",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "result": "success"
+            },
+            "value": [
+              1792308411.913,
+              "156"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_business_snapshot_last_success_timestamp_seconds",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.913,
+              "1792308409"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_inventory_invariant_violations",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.913,
+              "0"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_inventory_negative_stock_batches",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.913,
+              "0"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_outbox_events",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "state": "DEAD"
+            },
+            "value": [
+              1792308411.913,
+              "1"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_outbox_events",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "state": "PENDING"
+            },
+            "value": [
+              1792308411.913,
+              "0"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_outbox_events",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "state": "PROCESSING"
+            },
+            "value": [
+              1792308411.913,
+              "0"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_outbox_oldest_pending_age_seconds",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.913,
+              "0"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_outbox_processing_overdue",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.913,
+              "0"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "freshmall_refund_failed",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308411.913,
+              "1"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "expression": "ALERTS{alertname=~\"FreshMall.*\"}",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "__name__": "ALERTS",
+              "alertname": "FreshMallOutboxDead",
+              "alertstate": "firing",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "severity": "critical",
+              "state": "DEAD"
+            },
+            "value": [
+              1792308411.915,
+              "1"
+            ]
+          },
+          {
+            "metric": {
+              "__name__": "ALERTS",
+              "alertname": "FreshMallRefundFailed",
+              "alertstate": "firing",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "severity": "critical"
+            },
+            "value": [
+              1792308411.915,
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "screens": [
+    "business-dead-targets.png",
+    "business-dead-alerts.png",
+    "business-dead-up-graph.png",
+    "business-dead-dead-graph.png"
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "prometheusVersion": "3.15.0",
+  "targets": [
+    {
+      "job": "freshmall",
+      "instance": "127.0.0.1:18081",
+      "health": "up",
+      "lastError": "",
+      "lastScrape": "2026-10-18T07:26:49.746342Z",
+      "lastScrapeDuration": 0.007445042,
+      "scrapeUrl": "http://127.0.0.1:18081/actuator/prometheus"
+    }
+  ],
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "FreshMallOutboxDead",
+        "instance": "127.0.0.1:18081",
+        "job": "freshmall",
+        "severity": "critical",
+        "state": "DEAD"
+      },
+      "annotations": {
+        "summary": "Refund outbox contains a dead event requiring finance recovery"
+      },
+      "state": "firing",
+      "activeAt": "2026-10-18T07:24:16.96732943Z",
+      "value": "1e+00"
+    },
+    {
+      "labels": {
+        "alertname": "FreshMallRefundFailed",
+        "instance": "127.0.0.1:18081",
+        "job": "freshmall",
+        "severity": "critical"
+      },
+      "annotations": {
+        "summary": "A failed refund requires controlled finance recovery"
+      },
+      "state": "firing",
+      "activeAt": "2026-10-18T07:24:16.96732943Z",
+      "value": "1e+00"
+    }
+  ],
+  "upHistory": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "up",
+          "instance": "127.0.0.1:18081",
+          "job": "freshmall"
+        },
+        "values": [
+          [
+            1792307981.916,
+            "1"
+          ],
+          [
+            1792307986.916,
+            "1"
+          ],
+          [
+            1792307991.916,
+            "1"
+          ],
+          [
+            1792307996.916,
+            "1"
+          ],
+          [
+            1792308001.916,
+            "1"
+          ],
+          [
+            1792308006.916,
+            "1"
+          ],
+          [
+            1792308011.916,
+            "1"
+          ],
+          [
+            1792308016.916,
+            "1"
+          ],
+          [
+            1792308021.916,
+            "1"
+          ],
+          [
+            1792308026.916,
+            "1"
+          ],
+          [
+            1792308031.916,
+            "1"
+          ],
+          [
+            1792308036.916,
+            "1"
+          ],
+          [
+            1792308041.916,
+            "1"
+          ],
+          [
+            1792308046.916,
+            "1"
+          ],
+          [
+            1792308051.916,
+            "1"
+          ],
+          [
+            1792308056.916,
+            "1"
+          ],
+          [
+            1792308061.916,
+            "1"
+          ],
+          [
+            1792308066.916,
+            "1"
+          ],
+          [
+            1792308071.916,
+            "1"
+          ],
+          [
+            1792308076.916,
+            "1"
+          ],
+          [
+            1792308081.916,
+            "1"
+          ],
+          [
+            1792308086.916,
+            "1"
+          ],
+          [
+            1792308091.916,
+            "1"
+          ],
+          [
+            1792308096.916,
+            "1"
+          ],
+          [
+            1792308101.916,
+            "1"
+          ],
+          [
+            1792308106.916,
+            "1"
+          ],
+          [
+            1792308111.916,
+            "1"
+          ],
+          [
+            1792308116.916,
+            "1"
+          ],
+          [
+            1792308121.916,
+            "1"
+          ],
+          [
+            1792308126.916,
+            "1"
+          ],
+          [
+            1792308131.916,
+            "1"
+          ],
+          [
+            1792308136.916,
+            "1"
+          ],
+          [
+            1792308141.916,
+            "1"
+          ],
+          [
+            1792308146.916,
+            "1"
+          ],
+          [
+            1792308151.916,
+            "1"
+          ],
+          [
+            1792308156.916,
+            "1"
+          ],
+          [
+            1792308161.916,
+            "0"
+          ],
+          [
+            1792308166.916,
+            "0"
+          ],
+          [
+            1792308171.916,
+            "0"
+          ],
+          [
+            1792308176.916,
+            "0"
+          ],
+          [
+            1792308181.916,
+            "0"
+          ],
+          [
+            1792308186.916,
+            "0"
+          ],
+          [
+            1792308191.916,
+            "0"
+          ],
+          [
+            1792308196.916,
+            "0"
+          ],
+          [
+            1792308201.916,
+            "0"
+          ],
+          [
+            1792308206.916,
+            "0"
+          ],
+          [
+            1792308211.916,
+            "0"
+          ],
+          [
+            1792308216.916,
+            "0"
+          ],
+          [
+            1792308221.916,
+            "0"
+          ],
+          [
+            1792308226.916,
+            "0"
+          ],
+          [
+            1792308231.916,
+            "0"
+          ],
+          [
+            1792308236.916,
+            "0"
+          ],
+          [
+            1792308241.916,
+            "0"
+          ],
+          [
+            1792308246.916,
+            "0"
+          ],
+          [
+            1792308251.916,
+            "0"
+          ],
+          [
+            1792308256.916,
+            "1"
+          ],
+          [
+            1792308261.916,
+            "1"
+          ],
+          [
+            1792308266.916,
+            "1"
+          ],
+          [
+            1792308271.916,
+            "1"
+          ],
+          [
+            1792308276.916,
+            "1"
+          ],
+          [
+            1792308281.916,
+            "1"
+          ],
+          [
+            1792308286.916,
+            "1"
+          ],
+          [
+            1792308291.916,
+            "1"
+          ],
+          [
+            1792308296.916,
+            "1"
+          ],
+          [
+            1792308301.916,
+            "1"
+          ],
+          [
+            1792308306.916,
+            "1"
+          ],
+          [
+            1792308311.916,
+            "1"
+          ],
+          [
+            1792308316.916,
+            "1"
+          ],
+          [
+            1792308321.916,
+            "1"
+          ],
+          [
+            1792308326.916,
+            "1"
+          ],
+          [
+            1792308331.916,
+            "1"
+          ],
+          [
+            1792308336.916,
+            "1"
+          ],
+          [
+            1792308341.916,
+            "1"
+          ],
+          [
+            1792308346.916,
+            "1"
+          ],
+          [
+            1792308351.916,
+            "1"
+          ],
+          [
+            1792308356.916,
+            "1"
+          ],
+          [
+            1792308361.916,
+            "1"
+          ],
+          [
+            1792308366.916,
+            "1"
+          ],
+          [
+            1792308371.916,
+            "1"
+          ],
+          [
+            1792308376.916,
+            "1"
+          ],
+          [
+            1792308381.916,
+            "1"
+          ],
+          [
+            1792308386.916,
+            "1"
+          ],
+          [
+            1792308391.916,
+            "1"
+          ],
+          [
+            1792308396.916,
+            "1"
+          ],
+          [
+            1792308401.916,
+            "1"
+          ],
+          [
+            1792308406.916,
+            "1"
+          ],
+          [
+            1792308411.916,
+            "1"
+          ]
+        ]
+      }
+    ]
+  },
+  "graphPageText": "Prometheus\n\nQuery\nAlerts\nStatus\nQuery\nAlerts\nStatus\nup{job=\"freshmall\"}\nExecute\nTable\nGraph\nExplain\nEnd time\nUnstacked\nStacked\nup{instance=\"127.0.0.1:18081\", job=\"freshmall\"}\n\nClick: show single series, ⌘ + click: hide single series\n\nAdd query",
+  "status": "CAPTURED"
+}

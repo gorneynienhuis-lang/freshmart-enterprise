@@ -1,0 +1,14 @@
+{
+  "version": "3.15.0",
+  "platform": "darwin-arm64",
+  "release_url": "https://github.com/prometheus/prometheus/releases/tag/v3.15.0",
+  "release_api": "https://api.github.com/repos/prometheus/prometheus/releases/tags/v3.15.0",
+  "archive": "prometheus-3.15.0.darwin-arm64.tar.gz",
+  "archive_url": "https://github.com/prometheus/prometheus/releases/download/v3.15.0/prometheus-3.15.0.darwin-arm64.tar.gz",
+  "archive_bytes": 109656029,
+  "archive_sha256": "920df4d17e78b3b0175af144eb318b0c74d1cf7b1d1251b326966f0e81977260",
+  "checksum_url": "https://github.com/prometheus/prometheus/releases/download/v3.15.0/sha256sums.txt",
+  "checksum_sha256": "023cab1e6b275ee1b8f5f64215a01d74bbb1b19c45183b7296ced4aa4532707b",
+  "license": "Apache-2.0",
+  "verified_on": "2026-10-18"
+}

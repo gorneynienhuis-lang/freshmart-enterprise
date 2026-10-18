@@ -1,0 +1,135 @@
+# Synthetic time series are rule-engine tests, not actual application monitoring evidence.
+rule_files: [alerts.yml]
+evaluation_interval: 5s
+tests:
+  - name: real-prometheus-rule-engine-down-and-recovery
+    interval: 5s
+    input_series:
+      - series: 'up{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '1 0+0x6 1+0x12'
+      - series: 'freshmall_business_snapshot_collection_success{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '1+0x20'
+      - series: 'freshmall_business_snapshot_last_success_timestamp_seconds{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '0+5x20'
+    alert_rule_test:
+      - eval_time: 10s
+        alertname: FreshMallApplicationDown
+        exp_alerts: []
+      - eval_time: 25s
+        alertname: FreshMallApplicationDown
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: '127.0.0.1:18081', severity: critical}
+            exp_annotations: {summary: FreshMall scrape target is unavailable}
+      - eval_time: 50s
+        alertname: FreshMallApplicationDown
+        exp_alerts: []
+      - eval_time: 50s
+        alertname: FreshMallBusinessSnapshotUnavailable
+        exp_alerts: []
+  - name: fault-gauges-fire-and-recover
+    interval: 5s
+    input_series:
+      - series: 'up{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '1+0x20'
+      - series: 'freshmall_business_snapshot_collection_success{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '1+0x20'
+      - series: 'freshmall_business_snapshot_last_success_timestamp_seconds{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '0+5x20'
+      - series: 'freshmall_outbox_events{job="freshmall",instance="127.0.0.1:18081",state="DEAD"}'
+        values: '0 1+0x6 0+0x12'
+      - series: 'freshmall_outbox_processing_overdue{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '0 1+0x6 0+0x12'
+      - series: 'freshmall_refund_failed{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '0 1+0x6 0+0x12'
+      - series: 'freshmall_inventory_negative_stock_batches{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '0 1+0x6 0+0x12'
+      - series: 'freshmall_inventory_invariant_violations{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '0 1+0x6 0+0x12'
+      - series: 'freshmall_outbox_oldest_pending_age_seconds{job="freshmall",instance="127.0.0.1:18081"}'
+        values: '0 180+0x12 0+0x6'
+    alert_rule_test:
+      - eval_time: 25s
+        alertname: FreshMallOutboxDead
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: '127.0.0.1:18081', state: DEAD, severity: critical}
+            exp_annotations: {summary: Refund outbox contains a dead event requiring finance recovery}
+      - eval_time: 25s
+        alertname: FreshMallOutboxLeaseOverdue
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: '127.0.0.1:18081', severity: warning}
+            exp_annotations: {summary: Refund outbox processing lease is overdue}
+      - eval_time: 25s
+        alertname: FreshMallRefundFailed
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: '127.0.0.1:18081', severity: critical}
+            exp_annotations: {summary: A failed refund requires controlled finance recovery}
+      - eval_time: 25s
+        alertname: FreshMallNegativeStock
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: '127.0.0.1:18081', severity: critical}
+            exp_annotations: {summary: Inventory contains a negative stock balance}
+      - eval_time: 25s
+        alertname: FreshMallInventoryInvariantViolation
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: '127.0.0.1:18081', severity: critical}
+            exp_annotations: {summary: Inventory batch balance or lifecycle invariant is violated}
+      - eval_time: 50s
+        alertname: FreshMallOutboxDead
+        exp_alerts: []
+      - eval_time: 50s
+        alertname: FreshMallOutboxLeaseOverdue
+        exp_alerts: []
+      - eval_time: 50s
+        alertname: FreshMallRefundFailed
+        exp_alerts: []
+      - eval_time: 50s
+        alertname: FreshMallNegativeStock
+        exp_alerts: []
+      - eval_time: 50s
+        alertname: FreshMallInventoryInvariantViolation
+        exp_alerts: []
+      - eval_time: 50s
+        alertname: FreshMallOutboxStalled
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: '127.0.0.1:18081', severity: warning}
+            exp_annotations: {summary: Oldest pending refund event has exceeded the classroom budget}
+      - eval_time: 80s
+        alertname: FreshMallOutboxStalled
+        exp_alerts: []
+  - name: stale-missing-or-failed-snapshot-is-not-green
+    interval: 5s
+    input_series:
+      - series: 'up{job="freshmall",instance="failed"}'
+        values: '1+0x30'
+      - series: 'freshmall_business_snapshot_collection_success{job="freshmall",instance="failed"}'
+        values: '1 0+0x6 1+0x23'
+      - series: 'freshmall_business_snapshot_last_success_timestamp_seconds{job="freshmall",instance="failed"}'
+        values: '0+5x30'
+      - series: 'up{job="freshmall",instance="missing"}'
+        values: '1+0x30'
+      - series: 'up{job="freshmall",instance="stale"}'
+        values: '1+0x30'
+      - series: 'freshmall_business_snapshot_collection_success{job="freshmall",instance="stale"}'
+        values: '1+0x30'
+      - series: 'freshmall_business_snapshot_last_success_timestamp_seconds{job="freshmall",instance="stale"}'
+        values: '0+0x13 70+5x16'
+    alert_rule_test:
+      - eval_time: 25s
+        alertname: FreshMallBusinessSnapshotUnavailable
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: failed, severity: warning}
+            exp_annotations: {summary: Business snapshot collection failed or became stale}
+          - exp_labels: {job: freshmall, instance: missing, severity: warning}
+            exp_annotations: {summary: Business snapshot collection failed or became stale}
+      - eval_time: 60s
+        alertname: FreshMallBusinessSnapshotUnavailable
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: missing, severity: warning}
+            exp_annotations: {summary: Business snapshot collection failed or became stale}
+          - exp_labels: {job: freshmall, instance: stale, severity: warning}
+            exp_annotations: {summary: Business snapshot collection failed or became stale}
+      - eval_time: 100s
+        alertname: FreshMallBusinessSnapshotUnavailable
+        exp_alerts:
+          - exp_labels: {job: freshmall, instance: missing, severity: warning}
+            exp_annotations: {summary: Business snapshot collection failed or became stale}

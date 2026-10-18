@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "recordedAt": "2026-10-18T07:42:26.835895+00:00",
+  "engineeringBackend18081": "STOPPED",
+  "engineeringVite15173": "STOPPED",
+  "prometheus9090": "STOPPED_BY_OWNER",
+  "redis16379": "STOPPED",
+  "privateEvidenceAndDataRetained": true,
+  "main8080Health": "UP",
+  "mainFrontend5173": "RUNNING_OWNED",
+  "mainMysql3306": "RUNNING_OWNED",
+  "unrelatedProcessesSignaled": false,
+  "concurrencyBusinessWrites": 0
+}

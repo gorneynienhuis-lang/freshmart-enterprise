@@ -1,0 +1,44 @@
+{
+  "downloadAttempt": {
+    "observedStatus": 403,
+    "tool": "Python urllib against fixed official public URL",
+    "evidenceBoundary": "HTTP status was observed in tool output; no fabricated local raw HTTP trace is claimed",
+    "resolvedBy": "Same fixed URL via curl HTTP200, followed by exact official SHA verification before extraction/build"
+  },
+  "unicodeStartupAttempt": {
+    "status": "FAILED_BEFORE_LISTEN",
+    "actualPrivateLogSha256": "03e5aaee4a8f64895c77b63d8645e812ce9795934ba26ac2b3e29a7383bf6225",
+    "redactedActualLog": "\n*** FATAL CONFIG FILE ERROR (Redis 8.2.10) ***\nReading the configuration file, at line 14\n>>> 'dir \"<desktop>/\\u5b9e\\u9a8c\\u56db/fresh-mall/.runtime/redis-cache/instance-20e80cb7e57dee46/data\"'\nNo such file or directory\n",
+    "resolution": "ensure_ascii=False for Redis config paths; fresh private instance generated, failed directory preserved",
+    "offlineRegressionTest": "test_prepare_keeps_unicode_paths_and_acl_secrets_private"
+  },
+  "mockitoTestAttempt": {
+    "originalSuite": {
+      "name": "com.freshmart.cache.PublicCategoryCacheTest",
+      "tests": "9",
+      "failures": "0",
+      "errors": "1",
+      "skipped": "0"
+    },
+    "actualErrors": [
+      {
+        "test": "getFailureReturnsDatabaseAndCooldownSkipsRedisThenRecovers",
+        "type": "org.springframework.data.redis.RedisConnectionFailureException",
+        "message": "Secret-like error messages must not be logged",
+        "firstProjectFrame": "at com.freshmart.cache.PublicCategoryCacheTest.getFailureReturnsDatabaseAndCooldownSkipsRedisThenRecovers(PublicCategoryCacheTest.java:88)"
+      }
+    ],
+    "privateReportSha256": "ed5c3ba57f35321bd98c21a7923c8631ab0534f6465c1b3a875f88ee847cb1a6",
+    "resolution": "doReturn(null).when(values).get(key()) replaces restubbing when(mock.get()); existing fallback/loader/count assertions retained",
+    "subsequentFullBuild": {
+      "tests": {
+        "tests": 192,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "snapshot": "20261018T071320Z-e9b367d1"
+    }
+  },
+  "attemptsWereNotDeleted": true
+}

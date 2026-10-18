@@ -1,0 +1,55 @@
+groups:
+  - name: freshmall-business
+    interval: 5s
+    rules:
+      - alert: FreshMallApplicationDown
+        expr: up{job="freshmall"} == 0
+        for: 15s
+        labels: { severity: critical }
+        annotations:
+          summary: FreshMall scrape target is unavailable
+      - alert: FreshMallBusinessSnapshotUnavailable
+        expr: |
+          ((up{job="freshmall"} == 1) unless on(job, instance)
+            (freshmall_business_snapshot_collection_success{job="freshmall"} == 1))
+          or
+          ((time() - freshmall_business_snapshot_last_success_timestamp_seconds{job="freshmall"} > 35)
+            and on(job, instance) (up{job="freshmall"} == 1))
+        for: 15s
+        labels: { severity: warning }
+        annotations:
+          summary: Business snapshot collection failed or became stale
+      - alert: FreshMallOutboxDead
+        expr: freshmall_outbox_events{job="freshmall",state="DEAD"} > 0
+        for: 5s
+        labels: { severity: critical }
+        annotations:
+          summary: Refund outbox contains a dead event requiring finance recovery
+      - alert: FreshMallOutboxLeaseOverdue
+        expr: freshmall_outbox_processing_overdue{job="freshmall"} > 0
+        for: 15s
+        labels: { severity: warning }
+        annotations:
+          summary: Refund outbox processing lease is overdue
+      - alert: FreshMallRefundFailed
+        expr: freshmall_refund_failed{job="freshmall"} > 0
+        for: 5s
+        labels: { severity: critical }
+        annotations:
+          summary: A failed refund requires controlled finance recovery
+      - alert: FreshMallNegativeStock
+        expr: freshmall_inventory_negative_stock_batches{job="freshmall"} > 0
+        labels: { severity: critical }
+        annotations:
+          summary: Inventory contains a negative stock balance
+      - alert: FreshMallInventoryInvariantViolation
+        expr: freshmall_inventory_invariant_violations{job="freshmall"} > 0
+        labels: { severity: critical }
+        annotations:
+          summary: Inventory batch balance or lifecycle invariant is violated
+      - alert: FreshMallOutboxStalled
+        expr: freshmall_outbox_oldest_pending_age_seconds{job="freshmall"} > 120
+        for: 30s
+        labels: { severity: warning }
+        annotations:
+          summary: Oldest pending refund event has exceeded the classroom budget

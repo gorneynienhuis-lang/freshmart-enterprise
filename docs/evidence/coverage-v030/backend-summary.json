@@ -1,0 +1,57 @@
+{
+  "status": "PASSED",
+  "recordedAt": "2026-10-18T07:28:47.742909+00:00",
+  "tool": "JaCoCo0.8.14, Maven3.9.16, Java21.0.12.1",
+  "command": "python3 scripts/verify-backend.py --coverage",
+  "scope": "All compiled production Java classes; no package/class exclusions. H2 integration tests, not a MySQL load result.",
+  "sourceSnapshot": ".runtime/builds/20261018T071320Z-e9b367d1",
+  "sourceBaseCommit": "d96169bdbf720ed3af54a1d296443a59fc5888c2",
+  "sourceState": "working tree copied at invocation; not a clean-install or remote-CI claim",
+  "tests": {
+    "tests": 192,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "counters": {
+    "INSTRUCTION": {
+      "missed": 3107,
+      "covered": 31275
+    },
+    "BRANCH": {
+      "missed": 1018,
+      "covered": 2272
+    },
+    "LINE": {
+      "missed": 122,
+      "covered": 2029
+    },
+    "COMPLEXITY": {
+      "missed": 1039,
+      "covered": 1571
+    },
+    "METHOD": {
+      "missed": 86,
+      "covered": 876
+    },
+    "CLASS": {
+      "missed": 2,
+      "covered": 240
+    }
+  },
+  "percent": {
+    "INSTRUCTION": 90.9633,
+    "BRANCH": 69.0578,
+    "LINE": 94.3282,
+    "COMPLEXITY": 60.1916,
+    "METHOD": 91.0603,
+    "CLASS": 99.1736
+  },
+  "configuredGate": {
+    "LINE_COVEREDRATIO_MINIMUM": 0.6
+  },
+  "jarSha256": "aa267f513059bad34a0538b2fb0570af6a81ef6dba11ec7451d72e728ef4b4c5",
+  "jacocoXmlSha256": "47fce18dcab1f80c7d687ab8b28bb2045a3e82f5504a1040a9d33aa8dc43fce3",
+  "liveSourceChangedDuringBuild": false,
+  "mainJarChanged": false
+}

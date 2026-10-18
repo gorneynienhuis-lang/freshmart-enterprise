@@ -186,7 +186,7 @@ def restore(args):
         record.update(status='RESTORED_VERIFIED', verifiedAt=dt.datetime.now(dt.timezone.utc).isoformat(),
                       tables=len(manifest['database']['tables']), mediaFiles=len(manifest['mediaFiles']),
                       sqlRoundTripSha256=manifest['sql']['uncompressedSha256'], migrationVersions=[row['version'] for row in manifest['database']['migrations']],
-                      browserSessions='New recovery signing keys intentionally invalidate backed-up bearer/refresh signatures.')
+                      browserSessions='New signing keys reject old JWT/CSRF signatures; opaque refresh hashes must be revoked by post-restore security initialization before first runtime start.')
     except Exception:
         record['status'] = 'FAILED_ISOLATED_TARGET_RETAINED'
         raise
@@ -203,6 +203,35 @@ def recovery_process(directory, demo):
     record = json.loads(file.read_text())
     identity = demo.process_identity(record['pid'])
     return record if identity and identity == record['identity'] and record['marker'] in identity and str(directory / 'media') in identity else None
+
+
+def initialize_recovery_sessions(directory, record, demo, env):
+    """A deliberate post-verification write to this new schema, never the snapshot or main database."""
+    marker = directory / 'session-initialization.json'
+    if marker.exists():
+        with regular_reader(marker, private=True) as source:
+            previous = json.load(source)
+        require(previous.get('status') == 'COMPLETED' and previous.get('schema') == record['schema']
+                and previous.get('snapshotSqlSha256') == record['sqlRoundTripSha256'],
+                'Recovery session initialization is uncertain; inspect its private marker before retrying. No process was started.')
+        return
+    require(SCHEMA.fullmatch(record['schema']) and re.fullmatch(r'fmrec_[a-f0-9]{16}', env['DB_USERNAME']),
+            'Session initialization requires the new isolated schema/account.')
+    client = [str(demo.MYSQL / 'bin/mysql'), '--defaults-file=' + str(directory / 'mysql-recovery.cnf')]
+    target = MysqlDatabase(client, [], record['schema'])
+    require(target.query('SELECT DATABASE();') == record['schema']
+            and target.query('SELECT CURRENT_USER();').split('@', 1)[0] == env['DB_USERNAME'],
+            'Recovery session initialization database binding mismatch.')
+    intent = {'status': 'PENDING', 'schema': record['schema'], 'snapshotSqlSha256': record['sqlRoundTripSha256'],
+              'phase': 'post-restore security initialization; raw snapshot verification is retained',
+              'startedAt': dt.datetime.now(dt.timezone.utc).isoformat(), 'mainDatabaseChanged': False}
+    private_write(marker, canonical(intent))
+    count = target.query("START TRANSACTION; UPDATE fm_auth_session SET status='REVOKED' WHERE status='ACTIVE'; SELECT ROW_COUNT(); COMMIT;")
+    require(count.isdigit(), 'Session initialization result is uncertain; inspect its private marker before retrying.')
+    intent.update(status='COMPLETED', revokedActiveSessions=int(count), completedAt=dt.datetime.now(dt.timezone.utc).isoformat())
+    completed = directory / ('session-initialization-' + secrets.token_hex(8) + '.json')
+    private_write(completed, canonical(intent))
+    os.replace(completed, marker)
 
 
 def start_recovery(args):
@@ -223,6 +252,7 @@ def start_recovery(args):
     java = str(Path(env['JAVA_HOME']) / 'bin/java') if env.get('JAVA_HOME') else 'java'
     version = subprocess.run([java, '-version'], capture_output=True, text=True)
     require(version.returncode == 0 and 'version "21.' in version.stderr, 'Java 21 is required for the isolated recovery backend.')
+    initialize_recovery_sessions(directory, record, demo, env)
     origin = env['APP_PUBLIC_ORIGIN']
     command = [java, '-jar', str(demo.JAR), '--server.address=127.0.0.1', '--server.port=' + str(record['port']),
                '--spring.profiles.active=demo', '--app.allowed-origins=' + origin, '--app.public-origin=' + origin,

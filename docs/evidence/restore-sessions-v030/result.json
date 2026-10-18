@@ -1,0 +1,26 @@
+{
+  "status": "PASSED",
+  "postRestoreInitialization": {
+    "completedAt": "2026-10-18T07:19:52.636018+00:00",
+    "mainDatabaseChanged": false,
+    "phase": "post-restore security initialization; raw snapshot verification is retained",
+    "revokedActiveSessions": 107,
+    "schema": "fresh_mall_restore_formal_20261018_064037",
+    "snapshotSqlSha256": "8d506e69e199cc58c8d7d820c98f665c899c8fdec683274bbcf78c3b292094ac",
+    "startedAt": "2026-10-18T07:19:52.625313+00:00",
+    "status": "COMPLETED"
+  },
+  "sameSnapshotReportRetained": true,
+  "mainServicesChanged": false,
+  "independentOrigin": "http://127.0.0.1:18080",
+  "testedCapturedJarVersion": "v0.2.1 capture, not the new engineering JAR",
+  "httpVerificationAfterInitialization": ".runtime/recoveries/formal-20261018_064037/http-verification-20261018T072118349296Z.json",
+  "checks": [
+    "Original opaque refresh session hashes marked REVOKED before independent restart",
+    "Independent source-scoped database user and unchanged snapshot reference",
+    "Actual product/review pixels match SHA",
+    "Private images deny anonymous and unrelated member; assigned SERVICE permitted; signature session binding",
+    "Independent recovery backend stopped; source8080/engineering18081 not stopped by this check"
+  ],
+  "note": "Raw snapshot SQL round-trip was verified before deliberate security initialization. No claim the post-login database remains byte-identical to its snapshot."
+}

@@ -1,14 +1,15 @@
 package com.freshmart.catalog;
 import com.freshmart.common.*;
+import com.freshmart.cache.PublicCategoryCache;
 import com.freshmart.operations.BusinessPolicyService;
 import com.freshmart.operations.OperationsModels.Policies;
 import org.springframework.beans.factory.annotation.Value;import org.springframework.stereotype.Service;import org.springframework.transaction.annotation.Transactional;
 import java.math.BigInteger;import java.time.*;import java.util.*;import java.util.stream.Collectors;
 @Service @Transactional(readOnly=true)
 public class CatalogService {
- private final CatalogMapper mapper;private final Clock clock;private final BusinessPolicyService policies;
- public CatalogService(CatalogMapper mapper,Clock clock,BusinessPolicyService policies){this.mapper=mapper;this.clock=clock;this.policies=policies;}
- public List<CategoryView> categories(){return mapper.categories().stream().map(c->new CategoryView(c.categoryId(),c.code(),c.name(),c.shortName(),c.imageUrl(),c.sortOrder())).toList();}
+ private final CatalogMapper mapper;private final Clock clock;private final BusinessPolicyService policies;private final PublicCategoryCache categoryCache;
+ public CatalogService(CatalogMapper mapper,Clock clock,BusinessPolicyService policies,PublicCategoryCache categoryCache){this.mapper=mapper;this.clock=clock;this.policies=policies;this.categoryCache=categoryCache;}
+ public List<CategoryView> categories(){return categoryCache.getOrLoad(()->mapper.categories().stream().map(c->new CategoryView(c.categoryId(),c.code(),c.name(),c.shortName(),c.imageUrl(),c.sortOrder())).toList());}
  public PageResult<ProductView> products(int page,int size,String category,String keyword,boolean nearExpiry,String sort){validatePaging(page,size);if(category!=null&&!category.matches("[A-Za-z0-9_-]{1,64}"))throw ApiException.invalid("分类ID格式不合法");if(keyword!=null&&(keyword.isBlank()||keyword.length()>100))throw ApiException.invalid("关键词长度不合法");if(!Set.of("RECOMMENDED","PRICE_ASC","PRICE_DESC").contains(sort))throw ApiException.invalid("排序参数不合法");var policy=policies.current();Instant now=clock.instant(),nearAt=now.plus(Duration.ofDays(policy.nearExpiryDays()));long total=mapper.count(category,keyword,nearExpiry,now,nearAt);var rows=mapper.products(category,keyword,nearExpiry,sort,now,nearAt,policy.nearExpiryDiscountBasisPoints(),size,((long)page-1)*size);return new PageResult<>(page,size,total,views(rows,now,policy));}
  public ProductView product(String id){ProductRow p=mapper.product(id);if(p==null)throw ApiException.notFound();var products=views(List.of(p),clock.instant(),policies.current());if(products.isEmpty())throw ApiException.notFound();return products.getFirst();}
  public HomeView home(){return new HomeView(List.of(),categories(),products(1,8,null,null,true,"RECOMMENDED").items(),products(1,12,null,null,false,"RECOMMENDED").items(),clock.instant().toString());}

@@ -1,0 +1,82 @@
+{
+  "capturedAt": "2026-10-18T07:20:16.972048+00:00",
+  "target": "http://127.0.0.1:18081",
+  "scope": "Actual isolated backend HTTP requests. Auth-denial audit rows are confined to the isolated acceptance database. No main database requests, business writes, ADMIN credentials or user sessions. Real ADMIN/MEMBER behavior is additionally covered by the separate Java tests.",
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/actuator/prometheus",
+      "scrape_credential_used": true,
+      "expected": 200,
+      "actual": 200,
+      "token_echoed": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "scrape_credential_used": true,
+      "expected": 401,
+      "actual": 401,
+      "token_echoed": false
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "scrape_credential_used": true,
+      "expected": 401,
+      "actual": 401,
+      "token_echoed": false
+    },
+    {
+      "method": "GET",
+      "path": "/actuator/info",
+      "scrape_credential_used": true,
+      "expected": 401,
+      "actual": 401,
+      "token_echoed": false
+    },
+    {
+      "method": "POST",
+      "path": "/actuator/prometheus",
+      "scrape_credential_used": true,
+      "expected": 401,
+      "actual": 401,
+      "token_echoed": false
+    },
+    {
+      "method": "GET",
+      "path": "/actuator/prometheus",
+      "scrape_credential_used": false,
+      "expected": 401,
+      "actual": 401,
+      "token_echoed": false
+    },
+    {
+      "method": "GET",
+      "path": "/actuator/health",
+      "scrape_credential_used": false,
+      "expected": 200,
+      "actual": 200,
+      "token_echoed": false
+    }
+  ],
+  "custom_metric_samples": [
+    "freshmall_business_snapshot_collection_success 1.0",
+    "freshmall_business_snapshot_collections_total{result=\"failure\"} 0.0",
+    "freshmall_business_snapshot_collections_total{result=\"success\"} 115.0",
+    "freshmall_business_snapshot_last_success_timestamp_seconds 1.792308016E9",
+    "freshmall_inventory_invariant_violations 0.0",
+    "freshmall_inventory_negative_stock_batches 0.0",
+    "freshmall_outbox_events{state=\"DEAD\"} 0.0",
+    "freshmall_outbox_events{state=\"PENDING\"} 4.0",
+    "freshmall_outbox_events{state=\"PROCESSING\"} 0.0",
+    "freshmall_outbox_oldest_pending_age_seconds 29.504",
+    "freshmall_outbox_processing_overdue 0.0",
+    "freshmall_refund_failed 0.0"
+  ],
+  "label_keys_allowed": [
+    "state",
+    "result"
+  ],
+  "status": "PASSED"
+}

@@ -1,0 +1,12 @@
+{
+  "verified_at": "2026-10-18T07:06:32.991507+00:00",
+  "version": "3.15.0",
+  "platform": "darwin-arm64",
+  "release_url": "https://github.com/prometheus/prometheus/releases/tag/v3.15.0",
+  "archive_sha256": "920df4d17e78b3b0175af144eb318b0c74d1cf7b1d1251b326966f0e81977260",
+  "manifest_sha256": "023cab1e6b275ee1b8f5f64215a01d74bbb1b19c45183b7296ced4aa4532707b",
+  "binaries": {
+    "prometheus": "edfbcf257fff3694e345be7648ce8ee05aa0cf602662097c649f4923116d7145",
+    "promtool": "51a8798ea299906d5f7adeef6783f6eaf2d5c2d247721bb71403e384300ec5f0"
+  }
+}

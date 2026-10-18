@@ -1,0 +1,1172 @@
+{
+  "scope": "28 actual HTTP responses; metrics samples retain status/timing/digest, category and health include actual public JSON",
+  "observations": [
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 2.287,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "832c0bc832efd7256c5e669cddded9fd0021215ed76bf2f5ef20c28d292d113d"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:37.836470+08:00",
+        "traceId": "2ab3cfec-64dd-471e-a17d-168a15cab5df"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 133.705,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "01ae29c2b249ef9154d76c9aa87413abc13405e76f590a2da69b7af79a5989a6"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 2.594,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "a0d23e51f2bada3d18b7298d25e1e6f9abd59572060ec4b0ae2f1e29a62fda49"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:37.843986+08:00",
+        "traceId": "89d97fe5-7a77-45c9-90e1-c3077f52eb65"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 3.601,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "c41481bf063b61519c5783db019c8ce106017a94c5ac38640af7bb003808f77e"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.652,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "f3f90a63281e1e8d67387ee5a88cac5ec673380c07960fc06faea3acfe3a9854"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.691,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "7fca2bf3a6b4483caf1cba11c0f35a01e84dec53ea4962726d73f8568ebb0292"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:37.852138+08:00",
+        "traceId": "5f43240f-ca2f-4847-8eed-17dd000255e6"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 2.958,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "8bf4d99d373ab36ca2f790834ccd59f1d86726fc378f3afcc6d74482c8f678e5"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.621,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "9830177a36ebaa30daf6f072ca4d3e69126f5f5a54b5a065bb07fa936512b0b8"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:37.856146+08:00",
+        "traceId": "31fa9d8f-4278-4ffc-8b9f-6ddb908c7b23"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 1.811,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "29567d8ac7eba5d242225c03e6abc1cece844289ccc7490007246a22c7cf826a"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 3.572,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "724c584fe3cca6a5d802002a2408b412df87aed01318ce64a60f94ec8fa8f01f"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:37.863341+08:00",
+        "traceId": "d711608a-5179-4436-87b7-5171f6a6ae63"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 2.996,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "c3495e4b35dc1369873068007baa13f24cf612766fbb419e16d4aaf27ad14ffa"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.647,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "163bc66b8d1ec109cc36b953df2b09db25e39cd8198a824f2a48e16f6633cc3d"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:37.867788+08:00",
+        "traceId": "01fa82e4-2c3b-4787-97ff-7689f0795ed3"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 2.283,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "61796ca39a3be99110d0fb5ed28adccc5a4703e06765b0590fa3996eeef923dd"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.453,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "0fcf3b6ac151b125183555e8d4c063dc20ff64bd0ef840293f56beb4f0e38be1"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:38.035674+08:00",
+        "traceId": "698610a1-9be6-4066-ab66-4d50692867ec"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 3.724,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "0c37e64475de05d4784b0d8e652b48e0b609f94c22b6867a44523b03f0e9d86e"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:38.038079+08:00",
+        "traceId": "67811973-5119-4c3a-a4e2-e14c9565759f"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 1.985,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "852858eed4d927f4a63e46b04a18546a6920f208df0fe850e2d2bd6b47f7cbc9"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:38.040218+08:00",
+        "traceId": "80d3f18a-2f55-44db-8a19-437a692da65d"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 2.289,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "98f560b851210f06eae4392013a3344c8fb465bf9f2a7537142f340e0506b72e"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:38.042326+08:00",
+        "traceId": "72ca39b8-e07c-42b7-9e6b-ea4def0963e8"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 1.818,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "c84336874fac68bef537b4ed414009c3150af1419f8a7980a467777b13f0b041"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.971,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "4f1b881e777c8736419116a11c8544abf0a81ac7b6ca9363d5322f3175fe6830"
+    },
+    {
+      "body": {
+        "groups": [
+          "liveness",
+          "readiness"
+        ],
+        "status": "UP"
+      },
+      "contentType": "application/vnd.spring-boot.actuator.v3+json",
+      "elapsedMillis": 1.145,
+      "httpStatus": 200,
+      "path": "/actuator/health",
+      "sha256": "f5d81755935209a3ae596d4553d269cbbe8d08a27dd95b05fe0b7c544eb7ed71"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 7.504,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "029cd5d2caa46ca53c2e5c0a3b56b97f5630db891dfd3572b5e129e0523d2a4a"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:41.387740+08:00",
+        "traceId": "9caec7c8-cc4b-474f-be11-3733e35d5a62"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 6.196,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "89ae9a59f56e9f44812d6e8a023ccfaa26a13e16ff3bc5bb1090fd32c0d10d84"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 4.35,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "2df2a1579df1e06937eac01439add7c3944a24538d08becb8a51b1b29b2e3687"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:20:41.397519+08:00",
+        "traceId": "81778b09-047a-46fa-a779-b5c067da425a"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 4.095,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "a1351709a4a30559114090101afa1e6e915a3d9b99ebdf0b9a90d1e9e2de6c9e"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 3.125,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "04526db9101e9a766f99738fa64434c38b757f3f3aa295413b609776d9df983c"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 7.222,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "10f1f0b469c8a524848047e8c9d24771fe1290e803910635d34116f057b4cc04"
+    },
+    {
+      "body": {
+        "code": 0,
+        "data": {
+          "items": [
+            {
+              "categoryId": "C01",
+              "code": "C01",
+              "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+              "name": "时令蔬菜",
+              "shortName": "蔬菜",
+              "sortOrder": 1
+            },
+            {
+              "categoryId": "C02",
+              "code": "C02",
+              "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+              "name": "新鲜水果",
+              "shortName": "水果",
+              "sortOrder": 2
+            },
+            {
+              "categoryId": "C03",
+              "code": "C03",
+              "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+              "name": "肉禽蛋品",
+              "shortName": "肉禽蛋",
+              "sortOrder": 3
+            },
+            {
+              "categoryId": "C04",
+              "code": "C04",
+              "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+              "name": "水产海鲜",
+              "shortName": "海鲜",
+              "sortOrder": 4
+            },
+            {
+              "categoryId": "C05",
+              "code": "C05",
+              "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+              "name": "乳品烘焙",
+              "shortName": "乳品烘焙",
+              "sortOrder": 5
+            },
+            {
+              "categoryId": "C06",
+              "code": "C06",
+              "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+              "name": "粮油调味",
+              "shortName": "粮油",
+              "sortOrder": 6
+            },
+            {
+              "categoryId": "C07",
+              "code": "C07",
+              "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+              "name": "冷冻食品",
+              "shortName": "冷冻",
+              "sortOrder": 7
+            },
+            {
+              "categoryId": "C08",
+              "code": "C08",
+              "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+              "name": "饮料酒水",
+              "shortName": "饮品",
+              "sortOrder": 8
+            }
+          ]
+        },
+        "message": "ok",
+        "timestamp": "2026-10-18T15:21:40.659067+08:00",
+        "traceId": "0587daf9-b94b-46f0-87fc-2aaaa8351d74"
+      },
+      "contentType": "application/json",
+      "elapsedMillis": 7.905,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "fc641b1f0998159063546954828811a8d3b03c154a72813636b4749f597bb46b"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 3.72,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "e6bfb89c75a7af02b0dd52b064cab9bc5fa2b274fcd5a61faa1695d7098a945b"
+    }
+  ],
+  "credentialHeadersOmitted": true,
+  "sourcePrivateSummarySha256": "c6e6d97a9f3ce2efe8e2215ded1767b89112135a9a81b31cf220adda53d782cc"
+}

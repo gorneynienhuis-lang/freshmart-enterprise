@@ -1,0 +1,20 @@
+# Rendered by scripts/monitoring-runtime.py; values are paths/loopback ports, never credentials.
+global:
+  scrape_interval: 5s
+  scrape_timeout: 3s
+  evaluation_interval: 5s
+rule_files:
+  - @RULES_PATH@
+scrape_configs:
+  - job_name: freshmall
+    metrics_path: /actuator/prometheus
+    scheme: http
+    authorization:
+      type: Bearer
+      credentials_file: @TOKEN_PATH@
+    static_configs:
+      - targets: ['127.0.0.1:@TARGET_PORT@']
+    sample_limit: 10000
+    label_limit: 30
+    label_name_length_limit: 128
+    label_value_length_limit: 256

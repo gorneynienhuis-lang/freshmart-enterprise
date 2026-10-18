@@ -1,0 +1,207 @@
+{
+  "checks": {
+    "coldAndHit": {
+      "afterCold": {
+        "bypass": 0.0,
+        "db_load": 1.0,
+        "disabled": 0.0,
+        "hit": 0.0,
+        "invalid": 0.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 1.0
+      },
+      "afterHit": {
+        "bypass": 0.0,
+        "db_load": 1.0,
+        "disabled": 0.0,
+        "hit": 1.0,
+        "invalid": 0.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 1.0
+      },
+      "categoryCount": 8,
+      "metricsBefore": {
+        "bypass": 0.0,
+        "db_load": 0.0,
+        "disabled": 0.0,
+        "hit": 0.0,
+        "invalid": 0.0,
+        "miss": 0.0,
+        "redis_error": 0.0,
+        "write": 0.0
+      },
+      "passed": true,
+      "redisStatsAfter": [
+        "cmdstat_set:calls=1,usec=9,usec_per_call=9.00,rejected_calls=0,failed_calls=0",
+        "cmdstat_get:calls=2,usec=3,usec_per_call=1.50,rejected_calls=0,failed_calls=0",
+        "cmdstat_del:calls=1,usec=9,usec_per_call=9.00,rejected_calls=0,failed_calls=0"
+      ],
+      "redisStatsBefore": [
+        "cmdstat_del:calls=1,usec=9,usec_per_call=9.00,rejected_calls=0,failed_calls=0"
+      ],
+      "remainingTtlMillis": 62165
+    },
+    "malformed": {
+      "after": {
+        "bypass": 0.0,
+        "db_load": 2.0,
+        "disabled": 0.0,
+        "hit": 1.0,
+        "invalid": 1.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 2.0
+      },
+      "before": {
+        "bypass": 0.0,
+        "db_load": 1.0,
+        "disabled": 0.0,
+        "hit": 1.0,
+        "invalid": 0.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 1.0
+      },
+      "passed": true
+    },
+    "naturalTtl": {
+      "after": {
+        "bypass": 3.0,
+        "db_load": 9.0,
+        "disabled": 0.0,
+        "hit": 4.0,
+        "invalid": 2.0,
+        "miss": 3.0,
+        "redis_error": 1.0,
+        "write": 5.0
+      },
+      "before": {
+        "bypass": 3.0,
+        "db_load": 8.0,
+        "disabled": 0.0,
+        "hit": 4.0,
+        "invalid": 2.0,
+        "miss": 2.0,
+        "redis_error": 1.0,
+        "write": 4.0
+      },
+      "initialRemainingMillis": 59229,
+      "observedExpiredPttl": -2,
+      "passed": true,
+      "waitedSeconds": 59.262
+    },
+    "redisDown": {
+      "after": {
+        "bypass": 3.0,
+        "db_load": 7.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 1.0,
+        "write": 3.0
+      },
+      "before": {
+        "bypass": 0.0,
+        "db_load": 3.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 3.0
+      },
+      "health": {
+        "groups": [
+          "liveness",
+          "readiness"
+        ],
+        "status": "UP"
+      },
+      "latencyMillis": [
+        3.724,
+        1.985,
+        2.289,
+        1.818
+      ],
+      "passed": true
+    },
+    "restart": {
+      "afterCold": {
+        "bypass": 3.0,
+        "db_load": 8.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 2.0,
+        "redis_error": 1.0,
+        "write": 4.0
+      },
+      "afterHit": {
+        "bypass": 3.0,
+        "db_load": 8.0,
+        "disabled": 0.0,
+        "hit": 4.0,
+        "invalid": 2.0,
+        "miss": 2.0,
+        "redis_error": 1.0,
+        "write": 4.0
+      },
+      "before": {
+        "bypass": 3.0,
+        "db_load": 7.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 1.0,
+        "write": 3.0
+      },
+      "passed": true
+    },
+    "wrong-identity": {
+      "after": {
+        "bypass": 0.0,
+        "db_load": 3.0,
+        "disabled": 0.0,
+        "hit": 2.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 3.0
+      },
+      "before": {
+        "bypass": 0.0,
+        "db_load": 2.0,
+        "disabled": 0.0,
+        "hit": 2.0,
+        "invalid": 1.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 2.0
+      },
+      "passed": true
+    }
+  },
+  "finalRedisProbe": {
+    "appPing": "PONG",
+    "commandstats": [
+      "cmdstat_set:calls=2,usec=26,usec_per_call=13.00,rejected_calls=0,failed_calls=0",
+      "cmdstat_get:calls=3,usec=12,usec_per_call=4.00,rejected_calls=0,failed_calls=0"
+    ],
+    "credentialValuesPrinted": false,
+    "deniedByDryRun": {
+      "config": true,
+      "eval": true,
+      "flushall": true,
+      "keys": true,
+      "outside_key": true,
+      "select": true
+    },
+    "status": "PROBED",
+    "ttlMillis": 56020
+  },
+  "sourcePrivateSummarySha256": "c6e6d97a9f3ce2efe8e2215ded1767b89112135a9a81b31cf220adda53d782cc"
+}

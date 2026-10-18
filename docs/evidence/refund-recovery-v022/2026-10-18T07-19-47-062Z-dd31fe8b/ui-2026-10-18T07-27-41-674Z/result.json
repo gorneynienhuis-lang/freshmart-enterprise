@@ -1,0 +1,225 @@
+{
+  "runId": "2026-10-18T07-19-47-062Z-dd31fe8b",
+  "phase": "ui",
+  "startedAt": "2026-10-18T07:27:41.674Z",
+  "status": "FAIL",
+  "target": {
+    "schema": "fresh_mall_restore_engineering_v030_20261018a",
+    "uiBaseUrl": "http://127.0.0.1:15173",
+    "backendBaseUrl": "http://127.0.0.1:18081"
+  },
+  "responses": [
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "9070b226-097b-414a-b09a-3a63abbe0d93",
+      "at": "2026-10-18T07:27:42.142Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 401,
+      "traceId": "f913bed1-7ba9-47aa-a905-ba9f95628a21",
+      "at": "2026-10-18T07:27:42.145Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "traceId": "11db6f36-4d72-4697-badb-edadc390ba66",
+      "at": "2026-10-18T07:27:42.281Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/home",
+      "status": 200,
+      "traceId": "0bb4a870-0070-4b62-9feb-8819427826fa",
+      "at": "2026-10-18T07:27:42.335Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "77b4d9a8-d6e0-418b-af8c-256aa3f9baea",
+      "at": "2026-10-18T07:27:42.427Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "9fbfcb1e-bda4-4c2e-ab3a-9706527a689a",
+      "at": "2026-10-18T07:27:42.483Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "status": 200,
+      "traceId": "d7eb1ac5-0660-45b3-9c10-fa02ee485e6c",
+      "at": "2026-10-18T07:27:42.491Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "status": 200,
+      "traceId": "f9eb6fa4-c290-4e84-9f17-4ee7f36cd430",
+      "at": "2026-10-18T07:27:42.496Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "status": 200,
+      "traceId": "d70b0220-bb3f-41ed-b537-4481ebca7b41",
+      "at": "2026-10-18T07:27:42.501Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "status": 200,
+      "traceId": "f67b551b-0d91-4a6b-ad42-562a5227861e",
+      "at": "2026-10-18T07:27:42.512Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "status": 200,
+      "traceId": "83f65dd4-654b-4237-834c-0afbc84fd48e",
+      "at": "2026-10-18T07:27:42.529Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "b23b04c2-3178-4628-811d-e2d6d0e51849",
+      "at": "2026-10-18T07:27:42.536Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "6f25b97e-494a-4be7-82ef-19af0f8261e3",
+      "at": "2026-10-18T07:27:42.588Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "d71adb9e-f6ea-440a-9357-fb7c3d13f96a",
+      "at": "2026-10-18T07:27:43.127Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "status": 200,
+      "traceId": "a8b31fab-0b17-4da3-937f-a86846566f4b",
+      "at": "2026-10-18T07:27:43.127Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "96eaab36-1293-404c-8881-aee756b96672",
+      "at": "2026-10-18T07:27:43.144Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "34799f09-e6f2-4cf4-8f2d-7c24bbbcfea0",
+      "at": "2026-10-18T07:27:43.150Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/ref_5efac181-2fc1-48d6-9728-512eda6037c6/retry",
+      "status": 401,
+      "traceId": "2a5deecc-863f-445f-86fc-203606ba00aa",
+      "at": "2026-10-18T07:27:43.194Z"
+    }
+  ],
+  "checkedResponses": 18,
+  "schemaErrors": [],
+  "pageErrors": [],
+  "failedAssets": [],
+  "screens": [
+    "real-failed-refund-1440.png",
+    "real-failed-refund-1024.png",
+    "real-failed-refund-390.png"
+  ],
+  "layouts": [
+    {
+      "name": "real-failed-refund",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "real-failed-refund",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "real-failed-refund",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": []
+    }
+  ],
+  "visitedRefundPages": [
+    {
+      "page": 1,
+      "size": 20,
+      "total": 22,
+      "status": null,
+      "containsTarget": true
+    },
+    {
+      "page": 1,
+      "size": 20,
+      "total": 1,
+      "status": "FAILED",
+      "containsTarget": true
+    },
+    {
+      "page": 1,
+      "size": 100,
+      "total": 1,
+      "status": null,
+      "containsTarget": true
+    }
+  ],
+  "retryRequests": [
+    {
+      "at": "2026-10-18T07:27:43.179Z"
+    }
+  ],
+  "checks": [],
+  "snapshots": [
+    {
+      "label": "real-failed-before-ui",
+      "at": "2026-10-18T07:27:41.688Z",
+      "amount": 1190,
+      "status": "FAILED",
+      "refundId": "ref_5efac181-2fc1-48d6-9728-512eda6037c6",
+      "paymentId": "pay_3106e5da-1cd2-488e-9b02-cb29bec04ef7",
+      "generation": 1,
+      "attemptCount": 1,
+      "outboxStatus": "DEAD",
+      "receiptCount": 0,
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "retryAuditCount": 0,
+      "validReceiptCount": 0
+    }
+  ],
+  "error": "page.waitForFunction: Timeout 20000ms exceeded.",
+  "pendingUi": {
+    "refundId": "ref_5efac181-2fc1-48d6-9728-512eda6037c6",
+    "orderId": "ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+    "reason": "Retain actual state; never replay an unknown write or alter failure state through SQL."
+  },
+  "finishedAt": "2026-10-18T07:28:03.357Z"
+}

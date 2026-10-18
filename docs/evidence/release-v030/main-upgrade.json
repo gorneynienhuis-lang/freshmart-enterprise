@@ -1,0 +1,21 @@
+{
+  "status": "PASSED",
+  "recordedAt": "2026-10-18T07:37:18.808926+00:00",
+  "operation": "install previously verified v0.3 JAR while owned main backend stopped; migrate existing schema",
+  "backup": ".runtime/backups/pre-v030-upgrade-20261018_1545",
+  "backupStatus": "BACKUP_VERIFIED_NOT_YET_RESTORED",
+  "previousJarSha256": "12c2c39a50c6ac66f56b43442cb9c7da0ba0eed40fef8630da75461e2b8645c4",
+  "installedJarSha256": "aa267f513059bad34a0538b2fb0570af6a81ef6dba11ec7451d72e728ef4b4c5",
+  "allBuildSourcesMatch": true,
+  "sourceFileCount": 205,
+  "backendPidBefore": 50776,
+  "backendPidAfter": 50973,
+  "flywayVersion": "013",
+  "health": "UP",
+  "userPasswordStatusAndVersionUnchanged": true,
+  "userOrderPaymentProductCountsUnchanged": true,
+  "seedCommandExecuted": false,
+  "faultInjectionEnabled": false,
+  "redisRequired": false,
+  "publicDeployment": false
+}

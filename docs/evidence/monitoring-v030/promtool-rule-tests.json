@@ -1,0 +1,39 @@
+{
+  "checked_at": "2026-10-18T07:06:43.360995+00:00",
+  "scope": "synthetic rule tests and configuration only; not live application evidence",
+  "checks": [
+    {
+      "command": [
+        "promtool",
+        "check",
+        "config",
+        "/Users/djy/Desktop/\u5b9e\u9a8c\u56db/fresh-mall/.runtime/monitoring/private/prometheus.yml"
+      ],
+      "exit_code": 0,
+      "stdout": "Checking /Users/djy/Desktop/\u5b9e\u9a8c\u56db/fresh-mall/.runtime/monitoring/private/prometheus.yml\n  SUCCESS: 1 rule files found\n SUCCESS: /Users/djy/Desktop/\u5b9e\u9a8c\u56db/fresh-mall/.runtime/monitoring/private/prometheus.yml is valid prometheus config file syntax\n\nChecking /Users/djy/Desktop/\u5b9e\u9a8c\u56db/fresh-mall/deploy/monitoring/alerts.yml\n  SUCCESS: 8 rules found\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "promtool",
+        "check",
+        "rules",
+        "/Users/djy/Desktop/\u5b9e\u9a8c\u56db/fresh-mall/deploy/monitoring/alerts.yml"
+      ],
+      "exit_code": 0,
+      "stdout": "Checking /Users/djy/Desktop/\u5b9e\u9a8c\u56db/fresh-mall/deploy/monitoring/alerts.yml\n  SUCCESS: 8 rules found\n\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "promtool",
+        "test",
+        "rules",
+        "/Users/djy/Desktop/\u5b9e\u9a8c\u56db/fresh-mall/deploy/monitoring/alerts.test.yml"
+      ],
+      "exit_code": 0,
+      "stdout": "  SUCCESS\n\n",
+      "stderr": ""
+    }
+  ]
+}

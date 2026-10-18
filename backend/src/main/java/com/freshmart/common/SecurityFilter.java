@@ -7,13 +7,15 @@ import org.slf4j.Logger;import org.slf4j.LoggerFactory;
 import java.io.IOException;import java.util.UUID;import java.util.Set;
 @Component @Order(Ordered.HIGHEST_PRECEDENCE+10)
 public class SecurityFilter extends OncePerRequestFilter {
+ private final com.freshmart.observability.MetricsScrapeAuth metricsScrape;
  private static final Logger log=LoggerFactory.getLogger(SecurityFilter.class);
  private final AuthenticationService auth;private final CsrfService csrf;private final ObjectMapper json;private final ApiAuthorizationRules authorization;private final com.freshmart.audit.AuditRecorder audit;
  private static final Set<String> COOKIE_AUTH=Set.of("/api/v1/auth/register","/api/v1/auth/login","/api/v1/auth/refresh","/api/v1/auth/logout");
- public SecurityFilter(AuthenticationService auth,CsrfService csrf,ObjectMapper json,ApiAuthorizationRules authorization,com.freshmart.audit.AuditRecorder audit){this.auth=auth;this.csrf=csrf;this.json=json;this.authorization=authorization;this.audit=audit;}
+ public SecurityFilter(AuthenticationService auth,CsrfService csrf,ObjectMapper json,ApiAuthorizationRules authorization,com.freshmart.audit.AuditRecorder audit,com.freshmart.observability.MetricsScrapeAuth metricsScrape){this.metricsScrape=metricsScrape;this.auth=auth;this.csrf=csrf;this.json=json;this.authorization=authorization;this.audit=audit;}
  @Override protected void doFilterInternal(HttpServletRequest request,HttpServletResponse response,FilterChain chain)throws ServletException,IOException{
   String trace=UUID.randomUUID().toString();TraceContext.set(trace);response.setHeader("X-Trace-Id",trace);if(request.getRequestURI().startsWith("/api/"))response.setHeader("Cache-Control","no-store");
   try{
+   if(metricsScrape.accepts(request.getMethod(),request.getRequestURI(),request.getHeader("Authorization"))){response.setHeader("Cache-Control","no-store");chain.doFilter(request,response);return;}
    String origin=request.getHeader("Origin");if(origin!=null){if(!csrf.allowsOrigin(origin))throw ApiException.forbidden();response.setHeader("Access-Control-Allow-Origin",origin);response.setHeader("Vary","Origin");response.setHeader("Access-Control-Allow-Credentials","true");}
    if("OPTIONS".equals(request.getMethod())){if(origin==null)throw ApiException.forbidden();response.setHeader("Access-Control-Allow-Methods","GET,POST,PUT,PATCH,DELETE,OPTIONS");response.setHeader("Access-Control-Allow-Headers","Authorization,Content-Type,Idempotency-Key,X-CSRF-Token");response.setHeader("Access-Control-Max-Age","600");response.setStatus(204);return;}
    String path=request.getRequestURI();boolean cookieAuth=COOKIE_AUTH.contains(path)&&"POST".equals(request.getMethod());boolean callback="/api/v1/payments/sandbox/callback".equals(path)&&"POST".equals(request.getMethod());
@@ -22,7 +24,7 @@ public class SecurityFilter extends OncePerRequestFilter {
    if(path.startsWith("/actuator/")&&!path.equals("/actuator/health"))RequestActor.current(request).requireRole("ADMIN");
    if(path.startsWith("/api/v1/auth")||request.getAttribute(RequestActor.ATTRIBUTE)!=null)response.setHeader("Cache-Control","no-store");
    chain.doFilter(request,response);
-  }catch(ApiException e){if(e.status()==401||e.status()==403)audit.denied((RequestActor)request.getAttribute(RequestActor.ATTRIBUTE),"api.authorization.denied",trace,"HTTP "+request.getMethod()+"; "+e.errorKey());response.setStatus(e.status());response.setContentType("application/json");response.setCharacterEncoding("UTF-8");if(e.status()==429)response.setHeader("Retry-After","900");json.writeValue(response.getOutputStream(),ApiEnvelope.error(e.code(),e.getMessage(),ApiError.of(e.errorKey())));
+  }catch(ApiException e){if(e.status()==401||e.status()==403)audit.denied((RequestActor)request.getAttribute(RequestActor.ATTRIBUTE),"api.authorization.denied",trace,"HTTP "+request.getMethod()+"; "+e.errorKey());response.setStatus(e.status());response.setContentType("application/json");response.setCharacterEncoding("UTF-8");if(e.status()==429)response.setHeader("Retry-After",String.valueOf(e.retryAfterSeconds()));json.writeValue(response.getOutputStream(),ApiEnvelope.error(e.code(),e.getMessage(),ApiError.of(e.errorKey())));
   }catch(RuntimeException e){if(response.isCommitted())throw e;log.error("Authentication boundary error traceId={} type={}",trace,e.getClass().getSimpleName());response.setStatus(500);response.setContentType("application/json");response.setCharacterEncoding("UTF-8");json.writeValue(response.getOutputStream(),ApiEnvelope.error(1050,"系统暂时不可用",new ApiError("INTERNAL_ERROR",true,java.util.List.of())));
   }finally{TraceContext.clear();}
  }

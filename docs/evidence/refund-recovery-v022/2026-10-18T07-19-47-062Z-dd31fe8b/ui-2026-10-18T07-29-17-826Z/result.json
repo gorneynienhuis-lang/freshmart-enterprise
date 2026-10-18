@@ -1,0 +1,625 @@
+{
+  "runId": "2026-10-18T07-19-47-062Z-dd31fe8b",
+  "phase": "ui",
+  "startedAt": "2026-10-18T07:29:17.826Z",
+  "status": "PASS",
+  "target": {
+    "schema": "fresh_mall_restore_engineering_v030_20261018a",
+    "uiBaseUrl": "http://127.0.0.1:15173",
+    "backendBaseUrl": "http://127.0.0.1:18081"
+  },
+  "responses": [
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "ffd12d7e-e1ec-47a6-8d59-fca913412c97",
+      "at": "2026-10-18T07:29:18.291Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 401,
+      "traceId": "29f76770-6b8e-45be-84a3-80bf540b4e5e",
+      "at": "2026-10-18T07:29:18.293Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "traceId": "c805e193-93c8-4030-8919-1023c77b62d7",
+      "at": "2026-10-18T07:29:18.298Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/home",
+      "status": 200,
+      "traceId": "b088fd60-7d8a-4e22-bd07-28d5c0b6d640",
+      "at": "2026-10-18T07:29:18.339Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "494380ea-4ba2-43ae-bbcf-3056bb4f0496",
+      "at": "2026-10-18T07:29:18.419Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "671f158b-252d-4f89-8ef5-b1bbaaef1ef2",
+      "at": "2026-10-18T07:29:18.475Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "status": 200,
+      "traceId": "3b816dac-eb89-4faf-a0c9-ce03ca6071e9",
+      "at": "2026-10-18T07:29:18.482Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "status": 200,
+      "traceId": "edf8a8b4-7ca0-491d-a2dd-0bd27ecbcf78",
+      "at": "2026-10-18T07:29:18.487Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "status": 200,
+      "traceId": "3beca38f-cf46-4610-bd7c-bee47ea8af6e",
+      "at": "2026-10-18T07:29:18.489Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "status": 200,
+      "traceId": "9a6c9fd6-713b-455d-ad22-8214799e0e35",
+      "at": "2026-10-18T07:29:18.494Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "status": 200,
+      "traceId": "7286c30d-4e6a-46ce-9b80-9b1680c1d0b5",
+      "at": "2026-10-18T07:29:18.508Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "945c18b5-4121-4b1f-811d-7e6449dde81e",
+      "at": "2026-10-18T07:29:18.511Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "5d7d0abb-a5d4-4b58-9dd4-ee166f44ddc5",
+      "at": "2026-10-18T07:29:18.528Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "ddd88855-6375-44b1-bd36-c393d51782a4",
+      "at": "2026-10-18T07:29:19.036Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "status": 200,
+      "traceId": "4f8faaf8-d4df-46b9-a5f3-9f7e06cfe5b8",
+      "at": "2026-10-18T07:29:19.037Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "513eb5da-1c0e-403a-aae4-91843efc9d79",
+      "at": "2026-10-18T07:29:19.051Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "74625a5d-170a-4dee-98a5-9cd03716616d",
+      "at": "2026-10-18T07:29:19.056Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/ref_5efac181-2fc1-48d6-9728-512eda6037c6/retry",
+      "status": 401,
+      "traceId": "28b2cea3-e2f5-40c4-b841-3030c78f39ad",
+      "at": "2026-10-18T07:29:19.104Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "be3bf6a4-e26f-4914-be27-c715451cdcc9",
+      "at": "2026-10-18T07:29:20.836Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "40e812b1-af9e-4a66-88d8-a1d0ed325d45",
+      "at": "2026-10-18T07:29:20.892Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "status": 200,
+      "traceId": "a20dea7c-f289-46a9-9134-853657e7124c",
+      "at": "2026-10-18T07:29:20.896Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "status": 200,
+      "traceId": "6bc51af1-8560-430e-a688-7f44c1045e39",
+      "at": "2026-10-18T07:29:20.898Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "status": 200,
+      "traceId": "98cf22f3-8ab8-4a10-969b-bd163e356312",
+      "at": "2026-10-18T07:29:20.900Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "status": 200,
+      "traceId": "b252f963-6e3e-42e6-b5b9-9fbefa70e654",
+      "at": "2026-10-18T07:29:20.905Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "status": 200,
+      "traceId": "7f525647-cd68-49fe-a45e-871e2e741b24",
+      "at": "2026-10-18T07:29:20.916Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "ee920b53-fe4c-4f0f-a488-fac3292a1259",
+      "at": "2026-10-18T07:29:20.921Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "91a323df-f529-45a0-98a4-a79fb378b3aa",
+      "at": "2026-10-18T07:29:20.970Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_1532b7e4-0c7e-4e8c-a704-e76e745a6dd5",
+      "status": 200,
+      "traceId": "d78d829d-5b17-4e8f-9164-9e95d0d51cd7",
+      "at": "2026-10-18T07:29:20.970Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/admin/refunds/ref_5efac181-2fc1-48d6-9728-512eda6037c6/retry",
+      "status": 200,
+      "traceId": "28f46098-8ab7-4bb0-a70b-2cbb899bbd25",
+      "at": "2026-10-18T07:29:21.487Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "status": 200,
+      "traceId": "ecfec6ba-465b-4b63-b52f-f841afb4e5cd",
+      "at": "2026-10-18T07:29:21.491Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "status": 200,
+      "traceId": "c80ae223-e4f2-45d4-9a76-345cc39e0b7f",
+      "at": "2026-10-18T07:29:21.496Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "status": 200,
+      "traceId": "0efebccd-b605-453e-a0a7-391c70a36531",
+      "at": "2026-10-18T07:29:21.501Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "status": 200,
+      "traceId": "12059638-4167-4162-940a-b4b27aa97b02",
+      "at": "2026-10-18T07:29:21.511Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "02fa6784-8433-4e1e-8b9b-b08ef8a35d7c",
+      "at": "2026-10-18T07:29:21.513Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "8081025c-c6e7-437c-8dca-5ae4ed5ec91f",
+      "at": "2026-10-18T07:29:22.060Z"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 200,
+      "traceId": "34b47511-66eb-4cb5-a028-60e219039672",
+      "at": "2026-10-18T07:29:22.064Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "traceId": "f9cccb4a-99f9-48b2-9e8e-46e63e0a3791",
+      "at": "2026-10-18T07:29:22.069Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/dashboard",
+      "status": 200,
+      "traceId": "25a4ee74-4010-4473-8313-5b2e237cf336",
+      "at": "2026-10-18T07:29:22.073Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "status": 200,
+      "traceId": "b3ea732b-565e-41df-a7f6-6031dbd86fcf",
+      "at": "2026-10-18T07:29:22.078Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/reconciliations",
+      "status": 200,
+      "traceId": "fc62c214-ae63-4516-8db8-b447c0e809d3",
+      "at": "2026-10-18T07:29:22.084Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "status": 200,
+      "traceId": "94f6fc8f-9567-4445-9ec8-d92db4df583c",
+      "at": "2026-10-18T07:29:22.095Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "b8ed5f55-7dd1-4279-8f4d-541afb70289d",
+      "at": "2026-10-18T07:29:22.099Z"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "fd5f8967-b640-42be-a21b-c9c5c64f0ea6",
+      "at": "2026-10-18T07:29:22.148Z"
+    }
+  ],
+  "checkedResponses": 43,
+  "schemaErrors": [],
+  "pageErrors": [],
+  "failedAssets": [],
+  "screens": [
+    "real-failed-refund-1440.png",
+    "real-failed-refund-1024.png",
+    "real-failed-refund-390.png",
+    "revoked-session-stops-replay-1440.png",
+    "revoked-session-stops-replay-1024.png",
+    "revoked-session-stops-replay-390.png",
+    "original-refund-recovery-dialog-1440.png",
+    "original-refund-recovery-dialog-1024.png",
+    "original-refund-recovery-dialog-390.png",
+    "original-refund-success-no-retry-1440.png",
+    "original-refund-success-no-retry-1024.png",
+    "original-refund-success-no-retry-390.png"
+  ],
+  "layouts": [
+    {
+      "name": "real-failed-refund",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "real-failed-refund",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "real-failed-refund",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "revoked-session-stops-replay",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": [
+        {
+          "left": 448.828125,
+          "right": 991.15625,
+          "clientWidth": 536,
+          "scrollWidth": 536
+        }
+      ]
+    },
+    {
+      "name": "revoked-session-stops-replay",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": [
+        {
+          "left": 240.828125,
+          "right": 783.15625,
+          "clientWidth": 536,
+          "scrollWidth": 536
+        }
+      ]
+    },
+    {
+      "name": "revoked-session-stops-replay",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": [
+        {
+          "left": 0,
+          "right": 390,
+          "clientWidth": 384,
+          "scrollWidth": 384
+        }
+      ]
+    },
+    {
+      "name": "original-refund-recovery-dialog",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": [
+        {
+          "left": 321.3125,
+          "right": 1118.6875,
+          "clientWidth": 795,
+          "scrollWidth": 795
+        }
+      ]
+    },
+    {
+      "name": "original-refund-recovery-dialog",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": [
+        {
+          "left": 113.3125,
+          "right": 910.6875,
+          "clientWidth": 795,
+          "scrollWidth": 795
+        }
+      ]
+    },
+    {
+      "name": "original-refund-recovery-dialog",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": [
+        {
+          "left": 0,
+          "right": 390,
+          "clientWidth": 388,
+          "scrollWidth": 388
+        }
+      ]
+    },
+    {
+      "name": "original-refund-success-no-retry",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "original-refund-success-no-retry",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "original-refund-success-no-retry",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": []
+    }
+  ],
+  "visitedRefundPages": [
+    {
+      "page": 1,
+      "size": 20,
+      "total": 22,
+      "status": null,
+      "containsTarget": true
+    },
+    {
+      "page": 1,
+      "size": 20,
+      "total": 1,
+      "status": "FAILED",
+      "containsTarget": true
+    },
+    {
+      "page": 1,
+      "size": 100,
+      "total": 1,
+      "status": null,
+      "containsTarget": true
+    },
+    {
+      "page": 1,
+      "size": 20,
+      "total": 1,
+      "status": "FAILED",
+      "containsTarget": true
+    },
+    {
+      "page": 1,
+      "size": 100,
+      "total": 1,
+      "status": null,
+      "containsTarget": true
+    },
+    {
+      "page": 1,
+      "size": 20,
+      "total": 0,
+      "status": "FAILED",
+      "containsTarget": false
+    },
+    {
+      "page": 1,
+      "size": 20,
+      "total": 0,
+      "status": "FAILED",
+      "containsTarget": false
+    },
+    {
+      "page": 1,
+      "size": 20,
+      "total": 22,
+      "status": "SUCCESS",
+      "containsTarget": true
+    }
+  ],
+  "retryRequests": [
+    {
+      "at": "2026-10-18T07:29:19.087Z"
+    },
+    {
+      "at": "2026-10-18T07:29:21.470Z"
+    }
+  ],
+  "checks": [
+    "Real logout revokes only this browser family; stale dialog POST401 is removed or disabled and replaced with login, emits exactly one write and does not change task, reserve or channel.",
+    "Actual FAILED pagination locates the prepared id; explicit independent FINANCE dialog recovery reuses refund/payment identity with one receipt; refreshed SUCCESS row removes retry."
+  ],
+  "snapshots": [
+    {
+      "label": "real-failed-before-ui",
+      "at": "2026-10-18T07:29:17.847Z",
+      "amount": 1190,
+      "status": "FAILED",
+      "failedAt": "2026-10-18 07:24:14.327219",
+      "refundId": "ref_5efac181-2fc1-48d6-9728-512eda6037c6",
+      "paymentId": "pay_3106e5da-1cd2-488e-9b02-cb29bec04ef7",
+      "generation": 1,
+      "leaseUntil": null,
+      "availableAt": "2026-10-18 07:24:14.327219",
+      "completedAt": null,
+      "attemptCount": 1,
+      "outboxStatus": "DEAD",
+      "receiptCount": 0,
+      "lastErrorCode": "CHANNEL_REJECTED",
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "retryAuditCount": 0,
+      "cycleAttemptCount": 1,
+      "validReceiptCount": 0
+    },
+    {
+      "label": "revoked-session-no-write",
+      "at": "2026-10-18T07:29:20.316Z",
+      "amount": 1190,
+      "status": "FAILED",
+      "failedAt": "2026-10-18 07:24:14.327219",
+      "refundId": "ref_5efac181-2fc1-48d6-9728-512eda6037c6",
+      "paymentId": "pay_3106e5da-1cd2-488e-9b02-cb29bec04ef7",
+      "generation": 1,
+      "leaseUntil": null,
+      "availableAt": "2026-10-18 07:24:14.327219",
+      "completedAt": null,
+      "attemptCount": 1,
+      "outboxStatus": "DEAD",
+      "receiptCount": 0,
+      "lastErrorCode": "CHANNEL_REJECTED",
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "retryAuditCount": 0,
+      "cycleAttemptCount": 1,
+      "validReceiptCount": 0
+    },
+    {
+      "label": "await-channel-original-id",
+      "at": "2026-10-18T07:29:21.495Z",
+      "amount": 1190,
+      "status": "PROCESSING",
+      "failedAt": null,
+      "refundId": "ref_5efac181-2fc1-48d6-9728-512eda6037c6",
+      "paymentId": "pay_3106e5da-1cd2-488e-9b02-cb29bec04ef7",
+      "generation": 2,
+      "leaseUntil": null,
+      "availableAt": "2026-10-18 07:29:21.475064",
+      "completedAt": null,
+      "attemptCount": 1,
+      "outboxStatus": "PENDING",
+      "receiptCount": 0,
+      "lastErrorCode": null,
+      "refundReserved": 1190,
+      "refundedAmount": 0,
+      "retryAuditCount": 1,
+      "cycleAttemptCount": 0,
+      "validReceiptCount": 0
+    },
+    {
+      "label": "await-channel-original-id",
+      "at": "2026-10-18T07:29:22.013Z",
+      "amount": 1190,
+      "status": "SUCCESS",
+      "failedAt": null,
+      "refundId": "ref_5efac181-2fc1-48d6-9728-512eda6037c6",
+      "paymentId": "pay_3106e5da-1cd2-488e-9b02-cb29bec04ef7",
+      "generation": 3,
+      "leaseUntil": null,
+      "availableAt": "2026-10-18 07:29:21.981756",
+      "completedAt": "2026-10-18 07:29:21.979050",
+      "attemptCount": 2,
+      "outboxStatus": "COMPLETED",
+      "receiptCount": 1,
+      "lastErrorCode": null,
+      "refundReserved": 0,
+      "refundedAmount": 1190,
+      "retryAuditCount": 1,
+      "cycleAttemptCount": 1,
+      "validReceiptCount": 1
+    }
+  ],
+  "sessionFailureBlock": {
+    "staleDialogRemoved": true,
+    "loginPrompt": true
+  },
+  "finishedAt": "2026-10-18T07:29:22.794Z"
+}

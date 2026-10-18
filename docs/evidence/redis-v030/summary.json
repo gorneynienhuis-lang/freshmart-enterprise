@@ -1,0 +1,488 @@
+{
+  "status": "PASSED",
+  "scope": "real Redis8.2.10 classification cache only; no whole-shop hit-rate claim",
+  "startedAt": "2026-10-18T07:20:37.697831+00:00",
+  "completedAt": "2026-10-18T07:21:40.796065+00:00",
+  "backendPort": 18081,
+  "backendPid": 48717,
+  "schema": "fresh_mall_restore_engineering_v030_20261018a",
+  "jarSha256": "aa267f513059bad34a0538b2fb0570af6a81ef6dba11ec7451d72e728ef4b4c5",
+  "redisVersion": "8.2.10",
+  "redisBinarySha256": "03bcb53683d831c79c298fc81da3ed368c3763e2f5c639c1372a8cfd23495973",
+  "redisInitialPid": 47338,
+  "redisFinalPid": 49078,
+  "namespaceKeySha256": "254612d8f930e6476820861126b7a62b84543e2bcb3d68fde6131735bf1cf776",
+  "commerceJobsEnabled": false,
+  "checks": {
+    "coldAndHit": {
+      "afterCold": {
+        "bypass": 0.0,
+        "db_load": 1.0,
+        "disabled": 0.0,
+        "hit": 0.0,
+        "invalid": 0.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 1.0
+      },
+      "afterHit": {
+        "bypass": 0.0,
+        "db_load": 1.0,
+        "disabled": 0.0,
+        "hit": 1.0,
+        "invalid": 0.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 1.0
+      },
+      "categoryCount": 8,
+      "metricsBefore": {
+        "bypass": 0.0,
+        "db_load": 0.0,
+        "disabled": 0.0,
+        "hit": 0.0,
+        "invalid": 0.0,
+        "miss": 0.0,
+        "redis_error": 0.0,
+        "write": 0.0
+      },
+      "passed": true,
+      "redisStatsAfter": [
+        "cmdstat_set:calls=1,usec=9,usec_per_call=9.00,rejected_calls=0,failed_calls=0",
+        "cmdstat_get:calls=2,usec=3,usec_per_call=1.50,rejected_calls=0,failed_calls=0",
+        "cmdstat_del:calls=1,usec=9,usec_per_call=9.00,rejected_calls=0,failed_calls=0"
+      ],
+      "redisStatsBefore": [
+        "cmdstat_del:calls=1,usec=9,usec_per_call=9.00,rejected_calls=0,failed_calls=0"
+      ],
+      "remainingTtlMillis": 62165
+    },
+    "malformed": {
+      "after": {
+        "bypass": 0.0,
+        "db_load": 2.0,
+        "disabled": 0.0,
+        "hit": 1.0,
+        "invalid": 1.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 2.0
+      },
+      "before": {
+        "bypass": 0.0,
+        "db_load": 1.0,
+        "disabled": 0.0,
+        "hit": 1.0,
+        "invalid": 0.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 1.0
+      },
+      "passed": true
+    },
+    "naturalTtl": {
+      "after": {
+        "bypass": 3.0,
+        "db_load": 9.0,
+        "disabled": 0.0,
+        "hit": 4.0,
+        "invalid": 2.0,
+        "miss": 3.0,
+        "redis_error": 1.0,
+        "write": 5.0
+      },
+      "before": {
+        "bypass": 3.0,
+        "db_load": 8.0,
+        "disabled": 0.0,
+        "hit": 4.0,
+        "invalid": 2.0,
+        "miss": 2.0,
+        "redis_error": 1.0,
+        "write": 4.0
+      },
+      "initialRemainingMillis": 59229,
+      "observedExpiredPttl": -2,
+      "passed": true,
+      "waitedSeconds": 59.262
+    },
+    "redisDown": {
+      "after": {
+        "bypass": 3.0,
+        "db_load": 7.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 1.0,
+        "write": 3.0
+      },
+      "before": {
+        "bypass": 0.0,
+        "db_load": 3.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 3.0
+      },
+      "health": {
+        "groups": [
+          "liveness",
+          "readiness"
+        ],
+        "status": "UP"
+      },
+      "latencyMillis": [
+        3.724,
+        1.985,
+        2.289,
+        1.818
+      ],
+      "passed": true
+    },
+    "restart": {
+      "afterCold": {
+        "bypass": 3.0,
+        "db_load": 8.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 2.0,
+        "redis_error": 1.0,
+        "write": 4.0
+      },
+      "afterHit": {
+        "bypass": 3.0,
+        "db_load": 8.0,
+        "disabled": 0.0,
+        "hit": 4.0,
+        "invalid": 2.0,
+        "miss": 2.0,
+        "redis_error": 1.0,
+        "write": 4.0
+      },
+      "before": {
+        "bypass": 3.0,
+        "db_load": 7.0,
+        "disabled": 0.0,
+        "hit": 3.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 1.0,
+        "write": 3.0
+      },
+      "passed": true
+    },
+    "wrong-identity": {
+      "after": {
+        "bypass": 0.0,
+        "db_load": 3.0,
+        "disabled": 0.0,
+        "hit": 2.0,
+        "invalid": 2.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 3.0
+      },
+      "before": {
+        "bypass": 0.0,
+        "db_load": 2.0,
+        "disabled": 0.0,
+        "hit": 2.0,
+        "invalid": 1.0,
+        "miss": 1.0,
+        "redis_error": 0.0,
+        "write": 2.0
+      },
+      "passed": true
+    }
+  },
+  "finalRedisProbe": {
+    "appPing": "PONG",
+    "commandstats": [
+      "cmdstat_set:calls=2,usec=26,usec_per_call=13.00,rejected_calls=0,failed_calls=0",
+      "cmdstat_get:calls=3,usec=12,usec_per_call=4.00,rejected_calls=0,failed_calls=0"
+    ],
+    "credentialValuesPrinted": false,
+    "deniedByDryRun": {
+      "config": true,
+      "eval": true,
+      "flushall": true,
+      "keys": true,
+      "outside_key": true,
+      "select": true
+    },
+    "status": "PROBED",
+    "ttlMillis": 56020
+  },
+  "credentialsIncluded": false,
+  "linuxDockerCloudValidated": false,
+  "privateRawEvidenceSha256": "c6e6d97a9f3ce2efe8e2215ded1767b89112135a9a81b31cf220adda53d782cc",
+  "httpObservations": [
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 2.287,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "832c0bc832efd7256c5e669cddded9fd0021215ed76bf2f5ef20c28d292d113d"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 133.705,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "01ae29c2b249ef9154d76c9aa87413abc13405e76f590a2da69b7af79a5989a6"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 2.594,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "a0d23e51f2bada3d18b7298d25e1e6f9abd59572060ec4b0ae2f1e29a62fda49"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 3.601,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "c41481bf063b61519c5783db019c8ce106017a94c5ac38640af7bb003808f77e"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.652,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "f3f90a63281e1e8d67387ee5a88cac5ec673380c07960fc06faea3acfe3a9854"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.691,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "7fca2bf3a6b4483caf1cba11c0f35a01e84dec53ea4962726d73f8568ebb0292"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 2.958,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "8bf4d99d373ab36ca2f790834ccd59f1d86726fc378f3afcc6d74482c8f678e5"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.621,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "9830177a36ebaa30daf6f072ca4d3e69126f5f5a54b5a065bb07fa936512b0b8"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 1.811,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "29567d8ac7eba5d242225c03e6abc1cece844289ccc7490007246a22c7cf826a"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 3.572,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "724c584fe3cca6a5d802002a2408b412df87aed01318ce64a60f94ec8fa8f01f"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 2.996,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "c3495e4b35dc1369873068007baa13f24cf612766fbb419e16d4aaf27ad14ffa"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.647,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "163bc66b8d1ec109cc36b953df2b09db25e39cd8198a824f2a48e16f6633cc3d"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 2.283,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "61796ca39a3be99110d0fb5ed28adccc5a4703e06765b0590fa3996eeef923dd"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.453,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "0fcf3b6ac151b125183555e8d4c063dc20ff64bd0ef840293f56beb4f0e38be1"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 3.724,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "0c37e64475de05d4784b0d8e652b48e0b609f94c22b6867a44523b03f0e9d86e"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 1.985,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "852858eed4d927f4a63e46b04a18546a6920f208df0fe850e2d2bd6b47f7cbc9"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 2.289,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "98f560b851210f06eae4392013a3344c8fb465bf9f2a7537142f340e0506b72e"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 1.818,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "c84336874fac68bef537b4ed414009c3150af1419f8a7980a467777b13f0b041"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 1.971,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "4f1b881e777c8736419116a11c8544abf0a81ac7b6ca9363d5322f3175fe6830"
+    },
+    {
+      "contentType": "application/vnd.spring-boot.actuator.v3+json",
+      "elapsedMillis": 1.145,
+      "httpStatus": 200,
+      "path": "/actuator/health",
+      "sha256": "f5d81755935209a3ae596d4553d269cbbe8d08a27dd95b05fe0b7c544eb7ed71"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 7.504,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "029cd5d2caa46ca53c2e5c0a3b56b97f5630db891dfd3572b5e129e0523d2a4a"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 6.196,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "89ae9a59f56e9f44812d6e8a023ccfaa26a13e16ff3bc5bb1090fd32c0d10d84"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 4.35,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "2df2a1579df1e06937eac01439add7c3944a24538d08becb8a51b1b29b2e3687"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 4.095,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "a1351709a4a30559114090101afa1e6e915a3d9b99ebdf0b9a90d1e9e2de6c9e"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 3.125,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "04526db9101e9a766f99738fa64434c38b757f3f3aa295413b609776d9df983c"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 7.222,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "10f1f0b469c8a524848047e8c9d24771fe1290e803910635d34116f057b4cc04"
+    },
+    {
+      "contentType": "application/json",
+      "elapsedMillis": 7.905,
+      "httpStatus": 200,
+      "path": "/api/v1/categories",
+      "sha256": "fc641b1f0998159063546954828811a8d3b03c154a72813636b4749f597bb46b"
+    },
+    {
+      "contentType": "text/plain;version=0.0.4;charset=utf-8",
+      "elapsedMillis": 3.72,
+      "httpStatus": 200,
+      "path": "/actuator/prometheus",
+      "sha256": "e6bfb89c75a7af02b0dd52b064cab9bc5fa2b274fcd5a61faa1695d7098a945b"
+    }
+  ],
+  "publicClassificationData": [
+    {
+      "categoryId": "C01",
+      "code": "C01",
+      "imageUrl": "http://localhost:8080/catalog/S001.jpg",
+      "name": "时令蔬菜",
+      "shortName": "蔬菜",
+      "sortOrder": 1
+    },
+    {
+      "categoryId": "C02",
+      "code": "C02",
+      "imageUrl": "http://localhost:8080/catalog/S006.jpg",
+      "name": "新鲜水果",
+      "shortName": "水果",
+      "sortOrder": 2
+    },
+    {
+      "categoryId": "C03",
+      "code": "C03",
+      "imageUrl": "http://localhost:8080/catalog/S011.jpg",
+      "name": "肉禽蛋品",
+      "shortName": "肉禽蛋",
+      "sortOrder": 3
+    },
+    {
+      "categoryId": "C04",
+      "code": "C04",
+      "imageUrl": "http://localhost:8080/catalog/S016.jpg",
+      "name": "水产海鲜",
+      "shortName": "海鲜",
+      "sortOrder": 4
+    },
+    {
+      "categoryId": "C05",
+      "code": "C05",
+      "imageUrl": "http://localhost:8080/catalog/S021.jpg",
+      "name": "乳品烘焙",
+      "shortName": "乳品烘焙",
+      "sortOrder": 5
+    },
+    {
+      "categoryId": "C06",
+      "code": "C06",
+      "imageUrl": "http://localhost:8080/catalog/S026.jpg",
+      "name": "粮油调味",
+      "shortName": "粮油",
+      "sortOrder": 6
+    },
+    {
+      "categoryId": "C07",
+      "code": "C07",
+      "imageUrl": "http://localhost:8080/catalog/S031.jpg",
+      "name": "冷冻食品",
+      "shortName": "冷冻",
+      "sortOrder": 7
+    },
+    {
+      "categoryId": "C08",
+      "code": "C08",
+      "imageUrl": "http://localhost:8080/catalog/S036.jpg",
+      "name": "饮料酒水",
+      "shortName": "饮品",
+      "sortOrder": 8
+    }
+  ],
+  "validationBoundary": "macOS ARM64 real MySQL/Redis/native Java; source snapshot build, not Linux/Docker/cloud; no whole-shop hit-rate inference"
+}

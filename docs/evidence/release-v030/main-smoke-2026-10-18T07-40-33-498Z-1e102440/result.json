@@ -1,0 +1,923 @@
+{
+  "runId": "main-smoke-2026-10-18T07-40-33-498Z-1e102440",
+  "startedAt": "2026-10-18T07:40:33.499Z",
+  "status": "PASS",
+  "baseUrl": "http://127.0.0.1:5173",
+  "expectedProxyBackend": "http://127.0.0.1:8080",
+  "scope": "Existing seven roles; read-only business GETs and real R03 browser pages. Only CSRF/login/logout session-security records; expected authorization-denial audits. No business write, registration, reset or mocked response.",
+  "roles": [
+    {
+      "role": "MEMBER",
+      "actualRoles": [
+        "MEMBER"
+      ],
+      "meStatus": 200,
+      "listRoute": "/api/v1/orders",
+      "listStatus": 200,
+      "listTotal": 0,
+      "listItemCount": 0,
+      "employeesStatus": 403
+    },
+    {
+      "role": "PICKER",
+      "actualRoles": [
+        "PICKER"
+      ],
+      "meStatus": 200,
+      "listRoute": "/api/v1/admin/pick-tasks",
+      "listStatus": 200,
+      "listTotal": 13,
+      "listItemCount": 13,
+      "employeesStatus": 403
+    },
+    {
+      "role": "COURIER",
+      "actualRoles": [
+        "COURIER"
+      ],
+      "meStatus": 200,
+      "listRoute": "/api/v1/admin/delivery-tasks",
+      "listStatus": 200,
+      "listTotal": 10,
+      "listItemCount": 10,
+      "employeesStatus": 403
+    },
+    {
+      "role": "SERVICE",
+      "actualRoles": [
+        "SERVICE"
+      ],
+      "meStatus": 200,
+      "listRoute": "/api/v1/admin/aftersales",
+      "listStatus": 200,
+      "listTotal": 9,
+      "listItemCount": 9,
+      "employeesStatus": 403
+    },
+    {
+      "role": "FINANCE",
+      "actualRoles": [
+        "FINANCE"
+      ],
+      "meStatus": 200,
+      "listRoute": "/api/v1/admin/refunds",
+      "listStatus": 200,
+      "listTotal": 19,
+      "listItemCount": 19,
+      "employeesStatus": 403
+    },
+    {
+      "role": "OPERATOR",
+      "actualRoles": [
+        "OPERATOR"
+      ],
+      "meStatus": 200,
+      "listRoute": "/api/v1/admin/products",
+      "listStatus": 200,
+      "listTotal": 49,
+      "listItemCount": 20,
+      "employeesStatus": 403
+    },
+    {
+      "role": "ADMIN",
+      "actualRoles": [
+        "ADMIN"
+      ],
+      "meStatus": 200,
+      "listRoute": "/api/v1/admin/employees",
+      "listStatus": 200,
+      "listTotal": 9,
+      "listItemCount": 9,
+      "employeesStatus": 200
+    }
+  ],
+  "responses": [
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "c68a980d-3e82-4eef-aae4-9877f62f099e",
+      "at": "2026-10-18T07:40:33.853Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "7a2783e8-eb79-43cc-a8d1-789246d039a3",
+      "at": "2026-10-18T07:40:33.962Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "8924922c-ad7c-4ae4-b1f6-af0e99df3deb",
+      "at": "2026-10-18T07:40:33.969Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "status": 200,
+      "traceId": "a30c4e5f-eb2c-4c2f-b88d-0f7a636484d2",
+      "at": "2026-10-18T07:40:33.991Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 403,
+      "traceId": "acafb185-f822-4f2e-a624-7f1743119baf",
+      "at": "2026-10-18T07:40:33.998Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "aa839a1a-a8d6-480a-b48a-a4f370798174",
+      "at": "2026-10-18T07:40:34.003Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "e879b065-518c-44a0-b9d5-2d85933598d4",
+      "at": "2026-10-18T07:40:34.010Z"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "7356fe9c-a446-4c31-a219-5827472c4798",
+      "at": "2026-10-18T07:40:34.013Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "864a105a-b3b9-4967-8879-da3f5bb05939",
+      "at": "2026-10-18T07:40:34.017Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "812d7b26-85fd-46e2-9064-a77df24a12ac",
+      "at": "2026-10-18T07:40:34.073Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "f2279ee1-c86b-44fc-a127-7ac993a2ca89",
+      "at": "2026-10-18T07:40:34.078Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "status": 200,
+      "traceId": "01fc3b90-da5b-4415-9bec-ac1369d3844e",
+      "at": "2026-10-18T07:40:34.094Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 403,
+      "traceId": "52cc6d01-a793-494a-8f24-43ac68f647a4",
+      "at": "2026-10-18T07:40:34.099Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "a7de2f70-afb3-4062-be6a-31f0926c0c68",
+      "at": "2026-10-18T07:40:34.103Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "51a87e7f-52cb-41de-82ba-e90054afc447",
+      "at": "2026-10-18T07:40:34.107Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "05f6fbc7-23b9-4a86-8c7e-1d68d871f4e3",
+      "at": "2026-10-18T07:40:34.109Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "e95ebe69-7618-49b1-8505-9b960873181d",
+      "at": "2026-10-18T07:40:34.114Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "e8ca08f5-6d9a-4a8d-b380-55c6fa7694b8",
+      "at": "2026-10-18T07:40:34.167Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "e73879bb-c51c-4cee-b668-9e751a6d70b8",
+      "at": "2026-10-18T07:40:34.170Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks",
+      "status": 200,
+      "traceId": "d4265d5d-3228-425e-a068-802ecf05bbf8",
+      "at": "2026-10-18T07:40:34.177Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 403,
+      "traceId": "e88ce182-2dc2-43c7-a39b-1532e580f3b5",
+      "at": "2026-10-18T07:40:34.180Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "047c8ee0-88f3-4bfb-a0d3-9d9828b0cfaa",
+      "at": "2026-10-18T07:40:34.184Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "9218885c-07b7-4d7e-b2cc-2405c6649253",
+      "at": "2026-10-18T07:40:34.187Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "4783c7aa-1b41-44b3-b299-039564cfeb97",
+      "at": "2026-10-18T07:40:34.189Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "71a6edf9-ef97-4b92-811d-67afd70e409c",
+      "at": "2026-10-18T07:40:34.194Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "1adfd213-0b52-4bd9-98c3-b41eedad3852",
+      "at": "2026-10-18T07:40:34.249Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "0f75d8f3-af99-4a40-b144-e9b366a4ed10",
+      "at": "2026-10-18T07:40:34.253Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales",
+      "status": 200,
+      "traceId": "9161da2b-e7db-4796-b252-6e2835fd37db",
+      "at": "2026-10-18T07:40:34.267Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 403,
+      "traceId": "8ac7e151-18cb-4402-93df-946b4629da34",
+      "at": "2026-10-18T07:40:34.271Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "e185ebd9-22a6-4d36-abbb-269b42842d1c",
+      "at": "2026-10-18T07:40:34.274Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "258dd05d-8364-4729-832b-c120001f0f52",
+      "at": "2026-10-18T07:40:34.278Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "e09945d1-d7c0-446b-82fc-a2b18d9e6ce8",
+      "at": "2026-10-18T07:40:34.280Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "820f33cb-9282-4b60-991f-c3498a24dd47",
+      "at": "2026-10-18T07:40:34.284Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "22a937d4-b5e9-426e-b4f9-b406e5a34594",
+      "at": "2026-10-18T07:40:34.337Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "b36921b3-ea30-4f46-9048-356127ae55e6",
+      "at": "2026-10-18T07:40:34.341Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "31274784-26ed-45cd-8a70-be12433cdc0e",
+      "at": "2026-10-18T07:40:34.346Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 403,
+      "traceId": "0ce2708d-02b6-4711-9ed5-a8dbe4fe6fb3",
+      "at": "2026-10-18T07:40:34.350Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "4cbf2b02-6283-4706-ad1e-0c20bae83248",
+      "at": "2026-10-18T07:40:34.353Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "ce8f2102-d568-49d8-bde0-c080b0c365cb",
+      "at": "2026-10-18T07:40:34.356Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "9ff8af48-cdf7-4805-b467-4dd016a570ec",
+      "at": "2026-10-18T07:40:34.358Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "4b0d5af0-ff3a-4a02-85a7-d7aea32c06ad",
+      "at": "2026-10-18T07:40:34.363Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "52584abf-804e-4851-9296-5e92bf701221",
+      "at": "2026-10-18T07:40:34.416Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "4a2dc345-66d0-48b8-9d8e-613698db711f",
+      "at": "2026-10-18T07:40:34.419Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/admin/products",
+      "status": 200,
+      "traceId": "74bf5496-29c4-4324-968c-bc1306964144",
+      "at": "2026-10-18T07:40:34.435Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 403,
+      "traceId": "ab3eb0bd-d337-4ad5-9af4-49d94a858490",
+      "at": "2026-10-18T07:40:34.439Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "a7e68bc3-8e67-43cd-bfc1-80f1f1438a08",
+      "at": "2026-10-18T07:40:34.442Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "10322055-b82b-4c9e-abfe-135ef3e7da11",
+      "at": "2026-10-18T07:40:34.446Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "c147077a-cfc6-4378-a6aa-005a7f86c441",
+      "at": "2026-10-18T07:40:34.448Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "b45f2ff0-b8d4-445c-8524-9e3a42420596",
+      "at": "2026-10-18T07:40:34.570Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "bf07f71f-9e7e-4537-a73e-cf71f12abb68",
+      "at": "2026-10-18T07:40:34.629Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "308367fe-b5ee-4a06-a6c5-5f28163fcbcf",
+      "at": "2026-10-18T07:40:34.632Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 200,
+      "traceId": "6310f6b1-2077-4106-b2d9-5158f1873f7e",
+      "at": "2026-10-18T07:40:34.640Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 200,
+      "traceId": "3dd697f2-fb85-4440-9b36-0090831b0998",
+      "at": "2026-10-18T07:40:34.645Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "5e9d6e31-7f26-4099-8c57-fb3b67be9023",
+      "at": "2026-10-18T07:40:34.815Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 401,
+      "traceId": "3cee9f62-173a-4655-89ef-173c84d2547d",
+      "at": "2026-10-18T07:40:34.821Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "traceId": "35bb3902-9417-487f-acc4-f62ff41e17e6",
+      "at": "2026-10-18T07:40:34.824Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "GET",
+      "path": "/api/v1/home",
+      "status": 200,
+      "traceId": "6b6a1f35-5845-471a-a5b2-8d13b8f8d310",
+      "at": "2026-10-18T07:40:34.846Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "status": 200,
+      "traceId": "93899370-fee6-4724-bc9f-c00af22806c6",
+      "at": "2026-10-18T07:40:35.729Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "status": 200,
+      "traceId": "2ff5c54e-2f97-4d8e-8710-0539198faf9a",
+      "at": "2026-10-18T07:40:35.744Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "GET",
+      "path": "/api/v1/products/S001",
+      "status": 200,
+      "traceId": "a71a7b98-61ad-4402-a201-23eb2c8591e6",
+      "at": "2026-10-18T07:40:36.463Z"
+    },
+    {
+      "role": "PUBLIC",
+      "method": "GET",
+      "path": "/api/v1/products/S001/reviews",
+      "status": 200,
+      "traceId": "d0fd8207-e800-4480-8379-ee7717dd5bda",
+      "at": "2026-10-18T07:40:36.471Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "70299f79-179d-4fb6-a8c4-f9db80fa7a0d",
+      "at": "2026-10-18T07:40:36.934Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 200,
+      "traceId": "fe7e67bc-5349-4097-8908-57687e277ede",
+      "at": "2026-10-18T07:40:36.940Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "traceId": "d1876e20-eb45-496a-9501-3355901507cd",
+      "at": "2026-10-18T07:40:36.946Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/roles",
+      "status": 200,
+      "traceId": "4aa79b07-a7b2-4d01-8011-7b87a00fbac6",
+      "at": "2026-10-18T07:40:36.953Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 200,
+      "traceId": "a6d9f837-dcc2-4e19-b7b3-c07cc8669bdb",
+      "at": "2026-10-18T07:40:36.963Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/audit-logs",
+      "status": 200,
+      "traceId": "47198e4b-21c7-4692-b848-ef07cce68a81",
+      "at": "2026-10-18T07:40:36.981Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "7ff4e94c-f4b1-4d74-b13c-b0998e95bd25",
+      "at": "2026-10-18T07:40:37.337Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "f1b8fe4b-191c-4b0f-8b63-939802a1d817",
+      "at": "2026-10-18T07:40:37.342Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "1f3cf3e0-321e-4adb-9987-f1ff92fcb146",
+      "at": "2026-10-18T07:40:37.344Z"
+    }
+  ],
+  "checkedResponses": 70,
+  "responseStatuses": {
+    "200": 56,
+    "401": 8,
+    "403": 6
+  },
+  "schemaErrors": [],
+  "pageErrors": [],
+  "failedAssets": [],
+  "layouts": [
+    {
+      "role": "PUBLIC",
+      "name": "r03-home",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-home",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-home",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-products",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-products",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-products",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-product-detail",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-product-detail",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "PUBLIC",
+      "name": "r03-product-detail",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "tables": []
+    },
+    {
+      "role": "ADMIN",
+      "name": "r03-administrator",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "clientWidth": 1178,
+          "scrollWidth": 1178
+        },
+        {
+          "left": 130,
+          "right": 1310,
+          "clientWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ]
+    },
+    {
+      "role": "ADMIN",
+      "name": "r03-administrator",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "clientWidth": 874,
+          "scrollWidth": 874
+        },
+        {
+          "left": 74,
+          "right": 950,
+          "clientWidth": 874,
+          "scrollWidth": 874
+        }
+      ]
+    },
+    {
+      "role": "ADMIN",
+      "name": "r03-administrator",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "tables": [
+        {
+          "left": 49,
+          "right": 341,
+          "clientWidth": 290,
+          "scrollWidth": 740
+        },
+        {
+          "left": 49,
+          "right": 341,
+          "clientWidth": 290,
+          "scrollWidth": 795
+        }
+      ]
+    }
+  ],
+  "screens": [
+    "r03-home-1440.png",
+    "r03-home-1024.png",
+    "r03-home-390.png",
+    "r03-products-1440.png",
+    "r03-products-1024.png",
+    "r03-products-390.png",
+    "r03-product-detail-1440.png",
+    "r03-product-detail-1024.png",
+    "r03-product-detail-390.png",
+    "r03-administrator-1440.png",
+    "r03-administrator-1024.png",
+    "r03-administrator-390.png"
+  ],
+  "attempts": [
+    {
+      "stage": "role-MEMBER",
+      "startedAt": "2026-10-18T07:40:33.825Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:34.013Z"
+    },
+    {
+      "stage": "role-PICKER",
+      "startedAt": "2026-10-18T07:40:34.013Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:34.109Z"
+    },
+    {
+      "stage": "role-COURIER",
+      "startedAt": "2026-10-18T07:40:34.109Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:34.189Z"
+    },
+    {
+      "stage": "role-SERVICE",
+      "startedAt": "2026-10-18T07:40:34.189Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:34.280Z"
+    },
+    {
+      "stage": "role-FINANCE",
+      "startedAt": "2026-10-18T07:40:34.280Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:34.358Z"
+    },
+    {
+      "stage": "role-OPERATOR",
+      "startedAt": "2026-10-18T07:40:34.358Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:34.448Z"
+    },
+    {
+      "stage": "role-ADMIN",
+      "startedAt": "2026-10-18T07:40:34.448Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:34.645Z"
+    },
+    {
+      "stage": "public-pages",
+      "startedAt": "2026-10-18T07:40:34.723Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:36.837Z"
+    },
+    {
+      "stage": "admin-workbench",
+      "startedAt": "2026-10-18T07:40:36.837Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T07:40:37.344Z"
+    }
+  ],
+  "sessionCleanup": [
+    {
+      "role": "MEMBER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "PICKER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "COURIER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "SERVICE",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "FINANCE",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "OPERATOR",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "ADMIN",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    }
+  ],
+  "sourceSha256": {
+    "frontend/scripts/verify-local-release.mjs": "220718d44a0a2e7b315f831a3234a53cc9cb189fbc56f5addaf1bcbb7e20ce1c",
+    "frontend/src/app/application.ts": "e0d9f2a52c512a3cf08aaa28e69608b53836505bf7891adef220c9086a4e9352",
+    "frontend/src/styles/runtime-r03.css": "715de7a8a653dce8cf76129ddeb0ffc0c591a41c6fbe05ce31f6d7ad7390387e",
+    "backend/src/main/java/com/freshmart/common/SecurityFilter.java": "37fc14e6573cbe0a79d8e3ae6ebb681846712dab5c33bda0b87c3ee02bb9bb99"
+  },
+  "finishedAt": "2026-10-18T07:40:37.497Z"
+}

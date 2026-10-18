@@ -1,0 +1,180 @@
+{
+  "status": "PASSED",
+  "scope": "Actual isolated MySQL-backed application, dedicated scrape credential, official Prometheus query/alert engine and native UI. Synthetic promtool rule tests are separate. No main-service/database mutation.",
+  "jar_sha256": "aa267f513059bad34a0538b2fb0570af6a81ef6dba11ec7451d72e728ef4b4c5",
+  "application_sources_unchanged_since_final_build": [
+    {
+      "path": "backend/src/main/java/com/freshmart/observability/BusinessMetricsCollector.java",
+      "sha256": "547cc3fe1dd9bd0b73c4336058ac30a8a0dac17cb29d344c30ad8dc521d9967a",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/main/java/com/freshmart/observability/BusinessMetricsMapper.java",
+      "sha256": "318c9a549a67cfc62e37280821bf0591824f80ea303d6689dc068c1568886551",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/main/java/com/freshmart/observability/BusinessMetricsSource.java",
+      "sha256": "1be21db4109b55720cc5833629a9ce3939b55029c3e37dd415b7ed47538873cb",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/main/java/com/freshmart/observability/MetricsScrapeAuth.java",
+      "sha256": "c44139bd2cdfdbfbecd2d8064669702cfd7310d374aefa98ebdd7ab74bc40253",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/test/java/com/freshmart/observability/BusinessMetricsCollectorTest.java",
+      "sha256": "503b5b59414565235eba9ab527501eaf9db4c95bbf868b052dc83fd97c8f2aad",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/test/java/com/freshmart/observability/BusinessMetricsMapperTest.java",
+      "sha256": "1e231571f47f6d248be0c63ca12f2798f4445e0817c9dff20513b305aa96f13e",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/test/java/com/freshmart/observability/MetricsScrapeAuthTest.java",
+      "sha256": "a8233c8f7a81af054c3af8c251f3985f3702594854281ac89401bac68442461c",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/test/java/com/freshmart/observability/MetricsSecurityFilterTest.java",
+      "sha256": "380afc655cf0c057d23ba64330810faf1e42e16c0313df51bd1e60815c20df0a",
+      "matches_final_test_build": true
+    },
+    {
+      "path": "backend/src/main/java/com/freshmart/common/SecurityFilter.java",
+      "sha256": "37fc14e6573cbe0a79d8e3ae6ebb681846712dab5c33bda0b87c3ee02bb9bb99",
+      "matches_final_test_build": true
+    }
+  ],
+  "prometheus_version": "3.15.0",
+  "prometheus_pid_during_all_phases": 48890,
+  "phases": [
+    {
+      "label": "baseline",
+      "capturedAt": "2026-10-18T07:21:40.862Z",
+      "up": "1",
+      "dead": "0",
+      "failedRefunds": "0",
+      "snapshotSuccess": "1",
+      "alerts": [],
+      "screens": [
+        "baseline-targets.png",
+        "baseline-alerts.png",
+        "baseline-up-graph.png"
+      ]
+    },
+    {
+      "label": "backend-down",
+      "capturedAt": "2026-10-18T07:23:49.702Z",
+      "up": "0",
+      "dead": null,
+      "failedRefunds": null,
+      "snapshotSuccess": null,
+      "alerts": [
+        {
+          "name": "FreshMallApplicationDown",
+          "state": "firing"
+        }
+      ],
+      "screens": [
+        "backend-down-targets.png",
+        "backend-down-alerts.png",
+        "backend-down-up-graph.png"
+      ]
+    },
+    {
+      "label": "backend-recovered",
+      "capturedAt": "2026-10-18T07:26:10.402Z",
+      "up": "1",
+      "dead": "1",
+      "failedRefunds": "1",
+      "snapshotSuccess": "1",
+      "alerts": [
+        {
+          "name": "FreshMallOutboxDead",
+          "state": "firing"
+        },
+        {
+          "name": "FreshMallRefundFailed",
+          "state": "firing"
+        }
+      ],
+      "screens": [
+        "backend-recovered-targets.png",
+        "backend-recovered-alerts.png",
+        "backend-recovered-up-graph.png"
+      ]
+    },
+    {
+      "label": "business-dead",
+      "capturedAt": "2026-10-18T07:26:51.897Z",
+      "up": "1",
+      "dead": "1",
+      "failedRefunds": "1",
+      "snapshotSuccess": "1",
+      "alerts": [
+        {
+          "name": "FreshMallOutboxDead",
+          "state": "firing"
+        },
+        {
+          "name": "FreshMallRefundFailed",
+          "state": "firing"
+        }
+      ],
+      "screens": [
+        "business-dead-targets.png",
+        "business-dead-alerts.png",
+        "business-dead-up-graph.png",
+        "business-dead-dead-graph.png"
+      ]
+    },
+    {
+      "label": "business-recovered",
+      "capturedAt": "2026-10-18T07:30:23.354Z",
+      "up": "1",
+      "dead": "0",
+      "failedRefunds": "0",
+      "snapshotSuccess": "1",
+      "alerts": [],
+      "screens": [
+        "business-recovered-targets.png",
+        "business-recovered-alerts.png",
+        "business-recovered-up-graph.png",
+        "business-recovered-dead-graph.png"
+      ]
+    }
+  ],
+  "successful_native_screenshots": 17,
+  "actual_auth_http_checks": 7,
+  "custom_metric_samples": 12,
+  "custom_labels": [
+    "state",
+    "result"
+  ],
+  "not_exercised_as_real_application_faults": [
+    "inventory corruption or negative balance",
+    "SQL collection failure/staleness/missing series",
+    "expired processing lease"
+  ],
+  "not_deployed": [
+    "Grafana",
+    "Alertmanager or external notifications",
+    "public TLS or cloud monitoring"
+  ],
+  "harness_note": "Failed selector/wait attempts preserved; harness-only fixes did not change the application JAR, Java source or Prometheus binary.",
+  "cleanup": {
+    "completedAt": "2026-10-18T07:31:44.525116+00:00",
+    "stopped_owned_prometheus_pid": 48890,
+    "process_state_file_removed": true,
+    "credential_preserved": true,
+    "credential_mode": "0600",
+    "configuration_preserved": true,
+    "configuration_mode": "0600",
+    "tsdb_preserved": true,
+    "did_not_signal_java_redis_mysql_or_main_frontend": true
+  }
+}

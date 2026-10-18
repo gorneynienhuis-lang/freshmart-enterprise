@@ -1,0 +1,306 @@
+{
+  "capturedAt": "2026-10-18T07:23:49.702Z",
+  "label": "backend-down",
+  "dataSource": "Actual Prometheus 3.15.0 HTTP APIs and native browser UI. No mocked responses, interception, fixture scrape, or main application/database access.",
+  "queries": [
+    {
+      "expression": "up{job=\"freshmall\"}",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "__name__": "up",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308229.716,
+              "0"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "expression": "{__name__=~\"freshmall_outbox_.*|freshmall_refund_failed|freshmall_inventory_.*|freshmall_business_.*\"}",
+      "data": {
+        "resultType": "vector",
+        "result": []
+      }
+    },
+    {
+      "expression": "ALERTS{alertname=~\"FreshMall.*\"}",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "__name__": "ALERTS",
+              "alertname": "FreshMallApplicationDown",
+              "alertstate": "firing",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "severity": "critical"
+            },
+            "value": [
+              1792308229.72,
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "screens": [
+    "backend-down-targets.png",
+    "backend-down-alerts.png",
+    "backend-down-up-graph.png"
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "prometheusVersion": "3.15.0",
+  "targets": [
+    {
+      "job": "freshmall",
+      "instance": "127.0.0.1:18081",
+      "health": "down",
+      "lastError": "Get \"http://127.0.0.1:18081/actuator/prometheus\": dial tcp 127.0.0.1:18081: connect: connection refused",
+      "lastScrape": "2026-10-18T07:23:44.748434Z",
+      "lastScrapeDuration": 0.001053166,
+      "scrapeUrl": "http://127.0.0.1:18081/actuator/prometheus"
+    }
+  ],
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "FreshMallApplicationDown",
+        "instance": "127.0.0.1:18081",
+        "job": "freshmall",
+        "severity": "critical"
+      },
+      "annotations": {
+        "summary": "FreshMall scrape target is unavailable"
+      },
+      "state": "firing",
+      "activeAt": "2026-10-18T07:22:41.96732943Z",
+      "value": "0e+00"
+    }
+  ],
+  "upHistory": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "up",
+          "instance": "127.0.0.1:18081",
+          "job": "freshmall"
+        },
+        "values": [
+          [
+            1792307984.721,
+            "1"
+          ],
+          [
+            1792307989.721,
+            "1"
+          ],
+          [
+            1792307994.721,
+            "1"
+          ],
+          [
+            1792307999.721,
+            "1"
+          ],
+          [
+            1792308004.721,
+            "1"
+          ],
+          [
+            1792308009.721,
+            "1"
+          ],
+          [
+            1792308014.721,
+            "1"
+          ],
+          [
+            1792308019.721,
+            "1"
+          ],
+          [
+            1792308024.721,
+            "1"
+          ],
+          [
+            1792308029.721,
+            "1"
+          ],
+          [
+            1792308034.721,
+            "1"
+          ],
+          [
+            1792308039.721,
+            "1"
+          ],
+          [
+            1792308044.721,
+            "1"
+          ],
+          [
+            1792308049.721,
+            "1"
+          ],
+          [
+            1792308054.721,
+            "1"
+          ],
+          [
+            1792308059.721,
+            "1"
+          ],
+          [
+            1792308064.721,
+            "1"
+          ],
+          [
+            1792308069.721,
+            "1"
+          ],
+          [
+            1792308074.721,
+            "1"
+          ],
+          [
+            1792308079.721,
+            "1"
+          ],
+          [
+            1792308084.721,
+            "1"
+          ],
+          [
+            1792308089.721,
+            "1"
+          ],
+          [
+            1792308094.721,
+            "1"
+          ],
+          [
+            1792308099.721,
+            "1"
+          ],
+          [
+            1792308104.721,
+            "1"
+          ],
+          [
+            1792308109.721,
+            "1"
+          ],
+          [
+            1792308114.721,
+            "1"
+          ],
+          [
+            1792308119.721,
+            "1"
+          ],
+          [
+            1792308124.721,
+            "1"
+          ],
+          [
+            1792308129.721,
+            "1"
+          ],
+          [
+            1792308134.721,
+            "1"
+          ],
+          [
+            1792308139.721,
+            "1"
+          ],
+          [
+            1792308144.721,
+            "1"
+          ],
+          [
+            1792308149.721,
+            "1"
+          ],
+          [
+            1792308154.721,
+            "1"
+          ],
+          [
+            1792308159.721,
+            "1"
+          ],
+          [
+            1792308164.721,
+            "0"
+          ],
+          [
+            1792308169.721,
+            "0"
+          ],
+          [
+            1792308174.721,
+            "0"
+          ],
+          [
+            1792308179.721,
+            "0"
+          ],
+          [
+            1792308184.721,
+            "0"
+          ],
+          [
+            1792308189.721,
+            "0"
+          ],
+          [
+            1792308194.721,
+            "0"
+          ],
+          [
+            1792308199.721,
+            "0"
+          ],
+          [
+            1792308204.721,
+            "0"
+          ],
+          [
+            1792308209.721,
+            "0"
+          ],
+          [
+            1792308214.721,
+            "0"
+          ],
+          [
+            1792308219.721,
+            "0"
+          ],
+          [
+            1792308224.721,
+            "0"
+          ],
+          [
+            1792308229.721,
+            "0"
+          ]
+        ]
+      }
+    ]
+  },
+  "graphPageText": "Prometheus\n\nQuery\nAlerts\nStatus\nQuery\nAlerts\nStatus\nup{job=\"freshmall\"}\nExecute\nTable\nGraph\nExplain\nEnd time\nUnstacked\nStacked\nup{instance=\"127.0.0.1:18081\", job=\"freshmall\"}\n\nClick: show single series, ⌘ + click: hide single series\n\nAdd query",
+  "status": "CAPTURED"
+}

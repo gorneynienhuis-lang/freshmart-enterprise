@@ -114,7 +114,7 @@ class CancellationSupportIntegrationTest {
   assertEquals("CANCELED",orders.order(order.orderId).status);assertEquals("RESOLVED",requests.latest(order.orderId).status());assertNotNull(requests.latest(order.orderId).resolvedAt());assertEquals(97,stock("on_hand"));assertEquals(0,stock("reserved"));
   var allocation=orders.allocations(order.orderId).getFirst();commerce.receiveReturn(picker.actor(),order.orderId,new ReturnReceive(List.of(new ReturnLine(allocation.allocationId,2L,1L)),"实际收到两件合格、一件待检隔离",orders.order(order.orderId).version));
   assertEquals(100,stock("on_hand"));assertEquals(1,stock("quarantined"));assertEquals(3,orders.allocations(order.orderId).getFirst().returnedQuantity);
-  assertEquals(1,orders.refunds(order.orderId).size());var refund=orders.refunds(order.orderId).getFirst();assertEquals(order.paidAmount,refund.amount);var claimed=refunds.claim(refund.refundId);gateway.execute(claimed);refunds.complete(refund.refundId);assertEquals(order.paidAmount,orders.order(order.orderId).refundedAmount);
+  assertEquals(1,orders.refunds(order.orderId).size());var refund=orders.refunds(order.orderId).getFirst();assertEquals(order.paidAmount,refund.amount);var claimed=refunds.claim(refund.refundId);gateway.execute(claimed);refunds.complete(claimed);assertEquals(order.paidAmount,orders.order(order.orderId).refundedAmount);
  }
  @Test void selfCancellationTimeoutAndSuccessfulDispatchResolveOpenAssistance(){
   String canceled=create();support.request(member.actor(),canceled,new ReasonVersion("先请求后自行取消",orders.order(canceled).version));commerce.cancel(member.actor(),canceled,new ReasonVersion("自行取消",orders.order(canceled).version),false);assertEquals("RESOLVED",requests.latest(canceled).status());

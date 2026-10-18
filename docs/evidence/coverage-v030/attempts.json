@@ -1,0 +1,41 @@
+[
+  {
+    "snapshot": ".runtime/builds/20261018T070439Z-37c9539e",
+    "status": "FAILED",
+    "mavenExitCode": 1,
+    "tests": {
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "reason": "Compile failed: ambiguous java.time.Clock/Micrometer.Clock import; corrected explicit imports.",
+    "rawPrivateLogRetained": true
+  },
+  {
+    "snapshot": ".runtime/builds/20261018T070824Z-d871bcba",
+    "status": "FAILED",
+    "mavenExitCode": 1,
+    "tests": {
+      "tests": 44,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0
+    },
+    "reason": "44 selected tests: one H2 RR SQLSTATE40001 not accepted by overly narrow test; tightened explicit safe rollback verification.",
+    "rawPrivateLogRetained": true
+  },
+  {
+    "snapshot": ".runtime/builds/20261018T071115Z-22ddd68e",
+    "status": "FAILED",
+    "mavenExitCode": 1,
+    "tests": {
+      "tests": 192,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0
+    },
+    "reason": "192 tests: Mockito restubbing invoked existing throwing stub; changed to doReturn, preserving all fallback assertions.",
+    "rawPrivateLogRetained": true
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "recordedAt": "2026-10-18T07:40:32.547802+00:00",
+  "status": "PASSED",
+  "evidenceType": "summary of actual root tool outputs in this release turn; not a remote CI run",
+  "commands": [
+    {
+      "command": "python3 -m unittest discover -s scripts/tests -p 'test_*.py'",
+      "tests": 61,
+      "failures": 0,
+      "exitCode": 0
+    },
+    {
+      "command": "python3 -m unittest discover -s deploy/monitoring -p 'test_*.py'",
+      "tests": 4,
+      "failures": 0,
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/validate-contract.mjs",
+      "exitCode": 0,
+      "operations": 95,
+      "schemas": 175,
+      "schemaExampleChecks": 2047,
+      "scope": "static contract only"
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    }
+  ],
+  "backendFullRun": "../coverage-v030/backend-summary.json",
+  "frontendFullRun": "../coverage-v030/frontend-unit-summary.json",
+  "privateInputsOrCredentialsPublished": false,
+  "linuxContainerExecuted": false,
+  "publicDeploymentExecuted": false
+}

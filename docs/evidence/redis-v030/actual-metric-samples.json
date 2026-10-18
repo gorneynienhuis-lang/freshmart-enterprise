@@ -1,0 +1,201 @@
+{
+  "samples": [
+    {
+      "stage": "00-baseline-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 0.0"
+      ],
+      "privateCompleteMetricsSha256": "832c0bc832efd7256c5e669cddded9fd0021215ed76bf2f5ef20c28d292d113d"
+    },
+    {
+      "stage": "01-cold-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 1.0"
+      ],
+      "privateCompleteMetricsSha256": "a0d23e51f2bada3d18b7298d25e1e6f9abd59572060ec4b0ae2f1e29a62fda49"
+    },
+    {
+      "stage": "02-hit-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 1.0"
+      ],
+      "privateCompleteMetricsSha256": "f3f90a63281e1e8d67387ee5a88cac5ec673380c07960fc06faea3acfe3a9854"
+    },
+    {
+      "stage": "03-malformed-after-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 2.0"
+      ],
+      "privateCompleteMetricsSha256": "9830177a36ebaa30daf6f072ca4d3e69126f5f5a54b5a065bb07fa936512b0b8"
+    },
+    {
+      "stage": "03-malformed-before-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 1.0"
+      ],
+      "privateCompleteMetricsSha256": "7fca2bf3a6b4483caf1cba11c0f35a01e84dec53ea4962726d73f8568ebb0292"
+    },
+    {
+      "stage": "03-wrong-identity-after-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 3.0"
+      ],
+      "privateCompleteMetricsSha256": "163bc66b8d1ec109cc36b953df2b09db25e39cd8198a824f2a48e16f6633cc3d"
+    },
+    {
+      "stage": "03-wrong-identity-before-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 2.0"
+      ],
+      "privateCompleteMetricsSha256": "724c584fe3cca6a5d802002a2408b412df87aed01318ce64a60f94ec8fa8f01f"
+    },
+    {
+      "stage": "04-outage-after-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 7.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 3.0"
+      ],
+      "privateCompleteMetricsSha256": "4f1b881e777c8736419116a11c8544abf0a81ac7b6ca9363d5322f3175fe6830"
+    },
+    {
+      "stage": "04-outage-before-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 3.0"
+      ],
+      "privateCompleteMetricsSha256": "0fcf3b6ac151b125183555e8d4c063dc20ff64bd0ef840293f56beb4f0e38be1"
+    },
+    {
+      "stage": "05-restart-before-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 7.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 3.0"
+      ],
+      "privateCompleteMetricsSha256": "029cd5d2caa46ca53c2e5c0a3b56b97f5630db891dfd3572b5e129e0523d2a4a"
+    },
+    {
+      "stage": "05-restart-cold-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 8.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 4.0"
+      ],
+      "privateCompleteMetricsSha256": "2df2a1579df1e06937eac01439add7c3944a24538d08becb8a51b1b29b2e3687"
+    },
+    {
+      "stage": "05-restart-hit-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 8.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 4.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 4.0"
+      ],
+      "privateCompleteMetricsSha256": "04526db9101e9a766f99738fa64434c38b757f3f3aa295413b609776d9df983c"
+    },
+    {
+      "stage": "06-expiry-after-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 9.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 4.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 5.0"
+      ],
+      "privateCompleteMetricsSha256": "e6bfb89c75a7af02b0dd52b064cab9bc5fa2b274fcd5a61faa1695d7098a945b"
+    },
+    {
+      "stage": "06-expiry-before-metrics",
+      "actualCounterSamples": [
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"bypass\"} 3.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"db_load\"} 8.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"disabled\"} 0.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"hit\"} 4.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"invalid\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"miss\"} 2.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"redis_error\"} 1.0",
+        "freshmall_catalog_cache_total{cache=\"public_categories\",result=\"write\"} 4.0"
+      ],
+      "privateCompleteMetricsSha256": "10f1f0b469c8a524848047e8c9d24771fe1290e803910635d34116f057b4cc04"
+    }
+  ],
+  "filter": "Only actual classification cache counter lines are published; complete raw scrape remains private."
+}

@@ -1,0 +1,48 @@
+{
+  "scope": "Only observability module compilation and its actual nine tests passed; this intermediate full build failed an unrelated cache test and is not a full-project pass.",
+  "source_build": ".runtime/builds/20261018T071115Z-22ddd68e",
+  "test_classes": [
+    {
+      "name": "com.freshmart.observability.BusinessMetricsCollectorTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "time": "0.022"
+    },
+    {
+      "name": "com.freshmart.observability.BusinessMetricsMapperTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "time": "0.006"
+    },
+    {
+      "name": "com.freshmart.observability.MetricsScrapeAuthTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "time": "0.005"
+    },
+    {
+      "name": "com.freshmart.observability.MetricsSecurityFilterTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "time": "0.116"
+    }
+  ],
+  "tests": 9,
+  "failures": 0,
+  "errors": 0,
+  "source_sha256": {
+    "backend/src/main/java/com/freshmart/observability/BusinessMetricsCollector.java": "547cc3fe1dd9bd0b73c4336058ac30a8a0dac17cb29d344c30ad8dc521d9967a",
+    "backend/src/main/java/com/freshmart/observability/BusinessMetricsMapper.java": "318c9a549a67cfc62e37280821bf0591824f80ea303d6689dc068c1568886551",
+    "backend/src/main/java/com/freshmart/observability/BusinessMetricsSource.java": "1be21db4109b55720cc5833629a9ce3939b55029c3e37dd415b7ed47538873cb",
+    "backend/src/main/java/com/freshmart/observability/MetricsScrapeAuth.java": "c44139bd2cdfdbfbecd2d8064669702cfd7310d374aefa98ebdd7ab74bc40253",
+    "backend/src/test/java/com/freshmart/observability/BusinessMetricsCollectorTest.java": "503b5b59414565235eba9ab527501eaf9db4c95bbf868b052dc83fd97c8f2aad",
+    "backend/src/test/java/com/freshmart/observability/BusinessMetricsMapperTest.java": "1e231571f47f6d248be0c63ca12f2798f4445e0817c9dff20513b305aa96f13e",
+    "backend/src/test/java/com/freshmart/observability/MetricsScrapeAuthTest.java": "a8233c8f7a81af054c3af8c251f3985f3702594854281ac89401bac68442461c",
+    "backend/src/test/java/com/freshmart/observability/MetricsSecurityFilterTest.java": "380afc655cf0c057d23ba64330810faf1e42e16c0313df51bd1e60815c20df0a",
+    "backend/src/main/java/com/freshmart/common/SecurityFilter.java": "37fc14e6573cbe0a79d8e3ae6ebb681846712dab5c33bda0b87c3ee02bb9bb99"
+  }
+}

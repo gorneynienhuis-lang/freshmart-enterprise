@@ -1,0 +1,276 @@
+{
+  "capturedAt": "2026-10-18T07:23:10.274Z",
+  "label": "backend-down",
+  "dataSource": "Actual Prometheus 3.15.0 HTTP APIs and native browser UI. No mocked responses, interception, fixture scrape, or main application/database access.",
+  "queries": [
+    {
+      "expression": "up{job=\"freshmall\"}",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "__name__": "up",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall"
+            },
+            "value": [
+              1792308190.289,
+              "0"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "expression": "{__name__=~\"freshmall_outbox_.*|freshmall_refund_failed|freshmall_inventory_.*|freshmall_business_.*\"}",
+      "data": {
+        "resultType": "vector",
+        "result": []
+      }
+    },
+    {
+      "expression": "ALERTS{alertname=~\"FreshMall.*\"}",
+      "data": {
+        "resultType": "vector",
+        "result": [
+          {
+            "metric": {
+              "__name__": "ALERTS",
+              "alertname": "FreshMallApplicationDown",
+              "alertstate": "firing",
+              "instance": "127.0.0.1:18081",
+              "job": "freshmall",
+              "severity": "critical"
+            },
+            "value": [
+              1792308190.293,
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "screens": [
+    "backend-down-targets.png"
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "prometheusVersion": "3.15.0",
+  "targets": [
+    {
+      "job": "freshmall",
+      "instance": "127.0.0.1:18081",
+      "health": "down",
+      "lastError": "Get \"http://127.0.0.1:18081/actuator/prometheus\": dial tcp 127.0.0.1:18081: connect: connection refused",
+      "lastScrape": "2026-10-18T07:23:09.748386Z",
+      "lastScrapeDuration": 0.000489333,
+      "scrapeUrl": "http://127.0.0.1:18081/actuator/prometheus"
+    }
+  ],
+  "alerts": [
+    {
+      "labels": {
+        "alertname": "FreshMallApplicationDown",
+        "instance": "127.0.0.1:18081",
+        "job": "freshmall",
+        "severity": "critical"
+      },
+      "annotations": {
+        "summary": "FreshMall scrape target is unavailable"
+      },
+      "state": "firing",
+      "activeAt": "2026-10-18T07:22:41.96732943Z",
+      "value": "0e+00"
+    }
+  ],
+  "upHistory": {
+    "resultType": "matrix",
+    "result": [
+      {
+        "metric": {
+          "__name__": "up",
+          "instance": "127.0.0.1:18081",
+          "job": "freshmall"
+        },
+        "values": [
+          [
+            1792307980.293,
+            "1"
+          ],
+          [
+            1792307985.293,
+            "1"
+          ],
+          [
+            1792307990.293,
+            "1"
+          ],
+          [
+            1792307995.293,
+            "1"
+          ],
+          [
+            1792308000.293,
+            "1"
+          ],
+          [
+            1792308005.293,
+            "1"
+          ],
+          [
+            1792308010.293,
+            "1"
+          ],
+          [
+            1792308015.293,
+            "1"
+          ],
+          [
+            1792308020.293,
+            "1"
+          ],
+          [
+            1792308025.293,
+            "1"
+          ],
+          [
+            1792308030.293,
+            "1"
+          ],
+          [
+            1792308035.293,
+            "1"
+          ],
+          [
+            1792308040.293,
+            "1"
+          ],
+          [
+            1792308045.293,
+            "1"
+          ],
+          [
+            1792308050.293,
+            "1"
+          ],
+          [
+            1792308055.293,
+            "1"
+          ],
+          [
+            1792308060.293,
+            "1"
+          ],
+          [
+            1792308065.293,
+            "1"
+          ],
+          [
+            1792308070.293,
+            "1"
+          ],
+          [
+            1792308075.293,
+            "1"
+          ],
+          [
+            1792308080.293,
+            "1"
+          ],
+          [
+            1792308085.293,
+            "1"
+          ],
+          [
+            1792308090.293,
+            "1"
+          ],
+          [
+            1792308095.293,
+            "1"
+          ],
+          [
+            1792308100.293,
+            "1"
+          ],
+          [
+            1792308105.293,
+            "1"
+          ],
+          [
+            1792308110.293,
+            "1"
+          ],
+          [
+            1792308115.293,
+            "1"
+          ],
+          [
+            1792308120.293,
+            "1"
+          ],
+          [
+            1792308125.293,
+            "1"
+          ],
+          [
+            1792308130.293,
+            "1"
+          ],
+          [
+            1792308135.293,
+            "1"
+          ],
+          [
+            1792308140.293,
+            "1"
+          ],
+          [
+            1792308145.293,
+            "1"
+          ],
+          [
+            1792308150.293,
+            "1"
+          ],
+          [
+            1792308155.293,
+            "1"
+          ],
+          [
+            1792308160.293,
+            "0"
+          ],
+          [
+            1792308165.293,
+            "0"
+          ],
+          [
+            1792308170.293,
+            "0"
+          ],
+          [
+            1792308175.293,
+            "0"
+          ],
+          [
+            1792308180.293,
+            "0"
+          ],
+          [
+            1792308185.293,
+            "0"
+          ],
+          [
+            1792308190.293,
+            "0"
+          ]
+        ]
+      }
+    ]
+  },
+  "status": "FAILED_CAPTURE",
+  "error": "locator.waitFor: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'FreshMallApplicationDown', exact: true }) to be visible\u001b[22m\n"
+}

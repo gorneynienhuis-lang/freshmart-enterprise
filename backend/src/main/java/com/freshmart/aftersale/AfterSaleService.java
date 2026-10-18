@@ -75,20 +75,17 @@ public class AfterSaleService {
   return map("page",page,"size",size,"total",db.countRefunds(status,orderId),"items",db.refunds(status,orderId,size,(long)(page-1)*size).stream().map(r->refundView(r,true)).toList());
  }
  public Map<String,Object> execute(RequestActor actor,String refundId,ReasonVersion request,boolean retry){
-  actor.requireRole("FINANCE");var lookup=commerce.refund(refundId);if(lookup==null)throw ApiException.notFound();var order=requiredOrder(commerce.lockOrder(lookup.orderId));commerce.lockPayment(lookup.paymentId);var refund=commerce.lockRefund(refundId);version(refund.version,request.version());
+  actor.requireRole("FINANCE");if(retry)return refundView(processor.recover(actor,refundId,request.version(),request.reason()),true);var lookup=commerce.refund(refundId);if(lookup==null)throw ApiException.notFound();var order=requiredOrder(commerce.lockOrder(lookup.orderId));commerce.lockPayment(lookup.paymentId);var refund=commerce.lockRefund(refundId);version(refund.version,request.version());
   if(actor.userId().equals(order.userId)||actor.userId().equals(refund.reviewerId)){
    denied.rejected(actor,refundId,"购买人或审核人不得执行同笔退款");throw ApiException.forbidden();
   }
   CaseRow after=null;if(refund.aftersaleId!=null){after=required(db.lock(refund.aftersaleId));if(!Objects.equals(after.reviewerId,refund.reviewerId)||!Set.of("APPROVED","REFUNDING").contains(after.status))throw invalid("售后审批状态不允许执行");}
-  if(retry){if(!"FAILED".equals(refund.status)||refund.executorId==null)throw invalid("仅已授权且失败的退款可重试");}
-  else if(!"AFTERSALE".equals(refund.type)||after==null||!"PENDING".equals(refund.status)||refund.executorId!=null)throw invalid("只有已审核待授权的人工退款可执行");
+  if(!"AFTERSALE".equals(refund.type)||after==null||!"PENDING".equals(refund.status)||refund.executorId!=null)throw invalid("只有已审核待授权的人工退款可执行");
   Long receipt=commerce.receiptAmount(refundId);if(receipt!=null&&receipt!=refund.amount)throw invalid("渠道退款金额不符，需人工对账");
   refund.executorId=actor.userId();refund.status="PROCESSING";refund.lastError=null;refund.version++;commerce.updateRefund(refund);
   if(after!=null&&"APPROVED".equals(after.status)){after.status="REFUNDING";touch(after);}
-  if(retry){commerce.retryOutbox(refundId,clock.instant());}
-  else{commerce.enqueueRefund(id(),"refund:"+refundId,refundId,clock.instant());}
+  commerce.enqueueRefund(id(),"refund:"+refundId,refundId,clock.instant());
   audit(actor,refundId,retry?"refund.retry":"refund.execute",receipt==null?"核验未见成功回执，授权复用原退款号执行":"已有真实渠道回执，执行对账补记");
-  if(receipt!=null)processor.complete(refundId);
   return refundView(commerce.refund(refundId),true);
  }
  private CaseRow lockCase(String id){var lookup=required(db.find(id));requiredOrder(commerce.lockOrder(lookup.orderId));return required(db.lock(id));}

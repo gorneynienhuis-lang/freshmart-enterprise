@@ -1,0 +1,28 @@
+{
+  "status": "NOT_EXECUTED_APPROVAL_BLOCKED",
+  "date": "2026-10-18",
+  "purpose": "engineering-concurrency",
+  "targetPort": 18081,
+  "schema": "fresh_mall_restore_engineering_v030_20261018a",
+  "plannedCreateBursts": [
+    100,
+    31
+  ],
+  "sourceSyntaxCheck": "node --check scripts/e2e-concurrency.mjs PASSED",
+  "offlinePreflight": {
+    "status": "CONFIG_VALIDATED_NOT_EXECUTED",
+    "httpSent": 0,
+    "databaseQueries": 0
+  },
+  "runProcessCreated": false,
+  "actualBusinessHttpSent": 0,
+  "actualDatabaseWrites": 0,
+  "approvalSource": "automatic approval review of exec_command",
+  "approvalReason": "Batch creation of about 100 members, product/inventory/order mutations and concurrent load have persistent-data and service-load effects; agent messages alone do not establish explicit human authorization for this specific action.",
+  "followup": "Explicit human approval is required before retry. No default-permission or indirect workaround was attempted.",
+  "businessAcceptancePassed": false,
+  "credentialsIncluded": false,
+  "plannedIndependentSyntheticMembers": 100,
+  "attemptedSourceSha256": "f877096061cf375bc2edbc254d96f42caa0f03533421d36e35a8375a637cb6a3",
+  "reviewedSourceSha256AfterEvidencePathOnlyChange": "1fd120bc2fc7b130ad73ed6b8c29045a4aa205f9f54df4ce308531650e9b5029"
+}
