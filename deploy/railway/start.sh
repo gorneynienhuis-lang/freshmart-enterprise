@@ -7,6 +7,6 @@ if [ "$(id -u)" = 0 ]; then
     mkdir -p /app/media
     chown 10001:10001 /app/media
     chmod 700 /app/media
-    exec su -s /bin/sh freshmall -c 'exec java -XX:MaxRAMPercentage=65.0 -XX:+ExitOnOutOfMemoryError -jar /app/app.jar'
+    exec su -s /bin/sh freshmall -c 'exec /opt/java/openjdk/bin/java -XX:MaxRAMPercentage=65.0 -XX:+ExitOnOutOfMemoryError -jar /app/app.jar'
 fi
-exec java -XX:MaxRAMPercentage=65.0 -XX:+ExitOnOutOfMemoryError -jar /app/app.jar
+exec /opt/java/openjdk/bin/java -XX:MaxRAMPercentage=65.0 -XX:+ExitOnOutOfMemoryError -jar /app/app.jar
