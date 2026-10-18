@@ -1,0 +1,266 @@
+{
+  "startedAt": "2026-10-18T06:44:55.828Z",
+  "sourceRunId": "2026-10-18T06-38-19-104Z-D664161454",
+  "status": "COMPLETED",
+  "authorization": "Root released backup maintenance and authorized cleanup of this exact failed synthetic run only",
+  "expected": {
+    "runId": "2026-10-18T06-38-19-104Z-D664161454",
+    "orderId": "ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+    "orderNo": "FM81244ea9ffe44210b5716d8b61855360",
+    "productId": "77d7d0ca-5f19-4717-bd29-8c72cc141afb",
+    "skuId": "a8fb8bb2-09f9-4eb1-bf45-23ab5ef3a438",
+    "batchId": "2cec0688-f6d2-4327-8594-dd98adf2177e",
+    "pickTaskId": "pick_fd69d481-9c3b-425f-bd06-833dabde9f66"
+  },
+  "responses": [
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "000dcf51-c5b4-42b5-a1cc-c5f12c193004",
+      "at": "2026-10-18T06:44:55.847Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "ceb0cff2-07f3-468c-816f-42729cd9c54b",
+      "at": "2026-10-18T06:44:55.900Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "46f831b5-69cb-4608-ab81-32a79e4a4882",
+      "at": "2026-10-18T06:44:55.902Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "7997fe1a-8c35-4322-bb23-9aa19f54aeb6",
+      "at": "2026-10-18T06:44:55.955Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "6ca807b2-7c42-45ad-9b72-dc2125480225",
+      "at": "2026-10-18T06:44:55.958Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "e486cb3d-c6d7-4617-a66a-334b79bf92db",
+      "at": "2026-10-18T06:44:56.009Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "95d18152-3ffe-49b0-b25c-67951090388f",
+      "at": "2026-10-18T06:44:56.011Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "09a1a675-3be5-40b2-a0f2-4ecf46683874",
+      "at": "2026-10-18T06:44:56.062Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+      "status": 200,
+      "traceId": "ac13e1f0-182f-49d8-89c4-d0198aa3286f",
+      "at": "2026-10-18T06:44:56.066Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/admin/products/77d7d0ca-5f19-4717-bd29-8c72cc141afb",
+      "status": 200,
+      "traceId": "a079750e-bfdd-4451-9f19-79d84a96db07",
+      "at": "2026-10-18T06:44:56.070Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks/pick_fd69d481-9c3b-425f-bd06-833dabde9f66",
+      "status": 200,
+      "traceId": "c367572e-7b55-45fe-ba18-cf79f58f1c62",
+      "at": "2026-10-18T06:44:56.074Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-slots",
+      "status": 200,
+      "traceId": "8007d2d7-8c23-456a-8234-69ce24df2625",
+      "at": "2026-10-18T06:44:56.078Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/batches/2cec0688-f6d2-4327-8594-dd98adf2177e",
+      "status": 200,
+      "traceId": "e22b0599-da18-4f04-8345-5d5fc975bf5f",
+      "at": "2026-10-18T06:44:56.081Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 200,
+      "traceId": "8cd42a5c-9bcf-49d2-825e-7ab4062aed8e",
+      "at": "2026-10-18T06:44:56.084Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks/pick_fd69d481-9c3b-425f-bd06-833dabde9f66",
+      "status": 200,
+      "traceId": "31505926-55bd-4881-be1e-c4646bbbb05f",
+      "at": "2026-10-18T06:44:56.088Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+      "status": 200,
+      "traceId": "03de5aa2-c0ce-4b2f-9ada-487a09e817cc",
+      "at": "2026-10-18T06:44:56.092Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks/pick_fd69d481-9c3b-425f-bd06-833dabde9f66",
+      "status": 200,
+      "traceId": "b689f5a4-4bbb-4c1b-bdba-0d15c2cc8fe6",
+      "at": "2026-10-18T06:44:56.095Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/batches/2cec0688-f6d2-4327-8594-dd98adf2177e",
+      "status": 200,
+      "traceId": "c8967f21-c254-4925-a9ab-8ac2e836aa82",
+      "at": "2026-10-18T06:44:56.097Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-slots",
+      "status": 200,
+      "traceId": "8fb6cf69-e702-49ac-bc10-e01ff2eef34d",
+      "at": "2026-10-18T06:44:56.100Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/inventory-movements",
+      "status": 200,
+      "traceId": "314ebab7-0f4e-46b9-a330-688ad5e13ac7",
+      "at": "2026-10-18T06:44:56.103Z"
+    }
+  ],
+  "checkedResponses": 20,
+  "schemaErrors": [],
+  "actions": [],
+  "before": {
+    "orderStatus": "CANCELED",
+    "orderVersion": 7,
+    "assistanceStatus": "RESOLVED",
+    "paidAmount": 3600,
+    "refundedAmount": 3600,
+    "batch": {
+      "batchId": "2cec0688-f6d2-4327-8594-dd98adf2177e",
+      "lifecycle": "NORMAL",
+      "onHand": 20,
+      "reserved": 0,
+      "quarantined": 3,
+      "available": 17,
+      "version": 3
+    },
+    "slot": {
+      "slotId": "slot-20261019-1",
+      "remaining": 20,
+      "version": 19
+    },
+    "pickedQuantity": 3,
+    "returnedQuantity": 3,
+    "productStatus": "OFF_SALE"
+  },
+  "after": {
+    "orderStatus": "CANCELED",
+    "orderVersion": 7,
+    "assistanceStatus": "RESOLVED",
+    "assistanceResolvedAt": "2026-10-18T06:43:38.883840Z",
+    "paidAmount": 3600,
+    "refundedAmount": 3600,
+    "refunds": [
+      {
+        "refundId": "ref_0971c079-c886-4ce9-8a47-11b999bc7af6",
+        "type": "CANCEL",
+        "status": "SUCCESS",
+        "amount": 3600
+      }
+    ],
+    "batch": {
+      "batchId": "2cec0688-f6d2-4327-8594-dd98adf2177e",
+      "lifecycle": "NORMAL",
+      "onHand": 20,
+      "reserved": 0,
+      "quarantined": 3,
+      "available": 17,
+      "version": 3
+    },
+    "slot": {
+      "slotId": "slot-20261019-1",
+      "remaining": 20,
+      "version": 19,
+      "observedReleaseDuringThisExecution": 0
+    },
+    "pickedQuantity": 3,
+    "returnedQuantity": 3,
+    "productStatus": "OFF_SALE",
+    "movements": [
+      {
+        "type": "RETURN_QUARANTINE",
+        "onHandDelta": 3,
+        "reservedDelta": 0,
+        "quarantinedDelta": 3
+      },
+      {
+        "type": "PICK_OUT",
+        "onHandDelta": -3,
+        "reservedDelta": -3,
+        "quarantinedDelta": 0
+      },
+      {
+        "type": "RESERVE",
+        "onHandDelta": 0,
+        "reservedDelta": 3,
+        "quarantinedDelta": 0
+      },
+      {
+        "type": "RECEIVE",
+        "onHandDelta": 20,
+        "reservedDelta": 0,
+        "quarantinedDelta": 0
+      }
+    ]
+  },
+  "pendingCleanup": [],
+  "finishedAt": "2026-10-18T06:44:56.103Z"
+}

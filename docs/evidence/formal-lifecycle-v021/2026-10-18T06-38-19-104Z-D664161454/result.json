@@ -1,0 +1,536 @@
+{
+  "runId": "2026-10-18T06-38-19-104Z-D664161454",
+  "startedAt": "2026-10-18T06:38:19.104Z",
+  "status": "FAILED",
+  "dataSource": "Actual local MySQL APIs, browser forms and isolated synthetic commerce; no mocked response or direct SQL",
+  "checks": [],
+  "screens": [
+    "member-cancellation-assistance-form-1440.png",
+    "failure-picker-1440.png",
+    "failure-service-1440.png",
+    "failure-member-1440.png"
+  ],
+  "responsive": [
+    {
+      "role": "member",
+      "name": "member-cancellation-assistance-form",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": [
+        {
+          "left": 215,
+          "right": 1225,
+          "clientWidth": 1008,
+          "scrollWidth": 1008
+        }
+      ]
+    },
+    {
+      "role": "picker",
+      "name": "failure-picker",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "role": "service",
+      "name": "failure-service",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "role": "member",
+      "name": "failure-member",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    }
+  ],
+  "sourceSha256": {
+    "frontend/scripts/e2e-lifecycle.mjs": "0cfe87b33bc021c15a15d92e832ff8357ac93f7a05c06c8b6ae6fa557ab57b7a",
+    "frontend/src/app/lifecycle-panel.ts": "00ccdaa660c05239744328a434f6a46696fa851860c85c93b123556dbf4abb08",
+    "frontend/src/app/lifecycle-service.ts": "71e54146f1ed1c434c26c2f5786856bab092552b73fbc0e259425a5d6ec59ed3",
+    "frontend/src/app/application.ts": "e0d9f2a52c512a3cf08aaa28e69608b53836505bf7891adef220c9086a4e9352",
+    "frontend/src/app/pagination.ts": "82777f2a627b9064fbfa951813e8e4a1d2535e0aea8dfee2ddc6ce12d2b0cbd4",
+    "backend/src/main/java/com/freshmart/support/CancellationSupportService.java": "0d631607c3c36dae504b433b594b6221c146251a585642cd2dd96d37327c9763",
+    "backend/src/main/java/com/freshmart/commerce/CommerceService.java": "bb221b5d282ea76d4abe08cecd60d0caf0f5d9dfd0bd81a6289b8503350e2a77",
+    "database/migrations/V012__cancellation_support.sql": "0443185797e3baf184ac0b0707601e6b5e0f217fcd5bd298fee495ce936b6b35",
+    "contracts/openapi.yaml": "47c2a33dbb70fa0784d9f02cb6e457be49e6cac1b2482604edc6177977d63c93"
+  },
+  "responses": [
+    {
+      "role": "operator",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.648Z",
+      "traceId": "332aa0e1-d4e6-4309-818c-4d601cb8a95b"
+    },
+    {
+      "role": "operator",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.738Z",
+      "traceId": "95b39d96-848d-47a9-8894-84d99e0d813f"
+    },
+    {
+      "role": "picker",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.741Z",
+      "traceId": "419a3133-7115-42d3-a864-68b55fb37d57"
+    },
+    {
+      "role": "picker",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.797Z",
+      "traceId": "de41ee41-ffb5-453e-962a-0162f384dd62"
+    },
+    {
+      "role": "courier",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.800Z",
+      "traceId": "b2652e7d-e256-45fa-8801-5e12b4f8daf2"
+    },
+    {
+      "role": "courier",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.856Z",
+      "traceId": "58ed3b0e-bd78-4a77-9192-2a8c8a60b164"
+    },
+    {
+      "role": "finance",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.859Z",
+      "traceId": "44d38818-c513-4249-8483-4ed93531db78"
+    },
+    {
+      "role": "finance",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.912Z",
+      "traceId": "b08381c5-0623-416a-b8ad-5ffb3686cbde"
+    },
+    {
+      "role": "service",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.914Z",
+      "traceId": "f7024559-76b2-41e0-8f9a-3f7cf9b41e90"
+    },
+    {
+      "role": "service",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.968Z",
+      "traceId": "678132cd-e992-4ab9-a1de-cf30c55338d9"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:19.971Z",
+      "traceId": "7558b233-e89c-4c1b-a987-a1d5e2981a6c"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.027Z",
+      "traceId": "97b08037-24f0-4265-bdb4-05f96197aeb8"
+    },
+    {
+      "role": "unrelated-member",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.030Z",
+      "traceId": "45d6fc90-ba93-4053-9fa2-813a8fab955e"
+    },
+    {
+      "role": "unrelated-member",
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.088Z",
+      "traceId": "9ffa2768-c9b8-4418-9874-84459aa26e65"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.094Z",
+      "traceId": "73025e8f-3ce0-4570-97fe-a47ab82a1e9a"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.100Z",
+      "traceId": "ce3a7867-0e67-4f54-a269-801ab19fca78"
+    },
+    {
+      "role": "operator",
+      "method": "POST",
+      "path": "/api/v1/admin/products",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.117Z",
+      "traceId": "279d1e59-7fe1-4d97-9d57-428235095c8c"
+    },
+    {
+      "role": "operator",
+      "method": "POST",
+      "path": "/api/v1/admin/products/77d7d0ca-5f19-4717-bd29-8c72cc141afb/skus",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.131Z",
+      "traceId": "18456890-b36e-4276-aee5-d5f8e703b660"
+    },
+    {
+      "role": "picker",
+      "method": "POST",
+      "path": "/api/v1/admin/batches",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.142Z",
+      "traceId": "e104bc0c-5132-48f2-b0ea-e893e7018860"
+    },
+    {
+      "role": "operator",
+      "method": "GET",
+      "path": "/api/v1/admin/products/77d7d0ca-5f19-4717-bd29-8c72cc141afb",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.148Z",
+      "traceId": "2e1b8c59-2987-4c37-a6d2-2b8a7028815d"
+    },
+    {
+      "role": "operator",
+      "method": "PUT",
+      "path": "/api/v1/admin/products/77d7d0ca-5f19-4717-bd29-8c72cc141afb/status",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.157Z",
+      "traceId": "5b16559d-b24c-4635-9557-0f384a301c83"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/addresses",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.169Z",
+      "traceId": "edb9c369-324a-49c4-984b-d926eb0295d9"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/delivery-slots",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.184Z",
+      "traceId": "955167c1-5526-444e-8e45-37ca0744c2b7"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.202Z",
+      "traceId": "aa3c96a9-d72f-4050-887d-7e2596b0ebcc"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.223Z",
+      "traceId": "6d0e7bcf-337b-4390-b097-43681862b15f"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/payments/prepay",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.231Z",
+      "traceId": "fc2399f1-15a6-427e-bbb6-3925b33c1444"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/payments/pay_7567e1c7-0e14-4d7c-9f75-0a189995f834/sandbox-simulate",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.242Z",
+      "traceId": "47d56f24-2bad-48a2-95ad-7ced8474bfce"
+    },
+    {
+      "role": "picker",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.252Z",
+      "traceId": "4944f2ec-ee54-4708-b404-f1ad388eb581"
+    },
+    {
+      "role": "picker",
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/pick_fd69d481-9c3b-425f-bd06-833dabde9f66/claim",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.260Z",
+      "traceId": "a52925a2-e068-4d60-818d-a54e826e129b"
+    },
+    {
+      "role": "picker",
+      "method": "POST",
+      "path": "/api/v1/admin/pick-tasks/pick_fd69d481-9c3b-425f-bd06-833dabde9f66/confirm",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.274Z",
+      "traceId": "e35b84d1-2b53-4aca-8c76-0d97c1289796"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.279Z",
+      "traceId": "1337cb55-0cd6-40e9-8165-7bb95acdfd99"
+    },
+    {
+      "role": "picker",
+      "method": "GET",
+      "path": "/api/v1/admin/batches/2cec0688-f6d2-4327-8594-dd98adf2177e",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.283Z",
+      "traceId": "c6dac066-89e8-4555-a191-83a1c4e0dedc"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.364Z",
+      "traceId": "94590d6a-271c-4b7f-83d6-2b6b1ffd352c"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.369Z",
+      "traceId": "4c8aa16b-63bd-4510-b1ad-ca9ea5ec21db"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.372Z",
+      "traceId": "f8e02d3b-17ec-44f3-baf0-911ab37e3a85"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.379Z",
+      "traceId": "5bd6a298-9fd1-4ce4-b5a9-75f784322f23"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.389Z",
+      "traceId": "412b096e-a916-4f8d-9d59-9edcbe60a69c"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/aftersales",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.393Z",
+      "traceId": "612cd862-ce7d-4eae-b9f4-9aec3c10d1c4"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.503Z",
+      "traceId": "b06daa9a-20e3-4c77-9208-27f871f2a166"
+    },
+    {
+      "role": "member",
+      "method": "POST",
+      "path": "/api/v1/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e/cancellation-requests",
+      "status": 201,
+      "at": "2026-10-18T06:38:20.754Z",
+      "traceId": "ec0c4461-d806-4b7a-89a5-dfb9e29d3e5c"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.761Z",
+      "traceId": "d515f73f-5b84-47c4-8f2e-3b607eab9901"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/aftersales",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.765Z",
+      "traceId": "2e26133e-eb99-447c-960b-b1ad05385cb0"
+    },
+    {
+      "role": "member",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.785Z",
+      "traceId": "b5f553a8-0ed7-44d6-a13d-2345892e149b"
+    },
+    {
+      "role": "picker",
+      "method": "GET",
+      "path": "/api/v1/admin/batches/2cec0688-f6d2-4327-8594-dd98adf2177e",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.789Z",
+      "traceId": "5b2485c6-220b-40cd-a04f-9baf8537496b"
+    },
+    {
+      "role": "unrelated-member",
+      "method": "POST",
+      "path": "/api/v1/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e/cancellation-requests",
+      "status": 404,
+      "at": "2026-10-18T06:38:20.794Z",
+      "traceId": "351141d5-d5e5-4b96-8096-66cdd1bc7f15"
+    },
+    {
+      "role": "finance",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.798Z",
+      "traceId": "ac01746f-b9cc-4186-a4d3-75ac7625b375"
+    },
+    {
+      "role": "service",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.881Z",
+      "traceId": "d4b8018c-f3e6-4f33-be1e-47880b30fe5c"
+    },
+    {
+      "role": "service",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.886Z",
+      "traceId": "3c138870-023d-4cbc-a0bb-ea9aaae37d19"
+    },
+    {
+      "role": "service",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.891Z",
+      "traceId": "91086c25-7f0a-47d5-8726-27fd68769497"
+    },
+    {
+      "role": "service",
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.913Z",
+      "traceId": "b0c6910c-9b94-4761-b220-42764a278db0"
+    },
+    {
+      "role": "service",
+      "method": "GET",
+      "path": "/api/v1/admin/delivery-tasks",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.918Z",
+      "traceId": "f7acbb40-bb65-4f73-b515-bfa92eda1b72"
+    },
+    {
+      "role": "service",
+      "method": "GET",
+      "path": "/api/v1/admin/aftersales",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.928Z",
+      "traceId": "576f08a8-5279-43f2-b922-94a32c8a2610"
+    },
+    {
+      "role": "service",
+      "method": "GET",
+      "path": "/api/v1/admin/orders",
+      "status": 200,
+      "at": "2026-10-18T06:38:20.966Z",
+      "traceId": "15272df0-9bb9-404a-b8cf-6ec3596cce69"
+    },
+    {
+      "role": "operator",
+      "method": "GET",
+      "path": "/api/v1/admin/products/77d7d0ca-5f19-4717-bd29-8c72cc141afb",
+      "status": 200,
+      "at": "2026-10-18T06:38:21.179Z",
+      "traceId": "0c497024-43e4-4ecf-9bc9-131eadde65df"
+    },
+    {
+      "role": "operator",
+      "method": "PUT",
+      "path": "/api/v1/admin/products/77d7d0ca-5f19-4717-bd29-8c72cc141afb/status",
+      "status": 200,
+      "at": "2026-10-18T06:38:21.185Z",
+      "traceId": "c71946dc-058f-4521-b1af-486c7640102d"
+    }
+  ],
+  "checkedResponses": 55,
+  "responseStatuses": {
+    "200": 45,
+    "201": 9,
+    "404": 1
+  },
+  "schemaErrors": [],
+  "pageErrors": [],
+  "failedAssets": [],
+  "synthetic": {
+    "productId": "77d7d0ca-5f19-4717-bd29-8c72cc141afb",
+    "skuId": "a8fb8bb2-09f9-4eb1-bf45-23ab5ef3a438",
+    "batchId": "2cec0688-f6d2-4327-8594-dd98adf2177e",
+    "productName": "生命周期验收生态苹果-D664161454",
+    "canceledOrder": {
+      "orderId": "ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+      "orderNo": "FM81244ea9ffe44210b5716d8b61855360",
+      "pickTaskId": "pick_fd69d481-9c3b-425f-bd06-833dabde9f66"
+    }
+  },
+  "cleanup": {
+    "policy": "Retain synthetic accounts/order/refund/request/inspection/audit; off-sale only this run product",
+    "product": "OFF_SALE_THROUGH_REAL_API"
+  },
+  "notExercised": [
+    "FAILED refund UI positive path needs a real controlled channel failure exercise; no database-crafted failure is introduced by this script"
+  ],
+  "error": "Exact scoped SERVICE search did not return its own assigned request",
+  "finishedAt": "2026-10-18T06:38:21.185Z"
+}

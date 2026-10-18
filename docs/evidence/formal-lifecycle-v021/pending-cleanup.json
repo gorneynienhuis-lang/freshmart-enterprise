@@ -1,0 +1,93 @@
+{
+  "sourceRunId": "2026-10-18T06-38-19-104Z-D664161454",
+  "sourceResultPreserved": true,
+  "status": "COMPLETED",
+  "reason": "Root released the backup window. Only the exact authorized failed synthetic order was canceled by its assigned SERVICE and received into quarantine by its original PICKER. The original FAIL and first cleanup INCOMPLETE are retained.",
+  "syntheticOnly": {
+    "productId": "77d7d0ca-5f19-4717-bd29-8c72cc141afb",
+    "skuId": "a8fb8bb2-09f9-4eb1-bf45-23ab5ef3a438",
+    "batchId": "2cec0688-f6d2-4327-8594-dd98adf2177e",
+    "orderId": "ord_6a669793-ba1b-4fd8-ac23-e54932e6186e",
+    "orderNo": "FM81244ea9ffe44210b5716d8b61855360",
+    "pickTaskId": "pick_fd69d481-9c3b-425f-bd06-833dabde9f66"
+  },
+  "lastObservedAtFailure": {
+    "orderStatus": "READY_TO_SHIP",
+    "cancellationSupportStatus": "OPEN",
+    "pickedQuantity": 3,
+    "returnedQuantity": 0,
+    "productCleanup": "OFF_SALE_THROUGH_REAL_API"
+  },
+  "authorizedCleanup": [
+    "Read this exact order through its assigned SERVICE; verify own synthetic product and allowedActions.CANCEL.",
+    "Cancel with current version, explicit reason and one idempotency key; do not retry an uncertain write.",
+    "Wait for the original-route refund to settle and confirm the request RESOLVED and delivery slot released.",
+    "Read the original PICKER task and receive only its actual unreturned three units into quarantine using current version.",
+    "Keep the original failed run, history, stock movements and audit; write a separate actual cleanup result."
+  ],
+  "completedAt": "2026-10-18T06:44:56.103Z",
+  "result": "cleanup-first-failed-run-result.json",
+  "firstCleanupAttempt": "cleanup-first-failed-run-attempt-01.json",
+  "slotEvidence": "slot-release-crosscheck.json",
+  "after": {
+    "orderStatus": "CANCELED",
+    "orderVersion": 7,
+    "assistanceStatus": "RESOLVED",
+    "assistanceResolvedAt": "2026-10-18T06:43:38.883840Z",
+    "paidAmount": 3600,
+    "refundedAmount": 3600,
+    "refunds": [
+      {
+        "refundId": "ref_0971c079-c886-4ce9-8a47-11b999bc7af6",
+        "type": "CANCEL",
+        "status": "SUCCESS",
+        "amount": 3600
+      }
+    ],
+    "batch": {
+      "batchId": "2cec0688-f6d2-4327-8594-dd98adf2177e",
+      "lifecycle": "NORMAL",
+      "onHand": 20,
+      "reserved": 0,
+      "quarantined": 3,
+      "available": 17,
+      "version": 3
+    },
+    "slot": {
+      "slotId": "slot-20261019-1",
+      "remaining": 20,
+      "version": 19,
+      "observedReleaseDuringThisExecution": 0
+    },
+    "pickedQuantity": 3,
+    "returnedQuantity": 3,
+    "productStatus": "OFF_SALE",
+    "movements": [
+      {
+        "type": "RETURN_QUARANTINE",
+        "onHandDelta": 3,
+        "reservedDelta": 0,
+        "quarantinedDelta": 3
+      },
+      {
+        "type": "PICK_OUT",
+        "onHandDelta": -3,
+        "reservedDelta": -3,
+        "quarantinedDelta": 0
+      },
+      {
+        "type": "RESERVE",
+        "onHandDelta": 0,
+        "reservedDelta": 3,
+        "quarantinedDelta": 0
+      },
+      {
+        "type": "RECEIVE",
+        "onHandDelta": 20,
+        "reservedDelta": 0,
+        "quarantinedDelta": 0
+      }
+    ]
+  },
+  "remainingCleanup": []
+}

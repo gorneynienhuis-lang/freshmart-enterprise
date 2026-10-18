@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-18T06:32:27.660Z",
+  "runId": "f04ccaf137",
+  "status": "FAILED",
+  "dataSource": "real local MySQL HTTP APIs and actual Chrome/Playwright UI; no mocked responses or interception",
+  "checks": [],
+  "screens": [
+    "failure-owner.png"
+  ],
+  "checkedResponses": 11,
+  "responseStatuses": {
+    "200": 9,
+    "201": 2
+  },
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "sourceSha256": {
+    "frontend/scripts/e2e-addresses.mjs": "31d298b0b3df24916fcf7dc936f4d37e378f95f22f211f3bd13c3a78eea75f21",
+    "frontend/src/app/address-panel.ts": "3fc338b83d11e9e86cc69e8822e3379bfe255600b5ac6cb9de680277b0665d49",
+    "frontend/src/app/address-service.ts": "d5d3c35ee550bd5d8d08a1034f92dd890659bb78c653fc063c84f006352d56fa",
+    "frontend/src/styles/address-panel.css": "58b55d83a797d6f4c63b2b8a908ef31d3ddb4b2687f6bcd200a641e08587ead2",
+    "frontend/src/app/application.ts": "000f444dbad2ba7656132e155929f1eb18fc62e7195df2e6cd77d00cb2f92b89",
+    "backend/src/main/java/com/freshmart/checkout/CheckoutController.java": "d316ab992d66c55d1bef58183faacd397dac1beae13bd765ccbe1dd513ad2419",
+    "backend/src/main/java/com/freshmart/checkout/CheckoutService.java": "9b784628563281be994176aab43b893eda1e9a27e281cbf0b245648d17fce49c",
+    "contracts/openapi.yaml": "47c2a33dbb70fa0784d9f02cb6e457be49e6cac1b2482604edc6177977d63c93"
+  },
+  "cleanup": {
+    "policy": "retain synthetic members and append-only audit history; address deletion is the tested owner-authorized CRUD operation; no database clearing or seed changes"
+  },
+  "error": "locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: '收货地址管理', exact: true }).getByRole('form', { name: '新增收货地址', exact: true }).getByRole('textbox', { name: '详细地址', exact: true })\u001b[22m\n",
+  "finishedAt": "2026-10-18T06:32:58.500Z"
+}

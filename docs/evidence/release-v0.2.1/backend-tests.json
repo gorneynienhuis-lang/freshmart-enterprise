@@ -1,0 +1,136 @@
+{
+  "tests": 150,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.freshmart.aftersale.AfterSaleIntegrationTest",
+      "tests": "11",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "3.042"
+    },
+    {
+      "name": "com.freshmart.catalog.CatalogIntegrationTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.255"
+    },
+    {
+      "name": "com.freshmart.checkout.CheckoutIntegrationTest",
+      "tests": "12",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.377"
+    },
+    {
+      "name": "com.freshmart.command.IdempotencyServiceTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.019"
+    },
+    {
+      "name": "com.freshmart.commerce.CommerceIntegrationTest",
+      "tests": "11",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "2.481"
+    },
+    {
+      "name": "com.freshmart.commerce.FulfillmentExtensionsIntegrationTest",
+      "tests": "10",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "5.467"
+    },
+    {
+      "name": "com.freshmart.common.ShowcaseConfigurationTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.001"
+    },
+    {
+      "name": "com.freshmart.domain.InventoryDomainTest",
+      "tests": "12",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.004"
+    },
+    {
+      "name": "com.freshmart.domain.OrderLifecycleTest",
+      "tests": "17",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.004"
+    },
+    {
+      "name": "com.freshmart.domain.PricingCalculatorTest",
+      "tests": "13",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.005"
+    },
+    {
+      "name": "com.freshmart.finance.FinanceAuditIntegrationTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "2.697"
+    },
+    {
+      "name": "com.freshmart.identity.EmployeeIntegrationTest",
+      "tests": "7",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "2.385"
+    },
+    {
+      "name": "com.freshmart.identity.IdentityIntegrationTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.66"
+    },
+    {
+      "name": "com.freshmart.media.MediaReviewIntegrationTest",
+      "tests": "9",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "2.936"
+    },
+    {
+      "name": "com.freshmart.operations.OperationsIntegrationTest",
+      "tests": "12",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "5.062"
+    },
+    {
+      "name": "com.freshmart.support.CancellationSupportIntegrationTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "3.334"
+    }
+  ]
+}

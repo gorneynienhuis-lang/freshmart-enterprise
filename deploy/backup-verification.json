@@ -1,0 +1,123 @@
+{
+  "status": "PASSED",
+  "executedAt": "2026-10-18T06:41:05.170691+00:00",
+  "execution": "Actual managed local MySQL8.4.11 plus independently started recovery backend; no mocks or source database replay.",
+  "bundle": ".runtime/backups/formal-recovery-v020-20261018_064037",
+  "recoveryDirectory": ".runtime/recoveries/formal-20261018_064037",
+  "recoverySchema": "fresh_mall_restore_formal_20261018_064037",
+  "rawRecoveryRecord": ".runtime/recoveries/formal-20261018_064037/recovery.json",
+  "rawHttpRecord": ".runtime/recoveries/formal-20261018_064037/http-verification-20261018T064105170846Z.json",
+  "database": {
+    "tableCount": 43,
+    "totalRowsAtSnapshot": 2632,
+    "migrationVersions": [
+      "001",
+      "002",
+      "003",
+      "004",
+      "005",
+      "006",
+      "007",
+      "008",
+      "009",
+      "010",
+      "011",
+      "012"
+    ],
+    "sourceMysqlVersion": "8.4.11",
+    "sqlRoundTripSha256": "8d506e69e199cc58c8d7d820c98f665c899c8fdec683274bbcf78c3b292094ac",
+    "sqlRoundTripIdentical": true
+  },
+  "media": {
+    "files": 7,
+    "scopes": {
+      "product": 1,
+      "private": 4,
+      "review-public": 2
+    },
+    "allFilesMatchDatabaseLengthAndSha256": true
+  },
+  "privateFileModes": {
+    "bundleDirectory": "0o700",
+    "bundleFiles": {
+      "manifest.hmac": "0o600",
+      "database.sql.gz": "0o600",
+      "media.tar.gz": "0o600",
+      "manifest.json": "0o600"
+    },
+    "integrityKeyStoredOutsideBundle": true
+  },
+  "http": [
+    "schema-scoped recovery database account is explicitly denied SELECT on the original application schema",
+    "product: actual recovered pixels match original DB SHA-256",
+    "published-review: actual recovered pixels match original DB SHA-256",
+    "private evidence: anonymous401 and unrelated MEMBER404",
+    "assigned SERVICE obtains session-bound signed access and correct recovered SHA-256 pixels",
+    "signed URL cannot be reused by unrelated member or anonymous client"
+  ],
+  "cleanup": {
+    "sourceBackendHealth": "UP",
+    "sourceFrontendHttpStatus": 200,
+    "sourceMysqlStillOwned": true,
+    "sourceFrontendStillOwned": true,
+    "recoveryBackendStopped": true,
+    "recoveryDataRetained": true,
+    "sourceCredentialsOverwritten": false,
+    "originalSchemaReset": false
+  },
+  "offlineSecurityTests": {
+    "command": "python3 -m unittest discover -s scripts/tests -p 'test_backup*.py' -v",
+    "passed": 20
+  },
+  "cloudBoundary": {
+    "composeRuntimeExecuted": false,
+    "railwayRuntimeExecuted": false,
+    "publicDeploymentExecuted": false
+  },
+  "sourceVersion": {
+    "snapshotBaseCommit": "c5e2e81dd299423e178a7912f9e2e6b0e6ba571e",
+    "snapshotTrackedChangesPresent": true,
+    "snapshotJarSha256": "12c2c39a50c6ac66f56b43442cb9c7da0ba0eed40fef8630da75461e2b8645c4",
+    "snapshotMigrationSourceSha256": {
+      "V001__identity_catalog.sql": "8644a30aed72afd198dc2e921a49d5a0e1b96f9128701b1c3a8b77d47df5ed6b",
+      "V002__command_audit.sql": "c1b3fc9c361a05c3a41a851c007ddbefbebfe28c2ec61c9728db128ce7d7d699",
+      "V003__checkout.sql": "69c7b6b1dce3ba5caef1fb6728dd45938491d6f9ebfc80feede4c2af239fd6f6",
+      "V004__commerce.sql": "354ebb56d726cb051c72282d145e66d09b44c9db150095107baaacde1cd54175",
+      "V005__aftersale.sql": "3422c0dba7e69c073e6408df8e70865644c7438192a22e774dee43133d283660",
+      "V006__employee_governance.sql": "915f1ec6f73d2b888664e0c1723d0a557935063e5e6a836b1f9055868a39d068",
+      "V007__operations_inventory.sql": "b7fd4c27cdc97e6ad9277c32609cd7e32ce6a27c920549696960942240627705",
+      "V008__fulfillment_extensions.sql": "dff9aaf52f2bb8aad5f611daa246a0cea0a6f4903cdbde477bd30d34682e8319",
+      "V009__media_reviews.sql": "6bd96a9b883e1a032a35e26161cd0b838832f449197b979383149b4519116a4d",
+      "V010__audit_reconciliation.sql": "643d3855ec8492d7d18d92fff808f0d1b08a949afa9787f301fcdce438a3eff2",
+      "V011__legacy_production_time.sql": "76bf04593811a9257935d273fb3b72516ed3f2035648f13f4ad3ff872cab58da",
+      "V012__cancellation_support.sql": "0443185797e3baf184ac0b0707601e6b5e0f217fcd5bd298fee495ce936b6b35"
+    },
+    "description": "The real backup captured this base commit plus the then-uncommitted working tree. It is not a clean published release, and later commits must not be backdated as this snapshot."
+  },
+  "literalGrantFollowup": {
+    "literalSchemaGrantEscaped": true,
+    "onlyRecoveryUserGrantNarrowed": true,
+    "originalApplicationAccountChanged": false,
+    "originalBusinessDataChanged": false,
+    "schema": "fresh_mall_restore_formal_20261018_064037",
+    "schemaMediaRowsReadable": 5,
+    "sourceSchemaSelectDenied": true,
+    "status": "PASSED",
+    "verifiedAt": "2026-10-18T06:44:07.775563+00:00",
+    "rawRecord": ".runtime/recoveries/formal-20261018_064037/grant-isolation-verification.json",
+    "retainedParserFailureRecord": ".runtime/recoveries/formal-20261018_064037/grant-isolation-attempt.json"
+  },
+  "finalSourceSha256": {
+    "scripts/backup_bundle.py": "4bc4aa9c2205c810da2de8cea2c0308ce12eca39a37e528d953341f5162135de",
+    "scripts/backup_database.py": "1d20d21cf6bc44672c64b67b8d0435963720de4c1d20ac09c6682aec561bf99d",
+    "scripts/demo-backup.py": "1b1b718891e66657d933644473d94bf0f9f6fc9704a807f507b2a93664d72d04",
+    "scripts/deploy-public.py": "c5f6aa1dad26dc00dc30f83733283fa26a99e36095c735cbcf084d4ea0cfbef5",
+    "scripts/tests/test_backup_bundle.py": "e51d825254dae6317d7721f0a1f45586231294117d0f77834f5c755500041c0a",
+    "scripts/tests/test_backup_database.py": "213c8cdce1bd78abefd76c09598d65a973b38e6db5b701904c6e03a8b9872024",
+    "deploy/.gitignore": "bfe0b14326d19effae90f8ab2f79ec179b2881b0435b7bb3cba3722d1e00e72f",
+    "deploy/备份恢复.md": "bfdf66ed4a75291f51766e26caa6724e29a88561c3fb39fe9fff5e091700cb63",
+    "deploy/公网部署.md": "ae28f2114f0128699b01b02fc1550c1bed7ebc58ba5a6a2014086d09248b2265",
+    "deploy/验证记录.md": "93cf817e76abd4e3130e5b357ee4c94ae629ef1b63f273a686369266c0082cf5"
+  },
+  "summaryUpdatedAt": "2026-10-18T06:46:13.443642+00:00"
+}

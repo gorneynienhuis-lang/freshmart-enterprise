@@ -1,4 +1,8 @@
-import { service } from './service';
+import { service, type ListQuery } from './service';
+import { pagination, paginationState, pageNumber, type Page } from './pagination';
+import { openAddressManager, renderAddressManager } from './address-panel';
+import { appendAftersaleActions, appendAdminOrderActions, appendRefundActions, appendMemberOrderActions } from './lifecycle-panel';
+import '../styles/pagination.css';
 import { mountTemplate, defaults, type Values, type PageName } from './template';
 import { ApiError } from '../api/errors';
 import { homeCategoryHref, selectHomeFeatured } from './home-featured';
@@ -30,6 +34,7 @@ function r04Note(text: string, kind = 'neutral') { const p = el('p', text); p.cl
 function r04State(text: string, raw: string) { const span = el('span', text); span.className = 'r04-state'; span.dataset.state = raw; return span; }
 export class Application {
     private epoch = 0;
+    private listStates = new Map<string,{page:number;status:string;search:string}>();
     private busy = false;
     private cart: Cart | null = null;
     private products: Product[] = [];
@@ -80,6 +85,35 @@ export class Application {
         this.tell('当前为员工账户，请切换会员账户进行购物。');
         return false;
     } return true; }
+    private async paged<T>(main:HTMLElement,key:string,title:string,load:(query:ListQuery)=>Promise<Page<T>>,draw:(item:T)=>HTMLElement,empty:string,states:Record<string,string>) {
+        const subject=service.auth.getSnapshot().user?.userId??'guest';const stateKey=subject+':'+key;
+        const route=new URL(location.hash.slice(1)||'/',location.origin),pageKey='p-'+key,statusKey='s-'+key;
+        const state=this.listStates.get(stateKey)??{page:1,status:'',search:''};
+        if(route.searchParams.has(pageKey))state.page=pageNumber(route.searchParams.get(pageKey));
+        if(route.searchParams.has(statusKey)){const filter=route.searchParams.get(statusKey)??'';state.status=Object.hasOwn(states,filter)?filter:'';}
+        this.listStates.set(stateKey,state);
+        const section=el('section');section.className='fm-management-section fm-paged-section';section.setAttribute('aria-label',title);section.append(el('h2',title));
+        const toolbar=el('div');toolbar.className='fm-list-filter';const label=el('label','状态');const select=document.createElement('select');select.setAttribute('aria-label',title+'状态筛选');
+        for(const [value,name] of [['','全部状态'],...Object.entries(states)]){const option=document.createElement('option');option.value=value!;option.textContent=name!;select.append(option);}select.value=state.status;label.append(select);toolbar.append(label);section.append(toolbar);
+        let search:HTMLInputElement|undefined;if(key==='admin-orders'){const searchLabel=el('label','订单号');search=document.createElement('input');search.value=state.search;search.maxLength=64;search.placeholder='输入完整订单号';search.setAttribute('aria-label','订单查询完整订单号');searchLabel.append(search);toolbar.append(searchLabel);}
+        const content=el('div');content.className='fm-list-content';const controls=el('div');section.append(content,controls);main.append(section);
+        const epoch=this.epoch;let revision=0;
+        const active=()=>section.isConnected&&this.epoch===epoch&&(service.auth.getSnapshot().user?.userId??'guest')===subject;
+        const refresh=async()=>{const current=++revision;content.setAttribute('aria-busy','true');try {
+            let result=await load({page:state.page,size:20,...state.status?{status:state.status}:{},...state.search?{orderNo:state.search}:{}});
+            if(current!==revision||!active())return;
+            const max=paginationState(result.page,result.size,result.total).pages;
+            if(state.page>max){state.page=max;result=await load({page:state.page,size:20,...state.status?{status:state.status}:{},...state.search?{orderNo:state.search}:{}});}
+            if(current!==revision||!active())return;
+            state.page=result.page;
+            const route=new URL(location.hash.slice(1)||'/',location.origin);if(state.page>1)route.searchParams.set(pageKey,String(state.page));else route.searchParams.delete(pageKey);if(state.status)route.searchParams.set(statusKey,state.status);else route.searchParams.delete(statusKey);
+            const address=new URL(location.href);address.hash=route.pathname+(route.searchParams.size?'?'+route.searchParams:'');history.replaceState(history.state,'',address);
+            content.replaceChildren(...result.items.map(draw));if(!result.items.length)content.append(el('p',empty));
+            controls.replaceChildren(pagination(result,title,async page=>{await this.run(async()=>{state.page=page;await refresh();});}));
+        }catch(error){if(active()&&current===revision){content.replaceChildren(el('p','读取失败，请重试。'),button('重新读取'+title,()=>void this.run(refresh)));throw error;}}finally{content.removeAttribute('aria-busy');}};
+        if(search){const field=search;toolbar.append(button('查询订单',()=>void this.run(async()=>{state.search=field.value.trim();state.page=1;await refresh();})));field.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();void this.run(async()=>{state.search=field.value.trim();state.page=1;await refresh();});}};}
+        select.onchange=()=>void this.run(async()=>{state.status=select.value;state.page=1;await refresh();});await refresh();
+    }
     private async loadCart() { if (service.auth.getSnapshot().user?.roles.includes('MEMBER'))
         this.cart = await service.cart();
     else
@@ -112,6 +146,7 @@ export class Application {
             }
             await this.orders();
         }
+        else if(route.pathname==='/addresses'){if(!this.member()){await this.home();return;}const main=this.shell('我的收货地址');const content=el('div');main.append(content);await renderAddressManager(content,{run:a=>this.run(a),notify:m=>this.tell(m)});}
         else if (route.pathname === '/operations' || route.pathname === '/admin') {
             await this.operations();
         }
@@ -192,6 +227,7 @@ export class Application {
             ops.style.color = 'inherit';
             account.append(ops);
         }
+        if(user?.roles.includes('MEMBER')){const accountNav=q(this.root,'nav[aria-label="账户"],nav[aria-label="账户操作"]');if(accountNav){const addresses=document.createElement('a');addresses.textContent='管理收货地址';addresses.href='#/addresses';addresses.style.color='inherit';accountNav.append(addresses);}}
         const slot = q(this.root, '.fm-slot');
         if (slot) {
             slot.textContent = '选择地址后查看配送时段';
@@ -260,7 +296,7 @@ export class Application {
             link.onclick = null;
         }
     }
-    private async list(params: URLSearchParams) { const epoch=this.epoch;const keyword = params.get('keyword') || undefined; const categoryId = params.get('categoryId') || undefined; const sort = (params.get('sort') || 'RECOMMENDED') as 'RECOMMENDED' | 'PRICE_ASC' | 'PRICE_DESC'; const result = await service.products({ ...keyword ? { keyword } : {}, ...categoryId ? { categoryId } : {}, ...params.get('nearExpiry') === 'true' ? { nearExpiry: true } : {}, sort }); if(epoch!==this.epoch)return;this.products = result.items; this.mount('List', { items: result.items.map(p => this.card(p)), facets: [] }); this.bindCards(); const h = q(this.root, 'h1'); if (h) {
+    private async list(params: URLSearchParams) { const epoch=this.epoch;const keyword = params.get('keyword') || undefined; const categoryId = params.get('categoryId') || undefined; const sort = (['RECOMMENDED','PRICE_ASC','PRICE_DESC'].includes(params.get('sort')??'')?params.get('sort'):'RECOMMENDED') as 'RECOMMENDED' | 'PRICE_ASC' | 'PRICE_DESC'; const page=pageNumber(params.get('page'));  const result = await service.products({ ...keyword ? { keyword } : {}, ...categoryId ? { categoryId } : {}, ...params.get('nearExpiry') === 'true' ? { nearExpiry: true } : {}, sort, page, size:20 }); if(epoch!==this.epoch)return;const last=paginationState(result.page,result.size,result.total).pages;if(page>last){params.set('page',String(last));this.navigate('/products?'+params);return;}this.products = result.items; this.mount('List', { items: result.items.map(p => this.card(p)), facets: [] }); this.bindCards(); const h = q(this.root, 'h1'); if (h) {
         h.textContent = keyword ? `搜索：${keyword}` : categoryId ? this.categories.find(category => category.categoryId === categoryId)?.name ?? '全部商品' : '全部商品';
         const breadcrumb = q(this.root, 'main nav[aria-label="面包屑"] > span:last-child');
         if (breadcrumb) breadcrumb.textContent = h.textContent;
@@ -292,9 +328,14 @@ export class Application {
                 continue;
             }
             b.setAttribute('aria-pressed', String(sort === ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]));
-            b.onclick = () => { params.set('sort', ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]!); this.navigate('/products?' + params); };
-        } const clear = qa<HTMLAnchorElement>(this.root, 'a').find(a => a.textContent === '清除全部'); if (clear)
-        clear.parentElement?.replaceChildren(button('清除筛选', () => this.navigate('/products'))); }
+            b.onclick = () => { params.delete('page'); params.set('sort', ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]!); this.navigate('/products?' + params); };
+        } const clear = qa<HTMLAnchorElement>(this.root, 'a').find(a => a.textContent === '清除全部');
+        if(clear?.parentElement){const filters=clear.parentElement;filters.replaceChildren(el('span','已选：'));
+            for(const [key,value] of [['keyword',keyword],['categoryId',categoryId?this.categories.find(c=>c.categoryId===categoryId)?.name??categoryId:undefined],['nearExpiry',params.get('nearExpiry')==='true'?'临期特惠':undefined]])if(value){const remove=button(String(value)+' ×',()=>{params.delete(key!);params.delete('page');this.navigate('/products?'+params);});remove.setAttribute('aria-label','移除筛选：'+value);filters.append(remove);}
+            if(filters.childElementCount===1)filters.append(el('span','全部商品'));else filters.append(button('清除筛选',()=>this.navigate('/products')));
+        }
+        if(end?.parentElement)end.parentElement.append(pagination(result,'商品',async next=>{params.set('page',String(next));this.navigate('/products?'+params);window.scrollTo({top:0});}));
+    }
     private async add(product: Product, quantity?: number, go = false) { if (!this.member())
         return; const sku = product.skus.find(s => s.skuId === this.selectedSku) ?? product.skus[0]; if (!sku)
         throw new Error('商品没有可购买规格'); await service.add({ skuId: sku.skuId, quantity: quantity ?? (sku.baseUnit === 'GRAM' ? sku.priceUnitGram ?? 500 : 1), selected: true }); await this.loadCart(); this.quote = null; this.tell(`${product.name} 已加入购物车`); if (go)
@@ -451,6 +492,7 @@ export class Application {
         row.append(checked, quantity, el('span', item.baseUnit === 'GRAM' ? ' 克 ' : ' 件 '), el('span', formatMoney(item.lineAmount)), button('更新', () => void this.run(async () => { await service.updateCart(item.cartItemId, { quantity: Number(quantity.value), selected: checked.checked, version: item.version }); this.quote = null; await this.loadCart(); d.close(); this.cartDialog(); })), button('删除', () => void this.run(async () => { await service.removeCart(item.cartItemId, item.version); this.quote = null; await this.loadCart(); d.close(); this.cartDialog(); })));
         d.append(row);
     } const estimate = el('p', '商品预估金额 ' + formatMoney(this.cart.estimatedGoodsAmount)); if (isR04Design()) estimate.className = 'r04-cart-total'; d.append(estimate, button('去结算', () => { d.close(); this.navigate('/checkout'); })); }
+    private manageAddresses() {openAddressManager({dialog:title=>this.dialog(title),run:action=>this.run(action),notify:message=>this.tell(message),onChanged:async()=>{this.quote=null;this.slotId='';if(location.hash.split('?')[0]==='#/checkout')await this.checkout();}});}
     private addressDialog() { const d = this.dialog('新增收货地址'); const f = document.createElement('form'); for (const [label, name, value] of [['收货人', 'recipientName', ''], ['手机号', 'phone', ''], ['省份', 'province', '上海市'], ['城市', 'city', '上海市'], ['区', 'district', '松江区'], ['详细地址', 'detail', '人民北路 2999 号 东华大学']])
         f.append(input(label!, name!, value), el('br')); const submit = button('保存地址', () => { }); submit.type = 'submit'; const error = el('p'); f.append(submit, error); f.onsubmit = e => { e.preventDefault(); submit.disabled = true; const data = new FormData(f); void (async () => { try {
         const a = await service.createAddress({ recipientName: String(data.get('recipientName')), phone: String(data.get('phone')), province: String(data.get('province')), city: String(data.get('city')), district: String(data.get('district')), detail: String(data.get('detail')), isDefault: true });
@@ -491,7 +533,7 @@ export class Application {
         textButton(this.root, '+ 新增收货地址')!.onclick = () => this.addressDialog();
         for (const a of qa<HTMLAnchorElement>(this.root, 'a')) {
             if (a.textContent === '管理地址')
-                a.onclick = e => { e.preventDefault(); this.addressDialog(); };
+                a.onclick = e => { e.preventDefault(); this.manageAddresses(); };
             if (a.textContent === '返回购物车修改')
                 a.onclick = e => { e.preventDefault(); void this.openCart(); };
         }
@@ -562,8 +604,10 @@ export class Application {
         this.mount('Checkout', { addrs: [], days: [], slots: [], lines: [], summary: [], payable: '—' }); this.root.dataset.runtime = 'true'; const main = q(this.root, 'main')!; main.replaceChildren(); main.style.display = 'block'; const section = el('section'); section.className = 'fm-runtime-panel'; section.style.cssText = 'background:#FFFFFF;border-radius:8px;padding:20px 24px;display:flex;flex-direction:column;gap:14px'; section.append(el('h1', title)); main.append(section); q(this.root, 'ol')?.replaceChildren(); const headerTitle = byText(this.root, '确认订单'); if (headerTitle)
             headerTitle.textContent = title; section.append(button('继续选购', () => this.navigate('/products')), button('刷新', () => void this.render())); return section;
     }
-    private async orders() {const epoch=this.epoch; const result = await service.orders();if(epoch!==this.epoch)return; const main = this.shell('我的订单'); if (!result.items.length) {
-        const empty = el('p', '暂无订单，先去选购商品吧。'); if (isR04Design()) empty.className = 'r04-empty-state'; main.append(empty); } for (const order of result.items) {
+    private async orders() {
+        const main=this.shell('我的订单');main.append(button('管理收货地址',()=>this.manageAddresses()));
+        const memberOptions={dialog:(title:string)=>this.dialog(title),run:(action:()=>Promise<void>)=>this.run(action),reload:()=>this.orders()};
+        await this.paged(main,'member-orders','订单列表',query=>service.orders(query),order=>{
         const article = el('article');
         if (isR04Design()) {
             article.className = 'r04-order-card'; article.dataset.state = order.status;
@@ -580,18 +624,23 @@ export class Application {
             if(order.status==='FINISHED')row.append(createReviewButton(order,item,{dialog:title=>this.dialog(title),run:action=>this.run(action),reload:()=>this.orders(),notify:message=>this.tell(message)}));
             article.append(row);
         }
-        if (order.weightAdjustment)
-            article.append(el('p', `实重结算：${order.weightAdjustment.status} · 差额 ${formatMoney(order.weightAdjustment.deltaAmount)}`));
+        if (order.weightAdjustment && order.weightAdjustment.status!=='NONE')
+            article.append(el('p', `实重结算：${({REFUND_PENDING:'退差处理中',REFUNDED:'已退差',TOP_UP_PENDING:'待补款',SETTLED:'已结算',CANCELED:'已取消',NONE:'无需调整'} as const)[order.weightAdjustment.status]} · 差额 ${formatMoney(order.weightAdjustment.deltaAmount)}`));
         if (order.deliveryReceiptCode) { const receipt = el('strong', '配送签收码：' + order.deliveryReceiptCode); if (isR04Design()) receipt.className = 'r04-receipt'; article.append(receipt); }
         if (order.allowedActions.includes('PAY') || order.allowedActions.includes('TOP_UP'))
             article.append(button(order.allowedActions.includes('TOP_UP') ? '支付称重补款' : '去支付', () => void this.run(() => this.payment(order))));
         if(order.allowedActions.includes('APPLY_AFTERSALE'))article.append(button('申请售后',()=>this.aftersaleDialog(order)));
         if (order.allowedActions.includes('CANCEL'))
             article.append(button('取消订单', () => { const d = this.dialog('取消订单'); const reason = input('取消原因', 'reason', '不再需要'); d.append(reason, button('确认取消', () => void this.run(async () => { await service.cancel(order.orderId, { version: order.version, reason: q<HTMLInputElement>(reason, 'input')!.value }); d.close(); this.tell('订单已取消；退款进度以订单为准'); await this.orders(); }))); }));
+        appendMemberOrderActions(article,order,memberOptions);
         if (isR04Design()) { const actions = el('div'); actions.className = 'r04-order-actions'; for (const action of qa<HTMLButtonElement>(article, ':scope > button')) actions.append(action); if (actions.childElementCount) article.append(actions); }
-        main.append(article);
-    }
-        const aftersales=await service.aftersales();if(aftersales.items.length){main.append(el('h2','售后进度'));for(const a of aftersales.items){const row=el('p',`${a.aftersaleId} · ${a.status} · 申请 ${formatMoney(a.requestedAmount)} · 核准 ${formatMoney(a.approvedAmount)}${a.reviewComment?' · '+a.reviewComment:''}`);if(isR04Design()){row.className='r04-aftersale-progress';row.dataset.state=a.status;}main.append(row);}}
+        return article;
+        },'暂无符合条件的订单，去选购商品吧。',status);
+        await this.paged(main,'member-aftersales','售后进度',query=>service.aftersales(query),a=>{
+            const row=el('article');row.dataset.aftersaleId=a.aftersaleId;row.dataset.state=a.status;
+            row.append(el('p',`${a.aftersaleId} · ${a.status} · 申请 ${formatMoney(a.requestedAmount)} · 核准 ${formatMoney(a.approvedAmount)}${a.reviewComment?' · '+a.reviewComment:''}`));
+            appendAftersaleActions(row,a,memberOptions);return row;
+        },'暂无符合条件的售后申请。',{APPLIED:'待处理',APPROVED:'已核准',REJECTED:'已驳回',REFUNDING:'退款中',COMPLETED:'已完成',CANCELED:'已撤销'});
     }
     private async operations() {
         const user = service.auth.getSnapshot().user;
@@ -606,18 +655,10 @@ export class Application {
         await renderManagement(main, managementOptions);
         await renderOperations(main, managementOptions);
         await renderFinanceAudit(main, managementOptions);
-        if (user.permissions.includes('order.work.read')) {
-            const orders = await service.adminOrders();
-            main.append(el('h2', '订单查询'));
-            for (const order of orders.items)
-                main.append(el('p', `${order.orderNo} · ${status[order.status]} · ${formatMoney(order.price.payableAmount)}`));
-        }
-        if (user.permissions.includes('pick.read')) {
-            const tasks = await service.pickTasks();
-            main.append(el('h2', '拣货任务'));
-            if (!tasks.items.length)
-                main.append(el('p', '暂无拣货任务'));
-            for (const task of tasks.items) {
+        if(user.permissions.includes('order.work.read'))await this.paged(main,'admin-orders','订单查询',query=>service.adminOrders(query),order=>{
+            const row=el('article');row.dataset.orderId=order.orderId;row.append(el('h3',order.orderNo+' · '+status[order.status]),el('p',formatMoney(order.price.payableAmount)));appendAdminOrderActions(row,order,managementOptions);return row;
+        },'暂无符合条件的订单。',status);
+        if(user.permissions.includes('pick.read'))await this.paged(main,'pick-tasks','拣货任务',query=>service.pickTasks(query),task=>{
                 const row = el('section');
                 row.append(el('h3', `${task.taskId} · ${task.status}`), el('p', `${task.slot.date} ${task.slot.label}`));
                 for (const item of task.items)
@@ -627,15 +668,9 @@ export class Application {
                 if (task.status === 'CLAIMED' && task.pickerId === user.userId) {
                     row.append(button('录入实拣数量', () => this.pickDialog(task)),button('重新分配批次',()=>openReallocateDialog(task,managementOptions)));
                 }
-                main.append(row);
-            }
-        }
-        if (user.permissions.some(p => ['delivery.handover.read', 'delivery.self.read', 'delivery.exception.resolve'].includes(p))) {
-            const tasks = await service.deliveryTasks();
-            main.append(el('h2', '配送任务'),el('p','称重退差处理中需稍后刷新再发货；如需补款，由会员完成支付后再交接。'));
-            if (!tasks.items.length)
-                main.append(el('p', '暂无配送任务'));
-            for (const task of tasks.items) {
+                appendAdminOrderActions(row,task,managementOptions);return row;
+        },'暂无符合条件的拣货任务。',{UNASSIGNED:'待领取',CLAIMED:'已领取',COMPLETED:'已实拣',CANCELED:'已取消'});
+        if(user.permissions.some(p=>['delivery.handover.read','delivery.self.read','delivery.exception.resolve'].includes(p)))await this.paged(main,'delivery-tasks','配送任务',query=>service.deliveryTasks(query),task=>{
                 const row = el('section');
                 row.append(el('h3', `${task.taskId} · ${task.status}`), el('p', `${task.contact.recipientName} ${task.contact.phoneMasked} · ${task.contact.region} · ${task.slot.date} ${task.slot.label}`));
                 if (task.status === 'PENDING_DISPATCH' && user.permissions.includes('delivery.dispatch'))
@@ -643,11 +678,19 @@ export class Application {
                 if (task.status === 'DELIVERING' && task.courierId === user.userId)
                     row.append(button('确认签收', () => { const d = this.dialog('配送签收'); const proof = input('会员提供的六位签收码', 'proofCode'); const i = q<HTMLInputElement>(proof, 'input')!; i.pattern = '[0-9]{6}'; i.maxLength = 6; d.append(proof, button('提交签收', () => void this.run(async () => { await service.completeDelivery(task.taskId, { proofCode: i.value, version: task.version }); d.close(); this.tell('订单已完成'); await this.operations(); }))); }));
                 appendDeliveryActions(row,task,managementOptions);
-                main.append(row);
-            }
-        }
-        if(user.permissions.includes('aftersale.work.read')){const cases=await service.adminAftersales();main.append(el('h2','售后工单'));for(const a of cases.items){const row=el('section');row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));if(a.status==='APPLIED'&&!a.assigneeId&&user.permissions.includes('aftersale.work.claim'))row.append(button('领取售后',()=>void this.run(async()=>{await service.claimAftersale(a.aftersaleId,a.version);await this.operations();})));if(a.assigneeId===user.userId&&a.evidenceMediaIds.length)row.append(button('查看品质证据',()=>openEvidencePreview(a.evidenceMediaIds,{dialog:title=>this.dialog(title),run:action=>this.run(action)})));if(a.status==='APPLIED'&&a.assigneeId===user.userId&&user.permissions.includes('aftersale.review'))row.append(button('审核售后',()=>this.reviewDialog(a)));main.append(row);}}
-        if(user.permissions.includes('refund.read')){const refunds=await service.refunds();main.append(el('h2','退款执行'));for(const refund of refunds.items){const row=el('p');row.append(el('span',`${refund.refundId} · ${refund.status} · ${formatMoney(refund.amount)} · ${refund.type}`));if(refund.status==='PENDING'&&refund.type==='AFTERSALE'&&user.permissions.includes('refund.execute'))row.append(button('执行退款',()=>{const d=this.dialog('确认原路沙箱退款');const reason=input('复核说明','reason','复核通过，执行原路沙箱退款');d.append(el('p',formatMoney(refund.amount)),reason,button('确认退款',()=>void this.run(async()=>{await service.executeRefund(refund.refundId,{version:refund.version,reason:q<HTMLInputElement>(reason,'input')!.value});d.close();this.tell('退款指令已提交，请刷新查看结果');await this.operations();})));}));main.append(row);}}
+                return row;
+        },'暂无符合条件的配送任务。',{PENDING_DISPATCH:'待交接',DELIVERING:'配送中',COMPLETED:'已签收',EXCEPTION:'异常待处理',CANCELED:'已取消'});
+        if(user.permissions.includes('aftersale.work.read'))await this.paged(main,'admin-aftersales','售后工单',query=>service.adminAftersales(query),a=>{
+            const row=el('section');row.dataset.aftersaleId=a.aftersaleId;row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));
+            if(a.status==='APPLIED'&&!a.assigneeId&&user.permissions.includes('aftersale.work.claim'))row.append(button('领取售后',()=>void this.run(async()=>{await service.claimAftersale(a.aftersaleId,a.version);await this.operations();})));
+            if(a.assigneeId===user.userId&&a.evidenceMediaIds.length)row.append(button('查看品质证据',()=>openEvidencePreview(a.evidenceMediaIds,{dialog:title=>this.dialog(title),run:action=>this.run(action)})));
+            if(a.status==='APPLIED'&&a.assigneeId===user.userId&&user.permissions.includes('aftersale.review'))row.append(button('审核售后',()=>this.reviewDialog(a)));return row;
+        },'暂无符合条件的售后工单。',{APPLIED:'待处理',APPROVED:'已核准',REJECTED:'已驳回',REFUNDING:'退款中',COMPLETED:'已完成',CANCELED:'已撤销'});
+        if(user.permissions.includes('refund.read'))await this.paged(main,'admin-refunds','退款执行',query=>service.refunds(query),refund=>{
+            const row=el('section');row.dataset.refundId=refund.refundId;row.append(el('p',`${refund.refundId} · ${refund.status} · ${formatMoney(refund.amount)} · ${refund.type}`));
+            if(refund.status==='PENDING'&&refund.type==='AFTERSALE'&&user.permissions.includes('refund.execute'))row.append(button('执行退款',()=>{const d=this.dialog('确认原路沙箱退款');const reason=input('复核说明','reason','复核通过，执行原路沙箱退款');d.append(el('p',formatMoney(refund.amount)),reason,button('确认退款',()=>void this.run(async()=>{await service.executeRefund(refund.refundId,{version:refund.version,reason:q<HTMLInputElement>(reason,'input')!.value});d.close();this.tell('退款指令已提交，请刷新查看结果');await this.operations();})));}));
+            appendRefundActions(row,refund,managementOptions);return row;
+        },'暂无符合条件的退款记录。',{PENDING:'待授权',PROCESSING:'处理中',SUCCESS:'已退款',FAILED:'失败待处理'});
         if (!user.permissions.some(p => ['order.work.read', 'pick.read', 'delivery.handover.read', 'delivery.self.read', 'aftersale.work.read', 'refund.read', 'dashboard.read', 'employee.read'].includes(p)))
             main.append(el('p', '此角色没有本工作台的业务操作权限。服务端独立校验角色与资源归属。'));
         if (isR04Design()) this.decorateWorkbench(main);

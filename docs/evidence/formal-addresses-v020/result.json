@@ -1,0 +1,64 @@
+{
+  "startedAt": "2026-10-18T06:34:16.616Z",
+  "runId": "718644221d",
+  "status": "PASSED",
+  "dataSource": "real local MySQL HTTP APIs and actual Chrome/Playwright UI; no mocked responses or interception",
+  "checks": [
+    "Member UI creates two real owner addresses, edits fields with version and sets exactly one default via full PUT",
+    "A real external update makes the open UI draft stale; 409 refreshes the latest list without overwrite; unrelated member PUT/DELETE return 404 and own list remains empty",
+    "Deletion requires explicit confirmation, cancel preserves data, removing default promotes the remaining address, reload restores the HttpOnly session, 390px manager does not overflow and last delete yields real empty list"
+  ],
+  "screens": [
+    "member-addresses-edited-default.png",
+    "member-address-stale-version-blocked.png",
+    "member-default-after-delete-reload.png",
+    "member-addresses-390.png",
+    "member-address-edit-390.png",
+    "member-addresses-empty-after-delete.png"
+  ],
+  "checkedResponses": 41,
+  "responseStatuses": {
+    "200": 34,
+    "201": 4,
+    "404": 2,
+    "409": 1
+  },
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "sourceSha256": {
+    "frontend/scripts/e2e-addresses.mjs": "fa51d4947aaa35652d96979695a383a5ccaf434efd98907214eb9d1078264740",
+    "frontend/src/app/address-panel.ts": "52504ebb09f4c1d9a794ea66e196819443c7a9d5d75a3e16d79b108607aefa29",
+    "frontend/src/app/address-service.ts": "d5d3c35ee550bd5d8d08a1034f92dd890659bb78c653fc063c84f006352d56fa",
+    "frontend/src/styles/address-panel.css": "000e83a68e8bf14640f226948fcf4e4d010e07c7e6041ec93b80689dbe566024",
+    "frontend/src/app/application.ts": "000f444dbad2ba7656132e155929f1eb18fc62e7195df2e6cd77d00cb2f92b89",
+    "backend/src/main/java/com/freshmart/checkout/CheckoutController.java": "d316ab992d66c55d1bef58183faacd397dac1beae13bd765ccbe1dd513ad2419",
+    "backend/src/main/java/com/freshmart/checkout/CheckoutService.java": "9b784628563281be994176aab43b893eda1e9a27e281cbf0b245648d17fce49c",
+    "contracts/openapi.yaml": "47c2a33dbb70fa0784d9f02cb6e457be49e6cac1b2482604edc6177977d63c93"
+  },
+  "cleanup": {
+    "policy": "retain synthetic members and append-only audit history; address deletion is the tested owner-authorized CRUD operation; no database clearing or seed changes"
+  },
+  "addressIds": [
+    "abc1f31b-29ec-4b68-9f02-98a994a994c2",
+    "d60ba6d7-5f1a-41eb-8743-e98127dfee49"
+  ],
+  "denials": {
+    "staleUiVersion": 409,
+    "otherOwnerUpdate": 404,
+    "otherOwnerDelete": 404
+  },
+  "mobileLayout": {
+    "pageOverflow": false,
+    "dialogOverflow": false,
+    "dialogBounds": {
+      "left": 16,
+      "right": 374,
+      "width": 358
+    }
+  },
+  "browserStorage": {
+    "noPlaintextTokenPasswordPhoneOrDetail": true
+  },
+  "finishedAt": "2026-10-18T06:34:18.730Z"
+}

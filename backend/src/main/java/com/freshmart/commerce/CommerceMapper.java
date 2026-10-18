@@ -11,16 +11,18 @@ public interface CommerceMapper {
     @Select("SELECT * FROM fm_order WHERE order_id=#{id} FOR UPDATE") OrderRow lockOrder(String id);
     @Select("SELECT * FROM fm_order WHERE pick_task_id=#{id}") OrderRow byPick(String id);
     @Select("SELECT * FROM fm_order WHERE delivery_task_id=#{id}") OrderRow byDelivery(String id);
-    @Select("<script>SELECT * FROM fm_order WHERE 1=1 <if test='user!=null'>AND user_id=#{user}</if><if test='status!=null'>AND status=#{status}</if> ORDER BY created_at DESC,order_id LIMIT #{limit} OFFSET #{offset}</script>")
-    List<OrderRow> orders(@Param("user") String user,@Param("status") String status,@Param("limit") int limit,@Param("offset") long offset);
+    @Select("<script>SELECT * FROM fm_order WHERE 1=1 <if test='user!=null'>AND user_id=#{user}</if><if test='status!=null'>AND status=#{status}</if><if test='orderNo!=null'>AND order_no=#{orderNo}</if> ORDER BY created_at DESC,order_id LIMIT #{limit} OFFSET #{offset}</script>")
+    List<OrderRow> orders(@Param("user") String user,@Param("status") String status,@Param("limit") int limit,@Param("offset") long offset,@Param("orderNo")String orderNo);
     @Select("<script>SELECT COUNT(*) FROM fm_order WHERE 1=1 <if test='user!=null'>AND user_id=#{user}</if><if test='status!=null'>AND status=#{status}</if></script>")
     long orderCount(@Param("user") String user,@Param("status") String status);
-    String SUPPORT_SCOPE="(EXISTS(SELECT 1 FROM fm_aftersale a WHERE a.order_id=o.order_id AND a.assignee_id=#{actor} AND a.member_id&lt;&gt;#{actor}) OR EXISTS(SELECT 1 FROM fm_delivery_exception e WHERE e.order_id=o.order_id AND e.assignee_id=#{actor} AND o.user_id&lt;&gt;#{actor}))";
-    @Select("<script>SELECT * FROM fm_order o WHERE "+SUPPORT_SCOPE+"<if test='status!=null'> AND o.status=#{status}</if> ORDER BY o.created_at DESC,o.order_id LIMIT #{limit} OFFSET #{offset}</script>")
-    List<OrderRow> supportOrders(@Param("actor")String actor,@Param("status")String status,@Param("limit")int limit,@Param("offset")long offset);
-    @Select("<script>SELECT COUNT(*) FROM fm_order o WHERE "+SUPPORT_SCOPE+"<if test='status!=null'> AND o.status=#{status}</if></script>")
-    long supportOrderCount(@Param("actor")String actor,@Param("status")String status);
-    @Select("SELECT (SELECT COUNT(*) FROM fm_aftersale WHERE order_id=#{order} AND assignee_id=#{actor} AND member_id != #{actor}) + (SELECT COUNT(*) FROM fm_delivery_exception e JOIN fm_order o ON o.order_id=e.order_id WHERE e.order_id=#{order} AND e.assignee_id=#{actor} AND o.user_id != #{actor})")
+    @Select("<script>SELECT COUNT(*) FROM fm_order WHERE 1=1 <if test='user!=null'>AND user_id=#{user}</if><if test='status!=null'>AND status=#{status}</if><if test='orderNo!=null'>AND order_no=#{orderNo}</if></script>")
+    long filteredOrderCount(@Param("user") String user,@Param("status") String status,@Param("orderNo")String orderNo);
+    String SUPPORT_SCOPE="(EXISTS(SELECT 1 FROM fm_aftersale a WHERE a.order_id=o.order_id AND a.assignee_id=#{actor} AND a.member_id&lt;&gt;#{actor}) OR EXISTS(SELECT 1 FROM fm_delivery_exception e WHERE e.order_id=o.order_id AND e.assignee_id=#{actor} AND o.user_id&lt;&gt;#{actor}) OR EXISTS(SELECT 1 FROM fm_cancellation_request c WHERE c.order_id=o.order_id AND c.assignee_id=#{actor} AND c.member_id&lt;&gt;#{actor}))";
+    @Select("<script>SELECT * FROM fm_order o WHERE "+SUPPORT_SCOPE+"<if test='status!=null'> AND o.status=#{status}</if><if test='orderNo!=null'> AND o.order_no=#{orderNo}</if> ORDER BY o.created_at DESC,o.order_id LIMIT #{limit} OFFSET #{offset}</script>")
+    List<OrderRow> supportOrders(@Param("actor")String actor,@Param("status")String status,@Param("limit")int limit,@Param("offset")long offset,@Param("orderNo")String orderNo);
+    @Select("<script>SELECT COUNT(*) FROM fm_order o WHERE "+SUPPORT_SCOPE+"<if test='status!=null'> AND o.status=#{status}</if><if test='orderNo!=null'> AND o.order_no=#{orderNo}</if></script>")
+    long supportOrderCount(@Param("actor")String actor,@Param("status")String status,@Param("orderNo")String orderNo);
+    @Select("SELECT (SELECT COUNT(*) FROM fm_aftersale WHERE order_id=#{order} AND assignee_id=#{actor} AND member_id != #{actor}) + (SELECT COUNT(*) FROM fm_delivery_exception e JOIN fm_order o ON o.order_id=e.order_id WHERE e.order_id=#{order} AND e.assignee_id=#{actor} AND o.user_id != #{actor}) + (SELECT COUNT(*) FROM fm_cancellation_request WHERE order_id=#{order} AND assignee_id=#{actor} AND member_id != #{actor})")
     int supportScope(@Param("order")String order,@Param("actor")String actor);
     String PICK_SCOPE="paid_at IS NOT NULL AND (picker_id IS NULL OR picker_id=#{actor})";
     @Select("<script>SELECT * FROM fm_order WHERE "+PICK_SCOPE+"<if test='status!=null'> AND pick_status=#{status}</if> ORDER BY created_at,order_id LIMIT #{limit} OFFSET #{offset}</script>")

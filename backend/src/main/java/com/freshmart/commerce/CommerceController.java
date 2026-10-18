@@ -39,7 +39,7 @@ public class CommerceController {
         return ApiEnvelope.ok(service.callback(body,nonce,TokenCodec.hash(raw)));
     }
     @GetMapping("/refunds/{id}") public ApiEnvelope<?> refund(@PathVariable String id){return ApiEnvelope.ok(service.refund(actor(),id));}
-    @GetMapping("/admin/orders") public ApiEnvelope<?> adminOrders(@RequestParam(required=false)String status,@RequestParam(defaultValue="1")int page,@RequestParam(defaultValue="20")int size){return ApiEnvelope.ok(service.list(actor(),status,page,size,true));}
+    @GetMapping("/admin/orders") public ApiEnvelope<?> adminOrders(@RequestParam(required=false)String status,@RequestParam(required=false)String orderNo,@RequestParam(defaultValue="1")int page,@RequestParam(defaultValue="20")int size){return ApiEnvelope.ok(service.list(actor(),status,page,size,true,orderNo));}
     @GetMapping("/admin/orders/{id}") public ApiEnvelope<?> adminOrder(@PathVariable String id){return ApiEnvelope.ok(service.adminOrder(actor(),id));}
     @PostMapping("/admin/orders/{id}/cancel") public ApiEnvelope<?> adminCancel(@PathVariable String id,@Valid @RequestBody ReasonVersion body,HttpServletRequest request){return command(request,body,()->service.cancel(actor(),id,body,true));}
     @PostMapping("/admin/orders/{id}/returns/receive") public ApiEnvelope<?> receiveReturn(@PathVariable String id,@Valid @RequestBody ReturnReceive body,HttpServletRequest request){return command(request,body,()->service.receiveReturn(actor(),id,body));}

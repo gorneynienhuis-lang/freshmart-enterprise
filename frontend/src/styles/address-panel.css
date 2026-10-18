@@ -1,0 +1,22 @@
+.fm-address-manager { margin: 0; }
+.fm-address-list { display: grid; gap: 12px; min-width: 0; }
+.fm-address-card { min-width: 0; border: 1px solid #E3E6EA; border-radius: 6px; padding: 16px; background: #FFF; }
+.fm-address-card-head { display: flex; align-items: center; flex-wrap: wrap; gap: 9px 12px; font-size: 13px; }
+.fm-address-card-head > strong { min-width: 0; max-width: 100%; overflow-wrap: anywhere; }
+.fm-address-card-head > span[data-address-phone] { color: #626C78; font-variant-numeric: tabular-nums; }
+.fm-address-card p, .fm-address-confirm p { color: #626C78; font-size: 12px; line-height: 1.8; overflow-wrap: anywhere; }
+.fm-address-default, .fm-address-unavailable { padding: 2px 7px; border-radius: 3px; background: #FCF1F3; color: #A0021F; font-size: 10px; }
+.fm-address-unavailable { color: #747D89; background: #F2F3F5; }
+.fm-address-editor:empty { display: none; }
+.fm-address-form, .fm-address-confirm { margin-bottom: 20px; padding: 18px; border: 1px solid #E3E6EA; border-radius: 6px; background: #FAFBFC; }
+.fm-address-form h3, .fm-address-confirm h3 { margin: 0; font-size: 16px; }
+.fm-address-default-choice { display: flex; align-items: center; gap: 9px; font-size: 12px; }
+.fm-address-default-choice input { width: 16px; height: 16px; accent-color: #A0021F; }
+.fm-address-default-choice input:focus-visible { outline: 2px solid #A0021F; outline-offset: 3px; }
+.fm-address-dialog { box-sizing: border-box; width: min(740px,calc(100vw - 32px)); max-width: calc(100vw - 32px); }
+.fm-address-dialog .fm-address-manager { border: 0; padding: 0; }
+@media (max-width: 760px) {
+  .fm-address-card { padding: 13px; }
+  .fm-address-form, .fm-address-confirm { padding: 14px; }
+  .fm-address-dialog { padding: 18px; }
+}

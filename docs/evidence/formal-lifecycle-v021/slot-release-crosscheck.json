@@ -1,0 +1,24 @@
+{
+  "status": "VERIFIED_AGAINST_MAINTENANCE_SNAPSHOT",
+  "slotId": "slot-20261019-1",
+  "before": {
+    "source": ".runtime/backups/formal-recovery-v020-20261018_064037/bundle/database.sql.gz",
+    "sourceProvenance": "Authorized backup agent reported a read-only parse of the HMAC-verified original snapshot INSERT, not a running recovered database",
+    "sqlSha256": "8d506e69e199cc58c8d7d820c98f665c899c8fdec683274bbcf78c3b292094ac",
+    "capacity": 30,
+    "used": 11,
+    "remainingDerivedFromCapacityMinusUsed": 19,
+    "version": 18
+  },
+  "after": {
+    "source": "cleanup-first-failed-run-result.json",
+    "observedAt": "2026-10-18T06:44:56.100Z",
+    "traceId": "8fb6cf69-e702-49ac-bc10-e01ff2eef34d",
+    "remaining": 20,
+    "version": 19
+  },
+  "releasedComparedToSnapshot": 1,
+  "versionIncrementComparedToSnapshot": 1,
+  "scope": "Root authorized no competing business writes during the snapshot-to-cleanup transition; later pagination is outside this point-in-time observation.",
+  "limitations": "The first cleanup script incorrectly referenced nonexistent API used and did not preserve API remaining before value. That INCOMPLETE result is unchanged. Snapshot used is from the private SQL, while after remaining is the real contract field."
+}

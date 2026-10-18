@@ -26,11 +26,12 @@ public class CommerceService {
     private final SandboxSignature sandbox;
     private final DeliveryProofVerifier proofs;
     private final ChannelLedger channelLedger;
+    private final com.freshmart.support.CancellationSupportService cancellationSupport;
     private final PricingCalculator prices = new PricingCalculator();
     private final SecureRandom random = new SecureRandom();
     public CommerceService(CommerceMapper db,CheckoutService checkout,CheckoutMapper checkoutDb,ObjectMapper json,
-                           Clock clock,SandboxSignature sandbox,DeliveryProofVerifier proofs,ChannelLedger channelLedger) {
-        this.db=db;this.checkout=checkout;this.checkoutDb=checkoutDb;this.json=json;this.clock=clock;this.sandbox=sandbox;this.proofs=proofs;this.channelLedger=channelLedger;
+                           Clock clock,SandboxSignature sandbox,DeliveryProofVerifier proofs,ChannelLedger channelLedger,com.freshmart.support.CancellationSupportService cancellationSupport) {
+        this.db=db;this.checkout=checkout;this.checkoutDb=checkoutDb;this.json=json;this.clock=clock;this.sandbox=sandbox;this.proofs=proofs;this.channelLedger=channelLedger;this.cancellationSupport=cancellationSupport;
     }
 
     @Transactional
@@ -100,11 +101,16 @@ public class CommerceService {
     }
     @Transactional(readOnly=true)
     public Map<String,Object> list(RequestActor actor,String status,int page,int size,boolean admin) {
+        return list(actor,status,page,size,admin,null);
+    }
+    @Transactional(readOnly=true)
+    public Map<String,Object> list(RequestActor actor,String status,int page,int size,boolean admin,String orderNo) {
         if(admin)actor.requireAnyRole("OPERATOR","SERVICE","FINANCE");else actor.requireRole("MEMBER");
+        if(orderNo!=null&&(!admin||!orderNo.matches("[A-Za-z0-9_-]{1,64}")))throw ApiException.invalid("订单号格式不合法");
         paging(page,size);validOrderStatus(status);String user=admin?null:actor.userId();
         if(admin&&actor.roles().contains("SERVICE")&&!actor.roles().contains("OPERATOR")&&!actor.roles().contains("FINANCE"))
-            return map("page",page,"size",size,"total",db.supportOrderCount(actor.userId(),status),"items",db.supportOrders(actor.userId(),status,size,(long)(page-1)*size).stream().map(o->adminView(o,actor)).toList());
-        return map("page",page,"size",size,"total",db.orderCount(user,status),"items",db.orders(user,status,size,(long)(page-1)*size).stream()
+            return map("page",page,"size",size,"total",db.supportOrderCount(actor.userId(),status,orderNo),"items",db.supportOrders(actor.userId(),status,size,(long)(page-1)*size,orderNo).stream().map(o->adminView(o,actor)).toList());
+        return map("page",page,"size",size,"total",db.filteredOrderCount(user,status,orderNo),"items",db.orders(user,status,size,(long)(page-1)*size,orderNo).stream()
                 .map(o->admin?adminView(o,actor):orderView(o)).toList());
     }
     @Transactional(readOnly=true)
@@ -139,6 +145,7 @@ public class CommerceService {
                 if(available>0)reserveRefund(o,p,available,"CANCEL",null,"cancel:"+o.orderId+":"+p.paymentId,reason);
             } else if(!"SUCCESS".equals(p.status)){p.status="CLOSED";p.version=nextVersion(p.version);db.updatePayment(p);}
         }
+        cancellationSupport.resolveOpen(o.orderId,actor,timeout?"订单超时关闭或取消，取消协助自动结束":"订单已取消，取消协助结束");
         touch(o);audit(o,actor,timeout?"order.expire":"order.cancel",reason);
     }
 
@@ -302,7 +309,7 @@ public class CommerceService {
         if(!"READY_TO_SHIP".equals(o.status)||!Set.of("NONE","REFUNDED","SETTLED").contains(o.adjustmentStatus))throw invalidState("须完成拣货并结清补退差额才可发货");
         if(db.activeRole(request.courierId(),"COURIER")!=1)throw ApiException.invalid("配送员不可用");
         o.courierId=request.courierId();o.deliveryStatus="DELIVERING";o.status="DELIVERING";o.dispatchedAt=clock.instant();
-        o.receiptCode=String.format(Locale.ROOT,"%06d",random.nextInt(1_000_000));touch(o);audit(o,actor.userId(),"delivery.dispatch","出库交接给配送员");return deliveryView(o);
+        o.receiptCode=String.format(Locale.ROOT,"%06d",random.nextInt(1_000_000));cancellationSupport.resolveOpen(o.orderId,"SYSTEM","订单已交接配送，取消协助自动结束；未取消已发货订单");touch(o);audit(o,actor.userId(),"delivery.dispatch","出库交接给配送员");return deliveryView(o);
     }
     @Transactional
     public Map<String,Object> complete(RequestActor actor,String id,Complete request) {
@@ -383,13 +390,13 @@ public class CommerceService {
     OrderRow deliveryOrder(RequestActor actor,String id,boolean lock){actor.requireAnyRole("PICKER","COURIER","SERVICE");var row=required(db.byDelivery(id));var o=lock?required(db.lockOrder(row.orderId)):row;
         if(!(actor.roles().contains("PICKER")&&actor.userId().equals(o.pickerId))&&!(actor.roles().contains("COURIER")&&actor.userId().equals(o.courierId))&&!(actor.roles().contains("SERVICE")&&db.deliverySupportScope(o.orderId,actor.userId())>0))throw ApiException.notFound();
         if(!Set.of("READY_TO_SHIP","DELIVERING","FINISHED","CANCELED").contains(o.status))throw ApiException.notFound();return o;}
-    Map<String,Object> orderView(OrderRow o){var s=snapshot(o);return map("orderId",o.orderId,"orderNo",o.orderNo,"status",o.status,"currency","CNY","items",s.get("items"),"price",s.get("price"),
+    Map<String,Object> orderView(OrderRow o){var s=snapshot(o);var view=map("orderId",o.orderId,"orderNo",o.orderNo,"status",o.status,"currency","CNY","items",s.get("items"),"price",s.get("price"),
             "paidAmount",o.paidAmount,"refundedAmount",o.refundedAmount,"address",s.get("address"),"slot",s.get("slot"),"weightAdjustment",adjustmentView(o),"refunds",db.refunds(o.orderId).stream().map(this::refundView).toList(),
             "buyerNote",s.get("buyerNote"),"createdAt",o.createdAt,"paymentExpiresAt",o.paymentExpiresAt,"paidAt",o.paidAt,"finishedAt",o.finishedAt,"version",o.version,"allowedActions",actions(o),
-            "deliveryReceiptCode","DELIVERING".equals(o.status)?o.receiptCode:null);}
-    Map<String,Object> adminView(OrderRow o,RequestActor actor){var s=snapshot(o);var contact=masked(s);if(actor.roles().contains("FINANCE"))contact.remove("region");return map("orderId",o.orderId,"orderNo",o.orderNo,"memberId",o.userId,"status",o.status,
+            "deliveryReceiptCode","DELIVERING".equals(o.status)?o.receiptCode:null);var support=cancellationSupport.latest(o.orderId);if(support!=null)view.put("cancellationSupport",support);return view;}
+    Map<String,Object> adminView(OrderRow o,RequestActor actor){var s=snapshot(o);var contact=masked(s);if(actor.roles().contains("FINANCE"))contact.remove("region");var view=map("orderId",o.orderId,"orderNo",o.orderNo,"memberId",o.userId,"status",o.status,
             "items",s.get("items"),"price",s.get("price"),"paidAmount",o.paidAmount,"refundedAmount",o.refundedAmount,"contact",contact,"slot",s.get("slot"),"weightAdjustment",adjustmentView(o),
-            "refunds",db.refunds(o.orderId).stream().map(this::refundView).toList(),"createdAt",o.createdAt,"version",o.version,"allowedActions",actor.roles().contains("SERVICE")&&db.supportScope(o.orderId,actor.userId())>0&&actions(o).contains("CANCEL")?List.of("CANCEL"):List.of());}
+            "refunds",db.refunds(o.orderId).stream().map(this::refundView).toList(),"createdAt",o.createdAt,"version",o.version,"allowedActions",actor.roles().contains("SERVICE")&&db.supportScope(o.orderId,actor.userId())>0&&actions(o).contains("CANCEL")?List.of("CANCEL"):List.of());if(!actor.roles().contains("FINANCE")){var support=cancellationSupport.latest(o.orderId);if(support!=null)view.put("cancellationSupport",support);}return view;}
     Map<String,Object> pickView(OrderRow o){var s=snapshot(o);return map("taskId",o.pickTaskId,"orderId",o.orderId,"status",o.pickStatus,"pickerId",o.pickerId,"items",s.get("items"),
             "allocations",db.allocations(o.orderId).stream().map(a->map("allocationId",a.allocationId,"orderItemId",a.orderItemId,"batchId",a.batchId,"batchNo",a.batchNo,"baseUnit",a.baseUnit,
                     "reservedQuantity",a.reservedQuantity,"pickedQuantity",a.pickedQuantity,"returnedQuantity",a.returnedQuantity,"version",a.version)).toList(),"slot",s.get("slot"),"version",o.version);}

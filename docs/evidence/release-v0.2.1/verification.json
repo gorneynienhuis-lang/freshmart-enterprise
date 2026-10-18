@@ -1,0 +1,65 @@
+{
+  "recordedAt": "2026-10-18T06:48:17.016587+00:00",
+  "contractVersion": "0.2.1",
+  "sourceState": "implementation working tree before release commit; exact files in source-sha256.json",
+  "contractCommit": "2c8d7d3c12c8f818f5788bfc35bf528fa038a082",
+  "backend": {
+    "tests": 150,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontend": {
+    "tests": 44,
+    "checkGeneratedTypes": true,
+    "typecheck": true,
+    "productionBuild": true,
+    "jsBytesReportedKB": 655.5,
+    "jsGzipReportedKB": 167.61,
+    "chunkWarningOver500KB": true
+  },
+  "staticContract": {
+    "operations": 95,
+    "schemas": 175,
+    "schemaExampleChecks": 2047
+  },
+  "realBrowserFlows": {
+    "addresses": {
+      "record": "docs/evidence/formal-addresses-v020/result.json",
+      "checkedResponses": 41,
+      "screenshots": 6,
+      "schemaErrors": 0,
+      "pageErrors": 0,
+      "failedAssets": 0
+    },
+    "pagination": {
+      "record": "docs/evidence/formal-pagination-v020/result.json",
+      "checkedResponses": 440,
+      "screenshots": 11,
+      "schemaErrors": 0,
+      "pageErrors": 0,
+      "failedAssets": 0
+    },
+    "lifecycle": {
+      "record": "docs/evidence/formal-lifecycle-v021/2026-10-18T06-39-18-624Z-BB3D3A98B0/result.json",
+      "checkedResponses": 122,
+      "screenshots": 11,
+      "schemaErrors": 0,
+      "pageErrors": 0,
+      "failedAssets": 0
+    }
+  },
+  "backupRecord": "deploy/backup-verification.json",
+  "backupOfflineTests": 20,
+  "sourceMainSchemaReset": false,
+  "defaultDesign": "R03",
+  "designApproval": "existing R03 main pages selected; new management forms not user-approved as final visuals",
+  "notExecuted": [
+    "positive real refund channel FAILED recovery",
+    "new lifecycle failure-finally branch",
+    "Docker/Linux runtime",
+    "Railway public deployment",
+    "long-term availability",
+    "formal performance acceptance"
+  ]
+}

@@ -1,4 +1,6 @@
 .env
 private/
 backups/
+backup-work/
+recoveries/
 images.lock.json

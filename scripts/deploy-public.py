@@ -6,7 +6,6 @@ All mutations are explicit subcommands. Existing secrets, business data and pass
 """
 import argparse
 import datetime as dt
-import gzip
 import hashlib
 import importlib.util
 import ipaddress
@@ -22,6 +21,9 @@ import sys
 from types import SimpleNamespace
 from urllib.parse import urlparse
 import uuid
+from backup_bundle import (BackupError, canonical, extract_media, file_hash, integrity_key, make_bundle,
+                           no_symlink_ancestors, private_dir, publish_bundle, require, unpack_sql, verify_bundle)
+from backup_database import MysqlDatabase, SCHEMA, grant_schema
 
 ROOT = Path(__file__).resolve().parents[1]
 DEPLOY = ROOT / 'deploy'
@@ -160,7 +162,7 @@ def initialize(args):
     private_write(private / 'backend.env', f'DB_PASSWORD={app_password}\nAPP_TOKEN_SECRET={token_secret}\nSANDBOX_SECRET={sandbox_secret}\n')
     # Railway's MySQL root credentials stay on its DB service. The app gets only this schema's user.
     private_write(private / 'railway-bootstrap.sql',
-        f"CREATE DATABASE IF NOT EXISTS fresh_mall CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;\nCREATE USER IF NOT EXISTS 'fresh_mall'@'%' IDENTIFIED BY '{app_password}';\nGRANT ALL PRIVILEGES ON fresh_mall.* TO 'fresh_mall'@'%';\n")
+        f"CREATE DATABASE IF NOT EXISTS fresh_mall CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;\nCREATE USER IF NOT EXISTS 'fresh_mall'@'%' IDENTIFIED BY '{app_password}';\nGRANT ALL PRIVILEGES ON {grant_schema('fresh_mall')}.* TO 'fresh_mall'@'%';\n")
     private_write(private / 'railway-app.env',
         'RAILWAY_DOCKERFILE_PATH=deploy/railway/Dockerfile\nSPRING_PROFILES_ACTIVE=showcase\nSERVER_ADDRESS=0.0.0.0\nSERVER_PORT=8080\nPORT=8080\n'
         'DB_URL=jdbc:mysql://${{MySQL.MYSQLHOST}}:${{MySQL.MYSQLPORT}}/fresh_mall?serverTimezone=UTC&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true\n'
@@ -303,63 +305,125 @@ def up(args):
     print('Compose services are healthy. Public HTTPS, browser login, cookies, business flow and backup recovery still require explicit verification from another network.')
 
 
+def compose_database(args):
+    require(args.directory == DEPLOY, 'Database operations require the real deploy/ project directory.')
+    prefix = ['docker', 'compose', '--env-file', DEPLOY / '.env', '-f', DEPLOY / 'compose.yaml', 'exec', '-T', 'db']
+    return MysqlDatabase(prefix + ['mysql', '--defaults-extra-file=/run/secrets/mysql-root.cnf'],
+                         prefix + ['mysqldump', '--defaults-extra-file=/run/secrets/mysql-root.cnf'], 'fresh_mall')
+
+
+def container(args, name):
+    ids = compose(args, 'ps', '-a', '-q', name, capture_output=True, text=True).stdout.split()
+    require(len(ids) == 1 and re.fullmatch(r'[a-f0-9]{12,64}', ids[0]), 'Expected exactly one managed Compose ' + name + ' container.')
+    identity = ids[0]
+    labels = json.loads(run(['docker', 'inspect', '--format', '{{json .Config.Labels}}', identity], capture_output=True, text=True).stdout)
+    require(labels.get('com.docker.compose.project') == load_env(args.directory)['COMPOSE_PROJECT_NAME'] and labels.get('com.docker.compose.service') == name, 'Container ownership labels do not match this deployment.')
+    state = json.loads(run(['docker', 'inspect', '--format', '{{json .State}}', identity], capture_output=True, text=True).stdout)
+    require(not state.get('Paused') and not state.get('Restarting'), 'Container is paused/restarting; no backup state change was attempted.')
+    return identity, bool(state['Running'])
+
+
 def backup(args):
+    require(args.transport == 'compose', 'Railway complete-volume export has not been executed/validated. MySQL-only exports are not complete backups; use the paired maintenance procedure in deploy/备份恢复.md.')
     require_images(args)
-    destination = args.directory / 'backups'
-    destination.mkdir(mode=0o700, exist_ok=True)
-    os.chmod(destination, 0o700)
+    require(args.pause_application, 'Complete backup requires an explicit --pause-application maintenance window.')
+    web, backend, db_container = container(args, 'web'), container(args, 'backend'), container(args, 'db')
+    require(db_container[1], 'Database must already be running; backup never changes database startup state.')
+    resume = [name for name, state in [('backend', backend), ('web', web)] if state[1]]
+    key = integrity_key(args.directory / 'private/backup-integrity.key', create=True)
     stamp = dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')
-    path = destination / f'fresh-mall-{stamp}.sql.gz'
-    temporary = path.with_suffix('.partial')
-    fd = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-    cmd = ['docker', 'compose', '--env-file', DEPLOY / '.env', '-f', DEPLOY / 'compose.yaml', 'exec', '-T', 'db',
-           'mysqldump', '--defaults-extra-file=/run/secrets/mysql-root.cnf', '--single-transaction', '--routines', '--events',
-           '--triggers', '--hex-blob', '--set-gtid-purged=OFF', '--no-tablespaces', '--databases', 'fresh_mall']
-    if args.directory != DEPLOY:
-        os.close(fd)
-        fail('Backups use the real Compose deployment only.')
-    with os.fdopen(fd, 'wb') as raw, gzip.GzipFile(fileobj=raw, mode='wb', mtime=0) as compressed:
-        proc = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        shutil.copyfileobj(proc.stdout, compressed)
-        error = proc.stderr.read()
-        if proc.wait() != 0:
-            fail('mysqldump failed; partial private file retained. Inspect database connectivity without publishing logs.')
-    temporary.replace(path)
-    private_write(path.with_suffix('.manifest.json'), json.dumps({'createdAt': stamp, 'sourceCommit': current_commit(),
-        'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'database': 'fresh_mall', 'consistency': 'single-transaction InnoDB'}, indent=2) + '\n')
-    print(f'Private logical backup written: {path}. This is not evidence of a successful restore.')
+    destination = args.directory / 'backups' / ('fresh-mall-' + stamp)
+    work = private_dir(args.directory / 'backup-work' / ('capture-' + uuid.uuid4().hex), new=True)
+    database = compose_database(args)
+    try:
+        if resume:
+            compose(args, 'stop', '--timeout', '30', *reversed(resume), capture_output=True, text=True)
+        require(not container(args, 'backend')[1] and not container(args, 'web')[1], 'Application containers did not remain stopped.')
+        with database.read_lock():
+            before = database.metadata()
+            sql, media = work / 'database.sql', private_dir(work / 'media')
+            database.dump(sql)
+            # docker cp supports stopped containers and does not follow links without -L;
+            # all copied entries are still independently validated before bundling.
+            run(['docker', 'cp', backend[0] + ':/app/media/.', media], capture_output=True, text=True)
+            metadata = {'createdAt': dt.datetime.now(dt.timezone.utc).isoformat(),
+                        'source': {'gitCommit': current_commit(), 'imageLockSha256': file_hash(args.directory / 'images.lock.json'),
+                                   'publicOrigin': load_env(args.directory)['PUBLIC_ORIGIN']},
+                        'database': before, 'consistency': {'applicationWriters': 'owned web/backend containers stopped',
+                        'database': 'global read lock across SQL/metadata/media copy', 'mediaScopes': ['product', 'private', 'review-public']}}
+            manifest = make_bundle(work / 'bundle', sql, media, metadata, key)
+            require(database.metadata() == before and not container(args, 'backend')[1] and not container(args, 'web')[1], 'Source changed during capture; partial bundle not accepted.')
+            publish_bundle(work / 'bundle', destination)
+        print(json.dumps({'status': 'COMPLETE_BUNDLE_VERIFIED_NOT_RESTORED', 'bundle': str(destination), 'mediaFiles': len(manifest['mediaFiles']), 'mainDataChanged': False}))
+    finally:
+        if resume:
+            compose(args, 'start', *resume, capture_output=True, text=True)
 
 
 def restore(args):
-    require_images(args)
-    path = args.backup.resolve()
-    if not path.is_file() or not path.name.endswith('.sql.gz'):
-        fail('Select an existing private .sql.gz backup.')
-    if args.confirm_empty_database != 'fresh_mall':
-        fail('Restore requires --confirm-empty-database fresh_mall and a database with zero tables.')
-    manifest = path.with_suffix('.manifest.json')
-    if not manifest.exists() or json.loads(manifest.read_text())['sha256'] != hashlib.sha256(path.read_bytes()).hexdigest():
-        fail('Backup manifest missing or checksum mismatch. Nothing was restored or stopped.')
-    compose(args, 'stop', 'web', 'backend')
-    compose(args, 'up', '-d', '--wait', '--wait-timeout', '180', 'db')
-    args.transport = 'compose'
-    count = remote_mysql(args, "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema='fresh_mall';")
-    if count != '0':
-        fail('Restore refused: fresh_mall has tables. Services remain stopped. No data was deleted or imported; use a separate fresh deployment for recovery.')
-    with gzip.open(path, 'rt') as handle:
-        remote_mysql(args, handle.read())
-    print('Logical backup imported into an empty schema. Review migration compatibility and recovered data before explicitly starting backend/web.')
+    require(args.transport == 'compose', 'Railway paired restore transport is not yet validated. No resource, database or volume was changed.')
+    require(args.confirm_isolated_schema == args.schema and SCHEMA.fullmatch(args.schema), 'Restore needs a matching explicit fresh_mall_restore_<unique> target, never fresh_mall.')
+    manifest = verify_bundle(args.backup, integrity_key(args.directory / 'private/backup-integrity.key'))
+    database = compose_database(args)
+    directory = no_symlink_ancestors(args.recovery_directory)
+    media = no_symlink_ancestors(args.media_directory)
+    require(not directory.exists() and directory.parent == args.directory / 'recoveries' and media == directory / 'media', 'Select a new deploy/recoveries/<unique>/ directory and its empty media/ child.')
+    private_dir(directory, new=True)
+    record = {'status': 'RESTORE_IN_PROGRESS', 'schema': args.schema, 'mediaDirectory': str(media), 'mainServicesStopped': False}
+    temporary_cnf = None
+    try:
+        database.new_schema(args.schema)
+        user, password = 'fmrec_' + secrets.token_hex(8), secrets.token_hex(24)
+        database.query("CREATE USER '" + user + "'@'%' IDENTIFIED BY '" + password + "'; GRANT ALL PRIVILEGES ON " + grant_schema(args.schema) + ".* TO '" + user + "'@'%';", server=True)
+        cnf = directory / 'mysql-recovery.cnf'
+        private_write(cnf, '[client]\nuser=' + user + '\npassword=' + password + '\ndefault-character-set=utf8mb4\n')
+        db_container = container(args, 'db')
+        require(db_container[1], 'Owned database container is not running.')
+        temporary_cnf = '/tmp/fresh-mall-recovery-' + uuid.uuid4().hex + '.cnf'
+        run(['docker', 'cp', cnf, db_container[0] + ':' + temporary_cnf], capture_output=True, text=True)
+        prefix = ['docker', 'compose', '--env-file', DEPLOY / '.env', '-f', DEPLOY / 'compose.yaml', 'exec', '-T', 'db']
+        run(prefix + ['chmod', '600', temporary_cnf], capture_output=True, text=True)
+        target = MysqlDatabase(prefix + ['mysql', '--defaults-extra-file=' + temporary_cnf],
+                               prefix + ['mysqldump', '--defaults-extra-file=' + temporary_cnf], args.schema, root_client=database.root_client)
+        sql = directory / 'restore.sql'
+        unpack_sql(args.backup, sql)
+        extract_media(args.backup, media, manifest)
+        target.import_sql(sql)
+        target.verify_restored(manifest, directory)
+        private_write(directory / 'database.env.json', canonical({'DB_USERNAME': user, 'DB_PASSWORD': password, 'DB_SCHEMA': args.schema, 'APP_TOKEN_SECRET': secrets.token_hex(32), 'SANDBOX_SECRET': secrets.token_hex(32)}).decode())
+        record.update(status='RESTORED_DATABASE_MEDIA_VERIFIED_NOT_STARTED', tables=len(manifest['database']['tables']), mediaFiles=len(manifest['mediaFiles']),
+                      sqlRoundTripSha256=manifest['sql']['uncompressedSha256'], migrationVersions=[row['version'] for row in manifest['database']['migrations']])
+    except Exception:
+        record['status'] = 'FAILED_ISOLATED_TARGET_RETAINED'
+        raise
+    finally:
+        cleanup_error = None
+        if temporary_cnf:
+            # Only this invocation's unpredictable, exact temporary filename.
+            try:
+                compose(args, 'exec', '-T', 'db', 'rm', '-f', temporary_cnf, capture_output=True, text=True)
+            except (subprocess.SubprocessError, OSError) as error:
+                cleanup_error = error
+                record['status'] = 'FAILED_TEMP_RECOVERY_CREDENTIAL_CLEANUP'
+        private_write(directory / 'recovery.json', canonical(record).decode())
+        if cleanup_error:
+            raise BackupError('Temporary scoped recovery credential cleanup failed. Private failure record and isolated target retained; do not start or publish them.') from cleanup_error
+    print(json.dumps(record))
 
 
 def main():
+    os.umask(0o077)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--directory', type=Path, default=DEPLOY, help='Offline preparation output; Docker commands require the default deploy/ directory.')
     sub = parser.add_subparsers(dest='command', required=True)
     init = sub.add_parser('init')
     init.add_argument('--origin', required=True)
     init.add_argument('--email', required=True)
-    for name in ['check', 'lock-images', 'up', 'status', 'credentials', 'backup']:
+    for name in ['check', 'lock-images', 'up', 'status', 'credentials']:
         sub.add_parser(name)
+    capture = sub.add_parser('backup')
+    capture.add_argument('--transport', choices=['compose', 'railway'], default='compose')
+    capture.add_argument('--pause-application', action='store_true')
     seed = sub.add_parser('seed')
     seed.add_argument('--transport', choices=['compose', 'railway'], default='compose')
     seed.add_argument('--project')
@@ -369,9 +433,15 @@ def main():
     bootstrap.add_argument('--service', default='MySQL')
     recovery = sub.add_parser('restore')
     recovery.add_argument('backup', type=Path)
-    recovery.add_argument('--confirm-empty-database', required=True)
+    recovery.add_argument('--transport', choices=['compose', 'railway'], default='compose')
+    recovery.add_argument('--schema', required=True)
+    recovery.add_argument('--confirm-isolated-schema', required=True)
+    recovery.add_argument('--recovery-directory', required=True, type=Path)
+    recovery.add_argument('--media-directory', required=True, type=Path)
     args = parser.parse_args()
     args.directory = args.directory.resolve()
+    if args.command == 'restore':
+        args.recovery_directory = no_symlink_ancestors(args.recovery_directory)
     handlers = {'init': initialize, 'check': check_files, 'lock-images': lock_images, 'up': up,
                 'seed': import_seed, 'railway-bootstrap': bootstrap_railway, 'backup': backup, 'restore': restore}
     try:
@@ -382,6 +452,8 @@ def main():
             compose(args, 'ps')
         else:
             handlers[args.command](args)
+    except BackupError as error:
+        fail(str(error))
     except subprocess.CalledProcessError:
         fail('External command failed. No secret output was printed; inspect the target service privately before retrying.')
 
