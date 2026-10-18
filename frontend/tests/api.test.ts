@@ -24,9 +24,9 @@ function deferred<T>() {
 }
 
 describe('canonical contract', () => {
-  it('covers all 94 unique operations without claiming implementation', () => {
-    expect(operations).toHaveLength(94);
-    expect(new Set(operations.map(operation => operation.operationId)).size).toBe(94);
+  it('covers all 95 unique operations without claiming implementation', () => {
+    expect(operations).toHaveLength(95);
+    expect(new Set(operations.map(operation => operation.operationId)).size).toBe(95);
     expect(operations.every(operation => ['CONTRACT_ONLY', 'IMPLEMENTED_DEMO'].includes(operation.implementationStatus))).toBe(true);
   });
   it('uses typed paths including dynamic path parameters and real envelope data', async () => {

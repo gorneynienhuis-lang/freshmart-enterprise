@@ -1,5 +1,5 @@
 {
-  "source": "contracts/examples/operation-manifest.json v0.2.0",
+  "source": "contracts/examples/operation-manifest.json v0.2.1",
   "rules": [
     {
       "method": "GET",
@@ -693,6 +693,13 @@
       "path": "/api/v1/media/reviews/{mediaId}/content",
       "roles": [
         "GUEST"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders/{orderId}/cancellation-requests",
+      "roles": [
+        "MEMBER"
       ]
     }
   ]

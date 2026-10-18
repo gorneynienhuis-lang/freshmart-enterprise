@@ -1244,7 +1244,7 @@ export interface paths {
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 SERVICE范围也包括本人实际获派的取消协助请求关联订单，不能查询或取消全店订单；其他角色和原始状态约束不变。
          */
         get: operations["listAdminOrders"];
         put?: never;
@@ -1268,7 +1268,7 @@ export interface paths {
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 SERVICE范围也包括本人实际获派的取消协助请求关联订单，不能查询或取消全店订单；其他角色和原始状态约束不变。
          */
         get: operations["getAdminOrder"];
         put?: never;
@@ -1300,7 +1300,7 @@ export interface paths {
          *
          *     SERVICE不得处理本人购买的订单；职责分离按账号主体而非当前选择角色判断。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 SERVICE范围也包括本人实际获派的取消协助请求关联订单，不能查询或取消全店订单；其他角色和原始状态约束不变。
          */
         post: operations["cancelOrderAsService"];
         delete?: never;
@@ -2257,6 +2257,26 @@ export interface paths {
         get: operations["readReviewMedia"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/orders/{orderId}/cancellation-requests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * 会员申请发货前订单取消协助
+         * @description 本人尚未发货订单可请求客服协助。校验订单version并锁定订单，同单至多一个OPEN；排除买家本人后按OPEN工作量分派ACTIVE SERVICE，无客服则409回滚。创建请求增加订单version，不改变订单状态、金额、库存或退款，也不冻结履约。仅获派客服取得该订单的脱敏读取和合法取消范围；普通取消、超时关闭或成功发货均将OPEN请求置RESOLVED。Idempotency-Key必需，重复请求不得分派两次。
+         */
+        post: operations["requestOrderCancellationSupport"];
         delete?: never;
         options?: never;
         head?: never;
@@ -3503,6 +3523,11 @@ export interface components {
             allowedActions: ("PAY" | "CANCEL" | "TOP_UP" | "APPLY_AFTERSALE" | "REVIEW")[];
             /** @example null */
             deliveryReceiptCode: string | null;
+            /**
+             * @description 最新取消协助记录；财务投影不提供原始理由。旧记录/无请求可为空或省略。
+             * @example null
+             */
+            cancellationSupport?: components["schemas"]["CancellationSupport"] | null;
         };
         OrderStatus: {
             /**
@@ -4503,6 +4528,11 @@ export interface components {
              * @example []
              */
             allowedActions: "CANCEL"[];
+            /**
+             * @description 最新取消协助记录；财务投影不提供原始理由。旧记录/无请求可为空或省略。
+             * @example null
+             */
+            cancellationSupport?: components["schemas"]["CancellationSupport"] | null;
         };
         PickTask: {
             /**
@@ -7287,6 +7317,58 @@ export interface components {
             differenceAmount: number;
             /** @example 缺少对应渠道凭证 */
             description: string;
+        };
+        /** @description 本人订单的取消协助请求。客服按实际获派记录取得最小范围；不公开内部客服身份。 */
+        CancellationSupport: {
+            /**
+             * @description 对外字符串ID；不将bigint作为JSON数字传输
+             * @example order-1
+             */
+            requestId: string;
+            /**
+             * @description 对外字符串ID；不将bigint作为JSON数字传输
+             * @example order-1
+             */
+            orderId: string;
+            /**
+             * @example OPEN
+             * @enum {string}
+             */
+            status: "OPEN" | "RESOLVED";
+            /** @example 需要客服协助取消尚未发货订单 */
+            reason: string;
+            /**
+             * Format: date-time
+             * @description RFC3339带时区；业务日界以Asia/Shanghai解释
+             * @example 2026-10-18T13:00:00+08:00
+             */
+            requestedAt: string;
+            /** @example null */
+            resolvedAt: string | null;
+        };
+        CancellationSupportEnvelope: {
+            /**
+             * @example 0
+             * @constant
+             */
+            code: 0;
+            /**
+             * @example ok
+             * @constant
+             */
+            message: "ok";
+            data: components["schemas"]["CancellationSupport"];
+            /**
+             * @description 对外字符串ID；不将bigint作为JSON数字传输
+             * @example trace-demo-001
+             */
+            traceId: string;
+            /**
+             * Format: date-time
+             * @description RFC3339带时区；业务日界以Asia/Shanghai解释
+             * @example 2026-10-18T13:00:00+08:00
+             */
+            timestamp: string;
         };
     };
     responses: {
@@ -14341,6 +14423,67 @@ export interface operations {
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
             503: components["responses"]["StorageUnavailable"];
+        };
+    };
+    requestOrderCancellationSupport: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description 主体+路由+键持久化幂等；相同键同请求返回原结果，不同请求体409；建议UUID，保留至少24小时。 */
+                "Idempotency-Key": components["parameters"]["IdempotencyKey"];
+            };
+            path: {
+                /** @example orderId-1 */
+                orderId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                /**
+                 * @example {
+                 *       "reason": "需要客服协助取消尚未发货订单",
+                 *       "version": 1
+                 *     }
+                 */
+                "application/json": components["schemas"]["ReasonVersionRequest"];
+            };
+        };
+        responses: {
+            /** @description 创建真实取消协助并返回记录；不代表订单已取消。 */
+            201: {
+                headers: {
+                    "X-Trace-Id"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    /**
+                     * @example {
+                     *       "code": 0,
+                     *       "message": "ok",
+                     *       "data": {
+                     *         "requestId": "cancel-help-1",
+                     *         "orderId": "order-1",
+                     *         "status": "OPEN",
+                     *         "reason": "需要客服协助取消尚未发货订单",
+                     *         "requestedAt": "2026-10-18T14:00:00+08:00",
+                     *         "resolvedAt": null
+                     *       },
+                     *       "traceId": "trace-demo-001",
+                     *       "timestamp": "2026-10-18T13:00:00+08:00"
+                     *     }
+                     */
+                    "application/json": components["schemas"]["CancellationSupportEnvelope"];
+                };
+            };
+            400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
+            404: components["responses"]["NotFound"];
+            409: components["responses"]["Conflict"];
+            422: components["responses"]["Unprocessable"];
+            429: components["responses"]["RateLimited"];
+            500: components["responses"]["InternalError"];
         };
     };
 }

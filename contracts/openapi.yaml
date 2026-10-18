@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "fresh-mall 企业级生鲜商城接口契约",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "description": "2026-10-18课程生鲜商城接口契约；以各operation的x-implementation-status区分已实现与尚未实现，示例不代表验收结果。BASELINE.md规定业务基线，CNY整数分、整数克、字符串ID，业务时区Asia/Shanghai。JSON语法为YAML1.2子集。v0.1.2新增员工治理五操作实装标记与独立showcase部署环境，业务状态和已有请求/响应结构不变。IMPLEMENTED_DEMO表示存在真实数据库实现，运行与部署验收以docs/evidence为准；showcase始终为合成数据和沙箱支付。"
   },
   "servers": [
@@ -7785,7 +7785,7 @@
           "admin"
         ],
         "summary": "按岗位查看订单",
-        "description": "按岗位查看订单\n\n返回脱敏联系信息；OPERATOR运营只读、FINANCE资金核对只读、SERVICE处理客服流程。PICKER/COURIER仅通过各自任务接口取最小数据。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "按岗位查看订单\n\n返回脱敏联系信息；OPERATOR运营只读、FINANCE资金核对只读、SERVICE处理客服流程。PICKER/COURIER仅通过各自任务接口取最小数据。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 SERVICE范围也包括本人实际获派的取消协助请求关联订单，不能查询或取消全店订单；其他角色和原始状态约束不变。",
         "security": [
           {
             "bearerAuth": []
@@ -7989,7 +7989,7 @@
           "admin"
         ],
         "summary": "后台脱敏订单详情",
-        "description": "后台脱敏订单详情\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "后台脱敏订单详情\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 SERVICE范围也包括本人实际获派的取消协助请求关联订单，不能查询或取消全店订单；其他角色和原始状态约束不变。",
         "security": [
           {
             "bearerAuth": []
@@ -8167,7 +8167,7 @@
           "admin"
         ],
         "summary": "客服执行发货前取消",
-        "description": "客服执行发货前取消\n\n仅PENDING_PAY/PAID/PICKING/READY_TO_SHIP，DELIVERING不允许普通取消。审计操作人和原因；出库后取消必须后续质检回库才恢复可售。异步退款不可由客服直接记成功。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE不得处理本人购买的订单；职责分离按账号主体而非当前选择角色判断。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。",
+        "description": "客服执行发货前取消\n\n仅PENDING_PAY/PAID/PICKING/READY_TO_SHIP，DELIVERING不允许普通取消。审计操作人和原因；出库后取消必须后续质检回库才恢复可售。异步退款不可由客服直接记成功。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。\n\nSERVICE不得处理本人购买的订单；职责分离按账号主体而非当前选择角色判断。\n\nDemo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 SERVICE范围也包括本人实际获派的取消协助请求关联订单，不能查询或取消全店订单；其他角色和原始状态约束不变。",
         "security": [
           {
             "bearerAuth": []
@@ -14571,6 +14571,175 @@
         "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
         "x-response-body": "BINARY_IMAGE"
       }
+    },
+    "/api/v1/orders/{orderId}/cancellation-requests": {
+      "post": {
+        "operationId": "requestOrderCancellationSupport",
+        "tags": [
+          "orders"
+        ],
+        "summary": "会员申请发货前订单取消协助",
+        "description": "本人尚未发货订单可请求客服协助。校验订单version并锁定订单，同单至多一个OPEN；排除买家本人后按OPEN工作量分派ACTIVE SERVICE，无客服则409回滚。创建请求增加订单version，不改变订单状态、金额、库存或退款，也不冻结履约。仅获派客服取得该订单的脱敏读取和合法取消范围；普通取消、超时关闭或成功发货均将OPEN请求置RESOLVED。Idempotency-Key必需，重复请求不得分派两次。",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-roles": [
+          "MEMBER"
+        ],
+        "x-implementation-status": "IMPLEMENTED_DEMO",
+        "x-request-body": "JSON_SCHEMA",
+        "x-error-codes": {
+          "VALIDATION_ERROR": {
+            "httpStatus": 400,
+            "code": 1001
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
+          },
+          "NOT_FOUND": {
+            "httpStatus": 404,
+            "code": 1004
+          },
+          "VERSION_CONFLICT": {
+            "httpStatus": 409,
+            "code": 1009
+          },
+          "INSUFFICIENT_STOCK": {
+            "httpStatus": 422,
+            "code": 1101
+          },
+          "RATE_LIMITED": {
+            "httpStatus": 429,
+            "code": 1029
+          },
+          "INTERNAL_ERROR": {
+            "httpStatus": 500,
+            "code": 1050
+          },
+          "SLOT_UNAVAILABLE": {
+            "httpStatus": 422,
+            "code": 1202
+          },
+          "QUOTE_EXPIRED": {
+            "httpStatus": 409,
+            "code": 1203
+          },
+          "IDEMPOTENCY_CONFLICT": {
+            "httpStatus": 409,
+            "code": 1008
+          },
+          "INVALID_STATE": {
+            "httpStatus": 409,
+            "code": 1007
+          }
+        },
+        "parameters": [
+          {
+            "name": "orderId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "对外字符串ID；不将bigint作为JSON数字传输",
+              "example": "orderId-1",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "example": "orderId-1"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "responses": {
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "422": {
+            "$ref": "#/components/responses/Unprocessable"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "201": {
+            "description": "创建真实取消协助并返回记录；不代表订单已取消。",
+            "headers": {
+              "X-Trace-Id": {
+                "schema": {
+                  "type": "string",
+                  "description": "对外字符串ID；不将bigint作为JSON数字传输",
+                  "example": "trace-demo-001",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9_-]+$"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancellationSupportEnvelope"
+                },
+                "example": {
+                  "code": 0,
+                  "message": "ok",
+                  "data": {
+                    "requestId": "cancel-help-1",
+                    "orderId": "order-1",
+                    "status": "OPEN",
+                    "reason": "需要客服协助取消尚未发货订单",
+                    "requestedAt": "2026-10-18T14:00:00+08:00",
+                    "resolvedAt": null
+                  },
+                  "traceId": "trace-demo-001",
+                  "timestamp": "2026-10-18T13:00:00+08:00"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReasonVersionRequest"
+              },
+              "example": {
+                "reason": "需要客服协助取消尚未发货订单",
+                "version": 1
+              }
+            }
+          }
+        },
+        "x-permissions": [
+          "order.self.cancel"
+        ],
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE"
+      }
     }
   },
   "components": {
@@ -17278,6 +17447,18 @@
               }
             ],
             "example": null
+          },
+          "cancellationSupport": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CancellationSupport"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "最新取消协助记录；财务投影不提供原始理由。旧记录/无请求可为空或省略。",
+            "example": null
           }
         },
         "required": [
@@ -19408,6 +19589,18 @@
             "maxItems": 100,
             "example": [],
             "description": "仅当前角色当前数据范围可执行动作；OPERATOR/FINANCE通常为空"
+          },
+          "cancellationSupport": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CancellationSupport"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "最新取消协助记录；财务投影不提供原始理由。旧记录/无请求可为空或省略。",
+            "example": null
           }
         },
         "required": [
@@ -24735,6 +24928,111 @@
             "example": "缺少对应渠道凭证"
           }
         }
+      },
+      "CancellationSupport": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "description": "对外字符串ID；不将bigint作为JSON数字传输",
+            "example": "order-1",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "orderId": {
+            "type": "string",
+            "description": "对外字符串ID；不将bigint作为JSON数字传输",
+            "example": "order-1",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "OPEN",
+              "RESOLVED"
+            ],
+            "example": "OPEN"
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "example": "需要客服协助取消尚未发货订单"
+          },
+          "requestedAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-10-18T13:00:00+08:00",
+            "description": "RFC3339带时区；业务日界以Asia/Shanghai解释"
+          },
+          "resolvedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "example": "2026-10-18T13:00:00+08:00",
+                "description": "RFC3339带时区；业务日界以Asia/Shanghai解释"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": null
+          }
+        },
+        "required": [
+          "requestId",
+          "orderId",
+          "status",
+          "reason",
+          "requestedAt",
+          "resolvedAt"
+        ],
+        "description": "本人订单的取消协助请求。客服按实际获派记录取得最小范围；不公开内部客服身份。"
+      },
+      "CancellationSupportEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "type": "integer",
+            "const": 0,
+            "example": 0
+          },
+          "message": {
+            "type": "string",
+            "const": "ok",
+            "example": "ok"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CancellationSupport"
+          },
+          "traceId": {
+            "type": "string",
+            "description": "对外字符串ID；不将bigint作为JSON数字传输",
+            "example": "trace-demo-001",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-10-18T13:00:00+08:00",
+            "description": "RFC3339带时区；业务日界以Asia/Shanghai解释"
+          }
+        },
+        "required": [
+          "code",
+          "message",
+          "data",
+          "traceId",
+          "timestamp"
+        ]
       }
     },
     "parameters": {

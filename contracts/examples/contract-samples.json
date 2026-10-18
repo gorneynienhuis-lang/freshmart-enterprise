@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "notice": "固定契约样例，非真实业务记录，非测试通过声明",
   "operations": {
     "getCsrfToken": {
@@ -3716,6 +3716,29 @@
       "method": "GET",
       "path": "/api/v1/media/reviews/{mediaId}/content",
       "response": "<binary image bytes>"
+    },
+    "requestOrderCancellationSupport": {
+      "method": "POST",
+      "path": "/api/v1/orders/{orderId}/cancellation-requests",
+      "request": {
+        "reason": "需要客服协助取消尚未发货订单",
+        "version": 1
+      },
+      "requestContentType": "application/json",
+      "response": {
+        "code": 0,
+        "message": "ok",
+        "data": {
+          "requestId": "cancel-help-1",
+          "orderId": "order-1",
+          "status": "OPEN",
+          "reason": "需要客服协助取消尚未发货订单",
+          "requestedAt": "2026-10-18T14:00:00+08:00",
+          "resolvedAt": null
+        },
+        "traceId": "trace-demo-001",
+        "timestamp": "2026-10-18T13:00:00+08:00"
+      }
     }
   }
 }

@@ -76,7 +76,7 @@ function validate(schema,value,where='$',depth=0){
 }
 function testExample(schema,value,where){examples++;try{failures.push(...validate(schema,value,where));}catch(e){failures.push(where+': '+e.message);}}
 check(doc.openapi==='3.1.0','OpenAPI version must be 3.1.0');
-check(doc.info?.version==='0.2.0','Expected contract version 0.2.0');
+check(doc.info?.version==='0.2.1','Expected contract version 0.2.1');
 check(doc['x-contract-status']==='IMPLEMENTATION_IN_PROGRESS','Implementation boundary missing');
 walk(doc,(value,where)=>{if(value.$ref){refs++;try{resolve(value.$ref)}catch(e){failures.push(where+': '+e.message)}}});
 walk(doc.components.schemas,(s,where)=>{

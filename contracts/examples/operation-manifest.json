@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "implementationStatus": "IMPLEMENTATION_IN_PROGRESS",
   "operations": [
     {
@@ -1167,6 +1167,18 @@
       ],
       "permissions": [
         "catalog.read"
+      ],
+      "implementationStatus": "IMPLEMENTED_DEMO"
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/orders/{orderId}/cancellation-requests",
+      "operationId": "requestOrderCancellationSupport",
+      "roles": [
+        "MEMBER"
+      ],
+      "permissions": [
+        "order.self.cancel"
       ],
       "implementationStatus": "IMPLEMENTED_DEMO"
     }
