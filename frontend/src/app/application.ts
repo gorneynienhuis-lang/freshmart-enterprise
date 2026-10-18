@@ -169,6 +169,7 @@ export class Application {
         for (const a of qa<HTMLAnchorElement>(this.root, 'a')) {
             const txt = a.textContent?.trim() ?? '';
             const aria = a.getAttribute('aria-label') ?? '';
+            const isAccountNavLink = Boolean(a.closest('nav[aria-label="账户"]'));
             if (aria.includes('首页') || txt === '首页')
                 a.href = '#/';
             else if (/购物车/.test(txt)) {
@@ -183,20 +184,20 @@ export class Application {
                     badge.textContent = String(this.cart?.items.length ?? 0);
             }
             else if (['你好，请登录', '登录'].includes(txt)) {
-                if (user) {
+                if (user && isAccountNavLink) {
                     a.textContent = `${user.displayName} · 退出`;
                     a.onclick = e => { e.preventDefault(); void this.run(async () => { await service.auth.logout(); this.cart = null; this.quote = null; this.addressId = ''; this.tell('已安全退出'); this.navigate('/'); await this.home(); }); };
                 }
-                else
+                else if (!user)
                     a.onclick = e => { e.preventDefault(); this.login(false); };
             }
             else if (['免费注册', '注册'].includes(txt)) {
-                if (user) {
+                if (user && isAccountNavLink) {
                     a.textContent = '账户 / 切换';
                     a.onclick = e => { e.preventDefault(); this.login(false); };
                     const security = document.createElement('a'); security.textContent = '修改密码'; security.href = '#/account/password'; a.after(security);
                 }
-                else
+                else if (!user)
                     a.onclick = e => { e.preventDefault(); this.login(true); };
             }
             else if (txt === '我的订单')
@@ -216,6 +217,20 @@ export class Application {
             }
             else if (a.getAttribute('href') === '#' && !a.closest('[data-key]'))
                 a.onclick = e => { e.preventDefault(); this.tell('配送、称重及售后规则详见结算页；本 Demo 先开放购物与履约闭环。'); };
+        }
+        const welcomeCard = q<HTMLElement>(this.root, '.fm-hero-aside > div:first-child');
+        if (welcomeCard) {
+            welcomeCard.classList.add('fm-welcome-card');
+            const heading = q<HTMLElement>(welcomeCard, ':scope > div:first-child > span:first-child > span:first-child');
+            const note = q<HTMLElement>(welcomeCard, ':scope > div:first-child > span:first-child > span:nth-child(2)');
+            const links = qa<HTMLAnchorElement>(welcomeCard, ':scope > div:first-child > div > a');
+            if (user) {
+                welcomeCard.dataset.authenticated = 'true';
+                if (heading) heading.textContent = `欢迎回来，${user.displayName}`;
+                if (note) note.textContent = user.roles.includes('MEMBER') ? '会员价与订单随时可查' : `当前身份：${roleNames[user.roles[0] ?? ''] ?? '员工账户'}`;
+                if (links[0]) { links[0].textContent = user.roles.includes('MEMBER') ? '我的订单' : '进入工作台'; links[0].href = user.roles.includes('MEMBER') ? '#/orders' : '#/operations'; links[0].onclick = null; }
+                if (links[1]) { links[1].textContent = '账户设置'; links[1].href = '#/account/password'; links[1].onclick = null; }
+            }
         }
         for (const form of qa<HTMLFormElement>(this.root, 'header form'))
             form.onsubmit = e => { e.preventDefault(); const term = q<HTMLInputElement>(form, 'input')?.value.trim() ?? ''; this.navigate('/products' + (term ? '?keyword=' + encodeURIComponent(term) : '')); };
@@ -405,7 +420,7 @@ export class Application {
         if (d.dataset.kind === 'payment') q(d, ':scope > p')?.classList.add('r04-payment-overview');
         if (d.dataset.kind === 'address') q(d, 'form')?.classList.add('r04-address-form');
     }
-    private login(register: boolean) { const d = this.dialog(register ? '注册会员' : '登录 / 切换账户'); const f = document.createElement('form'); f.append(input('手机号', 'phone', '', 'tel'), el('br'), input('密码', 'password', '', 'password'), el('br')); if (register)
+    private login(register: boolean) { const d = this.dialog(register ? '注册会员' : '登录 / 切换账户'); d.classList.add('fm-account-dialog'); d.dataset.kind = 'account'; const intro = el('p', register ? '注册东华社区账户，享受会员价与预约配送。' : '登录后继续选购食材、预约配送并查看订单。'); intro.className = 'fm-account-intro'; const f = document.createElement('form'); f.append(input('手机号', 'phone', '', 'tel'), el('br'), input('密码', 'password', '', 'password')); if (register)
         f.append(input('显示名称', 'displayName'), el('br')); const submit = button(register ? '注册并登录' : '登录', () => { }); submit.type = 'submit'; f.append(submit); const result = el('p'); result.setAttribute('role', 'alert'); f.append(result); f.onsubmit = e => { e.preventDefault(); submit.disabled = true; const data = new FormData(f); const body = { phone: String(data.get('phone')), password: String(data.get('password')) }; void (async () => { try {
         if (register)
             await service.auth.register({ ...body, displayName: String(data.get('displayName')) });
@@ -430,7 +445,7 @@ export class Application {
     }
     finally {
         submit.disabled = false;
-    } })(); }; d.append(f, el('p', '东华大学社区生鲜 · 会员与员工使用各自账户登录。密码至少 12 位。')); }
+    } })(); }; d.append(intro, f, el('p', '东华大学社区生鲜 · 会员与员工使用各自账户登录。密码至少 12 位。')); }
     private changePassword() {
         const d = this.dialog('修改登录密码');
         d.classList.add('fm-security-dialog');
