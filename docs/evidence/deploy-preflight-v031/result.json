@@ -1,0 +1,21 @@
+{
+  "status": "OFFLINE_PREPARED",
+  "recordedAt": "2026-10-18T08:49:34Z",
+  "sourceCommit": "482c16c00e50c435bbdcaa1a7a184f7b2e3b5d40",
+  "origin": "https://dhu-freshmart.invalid",
+  "email": "demo@example.invalid",
+  "checks": [
+    "exact HTTPS origin",
+    "private file modes",
+    "seven independent role accounts",
+    "forced first password change",
+    "six employee markers",
+    "public catalogue URLs",
+    "synthetic seed generation without database mutation"
+  ],
+  "cloudResourcesCreated": false,
+  "databaseChanged": false,
+  "publicUrlCreated": false,
+  "secretsIncluded": false,
+  "scope": "Offline deployment preparation only; Docker/Linux/Railway runtime and public HTTPS remain unverified."
+}
