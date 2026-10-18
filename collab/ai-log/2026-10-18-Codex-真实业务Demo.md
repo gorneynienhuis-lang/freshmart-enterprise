@@ -7,3 +7,5 @@ Codex并行分工：主代理实现订单/库存/支付/履约/退款任务并�
 实际发现并修复：测试配送时段fixture与唯一窗口冲突；测试沙箱缺profile被正确拒绝；售后与订单记录类型导入歧义；客服资源范围过宽、财务地区暴露；重复渠道事件当前读；全缺货取消的slot/SKU锁序；真实MySQL TIMESTAMP(6)默认值缺精度。每类修复通过相应集成测试或真实运行核对。
 
 实际通过证据与尚未完成能力逐项记录在collab/codex/CODEX-010.md及docs/evidence/demo-runtime。沙箱签名、账号密码、token和原始凭据没有写入交接。视觉美化与最终视觉确认继续留给Claude和用户。
+
+GitHub版本管理：用户确认单仓库30天Contents读写授权后，Codex在Chrome配置fine-grained授权；用户亲自完成身份验证及本机Keychain保存。Codex完成本仓库凭据配置、推送demo/v0.1.1，并用远端提交查询和Chrome分支页面核实。实际范围、提交记录与干净源码构建证据见CODEX-011；未修改main或创建额外权限。
