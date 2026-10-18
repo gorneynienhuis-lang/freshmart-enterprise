@@ -17,7 +17,9 @@
     "dev": "npm run import:design && vite --host 127.0.0.1 --port 5173 --strictPort",
     "build": "npm run import:design && tsc --noEmit && vite build",
     "preview": "vite preview",
-    "test:e2e": "node scripts/e2e-demo.mjs"
+    "test:e2e": "node scripts/e2e-demo.mjs",
+    "test:ui": "node scripts/verify-design-r04.mjs",
+    "gallery": "node ../scripts/build-design-gallery.mjs"
   },
   "dependencies": {
     "openapi-fetch": "0.17.0",

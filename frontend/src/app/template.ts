@@ -1,5 +1,8 @@
-import designs from '../generated/design.json';
-export type PageName = keyof typeof designs;
+import legacyDesigns from '../generated/design.json';
+import r04Designs from '../generated/design-r04.json';
+import { isR04Design } from './design-version';
+const selectedDesigns = () => isR04Design() ? r04Designs : legacyDesigns;
+export type PageName = keyof typeof legacyDesigns;
 export type Values = Record<string, unknown>;
 function lookup(path: string, scopes: Values[]): unknown {
     path = path.trim();
@@ -69,8 +72,9 @@ function walk(parent: Element, scopes: Values[]): void {
         walk(node, scopes);
     }
 }
-export function defaults(name: PageName): Values { return structuredClone(designs[name].defaults); }
+export function defaults(name: PageName): Values { return structuredClone(selectedDesigns()[name].defaults); }
 export function mountTemplate(root: HTMLElement, name: PageName, values: Values): void {
+    const designs = selectedDesigns();
     root.dataset.page = name;
     root.innerHTML = `<style>${designs[name].css}</style>${designs[name].template}`;
     walk(root, [values]);

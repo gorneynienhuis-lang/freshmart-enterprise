@@ -1,0 +1,482 @@
+{
+  "startedAt": "2026-10-18T05:12:52.494Z",
+  "dataSource": "real local API; anonymous new browser contexts; no mock or interception",
+  "status": "PASSED",
+  "screenshotLoadStrategy": "For screenshots only, mark existing lazy images eager and await bounded decode; real URLs and APIs unchanged.",
+  "sourceSha256": {
+    "design/r04/ASSETS.md": "ba5769f666a4ce651c2214e1477b1b94b602c0ffdf2a5a9bd29cfecfb5d38f77",
+    "design/r04/Admin.dc.html": "439898ede25dded9a7962927ea2668b6aeb6dae0a07670bfa0bf6a8e902be829",
+    "design/r04/AdminPick.dc.html": "95facbdd655dc2d16515e14dc610678632fdaea3853b5211d7e7e71d1c0b091d",
+    "design/r04/Checkout.dc.html": "432e61cc0b374ab6794786cb8cfd7536bdcc476689c4f355cb25800742fd1728",
+    "design/r04/Detail.dc.html": "d406006bc89e7a6975ecdcebac2cc6dfbc22d627e8ba5737c5c0c54d44a22673",
+    "design/r04/Home.dc.html": "e7a60c260d1986e90c9097307f65158b7ae79b18c8bc73b0d2ff386bba4c00b2",
+    "design/r04/List.dc.html": "ff47a918b2bab8510522901fb85169e9a356036ed81e301636d56604d3449ba3",
+    "design/r04/assets/r04-everyday-source.png": "6001fde542bcd5e978acec0318dbbc61d38becaf398a4b4f820e3c0a64556b99",
+    "design/r04/assets/r04-everyday.jpg": "9d4bab34893a0978158504bca7e91e1904fb883ee7fc628fc5a3ffaa0ae841b9",
+    "design/r04/assets/r04-produce-source.png": "aaa14e6d18d802d6df05de9be91f280215f2a12c1b820280df829b9636de20f6",
+    "design/r04/assets/r04-produce.jpg": "102350658403ff22e354a034505f0a7bd4e395605124fc41ed947b04e43e8143",
+    "design/r04/fragments/footer.html": "57d987fb8cf82fccca23caee2cbabf00851feea04ccac1380b02a7d885f24f2b",
+    "design/r04/fragments/header.html": "c067c57b409b8192f0973cd3a2d1c9e03af3979c757444e98967eaea5052b5f0",
+    "design/r04/fragments/product-card.html": "ab568bd950ae22e042002094ee7795b43ba1fac79298e30a4a04c55529743374",
+    "design/v2/V2-Admin.dc.html": "36a6bac382d579c29424cb6e9a71e967912ad4a741cf609e0c814f10c95e6a79",
+    "design/v2/V2-AdminPick.dc.html": "8e42b8cf392320bbc4ff2eda86b50de95f27021fee547203d2eae7eac2259541",
+    "design/v2/V2-Checkout.dc.html": "1124f28783784b24358604595840d78a1efbaca49b7853e67d4c1d9afc774902",
+    "design/v2/V2-Detail.dc.html": "2a2d1f793ce726d7f3933ef1b2be26ed1f7279bbf2e3d964ba4d39688986dec4",
+    "design/v2/V2-Home.dc.html": "70bcc4504ab4c46f29774ee751dc9347b9cfa766ae8d7de5dfdb02252bea66a6",
+    "design/v2/V2-HomeB.dc.html": "6c2e51503bfff85a338f3b92cc1ddcc18ee2794dcf981c3c061f4931aed16d10",
+    "design/v2/V2-List.dc.html": "abc49d2e9fe0205459630c630c0fe101bc8673ca24ea69454616ee4811747f6e",
+    "design/v2/assets/S007-cut.png": "ead08de40ff902b97e3ba6d9db4ecb46c0a41819fcc4b7b7b88ea313da75b5c0",
+    "design/v2/assets/S008-cut.png": "7478b04e3b11055e62e5ed436c3a22f8499b7d55acbebd25a2dd4ee06d30d277",
+    "design/v2/assets/S010-cut.png": "a00216c7575209cff77f8b4caf04ade0ae15e5022fa1d079baa457dc8ac37e81",
+    "design/v2/assets/dhu-emblem-256.png": "799e8be58f3f00be2b7effa1391daec9434612c872fe8aaacdccc826717c9f67",
+    "design/v2/assets/dhu-lockup-h.png": "23c9dc39f5a3a8a4c97557ee2dbb3db64d18bb99478cc90c3252975a5e083307",
+    "design/v2/assets/dhu-weave-on-red.png": "ef1fd0cb37be5a3e7f591e7caac930861e359232c78a5545766e185f28662c66",
+    "design/v2/assets/dhu-weave-red-fade.png": "406a125210d8c7fd7142584569d5e771d233ad3413fb970d8dc9f71de4071cfe",
+    "design/v2/assets/dhu-weave-soft.png": "882220078cb6ec47cbd56e04d34694b052142767d934ca72dcf2270020736007",
+    "design/v2/assets/dhu-weave-white.png": "80499c0ca640ede3612c46ad8bd7876b801110502d4f33c8129670cd3b22f04c",
+    "design/v2/assets/dongxiaojin-crop.jpg": "c2d0d8c3e294599355b361eec17cdbd3a08880ce29d0733b6c30af309747217c",
+    "design/v2/assets/home-r03-market-photo.jpg": "add299af2d4349697178fe276aca10deb336600ece46689394842c8a7d58724f",
+    "design/v2/assets/home-r03-market-photo.png": "cdde82d80a28194a7fec944db7aad91a021a58c4a4cbe0636ef898927c970862",
+    "design/v2/assets/home-r03-market-photo.prompt.txt": "a56ab3d2e00561655bd18154630d6054ea0a6059e86bc0a757c2149f2f9eba73",
+    "frontend/src/app/application.ts": "4c3d8812d4014d72f8ee1509009acd3b907b584ec250f570e210354afaf4ef02",
+    "frontend/src/app/template.ts": "85bba8de442afb8131db51f0c8f84997b7201da14536ce07f9ef00d02bb5864c",
+    "frontend/src/app/design-version.ts": "4db42ababf20749d1f54684e4f98e26cc010b0cff3665e1bee99d058bfb9756b",
+    "frontend/src/main.tsx": "47568f7240e8e7b92d240982f7d729069d9b11faa0c1b938e8df4a65324a7fe6",
+    "frontend/src/styles/r04-foundation.css": "acfbfc0f9cb42f32dd07b3a61e1e1c057df7ff9f2e124e543dd890dd098d6cd6",
+    "frontend/src/styles/runtime-r04.css": "eb8f66ef07c2f1bf1774937c383ad7b3d8d0863217a3a18a8d266b74360aa2ae",
+    "frontend/src/generated/design.json": "4047a3a41995f034a0356aed5ba58d864cb70562fe5861e6b8acf7127a45a9c1",
+    "frontend/src/generated/design-r04.json": "8b08d8f71e3608d0c73f7d5c80f1361b279fc2e1925bce6a511acbaa72f4c7fc"
+  },
+  "pages": [
+    {
+      "name": "home",
+      "width": 1440,
+      "version": "r04",
+      "url": "http://127.0.0.1:5173/",
+      "design": "r04",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "title": "把新鲜，带回校园。",
+      "brokenImages": [],
+      "overflowElements": []
+    },
+    {
+      "name": "list",
+      "width": 1440,
+      "version": "r04",
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01&sort=PRICE_DESC",
+      "design": "r04",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "title": "时令蔬菜",
+      "brokenImages": [],
+      "overflowElements": []
+    },
+    {
+      "name": "detail",
+      "width": 1440,
+      "version": "r04",
+      "url": "http://127.0.0.1:5173/#/product/S001",
+      "design": "r04",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "title": "沙瓤番茄",
+      "brokenImages": [],
+      "overflowElements": []
+    },
+    {
+      "name": "home",
+      "width": 1440,
+      "version": "r03",
+      "url": "http://127.0.0.1:5173/?ui=r03#/",
+      "design": "r03",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "title": "把新鲜，带回校园。",
+      "brokenImages": [],
+      "overflowElements": []
+    },
+    {
+      "name": "home",
+      "width": 1024,
+      "version": "r04",
+      "url": "http://127.0.0.1:5173/",
+      "design": "r04",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "title": "把新鲜，带回校园。",
+      "brokenImages": [],
+      "overflowElements": []
+    },
+    {
+      "name": "list",
+      "width": 1024,
+      "version": "r04",
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01&sort=PRICE_DESC",
+      "design": "r04",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "title": "时令蔬菜",
+      "brokenImages": [],
+      "overflowElements": []
+    },
+    {
+      "name": "detail",
+      "width": 1024,
+      "version": "r04",
+      "url": "http://127.0.0.1:5173/#/product/S001",
+      "design": "r04",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "title": "沙瓤番茄",
+      "brokenImages": [],
+      "overflowElements": []
+    }
+  ],
+  "featuredChecks": [
+    {
+      "width": 1440,
+      "cards": [
+        {
+          "slot": "0",
+          "id": "S001",
+          "name": "沙瓤番茄",
+          "price": "¥5.90",
+          "unit": "500g/份",
+          "image": "http://localhost:8080/catalog/S001.jpg",
+          "href": "#/product/S001",
+          "label": "沙瓤番茄，¥5.90，500g/份",
+          "prototypeHandler": false
+        },
+        {
+          "slot": "1",
+          "id": "S006",
+          "name": "红富士苹果",
+          "price": "¥16.90",
+          "unit": "4个装",
+          "image": "http://localhost:8080/catalog/S006.jpg",
+          "href": "#/product/S006",
+          "label": "红富士苹果，¥16.90，4个装",
+          "prototypeHandler": false
+        },
+        {
+          "slot": "2",
+          "id": "S011",
+          "name": "谷物鲜鸡蛋",
+          "price": "¥13.90",
+          "unit": "10枚装",
+          "image": "http://localhost:8080/catalog/S011.jpg",
+          "href": "#/product/S011",
+          "label": "谷物鲜鸡蛋，¥13.90，10枚装",
+          "prototypeHandler": false
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "cards": [
+        {
+          "slot": "0",
+          "id": "S001",
+          "name": "沙瓤番茄",
+          "price": "¥5.90",
+          "unit": "500g/份",
+          "image": "http://localhost:8080/catalog/S001.jpg",
+          "href": "#/product/S001",
+          "label": "沙瓤番茄，¥5.90，500g/份",
+          "prototypeHandler": false
+        },
+        {
+          "slot": "1",
+          "id": "S006",
+          "name": "红富士苹果",
+          "price": "¥16.90",
+          "unit": "4个装",
+          "image": "http://localhost:8080/catalog/S006.jpg",
+          "href": "#/product/S006",
+          "label": "红富士苹果，¥16.90，4个装",
+          "prototypeHandler": false
+        },
+        {
+          "slot": "2",
+          "id": "S011",
+          "name": "谷物鲜鸡蛋",
+          "price": "¥13.90",
+          "unit": "10枚装",
+          "image": "http://localhost:8080/catalog/S011.jpg",
+          "href": "#/product/S011",
+          "label": "谷物鲜鸡蛋，¥13.90，10枚装",
+          "prototypeHandler": false
+        }
+      ]
+    }
+  ],
+  "navigationChecks": [
+    {
+      "kind": "featured",
+      "productId": "S001",
+      "url": "http://127.0.0.1:5173/#/product/S001"
+    },
+    {
+      "kind": "featured",
+      "productId": "S006",
+      "url": "http://127.0.0.1:5173/#/product/S006"
+    },
+    {
+      "kind": "featured",
+      "productId": "S011",
+      "url": "http://127.0.0.1:5173/#/product/S011"
+    },
+    {
+      "kind": "switch-r03-preserve-detail",
+      "url": "http://127.0.0.1:5173/?ui=r03#/product/S001"
+    },
+    {
+      "kind": "switch-r04-preserve-home",
+      "url": "http://127.0.0.1:5173/?ui=r04#/"
+    }
+  ],
+  "categorySortChecks": [
+    {
+      "width": 1440,
+      "categoryId": "C01",
+      "categoryName": "时令蔬菜",
+      "sort": "RECOMMENDED",
+      "heading": "时令蔬菜",
+      "buttons": [
+        {
+          "text": "综合",
+          "pressed": "true"
+        },
+        {
+          "text": "价格 ↑",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↓",
+          "pressed": "false"
+        }
+      ],
+      "productIds": [
+        "S001",
+        "S002",
+        "S003",
+        "S004",
+        "S005"
+      ],
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01"
+    },
+    {
+      "width": 1440,
+      "categoryId": "C01",
+      "categoryName": "时令蔬菜",
+      "sort": "PRICE_ASC",
+      "heading": "时令蔬菜",
+      "buttons": [
+        {
+          "text": "综合",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↑",
+          "pressed": "true"
+        },
+        {
+          "text": "价格 ↓",
+          "pressed": "false"
+        }
+      ],
+      "productIds": [
+        "S003",
+        "S001",
+        "S005",
+        "S002",
+        "S004"
+      ],
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01&sort=PRICE_ASC"
+    },
+    {
+      "width": 1440,
+      "categoryId": "C01",
+      "categoryName": "时令蔬菜",
+      "sort": "PRICE_DESC",
+      "heading": "时令蔬菜",
+      "buttons": [
+        {
+          "text": "综合",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↑",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↓",
+          "pressed": "true"
+        }
+      ],
+      "productIds": [
+        "S004",
+        "S002",
+        "S005",
+        "S001",
+        "S003"
+      ],
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01&sort=PRICE_DESC"
+    },
+    {
+      "width": 1024,
+      "categoryId": "C01",
+      "categoryName": "时令蔬菜",
+      "sort": "RECOMMENDED",
+      "heading": "时令蔬菜",
+      "buttons": [
+        {
+          "text": "综合",
+          "pressed": "true"
+        },
+        {
+          "text": "价格 ↑",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↓",
+          "pressed": "false"
+        }
+      ],
+      "productIds": [
+        "S001",
+        "S002",
+        "S003",
+        "S004",
+        "S005"
+      ],
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01"
+    },
+    {
+      "width": 1024,
+      "categoryId": "C01",
+      "categoryName": "时令蔬菜",
+      "sort": "PRICE_ASC",
+      "heading": "时令蔬菜",
+      "buttons": [
+        {
+          "text": "综合",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↑",
+          "pressed": "true"
+        },
+        {
+          "text": "价格 ↓",
+          "pressed": "false"
+        }
+      ],
+      "productIds": [
+        "S003",
+        "S001",
+        "S005",
+        "S002",
+        "S004"
+      ],
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01&sort=PRICE_ASC"
+    },
+    {
+      "width": 1024,
+      "categoryId": "C01",
+      "categoryName": "时令蔬菜",
+      "sort": "PRICE_DESC",
+      "heading": "时令蔬菜",
+      "buttons": [
+        {
+          "text": "综合",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↑",
+          "pressed": "false"
+        },
+        {
+          "text": "价格 ↓",
+          "pressed": "true"
+        }
+      ],
+      "productIds": [
+        "S004",
+        "S002",
+        "S005",
+        "S001",
+        "S003"
+      ],
+      "url": "http://127.0.0.1:5173/#/products?categoryId=C01&sort=PRICE_DESC"
+    }
+  ],
+  "detailChecks": [
+    {
+      "width": 1440,
+      "productId": "S001",
+      "name": "沙瓤番茄",
+      "skuId": "SKU-001",
+      "unitLabel": "500g/份",
+      "salePrice": "¥5.90",
+      "selectedState": [
+        "true",
+        "false"
+      ]
+    },
+    {
+      "width": 1440,
+      "productId": "S001",
+      "name": "沙瓤番茄",
+      "skuId": "SKU-002",
+      "unitLabel": "1kg/袋",
+      "salePrice": "¥11.61",
+      "selectedState": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "width": 1440,
+      "kind": "quantity",
+      "afterIncrease": 2,
+      "afterDecrease": 1
+    },
+    {
+      "width": 1024,
+      "productId": "S001",
+      "name": "沙瓤番茄",
+      "skuId": "SKU-001",
+      "unitLabel": "500g/份",
+      "salePrice": "¥5.90",
+      "selectedState": [
+        "true",
+        "false"
+      ]
+    },
+    {
+      "width": 1024,
+      "productId": "S001",
+      "name": "沙瓤番茄",
+      "skuId": "SKU-002",
+      "unitLabel": "1kg/袋",
+      "salePrice": "¥11.61",
+      "selectedState": [
+        "false",
+        "true"
+      ]
+    },
+    {
+      "width": 1024,
+      "kind": "quantity",
+      "afterIncrease": 2,
+      "afterDecrease": 1
+    }
+  ],
+  "pageErrors": [],
+  "failedAssets": [],
+  "unexpectedApiWrites": [],
+  "anonymousRefreshes": 7,
+  "finishedAt": "2026-10-18T05:12:56.200Z"
+}

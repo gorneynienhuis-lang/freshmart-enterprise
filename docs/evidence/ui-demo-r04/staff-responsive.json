@@ -1,0 +1,28 @@
+{
+  "method": "independent read-only reviewer, actual synthetic staff login, no business mutations",
+  "roles": [
+    "PICKER",
+    "COURIER",
+    "SERVICE",
+    "FINANCE"
+  ],
+  "viewport": {
+    "width": 1024,
+    "height": 900
+  },
+  "documentWidths": [
+    1024,
+    1024,
+    1024,
+    1024
+  ],
+  "overflowingControls": 0,
+  "pageErrors": 0,
+  "incorrectPermissionNotices": 0,
+  "screens": [
+    "r04-workbench-picker-1024.png",
+    "r04-workbench-courier-1024.png",
+    "r04-workbench-service-1024.png",
+    "r04-workbench-finance-1024.png"
+  ]
+}

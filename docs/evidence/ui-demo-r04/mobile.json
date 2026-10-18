@@ -1,0 +1,24 @@
+{
+  "status": "PASSED",
+  "pages": [
+    {
+      "name": "home",
+      "width": 390,
+      "documentWidth": 390,
+      "brokenImages": []
+    },
+    {
+      "name": "list",
+      "width": 390,
+      "documentWidth": 390,
+      "brokenImages": []
+    },
+    {
+      "name": "detail",
+      "width": 390,
+      "documentWidth": 390,
+      "brokenImages": []
+    }
+  ],
+  "pageErrors": []
+}

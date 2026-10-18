@@ -4,6 +4,8 @@
 
 本机 Demo 入口：运行 `./scripts/demo-start.sh` 后打开 [http://localhost:5173](http://localhost:5173)。账号用 `./scripts/demo-credentials.sh` 查看；数据保存在 Git 忽略的 `.runtime/`。本轮功能与限制见 [Demo说明](docs/demo-v0.1.md)，部署见 [运行说明](deploy/README.md)，实际测试证据见 [CODEX-010](collab/codex/CODEX-010.md)。
 
+当前视觉为用户授权Codex制作的R04红白自然候选版，商城、订单/弹窗及员工工作台已统一。旧版先在GitHub另建归档分支保留，页面顶部可切换『新版 / 上一版』（`?ui=r04` / `?ui=r03`），版本索引见[UI-VERSIONS](collab/codex/UI-VERSIONS.md)。全站设计与实际验证见[CODEX-014](collab/codex/CODEX-014.md)；本轮授权覆盖下述历史Claude视觉独占描述，PPT继续暂停。
+
 私有仓库：https://github.com/gorneynienhuis-lang/freshmart-enterprise
 
 ## 从这里开始

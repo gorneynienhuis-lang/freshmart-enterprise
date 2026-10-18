@@ -1,4 +1,4 @@
-# 首页视觉版本索引
+# 商城视觉版本索引
 
 用户2026-10-18明确要求每个已交付前端设计版本保存到GitHub，方便比较和回退。**保存候选稿不代表用户批准视觉或功能已验收。**
 
@@ -6,7 +6,8 @@
 |---|---|---|---|
 | R01 | [ui/home-r01-warm](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r01-warm) | 首次可运行Demo中的暖米首屏，基于170f8d2 | 用户不满意中间米白区域；保存用于对比 |
 | R02 | [ui/home-r02-shelf](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r02-shelf) | Claude ACK-011 白底货架版；三张价签、红色边条 | 用户明确仍不满意，未采纳；存在两项接线缺陷 |
-| R03 | [ui/home-r03-market](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r03-market) | 用户授权Codex制作自然摄影主视觉；三类真实精选商品及直达入口 | 待用户确认；本机构建、32测试、三种宽度与6个导航入口已验证 |
+| R03 | [ui/home-r03-market](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r03-market) | 用户授权Codex制作自然摄影主视觉；三类真实精选商品及直达入口 | 用户认可该板块风格，要求保留并扩展整站；全Demo归档分支archive/demo-r03-2026-10-18=35182fe |
+| R04 | [ui/demo-r04-dhu-natural](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/demo-r04-dhu-natural) | 红白校园品牌、自然摄影的全Demo重构，支持新版/上一版即时切换 | 新候选稿待用户确认；34测试、三宽度页面及五角色业务流已验证 |
 
 ## 保存方式
 
@@ -33,3 +34,15 @@
 主图使用内置image_gen生成，PNG源图和JPEG网页编码均在design/v2/assets/，原提示词见home-r03-market-photo.prompt.txt。摄影图仅作装饰，下面三张商品卡名称、价格、规格、图片和直达链接均来自实时API；无可售商品则隐藏，避免假价格和无效价签。
 
 32项前端测试、TypeScript、契约类型检查与完整生产构建通过；真实API下1440/1280/1024无横向溢出/缺图/JS异常，三商品卡、两个分类与主选购入口共6条导航逐一验证。证据为docs/evidence/ui-home-r03-market/。R02两项接线问题在R03的新组件中已修复；未重跑订单支付全链路，不借用旧验收声称本轮全量后端测试。
+
+## R04与回看
+
+先核对R03远端标签，再另推送archive/demo-r03-2026-10-18分支，SHA为35182fe4ddfce989c700f4e54334c02886401bfa；完成旧版归档后才开始新设计。design/v2及旧generated/design.json与该提交保持逐字一致。
+
+- 新版：http://localhost:5173/?ui=r04
+- 上一版：http://localhost:5173/?ui=r03
+- 顶部『新版/上一版』切换保留当前hash路由，业务后端共用；没有复制密钥或数据库。
+- 旧版源代码：[GitHub归档分支](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/archive/demo-r03-2026-10-18)。标签和分支可下载完整代码，运行数据需按部署说明单独初始化。
+- 历史页面对比：frontend下执行npm run gallery，打开/generated/design-gallery/index.html。包含R01—R04首页、R03列表/详情实际截图及旧结算验收截图，截图和实际页面有明确区分。
+
+R04验证及边界见CODEX-014和docs/evidence/ui-demo-r04/；当前仅源码与截图归档不表示视觉已定稿。

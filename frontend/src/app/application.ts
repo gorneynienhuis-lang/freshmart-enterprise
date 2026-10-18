@@ -2,6 +2,7 @@ import { service } from './service';
 import { mountTemplate, defaults, type Values, type PageName } from './template';
 import { ApiError } from '../api/errors';
 import { homeCategoryHref, selectHomeFeatured } from './home-featured';
+import { isR04Design } from './design-version';
 import { formatMoney, formatWeight, type Models, type Product, type Cart, type Quote, type Address, type DeliverySlot, type Order } from '../domain';
 const money = (n: number) => formatMoney(n, { symbol: false, grouping: false });
 function yuan(value:string):number {if(!/^(0|[1-9]\d*)(\.\d{1,2})?$/.test(value))throw new Error('金额须为非负数，最多两位小数');const [whole,decimal='']=value.split('.');const cents=BigInt(whole!)*100n+BigInt(decimal.padEnd(2,'0'));if(cents>BigInt(Number.MAX_SAFE_INTEGER))throw new Error('金额超出范围');return Number(cents);}
@@ -15,8 +16,11 @@ const byText = (root: ParentNode, text: string) => qa(root, 'a,span,p,div').find
 const el = (tag: string, text?: string) => { const node = document.createElement(tag); if (text !== undefined)
     node.textContent = text; return node; };
 function businessDate(offset = 0) { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(Date.now() + offset * 86400000)); }
-function button(text: string, act: () => void) { const b = document.createElement('button'); b.type = 'button'; b.textContent = text; b.onclick = act; return b; }
-function input(label: string, name: string, value = '', type = 'text') { const l = document.createElement('label'); l.textContent = label + ' '; const i = document.createElement('input'); i.name = name; i.value = value; i.type = type; i.required = true; l.append(i); return l; }
+function button(text: string, act: () => void) { const b = document.createElement('button'); b.type = 'button'; b.textContent = text; b.onclick = act; if (isR04Design()) { b.className = 'r04-button'; if (/关闭|稍后|继续选购|刷新|切换|删除|取消订单|驳回/.test(text)) b.dataset.tone = /删除|取消订单|驳回/.test(text) ? 'danger' : 'quiet'; } return b; }
+function input(label: string, name: string, value = '', type = 'text') { const l = document.createElement('label'); if (isR04Design()) { l.className = 'r04-field'; l.append(el('span', label)); } else l.textContent = label + ' '; const i = document.createElement('input'); i.name = name; i.value = value; i.type = type; i.required = true; l.append(i); return l; }
+const roleNames: Record<string, string> = { MEMBER: '社区会员', ADMIN: '系统管理员', PICKER: '拣货员', COURIER: '配送员', OPERATOR: '门店运营', SERVICE: '客服', FINANCE: '财务' };
+function r04Note(text: string, kind = 'neutral') { const p = el('p', text); p.className = 'r04-context'; p.dataset.tone = kind; return p; }
+function r04State(text: string, raw: string) { const span = el('span', text); span.className = 'r04-state'; span.dataset.state = raw; return span; }
 export class Application {
     private epoch = 0;
     private busy = false;
@@ -192,7 +196,10 @@ export class Application {
                 await this.add(product); });
         }
     } }
-    private async home() { const epoch=this.epoch;const home = await service.home();if(epoch!==this.epoch)return; this.categories = home.categories; this.products = [...home.nearExpiryProducts, ...home.recommendedProducts]; this.mount('Home', { cats: home.categories.map(c => ({ _key: c.categoryId, name: c.name, sub: c.shortName })), slots: [{ day: '选择收货地址后', time: '查看实时配送时段', state: '结算页预约', badgeStyle: '' }], shelves: [{ title: '临期特惠', note: '库存与临期价格由服务端返回', items: home.nearExpiryProducts.slice(0, 6).map(p => this.card(p)) }, { title: '当季精选', note: '会员价 · 实时可售商品', items: home.recommendedProducts.slice(0, 12).map(p => this.card(p)) }] }); this.bindCards(); for (const a of qa<HTMLAnchorElement>(this.root, 'nav[aria-label="商品分类"] a[data-key]'))
+    private async home() { const epoch=this.epoch;const home = await service.home();if(epoch!==this.epoch)return; this.categories = home.categories; this.products = [...home.nearExpiryProducts, ...home.recommendedProducts];
+        const recommendationFeed = isR04Design() ? home.recommendedProducts.filter(product => !home.nearExpiryProducts.some(item => item.productId === product.productId)) : home.recommendedProducts;
+        const shelves = [{ title: '临期特惠', note: '库存与临期价格由服务端返回', items: home.nearExpiryProducts.slice(0, 6).map(p => this.card(p)) }, { title: '当季精选', note: '会员价 · 实时可售商品', items: recommendationFeed.slice(0, 12).map(p => this.card(p)) }].filter(shelf => !isR04Design() || shelf.items.length > 0);
+        this.mount('Home', { cats: home.categories.map(c => ({ _key: c.categoryId, name: c.name, sub: c.shortName })), slots: [{ day: '选择收货地址后', time: '查看实时配送时段', state: '结算页预约', badgeStyle: '' }], shelves }); this.bindCards(); for (const a of qa<HTMLAnchorElement>(this.root, 'nav[aria-label="商品分类"] a[data-key]'))
         a.href = '#/products?categoryId=' + a.dataset.key; const note = byText(this.root, '名额为示意，以下单时为准'); if (note)
         note.textContent = '库存与名额在提交订单时再次校验';
         this.bindHomeFeatured(selectHomeFeatured(home.recommendedProducts, home.nearExpiryProducts, home.categories));
@@ -237,7 +244,7 @@ export class Application {
         }
     }
     private async list(params: URLSearchParams) { const epoch=this.epoch;const keyword = params.get('keyword') || undefined; const categoryId = params.get('categoryId') || undefined; const sort = (params.get('sort') || 'RECOMMENDED') as 'RECOMMENDED' | 'PRICE_ASC' | 'PRICE_DESC'; const result = await service.products({ ...keyword ? { keyword } : {}, ...categoryId ? { categoryId } : {}, ...params.get('nearExpiry') === 'true' ? { nearExpiry: true } : {}, sort }); if(epoch!==this.epoch)return;this.products = result.items; this.mount('List', { items: result.items.map(p => this.card(p)), facets: [] }); this.bindCards(); const h = q(this.root, 'h1'); if (h) {
-        h.textContent = keyword ? `搜索：${keyword}` : '全部商品';
+        h.textContent = keyword ? `搜索：${keyword}` : isR04Design() && categoryId ? this.categories.find(category => category.categoryId === categoryId)?.name ?? '全部商品' : '全部商品';
         if (h.nextElementSibling)
             h.nextElementSibling.textContent = `共 ${result.total} 件商品`;
     } const end = qa(this.root, 'main p').at(-1); if (end)
@@ -249,6 +256,7 @@ export class Application {
             const a = document.createElement('a');
             a.textContent = c.name;
             a.href = '#/products?categoryId=' + c.categoryId;
+            if (isR04Design() && c.categoryId === categoryId) a.setAttribute('aria-current', 'page');
             sidebar.append(a, el('br'));
         }
     } const sorter = q(this.root, '[aria-label="排序"]'); if (sorter)
@@ -257,6 +265,7 @@ export class Application {
                 b.remove();
                 continue;
             }
+            if (isR04Design()) b.setAttribute('aria-pressed', String(sort === ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]));
             b.onclick = () => { params.set('sort', ['RECOMMENDED', 'PRICE_ASC', 'PRICE_DESC'][i]!); this.navigate('/products?' + params); };
         } const clear = qa<HTMLAnchorElement>(this.root, 'a').find(a => a.textContent === '清除全部'); if (clear)
         clear.parentElement?.replaceChildren(button('清除筛选', () => this.navigate('/products'))); }
@@ -300,7 +309,33 @@ export class Application {
         for (const tab of qa<HTMLButtonElement>(this.root, '[role="tab"]'))
             tab.onclick = () => this.tell(tab.textContent === '商品介绍' ? product.description : tab.textContent === '售后说明' ? '签收后 7 天内可申请缺货或配送延迟售后；品质证据上传尚未开放，退款由服务端校验实付上限。' : '下方为当前商品规格参数');
     }
-    private dialog(title: string) { qa<HTMLDialogElement>(document, 'dialog[data-demo]').forEach(d => d.remove()); const d = document.createElement('dialog'); d.dataset.demo = 'true'; d.style.maxWidth = 'min(92vw,960px)'; d.style.fontFamily = 'inherit'; const heading = el('h2', title); heading.id = 'dialog-' + crypto.randomUUID(); d.setAttribute('aria-labelledby', heading.id); d.append(heading, button('关闭', () => d.close())); d.addEventListener('close', () => d.remove()); document.body.append(d); d.showModal(); return d; }
+    private dialog(title: string) {
+        qa<HTMLDialogElement>(document, 'dialog[data-demo]').forEach(d => d.remove());
+        const d = document.createElement('dialog'); d.dataset.demo = 'true'; d.style.maxWidth = 'min(92vw,960px)'; d.style.fontFamily = 'inherit';
+        const heading = el('h2', title); heading.id = 'dialog-' + crypto.randomUUID(); d.setAttribute('aria-labelledby', heading.id);
+        const close = button('关闭', () => d.close());
+        if (isR04Design()) {
+            d.className = 'r04-dialog';
+            d.dataset.kind = /登录|注册/.test(title) ? 'account' : title === '购物车' ? 'cart' : /地址/.test(title) ? 'address' : /支付/.test(title) ? 'payment' : /实拣/.test(title) ? 'picking' : /售后/.test(title) ? 'aftersale' : 'action';
+            const head = el('header'); head.className = 'r04-dialog-head';
+            const identity = el('div'); identity.append(el('span', 'DH / COMMUNITY MARKET'), heading);
+            head.append(identity, close); d.append(head);
+            if (d.dataset.kind === 'account') d.append(r04Note('新鲜日常，从校园出发。登录后选购食材、预约配送、查看每一笔订单。'));
+            if (d.dataset.kind === 'cart') d.append(r04Note('为日常添一点新鲜', 'brand'));
+        } else d.append(heading, close);
+        d.addEventListener('close', () => d.remove()); document.body.append(d); d.showModal();
+        if (isR04Design()) queueMicrotask(() => this.decorateDialog(d));
+        return d;
+    }
+    private decorateDialog(d: HTMLDialogElement) {
+        if (!d.isConnected) return;
+        for (const row of qa<HTMLElement>(d, ':scope > p')) if (q(row, 'input,select')) row.classList.add('r04-editor-row');
+        for (const form of qa<HTMLFormElement>(d, ':scope > form')) { form.classList.add('r04-form'); for (const error of qa(form, 'p[role="alert"]')) error.classList.add('r04-form-error'); }
+        const actions = qa<HTMLButtonElement>(d, ':scope > button');
+        if (actions.length) { const footer = el('footer'); footer.className = 'r04-dialog-actions'; footer.append(...actions); d.append(footer); }
+        if (d.dataset.kind === 'payment') q(d, ':scope > p')?.classList.add('r04-payment-overview');
+        if (d.dataset.kind === 'address') q(d, 'form')?.classList.add('r04-address-form');
+    }
     private login(register: boolean) { const d = this.dialog(register ? '注册会员' : '登录 / 切换账户'); const f = document.createElement('form'); f.append(input('手机号', 'phone', '', 'tel'), el('br'), input('密码', 'password', '', 'password'), el('br')); if (register)
         f.append(input('显示名称', 'displayName'), el('br')); const submit = button(register ? '注册并登录' : '登录', () => { }); submit.type = 'submit'; f.append(submit); const result = el('p'); result.setAttribute('role', 'alert'); f.append(result); f.onsubmit = e => { e.preventDefault(); submit.disabled = true; const data = new FormData(f); const body = { phone: String(data.get('phone')), password: String(data.get('password')) }; void (async () => { try {
         if (register)
@@ -324,10 +359,10 @@ export class Application {
     }
     finally {
         submit.disabled = false;
-    } })(); }; d.append(f, el('p', '演示账户见本地 demo-credentials.sh；员工与会员权限独立。')); }
+    } })(); }; d.append(f, el('p', isR04Design() ? '东华大学社区生鲜 · 会员与员工使用各自账户登录。' : '演示账户见本地 demo-credentials.sh；员工与会员权限独立。')); }
     private async couponDialog() { if (!this.member())
-        return; await this.run(async () => { const list = await service.coupons(); const d = this.dialog('我的优惠券'); for (const c of list.items)
-        d.append(el('p', `${c.name}：${formatMoney(c.discountAmount)}，满 ${formatMoney(c.minGoodsAmount)} 可用 · ${c.status}`)); if (!list.items.length)
+        return; await this.run(async () => { const list = await service.coupons(); const d = this.dialog('我的优惠券'); for (const c of list.items) {
+        const coupon = el('p', `${c.name}：${formatMoney(c.discountAmount)}，满 ${formatMoney(c.minGoodsAmount)} 可用 · ${c.status}`); if (isR04Design()) coupon.className = 'r04-coupon-card'; d.append(coupon); } if (!list.items.length)
         d.append(el('p', '暂无优惠券')); }); }
     private async openCart() { if (!this.member())
         return; await this.run(async () => { await this.loadCart(); this.cartDialog(); }); }
@@ -335,8 +370,13 @@ export class Application {
         d.append(el('p', '购物车为空，请先选购商品。'));
         return;
     } for (const item of this.cart.items) {
-        const row = el('p');
-        row.append(el('strong', item.productName + ' '));
+        const row = el(isR04Design() ? 'article' : 'p');
+        if (isR04Design()) {
+            row.className = 'r04-cart-row';
+            const image = document.createElement('img'); image.src = item.imageUrl; image.alt = item.productName; image.width = 80; image.height = 80;
+            const info = el('div'); info.className = 'r04-cart-description'; info.append(el('strong', item.productName), el('span', item.unitLabel + (item.baseUnit === 'GRAM' ? ' · 按实重结算' : ' · 按件计价')));
+            row.append(image, info);
+        } else row.append(el('strong', item.productName + ' '));
         const checked = document.createElement('input');
         checked.type = 'checkbox';
         checked.checked = item.selected;
@@ -349,7 +389,7 @@ export class Application {
         quantity.setAttribute('aria-label', item.productName + '数量');
         row.append(checked, quantity, el('span', item.baseUnit === 'GRAM' ? ' 克 ' : ' 件 '), el('span', formatMoney(item.lineAmount)), button('更新', () => void this.run(async () => { await service.updateCart(item.cartItemId, { quantity: Number(quantity.value), selected: checked.checked, version: item.version }); this.quote = null; await this.loadCart(); d.close(); this.cartDialog(); })), button('删除', () => void this.run(async () => { await service.removeCart(item.cartItemId, item.version); this.quote = null; await this.loadCart(); d.close(); this.cartDialog(); })));
         d.append(row);
-    } d.append(el('p', '商品预估金额 ' + formatMoney(this.cart.estimatedGoodsAmount)), button('去结算', () => { d.close(); this.navigate('/checkout'); })); }
+    } const estimate = el('p', '商品预估金额 ' + formatMoney(this.cart.estimatedGoodsAmount)); if (isR04Design()) estimate.className = 'r04-cart-total'; d.append(estimate, button('去结算', () => { d.close(); this.navigate('/checkout'); })); }
     private addressDialog() { const d = this.dialog('新增收货地址'); const f = document.createElement('form'); for (const [label, name, value] of [['收货人', 'recipientName', ''], ['手机号', 'phone', ''], ['省份', 'province', '上海市'], ['城市', 'city', '上海市'], ['区', 'district', '松江区'], ['详细地址', 'detail', '人民北路 2999 号 东华大学']])
         f.append(input(label!, name!, value), el('br')); const submit = button('保存地址', () => { }); submit.type = 'submit'; const error = el('p'); f.append(submit, error); f.onsubmit = e => { e.preventDefault(); submit.disabled = true; const data = new FormData(f); void (async () => { try {
         const a = await service.createAddress({ recipientName: String(data.get('recipientName')), phone: String(data.get('phone')), province: String(data.get('province')), city: String(data.get('city')), district: String(data.get('district')), detail: String(data.get('detail')), isDefault: true });
@@ -429,27 +469,67 @@ export class Application {
         const b = button(label, () => { void this.run(async () => { const paid = await service.simulate(p.paymentId, { outcome, version: p.version }); d.close(); this.tell(paid.status === 'SUCCESS' ? '沙箱支付已入账' : '已模拟支付失败，可重新发起支付'); this.navigate('/orders'); }); });
         b.disabled=!p.allowedActions.includes('SIMULATE_PAYMENT');d.append(b);
     } d.append(button('稍后支付，查看订单', () => { d.close(); this.navigate('/orders'); })); }
-    private shell(title: string) { this.mount('Checkout', { addrs: [], days: [], slots: [], lines: [], summary: [], payable: '—' }); const main = q(this.root, 'main')!; main.replaceChildren(); main.style.display = 'block'; const section = el('section'); section.style.cssText = 'background:#FFFFFF;border-radius:8px;padding:20px 24px;display:flex;flex-direction:column;gap:14px'; section.append(el('h1', title)); main.append(section); q(this.root, 'ol')?.replaceChildren(); const headerTitle = byText(this.root, '确认订单'); if (headerTitle)
-        headerTitle.textContent = title; section.append(button('继续选购', () => this.navigate('/products')), button('刷新', () => void this.render())); return section; }
-    private async orders() {const epoch=this.epoch; const result = await service.orders();if(epoch!==this.epoch)return; const main = this.shell('我的订单'); if (!result.items.length)
-        main.append(el('p', '暂无订单，先去选购商品吧。')); for (const order of result.items) {
+    private shell(title: string) {
+        if (isR04Design()) {
+            const user = service.auth.getSnapshot().user;
+            const workplace = title.startsWith('员工工作台');
+            this.root.replaceChildren();
+            this.root.dataset.page = 'Runtime';
+            const top = el('div'); top.className = 'r04-runtime-topline'; top.append(el('span', 'DONGHUA UNIVERSITY · COMMUNITY MARKET'), el('span', '东华大学社区生鲜'));
+            const header = el('header'); header.className = 'r04-runtime-header';
+            const brand = document.createElement('a'); brand.href = '#/'; brand.className = 'r04-runtime-brand'; brand.setAttribute('aria-label', '东华大学社区生鲜首页');
+            const logo = document.createElement('img'); logo.src = '/generated/dhu-lockup-h.png'; logo.alt = '东华大学'; logo.width = 168; logo.height = 52;
+            const name = el('span'); name.append(el('strong', '社区生鲜'), el('small', '校园日常，新鲜相伴')); brand.append(logo, name);
+            const links = el('nav'); links.setAttribute('aria-label', '账户操作');
+            for (const [text, href] of [['首页', '#/'], ['我的订单', '#/orders'], ['工作台', '#/operations'], ['你好，请登录', '#'], ['免费注册', '#']]) { if (text === '我的订单' && !user?.roles.includes('MEMBER')) continue; if (text === '工作台' && user?.roles.every(role => role === 'MEMBER')) continue; const a = document.createElement('a'); a.textContent = text!; a.href = href!; links.append(a); }
+            header.append(brand, links);
+            const main = el('main'); main.className = 'r04-runtime-layout';
+            const aside = el('aside'); aside.className = 'r04-runtime-sidebar';
+            aside.append(el('p', workplace ? '门店运营' : '我的社区生活'), el('strong', user?.displayName ?? '欢迎来到社区生鲜'), el('span', user?.roles.map(role => roleNames[role] ?? role).join(' · ') ?? '东华大学社区'));
+            const menu = el('nav'); menu.setAttribute('aria-label', workplace ? '工作台分区' : '会员中心');
+            const destinations: [string, string][] = workplace ? [['工作台总览', '#/operations']] : [['我的订单', '#/orders'], ['继续选购', '#/products']];
+            if (workplace) for (const [permission, label, anchor] of [['order.work.read', '订单查询', 'orders'], ['pick.read', '拣货任务', 'picking'], ['delivery.handover.read', '配送任务', 'delivery'], ['delivery.self.read', '配送任务', 'delivery'], ['aftersale.work.read', '售后工单', 'aftersales'], ['refund.read', '退款执行', 'refunds']]) { if (user?.permissions.includes(permission!) && !destinations.some(([text]) => text === label)) destinations.push([label!, '#r04-' + anchor]); }
+            for (const [label, href] of destinations) { const a = document.createElement('a'); a.textContent = label; a.href = href; if (href.startsWith('#r04-')) a.onclick = event => { event.preventDefault(); document.getElementById(href.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }; menu.append(a); }
+            aside.append(menu, r04Note(workplace ? '依照当前岗位展示可操作任务，处理进度以服务端返回为准。' : '从挑选到签收，随时查看每一次新鲜的进度。'));
+            const section = el('section'); section.className = 'r04-runtime-content';
+            const intro = el('header'); intro.className = 'r04-runtime-intro';
+            const heading = el('div'); heading.append(el('span', workplace ? 'OPERATIONS / DONGHUA' : 'MY ORDERS / DONGHUA'), el('h1', title), el('p', workplace ? '清晰的任务，有序的每一天。' : '每一份新鲜，都有清晰的去向。'));
+            const actions = el('div'); actions.className = 'r04-runtime-actions'; actions.append(button('继续选购', () => this.navigate('/products')), button('刷新', () => void this.render())); intro.append(heading, actions); section.append(intro);
+            main.append(aside, section); this.root.append(top, header, main);
+            this.common(); return section;
+        }
+        this.mount('Checkout', { addrs: [], days: [], slots: [], lines: [], summary: [], payable: '—' }); const main = q(this.root, 'main')!; main.replaceChildren(); main.style.display = 'block'; const section = el('section'); section.style.cssText = 'background:#FFFFFF;border-radius:8px;padding:20px 24px;display:flex;flex-direction:column;gap:14px'; section.append(el('h1', title)); main.append(section); q(this.root, 'ol')?.replaceChildren(); const headerTitle = byText(this.root, '确认订单'); if (headerTitle)
+            headerTitle.textContent = title; section.append(button('继续选购', () => this.navigate('/products')), button('刷新', () => void this.render())); return section;
+    }
+    private async orders() {const epoch=this.epoch; const result = await service.orders();if(epoch!==this.epoch)return; const main = this.shell('我的订单'); if (!result.items.length) {
+        const empty = el('p', '暂无订单，先去选购商品吧。'); if (isR04Design()) empty.className = 'r04-empty-state'; main.append(empty); } for (const order of result.items) {
         const article = el('article');
-        article.style.cssText = 'border-top:1px solid #E3E6EA;padding:16px 0';
-        article.append(el('h2', `${order.orderNo} · ${status[order.status] ?? order.status}`), el('p', `${order.slot.date} ${order.slot.label} · 应付 ${formatMoney(order.price.payableAmount)} · 已付 ${formatMoney(order.paidAmount)} · 已退 ${formatMoney(order.refundedAmount)}`));
-        for (const item of order.items)
-            article.append(el('p', `${item.productName} × ${item.baseUnit === 'GRAM' ? formatWeight(item.actualGram ?? item.estimatedGram ?? item.quantity) + (item.actualGram !== null ? '（实重）' : '（估重）') : item.quantity} · ${formatMoney(item.finalPayableAmount ?? item.originalPayableAmount)}`));
+        if (isR04Design()) {
+            article.className = 'r04-order-card'; article.dataset.state = order.status;
+            const head = el('header'); head.className = 'r04-order-head';
+            const title = el('h2', order.orderNo + ' · '); title.append(r04State(status[order.status] ?? order.status, order.status));
+            head.append(title, el('time', '下单于 ' + new Date(order.createdAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }))); article.append(head);
+            const amounts = el('div'); amounts.className = 'r04-order-amounts';
+            for (const [label, amount] of [['应付', order.price.payableAmount], ['已付', order.paidAmount], ['已退', order.refundedAmount]] as const) { const field = el('div'); field.append(el('span', label), el('strong', formatMoney(amount))); amounts.append(field); }
+            article.append(amounts, r04Note(`配送预约 ${order.slot.date} ${order.slot.label} · ${order.address.recipientName} · ${order.address.detail}`));
+        } else { article.style.cssText = 'border-top:1px solid #E3E6EA;padding:16px 0'; article.append(el('h2', `${order.orderNo} · ${status[order.status] ?? order.status}`), el('p', `${order.slot.date} ${order.slot.label} · 应付 ${formatMoney(order.price.payableAmount)} · 已付 ${formatMoney(order.paidAmount)} · 已退 ${formatMoney(order.refundedAmount)}`)); }
+        for (const item of order.items) {
+            const row = el('p', `${item.productName} × ${item.baseUnit === 'GRAM' ? formatWeight(item.actualGram ?? item.estimatedGram ?? item.quantity) + (item.actualGram !== null ? '（实重）' : '（估重）') : item.quantity} · ${formatMoney(item.finalPayableAmount ?? item.originalPayableAmount)}`);
+            if (isR04Design()) { row.className = 'r04-order-line'; const image = document.createElement('img'); image.src = item.imageUrl; image.alt = item.productName; image.width = 58; image.height = 58; row.prepend(image); }
+            article.append(row);
+        }
         if (order.weightAdjustment)
             article.append(el('p', `实重结算：${order.weightAdjustment.status} · 差额 ${formatMoney(order.weightAdjustment.deltaAmount)}`));
-        if (order.deliveryReceiptCode)
-            article.append(el('strong', '配送签收码：' + order.deliveryReceiptCode));
+        if (order.deliveryReceiptCode) { const receipt = el('strong', '配送签收码：' + order.deliveryReceiptCode); if (isR04Design()) receipt.className = 'r04-receipt'; article.append(receipt); }
         if (order.allowedActions.includes('PAY') || order.allowedActions.includes('TOP_UP'))
             article.append(button(order.allowedActions.includes('TOP_UP') ? '支付称重补款' : '去支付', () => void this.run(() => this.payment(order))));
         if(order.allowedActions.includes('APPLY_AFTERSALE'))article.append(button('申请售后',()=>this.aftersaleDialog(order)));
         if (order.allowedActions.includes('CANCEL'))
             article.append(button('取消订单', () => { const d = this.dialog('取消订单'); const reason = input('取消原因', 'reason', '不再需要'); d.append(reason, button('确认取消', () => void this.run(async () => { await service.cancel(order.orderId, { version: order.version, reason: q<HTMLInputElement>(reason, 'input')!.value }); d.close(); this.tell('订单已取消；退款进度以订单为准'); await this.orders(); }))); }));
+        if (isR04Design()) { const actions = el('div'); actions.className = 'r04-order-actions'; for (const action of qa<HTMLButtonElement>(article, ':scope > button')) actions.append(action); if (actions.childElementCount) article.append(actions); }
         main.append(article);
     }
-        const aftersales=await service.aftersales();if(aftersales.items.length){main.append(el('h2','售后进度'));for(const a of aftersales.items)main.append(el('p',`${a.aftersaleId} · ${a.status} · 申请 ${formatMoney(a.requestedAmount)} · 核准 ${formatMoney(a.approvedAmount)}${a.reviewComment?' · '+a.reviewComment:''}`));}
+        const aftersales=await service.aftersales();if(aftersales.items.length){main.append(el('h2','售后进度'));for(const a of aftersales.items){const row=el('p',`${a.aftersaleId} · ${a.status} · 申请 ${formatMoney(a.requestedAmount)} · 核准 ${formatMoney(a.approvedAmount)}${a.reviewComment?' · '+a.reviewComment:''}`);if(isR04Design()){row.className='r04-aftersale-progress';row.dataset.state=a.status;}main.append(row);}}
     }
     private async operations() {
         const user = service.auth.getSnapshot().user;
@@ -500,8 +580,29 @@ export class Application {
         }
         if(user.permissions.includes('aftersale.work.read')){const cases=await service.adminAftersales();main.append(el('h2','售后工单'));for(const a of cases.items){const row=el('section');row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));if(a.status==='APPLIED'&&!a.assigneeId&&user.permissions.includes('aftersale.work.claim'))row.append(button('领取售后',()=>void this.run(async()=>{await service.claimAftersale(a.aftersaleId,a.version);await this.operations();})));if(a.status==='APPLIED'&&a.assigneeId===user.userId&&user.permissions.includes('aftersale.review'))row.append(button('审核售后',()=>this.reviewDialog(a)));main.append(row);}}
         if(user.permissions.includes('refund.read')){const refunds=await service.refunds();main.append(el('h2','退款执行'));for(const refund of refunds.items){const row=el('p');row.append(el('span',`${refund.refundId} · ${refund.status} · ${formatMoney(refund.amount)} · ${refund.type}`));if(refund.status==='PENDING'&&refund.type==='AFTERSALE'&&user.permissions.includes('refund.execute'))row.append(button('执行退款',()=>{const d=this.dialog('确认原路沙箱退款');const reason=input('复核说明','reason','复核通过，执行原路沙箱退款');d.append(el('p',formatMoney(refund.amount)),reason,button('确认退款',()=>void this.run(async()=>{await service.executeRefund(refund.refundId,{version:refund.version,reason:q<HTMLInputElement>(reason,'input')!.value});d.close();this.tell('退款指令已提交，请刷新查看结果');await this.operations();})));}));main.append(row);}}
-        if (!user.permissions.some(p => ['order.work.read', 'pick.read', 'delivery.handover.read', 'delivery.self.read'].includes(p)))
+        if (!user.permissions.some(p => ['order.work.read', 'pick.read', 'delivery.handover.read', 'delivery.self.read', 'aftersale.work.read', 'refund.read'].includes(p)))
             main.append(el('p', '此角色没有本工作台的业务操作权限。服务端独立校验角色与资源归属。'));
+        if (isR04Design()) this.decorateWorkbench(main);
+    }
+    private decorateWorkbench(main: HTMLElement) {
+        const anchors: Record<string, string> = { '订单查询': 'orders', '拣货任务': 'picking', '配送任务': 'delivery', '售后工单': 'aftersales', '退款执行': 'refunds' };
+        let group: HTMLElement | null = null;
+        const nodes = [...main.children];
+        for (const node of nodes) {
+            if (node.matches('.r04-runtime-intro')) continue;
+            if (node.tagName === 'H2') {
+                group = el('section'); group.className = 'r04-workgroup';
+                const key = anchors[node.textContent ?? '']; if (key) group.id = 'r04-' + key;
+                main.insertBefore(group, node); group.append(node); continue;
+            }
+            if (group) {
+                group.append(node);
+                if (node.tagName === 'SECTION') {
+                    node.classList.add('r04-task-card');
+                    const actions = qa<HTMLButtonElement>(node, ':scope > button'); if (actions.length) { const footer = el('div'); footer.className = 'r04-task-actions'; footer.append(...actions); node.append(footer); }
+                } else if (node.tagName === 'P') node.classList.add(q(node, 'button') ? 'r04-refund-row' : 'r04-work-record');
+            } else if (node.tagName === 'P') node.classList.add('r04-role-description');
+        }
     }
     private aftersaleDialog(order:Order){const d=this.dialog('申请售后');d.append(el('p','当前 Demo 支持缺货与配送延迟；品质证据上传尚未开放。金额和数量由服务端再次校验，不会重复退同一份资金。'));const type=document.createElement('select');type.setAttribute('aria-label','售后类型');for(const [value,label]of [['SHORTAGE','缺货'],['LATE','配送延迟']]){const option=document.createElement('option');option.value=value!;option.textContent=label!;type.append(option);}const reason=input('问题说明','reason');d.append(type,reason);const fields: {item:Models['OrderItem'];selected:HTMLInputElement;quantity:HTMLInputElement;amount:HTMLInputElement}[]=[];for(const item of order.items){const row=el('p');const selected=document.createElement('input');selected.type='checkbox';selected.checked=false;selected.setAttribute('aria-label','售后选择 '+item.productName);const qty=document.createElement('input');qty.type='number';qty.min='1';qty.value='1';qty.setAttribute('aria-label',item.productName+'售后数量');const amount=document.createElement('input');amount.inputMode='decimal';amount.placeholder='申请退款金额（元）';amount.setAttribute('aria-label',item.productName+'申请金额');row.append(selected,el('span',item.productName+' '),qty,el('span',item.baseUnit==='GRAM'?' 克 ':' 件 '),amount);fields.push({item,selected,quantity:qty,amount});d.append(row);}d.append(button('提交售后申请',()=>void this.run(async()=>{const items=fields.filter(f=>f.selected.checked).map(f=>({orderItemId:f.item.orderItemId,quantity:Number(f.quantity.value),requestedAmount:yuan(f.amount.value)}));if(!items.length)throw new Error('请选择需要售后的商品');await service.applyAftersale({orderId:order.orderId,type:type.value as 'SHORTAGE'|'LATE',reason:q<HTMLInputElement>(reason,'input')!.value,items,evidenceMediaIds:[]});d.close();this.tell('售后申请已提交');await this.orders();})));}
     private reviewDialog(a:Models['AdminAftersale']){const d=this.dialog('售后审核');const comment=input('审核说明','comment','已核实问题');d.append(comment);const fields:{line:Models['AftersaleLineInput'];amount:HTMLInputElement}[]=[];for(const line of a.items){const row=el('p',`${line.orderItemId} · 申请数量 ${line.quantity} · 核准金额（元） `);const amount=document.createElement('input');amount.inputMode='decimal';amount.value=money(line.requestedAmount);row.append(amount);fields.push({line,amount});d.append(row);}d.append(button('通过并生成退款单',()=>void this.run(async()=>{await service.approveAftersale(a.aftersaleId,{version:a.version,comment:q<HTMLInputElement>(comment,'input')!.value,approvedItems:fields.map(f=>({...f.line,requestedAmount:yuan(f.amount.value)}))});d.close();this.tell('审核通过，等待另一财务账户执行退款');await this.operations();})),button('驳回申请',()=>void this.run(async()=>{await service.rejectAftersale(a.aftersaleId,{version:a.version,comment:q<HTMLInputElement>(comment,'input')!.value});d.close();await this.operations();})));}

@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><title>商品详情 · 东华社区生鲜</title></head>
+<body>
+<x-dc>
+<helmet>
+<style>
+.r4-detail-main{max-width:1280px;margin:0 auto;padding:24px 32px 58px;color:#202A25}
+.r4-detail-crumb{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:24px;font-size:12px;color:#899087;line-height:1.6}
+.r4-detail-crumb a{color:#667168;text-decoration:none}
+.r4-detail-crumb a:hover{color:#A0021F}
+.r4-detail-crumb>span:last-child{color:#202A25}
+.r4-detail-product{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:44px;padding:30px;background:#FFF;border:1px solid #E7E5E0;border-radius:16px}
+.r4-detail-gallery{min-width:0}
+.r4-detail-image{position:relative;aspect-ratio:1;overflow:hidden;border-radius:11px;background:#F5F5F1}
+.r4-detail-image img{display:block;width:100%;height:100%;object-fit:cover}
+.r4-detail-image-badge{position:absolute;top:18px;left:18px;display:inline-flex;gap:7px;align-items:center;padding:7px 10px;border-radius:5px;background:rgba(255,255,255,.94);font-size:11px;font-weight:650;letter-spacing:.03em;color:#81162B}
+.r4-detail-image-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:#A0021F}
+.r4-detail-image-note{margin:14px 0 0;color:#879182;font-size:11px;line-height:1.7}
+.r4-detail-purchase{display:flex;flex-direction:column;gap:19px;min-width:0;padding:2px 0}
+.r4-detail-eyebrow{display:flex;align-items:center;gap:8px;color:#81162B;font-size:11px;line-height:1.4;font-weight:600;letter-spacing:.06em}
+.r4-detail-eyebrow>span{padding:4px 7px;background:#FCF1F3;border-radius:4px;letter-spacing:0;font-weight:500}
+.r4-detail-purchase h1{margin:9px 0 10px;font-size:31px;font-weight:750;line-height:1.35;letter-spacing:-.035em}
+.r4-detail-description{margin:0;color:#727B71;font-size:13px;line-height:1.8}
+.r4-detail-pricing{display:flex;flex-direction:column;gap:10px;border-radius:10px;padding:18px 20px;background:#FCF1F3;border:1px solid #F2E5E7}
+.r4-detail-price-line{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.r4-detail-price-label{font-size:12px;font-weight:600;color:#81162B}
+.r4-detail-price{color:#A0021F;font-size:36px;line-height:1;font-family:Arial,'PingFang SC',sans-serif;font-weight:700;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
+.r4-detail-price>span{margin-right:3px;font-size:19px;letter-spacing:0}
+.r4-detail-price-unit{font-size:12px;color:#7D716E}
+.r4-detail-reference{color:#9F9390;font-size:12px;text-decoration:line-through}
+.r4-detail-price-note{color:#94817F;font-size:11px;line-height:1.7}
+.r4-detail-choice{margin:0;padding:0;border:0;min-width:0}
+.r4-detail-choice legend{padding:0;margin:0 0 11px;color:#343C33;font-size:13px;font-weight:650}
+.r4-detail-skus{display:flex;gap:10px;flex-wrap:wrap}
+.r4-detail-skus>button{min-width:108px!important;min-height:58px;padding:10px 14px!important;border:1px solid #E4E1DC!important;border-radius:7px!important;background:#FFF!important;color:#596056!important;text-align:left!important;font-family:inherit!important;font-weight:500!important;font-size:13px!important;cursor:pointer}
+.r4-detail-skus>button[aria-pressed="true"]{border-color:#A0021F!important;background:#FCF1F3!important;color:#A0021F!important;box-shadow:inset 0 0 0 .5px #A0021F}
+.r4-detail-skus>button>span{display:block;margin-top:5px;font:600 12px Arial,'PingFang SC',sans-serif;opacity:.7}
+.r4-detail-weight-note{display:flex;gap:8px;align-items:flex-start;margin:0;padding:11px 12px;border-radius:6px;background:#F7F7F4;color:#767C70;font-size:11px;line-height:1.8}
+.r4-detail-weight-note svg{flex:none;margin-top:3px;color:#9C5D63}
+.r4-detail-delivery{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:start;padding:15px 0;border-top:1px solid #EEECE8;border-bottom:1px solid #EEECE8}
+.r4-detail-delivery>span{padding-top:1px;color:#343C33;font-size:13px;font-weight:650}
+.r4-detail-delivery .fm-slots{font-size:12px;color:#727B71;line-height:1.8}
+.r4-detail-buy-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.r4-detail-quantity{display:flex;height:46px;overflow:hidden;border:1px solid #E1E3DA;border-radius:7px;flex:none}
+.r4-detail-quantity>button{width:34px;border:0;background:#F7F7F4;color:#505A4D;font-size:19px;cursor:pointer}
+.r4-detail-quantity>button:hover{background:#EFEFEA}
+.r4-detail-quantity>span{display:flex;align-items:center;justify-content:center;min-width:36px;box-sizing:border-box;padding:0 7px;background:#FFF;color:#202A25;font:600 14px Arial,'PingFang SC',sans-serif;font-variant-numeric:tabular-nums}
+.r4-detail-add,.r4-detail-buy{height:46px;flex:1;min-width:128px;padding:0 19px;border-radius:7px;font-family:inherit;font-weight:650;font-size:14px;cursor:pointer;white-space:nowrap;transition:background .15s,border-color .15s}
+.r4-detail-add{border:1px solid #A0021F;background:#A0021F;color:#FFF}
+.r4-detail-add:hover{background:#81162B;border-color:#81162B}
+.r4-detail-buy{border:1px solid #DFC1C7;background:#FCF1F3;color:#A0021F}
+.r4-detail-buy:hover{background:#F6E6E9;border-color:#A0021F}
+.r4-detail-add:disabled,.r4-detail-buy:disabled{background:#F0F1EC;border-color:#E4E6DE;color:#9EA596;cursor:not-allowed}
+.r4-detail-service-notes{display:flex;align-items:center;gap:17px;flex-wrap:wrap;color:#879182;font-size:10px;line-height:1.8}
+.r4-detail-service-notes>span{display:inline-flex;align-items:center;gap:5px}
+.r4-detail-service-notes>span::before{content:'✓';color:#9B7376}
+.r4-detail-information{margin-top:28px;background:#FFF;border:1px solid #E7E5E0;border-radius:12px;overflow:hidden}
+.r4-detail-tabs{display:flex;gap:30px;border-bottom:1px solid #E7E5E0;padding:0 28px;background:#FFFEFC}
+.r4-detail-tabs>button{height:55px;padding:0 2px;border:0;border-bottom:2px solid transparent;background:transparent;color:#778078;font-family:inherit;font-weight:500;font-size:14px;cursor:pointer}
+.r4-detail-tabs>button[aria-selected="true"]{border-bottom-color:#A0021F;color:#A0021F;font-weight:700}
+.r4-detail-tabs>button:hover{color:#A0021F}
+.r4-detail-specs{display:grid;grid-template-columns:142px minmax(0,1fr);row-gap:0;margin:0;padding:10px 28px 20px;font-size:13px;line-height:1.8}
+.r4-detail-specs dt,.r4-detail-specs dd{padding:15px 0;border-bottom:1px solid #F0EEE9}
+.r4-detail-specs dt{color:#879182}
+.r4-detail-specs dd{margin:0;color:#3B4639}
+.r4-detail-specs dt:last-of-type,.r4-detail-specs dd:last-of-type{border-bottom:0}
+@media(max-width:1180px){.r4-detail-main{padding-right:28px;padding-left:28px}.r4-detail-product{padding:24px;gap:28px;grid-template-columns:minmax(0,.95fr) minmax(0,1fr)}.r4-detail-purchase{gap:16px}.r4-detail-purchase h1{font-size:28px}.r4-detail-buy-row{gap:9px}.r4-detail-add,.r4-detail-buy{min-width:112px;padding:0 12px}.r4-detail-image-note{max-width:34em}.r4-detail-price{font-size:33px}.r4-detail-pricing{padding:16px}}
+@media(max-width:860px){.r4-detail-main{padding:22px 18px 40px}.r4-detail-product{grid-template-columns:minmax(0,1fr);padding:18px;gap:25px}.r4-detail-image{max-height:560px;aspect-ratio:1.1}.r4-detail-purchase h1{font-size:27px}.r4-detail-purchase{gap:18px}.r4-detail-image-note{max-width:none}.r4-detail-pricing{padding:17px}.r4-detail-buy-row{gap:10px}.r4-detail-add,.r4-detail-buy{min-width:100px;padding:0 12px}.r4-detail-tabs{padding:0 18px;gap:24px}.r4-detail-tabs>button{font-size:13px}.r4-detail-specs{grid-template-columns:90px minmax(0,1fr);padding:7px 18px 15px;font-size:12px}.r4-detail-information{margin-top:20px}}
+</style>
+</helmet>
+<div class="r4-site">
+<!-- r04:header -->
+<main class="r4-detail-main">
+  <nav class="r4-detail-crumb" aria-label="面包屑"><a href="#/">首页</a><span aria-hidden="true">/</span><a href="#/products">商品分类</a><span aria-hidden="true">/</span><span>{{productName}}</span></nav>
+  <section class="r4-detail-product" aria-label="商品购买信息">
+    <div class="r4-detail-gallery">
+      <div class="r4-detail-image"><img src="{{productImage}}" alt="{{productName}}"><span class="r4-detail-image-badge">东华社区 · 每日所需</span></div>
+      <p class="r4-detail-image-note">图片用于商品展示，具体规格与商品信息请以当前页面为准。</p>
+    </div>
+    <div class="r4-detail-purchase">
+      <div>
+        <div class="r4-detail-eyebrow">COMMUNITY FRESH MARKET <span>{{storageLabel}}</span><span>{{priceModeLabel}}</span></div>
+        <h1>{{productName}}</h1>
+        <p class="r4-detail-description">{{productDescription}}</p>
+      </div>
+      <div class="r4-detail-pricing">
+        <div class="r4-detail-price-line"><span class="r4-detail-price-label">会员价</span><span class="r4-detail-price"><span>¥</span>{{salePrice}}</span><span class="r4-detail-price-unit">/ {{unitLabel}}</span><span class="r4-detail-reference">参考价 ¥{{referencePrice}}</span></div>
+        <div class="r4-detail-price-note">注册即享会员价 · 优惠与配送费在结算时计算</div>
+      </div>
+      <fieldset class="r4-detail-choice"><legend>选择规格</legend><div class="r4-detail-skus"><sc-for list="{{weights}}" as="w" hint-placeholder-count="3"><button onClick="{{w.pick}}" aria-pressed="{{w.on}}" style="{{w.style}}">{{w.label}}<span>{{w.note}}</span></button></sc-for></div></fieldset>
+      <p class="r4-detail-weight-note"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 10v6M12 7v1"></path></svg><span>{{weightMessage}}</span></p>
+      <div class="r4-detail-delivery"><span>预约配送</span><div class="fm-slots"><sc-for list="{{slots}}" as="s" hint-placeholder-count="1"><button onClick="{{s.pick}}" disabled="{{s.disabled}}" aria-pressed="{{s.on}}" style="{{s.style}}">{{s.day}} {{s.time}} {{s.state}}</button></sc-for></div></div>
+      <div class="r4-detail-buy-row">
+        <div class="r4-detail-quantity"><button aria-label="减少一份" onClick="{{dec}}">−</button><span aria-live="polite">{{qty}}</span><button aria-label="增加一份" onClick="{{inc}}">+</button></div>
+        <button class="r4-detail-add">加入购物车</button><button class="r4-detail-buy">立即购买</button>
+      </div>
+      <div class="r4-detail-service-notes"><span>按校区服务范围配送</span><span>签收后 7 天售后申请</span><span>沙箱支付</span></div>
+    </div>
+  </section>
+  <section class="r4-detail-information" aria-label="商品详细信息">
+    <div class="r4-detail-tabs" role="tablist" aria-label="商品信息"><button role="tab" aria-selected="true">规格参数</button><button role="tab" aria-selected="false">商品介绍</button><button role="tab" aria-selected="false">售后说明</button></div>
+    <dl class="r4-detail-specs"><sc-for list="{{specs}}" as="r" hint-placeholder-count="6"><dt>{{r.k}}</dt><dd>{{r.v}}</dd></sc-for></dl>
+  </section>
+</main>
+<!-- r04:footer -->
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1480}}'>
+class Component extends DCLogic {
+  themeOf() {
+    const themes = {
+      '锦缎红': { brand: '#A0021F', tint: '#F7EBED', price: '#A0021F', dot: '#D9B8BE' },
+      '松绿': { brand: '#0F6E56', tint: '#EAF2EE', price: '#A0021F', dot: '#B9C7C0' }
+    };
+    return themes[this.props.theme ?? '锦缎红'] || themes['锦缎红'];
+  }
+  renderVals() {
+    const T = this.themeOf();
+    const paint = (v) => {
+      if (typeof v === 'string') return v.split('#0F6E56').join(T.brand).split('#EAF2EE').join(T.tint).split('#D7261E').join(T.price);
+      if (Array.isArray(v)) return v.map(paint);
+      if (v && typeof v === 'object') { const o = {}; Object.keys(v).forEach((k) => { o[k] = paint(v[k]); }); return o; }
+      return v;
+    };
+    const out = paint(this.baseVals());
+    out.t = T;
+    return out;
+  }
+  constructor(props) {
+    super(props);
+    this.state = { w: 500, slot: 1, qty: 1 };
+  }
+  baseVals() {
+    const st = this.state;
+    const unitCents = 5490;
+    const fmt = (c) => (c / 100).toFixed(2);
+    const est = (g) => Math.round(unitCents * g / 500);
+    const chip = (on) => 'min-width: 112px; padding: 10px 16px; border-radius: 8px; text-align: left; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; ' +
+      (on ? 'border: 2px solid #0F6E56; background: #EAF2EE; color: #0F6E56' : 'border: 1px solid #D5DADF; background: #FFFFFF; color: #1B1F24');
+    const weights = [250, 500, 1000].map((g) => ({
+      label: '约 ' + g + 'g', amount: fmt(est(g)), on: st.w === g, style: chip(st.w === g),
+      pick: () => this.setState({ w: g })
+    }));
+    const slotDefs = [
+      { day: '今天', time: '09:00–12:00', state: '已截止', disabled: true },
+      { day: '今天', time: '14:00–17:00', state: '剩 8 个名额' },
+      { day: '今天', time: '18:00–21:00', state: '剩 21 个名额' },
+      { day: '明天', time: '09:00–12:00', state: '可预约' }
+    ];
+    const slots = slotDefs.map((s, i) => {
+      const on = st.slot === i;
+      let style = 'display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 14px; border-radius: 8px; font-family: inherit; text-align: left; ';
+      if (s.disabled) style += 'border: 1px dashed #D5DADF; background: #F7F8F9; color: #8A929C; cursor: not-allowed';
+      else if (on) style += 'border: 2px solid #0F6E56; background: #EAF2EE; color: #0F6E56; cursor: pointer';
+      else style += 'border: 1px solid #D5DADF; background: #FFFFFF; color: #1B1F24; cursor: pointer';
+      return { ...s, disabled: !!s.disabled, on, style, pick: () => { if (!s.disabled) this.setState({ slot: i }); } };
+    });
+    const amountC = est(st.w) * st.qty;
+    return {
+      weights, slots,
+      qty: st.qty,
+      amount: fmt(amountC),
+      maxTopUp: fmt(Math.round(amountC * 0.1)),
+      inc: () => this.setState({ qty: Math.min(st.qty + 1, 9) }),
+      dec: () => this.setState({ qty: Math.max(st.qty - 1, 1) }),
+      specs: [
+        { k: '商品编码', v: 'S016' },
+        { k: '产地', v: '广东' },
+        { k: '储存方式', v: '鲜活，冷藏运输' },
+        { k: '计价方式', v: '按重计价，每 500g 单价；按份下单，拣货称重' },
+        { k: '称重规则', v: '实重偏少退差；偏多补款，上限为预估的 10%' },
+        { k: '到货与新鲜度', v: '以系统实际入库信息为准，无数据时不显示' },
+        { k: '售后', v: '收货后 7 天内可申请品质售后' }
+      ],
+      related: [
+        { img: '/_blob/7df4f21ccc5aa96aea33b56af103bb83', name: '冰鲜三文鱼', spec: '200g/盒 · 挪威', price: '45.9' },
+        { img: '/_blob/d095abe6052961a74ac3dbba9adb0a20', name: '鲜活鲈鱼', spec: '按 500g 计价 · 福建', price: '32.9' },
+        { img: '/_blob/39533df27c4af5c4d923fce77a1c7751', name: '净化花蛤', spec: '500g/袋 · 山东', price: '10.9' },
+        { img: '/_blob/6e380256f753e29487c75a5e74c577a9', name: '冷冻带鱼段', spec: '500g/袋 · 浙江', price: '25.9' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
