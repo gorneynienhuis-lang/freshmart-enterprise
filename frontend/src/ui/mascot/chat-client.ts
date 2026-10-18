@@ -63,6 +63,10 @@ export async function askMascot(request: MascotChatRequest, signal?: AbortSignal
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const body = await response.json() as Envelope<MascotChatReply>;
         if (body.code !== 0 || !Array.isArray(body.data?.reply)) throw new Error(body.message || 'invalid reply');
+        // The backend deliberately returns 200 + source=fallback when the
+        // provider is unavailable. Prefer the local, verified FAQ in that
+        // case so a transient provider error never produces a dead answer.
+        if (body.data.source === 'fallback') return mockReply(request.message);
         return body.data;
     } catch (error) {
         if (signal?.aborted) throw error;

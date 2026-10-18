@@ -84,10 +84,18 @@ public class MascotService {
                 .POST(HttpRequest.BodyPublishers.ofString(json.writeValueAsString(payload)))
                 .build();
         HttpResponse<String> response = client.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() < 200 || response.statusCode() >= 300) throw new IllegalStateException("model http " + response.statusCode());
+        if (response.statusCode() < 200 || response.statusCode() >= 300) {
+            log.warn("Mascot model returned status={} body={}", response.statusCode(), compact(response.body()));
+            throw new IllegalStateException("model http " + response.statusCode());
+        }
         JsonNode root = json.readTree(response.body());
         String content = root.path("choices").path(0).path("message").path("content").asString("").trim();
         if (content.isBlank()) throw new IllegalStateException("model response missing content");
         return new ChatReply(List.of(content), SUGGESTIONS, "model");
+    }
+
+    private static String compact(String body) {
+        if (body == null) return "";
+        return body.replaceAll("\\s+", " ").substring(0, Math.min(body.length(), 300));
     }
 }
