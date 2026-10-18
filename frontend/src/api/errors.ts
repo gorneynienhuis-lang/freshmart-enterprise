@@ -32,7 +32,20 @@ function object(value: unknown): Record<string, unknown> | undefined {
   return typeof value === 'object' && value !== null ? value as Record<string, unknown> : undefined;
 }
 
-export async function checkedResponse(response: Response, method = 'GET'): Promise<Response> {
+export async function checkedResponse(response: Response, method = 'GET', binaryImage = false): Promise<Response> {
+  if (response.ok && binaryImage) {
+    const mime = response.headers.get('Content-Type')?.split(';')[0]?.trim();
+    if (method !== 'GET' || response.status !== 200 || !['image/png', 'image/jpeg'].includes(mime ?? '') || response.headers.get('X-Content-Type-Options') !== 'nosniff') {
+      throw new ApiError('图片响应格式不符合接口契约', { kind: 'protocol', status: response.status });
+    }
+    const bytes = new Uint8Array(await response.clone().arrayBuffer());
+    const png = mime === 'image/png' && bytes.length >= 8 && [137,80,78,71,13,10,26,10].every((n,i) => bytes[i] === n);
+    const jpeg = mime === 'image/jpeg' && bytes.length >= 3 && bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255;
+    if (bytes.length > 6 * 1024 * 1024 || (!png && !jpeg)) {
+      throw new ApiError('图片内容损坏或超过大小限制', { kind: 'protocol', status: response.status });
+    }
+    return response;
+  }
   let value: unknown;
   try { value = await response.clone().json(); } catch { /* handled as protocol/http error below */ }
   const envelope = object(value);

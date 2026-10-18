@@ -76,7 +76,7 @@ function validate(schema,value,where='$',depth=0){
 }
 function testExample(schema,value,where){examples++;try{failures.push(...validate(schema,value,where));}catch(e){failures.push(where+': '+e.message);}}
 check(doc.openapi==='3.1.0','OpenAPI version must be 3.1.0');
-check(doc.info?.version==='0.1.2','Expected contract version 0.1.2');
+check(doc.info?.version==='0.2.0','Expected contract version 0.2.0');
 check(doc['x-contract-status']==='IMPLEMENTATION_IN_PROGRESS','Implementation boundary missing');
 walk(doc,(value,where)=>{if(value.$ref){refs++;try{resolve(value.$ref)}catch(e){failures.push(where+': '+e.message)}}});
 walk(doc.components.schemas,(s,where)=>{
@@ -164,6 +164,15 @@ export function validateRuntimeResponse(method, url, status, body) {
  if(!entry)return {covered:false,errors:[]};
  const response=entry.op.responses[String(status)];
  if(!response)return {covered:true,errors:[`${method} ${pathname}: undeclared status ${status}`]};
- const schema=Object.values(deref(response).content||{})[0]?.schema;
+ const media=Object.entries(deref(response).content||{});
+ if(entry.op['x-response-body']==='BINARY_IMAGE'&&String(status).startsWith('2')) {
+  const allowed=['image/png','image/jpeg'];
+  const bytes=body instanceof Uint8Array?body:body instanceof ArrayBuffer?new Uint8Array(body):null;
+  const isPng=bytes?.length>=8&&[137,80,78,71,13,10,26,10].every((n,i)=>bytes[i]===n);
+  const isJpeg=bytes?.length>=3&&bytes[0]===255&&bytes[1]===216&&bytes[2]===255;
+  const valid=media.every(([type,m])=>allowed.includes(type)&&m.schema?.format==='binary')&&(isPng||isJpeg);
+  return {covered:true,binary:true,errors:valid?[]:['Expected actual PNG/JPEG bytes for binary image response']};
+ }
+ const schema=media[0]?.[1]?.schema;
  return {covered:true,errors:schema?validate(schema,body,`${entry.op.operationId}.${status}`):[]};
 }

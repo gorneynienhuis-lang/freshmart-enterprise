@@ -3,7 +3,7 @@
   "jsonSchemaDialect": "https://json-schema.org/draft/2020-12/schema",
   "info": {
     "title": "fresh-mall 企业级生鲜商城接口契约",
-    "version": "0.1.2",
+    "version": "0.2.0",
     "description": "2026-10-18课程生鲜商城接口契约；以各operation的x-implementation-status区分已实现与尚未实现，示例不代表验收结果。BASELINE.md规定业务基线，CNY整数分、整数克、字符串ID，业务时区Asia/Shanghai。JSON语法为YAML1.2子集。v0.1.2新增员工治理五操作实装标记与独立showcase部署环境，业务状态和已有请求/响应结构不变。IMPLEMENTED_DEMO表示存在真实数据库实现，运行与部署验收以docs/evidence为准；showcase始终为合成数据和沙箱支付。"
   },
   "servers": [
@@ -1489,8 +1489,7 @@
         "x-permissions": [
           "catalog.read"
         ],
-        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
-        "x-demo-limitations": "仅验证商品并返回无评价空分页；评价持久化及提交尚未实现，不生成虚假评价。"
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE"
       }
     },
     "/api/v1/cart": {
@@ -4970,8 +4969,7 @@
         "x-permissions": [
           "aftersale.self"
         ],
-        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
-        "x-demo-limitations": "仅SHORTAGE/LATE；QUALITY与非空evidenceMediaIds明确拒绝，私有证据媒体接口尚未实现。"
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE"
       },
       "get": {
         "operationId": "listMyAftersales",
@@ -5434,7 +5432,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -5473,7 +5471,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -5686,7 +5684,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -5735,7 +5733,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -5848,7 +5846,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -5887,7 +5885,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -6019,7 +6017,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -6065,7 +6063,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -6174,7 +6172,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -6231,7 +6229,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -6362,7 +6360,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -6419,7 +6417,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -6550,7 +6548,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -6607,7 +6605,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -6721,7 +6719,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -6778,7 +6776,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -6885,7 +6883,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -6963,7 +6961,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -7049,7 +7047,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -7088,7 +7086,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -7193,7 +7191,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -7239,7 +7237,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -7323,7 +7321,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -7380,7 +7378,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -7486,7 +7484,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -7543,7 +7541,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -7649,7 +7647,7 @@
           "PICKER",
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -7711,7 +7709,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -9066,7 +9064,7 @@
         "x-roles": [
           "PICKER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -9123,7 +9121,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -10106,7 +10104,7 @@
         "x-roles": [
           "COURIER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -10163,7 +10161,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -11457,7 +11455,7 @@
         "x-roles": [
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -11502,7 +11500,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -11576,7 +11574,7 @@
           "admin"
         ],
         "summary": "触发沙箱日对账",
-        "description": "触发沙箱日对账\n\n按资金SUCCESS事件日比较渠道账与内部账，异步执行；差异不得自动改账抹平。\n\nIdempotency-Key必需；同键不同体409。同键重试不重复执行业务。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "同步生成最近366天内沙箱业务日对账的不可变快照。命令幂等和所有读取在同一REPEATABLE_READ事务；返回201与COMPLETED。核对渠道成功凭证、内部支付退款与订单金额；差异不得自动改账。历史缺少独立渠道凭证会报告MISSING_CHANNEL。Idempotency-Key必需，同键不同请求409。",
         "security": [
           {
             "bearerAuth": []
@@ -11585,7 +11583,7 @@
         "x-roles": [
           "FINANCE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -11623,8 +11621,29 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "409": {
+            "$ref": "#/components/responses/Conflict"
+          },
+          "422": {
+            "$ref": "#/components/responses/Unprocessable"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "201": {
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -11663,27 +11682,6 @@
                 }
               }
             }
-          },
-          "400": {
-            "$ref": "#/components/responses/BadRequest"
-          },
-          "401": {
-            "$ref": "#/components/responses/Unauthorized"
-          },
-          "403": {
-            "$ref": "#/components/responses/Forbidden"
-          },
-          "409": {
-            "$ref": "#/components/responses/Conflict"
-          },
-          "422": {
-            "$ref": "#/components/responses/Unprocessable"
-          },
-          "429": {
-            "$ref": "#/components/responses/RateLimited"
-          },
-          "500": {
-            "$ref": "#/components/responses/InternalError"
           }
         },
         "requestBody": {
@@ -11712,7 +11710,7 @@
           "admin"
         ],
         "summary": "管理员审计查询",
-        "description": "管理员审计查询\n\n只读不可改删，敏感payload/token/密码不写日志。ADMIN没有商品、拣货、退款等业务权限。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。",
+        "description": "管理员审计查询\n\n只读不可改删，敏感payload/token/密码不写日志。ADMIN没有商品、拣货、退款等业务权限。\n\n所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。 查询默认最近7天，时间窗最多31天，结束时间不可晚于服务器当前时间5分钟；仅ADMIN。历史未记录角色/结果时返回空数组/UNKNOWN。",
         "security": [
           {
             "bearerAuth": []
@@ -11721,7 +11719,7 @@
         "x-roles": [
           "ADMIN"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -11807,7 +11805,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -11927,7 +11925,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12048,7 +12046,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12206,7 +12204,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12366,7 +12364,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12494,7 +12492,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12569,7 +12567,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12608,7 +12606,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12689,7 +12687,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12746,7 +12744,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12848,7 +12846,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12875,7 +12873,7 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -12947,7 +12945,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -12986,7 +12984,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -13221,7 +13219,7 @@
         "x-roles": [
           "MEMBER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -13251,6 +13249,10 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "STORAGE_UNAVAILABLE": {
+            "httpStatus": 503,
+            "code": 1050
           }
         },
         "parameters": [
@@ -13260,7 +13262,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -13315,6 +13317,9 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/StorageUnavailable"
           }
         },
         "requestBody": {
@@ -13355,7 +13360,7 @@
           "MEMBER",
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "NONE",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -13381,6 +13386,10 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "STORAGE_UNAVAILABLE": {
+            "httpStatus": 503,
+            "code": 1050
           }
         },
         "parameters": [
@@ -13401,7 +13410,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -13457,6 +13466,9 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/StorageUnavailable"
           }
         },
         "x-permissions": [
@@ -13481,7 +13493,7 @@
         "x-roles": [
           "COURIER"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -13538,7 +13550,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -13640,7 +13652,7 @@
         "x-roles": [
           "OPERATOR"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -13670,6 +13682,10 @@
           "INTERNAL_ERROR": {
             "httpStatus": 500,
             "code": 1050
+          },
+          "STORAGE_UNAVAILABLE": {
+            "httpStatus": 503,
+            "code": 1050
           }
         },
         "parameters": [
@@ -13679,7 +13695,7 @@
         ],
         "responses": {
           "201": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -13735,6 +13751,9 @@
           },
           "500": {
             "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/StorageUnavailable"
           }
         },
         "requestBody": {
@@ -13952,7 +13971,7 @@
         "x-roles": [
           "SERVICE"
         ],
-        "x-implementation-status": "CONTRACT_ONLY",
+        "x-implementation-status": "IMPLEMENTED_DEMO",
         "x-request-body": "JSON_SCHEMA",
         "x-error-codes": {
           "VALIDATION_ERROR": {
@@ -14009,7 +14028,7 @@
         ],
         "responses": {
           "200": {
-            "description": "成功（此文件为契约，后端尚待实现）",
+            "description": "成功；真实运行与验收状态见测试证据",
             "headers": {
               "X-Trace-Id": {
                 "schema": {
@@ -14112,6 +14131,446 @@
           "inventoryUnchanged": true
         }
       }
+    },
+    "/api/v1/media/{mediaId}/content": {
+      "get": {
+        "operationId": "readPrivateMedia",
+        "tags": [
+          "media"
+        ],
+        "summary": "读取净化后的私有证据",
+        "description": "Bearer会话与签名同时有效才返回。签名绑定mediaId、主体、sessionId和expiresAt，最长5分钟；每次重验当前资源范围和会话状态，越权/错签/过期404。no-store，nosniff。",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "x-roles": [
+          "MEMBER",
+          "SERVICE"
+        ],
+        "x-implementation-status": "IMPLEMENTED_DEMO",
+        "x-request-body": "NONE",
+        "x-error-codes": {
+          "VALIDATION_ERROR": {
+            "httpStatus": 400,
+            "code": 1001
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
+          },
+          "NOT_FOUND": {
+            "httpStatus": 404,
+            "code": 1004
+          },
+          "RATE_LIMITED": {
+            "httpStatus": 429,
+            "code": 1029
+          },
+          "INTERNAL_ERROR": {
+            "httpStatus": 500,
+            "code": 1050
+          },
+          "STORAGE_UNAVAILABLE": {
+            "httpStatus": 503,
+            "code": 1050
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "对外字符串ID；不将bigint作为JSON数字传输",
+              "example": "mediaId-1",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "example": "mediaId-1"
+          },
+          {
+            "name": "expiresAt",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 9007199254740991
+            },
+            "example": 1792303200
+          },
+          {
+            "name": "sessionId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "example": "2f6c4ace-b931-4f10-9689-1e9670aeec54"
+          },
+          {
+            "name": "signature",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 32,
+              "maxLength": 128,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "example": "0123456789abcdefghijklmnopqrstuvwxyzABCDEFG"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回经过真实解码和重新编码的PNG或JPEG字节。",
+            "headers": {
+              "X-Trace-Id": {
+                "schema": {
+                  "type": "string",
+                  "description": "对外字符串ID；不将bigint作为JSON数字传输",
+                  "example": "trace-demo-001",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9_-]+$"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "no-store"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "const": "nosniff",
+                  "example": "nosniff"
+                }
+              }
+            },
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": "<binary image bytes>"
+              },
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": "<binary image bytes>"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/StorageUnavailable"
+          }
+        },
+        "x-permissions": [
+          "media.access"
+        ],
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
+        "x-response-body": "BINARY_IMAGE"
+      }
+    },
+    "/api/v1/media/products/{mediaId}/content": {
+      "get": {
+        "operationId": "readProductMedia",
+        "tags": [
+          "media"
+        ],
+        "summary": "读取净化后的商品图片",
+        "description": "仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。",
+        "security": [],
+        "x-roles": [
+          "GUEST"
+        ],
+        "x-implementation-status": "IMPLEMENTED_DEMO",
+        "x-request-body": "NONE",
+        "x-error-codes": {
+          "VALIDATION_ERROR": {
+            "httpStatus": 400,
+            "code": 1001
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
+          },
+          "NOT_FOUND": {
+            "httpStatus": 404,
+            "code": 1004
+          },
+          "RATE_LIMITED": {
+            "httpStatus": 429,
+            "code": 1029
+          },
+          "INTERNAL_ERROR": {
+            "httpStatus": 500,
+            "code": 1050
+          },
+          "STORAGE_UNAVAILABLE": {
+            "httpStatus": 503,
+            "code": 1050
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "对外字符串ID；不将bigint作为JSON数字传输",
+              "example": "mediaId-1",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "example": "mediaId-1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回经过真实解码和重新编码的PNG或JPEG字节。",
+            "headers": {
+              "X-Trace-Id": {
+                "schema": {
+                  "type": "string",
+                  "description": "对外字符串ID；不将bigint作为JSON数字传输",
+                  "example": "trace-demo-001",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9_-]+$"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "max-age=3600, public"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "const": "nosniff",
+                  "example": "nosniff"
+                }
+              }
+            },
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": "<binary image bytes>"
+              },
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": "<binary image bytes>"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/StorageUnavailable"
+          }
+        },
+        "x-permissions": [
+          "catalog.read"
+        ],
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
+        "x-response-body": "BINARY_IMAGE"
+      }
+    },
+    "/api/v1/media/reviews/{mediaId}/content": {
+      "get": {
+        "operationId": "readReviewMedia",
+        "tags": [
+          "media"
+        ],
+        "summary": "读取净化后的已授权公开评价图片",
+        "description": "仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。",
+        "security": [],
+        "x-roles": [
+          "GUEST"
+        ],
+        "x-implementation-status": "IMPLEMENTED_DEMO",
+        "x-request-body": "NONE",
+        "x-error-codes": {
+          "VALIDATION_ERROR": {
+            "httpStatus": 400,
+            "code": 1001
+          },
+          "UNAUTHENTICATED": {
+            "httpStatus": 401,
+            "code": 1002
+          },
+          "FORBIDDEN": {
+            "httpStatus": 403,
+            "code": 1003
+          },
+          "NOT_FOUND": {
+            "httpStatus": 404,
+            "code": 1004
+          },
+          "RATE_LIMITED": {
+            "httpStatus": 429,
+            "code": 1029
+          },
+          "INTERNAL_ERROR": {
+            "httpStatus": 500,
+            "code": 1050
+          },
+          "STORAGE_UNAVAILABLE": {
+            "httpStatus": 503,
+            "code": 1050
+          }
+        },
+        "parameters": [
+          {
+            "name": "mediaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "对外字符串ID；不将bigint作为JSON数字传输",
+              "example": "mediaId-1",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            },
+            "example": "mediaId-1"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "返回经过真实解码和重新编码的PNG或JPEG字节。",
+            "headers": {
+              "X-Trace-Id": {
+                "schema": {
+                  "type": "string",
+                  "description": "对外字符串ID；不将bigint作为JSON数字传输",
+                  "example": "trace-demo-001",
+                  "minLength": 1,
+                  "maxLength": 64,
+                  "pattern": "^[A-Za-z0-9_-]+$"
+                }
+              },
+              "Cache-Control": {
+                "schema": {
+                  "type": "string",
+                  "example": "max-age=3600, public"
+                }
+              },
+              "X-Content-Type-Options": {
+                "schema": {
+                  "type": "string",
+                  "const": "nosniff",
+                  "example": "nosniff"
+                }
+              }
+            },
+            "content": {
+              "image/png": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": "<binary image bytes>"
+              },
+              "image/jpeg": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                },
+                "example": "<binary image bytes>"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/BadRequest"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          },
+          "429": {
+            "$ref": "#/components/responses/RateLimited"
+          },
+          "500": {
+            "$ref": "#/components/responses/InternalError"
+          },
+          "503": {
+            "$ref": "#/components/responses/StorageUnavailable"
+          }
+        },
+        "x-permissions": [
+          "catalog.read"
+        ],
+        "x-permission-mode": "ANY_WITH_ROLE_AND_SCOPE",
+        "x-response-body": "BINARY_IMAGE"
+      }
     }
   },
   "components": {
@@ -14164,7 +14623,8 @@
               "SOD_VIOLATION",
               "RATE_LIMITED",
               "INTERNAL_ERROR",
-              "CHANNEL_UNAVAILABLE"
+              "CHANNEL_UNAVAILABLE",
+              "STORAGE_UNAVAILABLE"
             ],
             "example": "VALIDATION_ERROR"
           },
@@ -17711,7 +18171,7 @@
           "url": {
             "type": "string",
             "description": "短效私有签名URL，不可公开缓存；服务端只签发已有授权媒体",
-            "example": "http://localhost:8080/media-content/media-1?token=demo",
+            "example": "http://localhost:8080/api/v1/media/media-1/content?expiresAt=1792303200&sessionId=2f6c4ace-b931-4f10-9689-1e9670aeec54&signature=example-signature",
             "format": "uri",
             "maxLength": 2048
           },
@@ -18218,8 +18678,9 @@
             "items": {
               "$ref": "#/components/schemas/Sku"
             },
-            "minItems": 1,
-            "maxItems": 100
+            "minItems": 0,
+            "maxItems": 100,
+            "description": "DRAFT可尚无SKU；上架必须存在有效ACTIVE规格。无规格显示未配置规格、0参考价、SOLD_OUT。"
           },
           "version": {
             "type": "integer",
@@ -18410,10 +18871,19 @@
             "example": "NORMAL"
           },
           "producedAt": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2026-10-18T00:00:00+08:00",
-            "description": "RFC3339带时区；业务日界以Asia/Shanghai解释"
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time",
+                "example": "2026-10-18T00:00:00+08:00",
+                "description": "RFC3339带时区；业务日界以Asia/Shanghai解释"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": null,
+            "description": "新入库必填真实生产时间。历史批次未保存则null，不把已知入库时间当作生产时间。"
           },
           "expiresAt": {
             "type": "string",
@@ -18515,7 +18985,20 @@
             "type": "integer",
             "minimum": -9007199254740991,
             "maximum": 9007199254740991,
-            "example": -1
+            "example": -1,
+            "description": " 必须为非零整数；不能用0写入伪调整流水。",
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": -1
+              },
+              {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 9007199254740991
+              }
+            ]
           },
           "reasonCode": {
             "type": "string",
@@ -20022,6 +20505,19 @@
               }
             ],
             "example": null
+          },
+          "differences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ReconciliationDifference"
+            },
+            "maxItems": 200,
+            "description": "最多200条差异样本，完整数量见differenceCount。旧报告可无此字段。"
+          },
+          "detailsTruncated": {
+            "type": "boolean",
+            "example": false,
+            "description": "差异样本是否被截断。"
           }
         },
         "required": [
@@ -20036,7 +20532,8 @@
           "differenceCount",
           "createdAt",
           "completedAt"
-        ]
+        ],
+        "description": "业务日为Asia/Shanghai。COMPLETED表示快照生成完毕，不代表无差异。只比较独立真实渠道凭证和账目，不补造历史凭证，不自动修账。"
       },
       "ReconciliationRequest": {
         "type": "object",
@@ -20087,8 +20584,9 @@
               ],
               "example": "MEMBER"
             },
-            "minItems": 1,
-            "maxItems": 8
+            "minItems": 0,
+            "maxItems": 8,
+            "description": "事件发生时记录的角色快照。历史未记录或系统/渠道/匿名主体返回空数组，不以当前账号角色推断历史。"
           },
           "action": {
             "type": "string",
@@ -20117,9 +20615,11 @@
             "enum": [
               "SUCCESS",
               "DENIED",
-              "FAILED"
+              "FAILED",
+              "UNKNOWN"
             ],
-            "example": "SUCCESS"
+            "example": "SUCCESS",
+            "description": "历史缺失结果为UNKNOWN；不从未验证的旧operation推断。"
           },
           "reason": {
             "anyOf": [
@@ -20891,7 +21391,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -21053,7 +21553,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -21512,7 +22012,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -21869,7 +22369,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -22050,7 +22550,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -22253,7 +22753,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -22389,7 +22889,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -22482,7 +22982,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -22664,7 +23164,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -22877,7 +23377,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -23023,7 +23523,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -23172,7 +23672,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -23310,7 +23810,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -23443,7 +23943,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -23537,7 +24037,7 @@
           "page": {
             "type": "integer",
             "minimum": 1,
-            "maximum": 9007199254740991,
+            "maximum": 2147483647,
             "example": 1
           },
           "size": {
@@ -24159,6 +24659,82 @@
           "reason",
           "expectedVersion"
         ]
+      },
+      "ReconciliationDifference": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "resourceType",
+          "resourceId",
+          "type",
+          "bookAmount",
+          "channelAmount",
+          "differenceAmount",
+          "description"
+        ],
+        "properties": {
+          "resourceType": {
+            "type": "string",
+            "enum": [
+              "PAYMENT",
+              "REFUND",
+              "ORDER"
+            ],
+            "example": "PAYMENT"
+          },
+          "resourceId": {
+            "type": "string",
+            "description": "对外字符串ID；不将bigint作为JSON数字传输",
+            "example": "order-1",
+            "minLength": 1,
+            "maxLength": 64,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "MISSING_LEDGER",
+              "MISSING_CHANNEL",
+              "AMOUNT_MISMATCH",
+              "REFERENCE_MISMATCH",
+              "ORDER_PAID_MISMATCH",
+              "ORDER_REFUND_MISMATCH"
+            ],
+            "example": "MISSING_CHANNEL"
+          },
+          "bookAmount": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "example": 0
+          },
+          "channelAmount": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991,
+                "example": 0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "example": null
+          },
+          "differenceAmount": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991,
+            "example": 0
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500,
+            "example": "缺少对应渠道凭证"
+          }
+        }
       }
     },
     "parameters": {
@@ -24169,7 +24745,7 @@
         "schema": {
           "type": "integer",
           "minimum": 1,
-          "maximum": 9007199254740991,
+          "maximum": 2147483647,
           "example": 1,
           "default": 1
         }
@@ -24560,6 +25136,39 @@
               "message": "沙箱渠道暂时不可用",
               "data": {
                 "errorKey": "CHANNEL_UNAVAILABLE",
+                "retryable": true,
+                "details": []
+              },
+              "traceId": "trace-demo-001",
+              "timestamp": "2026-10-18T14:00:00+08:00"
+            }
+          }
+        }
+      },
+      "StorageUnavailable": {
+        "description": "图片存储暂不可用或完整性校验失败；不要返回损坏内容。",
+        "headers": {
+          "X-Trace-Id": {
+            "schema": {
+              "type": "string",
+              "description": "对外字符串ID；不将bigint作为JSON数字传输",
+              "example": "trace-demo-001",
+              "minLength": 1,
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            }
+          }
+        },
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ErrorEnvelope"
+            },
+            "example": {
+              "code": 1050,
+              "message": "图片存储暂不可用",
+              "data": {
+                "errorKey": "STORAGE_UNAVAILABLE",
                 "retryable": true,
                 "details": []
               },

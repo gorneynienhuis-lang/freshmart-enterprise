@@ -1812,13 +1812,7 @@ export interface paths {
         put?: never;
         /**
          * 触发沙箱日对账
-         * @description 触发沙箱日对账
-         *
-         *     按资金SUCCESS事件日比较渠道账与内部账，异步执行；差异不得自动改账抹平。
-         *
-         *     Idempotency-Key必需；同键不同体409。同键重试不重复执行业务。
-         *
-         *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         * @description 同步生成最近366天内沙箱业务日对账的不可变快照。命令幂等和所有读取在同一REPEATABLE_READ事务；返回201与COMPLETED。核对渠道成功凭证、内部支付退款与订单金额；差异不得自动改账。历史缺少独立渠道凭证会报告MISSING_CHANNEL。Idempotency-Key必需，同键不同请求409。
          */
         post: operations["createReconciliation"];
         delete?: never;
@@ -1840,7 +1834,7 @@ export interface paths {
          *
          *     只读不可改删，敏感payload/token/密码不写日志。ADMIN没有商品、拣货、退款等业务权限。
          *
-         *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
+         *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。 查询默认最近7天，时间窗最多31天，结束时间不可晚于服务器当前时间5分钟；仅ADMIN。历史未记录角色/结果时返回空数组/UNKNOWN。
          */
         get: operations["listAuditLogs"];
         put?: never;
@@ -2209,6 +2203,66 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/media/{mediaId}/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取净化后的私有证据
+         * @description Bearer会话与签名同时有效才返回。签名绑定mediaId、主体、sessionId和expiresAt，最长5分钟；每次重验当前资源范围和会话状态，越权/错签/过期404。no-store，nosniff。
+         */
+        get: operations["readPrivateMedia"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/media/products/{mediaId}/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取净化后的商品图片
+         * @description 仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。
+         */
+        get: operations["readProductMedia"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/media/reviews/{mediaId}/content": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 读取净化后的已授权公开评价图片
+         * @description 仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。
+         */
+        get: operations["readReviewMedia"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -2230,7 +2284,7 @@ export interface components {
              * @example VALIDATION_ERROR
              * @enum {string}
              */
-            errorKey: "VALIDATION_ERROR" | "UNAUTHENTICATED" | "FORBIDDEN" | "NOT_FOUND" | "VERSION_CONFLICT" | "IDEMPOTENCY_CONFLICT" | "INVALID_STATE" | "INSUFFICIENT_STOCK" | "SLOT_UNAVAILABLE" | "QUOTE_EXPIRED" | "PAYMENT_MISMATCH" | "SIGNATURE_INVALID" | "REFUND_LIMIT" | "WEIGHT_LIMIT" | "SOD_VIOLATION" | "RATE_LIMITED" | "INTERNAL_ERROR" | "CHANNEL_UNAVAILABLE";
+            errorKey: "VALIDATION_ERROR" | "UNAUTHENTICATED" | "FORBIDDEN" | "NOT_FOUND" | "VERSION_CONFLICT" | "IDEMPOTENCY_CONFLICT" | "INVALID_STATE" | "INSUFFICIENT_STOCK" | "SLOT_UNAVAILABLE" | "QUOTE_EXPIRED" | "PAYMENT_MISMATCH" | "SIGNATURE_INVALID" | "REFUND_LIMIT" | "WEIGHT_LIMIT" | "SOD_VIOLATION" | "RATE_LIMITED" | "INTERNAL_ERROR" | "CHANNEL_UNAVAILABLE" | "STORAGE_UNAVAILABLE";
             /** @example false */
             retryable: boolean;
             details: components["schemas"]["ErrorDetail"][];
@@ -3839,7 +3893,7 @@ export interface components {
             /**
              * Format: uri
              * @description 短效私有签名URL，不可公开缓存；服务端只签发已有授权媒体
-             * @example http://localhost:8080/media-content/media-1?token=demo
+             * @example http://localhost:8080/api/v1/media/media-1/content?expiresAt=1792303200&sessionId=2f6c4ace-b931-4f10-9689-1e9670aeec54&signature=example-signature
              */
             url: string;
             /**
@@ -4131,6 +4185,7 @@ export interface components {
             stockStatus: "IN_STOCK" | "LOW" | "SOLD_OUT";
             /** @example false */
             nearExpiry: boolean;
+            /** @description DRAFT可尚无SKU；上架必须存在有效ACTIVE规格。无规格显示未配置规格、0参考价、SOLD_OUT。 */
             skus: components["schemas"]["Sku"][];
             /**
              * @description 资源乐观锁版本；写入时必须与当前version一致，否则409
@@ -4201,11 +4256,10 @@ export interface components {
              */
             freshness: "NORMAL" | "NEAR_EXPIRY" | "EXPIRED";
             /**
-             * Format: date-time
-             * @description RFC3339带时区；业务日界以Asia/Shanghai解释
-             * @example 2026-10-18T00:00:00+08:00
+             * @description 新入库必填真实生产时间。历史批次未保存则null，不把已知入库时间当作生产时间。
+             * @example null
              */
-            producedAt: string;
+            producedAt: string | null;
             /**
              * Format: date-time
              * @description RFC3339带时区；业务日界以Asia/Shanghai解释
@@ -4256,7 +4310,10 @@ export interface components {
             reason: string;
         };
         InventoryAdjustmentRequest: {
-            /** @example -1 */
+            /**
+             * @description 必须为非零整数；不能用0写入伪调整流水。
+             * @example -1
+             */
             quantityDelta: number;
             /**
              * @example COUNT_CORRECTION
@@ -4806,6 +4863,7 @@ export interface components {
              */
             reason: string;
         };
+        /** @description 业务日为Asia/Shanghai。COMPLETED表示快照生成完毕，不代表无差异。只比较独立真实渠道凭证和账目，不补造历史凭证，不自动修账。 */
         Reconciliation: {
             /**
              * @description 对外字符串ID；不将bigint作为JSON数字传输
@@ -4848,6 +4906,13 @@ export interface components {
             createdAt: string;
             /** @example null */
             completedAt: string | null;
+            /** @description 最多200条差异样本，完整数量见differenceCount。旧报告可无此字段。 */
+            differences?: components["schemas"]["ReconciliationDifference"][];
+            /**
+             * @description 差异样本是否被截断。
+             * @example false
+             */
+            detailsTruncated?: boolean;
         };
         ReconciliationRequest: {
             /**
@@ -4867,6 +4932,7 @@ export interface components {
              * @example u1001
              */
             actorId: string;
+            /** @description 事件发生时记录的角色快照。历史未记录或系统/渠道/匿名主体返回空数组，不以当前账号角色推断历史。 */
             actorRoles: ("MEMBER" | "PICKER" | "COURIER" | "OPERATOR" | "SERVICE" | "FINANCE" | "ADMIN")[];
             /**
              * @description 文本；服务端校验长度并以纯文本处理
@@ -4884,10 +4950,11 @@ export interface components {
              */
             resourceId: string;
             /**
+             * @description 历史缺失结果为UNKNOWN；不从未验证的旧operation推断。
              * @example SUCCESS
              * @enum {string}
              */
-            result: "SUCCESS" | "DENIED" | "FAILED";
+            result: "SUCCESS" | "DENIED" | "FAILED" | "UNKNOWN";
             /** @example null */
             reason: string | null;
             /**
@@ -7196,6 +7263,31 @@ export interface components {
              */
             expectedVersion: number;
         };
+        ReconciliationDifference: {
+            /**
+             * @example PAYMENT
+             * @enum {string}
+             */
+            resourceType: "PAYMENT" | "REFUND" | "ORDER";
+            /**
+             * @description 对外字符串ID；不将bigint作为JSON数字传输
+             * @example order-1
+             */
+            resourceId: string;
+            /**
+             * @example MISSING_CHANNEL
+             * @enum {string}
+             */
+            type: "MISSING_LEDGER" | "MISSING_CHANNEL" | "AMOUNT_MISMATCH" | "REFERENCE_MISMATCH" | "ORDER_PAID_MISMATCH" | "ORDER_REFUND_MISMATCH";
+            /** @example 0 */
+            bookAmount: number;
+            /** @example null */
+            channelAmount: number | null;
+            /** @example 0 */
+            differenceAmount: number;
+            /** @example 缺少对应渠道凭证 */
+            description: string;
+        };
     };
     responses: {
         /** @description HTTP 400: 请求参数不合法。具体errorKey以该操作x-error-codes为准；错误也返回traceId。 */
@@ -7397,6 +7489,29 @@ export interface components {
                  *       "message": "沙箱渠道暂时不可用",
                  *       "data": {
                  *         "errorKey": "CHANNEL_UNAVAILABLE",
+                 *         "retryable": true,
+                 *         "details": []
+                 *       },
+                 *       "traceId": "trace-demo-001",
+                 *       "timestamp": "2026-10-18T14:00:00+08:00"
+                 *     }
+                 */
+                "application/json": components["schemas"]["ErrorEnvelope"];
+            };
+        };
+        /** @description 图片存储暂不可用或完整性校验失败；不要返回损坏内容。 */
+        StorageUnavailable: {
+            headers: {
+                "X-Trace-Id"?: string;
+                [name: string]: unknown;
+            };
+            content: {
+                /**
+                 * @example {
+                 *       "code": 1050,
+                 *       "message": "图片存储暂不可用",
+                 *       "data": {
+                 *         "errorKey": "STORAGE_UNAVAILABLE",
                  *         "retryable": true,
                  *         "details": []
                  *       },
@@ -10052,7 +10167,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10150,7 +10265,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10251,7 +10366,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10333,7 +10448,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10427,7 +10542,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10523,7 +10638,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10626,7 +10741,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10698,7 +10813,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10763,7 +10878,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10837,7 +10952,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10892,7 +11007,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -10961,7 +11076,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11031,7 +11146,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11091,7 +11206,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -11852,7 +11967,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12368,7 +12483,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -12977,7 +13092,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13043,8 +13158,8 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
-            202: {
+            /** @description 成功；真实运行与验收状态见测试证据 */
+            201: {
                 headers: {
                     "X-Trace-Id"?: string;
                     [name: string]: unknown;
@@ -13103,7 +13218,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13161,7 +13276,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13231,7 +13346,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13298,7 +13413,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13364,7 +13479,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13413,7 +13528,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13460,7 +13575,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13528,7 +13643,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13577,7 +13692,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13638,7 +13753,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13752,7 +13867,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13785,6 +13900,7 @@ export interface operations {
             422: components["responses"]["Unprocessable"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
+            503: components["responses"]["StorageUnavailable"];
         };
     };
     getPrivateMediaAccess: {
@@ -13799,7 +13915,7 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13829,6 +13945,7 @@ export interface operations {
             404: components["responses"]["NotFound"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
+            503: components["responses"]["StorageUnavailable"];
         };
     };
     accessDeliveryContact: {
@@ -13857,7 +13974,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13914,7 +14031,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             201: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -13948,6 +14065,7 @@ export interface operations {
             422: components["responses"]["Unprocessable"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
+            503: components["responses"]["StorageUnavailable"];
         };
     };
     claimAftersale: {
@@ -14057,7 +14175,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description 成功（此文件为契约，后端尚待实现） */
+            /** @description 成功；真实运行与验收状态见测试证据 */
             200: {
                 headers: {
                     "X-Trace-Id"?: string;
@@ -14108,6 +14226,121 @@ export interface operations {
             409: components["responses"]["Conflict"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
+        };
+    };
+    readPrivateMedia: {
+        parameters: {
+            query: {
+                /** @example 1792303200 */
+                expiresAt: number;
+                /** @example 2f6c4ace-b931-4f10-9689-1e9670aeec54 */
+                sessionId: string;
+                /** @example 0123456789abcdefghijklmnopqrstuvwxyzABCDEFG */
+                signature: string;
+            };
+            header?: never;
+            path: {
+                /** @example mediaId-1 */
+                mediaId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 返回经过真实解码和重新编码的PNG或JPEG字节。 */
+            200: {
+                headers: {
+                    "X-Trace-Id"?: string;
+                    "Cache-Control"?: string;
+                    "X-Content-Type-Options"?: "nosniff";
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example <binary image bytes> */
+                    "image/png": string;
+                    /** @example <binary image bytes> */
+                    "image/jpeg": string;
+                };
+            };
+            400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
+            404: components["responses"]["NotFound"];
+            429: components["responses"]["RateLimited"];
+            500: components["responses"]["InternalError"];
+            503: components["responses"]["StorageUnavailable"];
+        };
+    };
+    readProductMedia: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example mediaId-1 */
+                mediaId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 返回经过真实解码和重新编码的PNG或JPEG字节。 */
+            200: {
+                headers: {
+                    "X-Trace-Id"?: string;
+                    "Cache-Control"?: string;
+                    "X-Content-Type-Options"?: "nosniff";
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example <binary image bytes> */
+                    "image/png": string;
+                    /** @example <binary image bytes> */
+                    "image/jpeg": string;
+                };
+            };
+            400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
+            404: components["responses"]["NotFound"];
+            429: components["responses"]["RateLimited"];
+            500: components["responses"]["InternalError"];
+            503: components["responses"]["StorageUnavailable"];
+        };
+    };
+    readReviewMedia: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example mediaId-1 */
+                mediaId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description 返回经过真实解码和重新编码的PNG或JPEG字节。 */
+            200: {
+                headers: {
+                    "X-Trace-Id"?: string;
+                    "Cache-Control"?: string;
+                    "X-Content-Type-Options"?: "nosniff";
+                    [name: string]: unknown;
+                };
+                content: {
+                    /** @example <binary image bytes> */
+                    "image/png": string;
+                    /** @example <binary image bytes> */
+                    "image/jpeg": string;
+                };
+            };
+            400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
+            404: components["responses"]["NotFound"];
+            429: components["responses"]["RateLimited"];
+            500: components["responses"]["InternalError"];
+            503: components["responses"]["StorageUnavailable"];
         };
     };
 }

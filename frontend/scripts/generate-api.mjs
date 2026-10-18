@@ -18,6 +18,7 @@ const operations = Object.entries(document.paths).flatMap(([path, item]) =>
     csrf: (op.parameters ?? []).some(p => p.$ref === '#/components/parameters/Csrf'),
     idempotent: (op.parameters ?? []).some(p => p.$ref === '#/components/parameters/IdempotencyKey'),
     implementationStatus: op['x-implementation-status'] ?? 'UNVERIFIED',
+    responseBody: op['x-response-body'] ?? 'JSON_ENVELOPE',
   })));
 if (new Set(operations.map(op => op.operationId)).size !== operations.length) {
   throw new Error('Duplicate operationId in canonical contract');

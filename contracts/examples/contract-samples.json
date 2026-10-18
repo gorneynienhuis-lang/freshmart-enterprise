@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.2.0",
   "notice": "固定契约样例，非真实业务记录，非测试通过声明",
   "operations": {
     "getCsrfToken": {
@@ -3701,6 +3701,21 @@
         "traceId": "trace-demo-001",
         "timestamp": "2026-10-18T14:15:00+08:00"
       }
+    },
+    "readPrivateMedia": {
+      "method": "GET",
+      "path": "/api/v1/media/{mediaId}/content",
+      "response": "<binary image bytes>"
+    },
+    "readProductMedia": {
+      "method": "GET",
+      "path": "/api/v1/media/products/{mediaId}/content",
+      "response": "<binary image bytes>"
+    },
+    "readReviewMedia": {
+      "method": "GET",
+      "path": "/api/v1/media/reviews/{mediaId}/content",
+      "response": "<binary image bytes>"
     }
   }
 }

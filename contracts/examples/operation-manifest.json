@@ -1,5 +1,5 @@
 {
-  "version": "0.1.2",
+  "version": "0.2.0",
   "implementationStatus": "IMPLEMENTATION_IN_PROGRESS",
   "operations": [
     {
@@ -462,7 +462,7 @@
       "permissions": [
         "review.self"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -487,7 +487,7 @@
       "permissions": [
         "product.read"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -499,7 +499,7 @@
       "permissions": [
         "product.write"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -511,7 +511,7 @@
       "permissions": [
         "product.read"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "PATCH",
@@ -523,7 +523,7 @@
       "permissions": [
         "product.write"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "PUT",
@@ -535,7 +535,7 @@
       "permissions": [
         "product.status"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -547,7 +547,7 @@
       "permissions": [
         "sku.write"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "PATCH",
@@ -559,7 +559,7 @@
       "permissions": [
         "sku.write"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -571,7 +571,7 @@
       "permissions": [
         "batch.read"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -583,7 +583,7 @@
       "permissions": [
         "batch.create"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -595,7 +595,7 @@
       "permissions": [
         "batch.read"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -607,7 +607,7 @@
       "permissions": [
         "inventory.adjust"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "PUT",
@@ -619,7 +619,7 @@
       "permissions": [
         "batch.lifecycle"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -632,7 +632,7 @@
       "permissions": [
         "inventory.movement.read"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -732,7 +732,7 @@
       "permissions": [
         "pick.reallocate"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -812,7 +812,7 @@
       "permissions": [
         "delivery.exception"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -908,7 +908,7 @@
       "permissions": [
         "reconciliation.read"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -920,7 +920,7 @@
       "permissions": [
         "reconciliation.run"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -932,7 +932,7 @@
       "permissions": [
         "audit.read"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -1004,7 +1004,7 @@
       "permissions": [
         "slot.manage"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "PUT",
@@ -1016,7 +1016,7 @@
       "permissions": [
         "slot.manage"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -1028,7 +1028,7 @@
       "permissions": [
         "policy.manage"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "PUT",
@@ -1040,7 +1040,7 @@
       "permissions": [
         "policy.manage"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -1070,7 +1070,7 @@
       "permissions": [
         "media.member.upload"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "GET",
@@ -1083,7 +1083,7 @@
       "permissions": [
         "media.access"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -1095,7 +1095,7 @@
       "permissions": [
         "delivery.contact.access"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -1107,7 +1107,7 @@
       "permissions": [
         "media.product.upload"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
     },
     {
       "method": "POST",
@@ -1131,7 +1131,44 @@
       "permissions": [
         "delivery.exception.resolve"
       ],
-      "implementationStatus": "CONTRACT_ONLY"
+      "implementationStatus": "IMPLEMENTED_DEMO"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/{mediaId}/content",
+      "operationId": "readPrivateMedia",
+      "roles": [
+        "MEMBER",
+        "SERVICE"
+      ],
+      "permissions": [
+        "media.access"
+      ],
+      "implementationStatus": "IMPLEMENTED_DEMO"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/products/{mediaId}/content",
+      "operationId": "readProductMedia",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "catalog.read"
+      ],
+      "implementationStatus": "IMPLEMENTED_DEMO"
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/reviews/{mediaId}/content",
+      "operationId": "readReviewMedia",
+      "roles": [
+        "GUEST"
+      ],
+      "permissions": [
+        "catalog.read"
+      ],
+      "implementationStatus": "IMPLEMENTED_DEMO"
     }
   ]
 }

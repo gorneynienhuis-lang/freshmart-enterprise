@@ -48,7 +48,7 @@ export function createMallClient(options: { origin?: string; fetch?: typeof fetc
       response = await sendRequest(fetcher, build(auth.getAccessToken()));
       if (response.status === 401) auth.clearSession();
     }
-    const checked = await checkedResponse(response, original.method);
+    const checked = await checkedResponse(response, original.method, operation.responseBody === 'BINARY_IMAGE');
     if (operation.operationId === 'changePassword') auth.clearSession();
     return checked;
   };

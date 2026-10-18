@@ -24,9 +24,9 @@ function deferred<T>() {
 }
 
 describe('canonical contract', () => {
-  it('covers all 91 unique operations without claiming implementation', () => {
-    expect(operations).toHaveLength(91);
-    expect(new Set(operations.map(operation => operation.operationId)).size).toBe(91);
+  it('covers all 94 unique operations without claiming implementation', () => {
+    expect(operations).toHaveLength(94);
+    expect(new Set(operations.map(operation => operation.operationId)).size).toBe(94);
     expect(operations.every(operation => ['CONTRACT_ONLY', 'IMPLEMENTED_DEMO'].includes(operation.implementationStatus))).toBe(true);
   });
   it('uses typed paths including dynamic path parameters and real envelope data', async () => {
@@ -208,3 +208,34 @@ function typeContract(api: ReturnType<typeof createMallClient>['api']) {
   return [invalid, allContractPaths];
 }
 void typeContract;
+
+
+describe('bounded binary image transport', () => {
+  const png = new Uint8Array([137,80,78,71,13,10,26,10]);
+  const image = (body: BodyInit = png, mime = 'image/png') => new Response(body, { headers: {'Content-Type': mime, 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'no-store'} });
+  it('accepts declared public image bytes while leaving envelopes mandatory on commerce routes', async () => {
+    const {api} = createMallClient({fetch:mock(() => image())});
+    const result = await api.GET('/api/v1/media/products/{mediaId}/content',{params:{path:{mediaId:'image-1'}},parseAs:'blob'});
+    expect(result.data?.type).toBe('image/png');
+    await expect(api.GET('/api/v1/home')).rejects.toMatchObject({kind:'protocol'});
+  });
+  it.each([['<html>no image</html>','image/png'],[png,'text/html'],[png,'image/svg+xml']])('rejects corrupt or wrong-type image responses', async (body,mime) => {
+    const {api} = createMallClient({fetch:mock(() => image(body as BodyInit,mime as string))});
+    await expect(api.GET('/api/v1/media/reviews/{mediaId}/content',{params:{path:{mediaId:'image-1'}},parseAs:'blob'})).rejects.toMatchObject({kind:'protocol'});
+  });
+  it('keeps structured authorization failures for image routes', async () => {
+    const {api} = createMallClient({fetch:mock(() => failure(404))});
+    await expect(api.GET('/api/v1/media/products/{mediaId}/content',{params:{path:{mediaId:'image-1'}},parseAs:'blob'})).rejects.toMatchObject({kind:'http',status:404,traceId:'trace-error'});
+  });
+  it('uses bearer only in the header for a signed private image', async () => {
+    const {api,auth} = createMallClient({fetch:mock(request => {
+      if(request.url.endsWith('/csrf')) return envelope(csrf);
+      if(request.url.endsWith('/refresh')) return envelope(session);
+      expect(request.headers.get('Authorization')).toBe('Bearer '+session.accessToken);
+      expect(request.url).not.toContain(session.accessToken);
+      return image();
+    })});
+    await auth.restore();
+    await api.GET('/api/v1/media/{mediaId}/content',{params:{path:{mediaId:'image-1'},query:{expiresAt:1792303200,sessionId:'2f6c4ace-b931-4f10-9689-1e9670aeec54',signature:'signed-reference'}},parseAs:'blob'});
+  });
+});
