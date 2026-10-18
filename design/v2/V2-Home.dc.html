@@ -22,6 +22,12 @@ a{color:#A0021F}a:hover{color:#7E0118}
 .fm-navlinks{scrollbar-width:none}.fm-navlinks::-webkit-scrollbar{display:none}
 @media (max-width:1279px){.fm-header-row{gap:24px!important}.fm-slot{display:none!important}.fm-hero-grid{grid-template-columns:232px minmax(0,1fr)!important}.fm-hero-aside{grid-column:1 / -1;flex-direction:row!important;align-items:flex-start;margin-top:0!important}.fm-hero-aside>*{flex:1 1 0}.fm-hero-fruit{transform:scale(.84);transform-origin:right bottom}}
 @media (max-width:1100px){.fm-freeship{display:none!important}.fm-navgap{gap:20px!important}.fm-hot{display:none!important}}
+.hero-shelf{background-color:#FFFFFF}
+.fm-shelf-bay{background-image:linear-gradient(180deg,#FFFFFF 0%,#F6F4F1 100%)}
+.fm-rail{background-color:#A0021F;background-image:url(/_blob/fda7af62195fbe9bd07b39f07f802586);background-repeat:repeat-x;background-size:360px auto;background-position:left center;box-shadow:0 2px 0 rgba(0,0,0,.08)}
+.fm-shelf-item img{transition:transform .25s ease}.fm-shelf-item:hover img{transform:translateY(-4px)}
+@media (prefers-reduced-motion:reduce){.fm-shelf-item img{transition:none}}
+@media (max-width:1279px){.fm-shelf-item img{max-height:165px!important}}
 </style>
 </helmet>
 <div style="min-height: 100vh; background: #F4F5F7; color: #1B1F24; font-family: 'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',sans-serif; font-size: 14px">
@@ -122,27 +128,45 @@ a{color:#A0021F}a:hover{color:#7E0118}
         </sc-for>
       </nav>
 
-      <section aria-label="当季推荐" class="{{h.cls}}" style="margin-top: 16px; border-radius: 8px; overflow: hidden; min-height: 384px; position: relative">
-        <div style="position: absolute; left: 0; top: 0; bottom: 0; z-index: 2; width: 320px; padding: 0 0 0 44px; display: flex; flex-direction: column; justify-content: center; gap: 14px">
-          <span style="display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; letter-spacing: 0.12em; color: {{h.eyebrow}}"><span aria-hidden="true" style="width: 18px; height: 2px; background: {{h.eyebrow}}"></span>当季鲜果 · 东华社区</span>
-          <h1 style="margin: 0; font-size: 36px; line-height: 1.25; font-weight: 700; color: {{h.title}}">秋天的果，<br>现在最好吃</h1>
-          <p style="margin: 0; font-size: 15px; line-height: 1.7; color: {{h.body}}">阳光玫瑰、赣南脐橙、高山香蕉，<br>会员价下单，按约定时段送到松江校区。</p>
-          <a href="#" style="align-self: flex-start; margin-top: 8px; padding: 12px 26px; background: {{h.ctaBg}}; color: {{h.ctaFg}}; border-radius: 8px; text-decoration: none; font-weight: 700">去选购</a>
+      <section aria-label="当季推荐" class="{{h.cls}}" style="margin-top: 16px; border-radius: 8px; overflow: hidden; min-height: 384px; display: flex; flex-direction: column">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; padding: 28px 32px 0">
+          <div style="display: flex; flex-direction: column; gap: 8px; min-width: 0">
+            <h1 style="margin: 0; font-size: 28px; line-height: 1.3; font-weight: 700; color: {{h.title}}">秋天的果，现在最好吃</h1>
+            <p style="margin: 0; font-size: 14px; line-height: 1.6; color: {{h.body}}">十月当季的三样，会员价下单，按约定时段送到松江校区。</p>
+          </div>
+          <a href="#" style="flex: none; padding: 10px 22px; background: {{h.ctaBg}}; color: {{h.ctaFg}}; border-radius: 6px; text-decoration: none; font-weight: 700">去选购</a>
         </div>
-        <div style="position: absolute; top: 0; right: 0; bottom: 0; width: 440px" class="fm-hero-fruit">
-          <span aria-hidden="true" style="position: absolute; left: 10px; top: 20px; width: 440px; height: 440px; border-radius: 50%; background: {{h.glow}}"></span>
-          <span aria-hidden="true" style="position: absolute; left: 64px; bottom: 150px; width: 220px; height: 16px; border-radius: 50%; background: {{h.shadow}}; filter: blur(7px)"></span><span aria-hidden="true" style="position: absolute; left: 230px; bottom: 38px; width: 190px; height: 16px; border-radius: 50%; background: {{h.shadow}}; filter: blur(7px)"></span><span aria-hidden="true" style="position: absolute; left: 20px; bottom: 30px; width: 170px; height: 16px; border-radius: 50%; background: {{h.shadow}}; filter: blur(7px)"></span>
-          <a href="#" aria-label="阳光玫瑰葡萄 ¥25.9" style="position: absolute; left: 50px; bottom: 150px; width: 250px; display: block"><img src="/_blob/212daffd30974fd23a4d144bc908fa73" alt="" style="width: 100%; height: auto; display: block"></a>
-          <a href="#" aria-label="高山香蕉 ¥8.9" style="position: absolute; left: 0px; bottom: 34px; width: 200px; display: block"><img src="/_blob/6e20d5b3b87508c7691eabd9c6436eae" alt="" style="width: 100%; height: auto; display: block"></a>
-          <a href="#" aria-label="赣南脐橙 ¥25.9" style="position: absolute; left: 208px; bottom: 42px; width: 220px; display: block"><img src="/_blob/e17f33201d9edaf481e37c5e91f31831" alt="" style="width: 100%; height: auto; display: block"></a>
-          <span style="position: absolute; left: 232px; bottom: 336px"><span style="display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 2px 6px rgba(27, 31, 36, 0.10); font-size: 13px; font-weight: 600; color: #1B1F24; white-space: nowrap">阳光玫瑰<span style="font-family: 'Barlow',sans-serif; font-size: 15px; font-weight: 700; color: #A0021F">¥25.9</span></span></span>
-          <span style="position: absolute; left: 4px; bottom: 6px"><span style="display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 2px 6px rgba(27, 31, 36, 0.10); font-size: 13px; font-weight: 600; color: #1B1F24; white-space: nowrap">高山香蕉<span style="font-family: 'Barlow',sans-serif; font-size: 15px; font-weight: 700; color: #A0021F">¥8.9</span></span></span>
-          <span style="position: absolute; left: 300px; bottom: 12px"><span style="display: inline-flex; align-items: baseline; gap: 6px; padding: 6px 12px; border-radius: 999px; background: #FFFFFF; box-shadow: 0 2px 6px rgba(27, 31, 36, 0.10); font-size: 13px; font-weight: 600; color: #1B1F24; white-space: nowrap">赣南脐橙<span style="font-family: 'Barlow',sans-serif; font-size: 15px; font-weight: 700; color: #A0021F">¥25.9</span></span></span>
+        <div class="fm-shelf-bay" style="flex: 1; min-height: 206px; margin-top: 18px; padding: 0 32px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: end">
+            <a href="#" aria-label="阳光玫瑰葡萄 ¥25.9" class="fm-shelf-item" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; min-width: 0; text-decoration: none">
+              <img src="/_blob/212daffd30974fd23a4d144bc908fa73" alt="" style="max-height: 222px; max-width: 92%; width: auto; height: auto; display: block; position: relative; z-index: 1">
+              <span aria-hidden="true" style="width: 70%; height: 12px; margin-top: -8px; border-radius: 50%; background: rgba(60, 40, 30, 0.16); filter: blur(5px)"></span>
+            </a>
+            <a href="#" aria-label="赣南脐橙 ¥25.9" class="fm-shelf-item" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; min-width: 0; text-decoration: none">
+              <img src="/_blob/e17f33201d9edaf481e37c5e91f31831" alt="" style="max-height: 196px; max-width: 92%; width: auto; height: auto; display: block; position: relative; z-index: 1">
+              <span aria-hidden="true" style="width: 70%; height: 12px; margin-top: -8px; border-radius: 50%; background: rgba(60, 40, 30, 0.16); filter: blur(5px)"></span>
+            </a>
+            <a href="#" aria-label="高山香蕉 ¥8.9" class="fm-shelf-item" style="display: flex; flex-direction: column; align-items: center; justify-content: flex-end; position: relative; min-width: 0; text-decoration: none">
+              <img src="/_blob/6e20d5b3b87508c7691eabd9c6436eae" alt="" style="max-height: 200px; max-width: 92%; width: auto; height: auto; display: block; position: relative; z-index: 1">
+              <span aria-hidden="true" style="width: 70%; height: 12px; margin-top: -8px; border-radius: 50%; background: rgba(60, 40, 30, 0.16); filter: blur(5px)"></span>
+            </a>
         </div>
-        <div style="position: absolute; left: 44px; bottom: 24px; display: flex; gap: 6px; z-index: 2" aria-hidden="true">
-          <span style="width: 20px; height: 4px; border-radius: 2px; background: {{h.dotOn}}"></span>
-          <span style="width: 8px; height: 4px; border-radius: 2px; background: {{h.dot}}"></span>
-          <span style="width: 8px; height: 4px; border-radius: 2px; background: {{h.dot}}"></span>
+        <div class="fm-rail" aria-hidden="true" style="height: 12px"></div>
+        <div style="padding: 0 32px 22px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px">
+            <a href="#" class="fm-tag" style="justify-self: center; width: min(100%, 196px); box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; padding: 9px 12px 10px; background: #FFFFFF; border: 1px solid #E3E6EA; border-top: 0; border-radius: 0 0 4px 4px; color: #1B1F24; text-decoration: none">
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">阳光玫瑰葡萄</span><span style="font-size: 11px; color: #8A929C; text-decoration: line-through; white-space: nowrap">¥29.9</span></span>
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-family: 'Barlow',sans-serif; font-size: 22px; font-weight: 700; color: #A0021F; line-height: 1.1"><span style="font-size: 14px">¥</span>25.9</span><span style="font-size: 11px; color: #5B6470; white-space: nowrap">¥5.18/100g</span></span>
+              <span style="font-size: 11px; color: #5B6470">500g/盒 · 云南</span>
+            </a>
+            <a href="#" class="fm-tag" style="justify-self: center; width: min(100%, 196px); box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; padding: 9px 12px 10px; background: #FFFFFF; border: 1px solid #E3E6EA; border-top: 0; border-radius: 0 0 4px 4px; color: #1B1F24; text-decoration: none">
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">赣南脐橙</span><span style="font-size: 11px; color: #8A929C; text-decoration: line-through; white-space: nowrap">¥29.9</span></span>
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-family: 'Barlow',sans-serif; font-size: 22px; font-weight: 700; color: #A0021F; line-height: 1.1"><span style="font-size: 14px">¥</span>25.9</span><span style="font-size: 11px; color: #5B6470; white-space: nowrap">¥1.30/100g</span></span>
+              <span style="font-size: 11px; color: #5B6470">2kg/箱 · 江西赣州</span>
+            </a>
+            <a href="#" class="fm-tag" style="justify-self: center; width: min(100%, 196px); box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; padding: 9px 12px 10px; background: #FFFFFF; border: 1px solid #E3E6EA; border-top: 0; border-radius: 0 0 4px 4px; color: #1B1F24; text-decoration: none">
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-weight: 700; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">高山香蕉</span><span style="font-size: 11px; color: #8A929C; text-decoration: line-through; white-space: nowrap">¥9.9</span></span>
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px"><span style="font-family: 'Barlow',sans-serif; font-size: 22px; font-weight: 700; color: #A0021F; line-height: 1.1"><span style="font-size: 14px">¥</span>8.9</span><span style="font-size: 11px; color: #5B6470; white-space: nowrap">¥0.89/100g</span></span>
+              <span style="font-size: 11px; color: #5B6470">1kg/份 · 广西</span>
+            </a>
         </div>
       </section>
 
@@ -229,7 +253,7 @@ class Component extends DCLogic {
     const tones = {
       '纯白': { cls: 'hero-white', eyebrow: '#A0021F', title: '#1B1F24', body: '#4A525C', ctaBg: '#A0021F', ctaFg: '#FFFFFF', shadow: 'rgba(27, 31, 36, 0.12)', dotOn: '#1B1F24', dot: '#D5DADF', glow: 'radial-gradient(closest-side, rgba(160, 2, 31, 0.06), rgba(160, 2, 31, 0))' },
       '深墨': { cls: 'hero-ink', eyebrow: '#F8B74A', title: '#FFFFFF', body: 'rgba(255, 255, 255, 0.78)', ctaBg: '#A0021F', ctaFg: '#FFFFFF', shadow: 'rgba(0, 0, 0, 0.45)', dotOn: '#FFFFFF', dot: 'rgba(255, 255, 255, 0.3)', glow: 'radial-gradient(closest-side, rgba(255, 255, 255, 0.10), rgba(255, 255, 255, 0))' },
-      '暖米': { cls: 'hero-warm', eyebrow: '#A0021F', title: '#1B1F24', body: '#4A525C', ctaBg: '#A0021F', ctaFg: '#FFFFFF', shadow: 'rgba(70, 45, 30, 0.14)', dotOn: '#1B1F24', dot: '#C9C3BA', glow: 'radial-gradient(closest-side, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0))' }
+      '暖米': { cls: 'hero-shelf', eyebrow: '#A0021F', title: '#1B1F24', body: '#5B6470', ctaBg: '#A0021F', ctaFg: '#FFFFFF', shadow: 'rgba(70, 45, 30, 0.14)', dotOn: '#1B1F24', dot: '#C9C3BA', glow: 'radial-gradient(closest-side, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0))' }
     };
     return tones[this.props.heroTone ?? '暖米'] || tones['深墨'];
   }

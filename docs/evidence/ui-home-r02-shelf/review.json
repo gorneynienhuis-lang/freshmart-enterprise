@@ -1,0 +1,57 @@
+{
+  "sourceSha256": "c355d070586e932a75dfd6ecae1b785e31855f30f512dc9d8f3c90bac7577abd",
+  "startedAt": "2026-10-18T04:34:17.864Z",
+  "dataSource": "local running API; no interception or mocked responses",
+  "widths": [
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "heroTitle": "秋天的果，现在最好吃",
+      "tagTexts": [
+        "阳光玫瑰葡萄¥29.9 ¥25.9¥5.18/100g 500g/盒 · 云南",
+        "赣南脐橙¥29.9 ¥25.9¥1.30/100g 2kg/箱 · 江西赣州",
+        "高山香蕉¥9.9 ¥8.9¥0.89/100g 1kg/份 · 广西"
+      ],
+      "tagHrefs": [
+        "#",
+        "#",
+        "#"
+      ],
+      "brokenImages": [],
+      "productCards": 18,
+      "homeHttpStatus": 200,
+      "afterPriceTagClick": {
+        "hash": "",
+        "notice": "配送、称重及售后规则详见结算页；本 Demo 先开放购物与履约闭环。"
+      },
+      "fruitImageClickHash": "#/products?keyword=%E9%98%B3%E5%85%89%E7%8E%AB%E7%91%B0%E8%91%A1%E8%90%84"
+    },
+    {
+      "width": 1024,
+      "documentWidth": 1024,
+      "heroTitle": "秋天的果，现在最好吃",
+      "tagTexts": [
+        "阳光玫瑰葡萄¥29.9 ¥25.9¥5.18/100g 500g/盒 · 云南",
+        "赣南脐橙¥29.9 ¥25.9¥1.30/100g 2kg/箱 · 江西赣州",
+        "高山香蕉¥9.9 ¥8.9¥0.89/100g 1kg/份 · 广西"
+      ],
+      "tagHrefs": [
+        "#",
+        "#",
+        "#"
+      ],
+      "brokenImages": [],
+      "productCards": 18,
+      "homeHttpStatus": 200,
+      "afterPriceTagClick": {
+        "hash": "",
+        "notice": "配送、称重及售后规则详见结算页；本 Demo 先开放购物与履约闭环。"
+      },
+      "fruitImageClickHash": "#/products?keyword=%E9%98%B3%E5%85%89%E7%8E%AB%E7%91%B0%E8%91%A1%E8%90%84"
+    }
+  ],
+  "pageErrors": [],
+  "failedAssets": [],
+  "status": "reviewed-with-known-integration-defects",
+  "finishedAt": "2026-10-18T04:34:18.870Z"
+}

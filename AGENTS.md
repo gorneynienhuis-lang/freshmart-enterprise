@@ -11,3 +11,5 @@ Codex负责 contracts、backend、database、deploy、docs、scripts、tests 及
 实现前读统一状态机/权限/接口；依赖版本核实并锁定。Controller→Service→Mapper，数据库为库存资金真相；审计、幂等、资源授权与补偿不是可选装饰。禁止把mock当实装，未运行测试不写通过，不编造历史AI记录。发现跨文档矛盾先统一契约再编码。
 
 每次交付写独立 `collab/codex/CODEX-xxx.md` 和实际AI记录；契约变更递增版本并说明差异。不要与Claude同时改共享日志。现有私有仓库见README；不另建仓库，不提交密钥和未审阅原始文件。
+
+用户要求每个已交付的前端视觉版本可回溯：Codex为每版保存独立commit、递增UI标签、源码/必要素材/截图及用户确认状态并推送GitHub，索引见collab/codex/UI-VERSIONS.md。候选稿即使未采纳也保留，不把归档当批准；禁止为回溯而reset/checkout覆盖共享工作目录中的新稿。Claude继续不操作Git。
