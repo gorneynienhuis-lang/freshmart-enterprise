@@ -1,0 +1,3 @@
+TwelveMonkeys 3.13.1 official test fixtures. Repository BSD-3-Clause license: https://raw.githubusercontent.com/haraldk/TwelveMonkeys/twelvemonkeys-3.13.1/LICENSE.txt
+small_1x1.webp SHA256 2f34799482dd5349b549d113fdaa188714d9737fe414e71541b752627bedbde3 source https://raw.githubusercontent.com/haraldk/TwelveMonkeys/twelvemonkeys-3.13.1/imageio/imageio-webp/src/test/resources/webp/small_1x1.webp
+animated-webp-supported.webp SHA256 df1160649539a1f73d4c52043358092c59c584763daf18007ff73b72865ddbc1 source https://raw.githubusercontent.com/haraldk/TwelveMonkeys/twelvemonkeys-3.13.1/imageio/imageio-webp/src/test/resources/webp/animated-webp-supported.webp

@@ -1,0 +1,15 @@
+{
+  "startedAt": "2026-10-18T06:17:55.837Z",
+  "finishedAt": "2026-10-18T06:18:01.198Z",
+  "runId": "18fe979e4a",
+  "sourceScriptSha256": "2aef7898a98c3d157559c24c4b38c67629b309afc4edc0432276563d7640d128",
+  "businessAndHttpStatus": "PASSED",
+  "checkedResponses": 101,
+  "binaryResponses": 5,
+  "pageErrors": 0,
+  "failedAssets": 0,
+  "schemaErrors": 0,
+  "visualCompletionEvidenceAccepted": false,
+  "finding": "Final member screenshot captured stale APPLIED state because navigation to identical orders hash did not trigger a refresh, despite independent HTTP confirming COMPLETED and 100 fen refund.",
+  "resolution": "Added page.reload plus explicit UI COMPLETED, refunded 1.00 CNY and finance SUCCESS assertions. Re-ran a new isolated synthetic order; final result.json and current screenshots are from that run. First-run screenshots were replaced and are not retained or claimed as completion evidence."
+}

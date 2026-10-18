@@ -1,6 +1,8 @@
 package com.freshmart.checkout;
 
 import com.freshmart.common.*;
+import com.freshmart.operations.BusinessPolicyService;
+import com.freshmart.operations.OperationsModels.Policies;
 import com.freshmart.domain.DomainException;
 import com.freshmart.domain.pricing.PriceMode;
 import com.freshmart.domain.pricing.PricingCalculator;
@@ -25,16 +27,12 @@ public class CheckoutService {
  private final ObjectMapper json;
  private final TokenCodec tokens;
  private final Clock clock;
- private final int nearDays,discountBps;
- private final long freight,freeThreshold;
+ private final BusinessPolicyService policies;
  private final Set<String> districts;
  private final PricingCalculator calculator=new PricingCalculator();
- public CheckoutService(CheckoutMapper mapper,ObjectMapper json,TokenCodec tokens,Clock clock,
-  @Value("${app.near-expiry-days:3}") int nearDays,@Value("${app.near-expiry-discount-basis-points:9000}") int discountBps,
-  @Value("${app.standard-freight:600}") long freight,@Value("${app.free-shipping-threshold:9900}") long freeThreshold,
+ public CheckoutService(CheckoutMapper mapper,ObjectMapper json,TokenCodec tokens,Clock clock,BusinessPolicyService policies,
   @Value("${app.delivery-districts:松江区,长宁区}") String districts){
-  this.mapper=mapper;this.json=json;this.tokens=tokens;this.clock=clock;this.nearDays=nearDays;this.discountBps=discountBps;this.freight=freight;this.freeThreshold=freeThreshold;this.districts=Set.copyOf(Arrays.asList(districts.split(",")));
-  if(nearDays<1||discountBps<1||discountBps>10000||freight<0||freeThreshold<0)throw new IllegalStateException("Invalid checkout policy");
+  this.mapper=mapper;this.json=json;this.tokens=tokens;this.clock=clock;this.policies=policies;this.districts=Set.copyOf(Arrays.asList(districts.split(",")));
  }
  @Transactional(readOnly=true) public List<AddressView> addresses(String user){return mapper.addresses(user).stream().map(this::addressView).toList();}
  public AddressView createAddress(String user,AddressInput in){
@@ -58,12 +56,12 @@ public class CheckoutService {
  }
  private void ensureDefault(String user,Instant now){var all=mapper.addresses(user);if(!all.isEmpty()&&all.stream().noneMatch(AddressRow::isDefault))mapper.makeDefault(all.getFirst().addressId(),user,now);}
  @Transactional(readOnly=true) public CartView cart(String user){
-  var items=new ArrayList<CartItemView>();long total=0,count=0;Instant now=clock.instant();
+  var policy=policies.current();var items=new ArrayList<CartItemView>();long total=0,count=0;Instant now=clock.instant();
   for(var item:mapper.cartItems(user)){
    var sku=mapper.sku(item.skuId());if(sku==null)continue;
-   var batches=isSaleable(sku)?mapper.availableBatchesAt(sku.skuId(),now,now.plus(Duration.ofDays(nearDays)),false,false,now):List.<BatchRow>of();
-   long available=available(batches);long nearAvailable=available(batches.stream().filter(b->!b.expiresAt().isAfter(now.plus(Duration.ofDays(nearDays)))).toList());
-   long unit=nearAvailable>=item.quantity()?Math.min(sku.memberPrice(),discount(sku.price())):sku.memberPrice();
+   var batches=isSaleable(sku)?mapper.availableBatchesAt(sku.skuId(),now,now.plus(Duration.ofDays(policy.nearExpiryDays())),false,false,now):List.<BatchRow>of();
+   long available=available(batches);long nearAvailable=available(batches.stream().filter(b->!b.expiresAt().isAfter(now.plus(Duration.ofDays(policy.nearExpiryDays())))).toList());
+   long unit=nearAvailable>=item.quantity()?Math.min(sku.memberPrice(),discount(sku.price(),policy)):sku.memberPrice();
    long amount=amount(sku.priceMode(),unit,item.quantity(),sku.priceUnitGram());
    String stock=available==0?"SOLD_OUT":available<=(sku.baseUnit().equals("GRAM")?5000:5)?"LOW":"IN_STOCK";
    items.add(new CartItemView(item.cartItemId(),sku.skuId(),sku.productId(),sku.productName(),sku.unitLabel(),sku.baseUnit(),item.quantity(),unit,amount,item.selected(),stock,sku.imageUrl(),item.version()));
@@ -101,7 +99,7 @@ public class CheckoutService {
   audit(user,"NEWCOMER_COUPON_GRANT","COUPON",id,"配置活动 "+c.campaignId()+" 版本 "+c.version());
  }
  public QuoteView quote(String user,QuoteRequest request){
-  Instant now=clock.instant(),nearAt=now.plus(Duration.ofDays(nearDays));var address=ownAddress(request.addressId(),user,false);
+  var policy=policies.current();Instant now=clock.instant(),nearAt=now.plus(Duration.ofDays(policy.nearExpiryDays()));var address=ownAddress(request.addressId(),user,false);
   if(!isServiceable(address))throw slotUnavailable("地址不在当前配送范围");var slot=mapper.slot(request.slotId());
   if(slot==null)throw ApiException.notFound();validateDate(slot.slotDate());if(!slotView(slot,true).available())throw slotUnavailable("配送时段已截止或无余量");
   CouponRow coupon=null;if(request.couponId()!=null){coupon=mapper.coupon(request.couponId(),user);if(coupon==null)throw ApiException.notFound();if(!coupon.status().equals("AVAILABLE")||!coupon.expiresAt().isAfter(now))throw invalidState("优惠券不可用");}
@@ -110,13 +108,13 @@ public class CheckoutService {
   for(var item:quantities.entrySet()){
    var sku=requireSku(item.getKey());long quantity=item.getValue();var batches=mapper.availableBatchesAt(sku.skuId(),slot.endAt(),nearAt,false,false,now);
    if(available(batches)<quantity)throw insufficientStock(true);
-   long nearAvailable=available(batches.stream().filter(b->!b.expiresAt().isAfter(nearAt)).toList());boolean nearOnly=nearAvailable>=quantity&&discount(sku.price())<sku.memberPrice();
-   long unit=nearOnly?discount(sku.price()):sku.memberPrice();boolean weight=sku.priceMode().equals("BY_WEIGHT");
+   long nearAvailable=available(batches.stream().filter(b->!b.expiresAt().isAfter(nearAt)).toList());boolean nearOnly=nearAvailable>=quantity&&discount(sku.price(),policy)<sku.memberPrice();
+   long unit=nearOnly?discount(sku.price(),policy):sku.memberPrice();boolean weight=sku.priceMode().equals("BY_WEIGHT");
    skus.put(sku.skuId(),sku);near.put(sku.skuId(),nearOnly);inputs.add(new PricingCalculator.LineInput(sku.skuId(),PriceMode.valueOf(sku.priceMode()),unit,quantity,weight?quantity:0,weight?sku.priceUnitGram():0,true));
    reference=add(reference,amount(sku.priceMode(),sku.price(),quantity,sku.priceUnitGram()));member=add(member,amount(sku.priceMode(),sku.memberPrice(),quantity,sku.priceUnitGram()));
   }
   PricingCalculator.Quote priced;
-  try{priced=calculator.quote(inputs,coupon==null?Optional.empty():Optional.of(new PricingCalculator.Coupon(coupon.discountAmount(),coupon.minGoodsAmount())),new PricingCalculator.FreightPolicy(freeThreshold,freight));}
+  try{priced=calculator.quote(inputs,coupon==null?Optional.empty():Optional.of(new PricingCalculator.Coupon(coupon.discountAmount(),coupon.minGoodsAmount())),new PricingCalculator.FreightPolicy(policy.freeShippingThresholdAmount(),policy.freightAmount()));}
   catch(DomainException ex){throw ApiException.invalid("金额超限或未满足优惠券门槛");}
   String id=id(),token=tokens.randomToken();Instant expires=now.plusSeconds(300).isBefore(slot.cutoffAt())?now.plusSeconds(300):slot.cutoffAt();
   var lines=new ArrayList<QuoteLineView>();var rows=new ArrayList<QuoteLineRow>();
@@ -125,9 +123,9 @@ public class CheckoutService {
    lines.add(new QuoteLineView(sku.skuId(),sku.productId(),sku.productName(),sku.baseUnit(),sku.priceMode(),in.quantity(),grams,priceGrams,in.unitPrice(),line.couponAllocationAmount(),line.payableAmount(),sku.price(),sku.memberPrice(),nearPrice));
    rows.add(new QuoteLineRow(id,sku.skuId(),sku.productId(),sku.productName(),sku.baseUnit(),sku.priceMode(),in.quantity(),grams,priceGrams,in.unitPrice(),sku.price(),sku.memberPrice(),nearPrice,line.couponAllocationAmount(),line.payableAmount(),sku.version(),isNear,nearAt));
   }
-  var price=new PriceSummary(reference,member,member-priced.goodsAmount(),priced.couponDiscountAmount(),priced.goodsPayableAmount(),priced.freightAmount(),priced.payableAmount(),freeThreshold,Math.max(0,freeThreshold-priced.goodsPayableAmount()));
+  var price=new PriceSummary(reference,member,member-priced.goodsAmount(),priced.couponDiscountAmount(),priced.goodsPayableAmount(),priced.freightAmount(),priced.payableAmount(),policy.freeShippingThresholdAmount(),Math.max(0,policy.freeShippingThresholdAmount()-priced.goodsPayableAmount()));
   var view=new QuoteView(id,token,expires.toString(),List.copyOf(lines),price,slotView(slot,true),addressView(address),0);
-  mapper.insertQuote(new QuoteRow(id,user,TokenCodec.hash(token),address.addressId(),address.version(),slot.slotId(),coupon==null?null:coupon.couponId(),coupon==null?null:coupon.version(),"OPEN",expires,0,json.writeValueAsString(view),policyFingerprint(),now));
+  mapper.insertQuote(new QuoteRow(id,user,TokenCodec.hash(token),address.addressId(),address.version(),slot.slotId(),coupon==null?null:coupon.couponId(),coupon==null?null:coupon.version(),"OPEN",expires,0,json.writeValueAsString(view),policyFingerprint(policy),now));
   rows.forEach(mapper::insertQuoteLine);return view;
  }
  /** Caller must retain the surrounding order transaction; this method never reserves stock itself. */
@@ -140,14 +138,14 @@ public class CheckoutService {
  }
  /** After caller locks address and stable SKU IDs, reject changed prices/policy instead of silently charging more. */
  public void validateForOrder(QuoteSnapshot snapshot){
-  if(!snapshot.row().policyFingerprint().equals(policyFingerprint()))throw ApiException.conflict("价格规则已变更，请重新报价");
+  if(!snapshot.row().policyFingerprint().equals(policyFingerprint(policies.lockCurrent())))throw ApiException.conflict("价格规则已变更，请重新报价");
   var a=ownAddress(snapshot.row().addressId(),snapshot.row().userId(),true);if(a.version()!=snapshot.row().addressVersion()||!isServiceable(a))throw ApiException.conflict("地址已变更，请重新报价");
   var slot=mapper.lockSlot(snapshot.row().slotId());var quotedSlot=snapshot.view().slot();if(slot==null||!slot.startAt().equals(Instant.parse(quotedSlot.startAt()))||!slot.endAt().equals(Instant.parse(quotedSlot.endAt()))||!slot.cutoffAt().equals(Instant.parse(quotedSlot.cutoffAt())))throw ApiException.conflict("配送时段已变更，请重新报价");
   for(var line:snapshot.lines()){var s=mapper.lockSku(line.skuId());if(!isSaleable(s)||s.version()!=line.skuVersion()||s.price()!=line.referenceUnitPrice()||s.memberPrice()!=line.memberUnitPrice()||!s.priceMode().equals(line.priceMode())||!Objects.equals(s.priceUnitGram(),line.priceUnitGram()))throw ApiException.conflict("商品价格或规格已变更，请重新报价");}
  }
  public AddressView addressView(AddressRow row){return new AddressView(row.addressId(),row.recipientName(),row.phone(),row.province(),row.city(),row.district(),row.detail(),row.isDefault(),isServiceable(row),row.version());}
  public SlotView slotView(SlotRow s,boolean serviceable){String reason=!serviceable||!s.enabled()?"OUT_OF_SERVICE":!clock.instant().isBefore(s.cutoffAt())?"CUTOFF":s.used()>=s.capacity()?"FULL":null;return new SlotView(s.slotId(),s.slotDate().toString(),s.label(),s.startAt().toString(),s.endAt().toString(),s.cutoffAt().toString(),Math.max(0,s.capacity()-s.used()),reason==null,reason,s.version());}
- private String policyFingerprint(){return TokenCodec.hash(nearDays+":"+discountBps+":"+freight+":"+freeThreshold+":"+new TreeSet<>(districts));}
+ private String policyFingerprint(Policies policy){return TokenCodec.hash(policy.version()+":"+policy.nearExpiryDays()+":"+policy.nearExpiryDiscountBasisPoints()+":"+policy.freightAmount()+":"+policy.freeShippingThresholdAmount()+":"+new TreeSet<>(districts));}
  private boolean serviceable(AddressInput in){return "上海市".equals(in.province().trim())&&"上海市".equals(in.city().trim())&&districts.contains(in.district().trim());}
  private boolean isServiceable(AddressRow row){return "上海市".equals(row.province())&&"上海市".equals(row.city())&&districts.contains(row.district());}
  private void validateDate(LocalDate date){LocalDate today=clock.instant().atZone(ZONE).toLocalDate();if(date.isBefore(today)||date.isAfter(today.plusDays(1)))throw ApiException.invalid("仅支持当天或次日预约");}
@@ -155,9 +153,9 @@ public class CheckoutService {
  private void lockUser(String user){if(mapper.lockUser(user)==null)throw ApiException.notFound();}
  private SkuRow requireSku(String id){var s=mapper.sku(id);if(!isSaleable(s))throw ApiException.notFound();return s;}
  private static boolean isSaleable(SkuRow s){return s!=null&&s.categoryEnabled()&&s.status().equals("ACTIVE")&&s.productStatus().equals("ON_SALE");}
- private void checkStock(SkuRow sku,long quantity,Instant end,boolean quote){if(available(mapper.availableBatchesAt(sku.skuId(),end,end.plus(Duration.ofDays(nearDays)),false,false,clock.instant()))<quantity)throw insufficientStock(quote);}
+ private void checkStock(SkuRow sku,long quantity,Instant end,boolean quote){var policy=policies.current();if(available(mapper.availableBatchesAt(sku.skuId(),end,end.plus(Duration.ofDays(policy.nearExpiryDays())),false,false,clock.instant()))<quantity)throw insufficientStock(quote);}
  private static long available(List<BatchRow> rows){BigInteger n=BigInteger.ZERO;for(var row:rows)n=n.add(BigInteger.valueOf(row.available()));return n.min(BigInteger.valueOf(MAX)).longValueExact();}
- private long discount(long price){return BigInteger.valueOf(price).multiply(BigInteger.valueOf(discountBps)).add(BigInteger.valueOf(5000)).divide(BigInteger.valueOf(10000)).longValueExact();}
+ private long discount(long price,Policies policy){return BigInteger.valueOf(price).multiply(BigInteger.valueOf(policy.nearExpiryDiscountBasisPoints())).add(BigInteger.valueOf(5000)).divide(BigInteger.valueOf(10000)).longValueExact();}
  private static long amount(String mode,long unit,long quantity,Long grams){try{return mode.equals("BY_WEIGHT")?PricingCalculator.weightedAmount(unit,quantity,grams):bounded(BigInteger.valueOf(unit).multiply(BigInteger.valueOf(quantity)));}catch(DomainException ex){throw ApiException.invalid("金额超出允许范围");}}
  private static long add(long a,long b){return bounded(BigInteger.valueOf(a).add(BigInteger.valueOf(b)));}
  private static long bounded(BigInteger value){if(value.signum()<0||value.compareTo(BigInteger.valueOf(MAX))>0)throw ApiException.invalid("数量或金额超出允许范围");return value.longValueExact();}
@@ -165,6 +163,6 @@ public class CheckoutService {
  private static ApiException insufficientStock(boolean quote){return new ApiException(422,quote?1101:1201,"INSUFFICIENT_STOCK","可售库存不足或无法覆盖配送窗口");}
  private static ApiException slotUnavailable(String reason){return new ApiException(422,1202,"SLOT_UNAVAILABLE",reason);}
  private static ApiException invalidState(String reason){return new ApiException(409,1007,"INVALID_STATE",reason);}
- private void audit(String actor,String operation,String type,String resource,String reason){mapper.audit(id(),actor,operation,type,resource,reason,TraceContext.id(),clock.instant());}
+ private void audit(String actor,String operation,String type,String resource,String reason){mapper.audit(id(),actor,operation,type,resource,reason,TraceContext.id(),clock.instant(),String.join(",",mapper.auditActorRoles(actor)));}
  private static String id(){return UUID.randomUUID().toString();}
 }

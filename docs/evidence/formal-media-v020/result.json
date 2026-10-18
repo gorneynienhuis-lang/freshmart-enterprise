@@ -1,0 +1,88 @@
+{
+  "startedAt": "2026-10-18T06:19:27.058Z",
+  "runId": "6fe9904d79",
+  "status": "PASSED",
+  "dataSource": "real local MySQL HTTP APIs and actual Playwright UI; synthetic order/payment/image; no mocks, interception or database clearing",
+  "checks": [
+    "Real register, server quote, persistent order, sandbox payment, pick claim/outbound, courier assignment and receipt completion",
+    "Member UI actual PNG upload, private blob preview, explicit public-image consent, one review per completed line, anonymous stored public projection and live product review rendering",
+    "QUALITY UI actual private upload; unrelated member, unclaimed support and public review scope cannot read evidence; claimed support sees real bearer-protected Blob pixels and URLs are revoked on close",
+    "Claimed SERVICE approves quality case, separate FINANCE authorizes original-route sandbox refund, durable worker completes exactly 100 fen while order remains FINISHED"
+  ],
+  "screens": [
+    "member-review-form-top.png",
+    "member-review-image-consent.png",
+    "product-real-published-review.png",
+    "member-quality-evidence-ready.png",
+    "assigned-service-private-blob-preview.png",
+    "service-quality-approved.png",
+    "member-quality-refund-completed.png",
+    "finance-quality-refund-executed.png"
+  ],
+  "sourceSha256": {
+    "frontend/scripts/e2e-media-review.mjs": "946c79b08ab118ab0ade03c9314875ed246d3b4f6eb7ad8444046490b95a1f33",
+    "frontend/src/app/media-service.ts": "7ed7ee30024d94ce9e0f0415dae83c788e58bfaf52a3fe131b4fd295574d8974",
+    "frontend/src/app/media-review.ts": "56a45edcc038e8232ca6b265d1b63328a15f4ef7368187878c57c2925c98f868",
+    "frontend/src/app/application.ts": "8c4524795c0c580b87c36a6ef213959400fd932b0cb2958db5afd489c5e47695",
+    "backend/src/main/java/com/freshmart/media/MediaService.java": "efd95c470fc77868c98a2c88ef6418e557116d84e7527e9a9849dbded6ade3aa",
+    "backend/src/main/java/com/freshmart/media/ImageSanitizer.java": "b3b32a6b84b55dccd12256a0d2030188e0679f27e2aeff223690046d2cf879f8",
+    "backend/src/main/java/com/freshmart/review/ReviewService.java": "2f875bcb2e60460badcfb6fe2f17ded031f26f31b535e1f5f91b5cdab8fa2cf2",
+    "backend/src/main/java/com/freshmart/aftersale/AfterSaleService.java": "4747a90a95fe7f0ecdc3515d8263af2397fde5b458c899f02c40ce47479bf6ee",
+    "database/migrations/V009__media_reviews.sql": "6bd96a9b883e1a032a35e26161cd0b838832f449197b979383149b4519116a4d",
+    "contracts/openapi.yaml": "d670fc6e46ca227e2a1fa435858ab3de5281b90375fba24fb8d6ced6e3046fb8"
+  },
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "checkedResponses": 116,
+  "binaryResponses": 6,
+  "responseStatuses": {
+    "200": 98,
+    "201": 9,
+    "401": 3,
+    "404": 5,
+    "409": 1
+  },
+  "cleanup": {
+    "policy": "retain synthetic audit/order/review/media history; no seeded account modified or records deleted"
+  },
+  "order": {
+    "orderId": "ord_7e5da0f4-52d0-4435-9fec-7adbe0266fad",
+    "orderNo": "FM2b052b0eaa0e468caeba35a088955368",
+    "productId": "S001",
+    "synthetic": true
+  },
+  "review": {
+    "reviewId": "d052f199-52d6-4165-83c0-d4dd54372988",
+    "mediaId": "6a16dab4-a4f8-425c-a92d-e60524fa4d6d",
+    "anonymous": true,
+    "publicImageCount": 1
+  },
+  "aftersale": {
+    "aftersaleId": "bc5f832b-a240-4f77-ac63-ae44f33333d9",
+    "privateMediaId": "25502cfa-9891-463e-a7d1-fd0bc25c0b4b",
+    "requestedAmount": 100,
+    "finalStatus": "COMPLETED",
+    "refundedAmount": 100,
+    "uiCompleted": true,
+    "financeUiRefundStatus": "SUCCESS"
+  },
+  "privatePreview": {
+    "actualPixels": [
+      {
+        "width": 96,
+        "height": 64,
+        "blob": true
+      }
+    ],
+    "privateUrlInDom": false,
+    "objectUrlsRevoked": true,
+    "unrelatedMemberStatus": 404,
+    "unclaimedServiceStatus": 404,
+    "privateEvidencePublicRouteStatus": 404,
+    "copiedPrivateUrlUnrelatedStatus": 404,
+    "copiedPrivateUrlAnonymousStatus": 401,
+    "expiredSignatureStatus": 404
+  },
+  "finishedAt": "2026-10-18T06:19:32.667Z"
+}

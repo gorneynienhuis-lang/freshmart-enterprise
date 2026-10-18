@@ -42,7 +42,9 @@
 .fm-management-empty { text-align: center; color: #89929D; padding: 32px !important; }
 .fm-management-pagination { display: flex; justify-content: flex-end; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 16px; color: #7D8794; font-size: 11px; }
 .fm-management-pagination > span { margin-right: auto; }
-.fm-management-dialog { max-width: min(700px,calc(100vw - 32px)); max-height: 88vh; overflow: auto; font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+.fm-management-dialog { max-width: min(700px,calc(100vw - 32px)); max-height: 88vh; overflow: auto; border: 1px solid #E3E6EA; border-radius: 10px; padding: 24px; background: #FFF; color: #1B1F24; box-shadow: 0 20px 70px #1F293728; font-family: 'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif; }
+.fm-management-dialog::backdrop { background: #18202A70; }
+.fm-management-table td > strong, .fm-management-table td > small { display: block; overflow-wrap: anywhere; }
 .fm-management-form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; min-width: 0; }
 .fm-management-wide { grid-column: 1 / -1; }
 .fm-management-form-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 10px; border-top: 1px solid #E8EBEF; margin-top: 2px; padding-top: 17px; }

@@ -5,6 +5,7 @@ const { api, auth } = mall;
 const ledger = new CommandLedger(typeof sessionStorage === 'undefined' ? undefined : sessionStorage);
 const cmd = <T>(method: string, path: string, body: unknown, send: (key: string) => Promise<T>) => ledger.execute(auth.getSnapshot().user?.userId ?? 'anonymous', method, path, body, send);
 const header = (key: string) => ({ 'Idempotency-Key': key });
+export { cmd as executeCommand, header as commandHeaders };
 export const service = {
     auth,
     home: async () => unwrap(await api.GET('/api/v1/home')),

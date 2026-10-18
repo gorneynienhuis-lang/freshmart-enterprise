@@ -8,6 +8,7 @@ import java.util.List;
 /** Persistence rows are internal; public views are explicitly assembled to avoid leaking contact/proof data. */
 public final class CommerceModels {
     private CommerceModels() {}
+    public static final long MAX_SAFE=9007199254740991L;
     public static class OrderRow {
         public String orderId, orderNo, userId, quoteId, slotId, couponId, status, snapshotJson;
         public long payableAmount, paidAmount, refundedAmount, adjustmentDelta, version;
@@ -19,6 +20,7 @@ public final class CommerceModels {
     public static class AllocationRow {
         public String allocationId, orderId, orderItemId, skuId, batchId, batchNo, baseUnit;
         public long reservedQuantity, pickedQuantity, returnedQuantity, version;
+        public boolean retired;
     }
     public static class PaymentRow {
         public String paymentId, orderId, userId, adjustmentId, purpose, status, channelTradeNo;
@@ -37,12 +39,12 @@ public final class CommerceModels {
     public record EventRow(String eventId,String paymentId,String nonce,String requestHash,boolean accepted,Instant createdAt) {}
     public record CreateOrder(@NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String quoteId,
                               @NotBlank @Size(min=16,max=2048) String quoteToken,@Size(min=1,max=300) String buyerNote) {}
-    public record Version(@NotNull @Min(0) Long version) {}
-    public record ReasonVersion(@NotBlank @Size(max=500) String reason,@NotNull @Min(0) Long version) {}
+    public record Version(@NotNull @Min(0) @Max(MAX_SAFE) Long version) {}
+    public record ReasonVersion(@NotBlank @Size(max=500) String reason,@NotNull @Min(0) @Max(MAX_SAFE) Long version) {}
     public record Prepay(@NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String orderId,
                         @NotBlank @Pattern(regexp="ORDER|TOP_UP") String purpose,
                         @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String adjustmentId) {}
-    public record Simulate(@NotBlank @Pattern(regexp="SUCCESS|FAILED") String outcome,@NotNull @Min(0) Long version) {}
+    public record Simulate(@NotBlank @Pattern(regexp="SUCCESS|FAILED") String outcome,@NotNull @Min(0) @Max(MAX_SAFE) Long version) {}
     public record Callback(@NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String eventId,
                            @NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String paymentId,
                            @NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String channelTradeNo,
@@ -53,13 +55,25 @@ public final class CommerceModels {
                            @NotNull @Min(0) @Max(9007199254740991L) Long actualQuantity,
                            @NotBlank @Pattern(regexp="NORMAL|SHORTAGE|WEIGHT_VARIANCE") String reasonCode,
                            @NotBlank @Size(max=500) String reason) {}
-    public record PickConfirm(@NotEmpty @Size(max=200) List<@Valid PickLine> allocations,@NotNull @Min(0) Long version) {}
-    public record Dispatch(@NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String courierId,@NotNull @Min(0) Long version) {}
+    public record PickConfirm(@NotEmpty @Size(max=200) List<@Valid PickLine> allocations,@NotNull @Min(0) @Max(MAX_SAFE) Long version) {}
+    public record Dispatch(@NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String courierId,@NotNull @Min(0) @Max(MAX_SAFE) Long version) {}
     public record Complete(@NotBlank @Pattern(regexp="[0-9]{6}") String proofCode,
-                           @Size(min=1,max=300) String note,@NotNull @Min(0) Long version) {}
+                           @Size(min=1,max=300) String note,@NotNull @Min(0) @Max(MAX_SAFE) Long version) {}
     public record ReturnLine(@NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String allocationId,
                              @NotNull @Min(0) @Max(9007199254740991L) Long passedQuantity,
                              @NotNull @Min(0) @Max(9007199254740991L) Long quarantinedQuantity) {}
     public record ReturnReceive(@NotEmpty @Size(max=200) List<@Valid ReturnLine> allocations,
-                                @NotBlank @Size(max=500) String inspectionNote,@NotNull @Min(0) Long version) {}
+                                @NotBlank @Size(max=500) String inspectionNote,@NotNull @Min(0) @Max(MAX_SAFE) Long version) {}
+    public record ReallocateLine(@NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String orderItemId,
+                                 @NotBlank @Pattern(regexp="[A-Za-z0-9_-]{1,64}") String batchId,
+                                 @NotNull @Min(1) @Max(9007199254740991L) Long quantity) {}
+    public record Reallocate(@NotEmpty @Size(max=200) List<@Valid ReallocateLine> allocations,
+                             @NotBlank @Size(max=500) String reason,@NotNull @Min(0) @Max(9007199254740991L) Long version) {}
+    public record DeliveryException(@NotBlank @Pattern(regexp="RECIPIENT_UNREACHABLE|DAMAGED|DELAYED|OTHER") String type,
+                                    @NotBlank @Size(max=500) String reason,@NotNull @Min(0) @Max(9007199254740991L) Long version) {}
+    public record ResolveException(@NotBlank @Size(max=500) String reason,@NotNull @Min(0) @Max(9007199254740991L) Long expectedVersion) {}
+    public record ContactAccess(@NotBlank @Pattern(regexp="DELIVERY_CONTACT") String purpose,
+                                @NotBlank @Size(max=500) String reason,@NotNull @Min(0) @Max(9007199254740991L) Long version) {}
+    public record DeliveryExceptionRow(String exceptionId,String orderId,String taskId,String activeOrderId,String type,String reason,
+                                       String courierId,String assigneeId,String status,String resolutionReason,String resolvedBy,Instant createdAt,Instant resolvedAt) {}
 }

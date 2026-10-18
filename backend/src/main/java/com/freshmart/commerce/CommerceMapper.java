@@ -15,23 +15,26 @@ public interface CommerceMapper {
     List<OrderRow> orders(@Param("user") String user,@Param("status") String status,@Param("limit") int limit,@Param("offset") long offset);
     @Select("<script>SELECT COUNT(*) FROM fm_order WHERE 1=1 <if test='user!=null'>AND user_id=#{user}</if><if test='status!=null'>AND status=#{status}</if></script>")
     long orderCount(@Param("user") String user,@Param("status") String status);
-    String SUPPORT_SCOPE="EXISTS(SELECT 1 FROM fm_aftersale a WHERE a.order_id=o.order_id AND a.assignee_id=#{actor} AND a.member_id&lt;&gt;#{actor})";
+    String SUPPORT_SCOPE="(EXISTS(SELECT 1 FROM fm_aftersale a WHERE a.order_id=o.order_id AND a.assignee_id=#{actor} AND a.member_id&lt;&gt;#{actor}) OR EXISTS(SELECT 1 FROM fm_delivery_exception e WHERE e.order_id=o.order_id AND e.assignee_id=#{actor} AND o.user_id&lt;&gt;#{actor}))";
     @Select("<script>SELECT * FROM fm_order o WHERE "+SUPPORT_SCOPE+"<if test='status!=null'> AND o.status=#{status}</if> ORDER BY o.created_at DESC,o.order_id LIMIT #{limit} OFFSET #{offset}</script>")
     List<OrderRow> supportOrders(@Param("actor")String actor,@Param("status")String status,@Param("limit")int limit,@Param("offset")long offset);
     @Select("<script>SELECT COUNT(*) FROM fm_order o WHERE "+SUPPORT_SCOPE+"<if test='status!=null'> AND o.status=#{status}</if></script>")
     long supportOrderCount(@Param("actor")String actor,@Param("status")String status);
-    @Select("SELECT COUNT(*) FROM fm_aftersale WHERE order_id=#{order} AND assignee_id=#{actor} AND member_id != #{actor}")
+    @Select("SELECT (SELECT COUNT(*) FROM fm_aftersale WHERE order_id=#{order} AND assignee_id=#{actor} AND member_id != #{actor}) + (SELECT COUNT(*) FROM fm_delivery_exception e JOIN fm_order o ON o.order_id=e.order_id WHERE e.order_id=#{order} AND e.assignee_id=#{actor} AND o.user_id != #{actor})")
     int supportScope(@Param("order")String order,@Param("actor")String actor);
     String PICK_SCOPE="paid_at IS NOT NULL AND (picker_id IS NULL OR picker_id=#{actor})";
     @Select("<script>SELECT * FROM fm_order WHERE "+PICK_SCOPE+"<if test='status!=null'> AND pick_status=#{status}</if> ORDER BY created_at,order_id LIMIT #{limit} OFFSET #{offset}</script>")
     List<OrderRow> pickOrders(@Param("actor")String actor,@Param("status")String status,@Param("limit")int limit,@Param("offset")long offset);
     @Select("<script>SELECT COUNT(*) FROM fm_order WHERE "+PICK_SCOPE+"<if test='status!=null'> AND pick_status=#{status}</if></script>")
     long pickCount(@Param("actor")String actor,@Param("status")String status);
-    String DELIVERY_SCOPE="(o.status IN ('READY_TO_SHIP','DELIVERING','FINISHED') OR o.dispatched_at IS NOT NULL) AND ((#{picker}=TRUE AND o.picker_id=#{actor}) OR (#{courier}=TRUE AND o.courier_id=#{actor}) OR (#{support}=TRUE AND "+SUPPORT_SCOPE+"))";
+    String DELIVERY_SUPPORT_SCOPE="(o.delivery_status='EXCEPTION' AND EXISTS(SELECT 1 FROM fm_delivery_exception e WHERE e.order_id=o.order_id AND e.assignee_id=#{actor} AND e.status='OPEN' AND o.user_id&lt;&gt;#{actor}))";
+    String DELIVERY_SCOPE="(o.status IN ('READY_TO_SHIP','DELIVERING','FINISHED') OR o.dispatched_at IS NOT NULL) AND ((#{picker}=TRUE AND o.picker_id=#{actor}) OR (#{courier}=TRUE AND o.courier_id=#{actor}) OR (#{support}=TRUE AND "+DELIVERY_SUPPORT_SCOPE+"))";
     @Select("<script>SELECT o.* FROM fm_order o WHERE "+DELIVERY_SCOPE+"<if test='status!=null'> AND o.delivery_status=#{status}</if> ORDER BY o.created_at,o.order_id LIMIT #{limit} OFFSET #{offset}</script>")
     List<OrderRow> deliveryOrders(@Param("actor")String actor,@Param("picker")boolean picker,@Param("courier")boolean courier,@Param("support")boolean support,@Param("status")String status,@Param("limit")int limit,@Param("offset")long offset);
     @Select("<script>SELECT COUNT(*) FROM fm_order o WHERE "+DELIVERY_SCOPE+"<if test='status!=null'> AND o.delivery_status=#{status}</if></script>")
     long deliveryCount(@Param("actor")String actor,@Param("picker")boolean picker,@Param("courier")boolean courier,@Param("support")boolean support,@Param("status")String status);
+    @Select("SELECT COUNT(*) FROM fm_delivery_exception e JOIN fm_order o ON o.order_id=e.order_id WHERE e.order_id=#{order} AND e.assignee_id=#{actor} AND e.status='OPEN' AND o.delivery_status='EXCEPTION' AND o.user_id != #{actor}")
+    int deliverySupportScope(@Param("order")String order,@Param("actor")String actor);
     @Insert("""
       INSERT INTO fm_order(order_id,order_no,user_id,quote_id,slot_id,coupon_id,status,snapshot_json,payable_amount,paid_amount,
       refunded_amount,adjustment_status,adjustment_delta,pick_task_id,pick_status,delivery_task_id,delivery_status,slot_held,
@@ -65,7 +68,7 @@ public interface CommerceMapper {
     @Update("UPDATE fm_inventory_batch SET on_hand=on_hand+#{hand},reserved=reserved+#{reserved},quarantined=quarantined+#{quarantine},version=version+1,updated_at=#{now} WHERE batch_id=#{id} AND version=#{version}")
     int moveBatch(@Param("id")String id,@Param("hand")long hand,@Param("reserved")long reserved,@Param("quarantine")long quarantine,@Param("version")long version,@Param("now")Instant now);
     @Insert("INSERT INTO fm_order_allocation(allocation_id,order_id,order_item_id,sku_id,batch_id,batch_no,base_unit,reserved_quantity,picked_quantity,returned_quantity,version) VALUES(#{allocationId},#{orderId},#{orderItemId},#{skuId},#{batchId},#{batchNo},#{baseUnit},#{reservedQuantity},#{pickedQuantity},#{returnedQuantity},#{version})") void insertAllocation(AllocationRow row);
-    @Select("SELECT * FROM fm_order_allocation WHERE order_id=#{id} ORDER BY sku_id,batch_id,allocation_id") List<AllocationRow> allocations(String id);
+    @Select("SELECT * FROM fm_order_allocation WHERE order_id=#{id} AND retired=FALSE ORDER BY sku_id,batch_id,allocation_id") List<AllocationRow> allocations(String id);
     @Update("UPDATE fm_order_allocation SET reserved_quantity=#{reservedQuantity},picked_quantity=#{pickedQuantity},returned_quantity=#{returnedQuantity},version=#{version} WHERE allocation_id=#{allocationId}") void updateAllocation(AllocationRow row);
     @Insert("INSERT INTO fm_inventory_movement(movement_id,order_id,allocation_id,batch_id,type,on_hand_delta,reserved_delta,quarantined_delta,reason,actor_id,created_at) VALUES(#{id},#{order},#{allocation},#{batch},#{type},#{hand},#{reserved},#{quarantine},#{reason},#{actor},#{now})")
     void movement(@Param("id")String id,@Param("order")String order,@Param("allocation")String allocation,@Param("batch")String batch,@Param("type")String type,@Param("hand")long hand,@Param("reserved")long reserved,@Param("quarantine")long quarantine,@Param("reason")String reason,@Param("actor")String actor,@Param("now")Instant now);
@@ -90,8 +93,9 @@ public interface CommerceMapper {
     @Update("UPDATE fm_outbox SET status='PENDING',last_error_code='SANDBOX_RETRY',available_at=#{next},lease_until=NULL WHERE event_type='SANDBOX_REFUND' AND aggregate_id=#{id} AND status<>'COMPLETED'") void retryOutbox(@Param("id")String id,@Param("next")Instant next);
     @Insert("INSERT INTO fm_sandbox_refund_receipt(refund_id,payment_id,amount,channel_refund_no,completed_at) VALUES(#{refundId},#{paymentId},#{amount},#{refundId},#{completedAt}) ON DUPLICATE KEY UPDATE refund_id=refund_id") void sandboxReceipt(RefundRow row);
     @Select("SELECT amount FROM fm_sandbox_refund_receipt WHERE refund_id=#{id}") Long receiptAmount(String id);
-    @Insert("INSERT INTO fm_audit_event(event_id,actor_id,operation,resource_type,resource_id,reason,trace_id,created_at) VALUES(#{id},#{actor},#{operation},'ORDER',#{resource},#{reason},#{trace},#{now})")
-    void audit(@Param("id")String id,@Param("actor")String actor,@Param("operation")String operation,@Param("resource")String resource,@Param("reason")String reason,@Param("trace")String trace,@Param("now")Instant now);
+    @Select("SELECT role_code FROM fm_user_role WHERE user_id=#{actor} ORDER BY role_code") List<String> actorRoles(String actor);
+    @Insert("INSERT INTO fm_audit_event(event_id,actor_id,operation,resource_type,resource_id,reason,trace_id,created_at,actor_roles_snapshot,outcome) VALUES(#{id},#{actor},#{operation},'ORDER',#{resource},#{reason,typeHandler=com.freshmart.audit.SafeAuditTextHandler},#{trace},#{now},#{roles},#{outcome})")
+    void audit(@Param("id")String id,@Param("actor")String actor,@Param("operation")String operation,@Param("resource")String resource,@Param("reason")String reason,@Param("trace")String trace,@Param("now")Instant now,@Param("roles")String roles,@Param("outcome")String outcome);
     @Select("SELECT COUNT(*) FROM fm_order WHERE paid_at>=#{from} AND paid_at<#{to}") long paidOrders(@Param("from")Instant from,@Param("to")Instant to);
     @Select("SELECT COALESCE(SUM(amount),0) FROM fm_payment WHERE status='SUCCESS' AND paid_at>=#{from} AND paid_at<#{to}") long captured(@Param("from")Instant from,@Param("to")Instant to);
     @Select("SELECT COALESCE(SUM(amount),0) FROM fm_refund WHERE status='SUCCESS' AND completed_at>=#{from} AND completed_at<#{to}") long refunded(@Param("from")Instant from,@Param("to")Instant to);

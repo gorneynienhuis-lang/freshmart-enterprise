@@ -5,6 +5,7 @@ import com.freshmart.checkout.CheckoutMapper;
 import com.freshmart.common.*;
 import com.freshmart.domain.pricing.*;
 import com.freshmart.identity.TokenCodec;
+import com.freshmart.finance.ChannelLedger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tools.jackson.databind.ObjectMapper;
@@ -24,11 +25,12 @@ public class CommerceService {
     private final Clock clock;
     private final SandboxSignature sandbox;
     private final DeliveryProofVerifier proofs;
+    private final ChannelLedger channelLedger;
     private final PricingCalculator prices = new PricingCalculator();
     private final SecureRandom random = new SecureRandom();
     public CommerceService(CommerceMapper db,CheckoutService checkout,CheckoutMapper checkoutDb,ObjectMapper json,
-                           Clock clock,SandboxSignature sandbox,DeliveryProofVerifier proofs) {
-        this.db=db;this.checkout=checkout;this.checkoutDb=checkoutDb;this.json=json;this.clock=clock;this.sandbox=sandbox;this.proofs=proofs;
+                           Clock clock,SandboxSignature sandbox,DeliveryProofVerifier proofs,ChannelLedger channelLedger) {
+        this.db=db;this.checkout=checkout;this.checkoutDb=checkoutDb;this.json=json;this.clock=clock;this.sandbox=sandbox;this.proofs=proofs;this.channelLedger=channelLedger;
     }
 
     @Transactional
@@ -127,7 +129,7 @@ public class CommerceService {
         lockSkus(allocations);
         for(var a:allocations) {
             if(a.reservedQuantity>0){var batch=db.lockBatch(a.batchId);move(o,a,batch,0,-a.reservedQuantity,0,"RELEASE",reason,actor);
-                a.reservedQuantity=0;a.version++;db.updateAllocation(a);}
+                a.reservedQuantity=0;a.version=nextVersion(a.version);db.updateAllocation(a);}
         }
         o.status=timeout&&o.paidAmount==0?"CLOSED":"CANCELED";o.pickStatus="CANCELED";o.deliveryStatus="CANCELED";
         if(o.adjustmentId!=null)o.adjustmentStatus="CANCELED";
@@ -135,7 +137,7 @@ public class CommerceService {
             if("SUCCESS".equals(p.status)&&p.accepted) {
                 long available=p.amount-p.refundedAmount-p.refundReserved;
                 if(available>0)reserveRefund(o,p,available,"CANCEL",null,"cancel:"+o.orderId+":"+p.paymentId,reason);
-            } else if(!"SUCCESS".equals(p.status)){p.status="CLOSED";p.version++;db.updatePayment(p);}
+            } else if(!"SUCCESS".equals(p.status)){p.status="CLOSED";p.version=nextVersion(p.version);db.updatePayment(p);}
         }
         touch(o);audit(o,actor,timeout?"order.expire":"order.cancel",reason);
     }
@@ -187,12 +189,13 @@ public class CommerceService {
         }
         if(e.amount()!=p.amount || !"CNY".equals(e.currency()) || e.occurredAt().isAfter(clock.instant().plusSeconds(300)))
             throw mismatch("支付金额、币种或渠道时间不一致");
+        channelLedger.recordPayment(e.eventId(),p.paymentId,e.channelTradeNo(),e.status(),e.amount(),e.occurredAt());
         boolean accepted=false;
         if("SUCCESS".equals(e.status())) {
             if("SUCCESS".equals(p.status)) {
                 if(!Objects.equals(p.channelTradeNo,e.channelTradeNo()))throw mismatch("同支付单出现不同渠道流水");accepted=p.accepted;
             }else{
-                p.status="SUCCESS";p.channelTradeNo=e.channelTradeNo();p.paidAt=clock.instant();p.version++;
+                p.status="SUCCESS";p.channelTradeNo=e.channelTradeNo();p.paidAt=clock.instant();p.version=nextVersion(p.version);
                 if("ORDER".equals(p.purpose)&&"PENDING_PAY".equals(o.status)&&clock.instant().isBefore(o.paymentExpiresAt)) {
                     o.status="PAID";o.paidAmount=add(o.paidAmount,p.amount);o.acceptedPaymentId=p.paymentId;o.paidAt=clock.instant();p.accepted=true;accepted=true;
                     if(o.couponId!=null&&db.useCoupon(o.couponId,o.orderId)!=1)throw new IllegalStateException("Locked coupon missing");
@@ -209,7 +212,7 @@ public class CommerceService {
                 }
                 touch(o);audit(o,"SANDBOX_CHANNEL","payment.success",accepted?"渠道已验证并入账":"渠道实收已记录并安排原路退款");
             }
-        }else if(!"SUCCESS".equals(p.status)) {p.status="FAILED";p.version++;db.updatePayment(p);audit(o,"SANDBOX_CHANNEL","payment.failed","沙箱渠道确认失败");}
+        }else if(!"SUCCESS".equals(p.status)) {p.status="FAILED";p.version=nextVersion(p.version);db.updatePayment(p);audit(o,"SANDBOX_CHANNEL","payment.failed","沙箱渠道确认失败");}
         db.insertEvent(new EventRow(e.eventId(),p.paymentId,nonce,hash,accepted,clock.instant()));
         return map("eventId",e.eventId(),"accepted",accepted,"duplicate",false);
     }
@@ -273,7 +276,7 @@ public class CommerceService {
             long extra=Math.max(0,line.actualQuantity()-a.reservedQuantity);
             if(extra>batch.onHand()-batch.reserved()-batch.quarantined())throw stock("称重增加所需库存不足");
             move(o,a,batch,-line.actualQuantity(),-a.reservedQuantity,0,"PICK_OUT",line.reason(),actor.userId());
-            a.reservedQuantity=0;a.pickedQuantity=line.actualQuantity();a.version++;db.updateAllocation(a);
+            a.reservedQuantity=0;a.pickedQuantity=line.actualQuantity();a.version=nextVersion(a.version);db.updateAllocation(a);
         }
         o.snapshotJson=json.writeValueAsString(snapshot);o.status="READY_TO_SHIP";o.pickStatus="COMPLETED";
         o.adjustmentId=id("wa");o.adjustmentDelta=result.deltaAmount();o.adjustmentJson=json.writeValueAsString(adjustmentLines);
@@ -325,7 +328,7 @@ public class CommerceService {
             if(line.passedQuantity()>0&&!batch.expiresAt().isAfter(clock.instant()))throw invalidState("已过期商品不能恢复可售");
             move(o,a,batch,total,0,total,"RETURN_QUARANTINE",request.inspectionNote(),actor.userId());
             if(line.passedQuantity()>0)move(o,a,db.lockBatch(a.batchId),0,0,-line.passedQuantity(),"RETURN_PASS",request.inspectionNote(),actor.userId());
-            a.returnedQuantity+=total;a.version++;db.updateAllocation(a);
+            a.returnedQuantity+=total;a.version=nextVersion(a.version);db.updateAllocation(a);
         }
         touch(o);audit(o,actor.userId(),"return.receive","实物回库并记录质检");return map("accepted",true,"resourceId",o.orderId,"version",o.version,"message","已登记实物与质检结果");
     }
@@ -363,21 +366,22 @@ public class CommerceService {
         if(amount<=0||amount>p.amount-p.refundedAmount-p.refundReserved)throw invalidState("退款预算不足");
         RefundRow r=new RefundRow();r.refundId=id("ref");r.orderId=o.orderId;r.paymentId=p.paymentId;r.businessKey=key;r.type=type;
         r.adjustmentId=adjustment;r.amount=amount;r.status="PENDING";r.reason=reason;r.createdAt=clock.instant();r.executorId="SYSTEM";
-        db.insertRefund(r);p.refundReserved=add(p.refundReserved,amount);p.version++;db.updatePayment(p);
+        db.insertRefund(r);p.refundReserved=add(p.refundReserved,amount);p.version=nextVersion(p.version);db.updatePayment(p);
         db.enqueueRefund(id("evt"),"refund:"+r.refundId,r.refundId,clock.instant());return r;
     }
     private void lockSkus(List<AllocationRow> allocations){allocations.stream().map(a->a.skuId).distinct().sorted().forEach(checkoutDb::lockSku);}
     void move(OrderRow o,AllocationRow a,BatchRow b,long hand,long reserved,long quarantine,String type,String reason,String actor) {
+        nextVersion(b.version());
         if(db.moveBatch(b.batchId(),hand,reserved,quarantine,b.version(),clock.instant())!=1)throw ApiException.conflict("批次已变化");
         db.movement(id("mov"),o.orderId,a.allocationId,a.batchId,type,hand,reserved,quarantine,reason,actor,clock.instant());
     }
     void requireSupportScope(OrderRow o,RequestActor actor){if(db.supportScope(o.orderId,actor.userId())==0)throw ApiException.notFound();}
-    void touch(OrderRow o){o.updatedAt=clock.instant();o.version++;db.updateOrder(o);}
-    void audit(OrderRow o,String actor,String operation,String reason){db.audit(id("audit"),actor,operation,o.orderId,reason,TraceContext.id(),clock.instant());}
+    void touch(OrderRow o){o.updatedAt=clock.instant();o.version=nextVersion(o.version);db.updateOrder(o);}
+    void audit(OrderRow o,String actor,String operation,String reason){db.audit(id("audit"),actor,operation,o.orderId,reason,TraceContext.id(),clock.instant(),String.join(",",db.actorRoles(actor)),"payment.failed".equals(operation)?"FAILED":"SUCCESS");}
     OrderRow owned(RequestActor actor,String id,boolean lock){var o=required(lock?db.lockOrder(id):db.order(id));actor.requireOwner(o.userId);return o;}
     OrderRow pickOrder(RequestActor actor,String id,boolean lock){var row=required(db.byPick(id));var o=lock?required(db.lockOrder(row.orderId)):row;if(o.paidAt==null)throw ApiException.notFound();if(o.pickerId!=null&&!actor.userId().equals(o.pickerId))throw ApiException.notFound();return o;}
     OrderRow deliveryOrder(RequestActor actor,String id,boolean lock){actor.requireAnyRole("PICKER","COURIER","SERVICE");var row=required(db.byDelivery(id));var o=lock?required(db.lockOrder(row.orderId)):row;
-        if(!(actor.roles().contains("PICKER")&&actor.userId().equals(o.pickerId))&&!(actor.roles().contains("COURIER")&&actor.userId().equals(o.courierId))&&!(actor.roles().contains("SERVICE")&&db.supportScope(o.orderId,actor.userId())>0))throw ApiException.notFound();
+        if(!(actor.roles().contains("PICKER")&&actor.userId().equals(o.pickerId))&&!(actor.roles().contains("COURIER")&&actor.userId().equals(o.courierId))&&!(actor.roles().contains("SERVICE")&&db.deliverySupportScope(o.orderId,actor.userId())>0))throw ApiException.notFound();
         if(!Set.of("READY_TO_SHIP","DELIVERING","FINISHED","CANCELED").contains(o.status))throw ApiException.notFound();return o;}
     Map<String,Object> orderView(OrderRow o){var s=snapshot(o);return map("orderId",o.orderId,"orderNo",o.orderNo,"status",o.status,"currency","CNY","items",s.get("items"),"price",s.get("price"),
             "paidAmount",o.paidAmount,"refundedAmount",o.refundedAmount,"address",s.get("address"),"slot",s.get("slot"),"weightAdjustment",adjustmentView(o),"refunds",db.refunds(o.orderId).stream().map(this::refundView).toList(),
@@ -409,7 +413,8 @@ public class CommerceService {
     static Instant instant(Object v){return v instanceof Instant i?i:OffsetDateTime.parse(v.toString()).toInstant();}
     static String id(String prefix){return prefix+"_"+UUID.randomUUID().toString();}
     static OrderRow required(OrderRow o){if(o==null)throw ApiException.notFound();return o;}
-    static void version(long actual,long expected){if(actual!=expected)throw ApiException.conflict("版本已变化，请刷新后重试");}
+    static void version(long actual,long expected){if(expected<0||expected>MAX_SAFE)throw ApiException.invalid("版本超出安全整数范围");if(actual<0||actual>MAX_SAFE)throw new IllegalStateException("Persisted resource version exceeds contract range");if(actual!=expected)throw ApiException.conflict("版本已变化，请刷新后重试");}
+    static long nextVersion(long current){if(current<0||current>=MAX_SAFE)throw ApiException.conflict("资源版本已达到安全上限，不能继续变更");return current+1;}
     static void paging(int page,int size){if(page<1||size<1||size>100)throw ApiException.invalid("分页范围不合法");}
     static void validOrderStatus(String status){if(status!=null&&!Set.of("PENDING_PAY","PAID","PICKING","READY_TO_SHIP","DELIVERING","FINISHED","CANCELED","CLOSED").contains(status))throw ApiException.invalid("订单状态不合法");}
     private static <T> Map<String,Object> page(List<T>all,int page,int size,java.util.function.Function<T,Map<String,Object>>view){return map("page",page,"size",size,"total",all.size(),"items",all.stream().skip((long)(page-1)*size).limit(size).map(view).toList());}

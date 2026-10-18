@@ -21,6 +21,9 @@ spring:
   jackson:
     deserialization:
       fail-on-unknown-properties: true
+      accept-float-as-int: false
+    mapper:
+      allow-coercion-of-scalars: false
   servlet:
     multipart:
       max-file-size: 6MB
@@ -38,6 +41,8 @@ app:
   csrf-ttl-seconds: 600
   secure-cookies: ${APP_SECURE_COOKIES:true}
   allowed-origins: ${APP_ALLOWED_ORIGINS:http://localhost:5173}
+  public-origin: ${APP_PUBLIC_ORIGIN:http://localhost:8080}
+  media-dir: ${APP_MEDIA_DIR:./.runtime/media}
   near-expiry-days: 3
   near-expiry-discount-basis-points: 9000
 management:

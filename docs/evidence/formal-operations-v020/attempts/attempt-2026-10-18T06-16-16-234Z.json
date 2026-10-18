@@ -1,0 +1,248 @@
+{
+  "startedAt": "2026-10-18T06:16:16.234Z",
+  "status": "FAILED",
+  "dataSource": "Actual local MySQL, real HTTP, browser forms. No mocks or interception.",
+  "checks": [
+    "OPERATOR real forms create empty DRAFT, edit product, create and edit priced SKU using controlled catalog image, then publish with version checks",
+    "PICKER real forms receive20, damage2, quarantine18, restore18; four immutable movements conserve18 on hand /0 reserved /0 quarantine /18 available",
+    "OPERATOR capacity edit persisted in MySQL and original capacity/cutoff/enabled restored through real UI with current versions",
+    "OPERATOR edits exact one-cent freight through confirmation form; restores all six original policy values through UI, preserving version history"
+  ],
+  "screens": [
+    "operator-products-1440.png",
+    "operator-products-panel-1440.png",
+    "operator-products-1024.png",
+    "operator-products-panel-1024.png",
+    "picker-batches-1440.png",
+    "picker-batches-panel-1440.png",
+    "picker-batches-1024.png",
+    "picker-batches-panel-1024.png",
+    "picker-movements-1440.png",
+    "picker-movements-panel-1440.png",
+    "picker-movements-1024.png",
+    "picker-movements-panel-1024.png",
+    "operator-slots-1440.png",
+    "operator-slots-panel-1440.png",
+    "operator-slots-1024.png",
+    "operator-slots-panel-1024.png",
+    "operator-policies-1440.png",
+    "operator-policies-panel-1440.png",
+    "operator-policies-1024.png",
+    "operator-policies-panel-1024.png"
+  ],
+  "responsive": [
+    {
+      "role": "OPERATOR",
+      "label": "operator-products",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-products",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-batches",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-batches",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-movements",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-movements",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-slots",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-slots",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-policies",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-policies",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [],
+      "brokenImages": []
+    }
+  ],
+  "sourceSha256": {
+    "frontend/src/app/operations-service.ts": "34a02931b1a32cda3a2cd3646e306137112830399131d3f165d68f72caf3a1e8",
+    "frontend/src/app/operations-panel.ts": "5ea3245ddd525b43d79e58fc97ee9f987ea3aa44d4fdc84d065607de9b0c4e4c",
+    "frontend/src/app/finance-audit-panel.ts": "cf0eebac8fb6cfc46a0b2b2ed7973f5f841553ff5acc73caaa0922cf209f2e68",
+    "backend/src/main/java/com/freshmart/operations/OperationsService.java": "1e4f89dde79661b0fb1455e139029a84f92506b2514c8d7d2b24115855ccb220",
+    "database/migrations/V007__operations_inventory.sql": "b7fd4c27cdc97e6ad9277c32609cd7e32ce6a27c920549696960942240627705",
+    "contracts/openapi.yaml": "7fa076dd257b33ea9865f0304de3c9a748d2a1a0bb039ea706c0c1968bdf52d0"
+  },
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "checkedResponses": 120,
+  "responseStatuses": {
+    "200": 113,
+    "201": 4,
+    "401": 3
+  },
+  "cleanup": {
+    "slot": "RESTORED_THROUGH_UI",
+    "policy": "RESTORED_THROUGH_UI",
+    "syntheticProduct": "OFF_SALE",
+    "historyRetained": true,
+    "seededAccountsChanged": false
+  },
+  "synthetic": {
+    "productName": "运营验收生态苹果-AC1D7F7F",
+    "skuCode": "ACCEPT-AC1D7F7F",
+    "batchNo": "ACCEPT-B-AC1D7F7F",
+    "productId": "41bcc192-8c13-4bb8-9f04-2610756082f9",
+    "skuId": "cd7bde2a-f62f-49fd-a892-8261562e84b1",
+    "batchId": "33150b5a-75c0-43f5-9996-11ddc5a47d78"
+  },
+  "inventory": {
+    "onHand": 18,
+    "reserved": 0,
+    "quarantined": 0,
+    "available": 18,
+    "movements": [
+      {
+        "type": "ADJUST",
+        "onHandDelta": 0,
+        "reservedDelta": 0,
+        "quarantinedDelta": -18
+      },
+      {
+        "type": "QUARANTINE",
+        "onHandDelta": 0,
+        "reservedDelta": 0,
+        "quarantinedDelta": 18
+      },
+      {
+        "type": "ADJUST",
+        "onHandDelta": -2,
+        "reservedDelta": 0,
+        "quarantinedDelta": 0
+      },
+      {
+        "type": "RECEIVE",
+        "onHandDelta": 20,
+        "reservedDelta": 0,
+        "quarantinedDelta": 0
+      }
+    ]
+  },
+  "slot": {
+    "slotId": "slot-20261019-1",
+    "date": "2026-10-19",
+    "originalCapacity": 30,
+    "used": 7
+  },
+  "reconciliation": {
+    "reconciliationId": "4d0450ab-c816-4a01-b3a4-61c9861dfad4",
+    "businessDate": "2026-10-18",
+    "differenceCount": 8
+  },
+  "error": "locator.click: Error: strict mode violation: getByRole('dialog', { name: '日对账明细', exact: true }).getByRole('button', { name: '关闭', exact: true }) resolved to 2 elements:\n    1) <button type=\"button\" data-tone=\"quiet\" class=\"fm-action-button\">关闭</button> aka getByRole('button', { name: '关闭' }).first()\n    2) <button type=\"button\" class=\"fm-management-button\">关闭</button> aka getByRole('button', { name: '关闭' }).nth(1)\n\nCall log:\n\u001b[2m  - waiting for getByRole('dialog', { name: '日对账明细', exact: true }).getByRole('button', { name: '关闭', exact: true })\u001b[22m\n",
+  "finishedAt": "2026-10-18T06:16:22.401Z"
+}

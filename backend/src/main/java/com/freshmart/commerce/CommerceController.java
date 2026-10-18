@@ -4,6 +4,7 @@ import com.freshmart.command.IdempotencyService;
 import com.freshmart.common.*;
 import com.freshmart.identity.TokenCodec;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,8 @@ import static com.freshmart.commerce.CommerceModels.*;
 @RequestMapping("/api/v1")
 public class CommerceController {
     private final CommerceService service;private final IdempotencyService commands;private final ObjectMapper json;
-    private final SandboxSignature signatures;private final Validator validator;
-    public CommerceController(CommerceService service,IdempotencyService commands,ObjectMapper json,SandboxSignature signatures,Validator validator){this.service=service;this.commands=commands;this.json=json;this.signatures=signatures;this.validator=validator;}
+    private final SandboxSignature signatures;private final Validator validator;private final FulfillmentService fulfillment;
+    public CommerceController(CommerceService service,IdempotencyService commands,ObjectMapper json,SandboxSignature signatures,Validator validator,FulfillmentService fulfillment){this.service=service;this.commands=commands;this.json=json;this.signatures=signatures;this.validator=validator;this.fulfillment=fulfillment;}
     @PostMapping("/orders") @ResponseStatus(HttpStatus.CREATED)
     public ApiEnvelope<?> create(@Valid @RequestBody CreateOrder body,HttpServletRequest request){return command(request,body,()->service.create(actor(),body));}
     @GetMapping("/orders") public ApiEnvelope<?> orders(@RequestParam(required=false)String status,@RequestParam(defaultValue="1")int page,@RequestParam(defaultValue="20")int size){return ApiEnvelope.ok(service.list(actor(),status,page,size,false));}
@@ -46,10 +47,14 @@ public class CommerceController {
     @GetMapping("/admin/pick-tasks/{id}") public ApiEnvelope<?> pick(@PathVariable String id){return ApiEnvelope.ok(service.pickTask(actor(),id));}
     @PostMapping("/admin/pick-tasks/{id}/claim") public ApiEnvelope<?> claim(@PathVariable String id,@Valid @RequestBody Version body,HttpServletRequest request){return command(request,body,()->service.claim(actor(),id,body));}
     @PostMapping("/admin/pick-tasks/{id}/confirm") public ApiEnvelope<?> confirm(@PathVariable String id,@Valid @RequestBody PickConfirm body,HttpServletRequest request){return command(request,body,()->service.confirmPick(actor(),id,body));}
+    @PostMapping("/admin/pick-tasks/{id}/reallocate") public ApiEnvelope<?> reallocate(@PathVariable String id,@Valid @RequestBody Reallocate body,HttpServletRequest request){return command(request,body,()->fulfillment.reallocate(actor(),id,body));}
     @GetMapping("/admin/delivery-tasks") public ApiEnvelope<?> deliveries(@RequestParam(required=false)String status,@RequestParam(defaultValue="1")int page,@RequestParam(defaultValue="20")int size){return ApiEnvelope.ok(service.deliveryTasks(actor(),status,page,size));}
     @GetMapping("/admin/delivery-tasks/{id}") public ApiEnvelope<?> delivery(@PathVariable String id){return ApiEnvelope.ok(service.deliveryTask(actor(),id));}
     @PostMapping("/admin/delivery-tasks/{id}/dispatch") public ApiEnvelope<?> dispatch(@PathVariable String id,@Valid @RequestBody Dispatch body,HttpServletRequest request){return command(request,body,()->service.dispatch(actor(),id,body));}
     @PostMapping("/admin/delivery-tasks/{id}/complete") public ApiEnvelope<?> complete(@PathVariable String id,@Valid @RequestBody Complete body,HttpServletRequest request){return command(request,body,()->service.complete(actor(),id,body));}
+    @PostMapping("/admin/delivery-tasks/{id}/exceptions") public ApiEnvelope<?> reportException(@PathVariable String id,@Valid @RequestBody DeliveryException body,HttpServletRequest request){return command(request,body,()->fulfillment.reportException(actor(),id,body));}
+    @PostMapping("/admin/delivery-tasks/{id}/resolve-exception") public ApiEnvelope<?> resolveException(@PathVariable String id,@Valid @RequestBody ResolveException body,HttpServletRequest request){return command(request,body,()->fulfillment.resolveException(actor(),id,body));}
+    @PostMapping("/admin/delivery-tasks/{id}/contact-access") public ApiEnvelope<?> contactAccess(@PathVariable String id,@Valid @RequestBody ContactAccess body,HttpServletRequest request,HttpServletResponse response){response.setHeader("Cache-Control","no-store");return ApiEnvelope.ok(fulfillment.contactAccess(actor(),id,body,CommandHeaders.requireIdempotencyKey(request)));}
     @GetMapping("/admin/dashboard") public ApiEnvelope<?> dashboard(@RequestParam(name="businessDate",required=false)LocalDate date){return ApiEnvelope.ok(service.dashboard(actor(),date));}
     private RequestActor actor(){return RequestActor.current();}
     @SuppressWarnings({"unchecked","rawtypes"})

@@ -52,6 +52,8 @@ services:
       DB_URL: jdbc:mysql://db:3306/fresh_mall?serverTimezone=UTC&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
       DB_USERNAME: fresh_mall
       APP_ALLOWED_ORIGINS: ${PUBLIC_ORIGIN:?Set an exact public HTTPS origin}
+      APP_PUBLIC_ORIGIN: ${PUBLIC_ORIGIN:?Set an exact public HTTPS origin}
+      APP_MEDIA_DIR: /app/media
       APP_SECURE_COOKIES: "true"
       APP_BRAND_NAME: 东华鲜集
       TZ: UTC
@@ -61,6 +63,8 @@ services:
     networks: [application, database]
     read_only: true
     tmpfs: ["/tmp:size=128m,mode=1777"]
+    volumes:
+      - media-data:/app/media
     cap_drop: [ALL]
     security_opt: ["no-new-privileges:true"]
     mem_limit: 1024m
@@ -113,6 +117,7 @@ networks:
     internal: true
 
 volumes:
+  media-data:
   mysql-data:
   caddy-data:
   caddy-config:

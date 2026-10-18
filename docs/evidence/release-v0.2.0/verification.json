@@ -1,0 +1,36 @@
+{
+  "contractVersion": "0.2.0",
+  "backend": {
+    "tests": 142,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "frontend": {
+    "tests": 40,
+    "typecheck": "PASSED",
+    "productionBuild": "PASSED"
+  },
+  "contract": {
+    "operations": 94,
+    "schemas": 173,
+    "exampleChecks": 2020
+  },
+  "actualMySQL": {
+    "version": "8.4.11",
+    "migration": "V011",
+    "dataReset": false,
+    "health": "UP"
+  },
+  "browser": {
+    "operations": 133,
+    "media": 116
+  },
+  "notVerified": [
+    "Linux Docker build",
+    "Railway deployment/public HTTPS",
+    "DB and media joint restore",
+    "formal performance and fault recovery",
+    "full project acceptance"
+  ]
+}

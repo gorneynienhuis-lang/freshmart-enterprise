@@ -1,5 +1,5 @@
 {
-  "source": "contracts/examples/operation-manifest.json v0.1.0",
+  "source": "contracts/examples/operation-manifest.json v0.2.0",
   "rules": [
     {
       "method": "GET",
@@ -671,6 +671,28 @@
       "path": "/api/v1/admin/delivery-tasks/{taskId}/resolve-exception",
       "roles": [
         "SERVICE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/{mediaId}/content",
+      "roles": [
+        "MEMBER",
+        "SERVICE"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/products/{mediaId}/content",
+      "roles": [
+        "GUEST"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/media/reviews/{mediaId}/content",
+      "roles": [
+        "GUEST"
       ]
     }
   ]

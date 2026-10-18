@@ -1,0 +1,357 @@
+{
+  "startedAt": "2026-10-18T06:16:35.567Z",
+  "status": "PASSED",
+  "dataSource": "Actual local MySQL, real HTTP, browser forms. No mocks or interception.",
+  "checks": [
+    "OPERATOR real forms create empty DRAFT, edit product, create and edit priced SKU using controlled catalog image, then publish with version checks",
+    "PICKER real forms receive20, damage2, quarantine18, restore18; four immutable movements conserve18 on hand /0 reserved /0 quarantine /18 available",
+    "OPERATOR capacity edit persisted in MySQL and original capacity/cutoff/enabled restored through real UI with current versions",
+    "OPERATOR edits exact one-cent freight through confirmation form; restores all six original policy values through UI, preserving version history",
+    "FINANCE generates actual immutable reconciliation snapshot, can inspect differences, receives sanitized order-only inventory movement projection and no receipt control",
+    "ADMIN audit filters synthetic product and displays real event-time OPERATOR role snapshot, SUCCESS outcome, resource ID and trace"
+  ],
+  "screens": [
+    "operator-products-1440.png",
+    "operator-products-panel-1440.png",
+    "operator-products-1024.png",
+    "operator-products-panel-1024.png",
+    "picker-batches-1440.png",
+    "picker-batches-panel-1440.png",
+    "picker-batches-1024.png",
+    "picker-batches-panel-1024.png",
+    "picker-movements-1440.png",
+    "picker-movements-panel-1440.png",
+    "picker-movements-1024.png",
+    "picker-movements-panel-1024.png",
+    "operator-slots-1440.png",
+    "operator-slots-panel-1440.png",
+    "operator-slots-1024.png",
+    "operator-slots-panel-1024.png",
+    "operator-policies-1440.png",
+    "operator-policies-panel-1440.png",
+    "operator-policies-1024.png",
+    "operator-policies-panel-1024.png",
+    "finance-reconciliation-1440.png",
+    "finance-reconciliation-panel-1440.png",
+    "finance-reconciliation-1024.png",
+    "finance-reconciliation-panel-1024.png",
+    "administrator-audit-1440.png",
+    "administrator-audit-panel-1440.png",
+    "administrator-audit-1024.png",
+    "administrator-audit-panel-1024.png"
+  ],
+  "responsive": [
+    {
+      "role": "OPERATOR",
+      "label": "operator-products",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-products",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-batches",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-batches",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-movements",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "PICKER",
+      "label": "picker-movements",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-slots",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-slots",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-policies",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [],
+      "brokenImages": []
+    },
+    {
+      "role": "OPERATOR",
+      "label": "operator-policies",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [],
+      "brokenImages": []
+    },
+    {
+      "role": "FINANCE",
+      "label": "finance-reconciliation",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        },
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "FINANCE",
+      "label": "finance-reconciliation",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        },
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "ADMIN",
+      "label": "administrator-audit",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "tables": [
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        },
+        {
+          "left": 130,
+          "right": 1310,
+          "containerWidth": 1178,
+          "scrollWidth": 1178
+        }
+      ],
+      "brokenImages": []
+    },
+    {
+      "role": "ADMIN",
+      "label": "administrator-audit",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "tables": [
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        },
+        {
+          "left": 74,
+          "right": 950,
+          "containerWidth": 874,
+          "scrollWidth": 874
+        }
+      ],
+      "brokenImages": []
+    }
+  ],
+  "sourceSha256": {
+    "frontend/src/app/operations-service.ts": "34a02931b1a32cda3a2cd3646e306137112830399131d3f165d68f72caf3a1e8",
+    "frontend/src/app/operations-panel.ts": "5ea3245ddd525b43d79e58fc97ee9f987ea3aa44d4fdc84d065607de9b0c4e4c",
+    "frontend/src/app/finance-audit-panel.ts": "cf0eebac8fb6cfc46a0b2b2ed7973f5f841553ff5acc73caaa0922cf209f2e68",
+    "backend/src/main/java/com/freshmart/operations/OperationsService.java": "1e4f89dde79661b0fb1455e139029a84f92506b2514c8d7d2b24115855ccb220",
+    "database/migrations/V007__operations_inventory.sql": "b7fd4c27cdc97e6ad9277c32609cd7e32ce6a27c920549696960942240627705",
+    "contracts/openapi.yaml": "7fa076dd257b33ea9865f0304de3c9a748d2a1a0bb039ea706c0c1968bdf52d0"
+  },
+  "pageErrors": [],
+  "failedAssets": [],
+  "schemaErrors": [],
+  "checkedResponses": 133,
+  "responseStatuses": {
+    "200": 125,
+    "201": 4,
+    "401": 4
+  },
+  "cleanup": {
+    "slot": "RESTORED_THROUGH_UI",
+    "policy": "RESTORED_THROUGH_UI",
+    "syntheticProduct": "OFF_SALE",
+    "historyRetained": true,
+    "seededAccountsChanged": false
+  },
+  "synthetic": {
+    "productName": "运营验收生态苹果-B3A99937",
+    "skuCode": "ACCEPT-B3A99937",
+    "batchNo": "ACCEPT-B-B3A99937",
+    "productId": "b976bd32-c8aa-4c5e-8ca2-7369c6190203",
+    "skuId": "b20205f8-92d5-41d3-81ea-e3414004159b",
+    "batchId": "54426a18-0117-46ea-83bd-ed797116d381"
+  },
+  "inventory": {
+    "onHand": 18,
+    "reserved": 0,
+    "quarantined": 0,
+    "available": 18,
+    "movements": [
+      {
+        "type": "ADJUST",
+        "onHandDelta": 0,
+        "reservedDelta": 0,
+        "quarantinedDelta": -18
+      },
+      {
+        "type": "QUARANTINE",
+        "onHandDelta": 0,
+        "reservedDelta": 0,
+        "quarantinedDelta": 18
+      },
+      {
+        "type": "ADJUST",
+        "onHandDelta": -2,
+        "reservedDelta": 0,
+        "quarantinedDelta": 0
+      },
+      {
+        "type": "RECEIVE",
+        "onHandDelta": 20,
+        "reservedDelta": 0,
+        "quarantinedDelta": 0
+      }
+    ]
+  },
+  "slot": {
+    "slotId": "slot-20261019-1",
+    "date": "2026-10-19",
+    "originalCapacity": 30,
+    "used": 7
+  },
+  "reconciliation": {
+    "reconciliationId": "f3663a11-e6a2-41b2-b402-87662bdef1df",
+    "businessDate": "2026-10-18",
+    "differenceCount": 8
+  },
+  "finishedAt": "2026-10-18T06:16:42.663Z",
+  "visualFollowup": {
+    "finishedAt": "2026-10-18T06:17:49.337Z",
+    "type": "READ_ONLY_AFTER_INFO_LINE_LAYOUT_FIX",
+    "httpRequests": 47,
+    "failures": [],
+    "sourceSha256": "3742601bd5274d9f2242e56da065134235151f049fcf20dfd988007de6b77798",
+    "screensUpdated": 28,
+    "auditCssRecheck": {
+      "finishedAt": "2026-10-18T06:19:54.149Z",
+      "cssSha256": "2ffff9d81e182b19d6c25c598e9fd4e67be6f958e65003218b92624972b17868",
+      "width": 1024,
+      "actorResourceSeparateLines": true,
+      "businessWrites": 0,
+      "documentWidth": 1024
+    }
+  }
+}

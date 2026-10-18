@@ -6,5 +6,7 @@ server:
 app:
   secure-cookies: true
   allowed-origins: ${APP_ALLOWED_ORIGINS}
+  public-origin: ${APP_PUBLIC_ORIGIN}
+  media-dir: ${APP_MEDIA_DIR}
   sandbox-enabled: true
   sandbox-secret: ${SANDBOX_SECRET}

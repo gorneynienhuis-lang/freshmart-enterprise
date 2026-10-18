@@ -9,6 +9,8 @@ public interface AfterSaleMapper {
  @Select("SELECT * FROM fm_aftersale WHERE aftersale_id=#{id}") CaseRow find(String id);
  @Select("SELECT * FROM fm_aftersale WHERE aftersale_id=#{id} FOR UPDATE") @Options(useCache=false,flushCache=Options.FlushCachePolicy.TRUE) CaseRow lock(String id);
  @Select("SELECT * FROM fm_aftersale_line WHERE aftersale_id=#{id} ORDER BY order_item_id") List<LineRow> lines(String id);
+ @Insert("INSERT INTO fm_aftersale_evidence(aftersale_id,media_id) VALUES(#{aftersale},#{media})") void addEvidence(@Param("aftersale")String aftersale,@Param("media")String media);
+ @Select("SELECT media_id FROM fm_aftersale_evidence WHERE aftersale_id=#{id} ORDER BY media_id") List<String> evidence(String id);
  @Select("SELECT COUNT(*) FROM fm_aftersale_active_line WHERE order_item_id=#{id}") long activeCount(String id);
  @Select("SELECT COALESCE(SUM(l.approved_amount),0) FROM fm_aftersale_line l JOIN fm_aftersale a ON a.aftersale_id=l.aftersale_id WHERE l.order_item_id=#{item} AND a.status IN ('APPROVED','REFUNDING','COMPLETED') AND a.aftersale_id<>#{exclude}") long reservedForItem(@Param("item") String item,@Param("exclude") String exclude);
  @Select("SELECT COALESCE(SUM(picked_quantity),0) FROM fm_order_allocation WHERE order_id=#{order} AND order_item_id=#{item}") long pickedQuantity(@Param("order") String order,@Param("item") String item);
@@ -25,5 +27,5 @@ public interface AfterSaleMapper {
  String REFUND_FILTER="1=1 <if test='status!=null'>AND status=#{status}</if><if test='order!=null'>AND order_id=#{order}</if>";
  @Select("<script>SELECT * FROM fm_refund WHERE "+REFUND_FILTER+" ORDER BY created_at DESC,refund_id LIMIT #{size} OFFSET #{offset}</script>") List<RefundRow> refunds(@Param("status") String status,@Param("order") String order,@Param("size") int size,@Param("offset") long offset);
  @Select("<script>SELECT COUNT(*) FROM fm_refund WHERE "+REFUND_FILTER+"</script>") long countRefunds(@Param("status") String status,@Param("order") String order);
- @Insert("INSERT INTO fm_audit_event(event_id,actor_id,operation,resource_type,resource_id,reason,trace_id,created_at) VALUES(#{event},#{actor},#{operation},'AFTERSALE',#{resource},#{reason},#{trace},#{now})") void audit(@Param("event") String event,@Param("actor") String actor,@Param("operation") String operation,@Param("resource") String resource,@Param("reason") String reason,@Param("trace") String trace,@Param("now") Instant now);
+ @Insert("INSERT INTO fm_audit_event(event_id,actor_id,operation,resource_type,resource_id,reason,trace_id,created_at,actor_roles_snapshot,outcome) VALUES(#{event},#{actor},#{operation},'AFTERSALE',#{resource},#{reason,typeHandler=com.freshmart.audit.SafeAuditTextHandler},#{trace},#{now},#{roles},#{outcome})") void audit(@Param("event") String event,@Param("actor") String actor,@Param("operation") String operation,@Param("resource") String resource,@Param("reason") String reason,@Param("trace") String trace,@Param("now") Instant now,@Param("roles")String roles,@Param("outcome")String outcome);
 }

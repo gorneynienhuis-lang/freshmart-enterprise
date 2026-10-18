@@ -13,6 +13,7 @@ RUN javac -d /src/healthcheck /src/Healthcheck.java
 FROM ${JAVA_RUNTIME_IMAGE} AS runtime
 RUN groupadd --gid 10001 freshmall && useradd --system --uid 10001 --gid 10001 --home /app freshmall
 WORKDIR /app
+RUN mkdir -p /app/media && chown 10001:10001 /app/media
 COPY --from=build --chown=10001:10001 /src/backend/target/fresh-mall-backend-0.1.0-SNAPSHOT.jar /app/app.jar
 COPY --from=build --chown=10001:10001 /src/healthcheck/ /app/healthcheck/
 USER 10001:10001

@@ -4,6 +4,10 @@ import { ApiError } from '../api/errors';
 import { homeCategoryHref, selectHomeFeatured } from './home-featured';
 import { isR04Design } from './design-version';
 import { renderManagement } from './admin-panel';
+import { renderOperations } from './operations-panel';
+import { renderFinanceAudit } from './finance-audit-panel';
+import { appendDeliveryActions, openReallocateDialog } from './fulfillment-panel';
+import { createEvidenceUploader, createReviewButton, renderProductReviews, openEvidencePreview } from './media-review';
 import '../styles/account-security.css';
 import '../styles/runtime-r03.css';
 import { formatMoney, formatWeight, type Models, type Product, type Cart, type Quote, type Address, type DeliverySlot, type Order } from '../domain';
@@ -329,7 +333,9 @@ export class Application {
         }
         q(this.root, 'main aside')?.remove();
         for (const tab of qa<HTMLButtonElement>(this.root, '[role="tab"]'))
-            tab.onclick = () => this.tell(tab.textContent === '商品介绍' ? product.description : tab.textContent === '售后说明' ? '签收后 7 天内可申请缺货或配送延迟售后；品质证据上传尚未开放，退款由服务端校验实付上限。' : '下方为当前商品规格参数');
+            tab.onclick = () => this.tell(tab.textContent === '商品介绍' ? product.description : tab.textContent === '售后说明' ? '签收后 7 天内可申请品质、缺货或配送延迟售后；品质问题请上传订单图片，退款由服务端校验实付上限。' : '下方为当前商品规格参数');
+        const reviews = el('section'); (q(this.root, 'main') ?? this.root).append(reviews);
+        await renderProductReviews(reviews, product.productId, {run:action => this.run(action)});
     }
     private dialog(title: string) {
         qa<HTMLDialogElement>(document, 'dialog[data-demo]').forEach(d => d.remove());
@@ -571,6 +577,7 @@ export class Application {
         for (const item of order.items) {
             const row = el('p', `${item.productName} × ${item.baseUnit === 'GRAM' ? formatWeight(item.actualGram ?? item.estimatedGram ?? item.quantity) + (item.actualGram !== null ? '（实重）' : '（估重）') : item.quantity} · ${formatMoney(item.finalPayableAmount ?? item.originalPayableAmount)}`);
             if (isR04Design()) { row.className = 'r04-order-line'; const image = document.createElement('img'); image.src = item.imageUrl; image.alt = item.productName; image.width = 58; image.height = 58; row.prepend(image); }
+            if(order.status==='FINISHED')row.append(createReviewButton(order,item,{dialog:title=>this.dialog(title),run:action=>this.run(action),reload:()=>this.orders(),notify:message=>this.tell(message)}));
             article.append(row);
         }
         if (order.weightAdjustment)
@@ -595,7 +602,10 @@ export class Application {
         }
         const main = this.shell('员工工作台');
         main.append(el('p', '当前身份：' + user.displayName + ' · ' + user.roles.map(role => roleNames[role] ?? role).join(' / ')), button('切换账户', () => this.login(false)));
-        await renderManagement(main, { dialog: title => this.dialog(title), run: action => this.run(action), reload: () => this.operations() });
+        const managementOptions = { dialog: (title:string) => this.dialog(title), run: (action:()=>Promise<void>) => this.run(action), reload: () => this.operations() };
+        await renderManagement(main, managementOptions);
+        await renderOperations(main, managementOptions);
+        await renderFinanceAudit(main, managementOptions);
         if (user.permissions.includes('order.work.read')) {
             const orders = await service.adminOrders();
             main.append(el('h2', '订单查询'));
@@ -614,12 +624,13 @@ export class Application {
                     row.append(el('p', `${item.productName} · 计划 ${item.baseUnit === 'GRAM' ? formatWeight(item.quantity) : item.quantity + ' 件'}`));
                 if (task.status === 'UNASSIGNED')
                     row.append(button('领取拣货任务', () => void this.run(async () => { await service.claimPick(task.taskId, task.version); this.tell('已领取拣货任务'); await this.operations(); })));
-                if (task.status === 'CLAIMED' && task.pickerId === user.userId)
-                    row.append(button('录入实拣数量', () => this.pickDialog(task)));
+                if (task.status === 'CLAIMED' && task.pickerId === user.userId) {
+                    row.append(button('录入实拣数量', () => this.pickDialog(task)),button('重新分配批次',()=>openReallocateDialog(task,managementOptions)));
+                }
                 main.append(row);
             }
         }
-        if (user.permissions.some(p => ['delivery.handover.read', 'delivery.self.read'].includes(p))) {
+        if (user.permissions.some(p => ['delivery.handover.read', 'delivery.self.read', 'delivery.exception.resolve'].includes(p))) {
             const tasks = await service.deliveryTasks();
             main.append(el('h2', '配送任务'),el('p','称重退差处理中需稍后刷新再发货；如需补款，由会员完成支付后再交接。'));
             if (!tasks.items.length)
@@ -631,10 +642,11 @@ export class Application {
                     row.append(button('交接并发货', () => { const d=this.dialog('交接配送');const courier=input('配送员账户 ID','courierId','demo-courier');d.append(courier,el('p','演示配送员 ID 为 demo-courier；服务端验证配送员角色，不能指派给拣货员。'),button('确认发货',()=>void this.run(async()=>{await service.dispatch(task.taskId,{courierId:q<HTMLInputElement>(courier,'input')!.value,version:task.version});d.close();this.tell('订单已交接发货，会员订单中可查看签收码');await this.operations();}))); }));
                 if (task.status === 'DELIVERING' && task.courierId === user.userId)
                     row.append(button('确认签收', () => { const d = this.dialog('配送签收'); const proof = input('会员提供的六位签收码', 'proofCode'); const i = q<HTMLInputElement>(proof, 'input')!; i.pattern = '[0-9]{6}'; i.maxLength = 6; d.append(proof, button('提交签收', () => void this.run(async () => { await service.completeDelivery(task.taskId, { proofCode: i.value, version: task.version }); d.close(); this.tell('订单已完成'); await this.operations(); }))); }));
+                appendDeliveryActions(row,task,managementOptions);
                 main.append(row);
             }
         }
-        if(user.permissions.includes('aftersale.work.read')){const cases=await service.adminAftersales();main.append(el('h2','售后工单'));for(const a of cases.items){const row=el('section');row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));if(a.status==='APPLIED'&&!a.assigneeId&&user.permissions.includes('aftersale.work.claim'))row.append(button('领取售后',()=>void this.run(async()=>{await service.claimAftersale(a.aftersaleId,a.version);await this.operations();})));if(a.status==='APPLIED'&&a.assigneeId===user.userId&&user.permissions.includes('aftersale.review'))row.append(button('审核售后',()=>this.reviewDialog(a)));main.append(row);}}
+        if(user.permissions.includes('aftersale.work.read')){const cases=await service.adminAftersales();main.append(el('h2','售后工单'));for(const a of cases.items){const row=el('section');row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));if(a.status==='APPLIED'&&!a.assigneeId&&user.permissions.includes('aftersale.work.claim'))row.append(button('领取售后',()=>void this.run(async()=>{await service.claimAftersale(a.aftersaleId,a.version);await this.operations();})));if(a.assigneeId===user.userId&&a.evidenceMediaIds.length)row.append(button('查看品质证据',()=>openEvidencePreview(a.evidenceMediaIds,{dialog:title=>this.dialog(title),run:action=>this.run(action)})));if(a.status==='APPLIED'&&a.assigneeId===user.userId&&user.permissions.includes('aftersale.review'))row.append(button('审核售后',()=>this.reviewDialog(a)));main.append(row);}}
         if(user.permissions.includes('refund.read')){const refunds=await service.refunds();main.append(el('h2','退款执行'));for(const refund of refunds.items){const row=el('p');row.append(el('span',`${refund.refundId} · ${refund.status} · ${formatMoney(refund.amount)} · ${refund.type}`));if(refund.status==='PENDING'&&refund.type==='AFTERSALE'&&user.permissions.includes('refund.execute'))row.append(button('执行退款',()=>{const d=this.dialog('确认原路沙箱退款');const reason=input('复核说明','reason','复核通过，执行原路沙箱退款');d.append(el('p',formatMoney(refund.amount)),reason,button('确认退款',()=>void this.run(async()=>{await service.executeRefund(refund.refundId,{version:refund.version,reason:q<HTMLInputElement>(reason,'input')!.value});d.close();this.tell('退款指令已提交，请刷新查看结果');await this.operations();})));}));main.append(row);}}
         if (!user.permissions.some(p => ['order.work.read', 'pick.read', 'delivery.handover.read', 'delivery.self.read', 'aftersale.work.read', 'refund.read', 'dashboard.read', 'employee.read'].includes(p)))
             main.append(el('p', '此角色没有本工作台的业务操作权限。服务端独立校验角色与资源归属。'));
@@ -660,7 +672,28 @@ export class Application {
             } else if (node.tagName === 'P') node.classList.add('r04-role-description');
         }
     }
-    private aftersaleDialog(order:Order){const d=this.dialog('申请售后');d.append(el('p','当前 Demo 支持缺货与配送延迟；品质证据上传尚未开放。金额和数量由服务端再次校验，不会重复退同一份资金。'));const type=document.createElement('select');type.setAttribute('aria-label','售后类型');for(const [value,label]of [['SHORTAGE','缺货'],['LATE','配送延迟']]){const option=document.createElement('option');option.value=value!;option.textContent=label!;type.append(option);}const reason=input('问题说明','reason');d.append(type,reason);const fields: {item:Models['OrderItem'];selected:HTMLInputElement;quantity:HTMLInputElement;amount:HTMLInputElement}[]=[];for(const item of order.items){const row=el('p');const selected=document.createElement('input');selected.type='checkbox';selected.checked=false;selected.setAttribute('aria-label','售后选择 '+item.productName);const qty=document.createElement('input');qty.type='number';qty.min='1';qty.value='1';qty.setAttribute('aria-label',item.productName+'售后数量');const amount=document.createElement('input');amount.inputMode='decimal';amount.placeholder='申请退款金额（元）';amount.setAttribute('aria-label',item.productName+'申请金额');row.append(selected,el('span',item.productName+' '),qty,el('span',item.baseUnit==='GRAM'?' 克 ':' 件 '),amount);fields.push({item,selected,quantity:qty,amount});d.append(row);}d.append(button('提交售后申请',()=>void this.run(async()=>{const items=fields.filter(f=>f.selected.checked).map(f=>({orderItemId:f.item.orderItemId,quantity:Number(f.quantity.value),requestedAmount:yuan(f.amount.value)}));if(!items.length)throw new Error('请选择需要售后的商品');await service.applyAftersale({orderId:order.orderId,type:type.value as 'SHORTAGE'|'LATE',reason:q<HTMLInputElement>(reason,'input')!.value,items,evidenceMediaIds:[]});d.close();this.tell('售后申请已提交');await this.orders();})));}
+    private aftersaleDialog(order:Order) {
+        const d=this.dialog('申请售后'); d.classList.add('fm-management-dialog');
+        d.append(el('p','签收后7天内可申请品质、缺货或配送延迟售后。品质问题至少提供一张本订单图片；数量、金额和已退款额度由服务端再次校验。'));
+        const type=document.createElement('select');type.setAttribute('aria-label','售后类型');
+        for(const [value,label] of [['QUALITY','品质问题'],['SHORTAGE','缺货'],['LATE','配送延迟']]) {const option=document.createElement('option');option.value=value!;option.textContent=label!;type.append(option);}
+        const reason=input('问题说明','reason'); const reasonInput=q<HTMLInputElement>(reason,'input')!;reasonInput.maxLength=500;
+        const uploader=createEvidenceUploader(order.orderId,{purpose:'AFTERSALE',ownerDialog:d,run:action=>this.run(action)});
+        d.append(type,reason);const fields:{item:Models['OrderItem'];selected:HTMLInputElement;quantity:HTMLInputElement;amount:HTMLInputElement}[]=[];
+        for(const item of order.items) {
+            const row=el('p'),selected=document.createElement('input'),qty=document.createElement('input'),amount=document.createElement('input');
+            selected.type='checkbox';selected.setAttribute('aria-label','售后选择 '+item.productName);qty.type='number';qty.min='1';qty.step='1';qty.value='1';qty.setAttribute('aria-label',item.productName+'售后数量');amount.inputMode='decimal';amount.placeholder='申请退款金额（元）';amount.setAttribute('aria-label',item.productName+'申请金额');
+            row.append(selected,el('span',item.productName+' '),qty,el('span',item.baseUnit==='GRAM'?' 克 ':' 件 '),amount);fields.push({item,selected,quantity:qty,amount});d.append(row);
+        }
+        d.append(uploader.element,button('提交售后申请',()=>void this.run(async()=>{
+            if(!reasonInput.value.trim())throw new Error('请填写问题说明');
+            const items=fields.filter(f=>f.selected.checked).map(f=>{if(!/^[1-9]\d*$/.test(f.quantity.value)||!Number.isSafeInteger(Number(f.quantity.value)))throw new Error('售后数量必须为正整数');return {orderItemId:f.item.orderItemId,quantity:Number(f.quantity.value),requestedAmount:yuan(f.amount.value)};});
+            if(!items.length)throw new Error('请选择需要售后的商品');await uploader.uploadPending();const evidenceMediaIds=uploader.ids();
+            if(type.value==='QUALITY'&&!evidenceMediaIds.length)throw new Error('品质问题至少上传一张本订单图片');
+            await service.applyAftersale({orderId:order.orderId,type:type.value as 'QUALITY'|'SHORTAGE'|'LATE',reason:reasonInput.value.trim(),items,evidenceMediaIds});
+            d.close();this.tell('售后申请已提交');await this.orders();
+        })));
+    }
     private reviewDialog(a:Models['AdminAftersale']){const d=this.dialog('售后审核');const comment=input('审核说明','comment','已核实问题');d.append(comment);const fields:{line:Models['AftersaleLineInput'];amount:HTMLInputElement}[]=[];for(const line of a.items){const row=el('p',`${line.orderItemId} · 申请数量 ${line.quantity} · 核准金额（元） `);const amount=document.createElement('input');amount.inputMode='decimal';amount.value=money(line.requestedAmount);row.append(amount);fields.push({line,amount});d.append(row);}d.append(button('通过并生成退款单',()=>void this.run(async()=>{await service.approveAftersale(a.aftersaleId,{version:a.version,comment:q<HTMLInputElement>(comment,'input')!.value,approvedItems:fields.map(f=>({...f.line,requestedAmount:yuan(f.amount.value)}))});d.close();this.tell('审核通过，等待另一财务账户执行退款');await this.operations();})),button('驳回申请',()=>void this.run(async()=>{await service.rejectAftersale(a.aftersaleId,{version:a.version,comment:q<HTMLInputElement>(comment,'input')!.value});d.close();await this.operations();})));}
     private pickDialog(task: Models['PickTask']) {
         const d = this.dialog('实拣确认 · 基础单位');

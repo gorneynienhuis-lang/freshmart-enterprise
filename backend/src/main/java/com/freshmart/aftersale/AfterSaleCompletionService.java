@@ -31,7 +31,7 @@ public class AfterSaleCompletionService {
   if(changed){order.snapshotJson=json.writeValueAsString(snapshot);order.updatedAt=clock.instant();order.version++;commerce.updateOrder(order);}
   if(all&&total==after.approvedAmount&&!"COMPLETED".equals(after.status)){
    after.status="COMPLETED";after.version++;after.updatedAt=clock.instant();db.updateCase(after);db.release(after.aftersaleId);
-   db.audit(UUID.randomUUID().toString(),"SYSTEM","aftersale.complete",after.aftersaleId,"全部原路退款回执已成功，不修改实物库存",TraceContext.id(),clock.instant());
+   db.audit(UUID.randomUUID().toString(),"SYSTEM","aftersale.complete",after.aftersaleId,"全部原路退款回执已成功，不修改实物库存",TraceContext.id(),clock.instant(),"","SUCCESS");
   }
  }
 }

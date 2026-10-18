@@ -164,7 +164,7 @@ def initialize(args):
     private_write(private / 'railway-app.env',
         'RAILWAY_DOCKERFILE_PATH=deploy/railway/Dockerfile\nSPRING_PROFILES_ACTIVE=showcase\nSERVER_ADDRESS=0.0.0.0\nSERVER_PORT=8080\nPORT=8080\n'
         'DB_URL=jdbc:mysql://${{MySQL.MYSQLHOST}}:${{MySQL.MYSQLPORT}}/fresh_mall?serverTimezone=UTC&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true\n'
-        f'DB_USERNAME=fresh_mall\nDB_PASSWORD={app_password}\nAPP_TOKEN_SECRET={token_secret}\nSANDBOX_SECRET={sandbox_secret}\nAPP_ALLOWED_ORIGINS={origin}\nAPP_SECURE_COOKIES=true\nAPP_BRAND_NAME=东华鲜集\n')
+        f'DB_USERNAME=fresh_mall\nDB_PASSWORD={app_password}\nAPP_TOKEN_SECRET={token_secret}\nSANDBOX_SECRET={sandbox_secret}\nAPP_ALLOWED_ORIGINS={origin}\nAPP_PUBLIC_ORIGIN={origin}\nAPP_MEDIA_DIR=/app/media\nRAILWAY_RUN_UID=0\nAPP_SECURE_COOKIES=true\nAPP_BRAND_NAME=东华鲜集\n')
     private_write(private / 'accounts.txt',
         f'仅用于课程展示；合成登录标识，不发送短信。网址：{origin}\n每个账号首次登录必须修改密码；下面是初始密码，修改后此文件不会自动更新。\n不要公开员工/管理员密码。访客可自行注册 MEMBER。\n\n'
         + '\n'.join(f'1380000000{i}  {role:<8}  {passwords[role]}' for i, role in enumerate(ROLES, 1))
