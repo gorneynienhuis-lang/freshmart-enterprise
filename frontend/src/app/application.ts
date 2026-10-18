@@ -7,6 +7,7 @@ import { mountTemplate, defaults, type Values, type PageName } from './template'
 import { ApiError } from '../api/errors';
 import { homeCategoryHref, selectHomeFeatured } from './home-featured';
 import { isR04Design } from './design-version';
+import { productImagePath, setProductImage } from './product-image';
 import { renderManagement } from './admin-panel';
 import { renderOperations } from './operations-panel';
 import { renderFinanceAudit } from './finance-audit-panel';
@@ -252,7 +253,7 @@ export class Application {
             if (n.childElementCount === 0)
                 n.textContent = n.textContent?.replace('数据为示意', isR04Design() ? '数据库演示数据 · 备选设计待确认' : '数据库演示数据 · 沙箱支付') ?? '';
     }
-    private card(product: Product) { const sample = (defaults('List').items as Values[])[0]!; return { ...sample, _key: product.productId, img: product.imageUrl, name: product.name, spec: product.unitLabel + ' · ' + product.origin, price: money(product.salePrice), ref: money(product.price), unit: product.priceMode === 'BY_WEIGHT' ? '按实重结算，多退少补' : '按件计价', store: storage[product.storage], near: product.nearExpiry ? `临期 · 剩 ${product.shelfLifeRemainingDays ?? '—'} 天` : '', weighed: product.priceMode === 'BY_WEIGHT', soldOut: product.stockStatus === 'SOLD_OUT', inCart: false, canAdd: product.stockStatus !== 'SOLD_OUT' }; }
+    private card(product: Product) { const sample = (defaults('List').items as Values[])[0]!; return { ...sample, _key: product.productId, img: productImagePath(product.imageUrl), name: product.name, spec: product.unitLabel + ' · ' + product.origin, price: money(product.salePrice), ref: money(product.price), unit: product.priceMode === 'BY_WEIGHT' ? '按实重结算，多退少补' : '按件计价', store: storage[product.storage], near: product.nearExpiry ? `临期 · 剩 ${product.shelfLifeRemainingDays ?? '—'} 天` : '', weighed: product.priceMode === 'BY_WEIGHT', soldOut: product.stockStatus === 'SOLD_OUT', inCart: false, canAdd: product.stockStatus !== 'SOLD_OUT' }; }
     private bindCards() { for (const article of qa(this.root, 'article[data-key]')) {
         const id = article.getAttribute('data-key')!;
         const product = this.products.find(p => p.productId === id);
@@ -288,7 +289,7 @@ export class Application {
             slot.setAttribute('aria-label', `${product.name}，${formatMoney(product.salePrice)}，${product.unitLabel}`);
             const image = q<HTMLImageElement>(slot, '[data-home-product-image]');
             if (image) {
-                image.src = product.imageUrl;
+                setProductImage(image, product.imageUrl);
                 image.alt = product.name;
             }
             for (const [selector, value] of [
@@ -369,11 +370,11 @@ export class Application {
         const sku = product.skus.find(s => s.skuId === this.selectedSku) ?? product.skus[0]!;
         const weights = defaults('Detail').weights as Values[];
         const quantity = sku.baseUnit === 'GRAM' ? this.productQty * (sku.priceUnitGram ?? 500) : this.productQty;
-        this.mount('Detail', { productName: product.name, productImage: product.imageUrl, productDescription: product.origin + ' · ' + sku.unitLabel + ' · ' + product.description, salePrice: money(sku.salePrice), referencePrice: money(sku.price), unitLabel: sku.unitLabel, storageLabel: storage[product.storage], priceModeLabel: sku.priceMode === 'BY_WEIGHT' ? '称重' : '按件', qty: this.productQty, weights: product.skus.map(s => ({ ...weights[0], style:(s.skuId===sku.skuId?weights[1]:weights[0])!.style, label: s.unitLabel, note: formatMoney(s.salePrice), on: s.skuId === sku.skuId, pick: () => { this.selectedSku = s.skuId; void this.detail(id); } })), slots: [], related: [], weightMessage: sku.baseUnit === 'GRAM' ? `本次加入 ${formatWeight(quantity)} 估重。按实重多退少补，实重上限为估重的 110%；补款须在 10 分钟内且不晚于配送时段开始前完成，具体金额与期限以订单为准。` : '按件购买，商品金额、优惠与运费以结算页服务端报价为准。', inc: () => { this.productQty = Math.min(99, this.productQty + 1); void this.detail(id); }, dec: () => { this.productQty = Math.max(1, this.productQty - 1); void this.detail(id); }, specs: [{ k: '商品编码', v: product.spuCode }, { k: '产地', v: product.origin }, { k: '储存方式', v: storage[product.storage] }, { k: '计价方式', v: sku.priceMode === 'BY_WEIGHT' ? `按每 ${sku.priceUnitGram}g 计价` : '按件计价' }, { k: '到货与新鲜度', v: product.arrivedAt ? new Date(product.arrivedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }) : '尚无入库时间展示' }, { k: '说明', v: product.description }] });
+        this.mount('Detail', { productName: product.name, productImage: productImagePath(product.imageUrl), productDescription: product.origin + ' · ' + sku.unitLabel + ' · ' + product.description, salePrice: money(sku.salePrice), referencePrice: money(sku.price), unitLabel: sku.unitLabel, storageLabel: storage[product.storage], priceModeLabel: sku.priceMode === 'BY_WEIGHT' ? '称重' : '按件', qty: this.productQty, weights: product.skus.map(s => ({ ...weights[0], style:(s.skuId===sku.skuId?weights[1]:weights[0])!.style, label: s.unitLabel, note: formatMoney(s.salePrice), on: s.skuId === sku.skuId, pick: () => { this.selectedSku = s.skuId; void this.detail(id); } })), slots: [], related: [], weightMessage: sku.baseUnit === 'GRAM' ? `本次加入 ${formatWeight(quantity)} 估重。按实重多退少补，实重上限为估重的 110%；补款须在 10 分钟内且不晚于配送时段开始前完成，具体金额与期限以订单为准。` : '按件购买，商品金额、优惠与运费以结算页服务端报价为准。', inc: () => { this.productQty = Math.min(99, this.productQty + 1); void this.detail(id); }, dec: () => { this.productQty = Math.max(1, this.productQty - 1); void this.detail(id); }, specs: [{ k: '商品编码', v: product.spuCode }, { k: '产地', v: product.origin }, { k: '储存方式', v: storage[product.storage] }, { k: '计价方式', v: sku.priceMode === 'BY_WEIGHT' ? `按每 ${sku.priceUnitGram}g 计价` : '按件计价' }, { k: '到货与新鲜度', v: product.arrivedAt ? new Date(product.arrivedAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }) : '尚无入库时间展示' }, { k: '说明', v: product.description }] });
         this.root.dataset.productId=id;
         for (const img of qa<HTMLImageElement>(this.root, 'main img'))
             if (!img.closest('aside')) {
-                img.src = product.imageUrl;
+                setProductImage(img, product.imageUrl);
                 img.alt = product.name;
             }
         const category=this.categories.find(c=>c.categoryId===product.categoryId);const categoryLink=qa<HTMLAnchorElement>(this.root,'nav[aria-label="面包屑"] a')[1];if(categoryLink){categoryLink.textContent=category?.name??'商品分类';categoryLink.href='#/products?categoryId='+product.categoryId;categoryLink.onclick=null;}
@@ -490,7 +491,7 @@ export class Application {
         const row = el(isR04Design() ? 'article' : 'p');
         if (isR04Design()) {
             row.className = 'r04-cart-row';
-            const image = document.createElement('img'); image.src = item.imageUrl; image.alt = item.productName; image.width = 80; image.height = 80;
+            const image = document.createElement('img'); setProductImage(image, item.imageUrl); image.alt = item.productName; image.width = 80; image.height = 80;
             const info = el('div'); info.className = 'r04-cart-description'; info.append(el('strong', item.productName), el('span', item.unitLabel + (item.baseUnit === 'GRAM' ? ' · 按实重结算' : ' · 按件计价')));
             row.append(image, info);
         } else row.append(el('strong', item.productName + ' '));
@@ -635,7 +636,7 @@ export class Application {
         } else { article.style.cssText = 'border-top:1px solid #E3E6EA;padding:16px 0'; article.append(el('h2', `${order.orderNo} · ${status[order.status] ?? order.status}`), el('p', `${order.slot.date} ${order.slot.label} · 应付 ${formatMoney(order.price.payableAmount)} · 已付 ${formatMoney(order.paidAmount)} · 已退 ${formatMoney(order.refundedAmount)}`)); }
         for (const item of order.items) {
             const row = el('p', `${item.productName} × ${item.baseUnit === 'GRAM' ? formatWeight(item.actualGram ?? item.estimatedGram ?? item.quantity) + (item.actualGram !== null ? '（实重）' : '（估重）') : item.quantity} · ${formatMoney(item.finalPayableAmount ?? item.originalPayableAmount)}`);
-            if (isR04Design()) { row.className = 'r04-order-line'; const image = document.createElement('img'); image.src = item.imageUrl; image.alt = item.productName; image.width = 58; image.height = 58; row.prepend(image); }
+            if (isR04Design()) { row.className = 'r04-order-line'; const image = document.createElement('img'); setProductImage(image, item.imageUrl); image.alt = item.productName; image.width = 58; image.height = 58; row.prepend(image); }
             if(order.status==='FINISHED')row.append(createReviewButton(order,item,{dialog:title=>this.dialog(title),run:action=>this.run(action),reload:()=>this.orders(),notify:message=>this.tell(message)}));
             article.append(row);
         }
