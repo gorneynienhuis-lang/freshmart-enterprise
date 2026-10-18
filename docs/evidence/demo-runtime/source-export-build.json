@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-18",
+  "sourceCommit": "0d3de40",
+  "method": "git archive HEAD exported into a new temporary directory; no untracked project files copied",
+  "exportPathAtVerification": "/private/tmp/fresh-demo-export-m9xjh8h4",
+  "workingDirectory": "frontend",
+  "command": "npm ci --ignore-scripts --cache /private/tmp/fresh-demo-export-m9xjh8h4/npm-cache && npm run verify && npm run build",
+  "exitCode": 0,
+  "installedPackages": 81,
+  "auditReportedVulnerabilities": 0,
+  "openApiOperationsGeneratedTypesVerified": 91,
+  "typecheck": "passed",
+  "testFiles": 3,
+  "testsPassed": 28,
+  "designTemplatesImported": 6,
+  "productionBuild": "passed",
+  "limitations": [
+    "This verifies a clean frontend install and build, not backend deployment from a fresh clone.",
+    "The npm audit result is the registry result at execution time, not a complete security audit.",
+    "Git export verification does not itself prove a GitHub push or remote clone."
+  ]
+}
