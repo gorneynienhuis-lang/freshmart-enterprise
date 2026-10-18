@@ -11,7 +11,8 @@ const extra = {
  '212daffd30974fd23a4d144bc908fa73':'S010-cut.png','6e20d5b3b87508c7691eabd9c6436eae':'S007-cut.png',
  'e17f33201d9edaf481e37c5e91f31831':'S008-cut.png','1c325d6097fb7b3818807080959500f0':'dhu-weave-soft.png',
  '576df79a48b1fbc08c0224bb5f7a6f02':'dhu-weave-soft.png','48bde7c765abd9a63178ec245903b69f':'dhu-weave-white.png',
- 'fda7af62195fbe9bd07b39f07f802586':'dhu-weave-red-fade.png'
+ 'fda7af62195fbe9bd07b39f07f802586':'dhu-weave-red-fade.png',
+ 'cdde82d80a28194a7fec944db7aad91a':'home-r03-market-photo.jpg'
 };
 for(const [hash,file] of Object.entries(extra)) refs['/_blob/'+hash]='design/v2/assets/'+file;
 for(const [blob,source] of Object.entries(refs)) {

@@ -1,0 +1,208 @@
+{
+  "startedAt": "2026-10-18T04:42:56.906Z",
+  "dataSource": "local real API, no interception or mock data",
+  "sourceSha256": "70bcc4504ab4c46f29774ee751dc9347b9cfa766ae8d7de5dfdb02252bea66a6",
+  "viewports": [
+    {
+      "width": 1440,
+      "documentWidth": 1440,
+      "hero": {
+        "x": 328,
+        "y": 239,
+        "width": 744,
+        "height": 472,
+        "top": 239,
+        "right": 1072,
+        "bottom": 711,
+        "left": 328
+      },
+      "title": "把新鲜，带回校园。",
+      "brokenImages": [],
+      "cards": [
+        {
+          "id": "S001",
+          "name": "沙瓤番茄",
+          "price": "¥5.90",
+          "unit": "500g/份",
+          "image": "http://localhost:8080/catalog/S001.jpg",
+          "href": "#/product/S001",
+          "onclick": false
+        },
+        {
+          "id": "S006",
+          "name": "红富士苹果",
+          "price": "¥16.90",
+          "unit": "4个装",
+          "image": "http://localhost:8080/catalog/S006.jpg",
+          "href": "#/product/S006",
+          "onclick": false
+        },
+        {
+          "id": "S011",
+          "name": "谷物鲜鸡蛋",
+          "price": "¥13.90",
+          "unit": "10枚装",
+          "image": "http://localhost:8080/catalog/S011.jpg",
+          "href": "#/product/S011",
+          "onclick": false
+        }
+      ],
+      "categoryLinks": [
+        {
+          "kind": "produce",
+          "href": "#/products?categoryId=C01",
+          "onclick": false
+        },
+        {
+          "kind": "fresh",
+          "href": "#/products?categoryId=C03",
+          "onclick": false
+        }
+      ]
+    },
+    {
+      "width": 1280,
+      "documentWidth": 1280,
+      "hero": {
+        "x": 272,
+        "y": 239,
+        "width": 696,
+        "height": 472,
+        "top": 239,
+        "right": 968,
+        "bottom": 711,
+        "left": 272
+      },
+      "title": "把新鲜，带回校园。",
+      "brokenImages": [],
+      "cards": [
+        {
+          "id": "S001",
+          "name": "沙瓤番茄",
+          "price": "¥5.90",
+          "unit": "500g/份",
+          "image": "http://localhost:8080/catalog/S001.jpg",
+          "href": "#/product/S001",
+          "onclick": false
+        },
+        {
+          "id": "S006",
+          "name": "红富士苹果",
+          "price": "¥16.90",
+          "unit": "4个装",
+          "image": "http://localhost:8080/catalog/S006.jpg",
+          "href": "#/product/S006",
+          "onclick": false
+        },
+        {
+          "id": "S011",
+          "name": "谷物鲜鸡蛋",
+          "price": "¥13.90",
+          "unit": "10枚装",
+          "image": "http://localhost:8080/catalog/S011.jpg",
+          "href": "#/product/S011",
+          "onclick": false
+        }
+      ],
+      "categoryLinks": [
+        {
+          "kind": "produce",
+          "href": "#/products?categoryId=C01",
+          "onclick": false
+        },
+        {
+          "kind": "fresh",
+          "href": "#/products?categoryId=C03",
+          "onclick": false
+        }
+      ]
+    },
+    {
+      "width": 1024,
+      "documentWidth": 1024,
+      "hero": {
+        "x": 272,
+        "y": 222,
+        "width": 728,
+        "height": 472,
+        "top": 222,
+        "right": 1000,
+        "bottom": 694,
+        "left": 272
+      },
+      "title": "把新鲜，带回校园。",
+      "brokenImages": [],
+      "cards": [
+        {
+          "id": "S001",
+          "name": "沙瓤番茄",
+          "price": "¥5.90",
+          "unit": "500g/份",
+          "image": "http://localhost:8080/catalog/S001.jpg",
+          "href": "#/product/S001",
+          "onclick": false
+        },
+        {
+          "id": "S006",
+          "name": "红富士苹果",
+          "price": "¥16.90",
+          "unit": "4个装",
+          "image": "http://localhost:8080/catalog/S006.jpg",
+          "href": "#/product/S006",
+          "onclick": false
+        },
+        {
+          "id": "S011",
+          "name": "谷物鲜鸡蛋",
+          "price": "¥13.90",
+          "unit": "10枚装",
+          "image": "http://localhost:8080/catalog/S011.jpg",
+          "href": "#/product/S011",
+          "onclick": false
+        }
+      ],
+      "categoryLinks": [
+        {
+          "kind": "produce",
+          "href": "#/products?categoryId=C01",
+          "onclick": false
+        },
+        {
+          "kind": "fresh",
+          "href": "#/products?categoryId=C03",
+          "onclick": false
+        }
+      ]
+    }
+  ],
+  "pageErrors": [],
+  "failedAssets": [],
+  "links": [
+    {
+      "kind": "featured-0",
+      "hash": "#/product/S001"
+    },
+    {
+      "kind": "featured-1",
+      "hash": "#/product/S006"
+    },
+    {
+      "kind": "featured-2",
+      "hash": "#/product/S011"
+    },
+    {
+      "kind": "produce",
+      "hash": "#/products?categoryId=C01"
+    },
+    {
+      "kind": "fresh",
+      "hash": "#/products?categoryId=C03"
+    },
+    {
+      "kind": "primary-cta",
+      "hash": "#/products"
+    }
+  ],
+  "status": "PASSED",
+  "finishedAt": "2026-10-18T04:42:59.659Z"
+}

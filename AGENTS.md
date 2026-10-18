@@ -13,3 +13,7 @@ Codex负责 contracts、backend、database、deploy、docs、scripts、tests 及
 每次交付写独立 `collab/codex/CODEX-xxx.md` 和实际AI记录；契约变更递增版本并说明差异。不要与Claude同时改共享日志。现有私有仓库见README；不另建仓库，不提交密钥和未审阅原始文件。
 
 用户要求每个已交付的前端视觉版本可回溯：Codex为每版保存独立commit、递增UI标签、源码/必要素材/截图及用户确认状态并推送GitHub，索引见collab/codex/UI-VERSIONS.md。候选稿即使未采纳也保留，不把归档当批准；禁止为回溯而reset/checkout覆盖共享工作目录中的新稿。Claude继续不操作Git。
+
+2026-10-18本轮例外：用户明确要求Codex亲自重做首页主视觉R03，授权修改V2-Home.dc.html、相关摄影素材与工程接线；该请求覆盖本轮首页的Claude视觉独占约定。仍由用户确认候选稿，其他页面和PPT不因该例外自动扩展范围。
+
+课程验收检查Git提交及GitHub上传记录：每次完成可评审的项目修改均作真实独立提交并推送，核对远端SHA；上传失败必须明确说明，不把本地commit当作已上传，不倒填或伪造历史。只提交已审阅文件并排除凭据。

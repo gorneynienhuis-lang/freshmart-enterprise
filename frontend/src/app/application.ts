@@ -1,6 +1,7 @@
 import { service } from './service';
 import { mountTemplate, defaults, type Values, type PageName } from './template';
 import { ApiError } from '../api/errors';
+import { homeCategoryHref, selectHomeFeatured } from './home-featured';
 import { formatMoney, formatWeight, type Models, type Product, type Cart, type Quote, type Address, type DeliverySlot, type Order } from '../domain';
 const money = (n: number) => formatMoney(n, { symbol: false, grouping: false });
 function yuan(value:string):number {if(!/^(0|[1-9]\d*)(\.\d{1,2})?$/.test(value))throw new Error('金额须为非负数，最多两位小数');const [whole,decimal='']=value.split('.');const cents=BigInt(whole!)*100n+BigInt(decimal.padEnd(2,'0'));if(cents>BigInt(Number.MAX_SAFE_INTEGER))throw new Error('金额超出范围');return Number(cents);}
@@ -193,13 +194,48 @@ export class Application {
     } }
     private async home() { const epoch=this.epoch;const home = await service.home();if(epoch!==this.epoch)return; this.categories = home.categories; this.products = [...home.nearExpiryProducts, ...home.recommendedProducts]; this.mount('Home', { cats: home.categories.map(c => ({ _key: c.categoryId, name: c.name, sub: c.shortName })), slots: [{ day: '选择收货地址后', time: '查看实时配送时段', state: '结算页预约', badgeStyle: '' }], shelves: [{ title: '临期特惠', note: '库存与临期价格由服务端返回', items: home.nearExpiryProducts.slice(0, 6).map(p => this.card(p)) }, { title: '当季精选', note: '会员价 · 实时可售商品', items: home.recommendedProducts.slice(0, 12).map(p => this.card(p)) }] }); this.bindCards(); for (const a of qa<HTMLAnchorElement>(this.root, 'nav[aria-label="商品分类"] a[data-key]'))
         a.href = '#/products?categoryId=' + a.dataset.key; const note = byText(this.root, '名额为示意，以下单时为准'); if (note)
-        note.textContent = '库存与名额在提交订单时再次校验'; const hero = q(this.root, '.fm-hero-fruit'); if (hero)
-        for (const span of qa(hero, 'span'))
-            if (span.childElementCount === 0 && /^¥/.test(span.textContent ?? '')) {
-                const name = span.parentElement?.textContent?.replace(span.textContent ?? '', '').trim();
-                const product = this.products.find(p => p.name.includes(name ?? 'missing'));
-                span.textContent = product ? formatMoney(product.salePrice) : '查看价格';
-            } }
+        note.textContent = '库存与名额在提交订单时再次校验';
+        this.bindHomeFeatured(selectHomeFeatured(home.recommendedProducts, home.nearExpiryProducts, home.categories));
+    }
+    private bindHomeFeatured(products: readonly Product[]) {
+        for (const slot of qa<HTMLAnchorElement>(this.root, 'a[data-home-featured-slot]')) {
+            const index = Number(slot.dataset.homeFeaturedSlot);
+            const product = Number.isInteger(index) && index >= 0 ? products[index] : undefined;
+            slot.hidden = !product;
+            slot.style.display = product ? '' : 'none';
+            slot.onclick = null;
+            if (!product) {
+                slot.removeAttribute('href');
+                continue;
+            }
+            slot.href = '#/product/' + encodeURIComponent(product.productId);
+            slot.dataset.homeProductId = product.productId;
+            slot.setAttribute('aria-label', `${product.name}，${formatMoney(product.salePrice)}，${product.unitLabel}`);
+            const image = q<HTMLImageElement>(slot, '[data-home-product-image]');
+            if (image) {
+                image.src = product.imageUrl;
+                image.alt = product.name;
+            }
+            for (const [selector, value] of [
+                ['[data-home-product-name]', product.name],
+                ['[data-home-product-price]', formatMoney(product.salePrice)],
+                ['[data-home-product-unit]', product.unitLabel],
+                ['[data-home-product-origin]', product.origin],
+            ] as const) {
+                const field = q(slot, selector);
+                if (field) field.textContent = value;
+            }
+            const reference = q(slot, '[data-home-product-reference]');
+            if (reference) {
+                reference.hidden = product.price <= product.salePrice;
+                reference.textContent = formatMoney(product.price);
+            }
+        }
+        for (const link of qa<HTMLAnchorElement>(this.root, 'a[data-home-category-link]')) {
+            link.href = homeCategoryHref(link.dataset.homeCategoryLink ?? '', this.categories);
+            link.onclick = null;
+        }
+    }
     private async list(params: URLSearchParams) { const epoch=this.epoch;const keyword = params.get('keyword') || undefined; const categoryId = params.get('categoryId') || undefined; const sort = (params.get('sort') || 'RECOMMENDED') as 'RECOMMENDED' | 'PRICE_ASC' | 'PRICE_DESC'; const result = await service.products({ ...keyword ? { keyword } : {}, ...categoryId ? { categoryId } : {}, ...params.get('nearExpiry') === 'true' ? { nearExpiry: true } : {}, sort }); if(epoch!==this.epoch)return;this.products = result.items; this.mount('List', { items: result.items.map(p => this.card(p)), facets: [] }); this.bindCards(); const h = q(this.root, 'h1'); if (h) {
         h.textContent = keyword ? `搜索：${keyword}` : '全部商品';
         if (h.nextElementSibling)

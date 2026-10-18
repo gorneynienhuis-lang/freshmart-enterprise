@@ -6,10 +6,11 @@
 |---|---|---|---|
 | R01 | [ui/home-r01-warm](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r01-warm) | 首次可运行Demo中的暖米首屏，基于170f8d2 | 用户不满意中间米白区域；保存用于对比 |
 | R02 | [ui/home-r02-shelf](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r02-shelf) | Claude ACK-011 白底货架版；三张价签、红色边条 | 用户明确仍不满意，未采纳；存在两项接线缺陷 |
+| R03 | [ui/home-r03-market](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r03-market) | 用户授权Codex制作自然摄影主视觉；三类真实精选商品及直达入口 | 待用户确认；本机构建、32测试、三种宽度与6个导航入口已验证 |
 
 ## 保存方式
 
-每次Claude交付一版，Codex检查差异后，以独立commit保存源文件、必要素材、交接及截图，创建递增的`ui/home-rNN-名称`标签并推送至现有私有仓库；记录该版用户确认状态、验证范围和已知问题。工作中的每次文件保存不等于交付，不编造此前不存在的历史快照。
+每次Claude或Codex交付一版，Codex检查差异后，以独立commit保存源文件、必要素材、交接及截图，创建递增的`ui/home-rNN-名称`标签并推送至现有私有仓库；记录该版用户确认状态、验证范围和已知问题。工作中的每次文件保存不等于交付，不编造此前不存在的历史快照。
 
 2026-10-18本次核对前，GitHub只有main和demo/v0.1.1、无标签；首页源码历史只有Demo基线提交0d3de40，不能声称此前每次中间稿都已上传。本次R01为已有源码补标签，R02为本轮实际新增快照。更早的本地截图和HomeB候选文件不代表所有中间版本均能完整复原。
 
@@ -24,3 +25,11 @@
 - 三张新价签只有`href="#"`，实测点击显示通用规则提示；水果图片可进入对应关键词搜索。
 - `dhu-weave-on-red.png`已保存作候选素材，但当前未映射使用；本轮不替用户决定是否显示纹样。
 - 仅归档与复核；本次不修改Claude视觉源稿，不将这两项接线问题登记为已修复。
+
+## R03复核
+
+用户明确要求Codex亲自尝试新视觉，覆盖本轮首页的原视觉独占约定。主视觉改为深绿色自然食材摄影与『把新鲜，带回校园。』文案；去掉货架和三种水果限制，保留原校园品牌、吉祥物与完整购物入口。
+
+主图使用内置image_gen生成，PNG源图和JPEG网页编码均在design/v2/assets/，原提示词见home-r03-market-photo.prompt.txt。摄影图仅作装饰，下面三张商品卡名称、价格、规格、图片和直达链接均来自实时API；无可售商品则隐藏，避免假价格和无效价签。
+
+32项前端测试、TypeScript、契约类型检查与完整生产构建通过；真实API下1440/1280/1024无横向溢出/缺图/JS异常，三商品卡、两个分类与主选购入口共6条导航逐一验证。证据为docs/evidence/ui-home-r03-market/。R02两项接线问题在R03的新组件中已修复；未重跑订单支付全链路，不借用旧验收声称本轮全量后端测试。
