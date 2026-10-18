@@ -1,0 +1,22 @@
+{
+  "verified_on": "2026-10-18",
+  "actions": {
+    "actions/checkout": {"tag":"v7.0.1","sha":"3d3c42e5aac5ba805825da76410c181273ba90b1"},
+    "actions/setup-node": {"tag":"v7.1.0","sha":"949feb2413d6458794dcd2491c4babbbce0c15c1"},
+    "actions/setup-java": {"tag":"v6.1.0","sha":"b843ebf9b913146b38da2eaa7aeddf76074ae1ad"},
+    "actions/setup-python": {"tag":"v7.0.0","sha":"5fda3b95a4ea91299a34e894583c3862153e4b97"},
+    "actions/upload-artifact": {"tag":"v7.0.2","sha":"cf430e030ddbb5b0abf93d22962f4752f3646cd9"}
+  },
+  "runtime": {"node":"26.12.0","java":"21.0.12.1+1","python":"3.14.7","maven":"3.9.16","maven_wrapper":"3.3.4"},
+  "maven_distribution_url":"https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.16/apache-maven-3.9.16-bin.zip",
+  "maven_distribution_sha512":"ed41650d42485cfc243fad22158caf9cbb5dc408ce7a09ddb94dd42a019de929ca43065bfa450612cf12bf78b5cafa3884b96c090de326ff590448c933454af3",
+  "images": {
+    "JAVA_BUILD_IMAGE":{"tag":"eclipse-temurin:21.0.12.1_1-jdk-jammy","ref":"docker.io/library/eclipse-temurin@sha256:742daacb9316be4b6fc60258f6e4ac2a11882f6c597373c92290a57bfad0d2e0"},
+    "JAVA_RUNTIME_IMAGE":{"tag":"eclipse-temurin:21.0.12.1_1-jre-jammy","ref":"docker.io/library/eclipse-temurin@sha256:affcab5356e1270ac35d2361ee83135af2f03e8d580eca78a6d5d6fdbf048db0"},
+    "NODE_BUILD_IMAGE":{"tag":"node:26.12.0-bookworm-slim","ref":"docker.io/library/node@sha256:298992629d69bbd5b2b03ad57094d8e4fcb3a8eeb7c4e25d29de656519568913"},
+    "CADDY_IMAGE":{"tag":"caddy:2.11.7-alpine","ref":"docker.io/library/caddy@sha256:d8542f48d34a9cf4e4c11a478865229840e87e4c96ea3f439101f31a5d35f75f"},
+    "MYSQL_IMAGE":{"tag":"mysql:8.4.11","ref":"docker.io/library/mysql@sha256:24989179f58856db763f418010c1169fecc944e3ec1ea7e921572d83eb070f70"}
+  },
+  "image_verification":"Official Docker Hub manifest bytes matched Docker-Content-Digest and included linux/amd64. No Docker pull, layer download, build or run performed locally.",
+  "action_verification":"Official actions/{name}/releases/latest and git/ref/tags/{tag}; annotated tags resolved to commit objects. No remote workflow created or run."
+}

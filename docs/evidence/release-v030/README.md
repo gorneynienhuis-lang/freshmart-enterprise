@@ -2,6 +2,8 @@
 
 本目录只汇总2026-10-18实际运行记录，不代替每个模块的原始结果。完整范围与限制见[CODEX-018](../../../collab/codex/CODEX-018.md)。
 
+本轮工程提交`e52b52edb771430334d0c8170e1c7d45b4d281ea`与标签`demo/v0.3.0-engineering`已真实推送并核验远端，见[GitHub记录](github-push.json)。后续分支可以继续前进，该标签保留本轮代码；不是覆盖旧版本或倒填历史。
+
 - [已测构建及覆盖率](../coverage-v030/backend-summary.json)：192项通过，完整205输入SHA留存；[前端44项Node覆盖率](../coverage-v030/frontend-unit-summary.json)为10.61%，与浏览器E2E分开。
 - [退款故障与真实UI](../refund-recovery-v022/README.md)：通过链98响应、12图，原始失败保留；所有业务由实际API生成。
 - [Redis实测](../redis-v030/README.md)：28响应、真实中断/恢复/自然TTL；仅分类缓存。

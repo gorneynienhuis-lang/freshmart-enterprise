@@ -1,0 +1,6 @@
+{
+  "scope": "Local static parser only; no workflow or container executed.",
+  "attempts": [
+    {"result":"FAILED","reason":"Ruby Psych found unquoted colon in flow-style Compose volume entries.","fix":"Quoted both owned CI volume mount strings; no main deployment file changed."}
+  ]
+}

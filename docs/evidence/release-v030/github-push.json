@@ -1,0 +1,14 @@
+{
+  "recordedAt": "2026-10-18T07:46:35.557107+00:00",
+  "status": "PUSHED_AND_REMOTE_VERIFIED",
+  "repository": "https://github.com/gorneynienhuis-lang/freshmart-enterprise",
+  "command": "git ls-remote origin refs/heads/demo/v0.1.1 refs/tags/demo/v0.3.0-engineering refs/tags/demo/v0.3.0-engineering^{}",
+  "observedRefs": {
+    "refs/heads/demo/v0.1.1": "e52b52edb771430334d0c8170e1c7d45b4d281ea",
+    "refs/tags/demo/v0.3.0-engineering": "f3c1934be541649c90a12596e9dfc55854e2a005",
+    "refs/tags/demo/v0.3.0-engineering^{}": "e52b52edb771430334d0c8170e1c7d45b4d281ea"
+  },
+  "tagType": "annotated",
+  "observationScope": "At v0.3 engineering push verification. The branch may receive later commits; the tag preserves this code and evidence checkpoint.",
+  "secretsIncluded": false
+}

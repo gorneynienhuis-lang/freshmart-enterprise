@@ -1,0 +1,17 @@
+{
+  "status":"PREPARATION_PASSED_RUNTIME_NOT_EXECUTED",
+  "platform":"macOS arm64",
+  "executed":[
+    {"command":"python3 deploy/ci/check.py","result":"PASSED","scope":"Ruby Psych YAML, Python JSON/TOML and custom static invariants; not GitHub Actions/actionlint/Docker engine validation"},
+    {"command":"python3 deploy/ci/test_guards.py","result":"PASSED","tests":5,"failures":0,"scope":"Offline temporary-directory and mocked-process guards; no services or databases"},
+    {"command":"python3 -m py_compile deploy/ci/check.py deploy/ci/verify.py deploy/ci/container_smoke.py deploy/ci/test_guards.py","result":"PASSED","scope":"Python syntax only"},
+    {"operation":"Official GitHub Actions release/tag metadata read","result":"Five official action repositories resolved to pinned full commit SHAs; no remote mutation"},
+    {"operation":"Official Docker Hub image-index metadata read","result":"Five existing version manifest response digests matched and linux/amd64 descriptors found; no image layers pulled"},
+    {"operation":"Maven Central checksum metadata read","result":"Exact 3.9.16 ZIP SHA512 recorded; ZIP itself not downloaded or executed in this preparation"}
+  ],
+  "not_executed":["GitHub Actions activation or remote run","New PAT/Workflow authorization","npm ci/verify/coverage/build through this CI controller","Maven verify/coverage through this CI controller","Complete backup/runtime script test group through this CI controller","Docker/Podman/Colima installation or startup","Any Linux/container image pull, build, health or persistence test","Public TLS/Railway/cloud deployment"],
+  "local_container_tools":{"docker":null,"podman":null,"colima":null,"nerdctl":null,"lima":null},
+  "services_or_main_database_changed":false,
+  "git_or_remote_write":false,
+  "current_branch_note":"Parent reports demo/v0.1.1. Template push filter is main only, template remains outside .github/workflows, so no current-branch CI execution is claimed."
+}

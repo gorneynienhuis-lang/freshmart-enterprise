@@ -1,0 +1,31 @@
+{
+  "status": "PASSED",
+  "scope": "Static YAML/TOML/JSON and reviewed security invariants only; no workflow engine, Linux/container build, service or database execution.",
+  "actions_checked": 8,
+  "container_tools": {
+    "docker": null,
+    "podman": null,
+    "colima": null,
+    "nerdctl": null,
+    "lima": null
+  },
+  "local_versions": {
+    "node": "v26.8.1",
+    "npm": "11.19.0",
+    "java": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode, sharing)",
+    "python3": "Python 3.14.7",
+    "ruby": "3.1.0"
+  },
+  "files_sha256": {
+    "deploy/ci/static-attempts.json": "72fe774c8c5e81d8132a4089d2169d645aac11f357bc3d211aacd4bb489bd634",
+    "deploy/ci/check.py": "73d09f56a12259dd6b1405c62e1c91821d140ebe2af0f4bdb2c28972320e9c78",
+    "deploy/ci/dependencies.lock.json": "fec3971ae594785edc7ff4644ca3ce2bda9b1f866025c32957ef7aacff48f203",
+    "deploy/ci/compose.smoke.yaml": "bf9afc172d9898171502b10da5ce8feb0ae7d063ecf32d1ecd43997cf1505a8f",
+    "deploy/ci/container_smoke.py": "d0a2eceb81dcfc2a59d864c38860dc5f5d1bcc9190d21587f46a56d119eadc4f",
+    "deploy/ci/.gitignore": "46109ed5d208ec159924c87c140ec58e5461a8bcae54b339a84b4e76c41168ee",
+    "deploy/ci/test_guards.py": "730eae09cd54b1e64ef66203a609536b35530d78930375ca89a00d794f1b81c9",
+    "deploy/ci/local-verification.json": "b0ea0ab88cd672248c35bf3846f7f7888c09caf0aba2153d85573c142c57cb04",
+    "deploy/ci/workflow.yml.template": "7635f60a56e0eedee1f4a860b2ebb15edfb923acdd85bc7edb10a3845e4d9546",
+    "deploy/ci/verify.py": "c9eca4c640fb16f13e5e1f273319836aa0c0a9a3954e0109797e6a75aa035f06"
+  }
+}

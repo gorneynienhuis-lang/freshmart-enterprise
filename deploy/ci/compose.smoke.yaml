@@ -1,0 +1,48 @@
+# CI-owned project only. No production network, external volume, fixed host port or real credentials.
+services:
+  db:
+    image: ${MYSQL_IMAGE:?Set reviewed immutable reference}
+    environment:
+      MYSQL_DATABASE: fresh_mall_ci
+      MYSQL_USER: fresh_mall_ci
+      MYSQL_PASSWORD_FILE: /run/secrets/app-password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/root-password
+      TZ: UTC
+    command: ['--mysqlx=0','--default-time-zone=+00:00','--transaction-isolation=READ-COMMITTED']
+    secrets: [app-password,root-password,app-client]
+    volumes: ['ci-db:/var/lib/mysql']
+    healthcheck:
+      test: ['CMD','mysql','--defaults-extra-file=/run/secrets/app-client','-h127.0.0.1','-Nse','SELECT 1']
+      interval: 5s
+      timeout: 4s
+      retries: 36
+      start_period: 30s
+  app:
+    image: ${CI_APP_IMAGE:?Set owned local build tag}
+    env_file: ['${CI_PRIVATE:?Set owned private directory}/backend.env']
+    environment:
+      SPRING_PROFILES_ACTIVE: showcase
+      PORT: '8080'
+      DB_URL: jdbc:mysql://db:3306/fresh_mall_ci?serverTimezone=UTC&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
+      DB_USERNAME: fresh_mall_ci
+      APP_ALLOWED_ORIGINS: https://ci.example.test
+      APP_PUBLIC_ORIGIN: https://ci.example.test
+      APP_SECURE_COOKIES: 'true'
+      APP_MEDIA_DIR: /app/media
+      APP_COMMERCE_JOBS_ENABLED: 'false'
+      APP_MONITORING_ENABLED: 'false'
+    ports: ['127.0.0.1::8080']
+    volumes: ['ci-media:/app/media']
+    read_only: true
+    tmpfs: ['/tmp:size=128m,mode=1777']
+    cap_drop: [ALL]
+    security_opt: ['no-new-privileges:true']
+    depends_on:
+      db: {condition: service_healthy}
+volumes:
+  ci-db:
+  ci-media:
+secrets:
+  app-password: {file: '${CI_PRIVATE}/app-password'}
+  root-password: {file: '${CI_PRIVATE}/root-password'}
+  app-client: {file: '${CI_PRIVATE}/app-client.cnf'}
