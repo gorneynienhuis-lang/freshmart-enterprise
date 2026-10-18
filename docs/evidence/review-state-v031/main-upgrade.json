@@ -1,0 +1,18 @@
+{
+  "status": "PASSED",
+  "recordedAt": "2026-10-18T08:09:33.371710+00:00",
+  "backup": ".runtime/backups/pre-v031-upgrade-20261018_1610",
+  "backupStatus": "BACKUP_VERIFIED_NOT_YET_RESTORED",
+  "previousJarSha256": "aa267f513059bad34a0538b2fb0570af6a81ef6dba11ec7451d72e728ef4b4c5",
+  "installedJarSha256": "0c663923ced1ded16f0a6013599a7c01aacfb40b392d7309931b3876249ea9e4",
+  "all205BuildInputsMatch": true,
+  "backendPidBefore": 56019,
+  "backendPidAfter": 56127,
+  "health": "UP",
+  "flywayVersion": "013",
+  "userPasswordStatusAndVersionUnchanged": true,
+  "userOrderPaymentProductCountsUnchanged": true,
+  "seedExecuted": false,
+  "schemaMigrationNeeded": false,
+  "publicDeployment": false
+}

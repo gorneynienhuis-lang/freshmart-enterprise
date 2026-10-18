@@ -1,0 +1,52 @@
+{
+  "status": "PASSED",
+  "tests": {
+    "tests": 195,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "INSTRUCTION": {
+      "missed": 2962,
+      "covered": 31581
+    },
+    "BRANCH": {
+      "missed": 1013,
+      "covered": 2299
+    },
+    "LINE": {
+      "missed": 114,
+      "covered": 2046
+    },
+    "COMPLEXITY": {
+      "missed": 1029,
+      "covered": 1597
+    },
+    "METHOD": {
+      "missed": 80,
+      "covered": 887
+    },
+    "CLASS": {
+      "missed": 2,
+      "covered": 241
+    }
+  },
+  "jarSha256": "0c663923ced1ded16f0a6013599a7c01aacfb40b392d7309931b3876249ea9e4",
+  "mainJarChanged": false,
+  "liveSourceChangedDuringBuild": false,
+  "finishedAt": "2026-10-18T07:58:36.794937+00:00",
+  "sourceSnapshot": ".runtime/builds/20261018T075752Z-ca46b998",
+  "sourceBaseCommit": "98ac1c2b2e31119b610ea93fb11834bc2c46c5da",
+  "sourceInputs": 205,
+  "sourceState": "working tree copied at invocation; not a clean-install or remote-CI claim",
+  "percent": {
+    "INSTRUCTION": 91.4252,
+    "BRANCH": 69.4143,
+    "LINE": 94.7222,
+    "COMPLEXITY": 60.8149,
+    "METHOD": 91.727,
+    "CLASS": 99.177
+  },
+  "scope": "All production Java classes; no excludes; H2 relational tests, not MySQL sustained performance."
+}

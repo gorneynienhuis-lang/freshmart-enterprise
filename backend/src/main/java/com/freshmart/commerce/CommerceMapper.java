@@ -8,6 +8,9 @@ import static com.freshmart.commerce.CommerceModels.*;
 @Mapper
 public interface CommerceMapper {
     @Select("SELECT * FROM fm_order WHERE order_id=#{id}") OrderRow order(String id);
+    // One owner-scoped query for all lines, using the same actual delivery basis as ReviewService.
+    @Select("SELECT a.order_item_id,COALESCE(SUM(a.picked_quantity),0) AS delivered_quantity,CASE WHEN COUNT(r.review_id)>0 THEN TRUE ELSE FALSE END AS reviewed FROM fm_order o JOIN fm_order_allocation a ON a.order_id=o.order_id LEFT JOIN fm_review r ON r.order_id=o.order_id AND r.order_item_id=a.order_item_id AND r.member_id=o.user_id WHERE o.order_id=#{order} AND o.user_id=#{member} GROUP BY a.order_item_id ORDER BY a.order_item_id")
+    List<OrderItemReviewState> orderItemReviewStates(@Param("order")String order,@Param("member")String member);
     @Select("SELECT * FROM fm_order WHERE order_id=#{id} FOR UPDATE") OrderRow lockOrder(String id);
     @Select("SELECT * FROM fm_order WHERE pick_task_id=#{id}") OrderRow byPick(String id);
     @Select("SELECT * FROM fm_order WHERE delivery_task_id=#{id}") OrderRow byDelivery(String id);

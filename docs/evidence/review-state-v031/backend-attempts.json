@@ -1,0 +1,17 @@
+{
+  "attempts": [
+    {
+      "status": "FAILED",
+      "build": ".runtime/builds/20261018T075525Z-4c0ad076",
+      "tests": 195,
+      "failures": 0,
+      "errors": 15,
+      "skipped": 0,
+      "liveSourceChangedDuringBuild": false,
+      "mainJarChanged": false,
+      "errorScope": "Mockito inline mock maker could not self-attach JVM agent from sandbox external process; 9 cache+4 metrics security+2 collector test initialization errors",
+      "sourceChangesForRetry": false,
+      "response": "Retained original reports and reran the same frozen sources in approved local execution context. Final result stored separately."
+    }
+  ]
+}

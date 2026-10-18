@@ -1,0 +1,34 @@
+{
+  "status": "PASS",
+  "mainUpgradeRecord": "../main-upgrade.json",
+  "mainUpgradeRecordSha256": "ff09fc7e37967eed8b9b57545142a511004de0e59956b0429d5d2be55e9aed3f",
+  "jarSource": "Main upgrade record, with all205 build inputs matching the195-test build; smoke itself verifies actual HTTP and browser behavior rather than re-running Maven.",
+  "installedJarSha256": "0c663923ced1ded16f0a6013599a7c01aacfb40b392d7309931b3876249ea9e4",
+  "mainPidAtUpgrade": 56127,
+  "healthAtUpgrade": "UP",
+  "flywayAtUpgrade": "013",
+  "mainUpgradeUnchangedPasswordsStatusVersionAndCoreCounts": true,
+  "smokeResultSha256": "b9041273d5be5abfb85683528e6d3368f24b28044b2d5b2276cf1f289e8cfa7a",
+  "schemaContractSha256": "177b10e942d9df46dd9ea167348a52a5a9d320594f7b04f634f74a8c809fed3a",
+  "sourceFilesStillMatchAtRecording": true,
+  "observed": {
+    "roles": 7,
+    "actualResponses": 70,
+    "schemaErrors": 0,
+    "javascriptErrors": 0,
+    "failedAssets": 0,
+    "screens": 12,
+    "widths": [
+      1440,
+      1024,
+      390
+    ],
+    "newSessionFamiliesLoggedOut": 7,
+    "businessWrites": 0
+  },
+  "actualVisualInspection": [
+    "r03-home-1440.png",
+    "r03-administrator-390.png"
+  ],
+  "previousFailedEngineeringAttempts": "Retained unchanged in sibling review-state-v031 run directories. This new main smoke does not overwrite or reclassify them."
+}

@@ -1,0 +1,834 @@
+{
+  "runId": "2026-10-18T08-04-48-361Z-d7fd1c4875",
+  "startedAt": "2026-10-18T08:04:48.362Z",
+  "status": "FAIL",
+  "target": {
+    "uiBaseUrl": "http://127.0.0.1:15173",
+    "backendBaseUrl": "http://127.0.0.1:18081",
+    "expectedJarSha256": "0c663923ced1ded16f0a6013599a7c01aacfb40b392d7309931b3876249ea9e4"
+  },
+  "scope": {
+    "maximumNewMembers": 2,
+    "maximumNewOrders": 1,
+    "sqlWrites": 0,
+    "existingAccountPasswordOrRoleChanges": 0,
+    "existingProductOrPolicyChanges": 0
+  },
+  "resumed": true,
+  "resumedFrom": "2026-10-18T08-03-57-518Z-06b0a9126c",
+  "attempts": [
+    {
+      "stage": "two-members-and-independent-staff-sessions",
+      "startedAt": "2026-10-18T08:04:48.906Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T08:04:49.370Z"
+    },
+    {
+      "stage": "owner-only-flags-and-staff-projections",
+      "startedAt": "2026-10-18T08:04:49.370Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T08:04:49.386Z"
+    },
+    {
+      "stage": "actual-anonymous-review-ui",
+      "startedAt": "2026-10-18T08:04:49.386Z",
+      "status": "PASS",
+      "finishedAt": "2026-10-18T08:04:50.017Z"
+    },
+    {
+      "stage": "reload-independent-relogin-and-real-pagination",
+      "startedAt": "2026-10-18T08:04:50.017Z",
+      "status": "FAIL",
+      "error": "page.waitForResponse: Timeout 20000ms exceeded while waiting for event \"response\"",
+      "finishedAt": "2026-10-18T08:05:10.392Z"
+    }
+  ],
+  "responses": [
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "62aca729-6469-400c-84c0-5ca54958e8b7",
+      "at": "2026-10-18T08:04:48.914Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "beb074c0-b801-40de-b12a-b9665f3ac4e2",
+      "at": "2026-10-18T08:04:48.970Z"
+    },
+    {
+      "role": "OUTSIDER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "36218dec-9ee9-493a-964f-c53a42254a7f",
+      "at": "2026-10-18T08:04:48.972Z"
+    },
+    {
+      "role": "OUTSIDER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "e234b487-4a7d-48b8-b859-4dd01b815fe8",
+      "at": "2026-10-18T08:04:49.028Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "653275ff-45c3-45a4-b47b-98b2ca0b50ae",
+      "at": "2026-10-18T08:04:49.030Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "c60c76c4-b6b4-4a8e-b2ea-a775026d44c1",
+      "at": "2026-10-18T08:04:49.084Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "99f6ecfe-1967-46d2-b200-0a9227467d2e",
+      "at": "2026-10-18T08:04:49.086Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "233e284b-5a80-44d6-93fd-44cd45917418",
+      "at": "2026-10-18T08:04:49.141Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "d7862c93-9e48-4cb1-a816-502699e98762",
+      "at": "2026-10-18T08:04:49.143Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "854eacdc-b835-4f7e-9751-b26d5dabbf60",
+      "at": "2026-10-18T08:04:49.196Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "893555e8-2bcc-4a4b-92b6-7116fd820479",
+      "at": "2026-10-18T08:04:49.199Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "4715b299-687d-41d8-8b01-af1221667688",
+      "at": "2026-10-18T08:04:49.252Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "350921da-a65b-462a-bfd5-8c16238b2ffc",
+      "at": "2026-10-18T08:04:49.255Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "9025a643-0367-42d3-ae64-bd66f4e900b2",
+      "at": "2026-10-18T08:04:49.307Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "fd140e31-24ef-4f62-8d08-88dcf7d85612",
+      "at": "2026-10-18T08:04:49.310Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "a25162ef-7c99-473f-a327-2b734045a5c3",
+      "at": "2026-10-18T08:04:49.364Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "9538c725-59b9-47cc-8026-6a8b9cda4ff9",
+      "at": "2026-10-18T08:04:49.367Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 200,
+      "traceId": "78ea2598-0e62-4573-947f-7455285a4ed8",
+      "at": "2026-10-18T08:04:49.370Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 200,
+      "traceId": "73b3485e-dd8b-4def-976e-8fe02188dcb1",
+      "at": "2026-10-18T08:04:49.373Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 200,
+      "traceId": "c96ed721-344e-4536-a9e7-2e1555be5db3",
+      "at": "2026-10-18T08:04:49.377Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks/pick_02249ba2-a35a-48ec-9d7e-574bdcd21a25",
+      "status": 200,
+      "traceId": "00f84fdb-910c-4698-ae96-375f386c42db",
+      "at": "2026-10-18T08:04:49.380Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 403,
+      "traceId": "c744eb42-587d-4cf5-b64c-c77e0d3b047c",
+      "at": "2026-10-18T08:04:49.383Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/admin/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 404,
+      "traceId": "c0acf5e0-37ec-4b11-a08f-459fc83cd394",
+      "at": "2026-10-18T08:04:49.386Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 200,
+      "traceId": "e42645d9-d719-4c8b-8cae-e63a70e8796f",
+      "at": "2026-10-18T08:04:49.391Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "ccb69d22-c47a-475b-b4e3-7807c2e42045",
+      "at": "2026-10-18T08:04:49.473Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 200,
+      "traceId": "dc4f05de-0a13-452b-bc27-5a57f96f9116",
+      "at": "2026-10-18T08:04:49.477Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "traceId": "15702b07-c98d-4c41-973f-af6656ca6586",
+      "at": "2026-10-18T08:04:49.480Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "status": 200,
+      "traceId": "d899eb85-8f17-4526-98c6-8e98ac006f04",
+      "at": "2026-10-18T08:04:49.488Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "status": 200,
+      "traceId": "c342ffef-438a-4a87-aa86-63ac3d22480b",
+      "at": "2026-10-18T08:04:49.494Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/aftersales",
+      "status": 200,
+      "traceId": "3fb14135-de96-4c2c-a519-cdaf74c51d4d",
+      "at": "2026-10-18T08:04:49.500Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 200,
+      "traceId": "a81dc184-174c-4a6d-adac-c9f3035d9931",
+      "at": "2026-10-18T08:04:49.760Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/reviews",
+      "status": 409,
+      "traceId": "8b277235-6e51-4b6f-bce3-816cd6e68d83",
+      "at": "2026-10-18T08:04:50.013Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/reviews",
+      "status": 409,
+      "traceId": "f44c7f5e-6c9c-4e42-bbdd-702606005dd0",
+      "at": "2026-10-18T08:04:50.017Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "17f056a6-de49-4194-be2a-f0a0ed546375",
+      "at": "2026-10-18T08:04:50.045Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "status": 200,
+      "traceId": "a4167ba8-1e90-49c7-8aec-32f6b57635b2",
+      "at": "2026-10-18T08:04:50.049Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/categories",
+      "status": 200,
+      "traceId": "393a236b-7798-4329-afda-ae918b1d9c6d",
+      "at": "2026-10-18T08:04:50.051Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/cart",
+      "status": 200,
+      "traceId": "edfc9fec-0318-44c6-9e99-1ecc72dd5114",
+      "at": "2026-10-18T08:04:50.055Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "status": 200,
+      "traceId": "763ffb15-37b8-4d6e-9d54-83ec2cf9a089",
+      "at": "2026-10-18T08:04:50.067Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/aftersales",
+      "status": 200,
+      "traceId": "c9b495aa-22eb-4587-808d-ac9af58ab44a",
+      "at": "2026-10-18T08:04:50.068Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 200,
+      "traceId": "ea36721e-bea5-464f-99bf-f15ed39525af",
+      "at": "2026-10-18T08:04:50.078Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "eb1a34b3-49a5-45be-aee5-87296c0dff53",
+      "at": "2026-10-18T08:04:50.328Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "58479cc6-1e78-492b-b7c6-55cc4422346f",
+      "at": "2026-10-18T08:04:50.332Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "c3b39df4-4478-4df3-94df-21bb02aeb364",
+      "at": "2026-10-18T08:04:50.335Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "df3ce720-eef6-4b1b-a32d-3ecbb09bca43",
+      "at": "2026-10-18T08:04:50.337Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "traceId": "b4556ef4-6a2b-4ace-ba18-e9cce31cb16f",
+      "at": "2026-10-18T08:04:50.391Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_13cea66d-d3ab-49da-860b-d32e3d026fb8",
+      "status": 200,
+      "traceId": "6000c58d-c8b9-438d-9964-b97cd668ecd6",
+      "at": "2026-10-18T08:05:10.406Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "681734fc-58a9-49b2-ae64-d421cb70d20f",
+      "at": "2026-10-18T08:05:10.416Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "021fee9b-43f2-4386-80d9-c2e932522260",
+      "at": "2026-10-18T08:05:10.423Z"
+    },
+    {
+      "role": "BUYER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "6d103353-adaf-4f5b-bb2d-b63421c40f0e",
+      "at": "2026-10-18T08:05:10.427Z"
+    },
+    {
+      "role": "OUTSIDER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "bc664fe3-0deb-481e-a627-107a0ab3d0ac",
+      "at": "2026-10-18T08:05:10.431Z"
+    },
+    {
+      "role": "OUTSIDER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "0123f222-59e3-4077-9981-989da4a6bbdf",
+      "at": "2026-10-18T08:05:10.436Z"
+    },
+    {
+      "role": "OUTSIDER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "a46efef5-2c74-4a3e-b7bf-d1b677a90752",
+      "at": "2026-10-18T08:05:10.438Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "63549a83-381e-41cd-a40b-42c9c86d66a3",
+      "at": "2026-10-18T08:05:10.441Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "db2e119e-e6ed-4471-8aaa-21917637c75a",
+      "at": "2026-10-18T08:05:10.445Z"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "10176979-1456-43f2-87f9-b7f239700204",
+      "at": "2026-10-18T08:05:10.447Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "4e947b22-aa3b-4dd7-9b74-3ca2ab4a7761",
+      "at": "2026-10-18T08:05:10.450Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "e5fa0d4b-ed4f-4787-ac12-f76486846e2e",
+      "at": "2026-10-18T08:05:10.453Z"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "143946c6-e609-4e7e-a8d4-292aa0b83a37",
+      "at": "2026-10-18T08:05:10.455Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "4b989cde-88b1-4318-898c-0bce7d7ccdbe",
+      "at": "2026-10-18T08:05:10.458Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "dabca544-1b5f-4dd9-a381-0bbe0c184c69",
+      "at": "2026-10-18T08:05:10.462Z"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "8343fadd-d00b-4a03-8fc4-64d533035816",
+      "at": "2026-10-18T08:05:10.464Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "16a69787-0e7b-4fee-ad4f-4a75522c3a34",
+      "at": "2026-10-18T08:05:10.468Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "0910d066-2a79-4e1d-9338-7e322adfeb42",
+      "at": "2026-10-18T08:05:10.472Z"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "dc69238d-aaa5-4a02-813c-ed2f2d6d0314",
+      "at": "2026-10-18T08:05:10.474Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "7ef31fb8-7d17-4fbf-b7fc-7bf2916595d5",
+      "at": "2026-10-18T08:05:10.477Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "dce42e3b-1958-4279-8ee6-c01550332940",
+      "at": "2026-10-18T08:05:10.481Z"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "9dfb3cc9-2da7-42c4-8bbe-5da33cf447aa",
+      "at": "2026-10-18T08:05:10.483Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "traceId": "3a10b8ed-e127-423a-8dec-1414fe640b3c",
+      "at": "2026-10-18T08:05:10.487Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 200,
+      "traceId": "683217cf-4e4d-40e1-b915-29a9b9529d0e",
+      "at": "2026-10-18T08:05:10.491Z"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/me",
+      "status": 401,
+      "traceId": "a763c222-816a-4373-b732-e3931fc7bd01",
+      "at": "2026-10-18T08:05:10.493Z"
+    }
+  ],
+  "checkedResponses": 70,
+  "responseStatuses": {
+    "200": 57,
+    "401": 9,
+    "403": 1,
+    "404": 1,
+    "409": 2
+  },
+  "schemaErrors": [],
+  "pageErrors": [],
+  "failedAssets": [],
+  "unexpectedTargets": [],
+  "screens": [
+    "already-reviewed-resume-1440.png",
+    "already-reviewed-resume-1024.png",
+    "already-reviewed-resume-390.png",
+    "reviewed-after-submit-1440.png",
+    "reviewed-after-submit-1024.png",
+    "reviewed-after-submit-390.png",
+    "reviewed-after-reload-1440.png",
+    "reviewed-after-reload-1024.png",
+    "reviewed-after-reload-390.png"
+  ],
+  "layouts": [
+    {
+      "name": "already-reviewed-resume",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "already-reviewed-resume",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "already-reviewed-resume",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "reviewed-after-submit",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "reviewed-after-submit",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "reviewed-after-submit",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "reviewed-after-reload",
+      "viewport": 1440,
+      "documentWidth": 1440,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "reviewed-after-reload",
+      "viewport": 1024,
+      "documentWidth": 1024,
+      "brokenImages": [],
+      "dialogs": []
+    },
+    {
+      "name": "reviewed-after-reload",
+      "viewport": 390,
+      "documentWidth": 390,
+      "brokenImages": [],
+      "dialogs": []
+    }
+  ],
+  "checks": [
+    "Fresh identity is identical through15173 proxy and direct18081; only this run sessions are used.",
+    "Staff shared OrderItem omits both private flags; ADMIN is403 and unassigned SERVICE is404, with no scope widening.",
+    "Real UI submits one anonymous review, disables reviewed and zero-delivery actions; backend rejects duplicate and zero-delivery commands409."
+  ],
+  "flags": [
+    {
+      "label": "resumed-already-reviewed",
+      "orderStatus": "FINISHED",
+      "received": {
+        "reviewed": true,
+        "reviewable": false
+      },
+      "zeroDelivery": {
+        "reviewed": false,
+        "reviewable": false
+      },
+      "allowedReview": false
+    },
+    {
+      "label": "after-ui-review",
+      "orderStatus": "FINISHED",
+      "received": {
+        "reviewed": true,
+        "reviewable": false
+      },
+      "zeroDelivery": {
+        "reviewed": false,
+        "reviewable": false
+      },
+      "allowedReview": false
+    },
+    {
+      "label": "browser-reload",
+      "orderStatus": "FINISHED",
+      "received": {
+        "reviewed": true,
+        "reviewable": false
+      },
+      "zeroDelivery": {
+        "reviewed": false,
+        "reviewable": false
+      },
+      "allowedReview": false
+    }
+  ],
+  "staffProjections": [
+    {
+      "label": "OPERATOR/AdminOrder",
+      "itemCount": 2,
+      "reviewedPresent": false,
+      "reviewablePresent": false
+    },
+    {
+      "label": "FINANCE/AdminOrder",
+      "itemCount": 2,
+      "reviewedPresent": false,
+      "reviewablePresent": false
+    },
+    {
+      "label": "PICKER/PickTask",
+      "itemCount": 2,
+      "reviewedPresent": false,
+      "reviewablePresent": false
+    }
+  ],
+  "pagination": [],
+  "sessionCleanup": [
+    {
+      "role": "BUYER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "BUYER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "OUTSIDER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "PICKER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "COURIER",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "OPERATOR",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "FINANCE",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "ADMIN",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    },
+    {
+      "role": "SERVICE",
+      "status": "LOGGED_OUT",
+      "oldAccessRejected": true,
+      "otherFamiliesTouched": false
+    }
+  ],
+  "pendingCleanup": [],
+  "sourceSha256": {
+    "frontend/scripts/e2e-review-state.mjs": "3f3709516f189f9a08afc0fa8bf0f38afeedb5db60668fdbd71bf10a2dbfb422",
+    "frontend/src/app/media-review.ts": "a89aba3d53a34949c81a7e5c6bfde4c3d0a7a7611c573db99871d1950f3f81b2",
+    "frontend/src/app/application.ts": "e0d9f2a52c512a3cf08aaa28e69608b53836505bf7891adef220c9086a4e9352",
+    "backend/src/main/java/com/freshmart/commerce/CommerceService.java": "40767ebba0e383321604a13b4797813c8f5d51527e180b43905d659984c2cd13",
+    "backend/src/main/java/com/freshmart/commerce/CommerceMapper.java": "13e6faae3904b5e181d38a2502aac8cf019f794b558e9039d4d0f5068c29689e",
+    "contracts/openapi.yaml": "cb8f05c88ec7881f72368ca5ecaa6bed77084fa4b6c0f4aa0c3941e81f0e6506"
+  },
+  "error": "page.waitForResponse: Timeout 20000ms exceeded while waiting for event \"response\"",
+  "cleanup": {
+    "order": "FINISHED_RETAINED",
+    "reviewRetained": true
+  },
+  "finishedAt": "2026-10-18T08:05:10.697Z"
+}

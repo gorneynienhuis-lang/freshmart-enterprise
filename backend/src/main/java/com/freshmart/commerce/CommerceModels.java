@@ -34,6 +34,7 @@ public final class CommerceModels {
         public long amount, version;
         public Instant createdAt, completedAt;
     }
+    public record OrderItemReviewState(String orderItemId,long deliveredQuantity,boolean reviewed) {}
     public record BatchRow(String batchId,String skuId,String batchNo,String lifecycleStatus,
                            long onHand,long reserved,long quarantined,Instant receivedAt,Instant expiresAt,long version) {}
     public record EventRow(String eventId,String paymentId,String nonce,String requestHash,boolean accepted,Instant createdAt) {}

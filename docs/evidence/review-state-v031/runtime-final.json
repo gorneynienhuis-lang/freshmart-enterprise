@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "recordedAt": "2026-10-18T08:13:18.351208+00:00",
+  "mainMysqlPid": 17748,
+  "mainBackendPid": 56127,
+  "mainFrontendPid": 21651,
+  "main8080Health": "UP",
+  "main5173": "RUNNING",
+  "isolated18081": "STOPPED",
+  "isolated15173": "STOPPED",
+  "privateDataAndEvidenceRetained": true,
+  "unrelatedProcessesSignaled": false,
+  "bulkConcurrency": "USER_DEFERRED_NOT_EXECUTED"
+}

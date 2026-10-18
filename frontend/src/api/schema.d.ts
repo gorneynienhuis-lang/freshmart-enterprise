@@ -12,7 +12,7 @@ export interface paths {
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["getCsrfToken"];
         put?: never;
@@ -168,7 +168,7 @@ export interface paths {
          *
          *     origin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["getHome"];
         put?: never;
@@ -192,7 +192,7 @@ export interface paths {
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["listCategories"];
         put?: never;
@@ -220,7 +220,7 @@ export interface paths {
          *
          *     origin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["listProducts"];
         put?: never;
@@ -246,7 +246,7 @@ export interface paths {
          *
          *     origin/storage公开；arrivedAt/freshness/shelfLifeRemainingDays是当前可售FEFO候选的聚合快照，不含batchId/batchNo/库存台账，无候选为null；结算依据配送时段重新筛选。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["getProduct"];
         put?: never;
@@ -272,7 +272,7 @@ export interface paths {
          *
          *     所有写操作在服务端校验角色、资源所有权、状态和version（适用时）；示例是固定契约样例，不表示真实库存、业务运行或测试结果。
          *
-         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。
+         *     Demo已提供该路由；具体已验证范围及未完成分支见docs/demo-v0.1.md。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["listProductReviews"];
         put?: never;
@@ -2232,7 +2232,7 @@ export interface paths {
         };
         /**
          * 读取净化后的商品图片
-         * @description 仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。
+         * @description 仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["readProductMedia"];
         put?: never;
@@ -2252,7 +2252,7 @@ export interface paths {
         };
         /**
          * 读取净化后的已授权公开评价图片
-         * @description 仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。
+         * @description 仅返回用途与路径一致且READY的已保存净化图片；评价仅公开提交评价时显式授权的净化副本。禁止外部URL代理或返回原私有证据。 允许匿名访问；若显式携带无效Bearer返回401，非法Origin或受限首改会话返回403。
          */
         get: operations["readReviewMedia"];
         put?: never;
@@ -3473,7 +3473,7 @@ export interface components {
              * @enum {string}
              */
             currency: "CNY";
-            items: components["schemas"]["OrderItem"][];
+            items: components["schemas"]["MemberOrderItem"][];
             price: components["schemas"]["PriceSummary"];
             /**
              * @description CNY整数分，服务端计算；不得使用浮点金额
@@ -3514,7 +3514,7 @@ export interface components {
              */
             version: number;
             /**
-             * @description 服务端按当前主体、状态、资金额度和时限计算；执行操作时仍重新授权校验
+             * @description 服务端按当前主体、状态、资金额度和时限计算；执行操作时仍重新授权校验 REVIEW仅当至少一个本人订单行reviewable为true；已评价或实际缺货未交付的行不能再次评价。
              * @example [
              *       "PAY",
              *       "CANCEL"
@@ -5743,7 +5743,9 @@ export interface components {
              *             "couponAllocationAmount": 0,
              *             "originalPayableAmount": 590,
              *             "finalPayableAmount": null,
-             *             "refundedAmount": 0
+             *             "refundedAmount": 0,
+             *             "reviewed": false,
+             *             "reviewable": false
              *           }
              *         ],
              *         "price": {
@@ -7370,6 +7372,90 @@ export interface components {
              */
             timestamp: string;
         };
+        /** @description 仅本人会员订单返回的订单行读模型。评价状态由持久关联与实际交付量派生，不写回成交快照；后台OrderItem不含这两个字段。 */
+        MemberOrderItem: {
+            /**
+             * @description 对外字符串ID；不将bigint作为JSON数字传输
+             * @example oi-1
+             */
+            orderItemId: string;
+            /**
+             * @description 对外字符串ID；不将bigint作为JSON数字传输
+             * @example SKU-001
+             */
+            skuId: string;
+            /**
+             * @description 对外字符串ID；不将bigint作为JSON数字传输
+             * @example S001
+             */
+            productId: string;
+            /**
+             * @description 文本；服务端校验长度并以纯文本处理
+             * @example 沙瓤番茄
+             */
+            productName: string;
+            /**
+             * @description 文本；服务端校验长度并以纯文本处理
+             * @example 500g/份
+             */
+            unitLabel: string;
+            /**
+             * Format: uri
+             * @description 图片地址；开发静态目录以实际部署base URL拼接
+             * @example http://localhost:8080/static/products/S001.jpg
+             */
+            imageUrl: string;
+            /**
+             * @example PIECE
+             * @enum {string}
+             */
+            baseUnit: "PIECE" | "GRAM";
+            /**
+             * @example BY_PIECE
+             * @enum {string}
+             */
+            priceMode: "BY_PIECE" | "BY_WEIGHT";
+            /** @example 1 */
+            quantity: number;
+            /** @example null */
+            estimatedGram: number | null;
+            /** @example null */
+            actualGram: number | null;
+            /** @example null */
+            priceUnitGram: number | null;
+            /**
+             * @description CNY整数分，服务端计算；不得使用浮点金额
+             * @example 590
+             */
+            unitPrice: number;
+            /**
+             * @description CNY整数分，服务端计算；不得使用浮点金额
+             * @example 0
+             */
+            couponAllocationAmount: number;
+            /**
+             * @description CNY整数分，服务端计算；不得使用浮点金额
+             * @example 590
+             */
+            originalPayableAmount: number;
+            /** @example null */
+            finalPayableAmount: number | null;
+            /**
+             * @description CNY整数分，服务端计算；不得使用浮点金额
+             * @example 0
+             */
+            refundedAmount: number;
+            /**
+             * @description 当前本人订单行是否已有持久评价；每行只允许一评。不得通过匿名公开评价推断。
+             * @example false
+             */
+            reviewed: boolean;
+            /**
+             * @description 当前行允许评价：本人订单已完成、实际交付量大于0且尚未评价。执行时服务端重新授权与校验；同一行并发只写一评。
+             * @example false
+             */
+            reviewable: boolean;
+        };
     };
     responses: {
         /** @description HTTP 400: 请求参数不合法。具体errorKey以该操作x-error-codes为准；错误也返回traceId。 */
@@ -7661,6 +7747,8 @@ export interface operations {
                 };
             };
             400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
         };
@@ -8082,6 +8170,8 @@ export interface operations {
                 };
             };
             400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
         };
@@ -8126,6 +8216,8 @@ export interface operations {
                 };
             };
             400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
         };
@@ -8218,6 +8310,8 @@ export interface operations {
                 };
             };
             400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
         };
@@ -8295,6 +8389,8 @@ export interface operations {
                 };
             };
             400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
             404: components["responses"]["NotFound"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
@@ -8350,6 +8446,8 @@ export interface operations {
                 };
             };
             400: components["responses"]["BadRequest"];
+            401: components["responses"]["Unauthorized"];
+            403: components["responses"]["Forbidden"];
             404: components["responses"]["NotFound"];
             429: components["responses"]["RateLimited"];
             500: components["responses"]["InternalError"];
@@ -9149,7 +9247,9 @@ export interface operations {
                      *                 "couponAllocationAmount": 0,
                      *                 "originalPayableAmount": 590,
                      *                 "finalPayableAmount": null,
-                     *                 "refundedAmount": 0
+                     *                 "refundedAmount": 0,
+                     *                 "reviewed": false,
+                     *                 "reviewable": false
                      *               }
                      *             ],
                      *             "price": {
@@ -9275,7 +9375,9 @@ export interface operations {
                      *             "couponAllocationAmount": 0,
                      *             "originalPayableAmount": 590,
                      *             "finalPayableAmount": null,
-                     *             "refundedAmount": 0
+                     *             "refundedAmount": 0,
+                     *             "reviewed": false,
+                     *             "reviewable": false
                      *           }
                      *         ],
                      *         "price": {
@@ -9392,7 +9494,9 @@ export interface operations {
                      *             "couponAllocationAmount": 0,
                      *             "originalPayableAmount": 590,
                      *             "finalPayableAmount": null,
-                     *             "refundedAmount": 0
+                     *             "refundedAmount": 0,
+                     *             "reviewed": false,
+                     *             "reviewable": false
                      *           }
                      *         ],
                      *         "price": {
@@ -9571,7 +9675,9 @@ export interface operations {
                      *             "couponAllocationAmount": 0,
                      *             "originalPayableAmount": 590,
                      *             "finalPayableAmount": null,
-                     *             "refundedAmount": 0
+                     *             "refundedAmount": 0,
+                     *             "reviewed": false,
+                     *             "reviewable": false
                      *           }
                      *         ],
                      *         "price": {

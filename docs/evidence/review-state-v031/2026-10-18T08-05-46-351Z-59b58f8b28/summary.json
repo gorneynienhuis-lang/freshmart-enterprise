@@ -1,0 +1,62 @@
+{
+  "status": "FUNCTIONAL_ACCEPTANCE_PASS_WITH_TWO_RETAINED_HARNESS_FAILURES",
+  "scope": {
+    "newMembers": 2,
+    "newOrders": 1,
+    "successfulReviews": 1,
+    "sqlWrites": 0,
+    "existingProductPolicyOrAccountChanges": 0
+  },
+  "attemptCount": 3,
+  "passedAttempts": 1,
+  "failedAttempts": 2,
+  "actualResponsesAllAttempts": 254,
+  "actualResponsesFinalContinuation": 93,
+  "screensAllAttempts": 39,
+  "screensFinalContinuation": 18,
+  "schemaErrorsAllAttempts": 1,
+  "schemaErrorsFinalContinuation": 0,
+  "pageErrorsAllAttempts": 0,
+  "assetErrorsAllAttempts": 0,
+  "unexpectedTargetsAllAttempts": 0,
+  "sessionFamiliesLoggedOut": 26,
+  "pendingCleanupResolved": true,
+  "pendingCleanupResolution": "The first attempt lacked a live token to read cleanup; both later authorized continuations confirmed the same order FINISHED, retained its captured review and finished with pendingCleanup empty. No cancellation/return is required for the delivered order.",
+  "contractSha256AtAllThreeAttempts": "cb8f05c88ec7881f72368ca5ecaa6bed77084fa4b6c0f4aa0c3941e81f0e6506",
+  "attempts": [
+    {
+      "runId": "2026-10-18T08-03-57-518Z-06b0a9126c",
+      "status": "FAIL",
+      "responses": 91,
+      "screens": 12,
+      "resultSha256": "0cc3bdf6270c0c55bb0f9d148cc34df3ff9c369fbe72c539a15582931442fcb4",
+      "error": "Actual response violates contract: GET /api/v1/auth/csrf"
+    },
+    {
+      "runId": "2026-10-18T08-04-48-361Z-d7fd1c4875",
+      "status": "FAIL",
+      "responses": 70,
+      "screens": 9,
+      "resultSha256": "58fca5ad5d7d9bcbcba78c6dfd43837020677d0a6b034f854cb371cf23f12063",
+      "error": "page.waitForResponse: Timeout 20000ms exceeded while waiting for event \"response\""
+    },
+    {
+      "runId": "2026-10-18T08-05-46-351Z-59b58f8b28",
+      "status": "PASS",
+      "responses": 93,
+      "screens": 18,
+      "resultSha256": "6ed291131bb4435921b6234abd07306de41f8fdad301e18ef3abf77adc3ecb71",
+      "error": null
+    }
+  ],
+  "visualInspection": [
+    "../2026-10-18T08-03-57-518Z-06b0a9126c/received-vs-zero-before-review-390.png",
+    "../2026-10-18T08-03-57-518Z-06b0a9126c/anonymous-review-dialog-1440.png",
+    "reviewed-independent-relogin-390.png"
+  ],
+  "limitations": [
+    "One order permits page1/page2-empty/page1 and UI real page2→page1 boundary clamping, but not a genuine multi-page Next action.",
+    "No concurrent load wave was requested or executed; existing Java concurrency coverage remains separate.",
+    "The first original result has a real undeclared401 on public csrf GET caused by a deliberately stale bearer from the harness; later root contract-error-response follow-up must link separately without rewriting historical evidence."
+  ]
+}

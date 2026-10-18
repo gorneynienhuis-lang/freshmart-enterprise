@@ -121,12 +121,8 @@ export function createEvidenceUploader(orderId: string, options: UploadOptions):
     return { element, ids: () => entries.filter(entry => entry.state === 'ready' && entry.mediaId).map(entry => entry.mediaId!), uploadPending, dispose };
 }
 
-let reviewSubject: string | undefined;
-const reviewedThisSession = new Set<string>();
-function reviewedItems() { const subject = mall.auth.getSnapshot().user?.userId; if (subject !== reviewSubject) { reviewedThisSession.clear(); reviewSubject = subject; } return reviewedThisSession; }
-
-export function openReviewDialog(order: Models['Order'], item: Models['OrderItem'], options: MediaUiOptions): void {
-    if (order.status !== 'FINISHED' || !mall.auth.getSnapshot().user?.roles.includes('MEMBER')) { const dialog = options.dialog('暂不能评价'); dialog.append(node('p', '请使用会员账户，对本人已完成并实际收到的商品进行评价。', 'fm-management-note')); return; }
+export function openReviewDialog(order: Models['Order'], item: Models['MemberOrderItem'], options: MediaUiOptions): void {
+    if (!item.reviewable || order.status !== 'FINISHED' || !mall.auth.getSnapshot().user?.roles.includes('MEMBER')) { const dialog = options.dialog('暂不能评价'); dialog.append(node('p', item.reviewed ? '这个订单行已评价，每行只能评价一次。' : '请使用会员账户，对本人已完成并实际收到的商品进行评价。', 'fm-management-note')); return; }
     const dialog = options.dialog('评价已购商品'); dialog.classList.add('fm-management-dialog');
     dialog.append(node('p', `${item.productName} · ${item.unitLabel} · ${order.orderNo}`, 'fm-management-note'));
     const form = node('form', undefined, 'fm-management-form');
@@ -148,16 +144,16 @@ export function openReviewDialog(order: Models['Order'], item: Models['OrderItem
             await uploader.uploadPending(); const images = uploader.ids();
             if (images.length && !consent.checked) throw new Error('请确认公开所选评价图片，或移除图片后提交。');
             try { await submitReview({ orderItemId: item.orderItemId, rating: Number(rating.value), content: content.value.trim(), imageMediaIds: images, anonymous: anonymous.checked }); }
-            catch (error) { if (error instanceof ApiError && error.status === 409 && error.message.includes('订单行已经评价')) { reviewedItems().add(item.orderItemId); dialog.close(); options.notify?.('这个订单行已有评价，每行只能评价一次。'); await options.reload(); return; } throw error; }
-            reviewedItems().add(item.orderItemId); dialog.close(); options.notify?.('评价已提交，商品评价中可以查看。'); await options.reload();
+            catch (error) { if (error instanceof ApiError && error.status === 409 && error.message.includes('订单行已经评价')) { dialog.close(); options.notify?.('这个订单行已有评价，每行只能评价一次。'); await options.reload(); return; } throw error; }
+            dialog.close(); options.notify?.('评价已提交，商品评价中可以查看。'); await options.reload();
         });
     };
 }
 
-export function createReviewButton(order: Models['Order'], item: Models['OrderItem'], options: MediaUiOptions): HTMLButtonElement {
-    const reviewed = reviewedItems().has(item.orderItemId);
-    const result = button(reviewed ? '已评价' : `评价 ${item.productName}`, () => openReviewDialog(order, item, options), true);
-    result.disabled = reviewed || order.status !== 'FINISHED'; return result;
+export function createReviewButton(order: Models['Order'], item: Models['MemberOrderItem'], options: MediaUiOptions): HTMLButtonElement {
+    const label = item.reviewed ? '已评价' : !item.reviewable && order.status === 'FINISHED' ? '未交付商品不可评价' : `评价 ${item.productName}`;
+    const result = button(label, () => openReviewDialog(order, item, options), true);
+    result.disabled = !item.reviewable || order.status !== 'FINISHED'; return result;
 }
 
 export async function renderProductReviews(container: HTMLElement, productId: string, options: Pick<MediaUiOptions, 'run'>): Promise<void> {

@@ -16,6 +16,8 @@ v0.2.1新增地址完整管理、真实服务器分页、受派客服取消协�
 
 私有仓库：https://github.com/gorneynienhuis-lang/freshmart-enterprise
 
+最新v0.3.1修正已评价状态在刷新/重登录后丢失、缺货零交付行仍可点评价的问题，并保持后台匿名归属隔离。195项后端、44项前端及主系统七角色70响应/12三宽图通过，原数据密码保留；详见[本轮程序记录](collab/codex/CODEX-020.md)。95条接口，契约0.2.2。用户要求继续以程序为先，三份正式文档仅保留MD草稿、暂缓扩写，PPT和视频仍暂停；公网尚未上线。
+
 ## 从这里开始
 
 1. [当前优先级](collab/codex/PRIORITIES-003.md)、[分工](collab/codex/OWNERSHIP-002.md)、[界面范围](collab/codex/UI-SCOPE-002.md)

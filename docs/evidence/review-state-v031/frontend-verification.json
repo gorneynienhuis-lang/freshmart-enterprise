@@ -1,0 +1,14 @@
+{
+  "status": "PASSED",
+  "tests": 44,
+  "generatedApiOperations": 95,
+  "contractVersion": "0.2.2",
+  "typecheck": true,
+  "productionBuild": true,
+  "jsBundleKB": 655.49,
+  "jsGzipKB": 167.59,
+  "cssKB": 45.88,
+  "cssGzipKB": 8.69,
+  "warning": "single JS chunk exceeds500KB",
+  "scope": "Existing Node unit tests and actual local build; not a new UI coverage percentage claim."
+}

@@ -1,0 +1,186 @@
+[
+  {
+    "name": "com.freshmart.aftersale.AfterSaleIntegrationTest",
+    "tests": "14",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "3.781"
+  },
+  {
+    "name": "com.freshmart.cache.PublicCategoryCacheTest",
+    "tests": "9",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.373"
+  },
+  {
+    "name": "com.freshmart.catalog.CatalogIntegrationTest",
+    "tests": "5",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.271"
+  },
+  {
+    "name": "com.freshmart.checkout.CheckoutIntegrationTest",
+    "tests": "12",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.408"
+  },
+  {
+    "name": "com.freshmart.command.IdempotencyServiceTest",
+    "tests": "5",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.029"
+  },
+  {
+    "name": "com.freshmart.commerce.CommerceIntegrationTest",
+    "tests": "11",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "2.57"
+  },
+  {
+    "name": "com.freshmart.commerce.FulfillmentExtensionsIntegrationTest",
+    "tests": "10",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "6.687"
+  },
+  {
+    "name": "com.freshmart.commerce.RefundRecoveryIntegrationTest",
+    "tests": "14",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.87"
+  },
+  {
+    "name": "com.freshmart.common.ShowcaseConfigurationTest",
+    "tests": "3",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.001"
+  },
+  {
+    "name": "com.freshmart.domain.InventoryDomainTest",
+    "tests": "12",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.005"
+  },
+  {
+    "name": "com.freshmart.domain.OrderLifecycleTest",
+    "tests": "17",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.006"
+  },
+  {
+    "name": "com.freshmart.domain.PricingCalculatorTest",
+    "tests": "13",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.005"
+  },
+  {
+    "name": "com.freshmart.finance.FinanceAuditIntegrationTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "2.875"
+  },
+  {
+    "name": "com.freshmart.identity.EmployeeIntegrationTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "3.363"
+  },
+  {
+    "name": "com.freshmart.identity.IdentityIntegrationTest",
+    "tests": "8",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.664"
+  },
+  {
+    "name": "com.freshmart.identity.LoginThrottleIntegrationTest",
+    "tests": "7",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "1.492"
+  },
+  {
+    "name": "com.freshmart.media.MediaReviewIntegrationTest",
+    "tests": "12",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "3.954"
+  },
+  {
+    "name": "com.freshmart.observability.BusinessMetricsCollectorTest",
+    "tests": "2",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.025"
+  },
+  {
+    "name": "com.freshmart.observability.BusinessMetricsMapperTest",
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.007"
+  },
+  {
+    "name": "com.freshmart.observability.MetricsScrapeAuthTest",
+    "tests": "2",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.005"
+  },
+  {
+    "name": "com.freshmart.observability.MetricsSecurityFilterTest",
+    "tests": "4",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "0.129"
+  },
+  {
+    "name": "com.freshmart.operations.OperationsIntegrationTest",
+    "tests": "12",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "5.018"
+  },
+  {
+    "name": "com.freshmart.support.CancellationSupportIntegrationTest",
+    "tests": "8",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "3.288"
+  }
+]

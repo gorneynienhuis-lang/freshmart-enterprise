@@ -1,0 +1,48 @@
+{
+  "status": "PASSED",
+  "recordedAt": "2026-10-18T08:06:41.646729+00:00",
+  "results": [
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts/tests",
+        "-p",
+        "test_*.py"
+      ],
+      "exitCode": 0,
+      "tests": 75,
+      "passed": true
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "deploy/monitoring",
+        "-p",
+        "test_*.py"
+      ],
+      "exitCode": 0,
+      "tests": 4,
+      "passed": true
+    },
+    {
+      "command": [
+        "python3",
+        "deploy/ci/test_guards.py"
+      ],
+      "exitCode": 0,
+      "tests": 5,
+      "passed": true
+    }
+  ],
+  "runtimeScriptsTests": 79,
+  "ciGuardTests": 5,
+  "scope": "Local offline guards; no MySQL operations, live service mutations, Docker or remote CI run."
+}

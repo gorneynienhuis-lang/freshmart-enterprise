@@ -97,7 +97,7 @@ public class CommerceService {
     public Map<String,Object> status(RequestActor actor,String id) {
         actor.requireRole("MEMBER");var o=owned(actor,id,false);
         return map("orderId",o.orderId,"status",o.status,"paidAmount",o.paidAmount,"refundedAmount",o.refundedAmount,
-                "weightAdjustmentStatus",o.adjustmentStatus,"version",o.version,"updatedAt",o.updatedAt,"allowedActions",actions(o));
+                "weightAdjustmentStatus",o.adjustmentStatus,"version",o.version,"updatedAt",o.updatedAt,"allowedActions","FINISHED".equals(o.status)?memberActions(o,orderItemViews(o,snapshot(o),true)):actions(o));
     }
     @Transactional(readOnly=true)
     public Map<String,Object> list(RequestActor actor,String status,int page,int size,boolean admin) {
@@ -390,14 +390,24 @@ public class CommerceService {
     OrderRow deliveryOrder(RequestActor actor,String id,boolean lock){actor.requireAnyRole("PICKER","COURIER","SERVICE");var row=required(db.byDelivery(id));var o=lock?required(db.lockOrder(row.orderId)):row;
         if(!(actor.roles().contains("PICKER")&&actor.userId().equals(o.pickerId))&&!(actor.roles().contains("COURIER")&&actor.userId().equals(o.courierId))&&!(actor.roles().contains("SERVICE")&&db.deliverySupportScope(o.orderId,actor.userId())>0))throw ApiException.notFound();
         if(!Set.of("READY_TO_SHIP","DELIVERING","FINISHED","CANCELED").contains(o.status))throw ApiException.notFound();return o;}
-    Map<String,Object> orderView(OrderRow o){var s=snapshot(o);var view=map("orderId",o.orderId,"orderNo",o.orderNo,"status",o.status,"currency","CNY","items",s.get("items"),"price",s.get("price"),
+    private List<Map<String,Object>> orderItemViews(OrderRow order,Map<String,Object> snapshot,boolean owner) {
+        Map<String,OrderItemReviewState> states=new HashMap<>();
+        if(owner)for(var state:db.orderItemReviewStates(order.orderId,order.userId))states.put(state.orderItemId(),state);
+        return items(snapshot).stream().map(stored->{
+            Map<String,Object> view=new LinkedHashMap<>(stored);view.remove("reviewed");view.remove("reviewable");
+            if(owner){var state=states.get(string(stored,"orderItemId"));boolean reviewed=state!=null&&state.reviewed();view.put("reviewed",reviewed);view.put("reviewable","FINISHED".equals(order.status)&&state!=null&&state.deliveredQuantity()>0&&!reviewed);}
+            return view;
+        }).toList();
+    }
+    private List<String> memberActions(OrderRow order,List<Map<String,Object>> itemViews){var result=new ArrayList<>(actions(order));if(itemViews.stream().anyMatch(item->Boolean.TRUE.equals(item.get("reviewable"))))result.add("REVIEW");return result;}
+    Map<String,Object> orderView(OrderRow o){var s=snapshot(o);var itemViews=orderItemViews(o,s,true);var view=map("orderId",o.orderId,"orderNo",o.orderNo,"status",o.status,"currency","CNY","items",itemViews,"price",s.get("price"),
             "paidAmount",o.paidAmount,"refundedAmount",o.refundedAmount,"address",s.get("address"),"slot",s.get("slot"),"weightAdjustment",adjustmentView(o),"refunds",db.refunds(o.orderId).stream().map(this::refundView).toList(),
-            "buyerNote",s.get("buyerNote"),"createdAt",o.createdAt,"paymentExpiresAt",o.paymentExpiresAt,"paidAt",o.paidAt,"finishedAt",o.finishedAt,"version",o.version,"allowedActions",actions(o),
+            "buyerNote",s.get("buyerNote"),"createdAt",o.createdAt,"paymentExpiresAt",o.paymentExpiresAt,"paidAt",o.paidAt,"finishedAt",o.finishedAt,"version",o.version,"allowedActions",memberActions(o,itemViews),
             "deliveryReceiptCode","DELIVERING".equals(o.status)?o.receiptCode:null);var support=cancellationSupport.latest(o.orderId);if(support!=null)view.put("cancellationSupport",support);return view;}
     Map<String,Object> adminView(OrderRow o,RequestActor actor){var s=snapshot(o);var contact=masked(s);if(actor.roles().contains("FINANCE"))contact.remove("region");var view=map("orderId",o.orderId,"orderNo",o.orderNo,"memberId",o.userId,"status",o.status,
-            "items",s.get("items"),"price",s.get("price"),"paidAmount",o.paidAmount,"refundedAmount",o.refundedAmount,"contact",contact,"slot",s.get("slot"),"weightAdjustment",adjustmentView(o),
+            "items",orderItemViews(o,s,false),"price",s.get("price"),"paidAmount",o.paidAmount,"refundedAmount",o.refundedAmount,"contact",contact,"slot",s.get("slot"),"weightAdjustment",adjustmentView(o),
             "refunds",db.refunds(o.orderId).stream().map(this::refundView).toList(),"createdAt",o.createdAt,"version",o.version,"allowedActions",actor.roles().contains("SERVICE")&&db.supportScope(o.orderId,actor.userId())>0&&actions(o).contains("CANCEL")?List.of("CANCEL"):List.of());if(!actor.roles().contains("FINANCE")){var support=cancellationSupport.latest(o.orderId);if(support!=null)view.put("cancellationSupport",support);}return view;}
-    Map<String,Object> pickView(OrderRow o){var s=snapshot(o);return map("taskId",o.pickTaskId,"orderId",o.orderId,"status",o.pickStatus,"pickerId",o.pickerId,"items",s.get("items"),
+    Map<String,Object> pickView(OrderRow o){var s=snapshot(o);return map("taskId",o.pickTaskId,"orderId",o.orderId,"status",o.pickStatus,"pickerId",o.pickerId,"items",orderItemViews(o,s,false),
             "allocations",db.allocations(o.orderId).stream().map(a->map("allocationId",a.allocationId,"orderItemId",a.orderItemId,"batchId",a.batchId,"batchNo",a.batchNo,"baseUnit",a.baseUnit,
                     "reservedQuantity",a.reservedQuantity,"pickedQuantity",a.pickedQuantity,"returnedQuantity",a.returnedQuantity,"version",a.version)).toList(),"slot",s.get("slot"),"version",o.version);}
     Map<String,Object> deliveryView(OrderRow o){var s=snapshot(o);return map("taskId",o.deliveryTaskId,"orderId",o.orderId,"status",o.deliveryStatus,"courierId",o.courierId,"contact",masked(s),"slot",s.get("slot"),"dispatchedAt",o.dispatchedAt,"completedAt",o.finishedAt,"version",o.version);}
