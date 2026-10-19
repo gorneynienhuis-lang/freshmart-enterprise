@@ -9,6 +9,7 @@ import { homeCategoryHref, selectHomeFeatured } from './home-featured';
 import { isR04Design } from './design-version';
 import { productImagePath, setProductImage } from './product-image';
 import { renderCartSheet, renderCouponSheet } from '../ui/cart/cart-view';
+import { buildWorkbenchShell, finishWorkbench, toneOf, workItem } from '../ui/workbench/workbench';
 import { renderManagement } from './admin-panel';
 import { renderOperations } from './operations-panel';
 import { renderFinanceAudit } from './finance-audit-panel';
@@ -616,6 +617,17 @@ export class Application {
         b.disabled=!p.allowedActions.includes('SIMULATE_PAYMENT');d.append(b);
     } d.append(button('稍后支付，查看订单', () => { d.close(); this.navigate('/orders'); })); }
     private shell(title: string) {
+        if (!isR04Design() && title.startsWith('员工工作台')) {
+            const user = service.auth.getSnapshot().user;
+            return buildWorkbenchShell(this.root, {
+                user: { displayName: user?.displayName ?? '员工', roles: user?.roles ?? [] },
+                roleNames,
+                onHome: () => this.navigate('/'),
+                onRefresh: () => void this.render(),
+                onSwitch: () => this.login(false),
+                onLogout: () => void this.run(async () => { await service.auth.logout(); this.cart = null; this.quote = null; this.addressId = ''; this.tell('已安全退出'); this.navigate('/'); await this.home(); }),
+            });
+        }
         if (isR04Design()) {
             const user = service.auth.getSnapshot().user;
             const workplace = title.startsWith('员工工作台');
@@ -693,19 +705,24 @@ export class Application {
             return;
         }
         const main = this.shell('员工工作台');
-        main.append(el('p', '当前身份：' + user.displayName + ' · ' + user.roles.map(role => roleNames[role] ?? role).join(' / ')), button('切换账户', () => this.login(false)));
+        const r03 = !isR04Design();
+        if (!r03) main.append(el('p', '当前身份：' + user.displayName + ' · ' + user.roles.map(role => roleNames[role] ?? role).join(' / ')), button('切换账户', () => this.login(false)));
         const managementOptions = { dialog: (title:string) => this.dialog(title), run: (action:()=>Promise<void>) => this.run(action), reload: () => this.operations() };
         await renderManagement(main, managementOptions);
         await renderOperations(main, managementOptions);
         await renderFinanceAudit(main, managementOptions);
         if(user.permissions.includes('order.work.read'))await this.paged(main,'admin-orders','订单查询',query=>service.adminOrders(query),order=>{
-            const row=el('article');row.dataset.orderId=order.orderId;row.append(el('h3',order.orderNo+' · '+status[order.status]),el('p',formatMoney(order.price.payableAmount)));appendAdminOrderActions(row,order,managementOptions);return row;
+            const row=r03?workItem({title:order.orderNo,status:status[order.status]??order.status,tone:toneOf(order.status),amount:formatMoney(order.price.payableAmount),meta:[`${order.items.map(i=>i.productName).slice(0,3).join('、')}${order.items.length>3?` 等 ${order.items.length} 件`:''}`,`${order.contact.recipientName} ${order.contact.phoneMasked} · ${order.contact.region}`,`配送 ${order.slot.date} ${order.slot.label}`]}):el('article');row.dataset.orderId=order.orderId;if(!r03)row.append(el('h3',order.orderNo+' · '+status[order.status]),el('p',formatMoney(order.price.payableAmount)));appendAdminOrderActions(row,order,managementOptions);return row;
         },'暂无符合条件的订单。',status);
         if(user.permissions.includes('pick.read'))await this.paged(main,'pick-tasks','拣货任务',query=>service.pickTasks(query),task=>{
-                const row = el('section');
+                const pickStates: Record<string, string> = { UNASSIGNED: '待领取', CLAIMED: '已领取', COMPLETED: '已实拣', CANCELED: '已取消' };
+                const plan = task.items.map(item => `${item.productName} × ${item.baseUnit === 'GRAM' ? formatWeight(item.quantity) : item.quantity + ' 件'}`);
+                const row = r03 ? workItem({ title: `配送时段 ${task.slot.date} ${task.slot.label}`, code: `任务 ${task.taskId}${task.pickerId ? ` · 拣货员 ${task.pickerId === user.userId ? '我' : task.pickerId}` : ''}`, status: pickStates[task.status] ?? task.status, tone: toneOf(task.status), meta: plan }) : el('section');
+                if (!r03) {
                 row.append(el('h3', `${task.taskId} · ${task.status}`), el('p', `${task.slot.date} ${task.slot.label}`));
                 for (const item of task.items)
                     row.append(el('p', `${item.productName} · 计划 ${item.baseUnit === 'GRAM' ? formatWeight(item.quantity) : item.quantity + ' 件'}`));
+                }
                 if (task.status === 'UNASSIGNED')
                     row.append(button('领取拣货任务', () => void this.run(async () => { await service.claimPick(task.taskId, task.version); this.tell('已领取拣货任务'); await this.operations(); })));
                 if (task.status === 'CLAIMED' && task.pickerId === user.userId) {
@@ -714,8 +731,9 @@ export class Application {
                 appendAdminOrderActions(row,task,managementOptions);return row;
         },'暂无符合条件的拣货任务。',{UNASSIGNED:'待领取',CLAIMED:'已领取',COMPLETED:'已实拣',CANCELED:'已取消'});
         if(user.permissions.some(p=>['delivery.handover.read','delivery.self.read','delivery.exception.resolve'].includes(p)))await this.paged(main,'delivery-tasks','配送任务',query=>service.deliveryTasks(query),task=>{
-                const row = el('section');
-                row.append(el('h3', `${task.taskId} · ${task.status}`), el('p', `${task.contact.recipientName} ${task.contact.phoneMasked} · ${task.contact.region} · ${task.slot.date} ${task.slot.label}`));
+                const deliveryStates: Record<string, string> = { PENDING_DISPATCH: '待交接', DELIVERING: '配送中', COMPLETED: '已签收', EXCEPTION: '异常待处理', CANCELED: '已取消' };
+                const row = r03 ? workItem({ title: `${task.contact.recipientName} · ${task.contact.region}`, code: `配送任务 ${task.taskId}`, status: deliveryStates[task.status] ?? task.status, tone: toneOf(task.status), meta: [`联系电话 ${task.contact.phoneMasked}`, `预约时段 ${task.slot.date} ${task.slot.label}`] }) : el('section');
+                if (!r03) row.append(el('h3', `${task.taskId} · ${task.status}`), el('p', `${task.contact.recipientName} ${task.contact.phoneMasked} · ${task.contact.region} · ${task.slot.date} ${task.slot.label}`));
                 if (task.status === 'PENDING_DISPATCH' && user.permissions.includes('delivery.dispatch'))
                     row.append(button('交接并发货', () => { const d=this.dialog('交接配送');const courier=input('配送员账户 ID','courierId','demo-courier');d.append(courier,el('p','演示配送员 ID 为 demo-courier；服务端验证配送员角色，不能指派给拣货员。'),button('确认发货',()=>void this.run(async()=>{await service.dispatch(task.taskId,{courierId:q<HTMLInputElement>(courier,'input')!.value,version:task.version});d.close();this.tell('订单已交接发货，会员订单中可查看签收码');await this.operations();}))); }));
                 if (task.status === 'DELIVERING' && task.courierId === user.userId)
@@ -724,19 +742,22 @@ export class Application {
                 return row;
         },'暂无符合条件的配送任务。',{PENDING_DISPATCH:'待交接',DELIVERING:'配送中',COMPLETED:'已签收',EXCEPTION:'异常待处理',CANCELED:'已取消'});
         if(user.permissions.includes('aftersale.work.read'))await this.paged(main,'admin-aftersales','售后工单',query=>service.adminAftersales(query),a=>{
-            const row=el('section');row.dataset.aftersaleId=a.aftersaleId;row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));
+            const aftersaleStates:Record<string,string>={APPLIED:'待处理',APPROVED:'已核准',REJECTED:'已驳回',REFUNDING:'退款中',COMPLETED:'已完成',CANCELED:'已撤销'};const aftersaleTypes:Record<string,string>={QUALITY:'品质问题',SHORTAGE:'少发漏发',LATE:'配送超时'};
+            const row=r03?workItem({title:`${aftersaleTypes[a.type]??a.type} · ${a.reason}`,code:`售后单 ${a.aftersaleId} · 订单 ${a.orderId}`,status:aftersaleStates[a.status]??a.status,tone:toneOf(a.status),amount:`申请 ${formatMoney(a.requestedAmount)}`,meta:[`${a.evidenceMediaIds.length?`附 ${a.evidenceMediaIds.length} 张品质证据`:'未附图片'}${a.assigneeId?` · 处理人 ${a.assigneeId===user.userId?'我':a.assigneeId}`:' · 待领取'}`]}):el('section');row.dataset.aftersaleId=a.aftersaleId;if(!r03)row.append(el('h3',`${a.aftersaleId} · ${a.status}`),el('p',`${a.type} · ${a.reason} · 申请 ${formatMoney(a.requestedAmount)}`));
             if(a.status==='APPLIED'&&!a.assigneeId&&user.permissions.includes('aftersale.work.claim'))row.append(button('领取售后',()=>void this.run(async()=>{await service.claimAftersale(a.aftersaleId,a.version);await this.operations();})));
             if(a.assigneeId===user.userId&&a.evidenceMediaIds.length)row.append(button('查看品质证据',()=>openEvidencePreview(a.evidenceMediaIds,{dialog:title=>this.dialog(title),run:action=>this.run(action)})));
             if(a.status==='APPLIED'&&a.assigneeId===user.userId&&user.permissions.includes('aftersale.review'))row.append(button('审核售后',()=>this.reviewDialog(a)));return row;
         },'暂无符合条件的售后工单。',{APPLIED:'待处理',APPROVED:'已核准',REJECTED:'已驳回',REFUNDING:'退款中',COMPLETED:'已完成',CANCELED:'已撤销'});
         if(user.permissions.includes('refund.read'))await this.paged(main,'admin-refunds','退款执行',query=>service.refunds(query),refund=>{
-            const row=el('section');row.dataset.refundId=refund.refundId;row.append(el('p',`${refund.refundId} · ${refund.status} · ${formatMoney(refund.amount)} · ${refund.type}`));
+            const refundStates:Record<string,string>={PENDING:'待授权',PROCESSING:'处理中',SUCCESS:'已退款',FAILED:'失败待处理'};const refundTypes:Record<string,string>={AFTERSALE:'售后退款',CANCEL:'取消退款',WEIGHT_DIFFERENCE:'称重退差',LATE_PAYMENT:'晚付退款',DUPLICATE_PAYMENT:'重复支付退款'};
+            const row=r03?workItem({title:refundTypes[refund.type]??refund.type,code:`退款单 ${refund.refundId} · 订单 ${refund.orderId}`,status:refundStates[refund.status]??refund.status,tone:toneOf(refund.status),amount:formatMoney(refund.amount),meta:[refund.reason]}):el('section');row.dataset.refundId=refund.refundId;if(!r03)row.append(el('p',`${refund.refundId} · ${refund.status} · ${formatMoney(refund.amount)} · ${refund.type}`));
             if(refund.status==='PENDING'&&refund.type==='AFTERSALE'&&user.permissions.includes('refund.execute'))row.append(button('执行退款',()=>{const d=this.dialog('确认原路沙箱退款');const reason=input('复核说明','reason','复核通过，执行原路沙箱退款');d.append(el('p',formatMoney(refund.amount)),reason,button('确认退款',()=>void this.run(async()=>{await service.executeRefund(refund.refundId,{version:refund.version,reason:q<HTMLInputElement>(reason,'input')!.value});d.close();this.tell('退款指令已提交，请刷新查看结果');await this.operations();})));}));
             appendRefundActions(row,refund,managementOptions);return row;
         },'暂无符合条件的退款记录。',{PENDING:'待授权',PROCESSING:'处理中',SUCCESS:'已退款',FAILED:'失败待处理'});
         if (!user.permissions.some(p => ['order.work.read', 'pick.read', 'delivery.handover.read', 'delivery.self.read', 'aftersale.work.read', 'refund.read', 'dashboard.read', 'employee.read'].includes(p)))
             main.append(el('p', '此角色没有本工作台的业务操作权限。服务端独立校验角色与资源归属。'));
         if (isR04Design()) this.decorateWorkbench(main);
+        else finishWorkbench(main);
     }
     private decorateWorkbench(main: HTMLElement) {
         const anchors: Record<string, string> = { '订单查询': 'orders', '拣货任务': 'picking', '配送任务': 'delivery', '售后工单': 'aftersales', '退款执行': 'refunds' };
