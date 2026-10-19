@@ -458,7 +458,11 @@ export class Application {
             await this.render();
     }
     catch (error) {
-        result.textContent = error instanceof Error ? error.message : '登录失败';
+        // 登录接口在密码错误或账号停用时同样返回 401“需要重新登录”，这里改为明确提示，避免误以为是会话问题。
+        if (!register && error instanceof ApiError && error.status === 401)
+            result.textContent = '手机号或密码不正确，或该账号已停用。请核对该岗位的专用密码；同一账号 1 分钟内连续输错 5 次会被锁定 15 分钟。';
+        else
+            result.textContent = error instanceof Error ? error.message : '登录失败';
     }
     finally {
         submit.disabled = false;
