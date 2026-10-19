@@ -8,6 +8,7 @@ import { ApiError } from '../api/errors';
 import { homeCategoryHref, selectHomeFeatured } from './home-featured';
 import { isR04Design } from './design-version';
 import { productImagePath, setProductImage } from './product-image';
+import { renderCartSheet, renderCouponSheet } from '../ui/cart/cart-view';
 import { renderManagement } from './admin-panel';
 import { renderOperations } from './operations-panel';
 import { renderFinanceAudit } from './finance-audit-panel';
@@ -118,7 +119,21 @@ export class Application {
     private async loadCart() { if (service.auth.getSnapshot().user?.roles.includes('MEMBER'))
         this.cart = await service.cart();
     else
-        this.cart = null; }
+        this.cart = null;
+        this.syncCartSummary(); }
+    /** 购物车变化后立即刷新页头的金额与件数角标，无需刷新页面。 */
+    private syncCartSummary() {
+        for (const a of qa<HTMLAnchorElement>(this.root, 'a')) {
+            if (!/购物车/.test(a.textContent ?? '')) continue;
+            const spans = qa(a, 'span');
+            for (const s of spans)
+                if (s.childElementCount === 0 && /^¥/.test(s.textContent ?? ''))
+                    s.textContent = formatMoney(this.cart?.estimatedGoodsAmount ?? 0);
+            const badge = spans.find(s => s.getAttribute('style')?.includes('position: absolute'));
+            if (badge)
+                badge.textContent = String(this.cart?.items.length ?? 0);
+        }
+    }
     private mount(page: PageName, values: Values) { delete this.root.dataset.runtime; mountTemplate(this.root, page, { ...defaults(page), ...values }); this.common(); }
     private async render() { const epoch = ++this.epoch; const route = new URL(location.hash.slice(1) || '/', location.origin); try {
         const user = service.auth.getSnapshot().user;
@@ -479,12 +494,12 @@ export class Application {
         d.append(el('p', '密码至少 12 位。修改后立即退出全部设备；请妥善保存新密码。'), f);
     }
     private async couponDialog() { if (!this.member())
-        return; await this.run(async () => { const list = await service.coupons(); const d = this.dialog('我的优惠券'); for (const c of list.items) {
+        return; await this.run(async () => { const list = await service.coupons(); const d = this.dialog('我的优惠券'); if (!isR04Design()) { renderCouponSheet(d, list.items, () => d.close(), () => { d.close(); this.navigate('/products'); }); return; } for (const c of list.items) {
         const coupon = el('p', `${c.name}：${formatMoney(c.discountAmount)}，满 ${formatMoney(c.minGoodsAmount)} 可用 · ${c.status}`); if (isR04Design()) coupon.className = 'r04-coupon-card'; d.append(coupon); } if (!list.items.length)
         d.append(el('p', '暂无优惠券')); }); }
     private async openCart() { if (!this.member())
         return; await this.run(async () => { await this.loadCart(); this.cartDialog(); }); }
-    private cartDialog() { const d = this.dialog('购物车'); if (!this.cart?.items.length) {
+    private cartDialog() { if (!isR04Design()) { this.cartSheet(); return; } const d = this.dialog('购物车'); if (!this.cart?.items.length) {
         d.append(el('p', '购物车为空，请先选购商品。'));
         return;
     } for (const item of this.cart.items) {
@@ -508,6 +523,18 @@ export class Application {
         row.append(checked, quantity, el('span', item.baseUnit === 'GRAM' ? ' 克 ' : ' 件 '), el('span', formatMoney(item.lineAmount)), button('更新', () => void this.run(async () => { await service.updateCart(item.cartItemId, { quantity: Number(quantity.value), selected: checked.checked, version: item.version }); this.quote = null; await this.loadCart(); d.close(); this.cartDialog(); })), button('删除', () => void this.run(async () => { await service.removeCart(item.cartItemId, item.version); this.quote = null; await this.loadCart(); d.close(); this.cartDialog(); })));
         d.append(row);
     } const estimate = el('p', '商品预估金额 ' + formatMoney(this.cart.estimatedGoodsAmount)); if (isR04Design()) estimate.className = 'r04-cart-total'; d.append(estimate, button('去结算', () => { d.close(); this.navigate('/checkout'); })); }
+    private cartSheet() {
+        const d = this.dialog('购物车');
+        const draw = () => renderCartSheet(d, this.cart, {
+            onQuantity: (item, quantity) => void this.run(async () => { await service.updateCart(item.cartItemId, { quantity, selected: item.selected, version: item.version }); this.quote = null; await this.loadCart(); draw(); }),
+            onToggle: (item, selected) => void this.run(async () => { await service.updateCart(item.cartItemId, { quantity: item.quantity, selected, version: item.version }); this.quote = null; await this.loadCart(); draw(); }),
+            onRemove: item => void this.run(async () => { await service.removeCart(item.cartItemId, item.version); this.quote = null; await this.loadCart(); draw(); }),
+            onCheckout: () => { d.close(); this.navigate('/checkout'); },
+            onBrowse: () => { d.close(); this.navigate('/products'); },
+            onClose: () => d.close(),
+        });
+        draw();
+    }
     private manageAddresses() {openAddressManager({dialog:title=>this.dialog(title),run:action=>this.run(action),notify:message=>this.tell(message),onChanged:async()=>{this.quote=null;this.slotId='';if(location.hash.split('?')[0]==='#/checkout')await this.checkout();}});}
     private addressDialog() { const d = this.dialog('新增收货地址'); const f = document.createElement('form'); for (const [label, name, value] of [['收货人', 'recipientName', ''], ['手机号', 'phone', ''], ['省份', 'province', '上海市'], ['城市', 'city', '上海市'], ['区', 'district', '松江区'], ['详细地址', 'detail', '人民北路 2999 号 东华大学']])
         f.append(input(label!, name!, value), el('br')); const submit = button('保存地址', () => { }); submit.type = 'submit'; const error = el('p'); f.append(submit, error); f.onsubmit = e => { e.preventDefault(); submit.disabled = true; const data = new FormData(f); void (async () => { try {

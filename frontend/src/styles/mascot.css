@@ -7,8 +7,8 @@
   --dxj-ink: #1B1F24;
   --dxj-muted: #5B6470;
   --dxj-line: #E3E6EA;
-  --dxj-stage-w: 156px;
-  --dxj-stage-h: 184px;
+  --dxj-stage-w: 132px;
+  --dxj-stage-h: 156px;
   position: fixed;
   right: max(16px, env(safe-area-inset-right));
   bottom: max(16px, env(safe-area-inset-bottom));
