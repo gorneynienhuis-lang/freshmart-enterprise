@@ -1,5 +1,7 @@
 package com.freshmart.observability;
 
+import org.junit.jupiter.api.Assumptions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import java.nio.file.*;
@@ -8,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MetricsScrapeAuthTest {
     @TempDir Path temp;
+    @BeforeEach void requirePosix(){Assumptions.assumeTrue(FileSystems.getDefault().supportedFileAttributeViews().contains("posix"),"需要支持 POSIX 文件权限的系统（Linux/macOS），Windows 下跳过");}
     private static final String TOKEN="synthetic_MetricsCredential_2026_never_runtime_0123456789";
     private Path tokenFile(String name)throws Exception {
         Path file=temp.toRealPath().resolve(name);Files.writeString(file,TOKEN+"\n");

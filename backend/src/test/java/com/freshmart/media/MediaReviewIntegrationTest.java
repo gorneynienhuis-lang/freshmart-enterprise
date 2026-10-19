@@ -41,7 +41,7 @@ class MediaReviewIntegrationTest {
  static Path temp(){try{return Files.createTempDirectory("freshmart-media-integration-");}catch(IOException e){throw new ExceptionInInitializerError(e);}}
  @DynamicPropertySource static void mediaDirectory(DynamicPropertyRegistry registry){registry.add("app.media-dir",()->FILES.toString());}
  @TestConfiguration static class TestClockConfiguration {@Bean @Primary MutableClock mediaTestClock(){return new MutableClock();}}
- static class MutableClock extends Clock {private Instant now=Instant.now();void reset(){now=Instant.now();}void advance(long seconds){now=now.plusSeconds(seconds);}@Override public ZoneId getZone(){return ZoneOffset.UTC;}@Override public Clock withZone(ZoneId zone){return this;}@Override public Instant instant(){return now;}}
+ static class MutableClock extends Clock {private Instant now=Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MILLIS);void reset(){now=Instant.now().truncatedTo(java.time.temporal.ChronoUnit.MILLIS);}void advance(long seconds){now=now.plusSeconds(seconds);}@Override public ZoneId getZone(){return ZoneOffset.UTC;}@Override public Clock withZone(ZoneId zone){return this;}@Override public Instant instant(){return now;}}
  @Autowired MediaService media;@Autowired MediaMapper mediaDb;@Autowired ImageSanitizer sanitizer;@Autowired ReviewService reviews;
  @Autowired AfterSaleService aftersale;@Autowired AfterSaleMapper afterDb;@Autowired CommerceService commerce;@Autowired CommerceMapper orders;
  @Autowired CheckoutService checkout;@Autowired CheckoutMapper checkoutDb;@Autowired AuthenticationService auth;@Autowired JdbcTemplate jdbc;@Autowired MockMvc mvc;@Autowired ObjectMapper json;@Autowired MutableClock clock;

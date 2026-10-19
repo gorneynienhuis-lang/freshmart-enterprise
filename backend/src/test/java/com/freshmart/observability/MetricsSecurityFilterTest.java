@@ -19,6 +19,7 @@ class MetricsSecurityFilterTest {
     static final String TOKEN="synthetic_MetricsCredential_2026_never_runtime_0123456789";
     AuthenticationService authentication;CsrfService csrf;ApiAuthorizationRules rules;AuditRecorder audit;SecurityFilter filter;
     @BeforeEach void setUp()throws Exception {
+        Assumptions.assumeTrue(FileSystems.getDefault().supportedFileAttributeViews().contains("posix"),"需要支持 POSIX 文件权限的系统（Linux/macOS），Windows 下跳过");
         Path file=temp.toRealPath().resolve("credential");Files.writeString(file,TOKEN);Files.setPosixFilePermissions(file,PosixFilePermissions.fromString("rw-------"));
         authentication=mock(AuthenticationService.class);csrf=mock(CsrfService.class);rules=mock(ApiAuthorizationRules.class);audit=mock(AuditRecorder.class);
         filter=new SecurityFilter(authentication,csrf,new ObjectMapper(),rules,audit,new MetricsScrapeAuth(true,file.toString()));
