@@ -10,6 +10,7 @@ import { isR04Design } from './design-version';
 import { productImagePath, setProductImage } from './product-image';
 import { renderCartSheet, renderCouponSheet } from '../ui/cart/cart-view';
 import { buildWorkbenchShell, finishWorkbench, toneOf, workItem } from '../ui/workbench/workbench';
+import { mountStatusPills, renderAftersaleCard, renderOrderCard, tidyPageBar } from '../ui/orders/order-view';
 import { renderManagement } from './admin-panel';
 import { renderOperations } from './operations-panel';
 import { renderFinanceAudit } from './finance-audit-panel';
@@ -22,6 +23,7 @@ const money = (n: number) => formatMoney(n, { symbol: false, grouping: false });
 function yuan(value:string):number {if(!/^(0|[1-9]\d*)(\.\d{1,2})?$/.test(value))throw new Error('金额须为非负数，最多两位小数');const [whole,decimal='']=value.split('.');const cents=BigInt(whole!)*100n+BigInt(decimal.padEnd(2,'0'));if(cents>BigInt(Number.MAX_SAFE_INTEGER))throw new Error('金额超出范围');return Number(cents);}
 
 const storage: Record<string, string> = { AMBIENT: '常温', COLD: '冷藏', FROZEN: '冷冻', LIVE: '鲜活' };
+const aftersaleStates: Record<string, string> = { APPLIED: '待处理', APPROVED: '已核准', REJECTED: '已驳回', REFUNDING: '退款中', COMPLETED: '已完成', CANCELED: '已撤销' };
 const status: Record<string, string> = { PENDING_PAY: '待支付', PAID: '已支付，待拣货', PICKING: '拣货中', READY_TO_SHIP: '待发货', DELIVERING: '配送中', FINISHED: '已完成', CANCELED: '已取消', CLOSED: '已关闭' };
 const q = <T extends Element = HTMLElement>(root: ParentNode, selector: string) => root.querySelector<T>(selector);
 const qa = <T extends Element = HTMLElement>(root: ParentNode, selector: string) => [...root.querySelectorAll<T>(selector)];
@@ -97,7 +99,7 @@ export class Application {
         this.listStates.set(stateKey,state);
         const section=el('section');section.className='fm-management-section fm-paged-section';section.setAttribute('aria-label',title);section.append(el('h2',title));
         const toolbar=el('div');toolbar.className='fm-list-filter';const label=el('label','状态');const select=document.createElement('select');select.setAttribute('aria-label',title+'状态筛选');
-        for(const [value,name] of [['','全部状态'],...Object.entries(states)]){const option=document.createElement('option');option.value=value!;option.textContent=name!;select.append(option);}select.value=state.status;label.append(select);toolbar.append(label);section.append(toolbar);
+        for(const [value,name] of [['','全部状态'],...Object.entries(states)]){const option=document.createElement('option');option.value=value!;option.textContent=name!;select.append(option);}select.value=state.status;label.append(select);toolbar.append(label);section.append(toolbar);if(!isR04Design()&&key.startsWith('member-'))mountStatusPills(toolbar,select);
         let search:HTMLInputElement|undefined;if(key==='admin-orders'){const searchLabel=el('label','订单号');search=document.createElement('input');search.value=state.search;search.maxLength=64;search.placeholder='输入完整订单号';search.setAttribute('aria-label','订单查询完整订单号');searchLabel.append(search);toolbar.append(searchLabel);}
         const content=el('div');content.className='fm-list-content';const controls=el('div');section.append(content,controls);main.append(section);
         const epoch=this.epoch;let revision=0;
@@ -665,9 +667,11 @@ export class Application {
     }
     private async orders() {
         const main=this.shell('我的订单');main.append(button('管理收货地址',()=>this.manageAddresses()));
+        if(!isR04Design())tidyPageBar(main);
         const memberOptions={dialog:(title:string)=>this.dialog(title),run:(action:()=>Promise<void>)=>this.run(action),reload:()=>this.orders()};
         await this.paged(main,'member-orders','订单列表',query=>service.orders(query),order=>{
-        const article = el('article');
+        const r03Card = isR04Design() ? null : renderOrderCard(order, { statusLabel: status[order.status] ?? order.status, itemExtra: item => order.status === 'FINISHED' ? createReviewButton(order, item, { dialog: title => this.dialog(title), run: action => this.run(action), reload: () => this.orders(), notify: message => this.tell(message) }) : null });
+        const article = r03Card?.article ?? el('article');
         if (isR04Design()) {
             article.className = 'r04-order-card'; article.dataset.state = order.status;
             const head = el('header'); head.className = 'r04-order-head';
@@ -676,30 +680,31 @@ export class Application {
             const amounts = el('div'); amounts.className = 'r04-order-amounts';
             for (const [label, amount] of [['应付', order.price.payableAmount], ['已付', order.paidAmount], ['已退', order.refundedAmount]] as const) { const field = el('div'); field.append(el('span', label), el('strong', formatMoney(amount))); amounts.append(field); }
             article.append(amounts, r04Note(`配送预约 ${order.slot.date} ${order.slot.label} · ${order.address.recipientName} · ${order.address.detail}`));
-        } else { article.style.cssText = 'border-top:1px solid #E3E6EA;padding:16px 0'; article.append(el('h2', `${order.orderNo} · ${status[order.status] ?? order.status}`), el('p', `${order.slot.date} ${order.slot.label} · 应付 ${formatMoney(order.price.payableAmount)} · 已付 ${formatMoney(order.paidAmount)} · 已退 ${formatMoney(order.refundedAmount)}`)); }
-        for (const item of order.items) {
+        }
+        if (!r03Card) for (const item of order.items) {
             const row = el('p', `${item.productName} × ${item.baseUnit === 'GRAM' ? formatWeight(item.actualGram ?? item.estimatedGram ?? item.quantity) + (item.actualGram !== null ? '（实重）' : '（估重）') : item.quantity} · ${formatMoney(item.finalPayableAmount ?? item.originalPayableAmount)}`);
             if (isR04Design()) { row.className = 'r04-order-line'; const image = document.createElement('img'); setProductImage(image, item.imageUrl); image.alt = item.productName; image.width = 58; image.height = 58; row.prepend(image); }
             if(order.status==='FINISHED')row.append(createReviewButton(order,item,{dialog:title=>this.dialog(title),run:action=>this.run(action),reload:()=>this.orders(),notify:message=>this.tell(message)}));
             article.append(row);
         }
-        if (order.weightAdjustment && order.weightAdjustment.status!=='NONE')
+        if (!r03Card && order.weightAdjustment && order.weightAdjustment.status!=='NONE')
             article.append(el('p', `实重结算：${({REFUND_PENDING:'退差处理中',REFUNDED:'已退差',TOP_UP_PENDING:'待补款',SETTLED:'已结算',CANCELED:'已取消',NONE:'无需调整'} as const)[order.weightAdjustment.status]} · 差额 ${formatMoney(order.weightAdjustment.deltaAmount)}`));
-        if (order.deliveryReceiptCode) { const receipt = el('strong', '配送签收码：' + order.deliveryReceiptCode); if (isR04Design()) receipt.className = 'r04-receipt'; article.append(receipt); }
+        if (!r03Card && order.deliveryReceiptCode) { const receipt = el('strong', '配送签收码：' + order.deliveryReceiptCode); if (isR04Design()) receipt.className = 'r04-receipt'; article.append(receipt); }
         if (order.allowedActions.includes('PAY') || order.allowedActions.includes('TOP_UP'))
             article.append(button(order.allowedActions.includes('TOP_UP') ? '支付称重补款' : '去支付', () => void this.run(() => this.payment(order))));
         if(order.allowedActions.includes('APPLY_AFTERSALE'))article.append(button('申请售后',()=>this.aftersaleDialog(order)));
         if (order.allowedActions.includes('CANCEL'))
             article.append(button('取消订单', () => { const d = this.dialog('取消订单'); const reason = input('取消原因', 'reason', '不再需要'); d.append(reason, button('确认取消', () => void this.run(async () => { await service.cancel(order.orderId, { version: order.version, reason: q<HTMLInputElement>(reason, 'input')!.value }); d.close(); this.tell('订单已取消；退款进度以订单为准'); await this.orders(); }))); }));
         appendMemberOrderActions(article,order,memberOptions);
+        r03Card?.finish();
         if (isR04Design()) { const actions = el('div'); actions.className = 'r04-order-actions'; for (const action of qa<HTMLButtonElement>(article, ':scope > button')) actions.append(action); if (actions.childElementCount) article.append(actions); }
         return article;
         },'暂无符合条件的订单，去选购商品吧。',status);
         await this.paged(main,'member-aftersales','售后进度',query=>service.aftersales(query),a=>{
-            const row=el('article');row.dataset.aftersaleId=a.aftersaleId;row.dataset.state=a.status;
-            row.append(el('p',`${a.aftersaleId} · ${a.status} · 申请 ${formatMoney(a.requestedAmount)} · 核准 ${formatMoney(a.approvedAmount)}${a.reviewComment?' · '+a.reviewComment:''}`));
+            const row=isR04Design()?el('article'):renderAftersaleCard(a,aftersaleStates[a.status]??a.status);row.dataset.aftersaleId=a.aftersaleId;row.dataset.state=a.status;
+            if(isR04Design())row.append(el('p',`${a.aftersaleId} · ${a.status} · 申请 ${formatMoney(a.requestedAmount)} · 核准 ${formatMoney(a.approvedAmount)}${a.reviewComment?' · '+a.reviewComment:''}`));
             appendAftersaleActions(row,a,memberOptions);return row;
-        },'暂无符合条件的售后申请。',{APPLIED:'待处理',APPROVED:'已核准',REJECTED:'已驳回',REFUNDING:'退款中',COMPLETED:'已完成',CANCELED:'已撤销'});
+        },'暂无符合条件的售后申请。',aftersaleStates);
     }
     private async operations() {
         const user = service.auth.getSnapshot().user;

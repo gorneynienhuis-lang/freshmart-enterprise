@@ -1,0 +1,117 @@
+/* 会员“我的订单 / 售后进度”（当前版 r03）。由 ui/orders/order-view.ts 使用。 */
+html[data-design="r03"] {
+  --od-red: #A0021F;
+  --od-ink: #1F2933;
+  --od-sub: #667085;
+  --od-line: #E7E9ED;
+  --od-soft: #FAF7F5;
+}
+
+/* 页头：标题 + 一行工具栏 */
+html[data-design="r03"] .fm-orders-page > h1 { margin: 4px 0 2px; font-size: 26px; letter-spacing: .01em; }
+html[data-design="r03"] .fm-orders-bar { display: flex; flex-wrap: wrap; gap: 10px; margin: 0 0 6px; }
+html[data-design="r03"] .fm-orders-bar .fm-action-button { align-self: auto; margin: 0; min-height: 38px; padding: 8px 18px; border-radius: 999px; font-weight: 600; }
+html[data-design="r03"] .fm-orders-bar .fm-action-button:not([data-tone]) { background: #FFF; color: var(--od-red); border-color: #E7C3CB; }
+html[data-design="r03"] .fm-orders-bar .fm-action-button:not([data-tone]):hover { background: #FFF5F6; }
+html[data-design="r03"] .fm-orders-bar .fm-action-button[data-tone="quiet"]:hover { border-color: #B8BFC9; }
+
+/* 分区：列表外层不再是“框中框” */
+html[data-design="r03"] .fm-orders-page .fm-paged-section { border: 0 !important; padding: 8px 0 0 !important; background: none !important; box-shadow: none !important; }
+html[data-design="r03"] .fm-orders-page .fm-paged-section > h2 { margin: 18px 0 12px; font-size: 19px; display: flex; align-items: center; gap: 10px; }
+html[data-design="r03"] .fm-orders-page .fm-paged-section > h2::before { content: ""; width: 4px; height: 18px; border-radius: 2px; background: var(--od-red); }
+
+/* 状态筛选胶囊（select 仅留给读屏与脚本） */
+html[data-design="r03"] .fm-list-filter.has-pills { align-items: center; margin: 0 0 16px; }
+html[data-design="r03"] .fm-list-filter.has-pills > label { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+html[data-design="r03"] .fm-pills { display: flex; gap: 8px; max-width: 100%; overflow-x: auto; padding: 2px 1px 6px; scrollbar-width: thin; }
+html[data-design="r03"] .fm-pills button { flex: none; margin: 0; padding: 7px 15px; border: 1px solid var(--od-line); border-radius: 999px; background: #FFF; color: #475467; font: inherit; font-size: 13px; cursor: pointer; transition: background-color .15s, color .15s, border-color .15s; }
+html[data-design="r03"] .fm-pills button:hover { border-color: #D3A3AD; color: var(--od-red); }
+html[data-design="r03"] .fm-pills button[aria-pressed="true"] { background: var(--od-red); border-color: var(--od-red); color: #FFF; font-weight: 600; }
+html[data-design="r03"] .fm-pills button:focus-visible { outline: 2px solid var(--od-red); outline-offset: 2px; }
+
+/* 订单卡片 */
+html[data-design="r03"] .fm-list-content > article.fm-order { padding: 0; border: 1px solid var(--od-line); border-radius: 12px; background: #FFF; overflow: hidden; box-shadow: 0 2px 12px rgba(31, 41, 51, .04); transition: box-shadow .2s, border-color .2s; }
+html[data-design="r03"] .fm-list-content > article.fm-order:hover { border-color: #DCD3D3; box-shadow: 0 6px 20px rgba(31, 41, 51, .08); }
+html[data-design="r03"] .fm-order-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 14px 20px; background: var(--od-soft); border-bottom: 1px solid #F0ECEA; }
+html[data-design="r03"] .fm-order-head-main { display: flex; align-items: center; gap: 12px; min-width: 0; }
+html[data-design="r03"] .fm-order-head-main time { font-size: 13px; color: var(--od-sub); font-variant-numeric: tabular-nums; }
+html[data-design="r03"] .fm-order-no { display: flex; align-items: baseline; gap: 8px; margin: 0; min-width: 0; font-size: 12px; color: var(--od-sub); }
+html[data-design="r03"] .fm-order-no code { font: 12px/1.5 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: #475467; overflow-wrap: anywhere; user-select: all; }
+
+html[data-design="r03"] .fm-order-status { display: inline-flex; align-items: center; gap: 6px; padding: 3px 11px; border-radius: 999px; font-size: 13px; font-weight: 650; white-space: nowrap; background: #F1F2F4; color: #5B6470; }
+html[data-design="r03"] .fm-order-status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+html[data-design="r03"] .fm-order-status[data-tone="todo"] { background: #FFF4E0; color: #B25E00; }
+html[data-design="r03"] .fm-order-status[data-tone="active"] { background: #E8F1FF; color: #1F5FBF; }
+html[data-design="r03"] .fm-order-status[data-tone="done"] { background: #E6F5EC; color: #1A7A43; }
+
+/* 进度条 */
+html[data-design="r03"] .fm-order-track { display: grid; grid-template-columns: repeat(4, 1fr); list-style: none; margin: 0; padding: 16px 20px 4px; }
+html[data-design="r03"] .fm-order-track li { position: relative; padding-top: 18px; text-align: center; font-size: 12px; color: #98A2B3; }
+html[data-design="r03"] .fm-order-track li::before { content: ""; position: absolute; top: 0; left: 50%; width: 10px; height: 10px; margin-left: -5px; border-radius: 50%; background: #E1E4E9; box-shadow: 0 0 0 3px #FFF; z-index: 1; }
+html[data-design="r03"] .fm-order-track li::after { content: ""; position: absolute; top: 4px; left: -50%; width: 100%; height: 2px; background: #E1E4E9; }
+html[data-design="r03"] .fm-order-track li:first-child::after { display: none; }
+html[data-design="r03"] .fm-order-track li[data-state="done"] { color: #475467; }
+html[data-design="r03"] .fm-order-track li[data-state="done"]::before,
+html[data-design="r03"] .fm-order-track li[data-state="done"]::after { background: #2E9E63; }
+html[data-design="r03"] .fm-order-track li[data-state="current"] { color: var(--od-red); font-weight: 650; }
+html[data-design="r03"] .fm-order-track li[data-state="current"]::before { background: var(--od-red); box-shadow: 0 0 0 3px #FFF, 0 0 0 5px rgba(160, 2, 31, .18); }
+html[data-design="r03"] .fm-order-track li[data-state="current"]::after { background: #2E9E63; }
+
+/* 商品行 */
+html[data-design="r03"] .fm-order-items { list-style: none; margin: 0; padding: 6px 20px 0; }
+html[data-design="r03"] .fm-order-item { display: grid; grid-template-columns: 64px minmax(0, 1fr) auto; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px dashed #ECEEF1; }
+html[data-design="r03"] .fm-order-item:last-child { border-bottom: 0; }
+html[data-design="r03"] .fm-order-item img { width: 64px; height: 64px; object-fit: cover; border-radius: 10px; border: 1px solid #F0F1F3; background: #F7F7F5; }
+html[data-design="r03"] .fm-order-item-info { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+html[data-design="r03"] .fm-order-item-info strong { font-size: 15px; font-weight: 650; color: var(--od-ink); overflow-wrap: anywhere; }
+html[data-design="r03"] .fm-order-item-info span { font-size: 13px; color: var(--od-sub); }
+html[data-design="r03"] .fm-order-item-side { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+html[data-design="r03"] .fm-order-item-side b { font-size: 15px; font-weight: 650; font-variant-numeric: tabular-nums; color: var(--od-ink); }
+html[data-design="r03"] .fm-order-item-side button { margin: 0; min-height: 28px; padding: 3px 11px; font-size: 12px; border-radius: 999px; }
+
+/* 配送、备注 */
+html[data-design="r03"] .fm-order-ship { display: flex; align-items: flex-start; gap: 8px; margin: 4px 20px 0; padding: 11px 14px; border-radius: 8px; background: #F7F8FA; color: #475467; font-size: 13px; line-height: 1.6; }
+html[data-design="r03"] .fm-order-ship svg { flex: none; margin-top: 3px; color: #8A94A3; }
+html[data-design="r03"] .fm-order-notes { display: grid; gap: 8px; margin: 10px 20px 0; }
+html[data-design="r03"] .fm-order-notes p { margin: 0; font-size: 13px; line-height: 1.6; color: #475467; }
+html[data-design="r03"] .fm-order-notes .fm-management-note { padding: 9px 12px; border-radius: 8px; background: #FFF9EB; color: #8A5A00; }
+html[data-design="r03"] .fm-order-receipt { display: inline-flex; align-items: center; gap: 10px; justify-self: start; padding: 8px 14px; border-radius: 8px; background: #FFF5F6; border: 1px dashed #E7C3CB; }
+html[data-design="r03"] .fm-order-receipt span { color: var(--od-sub); }
+html[data-design="r03"] .fm-order-receipt strong { font: 650 18px/1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; letter-spacing: .12em; color: var(--od-red); }
+
+/* 底栏：金额 + 操作 */
+html[data-design="r03"] .fm-order-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; margin-top: 14px; padding: 14px 20px; border-top: 1px solid #F0F1F3; }
+html[data-design="r03"] .fm-order-sums { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 26px; margin: 0; }
+html[data-design="r03"] .fm-order-sums > div { display: flex; align-items: baseline; gap: 6px; }
+html[data-design="r03"] .fm-order-sums dt { font-size: 13px; color: var(--od-sub); }
+html[data-design="r03"] .fm-order-sums dd { margin: 0; font-size: 14px; font-weight: 600; color: #475467; font-variant-numeric: tabular-nums; }
+html[data-design="r03"] .fm-order-sums .is-payable dd { font-size: 22px; font-weight: 700; color: var(--od-red); }
+html[data-design="r03"] .fm-order-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-left: auto; }
+html[data-design="r03"] .fm-order-actions .fm-action-button { margin: 0; align-self: auto; min-height: 36px; padding: 7px 18px; border-radius: 999px; }
+html[data-design="r03"] .fm-order-actions .fm-action-button:not([data-tone]):not(:disabled) { box-shadow: 0 2px 8px rgba(160, 2, 31, .22); }
+
+/* 售后卡片 */
+html[data-design="r03"] .fm-aftersale .fm-order-head { border-bottom: 0; }
+html[data-design="r03"] .fm-aftersale .fm-order-sums { padding: 12px 20px 14px; }
+html[data-design="r03"] .fm-aftersale .fm-order-comment { margin: 0; padding: 0 20px 14px; font-size: 13px; color: #475467; }
+html[data-design="r03"] .fm-aftersale > .fm-action-button { margin: 0 0 16px 20px; }
+
+/* 空状态 */
+html[data-design="r03"] .fm-orders-page .fm-list-content > p { padding: 36px 20px; text-align: center; border: 1px dashed #DDE1E7; border-radius: 12px; background: #FBFBFC; color: var(--od-sub); }
+
+@media (max-width: 640px) {
+  html[data-design="r03"] .fm-orders-page > h1 { font-size: 23px; }
+  html[data-design="r03"] .fm-order-head { padding: 12px 14px; }
+  html[data-design="r03"] .fm-order-track { padding: 14px 10px 2px; }
+  html[data-design="r03"] .fm-order-items { padding: 4px 14px 0; }
+  html[data-design="r03"] .fm-order-item { grid-template-columns: 56px minmax(0, 1fr) auto; gap: 10px; }
+  html[data-design="r03"] .fm-order-item img { width: 56px; height: 56px; }
+  html[data-design="r03"] .fm-order-ship, html[data-design="r03"] .fm-order-notes { margin-left: 14px; margin-right: 14px; }
+  html[data-design="r03"] .fm-order-foot { padding: 12px 14px; }
+  html[data-design="r03"] .fm-order-actions { width: 100%; margin-left: 0; justify-content: stretch; }
+  html[data-design="r03"] .fm-order-actions .fm-action-button { flex: 1 1 auto; }
+  html[data-design="r03"] .fm-aftersale .fm-order-sums { padding: 10px 14px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="r03"] .fm-list-content > article.fm-order, html[data-design="r03"] .fm-pills button { transition: none; }
+}
