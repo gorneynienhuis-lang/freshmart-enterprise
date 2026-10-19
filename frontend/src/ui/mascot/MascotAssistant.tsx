@@ -55,8 +55,8 @@ function prefersReducedMotion(): boolean {
 /** 散步距离：桌面走得远一点，平板短一点，手机只挪一小步 */
 function strollDistance(): number {
     const w = window.innerWidth;
-    if (w > 1024) return 150;
-    if (w > 640) return 96;
+    if (w > 1024) return 90;
+    if (w > 640) return 64;
     return 36;
 }
 
