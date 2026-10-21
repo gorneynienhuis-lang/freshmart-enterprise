@@ -1,0 +1,97 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.freshmart:fresh-mall-backend >------------------
+[INFO] Building fresh-mall backend 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ fresh-mall-backend ---
+[INFO] Copying 45 resources from src\main\resources to target\classes
+[INFO] Copying 13 resources from ..\database\migrations to target\classes\db\migration
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ fresh-mall-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ fresh-mall-backend ---
+[INFO] Copying 4 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ fresh-mall-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ fresh-mall-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.freshmart.cache.PublicCategoryCacheTest
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+WARNING: A Java agent has been loaded dynamically (C:\Users\24932\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.11\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+10:31:32.409 [main] WARN com.freshmart.cache.PublicCategoryCache -- Optional category cache unavailable; using database type=RedisConnectionFailureException
+10:31:32.503 [main] WARN com.freshmart.cache.PublicCategoryCache -- Optional category cache unavailable; using database type=RedisConnectionFailureException
+10:31:32.507 [main] WARN com.freshmart.cache.PublicCategoryCache -- Optional category cache unavailable; using database type=RedisConnectionFailureException
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.654 s -- in com.freshmart.cache.PublicCategoryCacheTest
+[INFO] Running com.freshmart.command.IdempotencyServiceTest
+10:31:33.139 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
+10:31:33.350 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:commands user=
+10:31:33.354 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.169 s -- in com.freshmart.command.IdempotencyServiceTest
+[INFO] Running com.freshmart.commerce.RefundRecoveryIntegrationTest
+10:31:33.782 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.RefundRecoveryIntegrationTest
+10:31:33.838 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.RefundRecoveryIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-19T10:31:34.119+08:00  INFO 49176 --- [fresh-mall] [           main] c.f.c.RefundRecoveryIntegrationTest      : Starting RefundRecoveryIntegrationTest using Java 21.0.12.1 with PID 49176 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise\backend)
+2026-10-19T10:31:34.120+08:00  INFO 49176 --- [fresh-mall] [           main] c.f.c.RefundRecoveryIntegrationTest      : The following 1 profile is active: "test"
+2026-10-19T10:31:35.246+08:00  INFO 49176 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-19T10:31:35.249+08:00  INFO 49176 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn4: url=jdbc:h2:mem:refundrecovery user=SA
+2026-10-19T10:31:35.250+08:00  INFO 49176 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-19T10:31:35.257+08:00  INFO 49176 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:refundrecovery (H2 2.4)
+2026-10-19T10:31:35.284+08:00  WARN 49176 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-19T10:31:35.330+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-19T10:31:35.333+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.032s)
+2026-10-19T10:31:35.338+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-19T10:31:35.373+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-19T10:31:35.383+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-19T10:31:35.415+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-19T10:31:35.425+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-19T10:31:35.451+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-19T10:31:35.464+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-19T10:31:35.471+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-19T10:31:35.476+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-19T10:31:35.485+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-19T10:31:35.496+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-19T10:31:35.505+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-19T10:31:35.512+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-19T10:31:35.515+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-19T10:31:35.520+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-19T10:31:35.535+08:00  INFO 49176 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.098s)
+2026-10-19T10:31:37.627+08:00  INFO 49176 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-19T10:31:37.627+08:00  INFO 49176 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-19T10:31:37.632+08:00  INFO 49176 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-19T10:31:37.639+08:00  INFO 49176 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 12 ms
+2026-10-19T10:31:37.727+08:00  INFO 49176 --- [fresh-mall] [           main] c.f.c.RefundRecoveryIntegrationTest      : Started RefundRecoveryIntegrationTest in 3.865 seconds (process running for 7.511)
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.603 s -- in com.freshmart.commerce.RefundRecoveryIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 28, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  14.413 s
+[INFO] Finished at: 2026-10-19T10:31:42+08:00
+[INFO] ------------------------------------------------------------------------

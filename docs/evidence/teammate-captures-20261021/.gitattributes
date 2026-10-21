@@ -1,0 +1,2 @@
+# Preserve supplied Windows logs byte for byte, including CRLF and output spaces.
+logs/*.log -text -whitespace

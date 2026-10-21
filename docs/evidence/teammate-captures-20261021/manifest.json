@@ -1,0 +1,457 @@
+{
+  "preparedAt": "2026-10-21",
+  "codeBaselineForDocumentIntegration": "f32416e977c6352627e23066f192f81c10296a38",
+  "sourceCount": {
+    "team1": 42,
+    "team2": 13,
+    "team3": 21
+  },
+  "policy": "原图只读保留于Git忽略目录；仅做裁切和等比缩放；按用户要求原样保留合成演示手机号和签收码。未增造状态、数字、角色、HTTP响应、网址或完整视口；截图不是本次重跑测试。",
+  "sourceCaptureDates": "画面可见2026-10-19与2026-10-21；单张未提供固定commit或CSS视口。",
+  "files": [
+    {
+      "file": "home.png",
+      "source": "team1/队友一截图/UI-01-home.png",
+      "sourceSha256": "e9fa1887b783cd853f23aa2b464c2bfaa7798db3472f1b398fc9cb0762a3d800",
+      "sourceSize": [
+        1917,
+        1034
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1917,
+        1034
+      ],
+      "sha256": "86facdbf873eee5f7c95d80c541a723280b857199ff3adf093d7eadeeaf5826b",
+      "scope": "首页与公网来源"
+    },
+    {
+      "file": "product-detail.png",
+      "source": "team1/队友一截图/UI-03-detail-1.png",
+      "sourceSha256": "73ddb1e01119eba091adb6639788b952cbc209888618422f45aae8d929362266",
+      "sourceSize": [
+        1915,
+        1030
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1915,
+        1030
+      ],
+      "sha256": "85a81dc3c7594e884d851cfa212ceb0924027ecd025ffd81a58f170af50c1557",
+      "scope": "商品详情与按件SKU"
+    },
+    {
+      "file": "product-specification.png",
+      "source": "team1/队友一截图/UI-03-detail-2.png",
+      "sourceSha256": "cd4c1665718e10c226bd28f2d0dfbdcecca914686cae4198a4217c040cbc48d2",
+      "sourceSize": [
+        1912,
+        1032
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1912,
+        1032
+      ],
+      "sha256": "3eeb9d4a44ed5ef2e4e76214b4b477b7c7b3c957dcbe8735460ad71e4e636ced",
+      "scope": "参数与评价空态"
+    },
+    {
+      "file": "checkout-summary.png",
+      "source": "team1/队友一截图/UI-04-checkout-2.jpg",
+      "sourceSha256": "cea4ccee3b6e1bc06a4c6034224b1164a51d119d8a653f9119140c329d7d67ca",
+      "sourceSize": [
+        1918,
+        1118
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1918,
+        1118
+      ],
+      "sha256": "6ea20aa04b0cfa153bb5b690dedb011019aeebaa7a4c4853ef9747bc60cd061f",
+      "scope": "商品金额、配送时段及称重说明；优惠为0"
+    },
+    {
+      "file": "paid-order.png",
+      "source": "team1/队友一截图/UI-05-payment-success.png",
+      "sourceSha256": "4e1029c864643f2685ad3efac3f67b705084e99a32346c4e1d2f29b27c142d6e",
+      "sourceSize": [
+        1800,
+        1033
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        1800,
+        960
+      ],
+      "outputSize": [
+        1800,
+        960
+      ],
+      "sha256": "c23bb4921e89bf768418bd4723e3564d38da3fefea4fb6cfc7712f34d8097096",
+      "scope": "已支付待拣货订单；非支付操作页"
+    },
+    {
+      "file": "order-canceled.png",
+      "source": "team1/队友一截图/UI-06-order-3.png",
+      "sourceSha256": "ed97c35a004462eabd1804f18f9d48ef92aad4e989b3d2a4ede7bd0213fe94a4",
+      "sourceSize": [
+        1814,
+        746
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1814,
+        746
+      ],
+      "sha256": "c92b5b332ca132ef39ca5d9330e2dde6d2ddbaa9399d4dc57f889115438180db",
+      "scope": "已取消订单"
+    },
+    {
+      "file": "cancel-prompt.png",
+      "source": "team1/队友一截图/TEST-05-exception-flow-2.png",
+      "sourceSha256": "1fa860219fdb5994e2233d62f2f2c87d11f3b2f6c5b5274621ccf59312078898",
+      "sourceSize": [
+        1844,
+        670
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1844,
+        670
+      ],
+      "sha256": "a6d7397ca51b880e26d5150ac689bb4602c8c04503ba8e067180bbfec242d771",
+      "scope": "同单取消确认"
+    },
+    {
+      "file": "cancel-after.png",
+      "source": "team1/队友一截图/TEST-05-exception-flow-3.png",
+      "sourceSha256": "75ee7754ef132646282428082602da396d1e5410dc6bebc9b2a96b9b17e5111e",
+      "sourceSize": [
+        1791,
+        603
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1791,
+        603
+      ],
+      "sha256": "72d88bb8b090c9a12f7a5c40cae5dd65b0a0cea8a132cd39ed19cf754bee1ee8",
+      "scope": "同单取消完成；非退款恢复"
+    },
+    {
+      "file": "responsive-phone.png",
+      "source": "team1/队友一截图/TEST-04-responsive-390-4.jpg",
+      "sourceSha256": "ddfe7290bb0608bd86321c394261bec66575037b5f77c33a8ff9e99226823790",
+      "sourceSize": [
+        1206,
+        2494
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1206,
+        2494
+      ],
+      "sha256": "647d7b2fe6ca799a475993b394d2a278fa4dd2cbc51fa461970f8a85b6a42ba6",
+      "scope": "手机首页与问答抽屉；CSS视口宽度未固定"
+    },
+    {
+      "file": "login.png",
+      "source": "team2/AUTH-02-unauthorized.png",
+      "sourceSha256": "1a0e7e9baf3694d620b2263ef0224e74be115bcb1c04a13587760f301db26235",
+      "sourceSize": [
+        2544,
+        1336
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        2544,
+        1215
+      ],
+      "outputSize": [
+        1920,
+        917
+      ],
+      "sha256": "2977b91558e228dfdcc9f4163628ce881a35d905cb7053bcb9b390f703a49017",
+      "scope": "登录弹窗；无法单独证明订单路由拦截或401"
+    },
+    {
+      "file": "operator-overview.png",
+      "source": "team2/AUTH-04-operater.png",
+      "sourceSha256": "d03996ad3cbc98ae3a933add313ef6cca640164901914610f292d0fe9072205d",
+      "sourceSize": [
+        2544,
+        1336
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        2544,
+        1230
+      ],
+      "outputSize": [
+        1920,
+        928
+      ],
+      "sha256": "fea77363be1b8597ca38aea4123a0ec11cefa24cafbd2372751de7b5a1a3fc8f",
+      "scope": "运营经营概览"
+    },
+    {
+      "file": "picker-task.png",
+      "source": "team2/AUTH-05-picker (3).png",
+      "sourceSha256": "bccb948a15351ff4dbc21933f61427f46a3b1996b6fc31ddd0b4473d9172bbad",
+      "sourceSize": [
+        2542,
+        2892
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        520,
+        1655,
+        2446,
+        2315
+      ],
+      "outputSize": [
+        1920,
+        658
+      ],
+      "sha256": "ac432cff2ac32b8f3fe2254fac8a28e2898be1b55f71d2ded6743c06a8e58f0e",
+      "scope": "真实拣货任务局部；仅裁去重复拼接侧栏，不重建页头"
+    },
+    {
+      "file": "courier-task.png",
+      "source": "team2/AUTH-06-courier.png",
+      "sourceSha256": "b818dbf281334ca84ff188a53f9b2369b63d497b69250775e791a63db17b1f67",
+      "sourceSize": [
+        2544,
+        1336
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        2544,
+        1230
+      ],
+      "outputSize": [
+        1920,
+        928
+      ],
+      "sha256": "5a3d634dbd8611833dd103dfbd23fd2751d24b322f052451d634db4ba624e0b4",
+      "scope": "配送角色与配送中任务；未证明签收完成"
+    },
+    {
+      "file": "service-case.png",
+      "source": "team2/AUTH-07-service.png",
+      "sourceSha256": "eed107da5aba9227a02dd9ff3b000c1b433e01e6a8225dbd071d5b2757798fe1",
+      "sourceSize": [
+        2544,
+        1336
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        2544,
+        1230
+      ],
+      "outputSize": [
+        1920,
+        928
+      ],
+      "sha256": "2935c6ab192dd447322e22751864ccf4732d69c4e93bfa6d1aec90be9759bfb1",
+      "scope": "客服待处理工单；未证明完成退款"
+    },
+    {
+      "file": "finance-inventory.png",
+      "source": "team2/AUTH-08-finance.png",
+      "sourceSha256": "ca6995d457a423a9c7a196647b5ea3ea300e90ab341f90cfa88c4311dc1eed7b",
+      "sourceSize": [
+        2544,
+        1336
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        2544,
+        1215
+      ],
+      "outputSize": [
+        1920,
+        917
+      ],
+      "sha256": "c8226967b5448b097ee0fefa2d79b2e043bf09df7b00ff92af07b59c6c7c432f",
+      "scope": "财务库存对账投影；非退款执行"
+    },
+    {
+      "file": "admin-employees.png",
+      "source": "team2/AUTH-09-admin.png",
+      "sourceSha256": "efeac9c6aa3d9a3ab23eeac5a8984e232c55588daa3db35401cb20e8763cb843",
+      "sourceSize": [
+        2542,
+        2734
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        96,
+        0,
+        2416,
+        1408
+      ],
+      "outputSize": [
+        1920,
+        1165
+      ],
+      "sha256": "1fe8232c75876358b39bb89f852840c40a11774af77b4464da70c6570021cb96",
+      "scope": "员工权限与账号状态；未证明修改权限动作"
+    },
+    {
+      "file": "member-forbidden.png",
+      "source": "team2/AUTH-10-forbidden.png",
+      "sourceSha256": "4e50323fa91eaf10f9549368e5a087d186dbc4fb0f9afbeaa4952b5c1aea6a5b",
+      "sourceSize": [
+        2544,
+        1336
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        2544,
+        1200
+      ],
+      "outputSize": [
+        1920,
+        906
+      ],
+      "sha256": "3e1047dc5f807575d27127f5a0d54301bddfc605b9d0f11530134bc065bbf294",
+      "scope": "MEMBER无工作台权限页面提示；非HTTP403实测"
+    },
+    {
+      "file": "member3-openapi.png",
+      "source": "team3/成员3/ENG-04-openapi.png",
+      "sourceType": "source-view",
+      "sourceSha256": "59be76b0bebde09c47e5314668f6de0361c7d650e56c87090c98bb693316ccb3",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "sha256": "2b9638b366bbf419ad69209e715c33c16a4983a2dd99937596665bb57296e996",
+      "scope": "OpenAPI源码与角色约束摘录视图"
+    },
+    {
+      "file": "member3-migrations.png",
+      "source": "team3/成员3/ENG-05-migrations.png",
+      "sourceType": "source-view",
+      "sourceSha256": "676f955f210d78e24f302b202344ec0708a924656ed5e92dce48dc064a2eefa6",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1920,
+        1080
+      ],
+      "sha256": "f8eefad8a0d4195fe09e94e59a9e2283d78c85d0d8bfa491921710f61d14d0af",
+      "scope": "数据库迁移与约束源码摘录视图"
+    },
+    {
+      "file": "member3-security-code.png",
+      "source": "team3/成员3/ENG-06-security-code.png",
+      "sourceType": "source-view",
+      "sourceSha256": "dbf600e65fb3327d0703bdd2a35766a9478a2c2d61a6b4388156d7ef496f9674",
+      "sourceSize": [
+        1920,
+        1200
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1920,
+        1200
+      ],
+      "sha256": "d920e2f0f041a8afc624a990f6d1a22d7bd0911db3fcb393c014901a10aec154",
+      "scope": "认证、密码哈希和权限实现源码摘录视图"
+    },
+    {
+      "file": "member3-frontend-build.png",
+      "source": "team3/成员3/TEST-02-frontend-build.png",
+      "sourceType": "command-log-view",
+      "sourceSha256": "196412211e2bbbb36e8ec99fd935ae0f4896de81d4ffa6c4391ba26044369ab6",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": [
+        0,
+        0,
+        1920,
+        710
+      ],
+      "outputSize": [
+        1920,
+        710
+      ],
+      "sha256": "d8e8759dbc1c2fa95d54c8c8b993b6cb0318f6e897373eb8f5aa2db75162e1ff",
+      "scope": "前端44项测试与生产构建的原始日志排版摘录"
+    },
+    {
+      "file": "member3-targeted-tests.png",
+      "source": "team3/成员3/原始日志/runtime-targeted-tests.log",
+      "sourceType": "rendered-original-log-excerpt",
+      "sourceSha256": "0bfd33864b3bfba5f549079fef446b41bba0fd9a5fb8fe08fb90fc058da74ca1",
+      "sourceLineNumbers": [
+        37,
+        42,
+        86,
+        88,
+        90,
+        93
+      ],
+      "sourceExcerpt": [
+        "[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.654 s -- in com.freshmart.cache.PublicCategoryCacheTest",
+        "[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.169 s -- in com.freshmart.command.IdempotencyServiceTest",
+        "[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.603 s -- in com.freshmart.commerce.RefundRecoveryIntegrationTest",
+        "[INFO] Results:",
+        "[INFO] Tests run: 28, Failures: 0, Errors: 0, Skipped: 0",
+        "[INFO] BUILD SUCCESS"
+      ],
+      "redactionsInSourcePixels": [],
+      "cropInSourcePixels": null,
+      "outputSize": [
+        1800,
+        661
+      ],
+      "sha256": "4ccd5016333a056b62c7c04db68c2f5cd985adbb31138e4ba9e19320b26c7229",
+      "scope": "同一次Windows/Java21定向运行：缓存9、幂等5、退款14，共28项通过；原始日志摘录，不是终端原生截图"
+    }
+  ],
+  "selectedCount": 22,
+  "identifiers": "用户明确说明手机号、验证码等为课程合成数据，并要求保留。所选图片未遮挡这些演示标识；不含API Key、明文密码、Cookie或Bearer token。",
+  "thirdMemberMaterial": "第三位提供的代码/日志视图与原始日志，日期2026-10-19；选用源码摘录与成功专项日志，不冒称原生IDE/终端截图。"
+}
