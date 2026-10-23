@@ -1,0 +1,168 @@
+{
+  "preparedAt": "2026-10-23",
+  "captureDate": "2026-10-22",
+  "sourceArchive": "成员C-截图最终版.zip",
+  "sourceArchiveSha256": "93ceb9d167c5cc457f85a3569b5f6d86c9441a5dcf1a09b21da9174ad3a01f3a",
+  "reviewBaselineCommit": "7a7439cb82a520b6bf85b23da5fa535bfb35d4c7",
+  "reportedSourceCommit": "7a7439c",
+  "sourceBinding": "由成员自述；包内无git status/rev-parse原始输出。前端先本地generate:api，生成文件未随包提交。非干净checkout复跑证据。",
+  "sourceChecksumsVerified": {
+    "media": 22,
+    "match": 22,
+    "scope": "原校验表只覆盖21 PNG和联系表JPG；本索引另算采用日志摘要。"
+  },
+  "files": [
+    {
+      "file": "backend-tests.png",
+      "source": "TEST-01-backend-test.png",
+      "sourceSha256": "fdbd18f58cc4569740a8f49c4228cd0650c93a08f5a74c0a0163bcd91238878a",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "cropInSourcePixels": [
+        0,
+        0,
+        1920,
+        860
+      ],
+      "outputSize": [
+        1920,
+        860
+      ],
+      "sha256": "31ee01cce2c51dd5c88fe26505935dc9761da6d9ecce8ec2f3ea06224dea4679",
+      "scope": "Windows原始日志排版视图：195项总数，189项执行通过，6项POSIX守卫跳过。"
+    },
+    {
+      "file": "frontend-verify-build.png",
+      "source": "TEST-02-frontend-build.png",
+      "sourceSha256": "be813389597c40706b4f261e7a01acade44754e224f5c853a6b131cd8a4de876",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "cropInSourcePixels": [
+        0,
+        0,
+        1920,
+        820
+      ],
+      "outputSize": [
+        1920,
+        820
+      ],
+      "sha256": "16fb70c517fddabb68107f24c8ac5f69793e1052c2153065ed521f8b41dd975c",
+      "scope": "Windows原始日志排版视图：本地重生成API类型后verify 47项和build通过。"
+    },
+    {
+      "file": "jacoco-coverage.png",
+      "source": "TEST-03-coverage.png",
+      "sourceSha256": "5933985e35197aca5cb3df29e5a7e1e060e0192c29ffd157b2865fec9a194d38",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "cropInSourcePixels": [
+        0,
+        0,
+        1220,
+        680
+      ],
+      "outputSize": [
+        1220,
+        680
+      ],
+      "sha256": "655dfd1a4892b7b079028779c26dc996ce73b501b49d94ade57e3e692093bd0a",
+      "scope": "原生JaCoCo页面视图，Total Lines missed169 / total2212，covered2043，92.36%。"
+    },
+    {
+      "file": "media-permission-integration.png",
+      "source": "ENG-09-media-permission-NOT-RUN.png",
+      "sourceSha256": "7d6921d4f54ddb94fcb30c43be6e117145284a7caa76b6ac6d4617bf48656e10",
+      "sourceSize": [
+        1920,
+        1080
+      ],
+      "cropInSourcePixels": [
+        0,
+        0,
+        1920,
+        600
+      ],
+      "outputSize": [
+        1920,
+        600
+      ],
+      "sha256": "35dbdd9c9bdfc7cb660360f53f67d77a2ea6e211bc3c579549bc02598aada8ea",
+      "scope": "源码与集成测试日志排版视图；12项通过，H2/MockMvc范围，实时双会员会话未执行。"
+    }
+  ],
+  "logs": [
+    {
+      "file": "logs/TEST-01-backend-test-pr5.log",
+      "sha256": "6b3f3a853de836ebeb1560c855db2a6104847b9f6af62630c240d2fbbcb7394f",
+      "bytes": 136842
+    },
+    {
+      "file": "logs/TEST-02-frontend-npm-ci-pr5.log",
+      "sha256": "fa0e87c12058431d8240fa4253b6aca07d193f7f28ae2d0d50e99da3fdec1b61",
+      "bytes": 148
+    },
+    {
+      "file": "logs/TEST-02-frontend-verify-pr5.log",
+      "sha256": "27be87e2f0195071c9f957549ac18401a37c568469144482de5c2f26f9a97033",
+      "bytes": 610
+    },
+    {
+      "file": "logs/TEST-02-frontend-build-pr5.log",
+      "sha256": "ea95f2210f777ccecb809d730ad5e9ef49a036d7f757b34a9d1d471b2c660bb9",
+      "bytes": 971
+    },
+    {
+      "file": "logs/TEST-03-coverage-pr5.log",
+      "sha256": "34808cf595c1873875aa77b4af95af711df369406d75864939596dd38ea367f9",
+      "bytes": 137671
+    },
+    {
+      "file": "logs/ENG-09-media-review-pr5.log",
+      "sha256": "e5eccfce0163e648b4efb9bd3107ad5f2f13f1ae957f0001f69dcaa42d569df9",
+      "bytes": 9175
+    }
+  ],
+  "backend": {
+    "reportedTotal": 195,
+    "executedPassed": 189,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 6,
+    "platformSkipReason": "POSIX file permission assumptions on Windows; 2+4 Metrics tests"
+  },
+  "frontend": {
+    "testFiles": 7,
+    "testsPassed": 47,
+    "typecheck": "passed",
+    "build": "passed",
+    "precondition": "generate:api executed locally; generated diff not included"
+  },
+  "coverage": {
+    "counterSource": "TEST-03-coverage.png visible Total row; XML/CSV not supplied",
+    "missed": 169,
+    "total": 2212,
+    "coveredDerived": 2043,
+    "linePercentDerived": 92.36,
+    "gate": "passed in original log",
+    "reportedCountersNotUsed": {
+      "covered": 2044,
+      "total": 2213
+    },
+    "note": "输入manifest/说明与实际截图差1行，采用原图可见计数，不修改截图。"
+  },
+  "mediaIntegration": {
+    "passed": 12,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "scope": "H2/Spring MockMvc integration tests; not live HTTP A/B screenshots"
+  },
+  "changes": "仅主体裁切与PNG保存；不更改源码、日志、数据、结果或测试状态；旧批次证据保留。"
+}

@@ -19,8 +19,11 @@
 |---|---|---|
 | 接口契约 | 95 个操作 / 176 个 schema | [`contracts/openapi.yaml`](contracts/openapi.yaml)，人工维护，前端类型由其生成 |
 | 数据库 | 43 张业务表 · 13 个 Flyway 迁移 | MySQL 8.4.11，[`database/migrations`](database/migrations) V001–V013 |
-| 后端测试 | 195 项通过（0 失败 / 错误 / 跳过） | JaCoCo 行覆盖 94.72%（2046/2160），分支覆盖 69.41%，见[测试报告](docs/formal/测试报告.md) |
-| 前端测试 | 44 项通过，含类型检查、生成漂移检查、生产构建 | Vitest 5.0.5 |
+| 后端测试（v0.3.1 历史） | 195 项通过（0 失败 / 错误 / 跳过） | 历史 JaCoCo 行覆盖 94.72%（2046/2160），分支覆盖 69.41%，见[测试报告](docs/formal/测试报告.md) |
+| 前端测试（v0.3.1 历史） | 44 项通过，含类型检查、生成漂移检查、生产构建 | Vitest 5.0.5，历史结果 |
+| Windows 后端复现（2026-10-22，成员 C） | 195 项总数；189 项执行通过、6 项 POSIX 权限测试跳过，0 失败 / 错误 | Windows + Java 21 + H2；原始日志见[最终证据](docs/evidence/member-c-final-20261023/README.md) |
+| Windows 前端复现（2026-10-22，成员 C） | 7 个测试文件、47 项通过，类型检查和生产构建成功 | 以成员自述的 `7a7439c` 为基础，先本地执行 `generate:api`；生成文件未提交，见[复现记录](docs/formal/测试报告.md#31-成员c最终windows复现记录) |
+| Windows 后端行覆盖率（2026-10-22，成员 C） | 2043/2212，92.36% | 从原生 JaCoCo 图的 169 行未覆盖 / 2212 行总数推导；原始日志记录覆盖率门禁通过，见[最终证据](docs/evidence/member-c-final-20261023/README.md) |
 | 真实浏览器复验 | 七角色 70 个响应 · 四个页面三种宽度共 12 张截图 | Playwright 1.62.1，schema / JS / 缺图 / 外溢均为 0，见 [`docs/evidence/review-state-v031`](docs/evidence/review-state-v031) |
 | 监控告警 | 8 条规则；宕机与退款 DEAD 告警实测 FIRING → INACTIVE | Prometheus 3.15.0，见 [`docs/evidence/monitoring-v030`](docs/evidence/monitoring-v030) |
 | 种子数据 | 7 个角色账号 · 40 个商品 · 45 个 SKU · 136 个批次 | 合成数据，见 [`database/seed`](database/seed) |
@@ -119,7 +122,7 @@
 
 **已交付输入**：8 个分类、40 个商品 / 45 个 SKU 及批次数据与商品图片、12 张业务流程图、接口文档草案、FEFO / 临期 / 称重业务思路。基线保留其业务编码与业务主线，清理库存冲突与过期种子后重建契约、状态机与种子数据。
 
-**当前与后续**：验收证据采集（源码、测试、监控与异常）；已在 Windows 环境复现并反馈后端测试问题，促成 [PR #5](https://github.com/gorneynienhuis-lang/freshmart-enterprise/pull/5)（依赖 POSIX 文件权限的测试在 Windows 下自动跳过、修正时钟精度测试）；业务流程图与状态机对齐。
+**当前与后续**：已提交 2026-10-22 最终测试素材与原始日志，包含 Windows 后端复现、前端验证与构建、覆盖率和媒体权限集成测试；此前反馈促成 [PR #5](https://github.com/gorneynienhuis-lang/freshmart-enterprise/pull/5)（依赖 POSIX 文件权限的测试在 Windows 下自动跳过、修正时钟精度测试）。实时 Redis、Prometheus、媒体 A/B 与恢复演练未执行项仍单列，详见[最终证据](docs/evidence/member-c-final-20261023/README.md)；业务流程图与状态机对齐。
 
 ### 验收证据采集分工
 
@@ -132,7 +135,7 @@
 | MEMBER C | 源码、测试、监控与异常 | ENG-03 – ENG-09 · TEST-01 – TEST-03 · TEST-06 – TEST-08 · OPS-01 – OPS-08 |
 | MEMBER D | GitHub 与 Railway | ENG-01 · ENG-02 · GH-03 – GH-06 |
 
-截图原则：保留地址栏；密码、手机号、Cookie、Token、密钥与个人信息一律打码；没有真实结果时截取代码 / 配置 / 未执行状态，文件名加 `-NOT-RUN`，不以示例数据冒充实测。
+截图原则：保留地址栏；密码、Cookie、Token、密钥等真实凭据与真实个人信息不公开，合成手机号、验证码可保留；没有真实结果时截取代码 / 配置 / 未执行状态，文件名加 `-NOT-RUN`，不以示例数据冒充实测。
 
 ### 后续交付工作包
 
@@ -140,7 +143,7 @@
 |---|---|---|---|---|
 | WP-01 | 用户端页面与业务闭环截图 | A | 清单规定的文件齐全，地址栏可见，敏感信息已打码 | 已布置 |
 | WP-02 | 角色权限与越权拦截截图 | B | 每个岗位一张；401 / 403 / 404 各至少一张 | 已布置 |
-| WP-03 | 源码、测试、监控与异常截图 | C | 未执行项以 `-NOT-RUN` 标注；与测试报告的状态一致 | 已布置，已反馈 Windows 测试问题 |
+| WP-03 | 源码、测试、监控与异常截图 | C | 未执行项以 `-NOT-RUN` 标注；与测试报告的状态一致 | 已提交最终测试素材；实时未执行项保留标注 |
 | WP-04 | 需求文档定稿（DEL-02） | B | 含用例图、业务流程图、领域模型、ER 图、API 清单、可验证非功能需求；FR-01 – FR-14 可追踪 | 计划中 |
 | WP-05 | 业务流程图与状态机对齐 | C | 12 张流程图与 [状态模型](contracts/state-models.md) 一致；商品数据与种子（40 商品 / 45 SKU）对账无冲突 | 计划中 |
 | WP-06 | 需求 → 接口 → 用例 → 证据追踪矩阵（测试报告附录） | B | 覆盖 FR-01 – FR-14；无证据的条目写 NOT_RUN | 计划中 |
@@ -287,8 +290,10 @@ flowchart TD
 | 健康检查与监控告警 | Actuator liveness / readiness；业务指标覆盖 outbox 积压 / DEAD、退款失败、库存负值与守恒违规；独立只读抓取凭据；8 条告警规则；实测宕机与退款 DEAD 告警 FIRING → INACTIVE，17 张原生界面图 | 已验证（本机） | [`monitoring-v030`](docs/evidence/monitoring-v030) · [`deploy/monitoring`](deploy/monitoring) |
 | 备份恢复 | 停写一致性 bundle（SQL + 媒体 + manifest + HMAC），恢复到全新隔离 schema 与端口并核对逐文件摘要；升级前先做一致备份 | 已验证（本机） | [备份恢复](deploy/备份恢复.md) · [`restore-sessions-v030`](docs/evidence/restore-sessions-v030) |
 | Git 工作流 | 功能分支 → PR → 合并 `main`（#1 – #5）；发布标签 `demo/v0.2.0` … `demo/v0.3.2-*`；提交只列明确文件 | 已实施 | `git log` · `git tag` |
-| 测试体系 | 后端 195 项（23 个测试类；H2 MySQL 模式 + 真实 MySQL 业务链）、前端 44 项、运行脚本与监控 79 项、浏览器七角色 70 响应 | 已验证 | [测试报告 §3](docs/formal/测试报告.md) |
-| 覆盖率 | 后端 JaCoCo 行 94.72% / 分支 69.41%；前端 Node 行覆盖 10.61%（UI 模块保留分母，浏览器 E2E 未并入，属已知偏低） | 已验证 | [CODEX-020](collab/codex/CODEX-020.md) |
+| 测试体系（历史） | v0.3.1 后端 195 项（23 个测试类；H2 MySQL 模式 + 真实 MySQL 业务链）、前端 44 项、运行脚本与监控 79 项、浏览器七角色 70 响应 | 已验证（历史） | [测试报告 §3](docs/formal/测试报告.md) |
+| Windows 复现 | 2026-10-22 成员 C：后端 195 项总数、189 项执行通过、6 项 POSIX 测试跳过；前端先本地生成 API 类型后 47 项通过与构建成功 | 已验证（成员复现） | [复现记录](docs/formal/测试报告.md#31-成员c最终windows复现记录) |
+| 覆盖率（历史） | v0.3.1 后端 JaCoCo 行 94.72% / 分支 69.41%；前端 Node 行覆盖 10.61%（UI 模块保留分母，浏览器 E2E 未并入，属已知偏低） | 已验证（历史） | [CODEX-020](collab/codex/CODEX-020.md) |
+| Windows 后端覆盖率 | 2026-10-22 JaCoCo 图：2043/2212 行，92.36%；原始日志门禁通过 | 已验证（成员复现） | [最终证据](docs/evidence/member-c-final-20261023/README.md) |
 | 契约与规范 | `openapi.yaml` 为唯一契约；前端类型由其生成并做漂移检查；`validate-contract.mjs` 校验结构与示例；TypeScript 类型检查 | 已验证 | [`contracts/`](contracts) |
 | CI/CD | 工作流模板与源副本验证驱动（固定 action commit SHA、最小权限）；静态检查与 5 项保护测试通过；**尚未激活** GitHub Actions | 已准备 | [CI 计划](docs/ci-plan.md) · [`deploy/ci`](deploy/ci) |
 | 容器化与配置分离 | 三个 Dockerfile + Compose（私有网络、密钥文件、命名卷）；Spring profiles（demo / showcase）与环境变量；密钥与运行数据位于 Git 忽略目录；prod 配置禁止沙箱支付 | 已准备 | [`deploy/`](deploy) · `ShowcaseConfigurationTest` |
@@ -299,9 +304,12 @@ flowchart TD
 
 | 层次 | 工具 | 结果 | 证据 |
 |---|---|---|---|
-| 后端单元与集成 | JUnit · Spring Boot Test · H2（MySQL 模式）· 真实 MySQL 业务链 | 195 项通过，0 失败 / 错误 / 跳过 | [测试报告 §3](docs/formal/测试报告.md) |
-| 后端覆盖率 | JaCoCo 0.8.14 | 行 94.72%（2046/2160）· 分支 69.41%，无类 / 包排除，门槛 60% 通过 | [CODEX-020](collab/codex/CODEX-020.md) |
-| 前端 | Vitest 5.0.5 · tsc · 生成漂移检查 · Vite 构建 | 44 项通过；单包 655.49 KB（gzip 167.59 KB）待分包优化 | [CODEX-020](collab/codex/CODEX-020.md) |
+| 后端单元与集成（v0.3.1 历史） | JUnit · Spring Boot Test · H2（MySQL 模式）· 真实 MySQL 业务链 | 195 项通过，0 失败 / 错误 / 跳过 | [测试报告 §3](docs/formal/测试报告.md) |
+| 后端覆盖率（v0.3.1 历史） | JaCoCo 0.8.14 | 行 94.72%（2046/2160）· 分支 69.41%，无类 / 包排除，门槛 60% 通过 | [CODEX-020](collab/codex/CODEX-020.md) |
+| 前端（v0.3.1 历史） | Vitest 5.0.5 · tsc · 生成漂移检查 · Vite 构建 | 44 项通过；单包 655.49 KB（gzip 167.59 KB）待分包优化 | [CODEX-020](collab/codex/CODEX-020.md) |
+| Windows 后端复现（2026-10-22） | Java 21 · H2 · JUnit | 195 项总数，189 项执行通过、6 项 POSIX 测试跳过，0 失败 / 错误；媒体权限独立集成测试 12/12 通过 | [成员 C 最终证据](docs/evidence/member-c-final-20261023/README.md) |
+| Windows 前端复现（2026-10-22） | 本地 `generate:api` 后 verify + build | 7 文件、47 项通过，类型检查及生产构建成功；不视为干净 checkout 原样通过 | [复现记录](docs/formal/测试报告.md#31-成员c最终windows复现记录) |
+| Windows 后端覆盖率（2026-10-22） | 原生 JaCoCo 图 + 门禁日志 | 图中 169 行未覆盖 / 2212 行总数，推导 2043/2212=92.36%；门禁通过 | [成员 C 最终证据](docs/evidence/member-c-final-20261023/README.md) |
 | 浏览器复验 | Playwright 1.62.1（Chromium，1440 / 1024 / 390） | 七角色 70 响应，四页面三宽 12 图，缺陷 0 | [`review-state-v031`](docs/evidence/review-state-v031) |
 | 运行脚本 | unittest | 79 项通过（75 + 监控 4）；CI 保护 5 项单列 | [CODEX-020](collab/codex/CODEX-020.md) |
 | 故障注入 | 独立 MySQL 库 | 退款瞬时故障耗尽、明确拒绝、渠道成功后丢回执、原退款号人工恢复，98 响应通过链 | [`refund-recovery-v022`](docs/evidence/refund-recovery-v022) |
