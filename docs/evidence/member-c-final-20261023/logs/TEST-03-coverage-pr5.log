@@ -1,0 +1,935 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.freshmart:fresh-mall-backend >------------------
+[INFO] Building fresh-mall backend 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.14:prepare-agent (coverage-agent) @ fresh-mall-backend ---
+[INFO] argLine set to -javaagent:C:\\Users\\24932\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.14\\org.jacoco.agent-0.8.14-runtime.jar=destfile=C:\\Users\\24932\\Desktop\\freshmart-enterprise-github\\backend\\target\\jacoco.exec,append=false
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ fresh-mall-backend ---
+[INFO] Copying 45 resources from src\main\resources to target\classes
+[INFO] Copying 13 resources from ..\database\migrations to target\classes\db\migration
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ fresh-mall-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ fresh-mall-backend ---
+[INFO] Copying 4 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ fresh-mall-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ fresh-mall-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.freshmart.aftersale.AfterSaleIntegrationTest
+23:10:52.639 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.freshmart.aftersale.AfterSaleIntegrationTest]: AfterSaleIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:10:52.828 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.aftersale.AfterSaleIntegrationTest
+23:10:52.955 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.freshmart.aftersale.AfterSaleIntegrationTest]: AfterSaleIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:10:52.961 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.aftersale.AfterSaleIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:10:53.620+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.aftersale.AfterSaleIntegrationTest   : Starting AfterSaleIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:10:53.639+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.aftersale.AfterSaleIntegrationTest   : The following 1 profile is active: "test"
+2026-10-22T23:10:55.752+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T23:10:56.120+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:aftersale user=SA
+2026-10-22T23:10:56.123+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T23:10:56.141+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:aftersale (H2 2.4)
+2026-10-22T23:10:56.211+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:10:56.252+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:10:56.257+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.023s)
+2026-10-22T23:10:56.268+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:10:56.301+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:10:56.312+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:10:56.359+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:10:56.372+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:10:56.403+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:10:56.428+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:10:56.439+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:10:56.447+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:10:56.463+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:10:56.479+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:10:56.490+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:10:56.498+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:10:56.502+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:10:56.510+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:10:56.527+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.144s)
+2026-10-22T23:10:58.779+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:10:58.780+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:10:58.785+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:10:58.799+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 18 ms
+2026-10-22T23:10:58.878+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.aftersale.AfterSaleIntegrationTest   : Started AfterSaleIntegrationTest in 5.844 seconds (process running for 7.646)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\24932\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.11\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.77 s -- in com.freshmart.aftersale.AfterSaleIntegrationTest
+[INFO] Running com.freshmart.cache.PublicCategoryCacheTest
+2026-10-22T23:11:09.785+08:00  WARN 17516 --- [fresh-mall] [           main] c.freshmart.cache.PublicCategoryCache    : Optional category cache unavailable; using database type=RedisConnectionFailureException
+2026-10-22T23:11:09.919+08:00  WARN 17516 --- [fresh-mall] [           main] c.freshmart.cache.PublicCategoryCache    : Optional category cache unavailable; using database type=RedisConnectionFailureException
+2026-10-22T23:11:09.926+08:00  WARN 17516 --- [fresh-mall] [           main] c.freshmart.cache.PublicCategoryCache    : Optional category cache unavailable; using database type=RedisConnectionFailureException
+[INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.818 s -- in com.freshmart.cache.PublicCategoryCacheTest
+[INFO] Running com.freshmart.catalog.CatalogIntegrationTest
+2026-10-22T23:11:09.940+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.catalog.CatalogIntegrationTest]: CatalogIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:09.982+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.catalog.CatalogIntegrationTest
+2026-10-22T23:11:09.985+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.catalog.CatalogIntegrationTest]: CatalogIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:09.989+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.catalog.CatalogIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:10.068+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.catalog.CatalogIntegrationTest       : Starting CatalogIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:10.068+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.catalog.CatalogIntegrationTest       : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T23:11:10.970+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2026-10-22T23:11:10.972+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection conn4: url=jdbc:h2:mem:catalog user=SA
+2026-10-22T23:11:10.972+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2026-10-22T23:11:10.973+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:catalog (H2 2.4)
+2026-10-22T23:11:10.980+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:11.015+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:11.016+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.032s)
+2026-10-22T23:11:11.018+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:11.028+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:11.039+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:11.070+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:11.083+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:11.112+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:11.136+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:11.147+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:11.155+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:11.176+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:11.191+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:11.203+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:11.214+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:11.217+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:11.226+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:11.237+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.136s)
+2026-10-22T23:11:11.925+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:11.925+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:11.929+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:11.934+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 9 ms
+2026-10-22T23:11:11.956+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.catalog.CatalogIntegrationTest       : Started CatalogIntegrationTest in 1.943 seconds (process running for 20.726)
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.376 s -- in com.freshmart.catalog.CatalogIntegrationTest
+[INFO] Running com.freshmart.checkout.CheckoutIntegrationTest
+2026-10-22T23:11:12.313+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.checkout.CheckoutIntegrationTest]: CheckoutIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:12.334+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.checkout.CheckoutIntegrationTest
+2026-10-22T23:11:12.336+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.checkout.CheckoutIntegrationTest]: CheckoutIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:12.338+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.checkout.CheckoutIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:12.400+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.checkout.CheckoutIntegrationTest     : Starting CheckoutIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:12.401+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.checkout.CheckoutIntegrationTest     : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T23:11:12.699+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2026-10-22T23:11:12.702+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection conn8: url=jdbc:h2:mem:checkout user=SA
+2026-10-22T23:11:12.702+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2026-10-22T23:11:12.703+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:checkout (H2 2.4)
+2026-10-22T23:11:12.708+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:12.716+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:12.716+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.005s)
+2026-10-22T23:11:12.716+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:12.720+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:12.724+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:12.734+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:12.741+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:12.752+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:12.769+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:12.780+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:12.786+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:12.795+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:12.804+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:12.815+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:12.822+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:12.825+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:12.830+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:12.836+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.066s)
+2026-10-22T23:11:13.223+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:13.223+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:13.227+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:13.232+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 9 ms
+2026-10-22T23:11:13.246+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.checkout.CheckoutIntegrationTest     : Started CheckoutIntegrationTest in 0.904 seconds (process running for 22.016)
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.526 s -- in com.freshmart.checkout.CheckoutIntegrationTest
+[INFO] Running com.freshmart.command.IdempotencyServiceTest
+2026-10-22T23:11:15.893+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2026-10-22T23:11:15.896+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection conn11: url=jdbc:h2:mem:commands user=
+2026-10-22T23:11:15.896+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.096 s -- in com.freshmart.command.IdempotencyServiceTest
+[INFO] Running com.freshmart.commerce.CommerceIntegrationTest
+2026-10-22T23:11:15.939+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.commerce.CommerceIntegrationTest]: CommerceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:15.954+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.CommerceIntegrationTest
+2026-10-22T23:11:15.957+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.commerce.CommerceIntegrationTest]: CommerceIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:15.958+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.CommerceIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:15.985+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.commerce.CommerceIntegrationTest     : Starting CommerceIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:15.986+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.commerce.CommerceIntegrationTest     : The following 1 profile is active: "test"
+2026-10-22T23:11:16.243+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2026-10-22T23:11:16.244+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection conn15: url=jdbc:h2:mem:commerce user=SA
+2026-10-22T23:11:16.244+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2026-10-22T23:11:16.246+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:commerce (H2 2.4)
+2026-10-22T23:11:16.251+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:16.257+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:16.257+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.004s)
+2026-10-22T23:11:16.258+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:16.262+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:16.264+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:16.270+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:16.273+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:16.281+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:16.287+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:16.292+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:16.294+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:16.301+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:16.305+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:16.310+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:16.316+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:16.318+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:16.323+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:16.328+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.036s)
+2026-10-22T23:11:16.620+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:16.621+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:16.624+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:16.626+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2026-10-22T23:11:16.635+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.commerce.CommerceIntegrationTest     : Started CommerceIntegrationTest in 0.675 seconds (process running for 25.406)
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.164 s -- in com.freshmart.commerce.CommerceIntegrationTest
+[INFO] Running com.freshmart.commerce.FulfillmentExtensionsIntegrationTest
+2026-10-22T23:11:21.105+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.commerce.FulfillmentExtensionsIntegrationTest]: FulfillmentExtensionsIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:21.107+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.FulfillmentExtensionsIntegrationTest
+2026-10-22T23:11:21.108+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.commerce.FulfillmentExtensionsIntegrationTest]: FulfillmentExtensionsIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:21.108+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.FulfillmentExtensionsIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:21.137+08:00  INFO 17516 --- [fresh-mall] [           main] f.c.FulfillmentExtensionsIntegrationTest : Starting FulfillmentExtensionsIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:21.137+08:00  INFO 17516 --- [fresh-mall] [           main] f.c.FulfillmentExtensionsIntegrationTest : The following 1 profile is active: "test"
+2026-10-22T23:11:21.381+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2026-10-22T23:11:21.382+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection conn18: url=jdbc:h2:mem:fulfillment user=SA
+2026-10-22T23:11:21.382+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2026-10-22T23:11:21.382+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:fulfillment (H2 2.4)
+2026-10-22T23:11:21.388+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:21.395+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:21.395+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.004s)
+2026-10-22T23:11:21.396+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:21.399+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:21.403+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:21.408+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:21.410+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:21.419+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:21.426+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:21.429+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:21.433+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:21.439+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:21.445+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:21.452+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:21.457+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:21.459+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:21.461+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:21.467+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.034s)
+2026-10-22T23:11:21.738+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:21.738+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:21.740+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:21.742+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2026-10-22T23:11:21.752+08:00  INFO 17516 --- [fresh-mall] [           main] f.c.FulfillmentExtensionsIntegrationTest : Started FulfillmentExtensionsIntegrationTest in 0.638 seconds (process running for 30.523)
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 7.492 s -- in com.freshmart.commerce.FulfillmentExtensionsIntegrationTest
+[INFO] Running com.freshmart.commerce.RefundRecoveryIntegrationTest
+2026-10-22T23:11:28.599+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.RefundRecoveryIntegrationTest
+2026-10-22T23:11:28.601+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.commerce.RefundRecoveryIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:28.622+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.c.RefundRecoveryIntegrationTest      : Starting RefundRecoveryIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:28.622+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.c.RefundRecoveryIntegrationTest      : The following 1 profile is active: "test"
+2026-10-22T23:11:28.844+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2026-10-22T23:11:28.845+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection conn20: url=jdbc:h2:mem:refundrecovery user=SA
+2026-10-22T23:11:28.845+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2026-10-22T23:11:28.846+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:refundrecovery (H2 2.4)
+2026-10-22T23:11:28.850+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:28.856+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:28.856+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.004s)
+2026-10-22T23:11:28.856+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:28.858+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:28.861+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:28.865+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:28.869+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:28.876+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:28.881+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:28.884+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:28.886+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:28.890+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:28.893+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:28.899+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:28.903+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:28.904+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:28.906+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:28.910+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.026s)
+2026-10-22T23:11:29.170+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:29.170+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:29.170+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:29.173+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-10-22T23:11:29.183+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.c.RefundRecoveryIntegrationTest      : Started RefundRecoveryIntegrationTest in 0.58 seconds (process running for 37.956)
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 3.637 s -- in com.freshmart.commerce.RefundRecoveryIntegrationTest
+[INFO] Running com.freshmart.common.ShowcaseConfigurationTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.freshmart.common.ShowcaseConfigurationTest
+[INFO] Running com.freshmart.domain.InventoryDomainTest
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.freshmart.domain.InventoryDomainTest
+[INFO] Running com.freshmart.domain.OrderLifecycleTest
+[INFO] Tests run: 17, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in com.freshmart.domain.OrderLifecycleTest
+[INFO] Running com.freshmart.domain.PricingCalculatorTest
+[INFO] Tests run: 13, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.015 s -- in com.freshmart.domain.PricingCalculatorTest
+[INFO] Running com.freshmart.finance.FinanceAuditIntegrationTest
+2026-10-22T23:11:32.297+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.finance.FinanceAuditIntegrationTest]: FinanceAuditIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:32.306+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.finance.FinanceAuditIntegrationTest
+2026-10-22T23:11:32.306+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.finance.FinanceAuditIntegrationTest]: FinanceAuditIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:32.307+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.finance.FinanceAuditIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:32.325+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Starting FinanceAuditIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:32.325+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : The following 1 profile is active: "test"
+2026-10-22T23:11:32.511+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2026-10-22T23:11:32.513+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-8 - Added connection conn22: url=jdbc:h2:mem:financeaudit_053d587a-92f9-4b59-b164-ce88652a08c0 user=SA
+2026-10-22T23:11:32.513+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2026-10-22T23:11:32.513+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:financeaudit_053d587a-92f9-4b59-b164-ce88652a08c0 (H2 2.4)
+2026-10-22T23:11:32.516+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:32.521+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:32.522+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:11:32.522+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:32.525+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:32.527+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:32.531+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:32.533+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:32.539+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:32.543+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:32.545+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:32.547+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:32.553+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:32.557+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:32.560+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:32.564+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:32.572+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:32.577+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:32.583+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.028s)
+2026-10-22T23:11:32.860+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:32.860+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:32.861+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:32.863+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-10-22T23:11:32.872+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Started FinanceAuditIntegrationTest in 0.563 seconds (process running for 41.645)
+2026-10-22T23:11:33.303+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2026-10-22T23:11:33.306+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:33.325+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Starting FinanceAuditIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:33.325+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : The following 1 profile is active: "test"
+2026-10-22T23:11:33.507+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Starting...
+2026-10-22T23:11:33.508+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-9 - Added connection conn24: url=jdbc:h2:mem:financeaudit_b24af90a-caab-4a1a-a563-4621a56d7f9e user=SA
+2026-10-22T23:11:33.508+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Start completed.
+2026-10-22T23:11:33.508+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:financeaudit_b24af90a-caab-4a1a-a563-4621a56d7f9e (H2 2.4)
+2026-10-22T23:11:33.510+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:33.516+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:33.516+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:11:33.516+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:33.519+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:33.527+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:33.534+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:33.538+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:33.547+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:33.552+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:33.554+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:33.558+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:33.560+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:33.564+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:33.567+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:33.571+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:33.573+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:33.574+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:33.577+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.023s)
+2026-10-22T23:11:33.842+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:33.842+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:33.843+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:33.845+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-10-22T23:11:33.853+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Started FinanceAuditIntegrationTest in 0.544 seconds (process running for 42.627)
+2026-10-22T23:11:34.247+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown initiated...
+2026-10-22T23:11:34.247+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:34.264+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Starting FinanceAuditIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:34.264+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : The following 1 profile is active: "test"
+2026-10-22T23:11:34.472+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Starting...
+2026-10-22T23:11:34.473+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-10 - Added connection conn26: url=jdbc:h2:mem:financeaudit_6cefb15a-b289-49a1-a0e4-68766772a24d user=SA
+2026-10-22T23:11:34.473+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Start completed.
+2026-10-22T23:11:34.473+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:financeaudit_6cefb15a-b289-49a1-a0e4-68766772a24d (H2 2.4)
+2026-10-22T23:11:34.479+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:34.483+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:34.484+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:11:34.484+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:34.486+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:34.489+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:34.494+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:34.498+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:34.504+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:34.508+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:34.510+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:34.511+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:34.514+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:34.517+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:34.521+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:34.523+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:34.524+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:34.525+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:34.528+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.018s)
+2026-10-22T23:11:34.795+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:34.795+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:34.797+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:34.799+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2026-10-22T23:11:34.807+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Started FinanceAuditIntegrationTest in 0.558 seconds (process running for 43.58)
+2026-10-22T23:11:35.214+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown initiated...
+2026-10-22T23:11:35.214+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:35.237+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Starting FinanceAuditIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:35.237+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : The following 1 profile is active: "test"
+2026-10-22T23:11:35.420+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Starting...
+2026-10-22T23:11:35.422+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-11 - Added connection conn28: url=jdbc:h2:mem:financeaudit_c3ea2686-fa80-406f-b8b5-4cf330cd0d87 user=SA
+2026-10-22T23:11:35.422+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Start completed.
+2026-10-22T23:11:35.422+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:financeaudit_c3ea2686-fa80-406f-b8b5-4cf330cd0d87 (H2 2.4)
+2026-10-22T23:11:35.425+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:35.430+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:35.430+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:11:35.430+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:35.432+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:35.435+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:35.439+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:35.441+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:35.446+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:35.450+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:35.452+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:35.456+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:35.460+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:35.464+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:35.467+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:35.471+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:35.472+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:35.474+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:35.477+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.019s)
+2026-10-22T23:11:35.734+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:35.734+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:35.736+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:35.738+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2026-10-22T23:11:35.748+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Started FinanceAuditIntegrationTest in 0.531 seconds (process running for 44.522)
+2026-10-22T23:11:36.267+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Shutdown initiated...
+2026-10-22T23:11:36.269+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:36.290+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Starting FinanceAuditIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:36.290+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : The following 1 profile is active: "test"
+2026-10-22T23:11:36.522+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Starting...
+2026-10-22T23:11:36.523+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-12 - Added connection conn30: url=jdbc:h2:mem:financeaudit_0f60cdfb-0763-4d5a-9301-909d8590b467 user=SA
+2026-10-22T23:11:36.523+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Start completed.
+2026-10-22T23:11:36.524+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:financeaudit_0f60cdfb-0763-4d5a-9301-909d8590b467 (H2 2.4)
+2026-10-22T23:11:36.527+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:36.538+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:36.538+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.009s)
+2026-10-22T23:11:36.539+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:36.542+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:36.545+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:36.549+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:36.551+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:36.557+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:36.563+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:36.567+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:36.569+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:36.572+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:36.575+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:36.578+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:36.582+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:36.584+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:36.587+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:36.589+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.018s)
+2026-10-22T23:11:36.851+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:36.851+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:36.852+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:36.855+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2026-10-22T23:11:36.864+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Started FinanceAuditIntegrationTest in 0.592 seconds (process running for 45.638)
+2026-10-22T23:11:37.265+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown initiated...
+2026-10-22T23:11:37.266+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:37.287+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Starting FinanceAuditIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:37.288+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : The following 1 profile is active: "test"
+2026-10-22T23:11:37.482+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Starting...
+2026-10-22T23:11:37.485+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-13 - Added connection conn32: url=jdbc:h2:mem:financeaudit_c7d1f8a4-8ad5-45a7-a0f2-6a24f3c741ad user=SA
+2026-10-22T23:11:37.485+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Start completed.
+2026-10-22T23:11:37.485+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:financeaudit_c7d1f8a4-8ad5-45a7-a0f2-6a24f3c741ad (H2 2.4)
+2026-10-22T23:11:37.489+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:37.494+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:37.494+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:11:37.495+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:37.497+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:37.498+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:37.502+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:37.504+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:37.508+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:37.511+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:37.514+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:37.515+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:37.520+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:37.523+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:37.526+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:37.529+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:37.530+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:37.532+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:37.535+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.015s)
+2026-10-22T23:11:37.808+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:37.808+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:37.809+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:37.811+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-10-22T23:11:37.817+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Started FinanceAuditIntegrationTest in 0.548 seconds (process running for 46.592)
+2026-10-22T23:11:38.206+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Shutdown initiated...
+2026-10-22T23:11:38.206+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Shutdown completed.
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:38.224+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Starting FinanceAuditIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:38.224+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : The following 1 profile is active: "test"
+2026-10-22T23:11:38.491+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Starting...
+2026-10-22T23:11:38.494+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-14 - Added connection conn34: url=jdbc:h2:mem:financeaudit_2efd3073-85f0-4f01-b8ca-b9e291c398b6 user=SA
+2026-10-22T23:11:38.494+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Start completed.
+2026-10-22T23:11:38.494+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:financeaudit_2efd3073-85f0-4f01-b8ca-b9e291c398b6 (H2 2.4)
+2026-10-22T23:11:38.498+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:38.503+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:38.503+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.002s)
+2026-10-22T23:11:38.503+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:38.505+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:38.507+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:38.510+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:38.512+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:38.520+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:38.522+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:38.524+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:38.526+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:38.530+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:38.533+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:38.536+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:38.539+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:38.540+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:38.542+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:38.544+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.015s)
+2026-10-22T23:11:38.788+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:38.789+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:38.790+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:38.792+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-10-22T23:11:38.800+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.finance.FinanceAuditIntegrationTest  : Started FinanceAuditIntegrationTest in 0.591 seconds (process running for 47.574)
+2026-10-22T23:11:39.200+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Shutdown initiated...
+2026-10-22T23:11:39.200+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-14 - Shutdown completed.
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.906 s -- in com.freshmart.finance.FinanceAuditIntegrationTest
+[INFO] Running com.freshmart.identity.EmployeeIntegrationTest
+2026-10-22T23:11:39.203+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.identity.EmployeeIntegrationTest]: EmployeeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:39.224+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.EmployeeIntegrationTest
+2026-10-22T23:11:39.226+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.identity.EmployeeIntegrationTest]: EmployeeIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:39.227+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.EmployeeIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:39.244+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.identity.EmployeeIntegrationTest     : Starting EmployeeIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:39.244+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.identity.EmployeeIntegrationTest     : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T23:11:39.491+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Starting...
+2026-10-22T23:11:39.492+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-15 - Added connection conn36: url=jdbc:h2:mem:employees user=SA
+2026-10-22T23:11:39.492+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-15 - Start completed.
+2026-10-22T23:11:39.492+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:employees (H2 2.4)
+2026-10-22T23:11:39.496+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:39.505+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:39.505+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.008s)
+2026-10-22T23:11:39.506+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:39.507+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:39.509+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:39.523+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:39.527+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:39.535+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:39.543+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:39.547+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:39.550+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:39.563+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:39.570+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:39.573+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:39.577+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:39.578+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:39.581+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:39.584+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.036s)
+2026-10-22T23:11:39.829+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:39.829+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:39.831+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:39.832+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 3 ms
+2026-10-22T23:11:39.840+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.identity.EmployeeIntegrationTest     : Started EmployeeIntegrationTest in 0.612 seconds (process running for 48.614)
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.709 s -- in com.freshmart.identity.EmployeeIntegrationTest
+[INFO] Running com.freshmart.identity.IdentityIntegrationTest
+2026-10-22T23:11:43.914+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.identity.IdentityIntegrationTest]: IdentityIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:43.917+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.IdentityIntegrationTest
+2026-10-22T23:11:43.918+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.identity.IdentityIntegrationTest]: IdentityIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:43.920+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.IdentityIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:43.940+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.identity.IdentityIntegrationTest     : Starting IdentityIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:43.940+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.identity.IdentityIntegrationTest     : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T23:11:44.141+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-16 - Starting...
+2026-10-22T23:11:44.142+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-16 - Added connection conn39: url=jdbc:h2:mem:identity user=SA
+2026-10-22T23:11:44.142+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-16 - Start completed.
+2026-10-22T23:11:44.143+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:identity (H2 2.4)
+2026-10-22T23:11:44.146+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:44.152+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:44.153+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.005s)
+2026-10-22T23:11:44.153+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:44.156+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:44.158+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:44.163+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:44.166+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:44.171+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:44.175+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:44.179+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:44.183+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:44.187+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:44.191+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:44.196+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:44.201+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:44.202+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:44.205+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:44.207+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.021s)
+2026-10-22T23:11:44.469+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:44.469+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:44.470+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:44.473+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 4 ms
+2026-10-22T23:11:44.483+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.identity.IdentityIntegrationTest     : Started IdentityIntegrationTest in 0.56 seconds (process running for 53.258)
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.953 s -- in com.freshmart.identity.IdentityIntegrationTest
+[INFO] Running com.freshmart.identity.LoginThrottleIntegrationTest
+2026-10-22T23:11:46.868+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.LoginThrottleIntegrationTest
+2026-10-22T23:11:46.870+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.identity.LoginThrottleIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:46.894+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.i.LoginThrottleIntegrationTest       : Starting LoginThrottleIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:46.895+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.i.LoginThrottleIntegrationTest       : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T23:11:47.093+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-17 - Starting...
+2026-10-22T23:11:47.095+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-17 - Added connection conn42: url=jdbc:h2:mem:login-policy user=SA
+2026-10-22T23:11:47.095+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-17 - Start completed.
+2026-10-22T23:11:47.095+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:login-policy (H2 2.4)
+2026-10-22T23:11:47.099+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:47.102+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:47.102+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.002s)
+2026-10-22T23:11:47.102+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:47.104+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:47.105+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:47.111+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:47.116+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:47.122+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:47.129+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:47.132+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:47.137+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:47.141+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:47.145+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:47.147+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:47.151+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:47.153+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:47.158+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:47.161+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.028s)
+2026-10-22T23:11:47.435+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:47.435+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:47.435+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:47.437+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-10-22T23:11:47.448+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.i.LoginThrottleIntegrationTest       : Started LoginThrottleIntegrationTest in 0.575 seconds (process running for 56.224)
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.772 s -- in com.freshmart.identity.LoginThrottleIntegrationTest
+[INFO] Running com.freshmart.media.MediaReviewIntegrationTest
+2026-10-22T23:11:49.654+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.media.MediaReviewIntegrationTest
+2026-10-22T23:11:49.655+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.media.MediaReviewIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:49.678+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.media.MediaReviewIntegrationTest     : Starting MediaReviewIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:49.678+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.media.MediaReviewIntegrationTest     : The following 1 profile is active: "test"
+2026-10-22T23:11:49.881+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-18 - Starting...
+2026-10-22T23:11:49.883+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-18 - Added connection conn45: url=jdbc:h2:mem:mediaReview user=SA
+2026-10-22T23:11:49.883+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-18 - Start completed.
+2026-10-22T23:11:49.884+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:mediaReview (H2 2.4)
+2026-10-22T23:11:49.887+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:49.892+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:49.893+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:11:49.894+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:49.896+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:49.897+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:49.903+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:49.905+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:49.909+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:49.915+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:49.918+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:49.920+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:49.923+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:49.926+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:49.930+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:49.936+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:49.938+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:49.940+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:49.943+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.018s)
+2026-10-22T23:11:50.178+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:50.178+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:50.180+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:50.183+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2026-10-22T23:11:50.192+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.media.MediaReviewIntegrationTest     : Started MediaReviewIntegrationTest in 0.532 seconds (process running for 58.968)
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.259 s -- in com.freshmart.media.MediaReviewIntegrationTest
+[INFO] Running com.freshmart.observability.BusinessMetricsCollectorTest
+2026-10-22T23:11:57.985+08:00  WARN 17516 --- [fresh-mall] [           main] c.f.o.BusinessMetricsCollector           : Business metrics collection failed type=IllegalStateException
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.089 s -- in com.freshmart.observability.BusinessMetricsCollectorTest
+[INFO] Running com.freshmart.observability.BusinessMetricsMapperTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.027 s -- in com.freshmart.observability.BusinessMetricsMapperTest
+[INFO] Running com.freshmart.observability.MetricsScrapeAuthTest
+[WARNING] Tests run: 2, Failures: 0, Errors: 0, Skipped: 2, Time elapsed: 0.036 s -- in com.freshmart.observability.MetricsScrapeAuthTest
+[INFO] Running com.freshmart.observability.MetricsSecurityFilterTest
+[WARNING] Tests run: 4, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.016 s -- in com.freshmart.observability.MetricsSecurityFilterTest
+[INFO] Running com.freshmart.operations.OperationsIntegrationTest
+2026-10-22T23:11:58.073+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.operations.OperationsIntegrationTest]: OperationsIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:58.084+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.operations.OperationsIntegrationTest
+2026-10-22T23:11:58.085+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.operations.OperationsIntegrationTest]: OperationsIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:11:58.086+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.operations.OperationsIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:11:58.105+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.o.OperationsIntegrationTest          : Starting OperationsIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:11:58.105+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.o.OperationsIntegrationTest          : No active profile set, falling back to 1 default profile: "default"
+2026-10-22T23:11:58.291+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-19 - Starting...
+2026-10-22T23:11:58.292+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-19 - Added connection conn60: url=jdbc:h2:mem:operations user=SA
+2026-10-22T23:11:58.292+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-19 - Start completed.
+2026-10-22T23:11:58.292+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:operations (H2 2.4)
+2026-10-22T23:11:58.296+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:11:58.299+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:11:58.300+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:11:58.300+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:11:58.303+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:11:58.305+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:11:58.308+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:11:58.309+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:11:58.316+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:11:58.320+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:11:58.323+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:11:58.325+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:11:58.329+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:11:58.333+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:11:58.335+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:11:58.337+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:11:58.338+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:11:58.340+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:11:58.343+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.013s)
+2026-10-22T23:11:58.589+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:11:58.589+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:11:58.590+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:11:58.591+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-10-22T23:11:58.601+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.o.OperationsIntegrationTest          : Started OperationsIntegrationTest in 0.513 seconds (process running for 67.379)
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 10.06 s -- in com.freshmart.operations.OperationsIntegrationTest
+[INFO] Running com.freshmart.support.CancellationSupportIntegrationTest
+2026-10-22T23:12:08.140+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.support.CancellationSupportIntegrationTest]: CancellationSupportIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:12:08.150+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.support.CancellationSupportIntegrationTest
+2026-10-22T23:12:08.151+08:00  INFO 17516 --- [fresh-mall] [           main] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.freshmart.support.CancellationSupportIntegrationTest]: CancellationSupportIntegrationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+2026-10-22T23:12:08.152+08:00  INFO 17516 --- [fresh-mall] [           main] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.support.CancellationSupportIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:12:08.167+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.s.CancellationSupportIntegrationTest : Starting CancellationSupportIntegrationTest using Java 21.0.12.1 with PID 17516 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:12:08.167+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.s.CancellationSupportIntegrationTest : The following 1 profile is active: "test"
+2026-10-22T23:12:08.330+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-20 - Starting...
+2026-10-22T23:12:08.331+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-20 - Added connection conn62: url=jdbc:h2:mem:cancellation_support user=SA
+2026-10-22T23:12:08.331+08:00  INFO 17516 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-20 - Start completed.
+2026-10-22T23:12:08.331+08:00  INFO 17516 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:cancellation_support (H2 2.4)
+2026-10-22T23:12:08.335+08:00  WARN 17516 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:12:08.339+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:12:08.340+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.003s)
+2026-10-22T23:12:08.340+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:12:08.342+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:12:08.343+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:12:08.347+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:12:08.350+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:12:08.357+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:12:08.361+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:12:08.363+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:12:08.365+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:12:08.367+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:12:08.370+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:12:08.371+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:12:08.373+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:12:08.374+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:12:08.376+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:12:08.378+08:00  INFO 17516 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.015s)
+2026-10-22T23:12:08.625+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:12:08.625+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:12:08.626+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:12:08.627+08:00  INFO 17516 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 2 ms
+2026-10-22T23:12:08.634+08:00  INFO 17516 --- [fresh-mall] [           main] c.f.s.CancellationSupportIntegrationTest : Started CancellationSupportIntegrationTest in 0.48 seconds (process running for 77.413)
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.895 s -- in com.freshmart.support.CancellationSupportIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 195, Failures: 0, Errors: 0, Skipped: 6
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.5.1:jar (default-jar) @ fresh-mall-backend ---
+[INFO] Building jar: C:\Users\24932\Desktop\freshmart-enterprise-github\backend\target\fresh-mall-backend-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:4.1.1:repackage (repackage) @ fresh-mall-backend ---
+[INFO] Replacing main artifact C:\Users\24932\Desktop\freshmart-enterprise-github\backend\target\fresh-mall-backend-0.1.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to C:\Users\24932\Desktop\freshmart-enterprise-github\backend\target\fresh-mall-backend-0.1.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- jacoco:0.8.14:report (coverage-report) @ fresh-mall-backend ---
+[INFO] Loading execution data file C:\Users\24932\Desktop\freshmart-enterprise-github\backend\target\jacoco.exec
+[INFO] Analyzed bundle 'fresh-mall backend' with 248 classes
+[INFO] 
+[INFO] --- jacoco:0.8.14:check (coverage-check) @ fresh-mall-backend ---
+[INFO] Loading execution data file C:\Users\24932\Desktop\freshmart-enterprise-github\backend\target\jacoco.exec
+[INFO] Analyzed bundle 'fresh-mall-backend' with 248 classes
+[INFO] All coverage checks have been met.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:29 min
+[INFO] Finished at: 2026-10-22T23:12:18+08:00
+[INFO] ------------------------------------------------------------------------

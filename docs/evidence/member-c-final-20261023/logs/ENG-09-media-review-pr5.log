@@ -1,0 +1,87 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.freshmart:fresh-mall-backend >------------------
+[INFO] Building fresh-mall backend 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.5.0:resources (default-resources) @ fresh-mall-backend ---
+[INFO] Copying 45 resources from src\main\resources to target\classes
+[INFO] Copying 13 resources from ..\database\migrations to target\classes\db\migration
+[INFO] 
+[INFO] --- compiler:3.15.0:compile (default-compile) @ fresh-mall-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- resources:3.5.0:testResources (default-testResources) @ fresh-mall-backend ---
+[INFO] Copying 4 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.15.0:testCompile (default-testCompile) @ fresh-mall-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ fresh-mall-backend ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.freshmart.media.MediaReviewIntegrationTest
+23:10:19.701 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.media.MediaReviewIntegrationTest
+23:10:19.854 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.freshmart.FreshMartApplication for test class com.freshmart.media.MediaReviewIntegrationTest
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v4.1.1)
+
+2026-10-22T23:10:21.074+08:00  INFO 26840 --- [fresh-mall] [           main] c.f.media.MediaReviewIntegrationTest     : Starting MediaReviewIntegrationTest using Java 21.0.12.1 with PID 26840 (started by 24932 in C:\Users\24932\Desktop\freshmart-enterprise-github\backend)
+2026-10-22T23:10:21.076+08:00  INFO 26840 --- [fresh-mall] [           main] c.f.media.MediaReviewIntegrationTest     : The following 1 profile is active: "test"
+2026-10-22T23:10:23.096+08:00  INFO 26840 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-22T23:10:23.303+08:00  INFO 26840 --- [fresh-mall] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:mediaReview user=SA
+2026-10-22T23:10:23.305+08:00  INFO 26840 --- [fresh-mall] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-22T23:10:23.318+08:00  INFO 26840 --- [fresh-mall] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:h2:mem:mediaReview (H2 2.4)
+2026-10-22T23:10:23.362+08:00  WARN 26840 --- [fresh-mall] [           main] o.f.c.internal.database.base.Database    : Using H2 2.4.240 which is newer than the version Flyway has been verified with. The latest verified version of H2 is 2.3.232.
+2026-10-22T23:10:23.398+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history table "PUBLIC"."flyway_schema_history" does not exist yet
+2026-10-22T23:10:23.400+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbValidate     : Successfully validated 13 migrations (execution time 00:00.019s)
+2026-10-22T23:10:23.405+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table "PUBLIC"."flyway_schema_history" ...
+2026-10-22T23:10:23.441+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "PUBLIC": << Empty Schema >>
+2026-10-22T23:10:23.451+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "001 - identity catalog"
+2026-10-22T23:10:23.503+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "002 - command audit"
+2026-10-22T23:10:23.516+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "003 - checkout"
+2026-10-22T23:10:23.550+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "004 - commerce"
+2026-10-22T23:10:23.576+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "005 - aftersale"
+2026-10-22T23:10:23.586+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "006 - employee governance"
+2026-10-22T23:10:23.593+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "007 - operations inventory"
+2026-10-22T23:10:23.606+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "008 - fulfillment extensions"
+2026-10-22T23:10:23.618+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "009 - media reviews"
+2026-10-22T23:10:23.627+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "010 - audit reconciliation"
+2026-10-22T23:10:23.636+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "011 - legacy production time"
+2026-10-22T23:10:23.640+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "012 - cancellation support"
+2026-10-22T23:10:23.645+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Migrating schema "PUBLIC" to version "013 - refund recovery"
+2026-10-22T23:10:23.664+08:00  INFO 26840 --- [fresh-mall] [           main] o.f.core.internal.command.DbMigrate      : Successfully applied 13 migrations to schema "PUBLIC", now at version v013 (execution time 00:00.150s)
+2026-10-22T23:10:27.807+08:00  INFO 26840 --- [fresh-mall] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2026-10-22T23:10:27.808+08:00  INFO 26840 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2026-10-22T23:10:27.815+08:00  INFO 26840 --- [fresh-mall] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 3 endpoints beneath base path '/actuator'
+2026-10-22T23:10:27.827+08:00  INFO 26840 --- [fresh-mall] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 19 ms
+2026-10-22T23:10:27.917+08:00  INFO 26840 --- [fresh-mall] [           main] c.f.media.MediaReviewIntegrationTest     : Started MediaReviewIntegrationTest in 7.755 seconds (process running for 9.242)
+Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: https://javadoc.io/doc/org.mockito/mockito-core/latest/org.mockito/org/mockito/Mockito.html#0.3
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+WARNING: A Java agent has been loaded dynamically (C:\Users\24932\.m2\repository\net\bytebuddy\byte-buddy-agent\1.18.11\byte-buddy-agent-1.18.11.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.48 s -- in com.freshmart.media.MediaReviewIntegrationTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  21.155 s
+[INFO] Finished at: 2026-10-22T23:10:37+08:00
+[INFO] ------------------------------------------------------------------------

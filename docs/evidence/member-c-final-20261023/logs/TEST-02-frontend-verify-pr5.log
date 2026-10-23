@@ -1,0 +1,26 @@
+
+> fresh-mall-frontend@0.1.0 verify
+> npm run check:api && npm run typecheck && npm test
+
+
+> fresh-mall-frontend@0.1.0 check:api
+> node scripts/generate-api.mjs --check
+
+Verified 95 OpenAPI operations; implementation status remains unverified by this script.
+
+> fresh-mall-frontend@0.1.0 typecheck
+> tsc --noEmit
+
+
+> fresh-mall-frontend@0.1.0 test
+> vitest run
+
+
+ RUN  v5.0.5 C:/Users/24932/Desktop/freshmart-enterprise-github/frontend
+
+
+ Test Files  7 passed (7)
+      Tests  47 passed (47)
+   Start at  23:08:52
+   Duration  556ms (tests 40%, transform 38%, import 17%, worker 4%)
+

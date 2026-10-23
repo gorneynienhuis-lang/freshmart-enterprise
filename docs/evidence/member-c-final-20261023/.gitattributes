@@ -1,0 +1,2 @@
+# Preserve supplied Windows logs byte for byte.
+logs/*.log -text -whitespace
