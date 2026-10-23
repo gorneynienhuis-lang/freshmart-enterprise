@@ -1,0 +1,283 @@
+{
+  "target": "http://127.0.0.1:8080",
+  "kind": "rehearsal preflight, not full regression",
+  "responses": [
+    {
+      "role": "GUEST",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "status": 401,
+      "code": 1002,
+      "traceId": "d65027f2-f118-4b4b-b629-0e962e437b4f"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "code": 0,
+      "traceId": "37a400e8-6655-4a61-8b52-355e94860c34"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "code": 0,
+      "traceId": "763ff5dd-6bb5-41b8-8542-71f32b1f4ded"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/products?size=100",
+      "status": 200,
+      "code": 0,
+      "traceId": "edab3298-82a6-41f7-845e-93305ef8a1bc"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/addresses",
+      "status": 200,
+      "code": 0,
+      "traceId": "976b46c3-427c-4ef9-931e-0ec81be0074b"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/orders?size=100",
+      "status": 200,
+      "code": 0,
+      "traceId": "179f353a-ba18-4664-bfae-bd04c68c8a73"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "status": 403,
+      "code": 1003,
+      "traceId": "b8d6ecc5-c835-462c-bd93-70636e84464e"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "code": 0,
+      "traceId": "517b271c-b4c7-4f27-a3b0-990f9f72e1c8"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "code": 0,
+      "traceId": "ca75a740-dea6-4fe3-99e7-066d35c92dd6"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "status": 200,
+      "code": 0,
+      "traceId": "0fbc18c3-56eb-4fca-9459-495f58315ee0"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 403,
+      "code": 1003,
+      "traceId": "e0bed826-7cb3-4f9c-a29a-60b2f708aab2"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "code": 0,
+      "traceId": "1a1a4b73-1ccc-4556-98ba-53f81d271686"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "code": 0,
+      "traceId": "4e856465-9a35-421f-b66a-ae7d17c21aaf"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "status": 403,
+      "code": 1003,
+      "traceId": "2568bb31-35a9-48e7-8945-6639a1e340fd"
+    },
+    {
+      "role": "SERVICE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "code": 0,
+      "traceId": "2113fba5-5aa7-4076-9d8d-9d57b8599c24"
+    },
+    {
+      "role": "SERVICE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "code": 0,
+      "traceId": "bd08787b-68e9-45f4-b68d-9e3a504bb4a8"
+    },
+    {
+      "role": "FINANCE",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "code": 0,
+      "traceId": "1c2bbf73-6c5c-4b30-9963-12fdd5a85842"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "code": 0,
+      "traceId": "efad5ed1-d979-4657-8cc2-1099d4e39bb8"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "code": 0,
+      "traceId": "98cbe99b-2206-48be-af12-6d06b7653294"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "code": 0,
+      "traceId": "7bbf940f-2c44-46bd-8ae9-2d40acf103a4"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "status": 200,
+      "code": 0,
+      "traceId": "e78f3c35-274e-41ae-87dc-17be1b4a8fad"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "status": 200,
+      "code": 0,
+      "traceId": "ff7ac057-6028-40b6-aa91-1c0faad12428"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "status": 403,
+      "code": 1003,
+      "traceId": "2022b791-1035-47bb-a0b8-6cac0d0ff114"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 403,
+      "code": 1003,
+      "traceId": "e9bf54b5-ddf4-48e4-b1b6-a6a5c76fab8c"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 403,
+      "code": 1003,
+      "traceId": "4f2c9f09-8494-4a2c-9317-395254cc4fe1"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 403,
+      "code": 1003,
+      "traceId": "6f220423-0e25-488e-8744-ea790de00c38"
+    },
+    {
+      "role": "SERVICE",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 403,
+      "code": 1003,
+      "traceId": "4f86bb9e-9728-452e-b0f6-58dba5fd543e"
+    },
+    {
+      "role": "FINANCE",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 403,
+      "code": 1003,
+      "traceId": "76b42160-5585-43a4-a622-6d24a257ab44"
+    },
+    {
+      "role": "OPERATOR",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 403,
+      "code": 1003,
+      "traceId": "afec1c43-ca7f-4346-a942-bcb8416d5cf7"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "status": 403,
+      "code": 1003,
+      "traceId": "6a869d79-901d-479d-8016-7a3b5e163765"
+    }
+  ],
+  "roles": [
+    {
+      "role": "MEMBER",
+      "login": "PASS",
+      "mustChangePassword": false
+    },
+    {
+      "role": "PICKER",
+      "login": "PASS",
+      "mustChangePassword": false
+    },
+    {
+      "role": "COURIER",
+      "login": "PASS",
+      "mustChangePassword": false
+    },
+    {
+      "role": "SERVICE",
+      "login": "PASS",
+      "mustChangePassword": false
+    },
+    {
+      "role": "FINANCE",
+      "login": "PASS",
+      "mustChangePassword": false
+    },
+    {
+      "role": "OPERATOR",
+      "login": "PASS",
+      "mustChangePassword": false
+    },
+    {
+      "role": "ADMIN",
+      "login": "PASS",
+      "mustChangePassword": false
+    }
+  ]
+}

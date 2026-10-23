@@ -9,6 +9,7 @@
 | 在线演示（课程沙箱） | <https://freshmart-enterprise-production.up.railway.app/> |
 | 源码仓库 | <https://github.com/gorneynienhuis-lang/freshmart-enterprise> |
 | 三份正式文档（第一版） | [需求文档](docs/formal/企业级需求文档.md) · [设计文档](docs/formal/设计文档.md) · [测试报告](docs/formal/测试报告.md) |
+| 15分钟汇报录制 | [逐页与A—J操作指南](docs/recording/15分钟汇报录制指南.md) · [录制速查](docs/recording/录制速查.md) · [本次排练记录](docs/evidence/recording-rehearsal-20261024/README.md) |
 | 复现与使用 | [快速开始](#快速开始) · [本机运行](deploy/README.md) · [登录与后台使用](docs/登录与后台使用.md) |
 
 > 支付与退款为课程沙箱，不发生真实扣款；校园场景为课程设定，不代表获得学校运营授权；全部演示数据均为合成数据。

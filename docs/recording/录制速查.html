@@ -1,0 +1,93 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>录制速查</title><style>*{box-sizing:border-box}body{margin:0;color:#24272b;background:#f4f4f3;font:16px/1.85 -apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif}article{max-width:1160px;padding:46px 54px;margin:28px auto;background:#fff;border:1px solid #ddd;border-top:5px solid #aa1834;overflow-wrap:anywhere}h1{font-size:30px;line-height:1.5}h2{font-size:23px;border-top:1px solid #ddd;padding-top:24px;margin-top:36px;scroll-margin-top:20px}h3{font-size:19px;margin-top:26px}p{margin:12px 0}a{color:#871a30;text-underline-offset:3px}nav{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;border-bottom:1px solid #ddd;padding-bottom:14px}table{border-collapse:collapse;font-size:14px;width:100%;margin:20px 0}th,td{border:1px solid #d9d9d9;vertical-align:top;text-align:left;padding:10px 12px}th{background:#f4f4f4}pre{position:relative;padding:18px;background:#f4f4f4;border:1px solid #ddd;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;font-size:14px}code{font:13px/1.6 ui-monospace,monospace;background:#f1f1f1;padding:2px 4px}pre code{padding:0}button{cursor:pointer;font:inherit;border:1px solid #c8c8c8;background:#fff;padding:8px 15px;border-radius:4px}button.active{border-color:#aa1834;background:#aa1834;color:white}.copy{position:absolute;right:7px;top:7px;font-size:12px;padding:3px 9px}.tabs,.actions{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.caption{font-size:14px;color:#555}img{max-width:100%;height:auto;border:1px solid #ddd}figure{margin:20px 0}figcaption{font-size:14px;color:#555}.history{background:#f8f3ef;border-left:4px solid #ad5a28;padding:13px 18px}.section-list{background:#fafafa;border:1px solid #ddd;padding:16px 22px;margin:25px 0}.section-list ol{list-style:none;padding-left:0;margin-bottom:0}.panel{display:none}.panel.active{display:block}.pane-img{cursor:zoom-in}.tablewrap{overflow:auto}details{margin:15px 0}dialog{border:1px solid #999;max-width:96vw;max-height:95vh}dialog img{max-width:90vw;max-height:85vh;object-fit:contain}li{margin:6px 0}footer{border-top:1px solid #ddd;margin-top:30px;padding-top:20px;color:#666;font-size:13px}@media(max-width:760px){article{margin:0;padding:24px 18px;border-left:0;border-right:0}h1{font-size:25px}table{min-width:680px;font-size:13px}th,td{padding:8px}.section-list{padding:12px}}@media print{body{background:white;font-size:10pt}article{margin:0;padding:0;border:0;max-width:none}nav,.section-list,.copy,button,dialog{display:none}h1{font-size:22pt}h2{font-size:16pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt;min-width:0}tr{break-inside:avoid}th,td{padding:5px}pre{font-size:8pt}.panel{display:block!important}figure{break-inside:avoid}@page{size:A4;margin:15mm}}</style></head><body><article><nav><a href="开始阅读.html">录制指南</a><a href="演示证据台.html">演示证据台</a><a href="录制速查.html">录制速查</a><a href="http://localhost:5173/">本机商城</a></nav><h1>录制速查</h1>
+<p>目标 <strong>14:20，40秒余量</strong>。PPT原版保留，使用录制副本。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>段</th>
+<th>从哪一页切走</th>
+<th>回到哪一页</th>
+<th>画面</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A</td>
+<td>5</td>
+<td>6</td>
+<td>会员：首页、详情、购物车、结算、沙箱付款</td>
+</tr>
+<tr>
+<td>B</td>
+<td>7</td>
+<td>8</td>
+<td>同一订单：拣货、交接、签收、客服审核、财务退款、评价</td>
+</tr>
+<tr>
+<td>C</td>
+<td>9</td>
+<td>10</td>
+<td>会员工作台拒绝 + permissions真实401/403</td>
+</tr>
+<tr>
+<td>D</td>
+<td>11</td>
+<td>12</td>
+<td>throttle真实429，不使用七个现有账号故意输错</td>
+</tr>
+<tr>
+<td>E</td>
+<td>12</td>
+<td>13</td>
+<td>idempotency同单重放与409；自动取消辅助订单</td>
+</tr>
+<tr>
+<td>F</td>
+<td>18</td>
+<td>19</td>
+<td>演示证据台：历史退款恢复结果</td>
+</tr>
+<tr>
+<td>G</td>
+<td>19</td>
+<td>20</td>
+<td>另一张未付款单：取消前、原因、取消后</td>
+</tr>
+<tr>
+<td>东小锦</td>
+<td>22</td>
+<td>23</td>
+<td>真实模型或如实展示FAQ降级</td>
+</tr>
+<tr>
+<td>H</td>
+<td>23</td>
+<td>24</td>
+<td>status检查UP，转本机首页，不显示密码</td>
+</tr>
+<tr>
+<td>I</td>
+<td>26</td>
+<td>27</td>
+<td>演示证据台：历史监控UP、FIRING、恢复</td>
+</tr>
+<tr>
+<td>J</td>
+<td>27</td>
+<td>28</td>
+<td>公网HTTPS首页；有条件再展示Railway当前部署</td>
+</tr>
+</tbody></table></div>
+<h2>三句最容易忘的话</h2>
+<ul>
+<li>配送员ID填 <strong>demo-courier</strong>，不是手机号。</li>
+<li>品质售后勾订单行、上传本单图片、数量1、金额 <strong>1.00元</strong>，由不同客服与财务处理。</li>
+<li>订单A用于业务主链，订单B不付款留给取消；已完成的排练单不能倒回去。</li>
+</ul>
+<h2>终端固定位置</h2>
+<pre><code class="language-bash">cd &#39;/Users/djy/Desktop/实验四/fresh-mall&#39;
+python3 docs/recording/recording-assistant.py permissions
+python3 docs/recording/recording-assistant.py throttle
+python3 docs/recording/recording-assistant.py idempotency
+python3 docs/recording/recording-assistant.py status
+</code></pre>
+<p>录制时每次只运行所需的一行。首次启动看完整指南，不照抄PPT的Linux9091入口。历史结果回放要明确讲“此前演练记录”。</p>
+</article><script>document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.textContent='复制命令';b.className='copy';b.onclick=async()=>{const code=pre.querySelector('code');try{await navigator.clipboard.writeText(code.textContent);b.textContent='已复制'}catch{b.textContent='请手动选择复制'}};pre.append(b)})</script></body></html>

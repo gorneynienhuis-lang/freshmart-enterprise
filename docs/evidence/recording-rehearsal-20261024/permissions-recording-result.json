@@ -1,0 +1,159 @@
+{
+  "scene": "permissions",
+  "result": "PASS",
+  "responses": [
+    {
+      "role": "GUEST",
+      "method": "GET",
+      "path": "/api/v1/orders",
+      "http": 401,
+      "code": 1002,
+      "message": "需要重新登录",
+      "traceId": "cfff160e-6746-4e34-bd60-17952fa45e5c"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "2193f816-1eb7-45ec-95c1-decbcc4a41eb"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "21e02fdf-1d59-42fa-a4d0-5346a76e1dea"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/admin/pick-tasks",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "8538d452-be64-46fb-88d1-72359c079f42"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "d85565da-4514-4f24-81b6-d27176488b7c"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "fcec0bd0-abde-4875-8f79-5d14a0f5159c"
+    },
+    {
+      "role": "PICKER",
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "43c09927-49fd-48bd-8b26-393702aa0380"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "b781b177-f347-47a0-918c-a63d75ae7023"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "4b593675-845d-4e1b-8edd-51a8ea27c9fe"
+    },
+    {
+      "role": "COURIER",
+      "method": "GET",
+      "path": "/api/v1/admin/employees",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "47d9901e-2b9a-4ca9-80c3-279b7733e9d0"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "39aa30db-c9fc-4262-b019-8d46a556ff70"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "83ee8568-51c3-4c4f-9f50-fa7ded984708"
+    },
+    {
+      "role": "ADMIN",
+      "method": "GET",
+      "path": "/api/v1/admin/refunds",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "5d33339b-1cb0-47d2-a545-0cc6850e1798"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "966e63a6-03ca-4abe-b49e-c5cb6b3db5a2"
+    },
+    {
+      "role": "PICKER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "bfda50e4-5f3b-4316-a165-a2e6c1180e42"
+    },
+    {
+      "role": "COURIER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "2792bccc-51de-4b8f-ac56-bca687b2644d"
+    },
+    {
+      "role": "ADMIN",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "5ae6d488-5436-429b-a82e-dc95d8936876"
+    }
+  ]
+}
