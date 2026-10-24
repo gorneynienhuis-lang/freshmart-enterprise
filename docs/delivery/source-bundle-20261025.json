@@ -1,0 +1,31 @@
+{
+  "status": "VERIFIED",
+  "source_commit": "c74de80e67382169d202db107623ecf4c8da0b08",
+  "zip_sha256": "4e412d4650566ff24a96d3118caa30fde1c9edd41df6a6d098a0842580a981aa",
+  "zip_bytes": 214519583,
+  "source_file_count": 1057,
+  "source_bytes": 226401562,
+  "archive_entries": 1059,
+  "manifest_sha256": "278c30c9b90fdaf9a2e62a0a0f4fd6c627a87d7f53c01d2140db9bff5fcf4562",
+  "excluded_file_count": 21,
+  "tool_identical_in_selected_commit": true,
+  "verified_at": "2026-10-24T17:39:52.654577+00:00",
+  "running_database_included": false,
+  "delivery_filename": "东华大学社区生鲜超市-源码数据库部署-20261025.zip",
+  "delivery_date": "2026-10-25",
+  "delivery_timezone": "Asia/Shanghai",
+  "checks": {
+    "sql_migrations": 13,
+    "catalog_images": 40,
+    "mascot_images": 4,
+    "latest_ui_and_recording_entries": 14,
+    "recording_scripts_syntax": "PASS",
+    "zip_crc": "PASS",
+    "private_runtime_build_directories": 0,
+    "application_code_differs_from_20261024_zip": true,
+    "full_application_tests": "NOT_RUN; packaging only"
+  },
+  "source_branch": "delivery/source-bundle-20261025",
+  "source_is_main": false,
+  "archive_uploaded_to_github": false
+}
