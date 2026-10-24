@@ -1,15 +1,15 @@
-# CODEX-023 · R04 首页滚动动效
+# CODEX-023 · 当前版首页滚动动效
 
-2026-10-24。会员首页（`?ui=r04`）增加首屏入场、滚动显现、吸顶毛玻璃顶栏，以及商品图到详情页的视图过渡。布局、文案、品牌色和购物流程保持原样。没有新增动画库。
+2026-10-24。动效改到默认界面 R03（无 `ui` 参数，或 `?ui=r03`）。R04 备选稿不再带这套动效，相关设计源和生成模板已退回。
 
 ## 范围
 
-- 设计源：`design/r04/Home.dc.html` 增加氛围光层和区块显现标记；`design/r04/fragments/header.html` 用 `.r4-chrome` 包住顶栏。生成模板已重新导入。
-- 样式：`frontend/src/styles/r04-motion.css`。首屏用 `cubic-bezier(.16, 1, .3, 1)` 依次入场；主图随滚动轻微放大位移；区块和商品卡用 `animation-timeline: view()`，不支持时由 `IntersectionObserver` 补上。
-- 顶栏滚过 24px 后收起账户条、缩小搜索与导航，并加上 `backdrop-filter`。
-- 商品卡图片到详情主图使用 `document.startViewTransition`，名称按商品 ID 生成。不支持或系统要求减少动态效果时走原来的跳转。
-- `data-motion` 保证同一次停留里数据重绘不重播首屏入场；滚动显现在入场结束后仍然保留。
+- 设计源：`design/v2/V2-Home.dc.html` 用 `.fm-chrome` 包住顶栏，并加上氛围光和区块/商品卡标记。`design/v2/V2-Detail.dc.html` 的主图增加 `.fm-detail-photo`，供视图过渡使用。布局和文案未改。生成模板已重新导入。
+- 样式：`frontend/src/styles/r03-motion.css`。首屏标题、说明、按钮和右侧卡片按 `cubic-bezier(.16, 1, .3, 1)` 依次入场；主图随滚动轻微缩放位移；东华红与暖白光在首屏两侧缓慢流动。区块和商品卡用 `animation-timeline: view()`，不支持时由 `IntersectionObserver` 补上。
+- 顶栏滚过 24px 后收起红条、缩小搜索和标志，白底变为毛玻璃。
+- 商品图到详情主图使用 `document.startViewTransition`。不支持或系统要求减少动态效果时走原来的跳转，内容保持可见。
+- 同一次停留里数据重绘不重播首屏入场。没有新增动画库。
 
 ## 验证
 
-`frontend` 下 `npm run verify`：契约检查、类型检查、8 个测试文件 50 项通过。`npm run build` 通过。Chrome 实测：1440 宽首屏入场、滚动显现、顶栏吸顶收起、商品图过渡均发生；390 宽无横向溢出；`prefers-reduced-motion: reduce` 时动画关闭且内容保持可见。屏幕录像为首页自顶向下滚动后点开沙瓤番茄。
+`frontend` 下 `npm run verify`：契约检查、类型检查、8 个测试文件 50 项通过。`npm run build` 通过。Chrome 打开默认地址：首屏入场、滚动显现、顶栏吸顶收起、沙瓤番茄图片过渡均发生。390/768/1100/1440 宽无横向溢出。`prefers-reduced-motion: reduce` 时动画关闭且文字和商品卡保持可见。

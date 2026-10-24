@@ -58,15 +58,15 @@ export function leaveHome(root?: HTMLElement): void {
 }
 
 export function syncChrome(root: ParentNode = document): void {
-    const chrome = root.querySelector<HTMLElement>('.r4-chrome');
-    if (!chrome || document.documentElement.dataset.design !== 'r04') return;
+    const chrome = root.querySelector<HTMLElement>('.fm-chrome');
+    if (!chrome || document.documentElement.dataset.design === 'r04') return;
     chrome.classList.toggle('is-condensed', !reducedMotion() && window.scrollY > 24);
 }
 
 function parallaxFallback(): void {
-    if (document.documentElement.dataset.design !== 'r04' || supportsScrollTimeline()) return;
+    if (document.documentElement.dataset.design === 'r04' || supportsScrollTimeline()) return;
     const root = document.querySelector<HTMLElement>('[data-page="Home"]');
-    const image = root?.querySelector<HTMLElement>('.r4-home-feature > img');
+    const image = root?.querySelector<HTMLElement>('.fm-market-photo');
     if (!image) return;
     if (!root || root.dataset.motion === 'reduced') {
         image.style.transform = '';
@@ -100,7 +100,7 @@ export function stopHomeMotion(): void {
     observer = null;
 }
 
-const revealSelector = '.r4-reveal, .r4-home-shelf .r4-section-heading, .r4-home-shelf .r4-product-card, .r4-footer';
+const revealSelector = '.fm-reveal, .fm-product-card';
 
 /** Scroll reveals for browsers without `animation-timeline: view()`. */
 export function bindHomeReveals(root: HTMLElement): void {

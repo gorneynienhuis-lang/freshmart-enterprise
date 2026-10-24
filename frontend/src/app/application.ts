@@ -75,7 +75,7 @@ export class Application {
         waiter?.();
     }
     private navigate(path: string) {
-        const morphing = this.pendingMorph !== '' && isR04Design() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && this.beginViewTransition(path);
+        const morphing = this.pendingMorph !== '' && !isR04Design() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && this.beginViewTransition(path);
         if (morphing) return;
         this.pendingMorph = '';
         if (path.startsWith('/product/')) window.scrollTo(0, 0);
@@ -112,7 +112,7 @@ export class Application {
         }
     }
     private bindProductMorph() {
-        if (!isR04Design()) return;
+        if (isR04Design()) return;
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const canMorph = !reduced && typeof (document as Document & { startViewTransition?: unknown }).startViewTransition === 'function';
         for (const anchor of qa<HTMLAnchorElement>(this.root, 'a[href^="#/product/"]')) {
@@ -209,11 +209,11 @@ export class Application {
     }
     private mount(page: PageName, values: Values) {
         delete this.root.dataset.runtime;
-        if (page === 'Home' && isR04Design()) prepareHomeRoot(this.root);
-        else if (isR04Design()) leaveHome(this.root);
+        if (page === 'Home' && !isR04Design()) prepareHomeRoot(this.root);
+        else if (!isR04Design()) leaveHome(this.root);
         mountTemplate(this.root, page, { ...defaults(page), ...values });
         this.common();
-        if (isR04Design()) bindHomeReveals(this.root);
+        if (!isR04Design()) bindHomeReveals(this.root);
     }
     private async render() { const epoch = ++this.epoch; const paintToken = this.paintToken; const route = new URL(location.hash.slice(1) || '/', location.origin); try {
         const user = service.auth.getSnapshot().user;
@@ -474,7 +474,7 @@ export class Application {
                 setProductImage(img, product.imageUrl);
                 img.alt = product.name;
             }
-        const hero = q<HTMLImageElement>(this.root, '.r4-detail-image img');
+        const hero = q<HTMLImageElement>(this.root, '.fm-detail-photo');
         if (hero && this.pendingMorph) {
             hero.style.viewTransitionName = this.pendingMorph;
             this.pendingMorph = '';
