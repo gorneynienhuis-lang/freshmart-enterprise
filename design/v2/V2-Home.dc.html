@@ -44,8 +44,9 @@ a{color:#A0021F}a:hover{color:#7E0118}
 @media (prefers-reduced-motion:reduce){.fm-market-cta,.fm-market-pick{transition:none}.fm-market-cta:hover{transform:none}}
 </style>
 </helmet>
-<div style="min-height: 100vh; background: #F4F5F7; color: #1B1F24; font-family: 'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',sans-serif; font-size: 14px">
+<div class="fm-home" style="min-height: 100vh; background: #F4F5F7; color: #1B1F24; font-family: 'PingFang SC','Hiragino Sans GB','Noto Sans CJK SC','Microsoft YaHei',sans-serif; font-size: 14px">
 
+  <div class="fm-chrome">
   <div class="dhu-band">
     <div style="max-width: 1280px; margin: 0 auto; padding: 0 24px; height: 36px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-size: 12px; color: #FFFFFF; flex-wrap: wrap">
       <span style="display: flex; align-items: center; gap: 16px">
@@ -126,6 +127,8 @@ a{color:#A0021F}a:hover{color:#7E0118}
       <span class="fm-freeship" style="display: flex; align-items: center; font-size: 13px; color: #5B6470; flex: none">满 ¥99 免运费，未满收 ¥6</span>
     </div>
   </nav>
+  </div>
+  <div class="fm-home-glow" aria-hidden="true"></div>
 
   <main style="max-width: 1280px; margin: 0 auto; padding: 0 24px 48px; display: flex; flex-direction: column; gap: 24px">
 
@@ -194,14 +197,14 @@ a{color:#A0021F}a:hover{color:#7E0118}
     </div>
 
     <sc-for list="{{shelves}}" as="shelf" hint-placeholder-count="3">
-      <section style="background: #FFFFFF; border-radius: 8px; padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 16px">
+      <section class="fm-shelf fm-reveal" style="background: #FFFFFF; border-radius: 8px; padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 16px">
         <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px">
           <h2 style="margin: 0; display: flex; align-items: baseline; gap: 12px; font-size: 20px; font-weight: 700">{{shelf.title}}<span style="font-size: 13px; font-weight: 400; color: #5B6470">{{shelf.note}}</span></h2>
           <a href="#" style="font-size: 13px; text-decoration: none; white-space: nowrap">查看全部 ›</a>
         </div>
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 12px">
           <sc-for list="{{shelf.items}}" as="p" hint-placeholder-count="6">
-            <article style="border: 1px solid #E3E6EA; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 6px">
+            <article class="fm-product-card" style="border: 1px solid #E3E6EA; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 6px">
               <a href="#" style="display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 6px; background: #FFFFFF"><img src="{{p.img}}" alt="{{p.name}}" style="width: 100%; height: 100%; object-fit: cover"></a>
               <div style="display: flex; gap: 4px; flex-wrap: wrap; min-height: 20px">
                 <span style="{{p.storeStyle}}">{{p.store}}</span>
@@ -221,7 +224,7 @@ a{color:#A0021F}a:hover{color:#7E0118}
       </section>
     </sc-for>
 
-    <section aria-label="服务说明" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
+    <section class="fm-services fm-reveal" aria-label="服务说明" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px">
       <sc-for list="{{services}}" as="sv" hint-placeholder-count="4">
         <div style="background: #FFFFFF; border-radius: 8px; padding: 18px 20px; display: flex; gap: 14px; align-items: center">
           <span style="width: 40px; height: 40px; flex: none; border-radius: 50%; background: {{t.tint}}; color: {{t.brand}}; display: flex; align-items: center; justify-content: center; font-family: 'Barlow',sans-serif; font-weight: 700; font-size: 15px">{{sv.k}}</span>
@@ -231,7 +234,7 @@ a{color:#A0021F}a:hover{color:#7E0118}
     </section>
   </main>
 
-  <footer style="border-top: 1px solid #E3E6EA; background: #FFFFFF">
+  <footer class="fm-footer fm-reveal" style="border-top: 1px solid #E3E6EA; background: #FFFFFF">
     <div style="max-width: 1280px; margin: 0 auto; padding: 18px 24px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: #5B6470">
       <span>东华大学社区生鲜超市 · 课程项目（校内实验超市设定，非学校官方运营）· 沙箱支付，不产生真实扣费 · 数据为示意</span>
       <span style="display: flex; gap: 18px"><a href="#" style="color: #5B6470; text-decoration: none">配送与运费</a><a href="#" style="color: #5B6470; text-decoration: none">售后与退款</a><a href="#" style="color: #5B6470; text-decoration: none">称重差额说明</a></span>

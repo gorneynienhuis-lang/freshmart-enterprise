@@ -1,0 +1,268 @@
+/* R03 home motion. The entrance plays once per visit; scroll reveals stay after it settles. */
+
+html[data-design="r03"] .fm-chrome {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+html[data-design="r03"] .fm-chrome .dhu-band,
+html[data-design="r03"] .fm-chrome header,
+html[data-design="r03"] .fm-chrome nav[aria-label="主导航"],
+html[data-design="r03"] .fm-chrome .fm-header-row,
+html[data-design="r03"] .fm-chrome .fm-header-row img,
+html[data-design="r03"] .fm-chrome .fm-header-row form,
+html[data-design="r03"] .fm-chrome .fm-hot,
+html[data-design="r03"] .fm-chrome nav[aria-label="主导航"] > div {
+  transition:
+    background-color .55s cubic-bezier(.16, 1, .3, 1),
+    padding .55s cubic-bezier(.16, 1, .3, 1),
+    height .55s cubic-bezier(.16, 1, .3, 1),
+    max-height .55s cubic-bezier(.16, 1, .3, 1),
+    opacity .4s ease,
+    box-shadow .55s cubic-bezier(.16, 1, .3, 1);
+}
+
+html[data-design="r03"] .fm-chrome .dhu-band {
+  max-height: 48px;
+  overflow: hidden;
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed {
+  box-shadow: 0 14px 36px rgba(80, 16, 28, .12);
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed .dhu-band {
+  max-height: 0;
+  opacity: 0;
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed header {
+  background: rgba(255, 252, 251, .58) !important;
+  -webkit-backdrop-filter: blur(22px) saturate(1.6);
+  backdrop-filter: blur(22px) saturate(1.6);
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed nav[aria-label="主导航"] {
+  background: rgba(255, 255, 255, .72) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed .fm-header-row {
+  padding-top: 10px !important;
+  padding-bottom: 8px !important;
+  gap: 20px !important;
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed .fm-header-row img {
+  height: 40px !important;
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed .fm-hot {
+  display: none;
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed .fm-header-row form {
+  height: 38px !important;
+}
+
+html[data-design="r03"] .fm-chrome.is-condensed nav[aria-label="主导航"] > div {
+  height: 40px !important;
+}
+
+html[data-design="r03"] [data-page="Home"] .fm-home {
+  position: relative;
+}
+
+html[data-design="r03"] [data-page="Home"] main,
+html[data-design="r03"] [data-page="Home"] .fm-footer {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-design="r03"] [data-page="Home"] .fm-home-glow {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  left: 0;
+  right: 0;
+  top: 120px;
+  height: 620px;
+  overflow: hidden;
+  background:
+    radial-gradient(520px 280px at 6% 28%, rgba(160, 2, 31, .36), transparent 70%),
+    radial-gradient(480px 260px at 96% 22%, rgba(255, 214, 196, .98), transparent 68%),
+    radial-gradient(360px 180px at 50% 0%, rgba(252, 241, 243, .8), transparent 72%);
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  animation: fm-ambient 14s ease-in-out infinite alternate;
+}
+
+html[data-design="r03"] [data-page="Home"]:not([data-motion="reduced"]) .fm-market-scene::after {
+  background:
+    radial-gradient(520px 420px at 16% 58%, rgba(255, 206, 196, .55), transparent 64%),
+    radial-gradient(380px 320px at 78% 18%, rgba(160, 2, 31, .32), transparent 68%),
+    linear-gradient(90deg, rgba(13, 35, 27, .75) 0%, rgba(13, 35, 27, .48) 34%, rgba(13, 35, 27, .03) 68%);
+  background-repeat: no-repeat;
+  background-size: 160% 160%, 170% 170%, 100% 100%;
+  animation: fm-hero-light 11s ease-in-out infinite alternate;
+}
+
+@keyframes fm-ambient {
+  from { background-position: 0 0, 0 0, 0 0; }
+  to { background-position: 48px 12px, -42px 10px, 16px 0; }
+}
+
+@keyframes fm-hero-light {
+  from { background-position: 0% 30%, 100% 0%, 0 0; }
+  to { background-position: 28% 70%, 42% 36%, 0 0; }
+}
+
+@keyframes fm-enter {
+  from { opacity: 0; translate: 0 64px; filter: blur(16px); }
+  to { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+
+@keyframes fm-reveal {
+  from { opacity: 0; translate: 0 96px; filter: blur(18px); }
+  to { opacity: 1; translate: 0 0; filter: blur(0); }
+}
+
+@keyframes fm-hero-parallax {
+  from { transform: scale(1.14) translate3d(0, -2%, 0); }
+  to { transform: scale(1.06) translate3d(0, 5%, 0); }
+}
+
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-kicker,
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-title,
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-description,
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-cta,
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-links,
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-picks,
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-hero-aside {
+  animation: fm-enter 1.25s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-kicker { animation-delay: .08s; }
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-title { animation-delay: .24s; }
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-description { animation-delay: .4s; }
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-cta { animation-delay: .56s; }
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-links { animation-delay: .7s; }
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-market-picks { animation-delay: .82s; }
+html[data-design="r03"] [data-page="Home"][data-motion="enter"] .fm-hero-aside { animation-delay: .36s; }
+
+@supports (animation-timeline: scroll()) {
+  html[data-design="r03"] [data-page="Home"]:not([data-motion="reduced"]) .fm-market-photo {
+    animation-name: fm-hero-parallax;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+    animation-range: 0vh 85vh;
+  }
+}
+
+html[data-design="r03"] [data-page="Home"] .fm-product-card:nth-child(6n+1) { --fm-i: 0; }
+html[data-design="r03"] [data-page="Home"] .fm-product-card:nth-child(6n+2) { --fm-i: 1; }
+html[data-design="r03"] [data-page="Home"] .fm-product-card:nth-child(6n+3) { --fm-i: 2; }
+html[data-design="r03"] [data-page="Home"] .fm-product-card:nth-child(6n+4) { --fm-i: 3; }
+html[data-design="r03"] [data-page="Home"] .fm-product-card:nth-child(6n+5) { --fm-i: 4; }
+html[data-design="r03"] [data-page="Home"] .fm-product-card:nth-child(6n+6) { --fm-i: 5; }
+
+@supports (animation-timeline: view()) {
+  html[data-design="r03"] [data-page="Home"][data-reveal-mode="view"]:not([data-motion="reduced"]) .fm-reveal {
+    animation-name: fm-reveal;
+    animation-duration: auto;
+    animation-timing-function: cubic-bezier(.16, 1, .3, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 32%;
+  }
+  html[data-design="r03"] [data-page="Home"][data-reveal-mode="view"]:not([data-motion="reduced"]) .fm-product-card {
+    animation-name: fm-reveal;
+    animation-duration: auto;
+    animation-timing-function: cubic-bezier(.16, 1, .3, 1);
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: entry calc(var(--fm-i, 0) * 3%) cover calc(26% + var(--fm-i, 0) * 3.5%);
+  }
+}
+
+html[data-design="r03"] [data-page="Home"][data-reveal-mode="io"] :is(.fm-reveal, .fm-product-card) {
+  opacity: 0;
+  translate: 0 96px;
+  filter: blur(18px);
+  transition:
+    opacity .95s cubic-bezier(.16, 1, .3, 1),
+    translate .95s cubic-bezier(.16, 1, .3, 1),
+    filter .95s cubic-bezier(.16, 1, .3, 1);
+}
+
+html[data-design="r03"] [data-page="Home"][data-reveal-mode="io"] .fm-product-card {
+  transition-delay: calc(var(--fm-i, 0) * 80ms);
+}
+
+html[data-design="r03"] [data-page="Home"][data-reveal-mode="io"] :is(.fm-reveal, .fm-product-card).is-shown {
+  opacity: 1;
+  translate: 0 0;
+  filter: blur(0);
+}
+
+html[data-design="r03"] [data-page="Home"][data-reveal-mode="io"] .is-instant {
+  transition: none;
+}
+
+@supports (view-transition-name: none) {
+  html[data-design="r03"]::view-transition-group(*),
+  html[data-design="r03"]::view-transition-old(*),
+  html[data-design="r03"]::view-transition-new(*) {
+    animation-duration: .9s;
+    animation-timing-function: cubic-bezier(.16, 1, .3, 1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-design="r03"] .fm-chrome,
+  html[data-design="r03"] .fm-chrome .dhu-band,
+  html[data-design="r03"] .fm-chrome header,
+  html[data-design="r03"] .fm-chrome nav[aria-label="主导航"],
+  html[data-design="r03"] .fm-chrome .fm-header-row,
+  html[data-design="r03"] .fm-chrome .fm-header-row img,
+  html[data-design="r03"] .fm-chrome .fm-header-row form,
+  html[data-design="r03"] .fm-chrome .fm-hot,
+  html[data-design="r03"] .fm-chrome nav[aria-label="主导航"] > div,
+  html[data-design="r03"] [data-page="Home"] .fm-home-glow,
+  html[data-design="r03"] [data-page="Home"] .fm-market-scene::after,
+  html[data-design="r03"] [data-page="Home"] .fm-market-kicker,
+  html[data-design="r03"] [data-page="Home"] .fm-market-title,
+  html[data-design="r03"] [data-page="Home"] .fm-market-description,
+  html[data-design="r03"] [data-page="Home"] .fm-market-cta,
+  html[data-design="r03"] [data-page="Home"] .fm-market-links,
+  html[data-design="r03"] [data-page="Home"] .fm-market-picks,
+  html[data-design="r03"] [data-page="Home"] .fm-hero-aside,
+  html[data-design="r03"] [data-page="Home"] .fm-reveal,
+  html[data-design="r03"] [data-page="Home"] .fm-product-card,
+  html[data-design="r03"]::view-transition-group(*),
+  html[data-design="r03"]::view-transition-old(*),
+  html[data-design="r03"]::view-transition-new(*) {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    translate: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  html[data-design="r03"] [data-page="Home"] .fm-market-photo {
+    animation: none !important;
+    transform: none !important;
+  }
+  html[data-design="r03"] .fm-chrome.is-condensed,
+  html[data-design="r03"] .fm-chrome.is-condensed header,
+  html[data-design="r03"] .fm-chrome.is-condensed nav[aria-label="主导航"] {
+    background: unset;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

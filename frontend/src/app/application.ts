@@ -6,6 +6,7 @@ import '../styles/pagination.css';
 import { mountTemplate, defaults, type Values, type PageName } from './template';
 import { ApiError } from '../api/errors';
 import { homeCategoryHref, selectHomeFeatured } from './home-featured';
+import { bindHomeReveals, installHomeMotion, leaveHome, prepareHomeRoot, stopHomeMotion, viewTransitionName } from './home-motion';
 import { isR04Design } from './design-version';
 import { productImagePath, setProductImage } from './product-image';
 import { renderCartSheet, renderCouponSheet } from '../ui/cart/cart-view';
@@ -57,20 +58,89 @@ export class Application {
     private productQty = 1;
     private lastProductId = '';
     private selectedSku = '';
-    private routeListener = () => { void this.render(); };
+    private suppressHashRender = false;
+    private pendingMorph = '';
+    private paintToken = 0;
+    private paintWaiter: (() => void) | null = null;
+    private routeListener = () => { if (!this.suppressHashRender) void this.render(); };
     constructor(private root: HTMLElement, private notice: HTMLElement) { }
-    async start() { window.addEventListener('hashchange', this.routeListener); try {
+    async start() { window.addEventListener('hashchange', this.routeListener); installHomeMotion(); try {
         await service.auth.restore();
         this.categories=(await service.categories()).items;
     }
     catch (error) {
         this.report(error);
     } await this.render(); }
-    destroy() { this.epoch++;window.removeEventListener('hashchange', this.routeListener); }
-    private navigate(path: string) { if (location.hash === '#' + path)
-        void this.render();
-    else
-        location.hash = path; }
+    destroy() { this.epoch++; window.removeEventListener('hashchange', this.routeListener); stopHomeMotion(); this.signalPaint(this.paintToken); }
+    private signalPaint(token: number) {
+        if (token !== this.paintToken) return;
+        const waiter = this.paintWaiter;
+        this.paintWaiter = null;
+        waiter?.();
+    }
+    private navigate(path: string) {
+        const morphing = this.pendingMorph !== '' && !isR04Design() && !window.matchMedia('(prefers-reduced-motion: reduce)').matches && this.beginViewTransition(path);
+        if (morphing) return;
+        this.pendingMorph = '';
+        if (path.startsWith('/product/')) window.scrollTo(0, 0);
+        if (location.hash === '#' + path) void this.render();
+        else location.hash = path;
+    }
+    /** Snapshot the current product image, then reveal the detail page once its image is mounted. */
+    private beginViewTransition(path: string): boolean {
+        const start = (document as Document & { startViewTransition?: (update: () => Promise<void>) => unknown }).startViewTransition;
+        if (typeof start !== 'function') return false;
+        const token = ++this.paintToken;
+        const painted = new Promise<void>(resolve => { this.paintWaiter = resolve; });
+        try {
+            start.call(document, async () => {
+                this.suppressHashRender = true;
+                try {
+                    window.scrollTo(0, 0);
+                    if (location.hash !== '#' + path) location.hash = path;
+                    const pending = this.render();
+                    await painted;
+                    void pending;
+                }
+                finally {
+                    this.suppressHashRender = false;
+                    this.signalPaint(token);
+                }
+            });
+            return true;
+        }
+        catch {
+            this.paintWaiter = null;
+            this.suppressHashRender = false;
+            return false;
+        }
+    }
+    private bindProductMorph() {
+        if (isR04Design()) return;
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const canMorph = !reduced && typeof (document as Document & { startViewTransition?: unknown }).startViewTransition === 'function';
+        for (const anchor of qa<HTMLAnchorElement>(this.root, 'a[href^="#/product/"]')) {
+            if (anchor.dataset.morphBound === 'true' || !q(anchor, 'img')) continue;
+            anchor.dataset.morphBound = 'true';
+            anchor.addEventListener('click', event => {
+                if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                const raw = (anchor.getAttribute('href') ?? '').replace(/^#\/product\//, '');
+                let id = raw;
+                try { id = decodeURIComponent(raw); }
+                catch { /* keep the raw segment */ }
+                if (!id || id.includes('/')) return;
+                event.preventDefault();
+                const image = q<HTMLImageElement>(anchor, 'img');
+                if (canMorph && image) {
+                    const name = viewTransitionName(id);
+                    image.style.viewTransitionName = name;
+                    this.pendingMorph = name;
+                }
+                else this.pendingMorph = '';
+                this.navigate('/product/' + encodeURIComponent(id));
+            });
+        }
+    }
     private tell(message: string) { this.notice.textContent = message; this.notice.setAttribute('role', 'status'); }
     private report(error: unknown) { const e = error instanceof Error ? error : new Error(String(error)); const suffix = error instanceof ApiError && error.traceId ? `（追踪号 ${error.traceId}）` : ''; this.notice.setAttribute('role', 'alert'); this.notice.textContent = e.message + suffix + (error instanceof ApiError && error.outcomeUnknown ? '；结果未确认，请刷新订单或以原请求重试，系统会复用幂等键。' : ''); const active=q<HTMLDialogElement>(document,'dialog[open]');if(active){let output=q(active,'[data-command-error]');if(!output){output=el('p');output.dataset.commandError='true';output.setAttribute('role','alert');active.append(output);}output.textContent=this.notice.textContent;} }
     private async run(action: () => Promise<void>) { if (this.busy)
@@ -141,8 +211,15 @@ export class Application {
                 badge.textContent = String(this.cart?.items.length ?? 0);
         }
     }
-    private mount(page: PageName, values: Values) { delete this.root.dataset.runtime; mountTemplate(this.root, page, { ...defaults(page), ...values }); this.common(); }
-    private async render() { const epoch = ++this.epoch; const route = new URL(location.hash.slice(1) || '/', location.origin); try {
+    private mount(page: PageName, values: Values) {
+        delete this.root.dataset.runtime;
+        if (page === 'Home' && !isR04Design()) prepareHomeRoot(this.root);
+        else if (!isR04Design()) leaveHome(this.root);
+        mountTemplate(this.root, page, { ...defaults(page), ...values });
+        this.common();
+        if (!isR04Design()) bindHomeReveals(this.root);
+    }
+    private async render() { const epoch = ++this.epoch; const paintToken = this.paintToken; const route = new URL(location.hash.slice(1) || '/', location.origin); try {
         const user = service.auth.getSnapshot().user;
         if (user?.mustChangePassword || route.pathname === '/account/password') {
             if (!user) { await this.home(); this.login(false); return; }
@@ -186,7 +263,7 @@ export class Application {
         this.report(error);
         if (!this.root.childElementCount)
             this.root.append(el('p', '后端暂不可用，请启动 Demo 后重试。'), button('重新加载', () => void this.render()));
-    } }
+    } finally { this.signalPaint(paintToken); } }
     private common() {
         const user = service.auth.getSnapshot().user;
         for (const a of qa<HTMLAnchorElement>(this.root, 'a')) {
@@ -294,6 +371,7 @@ export class Application {
         a.href = '#/products?categoryId=' + a.dataset.key; const note = byText(this.root, '名额为示意，以下单时为准'); if (note)
         note.textContent = '库存与名额在提交订单时再次校验';
         this.bindHomeFeatured(selectHomeFeatured(home.recommendedProducts, home.nearExpiryProducts, home.categories));
+        this.bindProductMorph();
     }
     private bindHomeFeatured(products: readonly Product[]) {
         for (const slot of qa<HTMLAnchorElement>(this.root, 'a[data-home-featured-slot]')) {
@@ -373,6 +451,7 @@ export class Application {
             if(filters.childElementCount===1)filters.append(el('span','全部商品'));else filters.append(button('清除筛选',()=>this.navigate('/products')));
         }
         if(end?.parentElement)end.parentElement.append(pagination(result,'商品',async next=>{params.set('page',String(next));this.navigate('/products?'+params);window.scrollTo({top:0});}));
+        this.bindProductMorph();
     }
     private async add(product: Product, quantity?: number, go = false) { if (!this.member())
         return; const sku = product.skus.find(s => s.skuId === this.selectedSku) ?? product.skus[0]; if (!sku)
@@ -399,6 +478,12 @@ export class Application {
                 setProductImage(img, product.imageUrl);
                 img.alt = product.name;
             }
+        const hero = q<HTMLImageElement>(this.root, '.fm-detail-photo');
+        if (hero && this.pendingMorph) {
+            hero.style.viewTransitionName = this.pendingMorph;
+            this.pendingMorph = '';
+        }
+        this.signalPaint(this.paintToken);
         const category=this.categories.find(c=>c.categoryId===product.categoryId);const categoryLink=qa<HTMLAnchorElement>(this.root,'nav[aria-label="面包屑"] a')[1];if(categoryLink){categoryLink.textContent=category?.name??'商品分类';categoryLink.href='#/products?categoryId='+product.categoryId;categoryLink.onclick=null;}
         const slots = q(this.root, '.fm-slots');
         if (slots)
@@ -674,6 +759,7 @@ export class Application {
         if (isR04Design()) {
             const user = service.auth.getSnapshot().user;
             const workplace = title.startsWith('员工工作台');
+            leaveHome(this.root);
             this.root.replaceChildren();
             this.root.dataset.page = 'Runtime';
             const top = el('div'); top.className = 'r04-runtime-topline'; top.append(el('span', 'DONGHUA UNIVERSITY · COMMUNITY MARKET'), el('span', '东华大学社区生鲜'));
