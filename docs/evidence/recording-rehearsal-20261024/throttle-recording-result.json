@@ -1,0 +1,70 @@
+{
+  "scene": "throttle",
+  "result": "PASS",
+  "responses": [
+    {
+      "role": "NONEXISTENT_SYNTHETIC_SUBJECT",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "00ddbfd2-4a76-4353-8c8f-3cb0ab8020fe"
+    },
+    {
+      "role": "NONEXISTENT_SYNTHETIC_SUBJECT",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 401,
+      "code": 1002,
+      "message": "需要重新登录",
+      "traceId": "b8bc0df4-f441-412e-8aeb-6d339a0053a9"
+    },
+    {
+      "role": "NONEXISTENT_SYNTHETIC_SUBJECT",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 401,
+      "code": 1002,
+      "message": "需要重新登录",
+      "traceId": "e5f4fd36-7b1a-4386-bfc8-2f3cfc5089f7"
+    },
+    {
+      "role": "NONEXISTENT_SYNTHETIC_SUBJECT",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 401,
+      "code": 1002,
+      "message": "需要重新登录",
+      "traceId": "4f552341-5cec-4ac0-867f-8c4faf1d914b"
+    },
+    {
+      "role": "NONEXISTENT_SYNTHETIC_SUBJECT",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 401,
+      "code": 1002,
+      "message": "需要重新登录",
+      "traceId": "c3dc4eda-0187-41ce-b194-fcd8ddc84c13"
+    },
+    {
+      "role": "NONEXISTENT_SYNTHETIC_SUBJECT",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 401,
+      "code": 1002,
+      "message": "需要重新登录",
+      "traceId": "959c3fb2-8840-4ba7-82eb-3ea803936a2e"
+    },
+    {
+      "role": "NONEXISTENT_SYNTHETIC_SUBJECT",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 429,
+      "code": 1029,
+      "message": "登录尝试过多，请稍后重试",
+      "traceId": "3a02d603-a091-4179-ac34-464746135c2c",
+      "Retry-After": "900"
+    }
+  ]
+}

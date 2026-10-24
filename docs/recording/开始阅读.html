@@ -1,0 +1,716 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>15分钟视频录制指南</title><style>*{box-sizing:border-box}body{margin:0;color:#24272b;background:#f4f4f3;font:16px/1.85 -apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif}article{max-width:1160px;padding:46px 54px;margin:28px auto;background:#fff;border:1px solid #ddd;border-top:5px solid #aa1834;overflow-wrap:anywhere}h1{font-size:30px;line-height:1.5}h2{font-size:23px;border-top:1px solid #ddd;padding-top:24px;margin-top:36px;scroll-margin-top:20px}h3{font-size:19px;margin-top:26px}p{margin:12px 0}a{color:#871a30;text-underline-offset:3px}nav{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;border-bottom:1px solid #ddd;padding-bottom:14px}table{border-collapse:collapse;font-size:14px;width:100%;margin:20px 0}th,td{border:1px solid #d9d9d9;vertical-align:top;text-align:left;padding:10px 12px}th{background:#f4f4f4}pre{position:relative;padding:18px;background:#f4f4f4;border:1px solid #ddd;white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65;font-size:14px}code{font:13px/1.6 ui-monospace,monospace;background:#f1f1f1;padding:2px 4px}pre code{padding:0}button{cursor:pointer;font:inherit;border:1px solid #c8c8c8;background:#fff;padding:8px 15px;border-radius:4px}button.active{border-color:#aa1834;background:#aa1834;color:white}.copy{position:absolute;right:7px;top:7px;font-size:12px;padding:3px 9px}.tabs,.actions{display:flex;gap:9px;flex-wrap:wrap;margin:16px 0}.caption{font-size:14px;color:#555}img{max-width:100%;height:auto;border:1px solid #ddd}figure{margin:20px 0}figcaption{font-size:14px;color:#555}.history{background:#f8f3ef;border-left:4px solid #ad5a28;padding:13px 18px}.section-list{background:#fafafa;border:1px solid #ddd;padding:16px 22px;margin:25px 0}.section-list ol{list-style:none;padding-left:0;margin-bottom:0}.panel{display:none}.panel.active{display:block}.pane-img{cursor:zoom-in}.tablewrap{overflow:auto}details{margin:15px 0}dialog{border:1px solid #999;max-width:96vw;max-height:95vh}dialog img{max-width:90vw;max-height:85vh;object-fit:contain}li{margin:6px 0}footer{border-top:1px solid #ddd;margin-top:30px;padding-top:20px;color:#666;font-size:13px}@media(max-width:760px){article{margin:0;padding:24px 18px;border-left:0;border-right:0}h1{font-size:25px}table{min-width:680px;font-size:13px}th,td{padding:8px}.section-list{padding:12px}}@media print{body{background:white;font-size:10pt}article{margin:0;padding:0;border:0;max-width:none}nav,.section-list,.copy,button,dialog{display:none}h1{font-size:22pt}h2{font-size:16pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt;min-width:0}tr{break-inside:avoid}th,td{padding:5px}pre{font-size:8pt}.panel{display:block!important}figure{break-inside:avoid}@page{size:A4;margin:15mm}}</style></head><body><article><nav><a href="开始阅读.html">录制指南</a><a href="演示证据台.html">演示证据台</a><a href="录制速查.html">录制速查</a><a href="http://localhost:5173/">本机商城</a></nav><h1>东华大学社区生鲜超市：15分钟汇报录制指南</h1><aside class="section-list"><strong>先准备，再录制</strong><ol><li><a href="#s1">1. 对这份PPT的评价</a></li><li><a href="#s2">2. 录制前准备：先把能点开的东西放好</a></li><li><a href="#s3">3. 29页怎么压进15分钟</a></li><li><a href="#s4">4. A—J每段录什么、在哪里点</a></li><li><a href="#s5">5. 截图与录屏怎么分：只准备这些就够</a></li><li><a href="#s6">6. 最省心的成片方法</a></li><li><a href="#s7">7. 录制前与交付前检查</a></li><li><a href="#s8">8. 什么时候容易卡住，怎么继续</a></li><li><a href="#s9">9. 依据与本次范围</a></li></ol></aside>
+<p>适用PPT：桌面上的 <code>freshmart-defense-修复版.pptx</code>，共29页，含29页演讲者备注。本指南不改动原PPT。目标成片 <strong>14分20秒左右，最多15分钟</strong>。</p>
+<p><strong>先看第2节准备环境，再按第4节录制A—J素材，最后看第3节串联PPT。不要开机后直接从第一页边找菜单边录。</strong></p>
+<h2 id="s1">1. 对这份PPT的评价</h2>
+<p>这份PPT可以作为正式汇报的骨架。红白校园元素统一，东小锦的使用克制，业务、权限、架构、资金恢复、AI使用和部署都能找到对应页。最有价值的是没有只展示商城首页，而是讲了状态、库存和退款这些工程问题。29页内容和备注已全部阅读，并生成预览检查。</p>
+<p>它目前更像“讲解稿与证据索引”，还不是照着备注就能完成的录制操作手册。录前应处理以下几点：</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>我的评价</th>
+<th>录制时怎么处理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第2页</td>
+<td>八段标注时间合计14分钟，尚未充分给开场、切窗口和操作失误留余量</td>
+<td>使用本指南的逐页时间，视频动作时间已经包含在每页预算内，不再额外加一遍</td>
+</tr>
+<tr>
+<td>第5—7页</td>
+<td>40秒下单与60秒跨岗位履约，对第一次操作的人偏紧</td>
+<td>A控制45秒；B预先录成约110秒，剪去登录和等待，保留同一订单的真实变化</td>
+</tr>
+<tr>
+<td>第7、10、21、24页</td>
+<td>六张工作台、能力总表、AI记录表和测试数字比较密，录成1080p后小字难读</td>
+<td>不逐格念。每页指出两三个关键点，重要字段切到真实网页或证据原图放大</td>
+</tr>
+<tr>
+<td>第5、17页</td>
+<td>“500g/份、1kg/袋”是包装规格，不自动等于称重商品</td>
+<td>当前沙瓤番茄为按件SKU；称重请展示有机菠菜的“散装称重/按实重结算”</td>
+</tr>
+<tr>
+<td>第4、7页</td>
+<td>一笔履约售后链实际重点是会员、拣货、配送、客服、财务</td>
+<td>可讲“会员和四类履约售后岗位接力”。运营与管理员单独展示，不用强行参与每张订单</td>
+</tr>
+<tr>
+<td>第9、11、12页</td>
+<td>PPT上的401/403/429/409截图有说明力，但画面小</td>
+<td>用已准备并试运行的录制辅助命令，直接展示新的真实HTTP状态，不粘贴令牌</td>
+</tr>
+<tr>
+<td>第18页</td>
+<td>财务页面不保证随时有“失败重试”按钮</td>
+<td>正常成功退款不应出现重试。默认回放已归档故障证据，不能为了录视频手改数据库制造失败</td>
+</tr>
+<tr>
+<td>第23页</td>
+<td>备注中的Linux本机和你当前这台Mac不同；凭据命令会输出密码</td>
+<td>口述明确“本次在Mac演示”。录屏只显示启动/状态，不运行 <code>demo-credentials.sh</code> 展示密码</td>
+</tr>
+<tr>
+<td>第25—26页</td>
+<td>PPT引用的10月23日Linux <code>shots/new/</code>、wrk原始日志和9091监控实例，在当前工程及所检查目录中未找到</td>
+<td>不能把当前Mac说成那台Linux机器。默认用仓库已归档的真实监控结果回放；这已能满足“监控或压测结果”的视频要求</td>
+</tr>
+<tr>
+<td>第24页</td>
+<td>历史195/44/94.72%与Windows189执行+6跳过/47/92.36%不是同一次运行</td>
+<td>口述分开，不能说Windows195项全部执行通过，也不要把不同范围相加成“总通过率”</td>
+</tr>
+<tr>
+<td>第21页备注</td>
+<td>关于某个Spring Boot旧系列“最后开源支持版本”的枝节不影响本项目论证</td>
+<td>不必在视频里展开版本史；讲清为何选Java21、模块化单体和契约即可</td>
+</tr>
+</tbody></table></div>
+<p><strong>汇报的主线</strong>：我们做了一个能运行的校园生鲜商城；更重要的是，对价格、库存、权限、重复提交和退款失败，设计了明确规则并留下真实验证记录。15分钟里用代表性证据证明这条主线，不需要逐个介绍95个接口。</p>
+<h2 id="s2">2. 录制前准备：先把能点开的东西放好</h2>
+<h3>2.1 这次实际检查到了什么</h3>
+<ul>
+<li>公网首页、会员登录和结算页可用，结算能显示地址、预约时段和服务端报价。本次没有在公网提交新订单，原购物车保留。</li>
+<li>本机原来没有启动5173。3306由另一套Homebrew MySQL占用，因此没有停止它；项目自己的保留数据库改在3307启动，商城仍用5173、后端仍用8080。</li>
+<li>本机七个种子角色均登录成功。通过真实接口完成一笔合成沙箱订单的付款、拣货、交接、签收、客服审核、独立财务退款和评价；另做一笔未付款取消。随后在网页检查订单状态与售后完成结果。</li>
+<li>本机权限辅助、限流辅助、幂等辅助均实际运行通过。它们不访问Railway，也不输出密码、Cookie或access token。</li>
+<li>当前没有本机9090/9091 Prometheus运行实例。没有为了指南重新执行停机、Redis停启或负载测试。</li>
+</ul>
+<p>这里的业务试走是接口操作加网页结果复核，不是已经替你录好了逐按钮演示视频。正式录像仍按下文操作新订单。</p>
+<h3>2.2 优先使用的地址</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>用途</th>
+<th>本机地址</th>
+<th>页面里怎么进入</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>首页</td>
+<td><a href="http://localhost:5173/">http://localhost:5173/</a></td>
+<td>浏览器直接输入</td>
+</tr>
+<tr>
+<td>番茄详情</td>
+<td><a href="http://localhost:5173/#/product/S001">http://localhost:5173/#/product/S001</a></td>
+<td>首页搜索“番茄”后点商品</td>
+</tr>
+<tr>
+<td>称重商品</td>
+<td><a href="http://localhost:5173/#/product/S004">http://localhost:5173/#/product/S004</a></td>
+<td>搜索“有机菠菜”</td>
+</tr>
+<tr>
+<td>结算</td>
+<td><a href="http://localhost:5173/#/checkout">http://localhost:5173/#/checkout</a></td>
+<td>购物车抽屉点“去结算”</td>
+</tr>
+<tr>
+<td>我的订单</td>
+<td><a href="http://localhost:5173/#/orders">http://localhost:5173/#/orders</a></td>
+<td>首页顶部“我的订单”</td>
+</tr>
+<tr>
+<td>收货地址</td>
+<td><a href="http://localhost:5173/#/addresses">http://localhost:5173/#/addresses</a></td>
+<td>首页顶部“管理收货地址”，或订单页“管理收货地址”</td>
+</tr>
+<tr>
+<td>员工工作台</td>
+<td><a href="http://localhost:5173/#/operations">http://localhost:5173/#/operations</a></td>
+<td>首页顶部“工作台”；员工登录后通常自动进入</td>
+</tr>
+<tr>
+<td>无令牌订单接口</td>
+<td><a href="http://localhost:8080/api/v1/orders">http://localhost:8080/api/v1/orders</a></td>
+<td>新标签页直接打开，只用于看401</td>
+</tr>
+<tr>
+<td>后端健康</td>
+<td><a href="http://localhost:8080/actuator/health">http://localhost:8080/actuator/health</a></td>
+<td>应显示UP</td>
+</tr>
+<tr>
+<td>公网展示</td>
+<td><a href="https://freshmart-enterprise-production.up.railway.app/">https://freshmart-enterprise-production.up.railway.app/</a></td>
+<td>只在J段展示HTTPS与首页</td>
+</tr>
+</tbody></table></div>
+<p><strong>工作台以 <code>/#/operations</code> 为准。</strong> PPT第7页写的 <code>#/admin</code> 不作为本指南操作入口。页面切换后等一两秒让数据加载，不要因为刚点完还没换画面就连续重复提交。</p>
+<h3>2.3 七个角色怎么选</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>合成账号</th>
+<th>角色</th>
+<th>本次录像用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>13800000001</td>
+<td>MEMBER会员</td>
+<td>A下单、B签收码/售后/评价、G取消、东小锦</td>
+</tr>
+<tr>
+<td>13800000002</td>
+<td>PICKER拣货</td>
+<td>B领取、实拣、交接发货</td>
+</tr>
+<tr>
+<td>13800000003</td>
+<td>COURIER配送</td>
+<td>B签收</td>
+</tr>
+<tr>
+<td>13800000004</td>
+<td>SERVICE客服</td>
+<td>B领取、审核售后</td>
+</tr>
+<tr>
+<td>13800000005</td>
+<td>FINANCE财务</td>
+<td>B执行退款、F查看已归档恢复记录</td>
+</tr>
+<tr>
+<td>13800000006</td>
+<td>OPERATOR运营</td>
+<td>展示商品、规则、经营概览，可只保留PPT工作台图</td>
+</tr>
+<tr>
+<td>13800000007</td>
+<td>ADMIN管理员</td>
+<td>展示员工治理；C证明管理员不能调用财务退款接口</td>
+</tr>
+</tbody></table></div>
+<p>本机密码看项目 <code>.runtime/demo-accounts.txt</code>，<strong>与公网密码分开</strong>。当前录制辅助脚本读取的是本机私有配置。密码不写进指南，也不传到GitHub。录制前完成登录，别录打开凭据文件、复制密码或浏览器密码菜单的过程。输入前先全选清空自动填充，避免号码或密码被追加两次。</p>
+<p>换角色用“账户/切换”，明确退出再登录。<strong>同一浏览器里的多个普通标签页不等于多个独立账号环境</strong>，不要同时让两个角色刷新共享Cookie。最简单的办法是顺序换角色，后期剪去登录空档；若要并排展示，用独立浏览器配置文件。</p>
+<h3>2.4 本机打不开时，只用以下已准备命令</h3>
+<p>在Mac终端复制以下整段。这里只启动当前保留Demo，使用现有JAR，不重新跑全量测试、不清库。</p>
+<pre><code class="language-bash">cd &#39;/Users/djy/Desktop/实验四/fresh-mall&#39;
+python3 docs/recording/start-rehearsal.py
+python3 docs/recording/recording-assistant.py status
+</code></pre>
+<p>看到 <code>Backend health: UP</code>、mysql/backend/frontend为owned and running后，再开5173。当前排练的MySQL在3307，<strong>不是3306上另一套数据库</strong>。不要照PPT示意去结束陌生进程。</p>
+<p><code>start-rehearsal.py</code>为本机现有便携数据库与现有构建准备，并不宣称是任意电脑首次安装的通用脚本。换电脑复现仍看项目README的依赖与部署说明。录制当天优先使用已经准备好的本机，避免冷下载占用视频时间。</p>
+<h3>2.5 必须先准备两张新订单</h3>
+<ol>
+<li><strong>订单A：主演示单</strong>。选沙瓤番茄1件即可保证主链简单；想展示称重可再加有机菠菜500克。保存真实订单号，备注写“视频主演示单”。</li>
+<li><strong>订单B：异常演示单</strong>。另外下一笔小额单，停在待支付，不模拟付款，留给G段取消。</li>
+<li>收货地址用上海市/上海市/松江区、人民北路2999号校园示意地址。当前已经为本机会员准备了“录制排练合成地址”。</li>
+<li>选录制时仍未截止且有名额的时段。过了当天最后一个截止时间就选明天，不照抄PPT里的10月19日14—17点。</li>
+<li>准备一张生鲜演示图片，品质售后要上传到这张订单。附带的 <code>售后排练合成图片.png</code> 明确标明是合成测试附件，可用于课程演示，不冒充真实质量投诉。</li>
+</ol>
+<p>本次已完成的排练单可以在会员订单页看结果：主演练单号 <code>FMc99ad16319d441d1a9d074979aa64f07</code>，实付11.90元、已退1元、已评价；取消单号 <code>FM9dcd2d578f88447c911fe9dc235e2a66</code>。这些是结果样本，<strong>不能倒回待拣货</strong>。正式拍过程要创建新单，不修改旧单状态。</p>
+<h2 id="s3">3. 29页怎么压进15分钟</h2>
+<p>建议目标14分20秒，余40秒留给切换和停顿。每页时间包含对应录屏，不能把PPT讲稿时长和录像时长重复相加。说完该页的重点就翻页，不读来源小字、整张权限矩阵、全部技术版本或所有告警名称。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>成片时间</th>
+<th>PPT页</th>
+<th>画面</th>
+<th>本页只做什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00:00—00:15</td>
+<td>1</td>
+<td>PPT</td>
+<td>报项目与分工，不读所有指标</td>
+</tr>
+<tr>
+<td>00:15—00:25</td>
+<td>2</td>
+<td>PPT</td>
+<td>只说八部分，不读各行时间</td>
+</tr>
+<tr>
+<td>00:25—00:50</td>
+<td>3</td>
+<td>PPT</td>
+<td>生鲜的三个工程问题</td>
+</tr>
+<tr>
+<td>00:50—01:05</td>
+<td>4</td>
+<td>PPT</td>
+<td>交代同单跨岗位主线</td>
+</tr>
+<tr>
+<td>01:05—01:50</td>
+<td>5</td>
+<td>A 网页</td>
+<td>首页、选购、结算与沙箱付款</td>
+</tr>
+<tr>
+<td>01:50—02:10</td>
+<td>6</td>
+<td>PPT</td>
+<td>解释服务端报价，金额以当次为准</td>
+</tr>
+<tr>
+<td>02:10—04:00</td>
+<td>7</td>
+<td>B 网页</td>
+<td>拣货、交接、签收、客服审核、财务退款与会员结果</td>
+</tr>
+<tr>
+<td>04:00—04:20</td>
+<td>8</td>
+<td>PPT</td>
+<td>讲管理员不继承业务角色</td>
+</tr>
+<tr>
+<td>04:20—05:10</td>
+<td>9</td>
+<td>C 网页/终端</td>
+<td>界面限制及真实401/403</td>
+</tr>
+<tr>
+<td>05:10—05:30</td>
+<td>10</td>
+<td>PPT</td>
+<td>只挑安全、幂等、恢复三项</td>
+</tr>
+<tr>
+<td>05:30—05:55</td>
+<td>11</td>
+<td>D 终端</td>
+<td>六次错误请求的401到429</td>
+</tr>
+<tr>
+<td>05:55—06:40</td>
+<td>12</td>
+<td>E 终端</td>
+<td>同键同单、异体409；缓存策略简述</td>
+</tr>
+<tr>
+<td>06:40—07:15</td>
+<td>13</td>
+<td>PPT</td>
+<td>请求分层与数据库真相</td>
+</tr>
+<tr>
+<td>07:15—07:35</td>
+<td>14</td>
+<td>PPT</td>
+<td>为何选择模块化单体</td>
+</tr>
+<tr>
+<td>07:35—07:55</td>
+<td>15</td>
+<td>PPT</td>
+<td>OpenAPI、迁移与统一响应</td>
+</tr>
+<tr>
+<td>07:55—08:20</td>
+<td>16</td>
+<td>PPT</td>
+<td>库存守恒与固定锁序</td>
+</tr>
+<tr>
+<td>08:20—08:45</td>
+<td>17</td>
+<td>PPT</td>
+<td>菠菜称重，分与克，多退少补</td>
+</tr>
+<tr>
+<td>08:45—09:15</td>
+<td>18</td>
+<td>F 证据回放</td>
+<td>原退款号恢复记录，不伪造现场失败</td>
+</tr>
+<tr>
+<td>09:15—09:40</td>
+<td>19</td>
+<td>G 网页</td>
+<td>另一笔未付款订单正常取消</td>
+</tr>
+<tr>
+<td>09:40—10:05</td>
+<td>20</td>
+<td>PPT</td>
+<td>人定边界，两个AI按文件交接</td>
+</tr>
+<tr>
+<td>10:05—10:30</td>
+<td>21</td>
+<td>PPT/日志</td>
+<td>只讲一例拒绝与一例验证</td>
+</tr>
+<tr>
+<td>10:30—10:50</td>
+<td>22</td>
+<td>网页/PPT</td>
+<td>东小锦问答，失败降级</td>
+</tr>
+<tr>
+<td>10:50—11:20</td>
+<td>23</td>
+<td>H 终端/网页</td>
+<td>UP与运行状态，Windows独立复现</td>
+</tr>
+<tr>
+<td>11:20—11:50</td>
+<td>24</td>
+<td>PPT/证据</td>
+<td>历史与Windows数字分开</td>
+</tr>
+<tr>
+<td>11:50—12:20</td>
+<td>25</td>
+<td>PPT</td>
+<td>限定只读参考范围，未核验原日志不报新实测结论</td>
+</tr>
+<tr>
+<td>12:20—13:00</td>
+<td>26</td>
+<td>I 证据回放</td>
+<td>历史真实监控正常、触发、恢复</td>
+</tr>
+<tr>
+<td>13:00—13:35</td>
+<td>27</td>
+<td>J 网页</td>
+<td>公网HTTPS与部署来源</td>
+</tr>
+<tr>
+<td>13:35—14:10</td>
+<td>28</td>
+<td>PPT</td>
+<td>工程收获与未完成范围</td>
+</tr>
+<tr>
+<td>14:10—14:20</td>
+<td>29</td>
+<td>PPT</td>
+<td>仓库、网址、文档，致谢</td>
+</tr>
+</tbody></table></div>
+<h2 id="s4">4. A—J每段录什么、在哪里点</h2>
+<h3>A：会员选购、结算和付款（第5页，约45秒）</h3>
+<p><strong>录前位置</strong>：本机首页，会员已登录。先打开购物车检查有没有以前留下的商品，按你本次想演示的商品自行整理，不要把旧购物车总金额误当本次演示价格。</p>
+<ol>
+<li>首页停2秒，显示东华标志、分类、商品和东小锦。</li>
+<li>搜索框输入“番茄”，点“搜索”，点“沙瓤番茄”卡片。</li>
+<li>点选500g/份的SKU，再点“加入购物车”。如果本段要体现按实重，可在菠菜详情再选500克；番茄包装规格仍属于按件。</li>
+<li>点右上角购物车，展示抽屉里的商品与免运费提示。</li>
+<li>点“去结算”，选已准备地址和有名额的时段。录下订单金额框与称重提示。</li>
+<li>点“提交订单并支付”。出现课程沙箱支付窗口后，点“模拟支付成功”。等到订单为“已支付，待拣货”。</li>
+<li>记下这张新订单的订单号，后续B始终使用它。</li>
+</ol>
+<p><strong>结束画面</strong>：订单号与“已支付，待拣货”同时可见。A结束回PPT第6页，解释服务端报价；第6页不用重复下单。</p>
+<p><strong>建议口述</strong>：“会员提交商品、地址和时段，价格由服务端计算。这里是沙箱支付，接下来同一张订单交给拣货和配送岗位。”</p>
+<p><strong>不要照念PPT旧金额61.30元或旧余量29</strong>。金额、临期优惠、库存与时段余量都以当次页面为准。</p>
+<h3>B：同一订单跨岗位完成、售后、退款与评价（第7页，约110秒）</h3>
+<p>这是全片最重要的素材。可分B1—B5录，剪掉切账号、打密码和等待，<strong>保留每段的角色、同一订单标识及前后状态</strong>。不要只拍六张工作台空列表。</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>小段</th>
+<th>使用账号与页面</th>
+<th>具体操作</th>
+<th>结束必须看见</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>B1 拣货</td>
+<td>PICKER，<code>/#/operations</code>，左侧“拣货任务”</td>
+<td>刷新，找A的新任务，核对商品/时间。点“领取拣货任务”，再点“录入实拣数量”。按件填1，称重填克数，如500；保留“正常”，点“确认出库并结算”</td>
+<td>订单进入待发货，任务已实拣</td>
+</tr>
+<tr>
+<td>B2 交接</td>
+<td>仍用PICKER，左侧“配送任务”</td>
+<td>找刚才待交接任务，点“交接并发货”。配送员账户ID填 <strong><code>demo-courier</code></strong>，不是手机号13800000003，点“确认发货”</td>
+<td>任务配送中</td>
+</tr>
+<tr>
+<td>B3 签收</td>
+<td>先MEMBER看 <code>/#/orders</code>，再COURIER工作台</td>
+<td>会员订单配送中时读取六位签收码。换配送员，找自己的配送中任务，点“确认签收”，输入本次真实签收码，点“提交签收”</td>
+<td>已签收/订单已完成</td>
+</tr>
+<tr>
+<td>B4 售后审核</td>
+<td>MEMBER订单页 → SERVICE工作台</td>
+<td>会员点“申请售后”，选“品质问题”，勾选一个商品、数量1、金额1.00元、填合成演示原因并上传本订单演示图，提交。客服“售后工单”点“领取售后”，再“审核售后”，核准1.00元，点“通过并生成退款单”</td>
+<td>审核通过，等待另一财务账号执行</td>
+</tr>
+<tr>
+<td>B5 财务与评价</td>
+<td>FINANCE工作台 → MEMBER订单页</td>
+<td>财务进入“退款执行”，核对本单1元，点“执行退款”，填写复核说明，点“确认退款”。刷新至已退款。换会员刷新订单，显示已退1元；点该订单行“评价 沙瓤番茄”（或“评价＋商品名”），填星级和内容并提交</td>
+<td>订单已完成、已退1元、该行已评价；售后进度已完成</td>
+</tr>
+</tbody></table></div>
+<p>如果申请金额不能超过某行的实际可退金额，就降低申请金额，不能强行填总订单金额。品质问题必须上传合规图片；不要为省步骤选一个实际上不符合条件的“缺货”或“配送延迟”。</p>
+<p>如果找不到任务，先确认：A确实付款成功；当前账号正确；状态筛选为全部或待领取；已点刷新；不是在用已完成的旧单。工作台只露出本岗位入口是正常权限设计。</p>
+<p><strong>110秒成片分配</strong>：拣货25秒、交接10秒、签收15秒、会员售后20秒、客服15秒、财务/会员结果25秒。真实操作可以录更长，再剪去空档；保留步骤顺序和结果，不改造页面或数据。</p>
+<h3>C：401和403权限拦截（第9页，约50秒）</h3>
+<p>先录网页：会员登录后进“工作台”，可看见“此角色没有本工作台的业务操作权限”。这证明界面限制，<strong>还要录服务端状态</strong>。</p>
+<p>用Mac终端运行下面两行，字体调到22—26号，窗口只保留当前输出：</p>
+<pre><code class="language-bash">cd &#39;/Users/djy/Desktop/实验四/fresh-mall&#39;
+python3 docs/recording/recording-assistant.py permissions
+</code></pre>
+<p>输出依次为游客查订单401、会员查拣货403、拣货查退款403、配送查员工403、管理员查财务退款403。停留最后几行5秒。脚本只读取业务接口、创建并退出自己的登录会话，不会更改员工权限。</p>
+<p><strong>结束画面</strong>：<code>http: 403</code>和具体角色、路径。不要打开请求Headers里的Authorization；也不用把任何令牌复制到地址栏。</p>
+<p><strong>口述</strong>：“界面隐藏只是第一层，这里实际请求服务端，会员和管理员越过职责边界也会被拒绝。”</p>
+<h3>D：登录限流429（第11页，约25秒）</h3>
+<p>不要拿自己的会员、财务或管理员连续输错。已准备的命令只使用数据库中不存在的合成号码：</p>
+<pre><code class="language-bash">cd &#39;/Users/djy/Desktop/实验四/fresh-mall&#39;
+python3 docs/recording/recording-assistant.py throttle
+</code></pre>
+<p>录前5次401、第6次429与 <code>Retry-After: 900</code>。该命令已在本机试过，不会锁定现有七个账号。它验证的是限流策略，不证明一个实际用户存在。</p>
+<p><strong>口述</strong>：“连续失败后返回429，并提示等待时间。错误信息保持通用，不暴露账号是否存在。”</p>
+<h3>E：幂等409（第12页，约45秒）</h3>
+<p>本段直接录终端真实请求结果，比手动复制Cookie更稳妥。要求本机会员有地址、当天有可用时段和库存，运行：</p>
+<pre><code class="language-bash">cd &#39;/Users/djy/Desktop/实验四/fresh-mall&#39;
+python3 docs/recording/recording-assistant.py idempotency
+</code></pre>
+<p>屏幕会显示：首次201，同键同内容再次201，<code>SAME_ORDER_ID</code>相同；同键换请求体返回409。脚本只创建一笔未付款合成订单，最后走正常取消释放预占和时段。<strong>这笔不是A的主演示单。</strong></p>
+<p><strong>结束画面</strong>：同一orderId、409、正常取消成功。它不会模拟付款，不能把本段口述成“真实渠道重复扣款压测”。</p>
+<p>PPT右半的Redis停机属于另一个演练环境。当前没有启动Redis故障演练，不要在正式录制时临时寻找Redis窗口。此段优先录幂等，缓存策略用PPT简述即可。</p>
+<h3>F：退款失败与恢复（第18页，约30秒）</h3>
+<p>默认采用<strong>已有真实故障演练记录回放</strong>。打开附带的“演示证据台.html”，点击“退款恢复”，依次看原退款成功后的界面和原始记录摘要。源文件在：</p>
+<p><code>docs/evidence/refund-recovery-v022/2026-10-18T07-19-47-062Z-dd31fe8b/</code></p>
+<p>界面图在其 <code>ui-2026-10-18T07-29-17-826Z/</code> 中的 <code>original-refund-success-no-retry-1440.png</code>。记录是历史验收，不是你刚才B新订单的故障。</p>
+<p><strong>口述</strong>：“刚才展示正常退款。这里回看此前真实MySQL故障注入记录：系统复用原退款号恢复，成功后不再提供重试入口。失败尝试和后续修正都保留。”</p>
+<p>不要期待B刚成功的退款出现“重试”。不要执行SQL改为FAILED，也不要为了录像停止公网退款任务。若要拍现场失败到恢复，需要另行准备隔离故障场景，本指南没有自动执行这类故障注入。</p>
+<h3>G：取消未付款订单（第19页，约25秒）</h3>
+<ol>
+<li>会员打开 <code>/#/orders</code>，筛选“待支付”，找到录前准备的订单B。</li>
+<li>画面先停2秒，展示待支付与已付0。</li>
+<li>点“取消订单”，原因写“课程演示，暂不需要”。</li>
+<li>点“确认取消”，等待已取消。</li>
+<li>停3秒展示已付0、已退0。这里没有发生退款，不能讲成财务退款恢复。</li>
+</ol>
+<p>支付超时15分钟用状态机说明即可，不用空等15分钟。若拍超时快进，必须明确标注快进和经过时间，不调整电脑时钟冒充正常时间流逝。</p>
+<h3>产品AI：东小锦（第22页，约20秒，额外加在该页预算内）</h3>
+<ol>
+<li>打开首页，点右下角东小锦，打开“问东小锦”。</li>
+<li>点“怎么下单”或输入一个简短操作问题，等回答。</li>
+<li>录下问题、回答和在线/降级提示，说明密钥保存在后端。</li>
+<li>如果本机没配置模型密钥，按实际画面讲“常见问题降级回答”；要展示真实模型，可用已配好的公网，但不要打开密钥配置页面。</li>
+</ol>
+<p>不要把FAQ答案当作页面入口的权威来源：实际地址入口是“管理收货地址”，不是一定有“会员中心”菜单。模型说错时也不照着点。</p>
+<h3>H：可复现启动与状态（第23页，约30秒）</h3>
+<p>打开已准备的终端，运行：</p>
+<pre><code class="language-bash">cd &#39;/Users/djy/Desktop/实验四/fresh-mall&#39;
+python3 docs/recording/recording-assistant.py status
+</code></pre>
+<p>录UP和三个受管进程状态，再切本机首页。若确实要录从停止到启动的过程，可在准备期正常停止本项目后，用 <code>start-rehearsal.py</code>启动并预录；不要停止3306上的其他MySQL。</p>
+<p><strong>口述</strong>：“本次在Mac上使用保留Demo演示，数据库、后端与前端状态都可检查。另有组员在Windows独立复现的平台记录。”</p>
+<p>启动已完成时就说“检查运行状态”，不要把状态命令说成刚完成冷安装。这里不录 <code>demo-credentials.sh</code>，因为它会明文输出密码。</p>
+<h3>测试与源码：第20—25页可以额外录的证据</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>位置</th>
+<th>怎么打开</th>
+<th>应录什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AI七要素</td>
+<td>Finder进入 <code>fresh-mall/collab/ai-log</code>，打开一篇真实记录；或在GitHub点同路径</td>
+<td>一次真实Prompt/采纳或拒绝/修改/验证，别翻整份聊天</td>
+</tr>
+<tr>
+<td>架构与契约</td>
+<td>Finder或编辑器打开 <code>contracts/openapi.yaml</code></td>
+<td>一个接口的路径、角色和响应形态，不滚95个接口</td>
+</tr>
+<tr>
+<td>迁移</td>
+<td>打开 <code>database/migrations</code></td>
+<td>V001—V013文件名，讲迁移管理</td>
+</tr>
+<tr>
+<td>最新Windows测试</td>
+<td>“演示证据台.html”点“Windows测试”</td>
+<td>189执行+6跳过、47前端、JaCoCo92.36%</td>
+</tr>
+<tr>
+<td>Git记录</td>
+<td>打开仓库 <a href="https://github.com/gorneynienhuis-lang/freshmart-enterprise/commits/main/">Commits</a> 和 <a href="https://github.com/gorneynienhuis-lang/freshmart-enterprise/pull/5">PR #5</a></td>
+<td>平台问题如何变成代码修复和复现记录</td>
+</tr>
+</tbody></table></div>
+<p>第25页的wrk三组数值，本次没有找到其原始输出、运行机器与代码绑定，不能替该批结果完成独立核验。<strong>默认录制方案不再现场跑负载，不把这些具体QPS口述成这次Mac测得。</strong> 可快速翻过该页，说明只读参考与NFR04的差别，把实际监控结果留给I段。若你之后拿到 <code>shots/new/raw/loadtest_wrk.txt</code> 与环境说明，再使用该页的具体数字。</p>
+<h3>I：监控结果（第26页，约40秒）</h3>
+<p>最省准备的可靠方式是录<strong>仓库已有真实监控证据回放</strong>，而不是临时安装监控或杀进程。</p>
+<ol>
+<li>打开附带“演示证据台.html”，点“监控”。画面始终标注“历史真实演练，2026-10-18”。</li>
+<li>点“正常UP”，展示Targets正常。</li>
+<li>点“宕机告警”，展示 <code>FreshMallApplicationDown</code> 的FIRING。</li>
+<li>点“恢复后”，展示Targets恢复和告警INACTIVE。</li>
+<li>指出来源目录 <code>docs/evidence/monitoring-v030</code>。如需更详细复核，打开该目录的README与result.json。</li>
+</ol>
+<p><strong>口述</strong>：“这是此前本机真实宕机演练的记录。目标不可用后告警触发，服务恢复后解除。我们保存了原生页面和结果数据，没有部署外部通知。”</p>
+<p>PPT写的10月23日9091属于那次Linux环境。<strong>你当前不要直接去9091找页面，也不要把这次打开历史图说成刚刚让服务宕机。</strong> 本段与A/B/C/G的真实系统操作结合，满足视频不能只有PPT、并需展示监控或压测结果的要求。</p>
+<h3>J：公网地址与部署（第27页，约35秒，含本页讲解）</h3>
+<ol>
+<li>浏览器打开公网地址，等商品、图片与东小锦加载。</li>
+<li>保留HTTPS地址栏，鼠标点一次商品或分类证明能访问，不在此段重新完成业务链。</li>
+<li>若已登录Railway，可从项目 <code>stunning-generosity</code> → <code>freshmart-enterprise</code> → <code>Deployments</code> 展示当前成功部署，再回公网首页。无需打开Variables的值。</li>
+<li>GitHub可展示main的提交记录与PR修复记录。部署来源要看Railway当前成功部署关联的commit，不能只凭GitHub已上传就说网址是同一版。</li>
+</ol>
+<p><strong>口述</strong>：“本机用于完整业务演示，Railway提供HTTPS分享入口。公网首页与素材可以访问，公网完整七角色回归仍按已有验收范围说明。”</p>
+<p>如果Railway控制台登录失效，直接展示公网首页即可，不让视频卡在登录、验证码、费用界面或网络重试上。</p>
+<h2 id="s5">5. 截图与录屏怎么分：只准备这些就够</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>内容</th>
+<th>静态截图是否够</th>
+<th>正式视频怎么呈现</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>封面、架构、技术取舍、ER/状态模型</td>
+<td>够，PPT已有</td>
+<td>PPT配讲解，不再重复截</td>
+</tr>
+<tr>
+<td>下单支付、跨岗位、取消异常</td>
+<td>不够</td>
+<td>录真实操作与前后状态，A/B/G为重点</td>
+</tr>
+<tr>
+<td>权限拦截</td>
+<td>只拍按钮隐藏不够</td>
+<td>会员工作台提示 + 辅助命令真实401/403</td>
+</tr>
+<tr>
+<td>限流、幂等</td>
+<td>旧截图可作备份</td>
+<td>录辅助命令实际输出，D/E</td>
+</tr>
+<tr>
+<td>退款故障恢复</td>
+<td>可使用已归档原始图和数据</td>
+<td>F明确称历史结果回放，正常退款另在B展示</td>
+</tr>
+<tr>
+<td>监控或压测结果</td>
+<td>原始监控证据可用</td>
+<td>I在浏览器打开来源清楚的监控证据，不要求现场再次破坏服务</td>
+</tr>
+<tr>
+<td>测试数字、AI日志、GitHub、Railway</td>
+<td>重点页面截图或短录都可</td>
+<td>用20—30秒串联原始记录与对应工程努力</td>
+</tr>
+</tbody></table></div>
+<p>不用再补拍29页PPT截图，也不用为每个功能单独录一分钟。优先拍清同一订单、真实拒绝和明确工程取舍。</p>
+<h2 id="s6">6. 最省心的成片方法</h2>
+<h3>6.1 先录无声网页素材，再统一讲解</h3>
+<ol>
+<li>在桌面建文件夹“生鲜商城答辩录屏”。素材命名 <code>A-会员下单.mov</code>、<code>B1-拣货.mov</code>……<code>J-公网.mov</code>，避免最后找不到哪段接哪页。</li>
+<li>Mac按 <strong>Shift+Command+5</strong>，选择录制整个屏幕或固定区域。在“选项”里选择保存位置；素材可以先不开麦，避免重复收声。正式连讲时选对麦克风。此操作依据<a href="https://support.apple.com/zh-cn/102618">Apple官方录屏说明</a>。</li>
+<li>网页素材录长一点没关系，剪去打密码、切账号和网络等待，不能剪乱订单状态顺序。需要快进时标“操作等待已加速”。</li>
+<li>另存一份PPT为“答辩录制用.pptx”，原修复版保留。你可以把对应素材插在原标注“录屏A/B…”的页，或在全屏录制时切到已打开的视频播放器播放。</li>
+<li>最后一次统一录讲解：PPT讲到第5页时播放A，结束回第6页；按时间表继续。无声素材配这一次的麦克风旁白，避免双重声音。</li>
+<li>成片看总时长，目标14:20，最多15:00。超过时先删表格逐项解释和登录等待，不删业务结果、权限拒绝或异常证据。</li>
+</ol>
+<p>如果不熟悉剪辑，也可以整屏连录，PPT与Chrome用Command+Tab切换。但必须先排练一遍，账号登录、对应页面和订单状态都预先准备。29页不适合第一次边找菜单边一镜到底。</p>
+<h3>6.2 PowerPoint切换要点</h3>
+<ul>
+<li>备注是给你看的提示，不是最终视频要展示的“注释页面”。成片录幻灯片放映画面，不录备注编辑区。</li>
+<li>用窗口放映或把播放窗口与Chrome放在同一桌面，Command+Tab切换，先试一次再正式录。</li>
+<li>第5页播完A回第6页；第7页播B后回第8页；第9页C后回第10页，依此类推，不要从头重新放映。</li>
+<li>如果用播放器，先把要播的文件打开并暂停在开头；播放前后留半秒静止，便于剪接。录素材时不要把评委必须看清的字段挡在播放控件下面。</li>
+<li>不需要录到所有鼠标操作细节，更不必把每个错误码都解释一次。每次切换只讲一条“我做了什么，所以系统如何处理”。</li>
+</ul>
+<h2 id="s7">7. 录制前与交付前检查</h2>
+<h3>录制前</h3>
+<ul>
+<li><input disabled="" type="checkbox"> PPT原版保留，另外存录制副本，页码仍为29页。</li>
+<li><input disabled="" type="checkbox"> 手机/聊天通知关闭，浏览器只留本项目页面，网页缩放100%或能读清的比例。</li>
+<li><input disabled="" type="checkbox"> 本机首页、工作台、订单、地址能打开，七角色凭据私下准备，不录复制密码。</li>
+<li><input disabled="" type="checkbox"> 主订单A与取消订单B分开，配送员账户ID知道填 <code>demo-courier</code>，会员签收码来自本单。</li>
+<li><input disabled="" type="checkbox"> 品质售后图片、1元申请金额、独立客服与财务账号准备好。</li>
+<li><input disabled="" type="checkbox"> 权限/限流/幂等辅助命令已打开，不在公网运行测试，不拿现有七账号故意输错。</li>
+<li><input disabled="" type="checkbox"> I段选择历史监控回放还是另有真实预录，旁白和画面日期一致；不临时去找9091。</li>
+<li><input disabled="" type="checkbox"> 麦克风先录10秒回放确认有声，再开始长录。</li>
+</ul>
+<h3>交付前</h3>
+<ul>
+<li><input disabled="" type="checkbox"> 总时长不超过15分钟，声音可听清，建议1080p或更清楚。</li>
+<li><input disabled="" type="checkbox"> 视频有真实系统动作、服务端权限拒绝、取消异常和监控/压测结果，不是只翻PPT。</li>
+<li><input disabled="" type="checkbox"> 至少一条订单链首尾一致，订单、支付、退款状态没有被口述混在一起。</li>
+<li><input disabled="" type="checkbox"> 本机与公网、Mac与Linux、历史结果与当前演示均没有混称。</li>
+<li><input disabled="" type="checkbox"> Windows6项跳过未被写成195项全部执行通过；未把不同测试数字相加。</li>
+<li><input disabled="" type="checkbox"> 没有录到API Key、数据库密码、Cookie、Authorization或私有配置；合成号码与签收演示标识按课程示例保留。</li>
+<li><input disabled="" type="checkbox"> 不宣称已完成NFR04、月度可用率、远端CI、Docker干净安装或真实支付认证。</li>
+<li><input disabled="" type="checkbox"> 最后几秒留仓库、公网网址与三份文档入口，确认导出后能从头播放到结尾。</li>
+</ul>
+<h2 id="s8">8. 什么时候容易卡住，怎么继续</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>现象</th>
+<th>先做什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>localhost打不开</td>
+<td>用第2.4节的排练启动与status命令；不要另开第二套3306数据库</td>
+</tr>
+<tr>
+<td>登录报参数不合法</td>
+<td>清空自动填充，重新输入11位号码和本机私有密码，别把公网密码当本机密码</td>
+</tr>
+<tr>
+<td>无配送时段</td>
+<td>地址必须在服务范围；选未截止时段，必要时明天；不要照抄旧日期</td>
+</tr>
+<tr>
+<td>拣货任务为空</td>
+<td>A需付款成功；用PICKER刷新、检查状态筛选与订单，不拿已完成排练单重复演</td>
+</tr>
+<tr>
+<td>无法交接配送</td>
+<td>填账户ID <code>demo-courier</code>，不是手机号；先确认实拣已完成、需要的补款已结清</td>
+</tr>
+<tr>
+<td>签收失败</td>
+<td>读取订单A配送中时的新六位码，不用旧截图中的码或订单号</td>
+</tr>
+<tr>
+<td>品质售后不能提交</td>
+<td>必须勾选订单行、正数数量、范围内金额，上传本订单绑定图片</td>
+</tr>
+<tr>
+<td>财务没有执行按钮</td>
+<td>客服先领取并审核；财务账号必须与审核人不同；成功退款本来就不再显示执行/重试</td>
+</tr>
+<tr>
+<td>409版本冲突</td>
+<td>刷新列表，重新打开对话框，不用旧页面连续重试</td>
+</tr>
+<tr>
+<td>429</td>
+<td>停止重复登录，不对七个常用账号继续尝试；限流素材用独立合成标识辅助命令</td>
+</tr>
+<tr>
+<td>模型没有真实回答</td>
+<td>按实际说明FAQ降级；需要真实模型则检查已配置的公网，不在视频中展示Key</td>
+</tr>
+<tr>
+<td>监控页面打不开</td>
+<td>当前并没有9090/9091实例；按I段打开归档结果，不为了录屏随便杀进程</td>
+</tr>
+<tr>
+<td>时间快超15分钟</td>
+<td>删除逐行读表、版本串和重复镜头。优先保留A/B/C/G/I，主线与老师硬要求不丢</td>
+</tr>
+</tbody></table></div>
+<h2 id="s9">9. 依据与本次范围</h2>
+<p>教师任务书要求不超过15分钟，覆盖业务闭环、角色权限、企业能力、架构、难点、AI与复现、测试部署和总结，且必须展示系统运行、权限拦截、异常流程、监控或压测结果。本指南按所提供任务书原文核对。</p>
+<p>PPT、源码、契约、既有证据与本次接口排练分别使用。PPT引用的Linux <code>shots/new/</code>资料暂未取得，不把它当作本机新实测。已实际运行的录制助手命令及本机业务结果另保存为工程证据。本指南提供拍摄与串联步骤，没有更改原PPT、生成最终视频或替你声称所有课程验收均完成。</p>
+</article><script>document.querySelectorAll('pre').forEach(pre=>{const b=document.createElement('button');b.textContent='复制命令';b.className='copy';b.onclick=async()=>{const code=pre.querySelector('code');try{await navigator.clipboard.writeText(code.textContent);b.textContent='已复制'}catch{b.textContent='请手动选择复制'}};pre.append(b)})</script></body></html>

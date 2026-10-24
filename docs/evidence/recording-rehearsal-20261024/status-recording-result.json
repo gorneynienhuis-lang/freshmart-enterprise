@@ -1,0 +1,15 @@
+{
+  "scene": "status",
+  "result": "PASS",
+  "responses": [
+    {
+      "role": "GUEST",
+      "method": "GET",
+      "path": "/actuator/health",
+      "http": 200,
+      "code": null,
+      "message": null,
+      "traceId": null
+    }
+  ]
+}
