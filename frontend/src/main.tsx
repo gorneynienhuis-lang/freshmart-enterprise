@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Application } from './app/application';
 import { designVersion, designVersionHref } from './app/design-version';
 import './styles/r04-foundation.css';
+import './styles/r04-motion.css';
 import './styles/runtime-r04.css';
 import './styles/r03-polish.css';
 import { MascotAssistant } from './ui/mascot/MascotAssistant';
