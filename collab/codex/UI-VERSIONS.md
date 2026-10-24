@@ -11,6 +11,7 @@
 | R03 | [ui/home-r03-market](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/home-r03-market) | 用户授权Codex制作自然摄影主视觉；三类真实精选商品及直达入口 | 用户认可该板块风格，要求保留并扩展整站；全Demo归档分支archive/demo-r03-2026-10-18=35182fe |
 | R04 | [ui/demo-r04-dhu-natural](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/demo-r04-dhu-natural) | 红白校园品牌、自然摄影的全Demo重构，源码与实测保留 | 用户选择继续使用R03，R04作为未采纳备选保留 |
 | R03 采用与修补 | [ui/r03-selected-polish](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/r03-selected-polish) | R03默认；分类完整点击/高亮/字体与手机布局修补；新增真实管理功能及账户安全 | 用户采用R03主要页面；新增后台基于同风格实现，功能与截图见CODEX-015 |
+| R03 交易弹窗修补 v2 | [ui/r03-dialog-polish-v2](https://github.com/gorneynienhuis-lang/freshmart-enterprise/tree/ui/r03-dialog-polish-v2) | 支付/取消/实拣/签收/售后申请/售后审核统一弹窗；结算优惠券和备注卡片 | 用户要求修复七处截图；已实现候选待查看，不替用户确认审美 |
 
 ## 保存方式
 

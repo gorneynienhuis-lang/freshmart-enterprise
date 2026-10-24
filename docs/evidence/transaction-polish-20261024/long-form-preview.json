@@ -1,0 +1,69 @@
+{
+  "status": "PASSED",
+  "type": "Visual fixtures rendered with the real local frontend modules. No business-flow acceptance claim.",
+  "applicationBuild": "TypeScript + Vite production build PASS",
+  "businessCommandsSubmitted": 0,
+  "browserErrors": [],
+  "results": [
+    {
+      "kind": "picking",
+      "viewportWidth": 1440,
+      "width": 820,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "实拣确认",
+      "screenshot": "picking-1440.png"
+    },
+    {
+      "kind": "aftersale",
+      "viewportWidth": 1440,
+      "width": 720,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "申请售后",
+      "screenshot": "aftersale-1440.png"
+    },
+    {
+      "kind": "picking",
+      "viewportWidth": 1024,
+      "width": 820,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "实拣确认",
+      "screenshot": "picking-1024.png"
+    },
+    {
+      "kind": "aftersale",
+      "viewportWidth": 1024,
+      "width": 720,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "申请售后",
+      "screenshot": "aftersale-1024.png"
+    },
+    {
+      "kind": "picking",
+      "viewportWidth": 390,
+      "width": 358,
+      "height": 1018,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "实拣确认",
+      "screenshot": "picking-390.png"
+    },
+    {
+      "kind": "aftersale",
+      "viewportWidth": 390,
+      "width": 366,
+      "height": 1018,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "申请售后",
+      "screenshot": "aftersale-390.png"
+    }
+  ]
+}
