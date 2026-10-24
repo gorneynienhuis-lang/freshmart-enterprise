@@ -9,6 +9,10 @@ import { homeCategoryHref, selectHomeFeatured } from './home-featured';
 import { isR04Design } from './design-version';
 import { productImagePath, setProductImage } from './product-image';
 import { renderCartSheet, renderCouponSheet } from '../ui/cart/cart-view';
+import { renderCheckoutCoupons } from '../ui/checkout/coupon-view';
+import { renderPickConfirmation } from '../ui/fulfillment/pick-confirmation';
+import { renderAftersaleFields } from '../ui/orders/aftersale-form';
+import { transactionSurface, transactionButton, node as uiNode } from '../ui/transactions/transaction-dialog';
 import { buildWorkbenchShell, finishWorkbench, toneOf, workItem } from '../ui/workbench/workbench';
 import { mountStatusPills, renderAftersaleCard, renderOrderCard, tidyPageBar } from '../ui/orders/order-view';
 import { renderManagement } from './admin-panel';
@@ -425,7 +429,7 @@ export class Application {
             head.append(identity, close); d.append(head);
             if (d.dataset.kind === 'account') d.append(r04Note('新鲜日常，从校园出发。登录后选购食材、预约配送、查看每一笔订单。'));
             if (d.dataset.kind === 'cart') d.append(r04Note('为日常添一点新鲜', 'brand'));
-        } else d.append(heading, close);
+        } else { d.className = 'fm-basic-dialog'; d.append(heading, close); }
         d.addEventListener('close', () => d.remove()); document.body.append(d); d.showModal();
         if (isR04Design()) queueMicrotask(() => this.decorateDialog(d));
         return d;
@@ -589,19 +593,9 @@ export class Application {
         }
         const couponHead = qa(this.root, 'h2').find(n => n.textContent === '优惠券');
         const container = couponHead?.nextElementSibling;
+        couponHead?.closest('section')?.classList.add('fm-checkout-benefits');
         if (container) {
-            const template = q<HTMLButtonElement>(container, 'button')?.cloneNode(true) as HTMLButtonElement | undefined;
-            container.replaceChildren();
-            for (const c of coupons.filter(c => c.status === 'AVAILABLE')) {
-                const b = template?.cloneNode(true) as HTMLButtonElement | undefined;
-                if (!b)
-                    continue;
-                b.textContent = `${c.name} ${formatMoney(c.discountAmount)}（满 ${formatMoney(c.minGoodsAmount)}）${this.couponId === c.couponId ? ' · 已选' : ''}`;
-                b.setAttribute('aria-pressed', String(this.couponId === c.couponId)); b.style.border=this.couponId===c.couponId?'2px solid #A0021F':'1px solid #D5DADF';
-                b.onclick = () => void this.run(async () => { this.couponId = c.couponId; await select(); });
-                container.append(b);
-            }
-            container.append(button('不使用优惠券', () => void this.run(async () => { this.couponId = null; await select(); })));
+            renderCheckoutCoupons(container, coupons, this.couponId, id => void this.run(async () => { this.couponId = id; await select(); }));
         }
         const note = q<HTMLInputElement>(this.root, 'input[type="text"]');
         if (note) {
@@ -618,10 +612,53 @@ export class Application {
             return;
         } const order = await service.createOrder({ quoteId: quote.quoteId, quoteToken: quote.quoteToken, ...this.buyerNote.trim() ? { buyerNote: this.buyerNote.trim() } : {} }); this.quote = null; this.tell('订单创建成功；付款状态以订单为准。'); await this.loadCart();this.navigate('/orders');if(order.allowedActions.includes('PAY'))await this.payment(order); });
     }
-    private async payment(order: Order) { const purpose = order.weightAdjustment?.status === 'TOP_UP_PENDING' ? 'TOP_UP' : 'ORDER'; const p = await service.prepay({ orderId: order.orderId, purpose, ...purpose === 'TOP_UP' ? { adjustmentId: order.weightAdjustment!.adjustmentId } : {} }); const d = this.dialog('沙箱支付确认'); d.append(el('p', `${order.orderNo} · ${formatMoney(p.amount)} · 不产生真实扣费`), el('p', `状态 ${p.status}，有效期至 ${new Date(p.expiresAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })}`)); for (const [label, outcome] of [['模拟支付成功', 'SUCCESS'], ['模拟支付失败', 'FAILED']] as const) {
-        const b = button(label, () => { void this.run(async () => { const paid = await service.simulate(p.paymentId, { outcome, version: p.version }); d.close(); this.tell(paid.status === 'SUCCESS' ? '沙箱支付已入账' : '已模拟支付失败，可重新发起支付'); this.navigate('/orders'); }); });
-        b.disabled=!p.allowedActions.includes('SIMULATE_PAYMENT');d.append(b);
-    } d.append(button('稍后支付，查看订单', () => { d.close(); this.navigate('/orders'); })); }
+    private async payment(order: Order) {
+        const purpose = order.weightAdjustment?.status === 'TOP_UP_PENDING' ? 'TOP_UP' : 'ORDER';
+        const p = await service.prepay({ orderId: order.orderId, purpose, ...purpose === 'TOP_UP' ? { adjustmentId: order.weightAdjustment!.adjustmentId } : {} });
+        const d = this.dialog('沙箱支付确认');
+        const { body, footer } = transactionSurface(d, { kind: 'payment', title: '沙箱支付确认', description: '课程演示支付，选择结果后可返回订单查看进度。' });
+        const total = uiNode('div', 'fm-payment-total');
+        total.append(uiNode('span', '', purpose === 'TOP_UP' ? '本次称重补款' : '本次支付金额'), uiNode('strong', '', formatMoney(p.amount)), uiNode('small', '', '仅供课程演示 · 不产生真实扣费'));
+        const details = uiNode('dl', 'fm-payment-details');
+        const paymentStates: Record<string, string> = { INIT: '待发起', PENDING: '待支付', SUCCESS: '支付成功', FAILED: '支付失败', CLOSED: '已关闭' };
+        for (const [label, value] of [['订单编号', order.orderNo], ['支付状态', paymentStates[p.status] ?? p.status], ['有效期至', new Date(p.expiresAt).toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' })]]) {
+            const row = uiNode('div', ''); const valueNode = uiNode('dd', '');
+            valueNode.append(label === '订单编号' ? uiNode('code', '', value) : uiNode('span', label === '支付状态' ? 'fm-payment-state' : '', value));
+            row.append(uiNode('dt', '', label), valueNode); details.append(row);
+        }
+        body.append(total, details);
+        for (const [label, outcome] of [['模拟支付成功', 'SUCCESS'], ['模拟支付失败', 'FAILED']] as const) {
+            const b = transactionButton(label, () => void this.run(async () => { const paid = await service.simulate(p.paymentId, { outcome, version: p.version }); d.close(); this.tell(paid.status === 'SUCCESS' ? '沙箱支付已入账' : '已模拟支付失败，可重新发起支付'); this.navigate('/orders'); }), outcome === 'SUCCESS' ? 'primary' : 'secondary');
+            b.disabled = !p.allowedActions.includes('SIMULATE_PAYMENT'); footer.append(b);
+        }
+        footer.append(transactionButton('稍后支付，查看订单', () => { d.close(); this.navigate('/orders'); }, 'text'));
+    }
+    private cancelOrderDialog(order: Order) {
+        const d = this.dialog('取消订单');
+        const { body, footer } = transactionSurface(d, { kind: 'cancel', title: '取消订单', description: '确认不再需要这份订单？请告诉我们取消原因。' });
+        const summary = uiNode('div', 'fm-cancel-summary');
+        summary.append(uiNode('strong', '', `当前订单 · ${status[order.status] ?? order.status}`), uiNode('code', '', order.orderNo));
+        const form = uiNode('form', 'fm-cancel-form'); form.id = `cancel-${crypto.randomUUID()}`;
+        const field = uiNode('label', 'fm-cancel-field');
+        const label = uiNode('span', '', '取消原因'); label.append(uiNode('small', '', '最多 500 字'));
+        const reason = uiNode('textarea', ''); reason.name = 'reason'; reason.required = true; reason.maxLength = 500; reason.value = '不再需要';
+        reason.placeholder = '例如：计划有变，暂时不需要了'; field.append(label, reason); form.append(field);
+        form.onsubmit = event => { event.preventDefault(); void this.run(async () => { await service.cancel(order.orderId, { version: order.version, reason: reason.value }); d.close(); this.tell('订单已取消；退款进度以订单为准'); await this.orders(); }); };
+        body.append(summary, form, uiNode('p', 'fm-cancel-hint', order.paidAmount > 0 ? '已付款订单的退款进度，可在取消后返回订单查看。' : '取消后将释放本单预占的商品和配送名额。'));
+        footer.append(transactionButton('暂不取消', () => d.close(), 'secondary'));
+        const confirm = transactionButton('确认取消', () => {}); confirm.type = 'submit'; confirm.setAttribute('form', form.id); footer.append(confirm);
+    }
+    private receiptDialog(task: Models['DeliveryTask']) {
+        const d = this.dialog('配送签收');
+        const { body, footer } = transactionSurface(d, { kind: 'delivery', title: '配送签收', description: '请在商品送达后，向收货会员核对六位签收码。' });
+        const form = uiNode('form', 'fm-receipt-form'); form.id = `receipt-${crypto.randomUUID()}`;
+        const field = uiNode('label', 'fm-receipt-field'); field.append(uiNode('span', '', '会员提供的六位签收码'));
+        const proof = uiNode('input', ''); proof.name = 'proofCode'; proof.type = 'text'; proof.inputMode = 'numeric'; proof.autocomplete = 'one-time-code'; proof.pattern = '[0-9]{6}'; proof.maxLength = 6; proof.required = true; proof.placeholder = '请输入 6 位数字'; field.append(proof);
+        form.append(field, uiNode('p', 'fm-receipt-hint', '会员可在「我的订单」中查看签收码。核验成功后，订单将更新为已完成。'));
+        form.onsubmit = event => { event.preventDefault(); void this.run(async () => { await service.completeDelivery(task.taskId, { proofCode: proof.value, version: task.version }); d.close(); this.tell('订单已完成'); await this.operations(); }); };
+        body.append(form); footer.append(transactionButton('稍后操作', () => d.close(), 'secondary'));
+        const submit = transactionButton('提交签收', () => {}); submit.type = 'submit'; submit.setAttribute('form', form.id); footer.append(submit);
+    }
     private shell(title: string) {
         if (!isR04Design() && title.startsWith('员工工作台')) {
             const user = service.auth.getSnapshot().user;
@@ -694,7 +731,7 @@ export class Application {
             article.append(button(order.allowedActions.includes('TOP_UP') ? '支付称重补款' : '去支付', () => void this.run(() => this.payment(order))));
         if(order.allowedActions.includes('APPLY_AFTERSALE'))article.append(button('申请售后',()=>this.aftersaleDialog(order)));
         if (order.allowedActions.includes('CANCEL'))
-            article.append(button('取消订单', () => { const d = this.dialog('取消订单'); const reason = input('取消原因', 'reason', '不再需要'); d.append(reason, button('确认取消', () => void this.run(async () => { await service.cancel(order.orderId, { version: order.version, reason: q<HTMLInputElement>(reason, 'input')!.value }); d.close(); this.tell('订单已取消；退款进度以订单为准'); await this.orders(); }))); }));
+            article.append(button('取消订单', () => this.cancelOrderDialog(order)));
         appendMemberOrderActions(article,order,memberOptions);
         r03Card?.finish();
         if (isR04Design()) { const actions = el('div'); actions.className = 'r04-order-actions'; for (const action of qa<HTMLButtonElement>(article, ':scope > button')) actions.append(action); if (actions.childElementCount) article.append(actions); }
@@ -746,7 +783,7 @@ export class Application {
                 if (task.status === 'PENDING_DISPATCH' && user.permissions.includes('delivery.dispatch'))
                     row.append(button('交接并发货', () => { const d=this.dialog('交接配送');const courier=input('配送员账户 ID','courierId','demo-courier');d.append(courier,el('p','演示配送员 ID 为 demo-courier；服务端验证配送员角色，不能指派给拣货员。'),button('确认发货',()=>void this.run(async()=>{await service.dispatch(task.taskId,{courierId:q<HTMLInputElement>(courier,'input')!.value,version:task.version});d.close();this.tell('订单已交接发货，会员订单中可查看签收码');await this.operations();}))); }));
                 if (task.status === 'DELIVERING' && task.courierId === user.userId)
-                    row.append(button('确认签收', () => { const d = this.dialog('配送签收'); const proof = input('会员提供的六位签收码', 'proofCode'); const i = q<HTMLInputElement>(proof, 'input')!; i.pattern = '[0-9]{6}'; i.maxLength = 6; d.append(proof, button('提交签收', () => void this.run(async () => { await service.completeDelivery(task.taskId, { proofCode: i.value, version: task.version }); d.close(); this.tell('订单已完成'); await this.operations(); }))); }));
+                    row.append(button('确认签收', () => this.receiptDialog(task)));
                 appendDeliveryActions(row,task,managementOptions);
                 return row;
         },'暂无符合条件的配送任务。',{PENDING_DISPATCH:'待交接',DELIVERING:'配送中',COMPLETED:'已签收',EXCEPTION:'异常待处理',CANCELED:'已取消'});
@@ -788,61 +825,44 @@ export class Application {
             } else if (node.tagName === 'P') node.classList.add('r04-role-description');
         }
     }
-    private aftersaleDialog(order:Order) {
-        const d=this.dialog('申请售后'); d.classList.add('fm-management-dialog');
-        d.append(el('p','签收后7天内可申请品质、缺货或配送延迟售后。品质问题至少提供一张本订单图片；数量、金额和已退款额度由服务端再次校验。'));
-        const type=document.createElement('select');type.setAttribute('aria-label','售后类型');
-        for(const [value,label] of [['QUALITY','品质问题'],['SHORTAGE','缺货'],['LATE','配送延迟']]) {const option=document.createElement('option');option.value=value!;option.textContent=label!;type.append(option);}
-        const reason=input('问题说明','reason'); const reasonInput=q<HTMLInputElement>(reason,'input')!;reasonInput.maxLength=500;
-        const uploader=createEvidenceUploader(order.orderId,{purpose:'AFTERSALE',ownerDialog:d,run:action=>this.run(action)});
-        d.append(type,reason);const fields:{item:Models['OrderItem'];selected:HTMLInputElement;quantity:HTMLInputElement;amount:HTMLInputElement}[]=[];
-        for(const item of order.items) {
-            const row=el('p'),selected=document.createElement('input'),qty=document.createElement('input'),amount=document.createElement('input');
-            selected.type='checkbox';selected.setAttribute('aria-label','售后选择 '+item.productName);qty.type='number';qty.min='1';qty.step='1';qty.value='1';qty.setAttribute('aria-label',item.productName+'售后数量');amount.inputMode='decimal';amount.placeholder='申请退款金额（元）';amount.setAttribute('aria-label',item.productName+'申请金额');
-            row.append(selected,el('span',item.productName+' '),qty,el('span',item.baseUnit==='GRAM'?' 克 ':' 件 '),amount);fields.push({item,selected,quantity:qty,amount});d.append(row);
-        }
-        d.append(uploader.element,button('提交售后申请',()=>void this.run(async()=>{
-            if(!reasonInput.value.trim())throw new Error('请填写问题说明');
-            const items=fields.filter(f=>f.selected.checked).map(f=>{if(!/^[1-9]\d*$/.test(f.quantity.value)||!Number.isSafeInteger(Number(f.quantity.value)))throw new Error('售后数量必须为正整数');return {orderItemId:f.item.orderItemId,quantity:Number(f.quantity.value),requestedAmount:yuan(f.amount.value)};});
-            if(!items.length)throw new Error('请选择需要售后的商品');await uploader.uploadPending();const evidenceMediaIds=uploader.ids();
-            if(type.value==='QUALITY'&&!evidenceMediaIds.length)throw new Error('品质问题至少上传一张本订单图片');
-            await service.applyAftersale({orderId:order.orderId,type:type.value as 'QUALITY'|'SHORTAGE'|'LATE',reason:reasonInput.value.trim(),items,evidenceMediaIds});
-            d.close();this.tell('售后申请已提交');await this.orders();
-        })));
+    private aftersaleDialog(order: Order) {
+        const d = this.dialog('申请售后');
+        const { body, footer } = transactionSurface(d, { kind: 'aftersale', title: '申请售后', description: '签收后 7 天内，可申请品质、缺货或配送延迟售后。' });
+        const uploader = createEvidenceUploader(order.orderId, { purpose: 'AFTERSALE', ownerDialog: d, run: action => this.run(action) });
+        const { type, reasonInput, fields } = renderAftersaleFields(body, footer, order, uploader.element, () => void this.run(async () => {
+            if (!reasonInput.value.trim()) throw new Error('请填写问题说明');
+            const items = fields.filter(f => f.selected.checked).map(f => { if (!/^[1-9]\d*$/.test(f.quantity.value) || !Number.isSafeInteger(Number(f.quantity.value))) throw new Error('售后数量必须为正整数'); return { orderItemId: f.item.orderItemId, quantity: Number(f.quantity.value), requestedAmount: yuan(f.amount.value) }; });
+            if (!items.length) throw new Error('请选择需要售后的商品');
+            await uploader.uploadPending(); const evidenceMediaIds = uploader.ids();
+            if (type.value === 'QUALITY' && !evidenceMediaIds.length) throw new Error('品质问题至少上传一张本订单图片');
+            await service.applyAftersale({ orderId: order.orderId, type: type.value as 'QUALITY' | 'SHORTAGE' | 'LATE', reason: reasonInput.value.trim(), items, evidenceMediaIds });
+            d.close(); this.tell('售后申请已提交'); await this.orders();
+        }));
     }
-    private reviewDialog(a:Models['AdminAftersale']){const d=this.dialog('售后审核');const comment=input('审核说明','comment','已核实问题');d.append(comment);const fields:{line:Models['AftersaleLineInput'];amount:HTMLInputElement}[]=[];for(const line of a.items){const row=el('p',`${line.orderItemId} · 申请数量 ${line.quantity} · 核准金额（元） `);const amount=document.createElement('input');amount.inputMode='decimal';amount.value=money(line.requestedAmount);row.append(amount);fields.push({line,amount});d.append(row);}d.append(button('通过并生成退款单',()=>void this.run(async()=>{await service.approveAftersale(a.aftersaleId,{version:a.version,comment:q<HTMLInputElement>(comment,'input')!.value,approvedItems:fields.map(f=>({...f.line,requestedAmount:yuan(f.amount.value)}))});d.close();this.tell('审核通过，等待另一财务账户执行退款');await this.operations();})),button('驳回申请',()=>void this.run(async()=>{await service.rejectAftersale(a.aftersaleId,{version:a.version,comment:q<HTMLInputElement>(comment,'input')!.value});d.close();await this.operations();})));}
+    private reviewDialog(a: Models['AdminAftersale']) {
+        const d = this.dialog('售后审核');
+        const { body, footer } = transactionSurface(d, { kind: 'review', title: '售后审核', description: '逐项复核申请金额，审核通过后由独立财务人员执行退款。' });
+        const summary = uiNode('div', 'fm-cancel-summary'); summary.append(uiNode('strong', '', '当前售后申请'), uiNode('code', '', a.aftersaleId));
+        const list = uiNode('div', 'fm-review-lines');
+        const fields: { line: Models['AftersaleLineInput']; amount: HTMLInputElement }[] = [];
+        a.items.forEach((line, index) => {
+            const row = uiNode('div', 'fm-review-line');
+            const item = uiNode('div', ''); item.append(uiNode('strong', '', `商品 ${index + 1} · 申请数量 ${line.quantity}`), uiNode('code', '', line.orderItemId));
+            const field = uiNode('label', '', '核准金额（元）');
+            const amount = uiNode('input', ''); amount.inputMode = 'decimal'; amount.value = money(line.requestedAmount); field.append(amount);
+            row.append(item, field); list.append(row); fields.push({ line, amount });
+        });
+        const field = uiNode('label', 'fm-review-note', '审核说明');
+        const comment = uiNode('textarea', ''); comment.name = 'comment'; comment.value = '已核实问题'; field.append(comment);
+        body.append(summary, list, field, uiNode('p', 'fm-review-help', '核准金额与可退款额度由服务端校验。审核记录将保留在本次售后处理中。'));
+        footer.append(transactionButton('驳回申请', () => void this.run(async () => { await service.rejectAftersale(a.aftersaleId, { version: a.version, comment: comment.value }); d.close(); await this.operations(); }), 'secondary'), transactionButton('通过并生成退款单', () => void this.run(async () => { await service.approveAftersale(a.aftersaleId, { version: a.version, comment: comment.value, approvedItems: fields.map(f => ({ ...f.line, requestedAmount: yuan(f.amount.value) })) }); d.close(); this.tell('审核通过，等待另一财务账户执行退款'); await this.operations(); })));
+    }
     private pickDialog(task: Models['PickTask']) {
-        const d = this.dialog('实拣确认 · 基础单位');
-        const fields: {
-            allocation: Models['Allocation'];
-            quantity: HTMLInputElement;
-            reason: HTMLSelectElement;
-            note: HTMLInputElement;
-        }[] = [];
-        for (const a of task.allocations) {
-            const item = task.items.find(i => i.orderItemId === a.orderItemId);
-            const row = el('p');
-            row.append(el('strong', `${item?.productName ?? a.orderItemId} / ${a.batchNo} · 预占 ${a.reservedQuantity} ${a.baseUnit === 'GRAM' ? '克' : '件'} `));
-            const amount = document.createElement('input');
-            amount.type = 'number';
-            amount.min = '0';
-            amount.step = '1';
-            amount.value = String(a.reservedQuantity);
-            amount.setAttribute('aria-label', `${item?.productName ?? a.orderItemId}实拣数量`);
-            const reason = document.createElement('select');
-            for (const [value, text] of [['NORMAL', '正常'], ['WEIGHT_VARIANCE', '称重差异'], ['SHORTAGE', '缺货']]) {
-                const option = document.createElement('option');
-                option.value = value!;
-                option.textContent = text!;
-                reason.append(option);
-            }
-            const note = document.createElement('input');
-            note.value = '实际拣货确认';
-            note.setAttribute('aria-label', '拣货原因');
-            row.append(amount, reason, note);
-            fields.push({ allocation: a, quantity: amount, reason, note });
-            d.append(row);
-        }
-        d.append(el('p', 'PIECE 输入件数；GRAM 输入克数。实重超出估重 110% 会被服务器拒绝，零实拣必须选择缺货。'), button('确认出库并结算', () => void this.run(async () => { const result = await service.confirmPick(task.taskId, { version: task.version, allocations: fields.map(f => ({ allocationId: f.allocation.allocationId, actualQuantity: Number(f.quantity.value), reasonCode: f.reason.value as Models['PickConfirmLine']['reasonCode'], reason: f.note.value })) }); d.close(); this.tell(`拣货完成：${status[result.orderStatus]}${result.weightAdjustment ? ' · 差额 ' + formatMoney(result.weightAdjustment.deltaAmount) : ''}`); await this.operations(); })));
+        const d = this.dialog('实拣确认');
+        const { body, footer } = transactionSurface(d, { kind: 'picking', title: '实拣确认', description: '按商品批次核对实拣数量，确认后出库并按实重结算。' });
+        renderPickConfirmation(body, footer, task, allocations => void this.run(async () => {
+            const result = await service.confirmPick(task.taskId, { version: task.version, allocations });
+            d.close(); this.tell(`拣货完成：${status[result.orderStatus]}${result.weightAdjustment ? ' · 差额 ' + formatMoney(result.weightAdjustment.deltaAmount) : ''}`); await this.operations();
+        }));
     }
 }

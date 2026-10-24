@@ -1,0 +1,219 @@
+{
+  "status": "PASSED",
+  "type": "Visual fixtures rendered with the real local frontend modules. No business-flow acceptance claim.",
+  "applicationBuild": "TypeScript + Vite production build PASS",
+  "browserErrors": [],
+  "results": [
+    {
+      "kind": "payment",
+      "viewportWidth": 1440,
+      "width": 500,
+      "height": 496.53125,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "沙箱支付确认",
+      "screenshot": "payment-1440.png"
+    },
+    {
+      "kind": "cancel",
+      "viewportWidth": 1440,
+      "width": 500,
+      "height": 458.15625,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "取消订单",
+      "screenshot": "cancel-1440.png"
+    },
+    {
+      "kind": "coupon",
+      "viewportWidth": 1440,
+      "width": 808,
+      "height": 379.078125,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "优惠券",
+      "screenshot": "coupon-1440.png"
+    },
+    {
+      "kind": "picking",
+      "viewportWidth": 1440,
+      "width": 820,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "实拣确认",
+      "screenshot": "picking-1440.png"
+    },
+    {
+      "kind": "delivery",
+      "viewportWidth": 1440,
+      "width": 500,
+      "height": 360.28125,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "配送签收",
+      "screenshot": "delivery-1440.png"
+    },
+    {
+      "kind": "aftersale",
+      "viewportWidth": 1440,
+      "width": 720,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "申请售后",
+      "screenshot": "aftersale-1440.png"
+    },
+    {
+      "kind": "review",
+      "viewportWidth": 1440,
+      "width": 680,
+      "height": 566.734375,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "售后审核",
+      "screenshot": "review-1440.png"
+    },
+    {
+      "kind": "payment",
+      "viewportWidth": 1024,
+      "width": 500,
+      "height": 496.53125,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "沙箱支付确认",
+      "screenshot": "payment-1024.png"
+    },
+    {
+      "kind": "cancel",
+      "viewportWidth": 1024,
+      "width": 500,
+      "height": 458.15625,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "取消订单",
+      "screenshot": "cancel-1024.png"
+    },
+    {
+      "kind": "coupon",
+      "viewportWidth": 1024,
+      "width": 808,
+      "height": 379.078125,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "优惠券",
+      "screenshot": "coupon-1024.png"
+    },
+    {
+      "kind": "picking",
+      "viewportWidth": 1024,
+      "width": 820,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "实拣确认",
+      "screenshot": "picking-1024.png"
+    },
+    {
+      "kind": "delivery",
+      "viewportWidth": 1024,
+      "width": 500,
+      "height": 360.28125,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "配送签收",
+      "screenshot": "delivery-1024.png"
+    },
+    {
+      "kind": "aftersale",
+      "viewportWidth": 1024,
+      "width": 720,
+      "height": 1002,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "申请售后",
+      "screenshot": "aftersale-1024.png"
+    },
+    {
+      "kind": "review",
+      "viewportWidth": 1024,
+      "width": 680,
+      "height": 566.734375,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "售后审核",
+      "screenshot": "review-1024.png"
+    },
+    {
+      "kind": "payment",
+      "viewportWidth": 390,
+      "width": 366,
+      "height": 493.71875,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "沙箱支付确认",
+      "screenshot": "payment-390.png"
+    },
+    {
+      "kind": "cancel",
+      "viewportWidth": 390,
+      "width": 366,
+      "height": 460.546875,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "取消订单",
+      "screenshot": "cancel-390.png"
+    },
+    {
+      "kind": "coupon",
+      "viewportWidth": 390,
+      "width": 358,
+      "height": 371.078125,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "优惠券",
+      "screenshot": "coupon-390.png"
+    },
+    {
+      "kind": "picking",
+      "viewportWidth": 390,
+      "width": 358,
+      "height": 1018,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "实拣确认",
+      "screenshot": "picking-390.png"
+    },
+    {
+      "kind": "delivery",
+      "viewportWidth": 390,
+      "width": 366,
+      "height": 384.265625,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "配送签收",
+      "screenshot": "delivery-390.png"
+    },
+    {
+      "kind": "aftersale",
+      "viewportWidth": 390,
+      "width": 366,
+      "height": 1018,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "申请售后",
+      "screenshot": "aftersale-390.png"
+    },
+    {
+      "kind": "review",
+      "viewportWidth": 390,
+      "width": 358,
+      "height": 649.109375,
+      "withinViewport": true,
+      "overflow": false,
+      "heading": "售后审核",
+      "screenshot": "review-390.png"
+    }
+  ],
+  "businessCommandsSubmitted": 0
+}

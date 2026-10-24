@@ -1,0 +1,104 @@
+/* Isolated surfaces for payment, cancellation and pick confirmation. */
+html[data-design="r03"] .fm-basic-dialog:not(.fm-account-dialog):not(.fm-management-dialog):not(.fm-sheet) { box-sizing: border-box; width: min(580px, calc(100vw - 32px)); max-height: calc(100dvh - 48px); padding: 26px; border: 1px solid #e5e1e3; border-radius: 16px; color: #29313d; background: #fff; box-shadow: 0 24px 90px #20131c30; font: 14px/1.7 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif !important; }
+html[data-design="r03"] .fm-basic-dialog::backdrop { background: #19202b66; backdrop-filter: blur(4px); }
+html[data-design="r03"] .fm-basic-dialog:not(.fm-account-dialog):not(.fm-management-dialog):not(.fm-sheet) > h2 { margin: 0 65px 22px 0; font-size: 21px; }
+html[data-design="r03"] .fm-basic-dialog:not(.fm-account-dialog):not(.fm-management-dialog):not(.fm-sheet) > button:first-of-type { position: absolute; top: 21px; right: 24px; }
+html[data-design="r03"] .fm-basic-dialog:not(.fm-account-dialog):not(.fm-management-dialog):not(.fm-sheet) :is(input, select, textarea) { box-sizing: border-box; max-width: 100%; min-height: 40px; padding: 8px 11px; border: 1px solid #dfe2e7; border-radius: 8px; background: #fff; color: #333c48; font: inherit; }
+html[data-design="r03"] .fm-basic-dialog:not(.fm-account-dialog):not(.fm-management-dialog):not(.fm-sheet) > label { display: grid; gap: 7px; margin: 16px 0; font-size: 13px; }
+html[data-design="r03"] .fm-basic-dialog:not(.fm-account-dialog):not(.fm-management-dialog):not(.fm-sheet) > .fm-action-button { margin: 6px 8px 0 0; border-radius: 8px; }
+.fm-transaction-dialog {
+  --transaction-red: #a0021f;
+  box-sizing: border-box;
+  width: min(500px, calc(100vw - 32px));
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 48px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid #e5e1e3;
+  border-radius: 18px;
+  background: #fff;
+  color: #24272e;
+  box-shadow: 0 24px 90px #20131c30;
+  font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif !important;
+  font-size: 14px;
+  line-height: 1.6;
+  overflow: hidden;
+  overscroll-behavior: contain;
+}
+.fm-transaction-dialog[open] { display: flex; flex-direction: column; }
+.fm-transaction-dialog *, .fm-transaction-dialog *::before, .fm-transaction-dialog *::after { box-sizing: border-box; }
+.fm-transaction-dialog::backdrop { background: #19202b66; backdrop-filter: blur(4px); }
+.fm-transaction-head { display: flex; flex-shrink: 0; justify-content: space-between; align-items: flex-start; gap: 18px; padding: 26px 26px 20px; }
+.fm-transaction-identity { display: flex; align-items: flex-start; gap: 12px; min-width: 0; }
+.fm-transaction-icon { display: grid; place-items: center; flex: 0 0 40px; height: 40px; border: 1px solid #f1e0e4; border-radius: 12px; background: #fbf1f3; color: var(--transaction-red); }
+.fm-transaction-icon svg { width: 23px; height: 23px; }
+.fm-transaction-titles { min-width: 0; }
+.fm-transaction-titles h2 { margin: 0; color: #24272e; font-size: 21px; font-weight: 650; line-height: 1.5; }
+.fm-transaction-titles p { margin: 5px 0 0; font-size: 12px; color: #7c818b; line-height: 1.7; }
+.fm-transaction-close { display: grid; flex: 0 0 30px; place-items: center; height: 30px; padding: 6px; border: 0; border-radius: 8px; color: #737b86; background: transparent; cursor: pointer; }
+.fm-transaction-close svg { width: 18px; height: 18px; }
+.fm-transaction-close:hover { color: #24272e; background: #f2f3f5; }
+.fm-transaction-body { flex: 1; min-width: 0; min-height: 0; padding: 0 26px 24px; overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+.fm-transaction-actions { display: flex; flex-shrink: 0; align-items: center; justify-content: flex-end; flex-wrap: wrap; gap: 10px; padding: 18px 26px; background: #fbfbfc; border-top: 1px solid #eef0f3; border-radius: 0 0 18px 18px; }
+.fm-transaction-button { display: inline-flex; justify-content: center; align-items: center; min-height: 42px; padding: 10px 18px; border: 1px solid var(--transaction-red); border-radius: 9px; background: var(--transaction-red); color: #fff; font: inherit; font-size: 14px; font-weight: 600; line-height: 1.4; cursor: pointer; transition: background .15s, border-color .15s; }
+.fm-transaction-button:hover { background: #85041c; border-color: #85041c; }
+.fm-transaction-button[data-tone="secondary"] { border-color: #dfe2e7; background: #fff; color: #525a66; font-weight: 500; }
+.fm-transaction-button[data-tone="secondary"]:hover { border-color: #c1a0a8; color: var(--transaction-red); }
+.fm-transaction-button[data-tone="text"] { min-height: 30px; padding: 3px 8px; border-color: transparent; background: transparent; color: #727a85; font-size: 12px; font-weight: 400; }
+.fm-transaction-button[data-tone="text"]:hover { color: var(--transaction-red); }
+.fm-transaction-dialog button:disabled { opacity: .5; cursor: wait; }
+.fm-transaction-dialog :is(button, input, textarea, select):focus-visible { outline: 3px solid #a0021f35; outline-offset: 3px; }
+.fm-transaction-dialog > [data-command-error] { order: 1; margin: 0; padding: 14px 26px; background: #fff6f7; color: #a0021f; font-size: 12px; overflow-wrap: anywhere; }
+.fm-payment-total { display: grid; justify-items: center; gap: 7px; margin-bottom: 19px; padding: 22px 16px; border: 1px solid #f1e5e8; border-radius: 12px; background: linear-gradient(145deg, #fdf7f8, #fff); }
+.fm-payment-total > span { font-size: 12px; color: #7b6470; }
+.fm-payment-total strong { color: var(--transaction-red); font-size: 38px; font-weight: 700; line-height: 1.3; letter-spacing: -.04em; font-variant-numeric: tabular-nums; }
+.fm-payment-total small { display: inline-flex; align-items: center; gap: 5px; color: #8a7680; font-size: 11px; }
+.fm-payment-details { display: grid; gap: 11px; margin: 0; }
+.fm-payment-details > div { display: grid; grid-template-columns: 68px minmax(0, 1fr); align-items: baseline; gap: 16px; }
+.fm-payment-details dt { color: #858b94; font-size: 12px; }
+.fm-payment-details dd { margin: 0; text-align: right; color: #46505c; font-size: 12px; overflow-wrap: anywhere; }
+.fm-payment-details code { font: 11px/1.7 ui-monospace, SFMono-Regular, monospace; }
+.fm-payment-state { display: inline-block; padding: 2px 9px; border-radius: 20px; background: #fff4e4; color: #9a651c; font-size: 11px; }
+.fm-transaction-dialog[data-kind="payment"] .fm-transaction-actions { display: grid; grid-template-columns: 1fr 1fr; }
+.fm-transaction-dialog[data-kind="payment"] .fm-transaction-button[data-tone="text"] { grid-column: 1 / -1; justify-self: center; }
+.fm-cancel-summary { margin: 0 0 19px; padding: 13px 15px; border: 1px solid #e8eaee; border-radius: 10px; background: #f8f9fa; }
+.fm-cancel-summary > strong { display: block; margin-bottom: 4px; color: #505966; font-size: 12px; font-weight: 500; }
+.fm-cancel-summary > code { color: #818894; font: 11px/1.7 ui-monospace, SFMono-Regular, monospace; overflow-wrap: anywhere; }
+.fm-cancel-form { margin: 0; }
+.fm-cancel-field { display: grid; gap: 9px; }
+.fm-cancel-field > span { display: flex; justify-content: space-between; gap: 12px; color: #3e4753; font-size: 13px; font-weight: 600; }
+.fm-cancel-field small { color: #a0a5ad; font-size: 11px; font-weight: 400; }
+.fm-cancel-field textarea { display: block; width: 100%; min-height: 94px; resize: vertical; padding: 12px 14px; border: 1px solid #dfe2e7; border-radius: 9px; background: #fff; color: #333c48; font: inherit; font-size: 14px; line-height: 1.7; }
+.fm-cancel-field textarea:focus { border-color: #b95469; }
+.fm-cancel-hint { margin: 12px 0 0; color: #8a9098; font-size: 12px; line-height: 1.8; }
+.fm-transaction-dialog[data-kind="picking"] { width: min(820px, calc(100vw - 32px)); }
+.fm-transaction-dialog[data-kind="review"] { width: min(680px, calc(100vw - 32px)); }
+.fm-receipt-form { margin: 0; }
+.fm-receipt-field { display: grid; gap: 11px; font-size: 13px; font-weight: 600; color: #47515d; }
+.fm-receipt-field input { width: 100%; min-width: 0; height: 62px; padding: 12px 16px; border: 1px solid #dfe2e7; border-radius: 10px; background: #fafbfc; color: #29313d; font: 600 25px/1.3 ui-monospace, monospace; text-align: center; letter-spacing: .3em; }
+.fm-receipt-field input::placeholder { color: #a0a6af; font: 400 14px/1.5 'PingFang SC', sans-serif; letter-spacing: .05em; }
+.fm-receipt-field input:focus { background: #fff; border-color: #b95469; }
+.fm-receipt-hint { margin: 13px 0 0; padding: 12px 14px; border-radius: 9px; background: #f6f7f9; color: #858d98; font-size: 12px; line-height: 1.8; }
+.fm-review-lines { display: grid; gap: 12px; margin-bottom: 18px; }
+.fm-review-line { display: grid; grid-template-columns: minmax(0, 1fr) 150px; gap: 15px; align-items: center; padding: 15px; border: 1px solid #e6e8ed; border-radius: 10px; }
+.fm-review-line strong { font-size: 13px; font-weight: 600; }
+.fm-review-line code { display: block; margin-top: 4px; color: #939aa4; font: 10px/1.7 ui-monospace, monospace; overflow-wrap: anywhere; }
+.fm-review-line label { display: grid; gap: 7px; font-size: 12px; color: #727b87; }
+.fm-review-line input { width: 100%; min-width: 0; min-height: 40px; padding: 9px 11px; border: 1px solid #dfe2e7; border-radius: 8px; font: inherit; font-size: 14px; color: #333c48; }
+.fm-review-note { display: grid; gap: 9px; color: #525c69; font-size: 13px; font-weight: 600; }
+.fm-review-note textarea { width: 100%; min-height: 84px; padding: 11px 13px; border: 1px solid #dfe2e7; border-radius: 9px; resize: vertical; font: inherit; font-size: 14px; font-weight: 400; }
+.fm-review-help { margin: 12px 0 0; color: #8a919a; font-size: 12px; line-height: 1.8; }
+@media (max-width: 600px) {
+  .fm-transaction-dialog { width: calc(100vw - 24px); max-width: calc(100vw - 24px); max-height: calc(100dvh - 32px); border-radius: 14px; }
+  .fm-transaction-head { padding: 21px 18px 18px; gap: 10px; }
+  .fm-transaction-titles h2 { font-size: 19px; }
+  .fm-transaction-identity { gap: 10px; }
+  .fm-transaction-icon { flex-basis: 35px; height: 35px; border-radius: 10px; }
+  .fm-transaction-body { padding: 0 18px 20px; }
+  .fm-transaction-actions { padding: 16px 18px; border-radius: 0 0 14px 14px; }
+  .fm-transaction-actions > .fm-transaction-button { flex: 1; }
+  .fm-payment-total strong { font-size: 34px; }
+  .fm-payment-details > div { gap: 10px; }
+  .fm-review-line { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .fm-transaction-button { transition: none; } }

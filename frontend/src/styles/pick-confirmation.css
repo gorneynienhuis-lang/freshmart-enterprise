@@ -1,0 +1,53 @@
+/* The picking form only styles its own content; the shared transaction dialog owns the shell. */
+.fm-pick-confirmation {
+  margin: 0;
+  color: #27313e;
+  font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+.fm-pick-confirmation .fm-pick-confirmation-intro { margin: 0 0 18px; color: #667085; font-size: 14px; }
+.fm-pick-confirmation .fm-pick-confirmation-list { display: grid; gap: 14px; }
+.fm-pick-confirmation .fm-pick-confirmation-row { padding: 18px; border: 1px solid #e6e8ed; border-radius: 12px; background: #fff; }
+.fm-pick-confirmation .fm-pick-confirmation-product { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid #eef0f3; }
+.fm-pick-confirmation .fm-pick-confirmation-identity { min-width: 0; }
+.fm-pick-confirmation .fm-pick-confirmation-name { margin: 0; color: #202833; font-size: 15px; line-height: 1.5; font-weight: 650; overflow-wrap: anywhere; }
+.fm-pick-confirmation .fm-pick-confirmation-batch { margin: 4px 0 0; color: #7b8492; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.fm-pick-confirmation .fm-pick-confirmation-reserved { flex: none; padding: 4px 10px; border-radius: 6px; background: #f4f5f7; color: #596474; font-size: 12px; font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.fm-pick-confirmation .fm-pick-confirmation-controls { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, .8fr) minmax(0, 1.5fr); gap: 12px 16px; }
+.fm-pick-confirmation .fm-pick-confirmation-field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fm-pick-confirmation .fm-pick-confirmation-label { margin: 0; color: #596474; font-size: 12px; font-weight: 500; line-height: 1.5; }
+.fm-pick-confirmation .fm-pick-confirmation-input,
+.fm-pick-confirmation .fm-pick-confirmation-select { box-sizing: border-box; display: block; width: 100%; min-width: 0; min-height: 42px; margin: 0; padding: 9px 12px; border: 1px solid #dce1e8; border-radius: 8px; background: #fff; color: #27313e; font: inherit; line-height: 1.5; box-shadow: none; transition: border-color .15s, box-shadow .15s; }
+.fm-pick-confirmation .fm-pick-confirmation-input:hover,
+.fm-pick-confirmation .fm-pick-confirmation-select:hover { border-color: #bac1cb; }
+.fm-pick-confirmation .fm-pick-confirmation-input:focus,
+.fm-pick-confirmation .fm-pick-confirmation-select:focus { outline: none; border-color: #ad2941; box-shadow: 0 0 0 3px #a0021f12; }
+.fm-pick-confirmation .fm-pick-confirmation-quantity { position: relative; min-width: 0; }
+.fm-pick-confirmation .fm-pick-confirmation-quantity .fm-pick-confirmation-input { padding-right: 44px; font-variant-numeric: tabular-nums; appearance: textfield; }
+.fm-pick-confirmation .fm-pick-confirmation-quantity .fm-pick-confirmation-input::-webkit-inner-spin-button,
+.fm-pick-confirmation .fm-pick-confirmation-quantity .fm-pick-confirmation-input::-webkit-outer-spin-button { appearance: none; margin: 0; }
+.fm-pick-confirmation .fm-pick-confirmation-unit { position: absolute; top: 50%; right: 13px; transform: translateY(-50%); color: #7b8492; font-size: 13px; pointer-events: none; }
+.fm-pick-confirmation .fm-pick-confirmation-note { grid-column: auto; }
+.fm-pick-confirmation .fm-pick-confirmation-help { margin-top: 16px; padding: 12px 14px; border: 1px solid #e8eaee; border-radius: 9px; background: #f7f8fa; }
+.fm-pick-confirmation .fm-pick-confirmation-help-title { display: block; margin-bottom: 4px; color: #475467; font-size: 12px; font-weight: 600; }
+.fm-pick-confirmation .fm-pick-confirmation-help-text { margin: 0; color: #667085; font-size: 12px; line-height: 1.7; }
+.fm-pick-confirmation-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px; }
+.fm-pick-confirmation-footer .fm-pick-confirmation-submit { box-sizing: border-box; min-height: 42px; margin: 0; padding: 10px 22px; border: 1px solid #a0021f; border-radius: 8px; background: #a0021f; color: #fff; font: 600 14px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; cursor: pointer; transition: background-color .15s, box-shadow .15s; }
+.fm-pick-confirmation-footer .fm-pick-confirmation-submit:hover { border-color: #87011a; background: #87011a; }
+.fm-pick-confirmation-footer .fm-pick-confirmation-submit:focus-visible { outline: 2px solid #a0021f; outline-offset: 3px; }
+.fm-pick-confirmation-footer .fm-pick-confirmation-submit:disabled { opacity: .55; cursor: wait; }
+@media (max-width: 560px) {
+  .fm-pick-confirmation .fm-pick-confirmation-intro { margin-bottom: 14px; }
+  .fm-pick-confirmation .fm-pick-confirmation-row { padding: 14px; }
+  .fm-pick-confirmation .fm-pick-confirmation-product { flex-wrap: wrap; gap: 8px; margin-bottom: 12px; padding-bottom: 12px; }
+  .fm-pick-confirmation .fm-pick-confirmation-identity { flex: 1 1 160px; }
+  .fm-pick-confirmation .fm-pick-confirmation-controls { grid-template-columns: 1fr; gap: 12px; }
+  .fm-pick-confirmation .fm-pick-confirmation-note { grid-column: auto; }
+  .fm-pick-confirmation .fm-pick-confirmation-input,
+  .fm-pick-confirmation .fm-pick-confirmation-select { min-height: 44px; font-size: 16px; }
+  .fm-pick-confirmation-footer .fm-pick-confirmation-submit { width: 100%; min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fm-pick-confirmation .fm-pick-confirmation-input,
+  .fm-pick-confirmation .fm-pick-confirmation-select,
+  .fm-pick-confirmation-footer .fm-pick-confirmation-submit { transition: none; }
+}
