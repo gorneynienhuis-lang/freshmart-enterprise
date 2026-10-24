@@ -1,0 +1,15 @@
+{
+  "files": [
+    {
+      "path": "docs/recording/recording-assistant.py",
+      "identical_to_guide_branch": true,
+      "sha256": "5c98bd2884f0db4b87815f760a698faa31c2474e8d1290e1bae6e613ba354121"
+    },
+    {
+      "path": "docs/recording/start-rehearsal.py",
+      "identical_to_guide_branch": true,
+      "sha256": "564133c3c31299ce91f8bee2cc8255880e14cead1814b5ac64a296d08c974e6a"
+    }
+  ],
+  "permission_responses": 17
+}
