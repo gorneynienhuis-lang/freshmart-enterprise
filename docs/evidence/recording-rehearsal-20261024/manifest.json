@@ -1,0 +1,52 @@
+{
+  "verifiedOn": "2026-10-24 Asia/Shanghai",
+  "sourceCodeCommit": "f8fec51 (working tree source; presentation and helpers not yet committed)",
+  "backendBuild": "retained existing JAR, not rebuilt in this task",
+  "backendJarSha256": "79bf83ecaa3f43731de0b5d0945d2180b10680184d36f56188524179b87e76b9",
+  "database": "retained fresh_mall_demo, project-owned portable MySQL on 3307; Homebrew MySQL 3306 unchanged",
+  "application": [
+    "http://127.0.0.1:8080",
+    "http://localhost:5173"
+  ],
+  "scope": [
+    "seven-role login/read-only permissions",
+    "one synthetic paid order: pick, dispatch, complete, aftersale, independent refund, review",
+    "one unpaid cancellation branch",
+    "one additional unpaid idempotency order, normal cancellation cleanup",
+    "six deliberately failing logins against a verified nonexistent synthetic subject"
+  ],
+  "notRun": [
+    "application full regression or coverage rerun",
+    "load or concurrent purchase tests",
+    "Redis/Prometheus stop or start",
+    "refund failure injection",
+    "cloud deployment"
+  ],
+  "publicCheck": "homepage, login, checkout read-only; no public order or cart modification; helper-created public session logged out",
+  "files": [
+    {
+      "file": "business-walkthrough.json",
+      "sha256": "3de3f3a20f04b1e6d170501d8b95b1dd92f22d227f4be213136010810fc7f5f6"
+    },
+    {
+      "file": "idempotency-recording-result.json",
+      "sha256": "7fd468e3fe08b79f0693c16fbd2cf78391366f3f95722e98be5cf9c93d45fac4"
+    },
+    {
+      "file": "permissions-recording-result.json",
+      "sha256": "0a4aead0eef8a64f4de96659b44a55ddcb225526984c2f7b84772fbed62bdee7"
+    },
+    {
+      "file": "seven-role-preflight.json",
+      "sha256": "6146cf22f75173778315ac496be300065cc3aeba7e514221e214a82754111d90"
+    },
+    {
+      "file": "status-recording-result.json",
+      "sha256": "6e9b479741b67f4061d52d455adcd5c7d5d3caa20dcc4e1f69ddc14378f04620"
+    },
+    {
+      "file": "throttle-recording-result.json",
+      "sha256": "d3b15f4a9e9d08373262e585ee0b20747aed2c58b101101f6f6b1a2a228c0d0d"
+    }
+  ]
+}

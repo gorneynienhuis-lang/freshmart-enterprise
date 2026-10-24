@@ -9,6 +9,7 @@
 | 在线演示（课程沙箱） | <https://freshmart-enterprise-production.up.railway.app/> |
 | 源码仓库 | <https://github.com/gorneynienhuis-lang/freshmart-enterprise> |
 | 三份正式文档（第一版） | [需求文档](docs/formal/企业级需求文档.md) · [设计文档](docs/formal/设计文档.md) · [测试报告](docs/formal/测试报告.md) |
+| 15分钟汇报录制 | [逐页与A—J操作指南](docs/recording/15分钟汇报录制指南.md) · [录制速查](docs/recording/录制速查.md) · [本次排练记录](docs/evidence/recording-rehearsal-20261024/README.md) |
 | 复现与使用 | [快速开始](#快速开始) · [本机运行](deploy/README.md) · [登录与后台使用](docs/登录与后台使用.md) |
 
 > 支付与退款为课程沙箱，不发生真实扣款；校园场景为课程设定，不代表获得学校运营授权；全部演示数据均为合成数据。
@@ -365,7 +366,7 @@ flowchart LR
 
 | 任务书交付物 | 位置 | 状态 | 负责 |
 |---|---|---|---|
-| 源码、SQL、部署脚本（ZIP） | 本仓库；打包器 [`scripts/package-source.py`](scripts/package-source.py) | 打包器已实现；发布包待版本稳定后生成 | D（关键路径） |
+| 源码、SQL、部署脚本（ZIP） | 本仓库；打包器 [`scripts/package-source.py`](scripts/package-source.py) | 交付包通过 `SOURCE-MANIFEST.json` 固定源码提交与逐文件校验；包外 `SHA256SUMS` 校验压缩包 | D（关键路径） |
 | 企业级需求文档 | [`docs/formal/企业级需求文档.md`](docs/formal/企业级需求文档.md) | 第一版草稿；定稿见 WP-04 | B 主笔，D 审 |
 | 设计文档 | [`docs/formal/设计文档.md`](docs/formal/设计文档.md) | 第一版草稿 | D（关键路径） |
 | 测试报告 | [`docs/formal/测试报告.md`](docs/formal/测试报告.md) | 第一版草稿；截图与追踪矩阵见 WP-01 – 03、06 | D 主笔，A / B / C 提供截图与追踪 |
@@ -383,7 +384,7 @@ flowchart LR
 | Linux 容器干净安装与卷恢复 | NOT_RUN | 干净构建、健康检查、权限、持久化与成套恢复 |
 | 远端 CI | NOT_RUN | 工作流模板已就绪，尚未激活 Actions |
 | 公网完整业务回归 | PARTIAL | 域名、HTTPS、首页、商品图片与东小锦问答已复核；外网七角色、订单履约、售后与沙箱支付待逐项回归 |
-| 最终回滚演练与软件包 | NOT_RUN | 版本 / 迁移兼容核对、ZIP 清单与 SHA-256、独立复现 |
+| 最终回滚演练与独立环境复现 | NOT_RUN | 源码归档与ZIP校验单独留证，不代替版本/迁移兼容和干净环境复现 |
 | 监控外延 | 未部署 | Grafana、Alertmanager 与外部通知 |
 | 前端体积与覆盖 | 待优化 | 分包；浏览器覆盖并入统计 |
 

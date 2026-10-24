@@ -22,6 +22,16 @@ HISTORICAL_LOGS={
     'docs/evidence/implementation-foundation/backend-maven-clean-package-retry.log':'8e30c597766203f3c0425a1544bdcc9a0a72d6ea2abad5f2d7f570f1880f9c44',
     'docs/evidence/implementation-foundation/backend-maven-clean-package.log':'1b79a0d6704f354820429da6b9b6c96a3e821e33a610d768a4d24b0cad35a35a',
     'docs/evidence/implementation-foundation/v001-constraint-probe.log':'d216b62d306c8ca35cff405bc87dab5f83d099a310932ca10eabbbbce4e8cf59',
+    # Reviewed member evidence: exact committed bytes only, never an arbitrary runtime-log exemption.
+    'docs/evidence/member-c-final-20261023/logs/ENG-09-media-review-pr5.log':'e5eccfce0163e648b4efb9bd3107ad5f2f13f1ae957f0001f69dcaa42d569df9',
+    'docs/evidence/member-c-final-20261023/logs/TEST-01-backend-test-pr5.log':'6b3f3a853de836ebeb1560c855db2a6104847b9f6af62630c240d2fbbcb7394f',
+    'docs/evidence/member-c-final-20261023/logs/TEST-02-frontend-build-pr5.log':'ea95f2210f777ccecb809d730ad5e9ef49a036d7f757b34a9d1d471b2c660bb9',
+    'docs/evidence/member-c-final-20261023/logs/TEST-02-frontend-npm-ci-pr5.log':'fa0e87c12058431d8240fa4253b6aca07d193f7f28ae2d0d50e99da3fdec1b61',
+    'docs/evidence/member-c-final-20261023/logs/TEST-02-frontend-verify-pr5.log':'27be87e2f0195071c9f957549ac18401a37c568469144482de5c2f26f9a97033',
+    'docs/evidence/member-c-final-20261023/logs/TEST-03-coverage-pr5.log':'34808cf595c1873875aa77b4af95af711df369406d75864939596dd38ea367f9',
+    'docs/evidence/teammate-captures-20261021/logs/member3-frontend-build.log':'f5f67204c7e85345f79389eb647ed2d449a4cf8f1ba1b7e6470acba17418c323',
+    'docs/evidence/teammate-captures-20261021/logs/member3-frontend-verify.log':'9f13aec3d6a2321b8e296f77052d1d0c41c970af8cbb2f2ce9f5e1c137d61159',
+    'docs/evidence/teammate-captures-20261021/logs/member3-targeted-tests.log':'0bfd33864b3bfba5f549079fef446b41bba0fd9a5fb8fe08fb90fc058da74ca1',
 }
 
 class PackageError(RuntimeError):pass
@@ -121,7 +131,7 @@ ZIP 不含当前数据库、运行媒体、已有账号密码、JWT/支付/监�
 当前演示环境的账号密码由项目负责人单独私下交付，本包不复制它们。源码中的合成测试字面值不是当前登录密码。
 数据库只提供版本化迁移与受审阅初始化脚本，不提供当前数据的 SQL dump。
 `docs/evidence/demo-runtime/mysql-first-start-schema.sql` 是精确散列白名单内的历史 DDL 复核证据，不是运行库 dump，也不是初始化入口；初始化仅按当前 Flyway 迁移与启动说明进行。
-`docs/evidence/implementation-foundation/` 中三份固定散列日志仅为历史 H2 构建/约束测试证据，不是当前运行日志。
+SOURCE-MANIFEST.json 列出的固定散列日志仅为已审阅的历史构建/测试证据，不是当前运行日志或本次打包重新执行的测试结果。
 
 ## 完整性和复现
 
@@ -147,7 +157,7 @@ def build_zip(path,commit,timestamp,entries,store,url,tool_sha,omit=False):
         rows.append({'path':entry.path,'archive_path':PREFIX+entry.path,'bytes':entry.size,'sha256':sha256(data),'git_blob_oid':entry.oid,'git_mode':entry.mode});total+=entry.size
     tool=next((r for r in rows if r['path']=='scripts/package-source.py'),None);present=bool(tool and tool['sha256']==tool_sha)
     introduction=readme(commit,url,present,omit)
-    manifest={'format_version':1,'source_commit':commit,'commit_timestamp_utc':datetime.datetime.fromtimestamp(timestamp,datetime.timezone.utc).isoformat(),'repository_url':url,'source_tree_url':url+'/tree/'+commit,'source_truth':'Only tracked regular Git blobs from the explicit commit; never working-tree contents','packager':{'path':'scripts/package-source.py','execution_script_sha256':tool_sha,'identical_tool_in_selected_commit':present},'source_file_count':len(rows),'source_bytes':total,'payload_file_count':len(rows)+1,'payload_bytes_excluding_manifest':total+len(introduction),'files':rows,'generated_files':[{'archive_path':'DELIVERY-README.md','bytes':len(introduction),'sha256':sha256(introduction)}],'excluded':excluded,'reviewed_historical_sql_evidence':[{'path':path,'sha256':value,'purpose':'Historical DDL evidence only; not a running-database dump or initialization entrypoint'} for path,value in HISTORICAL_SCHEMA.items() if any(r['path']==path for r in rows)],'reviewed_historical_build_evidence':[{'path':path,'sha256':value,'purpose':'Historical H2 build/constraint-test evidence only; not current application runtime logs'} for path,value in HISTORICAL_LOGS.items() if any(r['path']==path for r in rows)],'manifest_self_digest':'Manifest cannot contain its own hash; its SHA256 and the ZIP SHA256 are in the outer SHA256SUMS.','limits':{'files':MAX_FILES,'file_bytes':MAX_FILE,'total_source_bytes':MAX_TOTAL},'archive_options':{'archived_screenshots_omitted':omit,'compression':'DEFLATE level 6','mtime':'explicit commit timestamp (ZIP two-second resolution)','ordering':'sorted source paths, then generated README and manifest'}}
+    manifest={'format_version':1,'source_commit':commit,'commit_timestamp_utc':datetime.datetime.fromtimestamp(timestamp,datetime.timezone.utc).isoformat(),'repository_url':url,'source_tree_url':url+'/tree/'+commit,'source_truth':'Only tracked regular Git blobs from the explicit commit; never working-tree contents','packager':{'path':'scripts/package-source.py','execution_script_sha256':tool_sha,'identical_tool_in_selected_commit':present},'source_file_count':len(rows),'source_bytes':total,'payload_file_count':len(rows)+1,'payload_bytes_excluding_manifest':total+len(introduction),'files':rows,'generated_files':[{'archive_path':'DELIVERY-README.md','bytes':len(introduction),'sha256':sha256(introduction)}],'excluded':excluded,'reviewed_historical_sql_evidence':[{'path':path,'sha256':value,'purpose':'Historical DDL evidence only; not a running-database dump or initialization entrypoint'} for path,value in HISTORICAL_SCHEMA.items() if any(r['path']==path for r in rows)],'reviewed_historical_build_evidence':[{'path':path,'sha256':value,'purpose':'Reviewed historical build/test evidence only; not current application runtime logs or a fresh package-time test run'} for path,value in HISTORICAL_LOGS.items() if any(r['path']==path for r in rows)],'manifest_self_digest':'Manifest cannot contain its own hash; its SHA256 and the ZIP SHA256 are in the outer SHA256SUMS.','limits':{'files':MAX_FILES,'file_bytes':MAX_FILE,'total_source_bytes':MAX_TOTAL},'archive_options':{'archived_screenshots_omitted':omit,'compression':'DEFLATE level 6','mtime':'explicit commit timestamp (ZIP two-second resolution)','ordering':'sorted source paths, then generated README and manifest'}}
     content=stable_json(manifest)
     with zipfile.ZipFile(path,'x',compression=zipfile.ZIP_DEFLATED,compresslevel=6,allowZip64=True) as archive:
         for row in rows:

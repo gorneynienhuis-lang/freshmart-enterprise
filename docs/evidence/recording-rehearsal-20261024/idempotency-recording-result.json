@@ -1,0 +1,114 @@
+{
+  "scene": "idempotency",
+  "result": "PASS",
+  "responses": [
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/auth/csrf",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "10c53af2-f2d2-432f-b868-74cee04418e9"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "7ddf5e26-3402-463e-811f-479f06fec9bf"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/addresses",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "72234d24-01d8-407a-96fc-d6f8cf7c2c5c"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/delivery-slots",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "a57fe091-379a-4770-956f-178538a73e31"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/products",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "ba589aee-3f4a-41f2-b0dc-3c491b0199c0"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/quote",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "67533ad7-d3d6-4463-aad5-53c0f31debcb"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "http": 201,
+      "code": 0,
+      "message": "ok",
+      "traceId": "92f337d1-1d61-48e0-8357-9f89c45e070e"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "http": 201,
+      "code": 0,
+      "message": "ok",
+      "traceId": "135a47a1-c688-4731-965a-877c2f9c6b9f"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders",
+      "http": 409,
+      "code": 1008,
+      "message": "同一操作键不能用于不同请求",
+      "traceId": "13074934-31fa-49d1-9170-29fa1ef47cac"
+    },
+    {
+      "role": "MEMBER",
+      "method": "GET",
+      "path": "/api/v1/orders/ord_1e8c105c-7cbe-4ba0-85c6-8b388caa1287",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "12c28585-2b54-46d7-b87c-2dcf94fc223a"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/orders/ord_1e8c105c-7cbe-4ba0-85c6-8b388caa1287/cancel",
+      "http": 200,
+      "code": 0,
+      "message": "ok",
+      "traceId": "5f513222-1cb3-4bc7-99e4-501e6d412e9c"
+    },
+    {
+      "role": "MEMBER",
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "http": 403,
+      "code": 1003,
+      "message": "无操作权限或来源校验失败",
+      "traceId": "bd357303-32e6-481c-9835-a3c91ef9012d"
+    }
+  ]
+}

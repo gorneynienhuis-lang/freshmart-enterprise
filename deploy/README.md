@@ -1,5 +1,7 @@
 # 本机 Demo 运行
 
+> 2026-10-24交付入口：当前源码含V001–V013迁移；课程展示网址为 <https://freshmart-enterprise-production.up.railway.app/>，部署状态与验证范围以[项目README](../README.md)为准。下文按日期保留最初本机部署与后续演练记录，其中“尚未上线/尚未验收”描述的是当时状态。新环境按本文初始化；现有公网项目不要重新创建、清库或重复导入种子。
+
 2026-10-18增量：新增独立`showcase`课程HTTPS环境与Railway/Compose部署包，默认用户选定R03。公网方案、变量、独立账号初始化及待验收边界见[公网部署](公网部署.md)，离线检查见[验证记录](验证记录.md)。这些文件不代表已上线；下文仍为已实测的本机运行方式。最新后端会执行V006员工治理迁移，保留已有数据。登录与管理入口见[使用说明](../docs/登录与后台使用.md)。
 
 目标是课程项目的真实 MySQL + Spring Boot + React/Vite 联调。支付只走沙箱；不涉及真实收费。当前便携安装脚本支持 **macOS ARM64、Java 21、Node.js 26、Python 3.11+**。MySQL 固定 **8.4.11**，来自 [MySQL 官方下载页](https://dev.mysql.com/downloads/mysql/?version=8.4.11) 与官方 CDN，下载包 SHA-256 固定在脚本中。Linux/Windows/容器部署尚未验证，不把本机 Demo 当成完整生产部署。
